@@ -1,7 +1,7 @@
-import { queryData } from '@/utils/getQueryOutput';
+import { storeUser } from '@/utils/getQueryOutput';
 
 export default async function Profile() {
-    // const profile = await queryData();
+      const profile = await storeUser();
     // console.log(JSON.stringify(profile,null,2));
     return (
       <div>tgt</div>
