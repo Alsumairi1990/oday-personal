@@ -1,5 +1,5 @@
 import { queryData } from '@/utils/getQueryOutput';
-import { User } from '@prisma/client'
+
 
 export default async function Profile() {
       const profile = await queryData();
@@ -22,7 +22,7 @@ export default async function Profile() {
         {profile.length > 0 ? (
           <div className='grid gris-cols border-x border-x-gray-300 items-center '>
             
-            {profile.map((user: User) => (
+            {profile.map((user: any) => (
               <div className='border-b flex items-center justify-between w-full border-b-gray-300 px-4 py-2' key={user.id}>
                 <div className="py-2 text-center">
                    <h2 className='text-gray-900 text-base font-semibold '>{user.name}</h2>
