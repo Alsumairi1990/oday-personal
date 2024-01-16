@@ -1,4 +1,5 @@
 import { queryData } from '@/utils/getQueryOutput';
+import { User } from '@prisma/client'
 
 export default async function Profile() {
       const profile = await queryData();
