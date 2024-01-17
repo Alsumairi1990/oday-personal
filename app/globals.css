@@ -17,5 +17,11 @@
 }
 
 body {
- 
+  
+}
+@media screen and (max-width:720px){
+  .mobile-clip{
+    clip-path: polygon( 37.60% 0.00%, 63.8% 0.00%, 100% 0.00%, 101% 101%, 50% 86.2%, 0.00% 101%, 0.00% 0.00% );
+    
+    }
 }

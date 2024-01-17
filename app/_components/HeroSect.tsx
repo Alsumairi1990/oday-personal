@@ -6,7 +6,7 @@ const Hero = () => {
     const imagePath = '/images/hero.jpg';
   return (
   <div className="w-full " >  
-    <div className="fixed top-0 h-[25rem] sm:h-[35rem] px-4 w-full bg-no-repeat bg-center bg-cover" style={{backgroundImage: `url(${imagePath})`}}>
+    <div className="h-[25rem] mobile-clip relative sm:h-[35rem] px-4 w-full bg-no-repeat bg-center bg-cover" style={{backgroundImage: `url(${imagePath})`}}>
        {/* <div className="absolute top-0 h-full w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgba(0, 0, 0, 0.3), rgb(50, 60, 79))'}}></div> */}
        <div className="absolute top-0 h-full w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(0 0 0),rgb(0 0 0 / 55%), rgb(14 14 14))'}}></div>
         <div className="relative flex sm:pt-8 flex-col h-full items-center justify-center z-40">
