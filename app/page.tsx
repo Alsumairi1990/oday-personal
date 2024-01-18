@@ -18,7 +18,7 @@ export default function Home() {
      <div>
      <Services />
      </div>
-     <div className="">
+     <div className="bg-[#111]">
      <About />
      </div>
      
