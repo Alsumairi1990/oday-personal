@@ -15,7 +15,7 @@ const Services = () => {
        
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 mt-8">
           <div className="p-2 flex flex-col justify-center pt-8 border rounded-xl border-[#8849a9]">
-            <div className="pb-5 w-32 flex items-center mx-auto ">
+            <div className="pb-5 w-[7.5rem] flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath}`} alt="" />
             </div>
             <div className="sm:p2 mt-4 text-center">
@@ -45,7 +45,7 @@ const Services = () => {
 
 
           <div className="p-2 flex flex-col justify-center pt-8 border rounded-xl border-[#8849a9]">
-            <div className="pb-5 w-32 flex items-center mx-auto ">
+            <div className="pb-5 w-[7.5rem]  flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath2}`} alt="" />
             </div>
             <div className="sm:p2 mt-4 text-center">
@@ -75,7 +75,7 @@ const Services = () => {
 
 
           <div className="p-2 flex flex-col justify-center pt-8 border rounded-xl border-[#8849a9]">
-            <div className="pb-5 w-32 flex items-center mx-auto ">
+            <div className="pb-5 w-[7.5rem]  flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath3}`} alt="" />
             </div>
             <div className="sm:p2 mt-4 text-center">
