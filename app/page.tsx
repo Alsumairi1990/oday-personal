@@ -5,6 +5,7 @@ import NavBar from './NavBar'
 import About from './_components/About'
 import Blogs from './_components/Blogs'
 import Footerk from './_components/Footer'
+import Works from './_components/Works'
 
 
 export default function Home() {
@@ -25,6 +26,12 @@ export default function Home() {
      </div>
      <div className="bg-[#111]">
      <Blogs />
+     </div>
+     <div className="bg-[#111]">
+      <div className="w-11/12 mx-auto ">
+      <Works />
+      </div>
+      
      </div>
      {/* <div>
       <Footerk />

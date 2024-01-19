@@ -9,25 +9,27 @@ const Services = () => {
   return (
 
       <div className="flex flex-col sm:py-8  bg-[#080808]">
-        <div className="p-4 w-11/12 mx-auto">
+        <div className="p-1 w-11/12 mx-auto">
         <h2 className="text-3xl text-center px-8 mb-6 text-white font-semibold">Our Services</h2>
         <p className="text-base text-gray-300 text-center leading-7 px-8">Search the world's ,information including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking </p>
        
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 mt-8">
-          <div className="p-2 flex flex-col justify-center pt-8 border rounded-xl border-[#8849a9]">
-            <div className="pb-5 w-8 sm:w-[7.5rem] flex items-center mx-auto ">
+        <div className="grid grid-cols sm:grid-cols-3 gap-8 mt-8">
+
+
+          <div className="p-2 flex flex-col justify-center pt-4 sm:pt-8 border max-sm:bg-[#171717] rounded-xl border-gray-600 sm:border-[#8849a9]">
+            <div className="pb-2 sm:pb-5 w-24 sm:w-[7.5rem] flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath}`} alt="" />
             </div>
             <div className="sm:p2 mt-4 text-center">
-              <h2 className="text-base sm:text-2xl uppercase font-semibold text-[#ca82ef]">Web Deveopment</h2>
-              <h2 className="text-sm sm:text-md max-sm:hidden text-[#00ba35] mt-3">Web Deveopment Categories Based on Background </h2>
-              <p className="text-sm text-gray-300 text-center leading-6 mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p>
+              <h2 className="text-base sm:text-2xl capitalize sm:uppercase font-semibold text-[#ca82ef]">Web Deveopment</h2>
+              <h2 className="text-sm sm:text-md max-sm:hidden text-[#00ba35]  sm:mt-3">Web Deveopment Categories Based on Background </h2>
+              <p className="text-sm leading-[22px] text-gray-300 text-center sm:leading-6 mt-1.5 sm:mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p>
               <div className="p-1 flex flex-col sm:flex-row justify-around mt-6 mb-4">
-                <button className='px-4 py-2 border-[0.13rem] border-[#4a235e] rounded text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request this Service
+                <button className='px-4 py-2 border-[0.13rem] max-sm:mb-4 border-[#4a235e] rounded text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request this Service
                
                 </button>
-                <button className='px-4 py-2 flex items-center border-[0.13rem] bg-[#00ba35] border-[#00ba35] rounded text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >Service Info 
-                <span className="ml-1">
+                <button className='px-4 py-2  flex items-center justify-center border-[0.13rem] bg-[#00ba35] border-[#00ba35] rounded text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >Service Info 
+                <span className="ml-2">
                 <svg height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
                         viewBox="0 0 512 512" >
                       <path fill="#FFFFFF" d="M256,504C119.248,504,8,392.752,8,256S119.248,8,256,8s248,111.248,248,248S392.752,504,256,504z"/>
@@ -38,26 +40,26 @@ const Services = () => {
                       </svg>
                     </span>
                 </button>
-
               </div>
             </div>
           </div>
 
 
-          <div className="p-2 flex flex-col justify-center pt-8 border rounded-xl border-[#8849a9]">
-            <div className="pb-5 w-8 sm:w-[7.5rem]  flex items-center mx-auto ">
+
+          <div className="p-2 flex flex-col justify-center pt-4 sm:pt-8 border max-sm:bg-[#171717] rounded-xl border-gray-600 sm:border-[#8849a9]">
+            <div className="pb-2 sm:pb-5 w-24 sm:w-[7.5rem] flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath2}`} alt="" />
             </div>
             <div className="sm:p2 mt-4 text-center">
-              <h2 className="text-base sm:text-2xl uppercase font-semibold text-[#ca82ef]">Mobile Design</h2>
-              <h2 className="text-sm sm:text-md max-sm:hidden text-[#00ba35] mt-3">Web Deveopment Categories Based on Background </h2>
-              <p className="text-sm text-gray-300 text-center leading-6 mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p>
-              <div className="p-1 flex flex-col sm:flex-row  justify-around mt-6 mb-4">
-                <button className='px-4 py-2 border-[0.13rem] border-[#4a235e] rounded text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request this Service
+              <h2 className="text-base sm:text-2xl capitalize sm:uppercase font-semibold text-[#ca82ef]">Mobile Design</h2>
+              <h2 className="text-sm sm:text-md max-sm:hidden text-[#00ba35]  sm:mt-3">Web Deveopment Categories Based on Background </h2>
+              <p className="text-sm leading-[22px] text-gray-300 text-center sm:leading-6 mt-1.5 sm:mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p>
+              <div className="p-1 flex flex-col sm:flex-row justify-around mt-6 mb-4">
+                <button className='px-4 py-2 border-[0.13rem] max-sm:mb-4 border-[#4a235e] rounded text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request this Service
                
                 </button>
-                <button className='px-4 py-2 flex items-center border-[0.13rem] bg-[#00ba35] border-[#00ba35] rounded text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >Service Info 
-                <span className="ml-1">
+                <button className='px-4 py-2  flex items-center justify-center border-[0.13rem] bg-[#00ba35] border-[#00ba35] rounded text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >Service Info 
+                <span className="ml-2">
                 <svg height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
                         viewBox="0 0 512 512" >
                       <path fill="#FFFFFF" d="M256,504C119.248,504,8,392.752,8,256S119.248,8,256,8s248,111.248,248,248S392.752,504,256,504z"/>
@@ -68,26 +70,26 @@ const Services = () => {
                       </svg>
                     </span>
                 </button>
-
               </div>
             </div>
           </div>
 
 
-          <div className="p-2 flex flex-col justify-center pt-8 border rounded-xl border-[#8849a9]">
-            <div className="pb-5 w-8 sm:w-[7.5rem]  flex items-center mx-auto ">
+
+          <div className="p-2 flex flex-col justify-center pt-4 sm:pt-8 border max-sm:bg-[#171717] rounded-xl border-gray-600 sm:border-[#8849a9]">
+            <div className="pb-2 sm:pb-5 w-24 sm:w-[7.5rem] flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath3}`} alt="" />
             </div>
             <div className="sm:p2 mt-4 text-center">
-              <h2 className="text-base sm:text-2xl uppercase font-semibold text-[#ca82ef]">Intero Preparion</h2>
-              <h2 className="text-sm sm:text-md max-sm:hidden text-[#00ba35] mt-3">Web Deveopment Categories Based on Background </h2>
-              <p className="text-sm text-gray-300 text-center leading-6 mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p>
-              <div className="p-1 flex flex-col sm:flex-row  justify-around mt-6 mb-4">
-                <button className='px-4 py-2 border-[0.13rem] border-[#4a235e] rounded text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request this Service
+              <h2 className="text-base sm:text-2xl capitalize sm:uppercase font-semibold text-[#ca82ef]">Intro Produacts</h2>
+              <h2 className="text-sm sm:text-md max-sm:hidden text-[#00ba35]  sm:mt-3">Web Deveopment Categories Based on Background </h2>
+              <p className="text-sm leading-[22px] text-gray-300 text-center sm:leading-6 mt-1.5 sm:mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p>
+              <div className="p-1 flex flex-col sm:flex-row justify-around mt-6 mb-4">
+                <button className='px-4 py-2 border-[0.13rem] max-sm:mb-4 border-[#4a235e] rounded text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request this Service
                
                 </button>
-                <button className='px-4 py-2 flex items-center border-[0.13rem] bg-[#00ba35] border-[#00ba35] rounded text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >Service Info 
-                <span className="ml-1">
+                <button className='px-4 py-2  flex items-center justify-center border-[0.13rem] bg-[#00ba35] border-[#00ba35] rounded text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >Service Info 
+                <span className="ml-2">
                 <svg height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
                         viewBox="0 0 512 512" >
                       <path fill="#FFFFFF" d="M256,504C119.248,504,8,392.752,8,256S119.248,8,256,8s248,111.248,248,248S392.752,504,256,504z"/>
@@ -98,10 +100,23 @@ const Services = () => {
                       </svg>
                     </span>
                 </button>
-
               </div>
             </div>
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           

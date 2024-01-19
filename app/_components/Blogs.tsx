@@ -40,7 +40,7 @@ const Blogs = () => {
 
                 <div className="p-4">
                     <h2 className="text-gray-100 mb-2 text-base font-semibold">
-                    Figma from Right Arrow 251 Vectors svg vector for Sketch 
+                    Figma from Right Arrow 251 Vectors svg vector 
                     </h2>
                     <p className="text-[13px] font-normal text-gray-200">
                     Figma from Right Arrow 251 Vectors svg vector for Sketch and Figma from Right Arrow 251
@@ -81,7 +81,7 @@ const Blogs = () => {
 
                 <div className="p-4">
                     <h2 className="text-gray-100 mb-2 text-base font-semibold">
-                    Figma from Right Arrow 251 Vectors svg vector for Sketch 
+                    Figma from Right Arrow 251 Vectors svg vector for 
                     </h2>
                     <p className="text-[13px] font-normal text-gray-200">
                     Figma from Right Arrow 251 Vectors svg vector for Sketch and Figma from Right Arrow 251
