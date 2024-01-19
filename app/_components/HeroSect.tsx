@@ -14,7 +14,7 @@ const Hero = () => {
             Design Shine Gate for Template and Web devlopment
           </h1>
           <p className="text-gray-300 max-sm:hidden sm:max-w-[70%] text-center text-sm sm:text-base mb-4">He formatting rules are not configurable but are already optimized for the best possible output. Note that the formatter will keep spaces and tabs between content tags such as div and span </p>
-          <a href="/" className="inline-block text-base sm:text-xl text-white bg-orange-500 py-1.5 sm:py-2 px-2 rounded-lg border border-orange-500">Discover Our Work</a>
+          <a href="/" className="inline-block text-base sm:text-lg text-white bg-green-600 py-1.5 sm:py-1 px-3 border hover:!bg-green-700 border-green-500  ">Discover Work</a>
         </div>
     </div>
   </div>

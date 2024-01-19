@@ -73,7 +73,7 @@ const Footerk = () => {
              </div>
           </div>
        </div>
-       <div className="grid grid-cols-4 w-11.4/12 mx-auto mb-3">
+       <div className="grid grid-cols-2 sm:grid-cols-4 w-11.4/12 mx-auto mb-3">
           <div className="">
              <div className="mb-4">
                 <p><a href="" className="font-bold text-gray-200 border-b border-b-gray-400 text-sm pb-2 uppercase">University Comparison</a></p>

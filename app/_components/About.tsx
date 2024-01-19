@@ -5,11 +5,11 @@ const About = () => {
     const imagePath = '/images/sect.png'
   return (
     <div className="bg-[#111] p-4 mt-16  ">
-        <div className="grid grid-cols-3 mx-auto w-11/12 rounded-md bg-[#161616] border border-[#522b58] p-8">
+        <div className="grid grid-cols sm:grid-cols-3 mx-auto w-11/12 rounded-md bg-[#161616] border border-[#522b58] p-8">
             <div className="">
                 <img className='w-full' src={`${imagePath}`} alt="" />
             </div>
-            <div className="col-span-2 flex flex-col justify-center items-start pl-14 ">
+            <div className="sm:col-span-2 flex flex-col justify-center items-start sm:pl-14 ">
                 <div className="flex items-center text-base text-gray-300 mb-4">
                      <span className="text-sm">ABOUT US</span> 
                      <span className="ml-2">

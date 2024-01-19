@@ -15,14 +15,14 @@ const Services = () => {
        
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 mt-8">
           <div className="p-2 flex flex-col justify-center pt-8 border rounded-xl border-[#8849a9]">
-            <div className="pb-5 w-[7.5rem] flex items-center mx-auto ">
+            <div className="pb-5 w-8 sm:w-[7.5rem] flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath}`} alt="" />
             </div>
             <div className="sm:p2 mt-4 text-center">
               <h2 className="text-base sm:text-2xl uppercase font-semibold text-[#ca82ef]">Web Deveopment</h2>
-              <h2 className="text-sm sm:text-md  text-[#00ba35] mt-3">Web Deveopment Categories Based on Background </h2>
+              <h2 className="text-sm sm:text-md max-sm:hidden text-[#00ba35] mt-3">Web Deveopment Categories Based on Background </h2>
               <p className="text-sm text-gray-300 text-center leading-6 mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p>
-              <div className="p-1 flex justify-around mt-6 mb-4">
+              <div className="p-1 flex flex-col sm:flex-row justify-around mt-6 mb-4">
                 <button className='px-4 py-2 border-[0.13rem] border-[#4a235e] rounded text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request this Service
                
                 </button>
@@ -45,14 +45,14 @@ const Services = () => {
 
 
           <div className="p-2 flex flex-col justify-center pt-8 border rounded-xl border-[#8849a9]">
-            <div className="pb-5 w-[7.5rem]  flex items-center mx-auto ">
+            <div className="pb-5 w-8 sm:w-[7.5rem]  flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath2}`} alt="" />
             </div>
             <div className="sm:p2 mt-4 text-center">
               <h2 className="text-base sm:text-2xl uppercase font-semibold text-[#ca82ef]">Mobile Design</h2>
-              <h2 className="text-sm sm:text-md  text-[#00ba35] mt-3">Web Deveopment Categories Based on Background </h2>
+              <h2 className="text-sm sm:text-md max-sm:hidden text-[#00ba35] mt-3">Web Deveopment Categories Based on Background </h2>
               <p className="text-sm text-gray-300 text-center leading-6 mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p>
-              <div className="p-1 flex justify-around mt-6 mb-4">
+              <div className="p-1 flex flex-col sm:flex-row  justify-around mt-6 mb-4">
                 <button className='px-4 py-2 border-[0.13rem] border-[#4a235e] rounded text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request this Service
                
                 </button>
@@ -75,14 +75,14 @@ const Services = () => {
 
 
           <div className="p-2 flex flex-col justify-center pt-8 border rounded-xl border-[#8849a9]">
-            <div className="pb-5 w-[7.5rem]  flex items-center mx-auto ">
+            <div className="pb-5 w-8 sm:w-[7.5rem]  flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath3}`} alt="" />
             </div>
             <div className="sm:p2 mt-4 text-center">
               <h2 className="text-base sm:text-2xl uppercase font-semibold text-[#ca82ef]">Intero Preparion</h2>
-              <h2 className="text-sm sm:text-md  text-[#00ba35] mt-3">Web Deveopment Categories Based on Background </h2>
+              <h2 className="text-sm sm:text-md max-sm:hidden text-[#00ba35] mt-3">Web Deveopment Categories Based on Background </h2>
               <p className="text-sm text-gray-300 text-center leading-6 mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p>
-              <div className="p-1 flex justify-around mt-6 mb-4">
+              <div className="p-1 flex flex-col sm:flex-row  justify-around mt-6 mb-4">
                 <button className='px-4 py-2 border-[0.13rem] border-[#4a235e] rounded text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request this Service
                
                 </button>

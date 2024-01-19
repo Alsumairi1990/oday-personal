@@ -8,11 +8,11 @@ const Blogs = () => {
    <div className="flex w-[90%] mx-auto  items-center flex-col my-8">
       <h2 className="text-sm uppercase font-bold text-fuchsia-600">Latest News</h2>
       <div className="p-2">
-      <h2 className="text-3xl font-bold text-white mt-3 text-center">Descover More </h2>
-      <h2 className="text-3xl font-bold text-white mt-3 text-center">About our provided serices</h2>
-      <div className="grid grid-cols-2 gap-3 mt-8">
+      <h2 className="text-base sm:text-3xl font-bold text-white mt-3 text-center">Descover More </h2>
+      <h2 className="text-base sm:text-3xl font-bold text-white mt-1 sm:mt-2.5 text-center">About our provided serices</h2>
+      <div className="grid sm:grid-cols-2 gap-3 mt-8">
 
-        <div className="grid grid-cols-2">
+        <div className="grid sm:grid-cols-2">
             <div className="relative">
             <img className='w-full h-full' src={`${imagePath}`} alt="" />
                 <div className="absolute flex px-3 py-1.5 flex-col justify-center items-center bg-fuchsia-600 text-white top-0 left-0">
@@ -53,7 +53,7 @@ const Blogs = () => {
         </div>
 
 
-        <div className="grid grid-cols-2">
+        <div className="grid sm:grid-cols-2">
             <div className="relative">
             <img className='w-full h-full' src={`${imagePath1}`} alt="" />
                 <div className="absolute flex px-3 py-1.5 flex-col justify-center items-center bg-fuchsia-600 text-white top-0 left-0">
