@@ -4,8 +4,8 @@ import React from 'react';
 const About = () => {
     const imagePath = '/images/sect.png'
   return (
-    <div className="bg-[#111] p-4 mt-16">
-        <div className="grid grid-cols-3 mx-auto w-11/12 rounded-md bg-[#161616] p-8">
+    <div className="bg-[#111] p-4 mt-16  ">
+        <div className="grid grid-cols-3 mx-auto w-11/12 rounded-md bg-[#161616] border border-[#522b58] p-8">
             <div className="">
                 <img className='w-full' src={`${imagePath}`} alt="" />
             </div>

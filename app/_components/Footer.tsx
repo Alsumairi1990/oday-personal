@@ -4,7 +4,7 @@ import React from 'react';
 const Footerk = () => {
   return (
     <div className="">
-    <div className="bg-[#1e1e1e] pt-3 px-8" > 
+    <div className="bg-[#1e1e1e] pt-3 " > 
        <div className="w-11.4/12 mx-auto mb-6">
           <div className="p-2 text-center">
              <h2 className="text-md font-bold text-gray-300 uppercase">SUBSCRIBE TO OUR NEWS LETTER </h2>
