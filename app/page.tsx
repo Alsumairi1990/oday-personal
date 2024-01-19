@@ -3,6 +3,7 @@ import Hero from './_components/HeroSect'
 import Services from './_components/Services'
 import NavBar from './NavBar'
 import About from './_components/About'
+import Blogs from './_components/Blogs'
 
 
 export default function Home() {
@@ -21,6 +22,10 @@ export default function Home() {
      <div className="bg-[#111]">
      <About />
      </div>
+     <div className="bg-[#111]">
+     <Blogs />
+     </div>
+
      
     </main>
   )
