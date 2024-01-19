@@ -4,13 +4,14 @@ import Services from './_components/Services'
 import NavBar from './NavBar'
 import About from './_components/About'
 import Blogs from './_components/Blogs'
+import Footerk from './_components/Footer'
 
 
 export default function Home() {
   return (
-    <main className="flex flex-col h-[80rem] bg-[#111]">
+    <main className="flex flex-col bg-[#111]">
       <div className="hed">
-      <NavBar />
+      {/* <NavBar /> */}
        <Hero />
        
       </div>
@@ -25,6 +26,9 @@ export default function Home() {
      <div className="bg-[#111]">
      <Blogs />
      </div>
+     {/* <div>
+      <Footerk />
+     </div> */}
 
      
     </main>
