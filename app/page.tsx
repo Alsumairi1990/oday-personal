@@ -11,6 +11,10 @@ import Works from './_components/Works'
 export default function Home() {
   return (
     <main className="flex flex-col bg-[#111]">
+       <div className="flex flex-col">
+        <NavBar />
+        
+          </div>
       <div className="hed">
       {/* <NavBar /> */}
        <Hero />

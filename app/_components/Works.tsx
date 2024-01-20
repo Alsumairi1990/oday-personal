@@ -2,10 +2,12 @@
 import React from 'react';
 
 const Works = () => {
-    const imagePath1 = '/images/w-2.jpg';
-  const imagePath2 = '/images/w-6.jpg';
-  const imagePath3 = '/images/w-3.jpg';
+    const imagePath1 = '/images/w05.jpg';
+  const imagePath2 = '/images/w02.jpg';
+  const imagePath3 = '/images/w03.jpg';
   const imagePath4 = '/images/w-4.jpg';
+  const imagePath5 = '/images/w05.jpg';
+  const imagePath6 = '/images/w06.jpg';
   return (
    <div className="">
     <div className="flex items-center justify-center">
@@ -23,7 +25,7 @@ const Works = () => {
         </h2>
        
     </div>
-    <div className='grid grid-cols-3 px-0 mt-6 py-4 gap-6'>
+    <div className='grid grid-cols sm:grid-cols-3 px-0 mt-6 py-4 gap-6'>
         <div className="rounded-md bg-[#181818] p-1.5 border border-gray-700 relative">
             <div className="">
               <img className='w-full rounded-md border border-gray-400 h-full' src={`${imagePath1}`} alt="" />
@@ -78,13 +80,7 @@ const Works = () => {
             <div className="">
               <img className='w-full rounded-md border border-gray-400 h-full' src={`${imagePath2}`} alt="" />
             </div>
-            {/* <div className="px-2 pb-2 pt-6 absolute bottom-0 left-0 flex w-full justify-between" style={{background: 'linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 81%)'}}>
-                <div className="flex flex-col">
-                    <h2 className="text-gray-100 font-semibold text-base">Businees Card </h2>
-                    <span className="inline-block text-gray-100 uppercase mt-1.5 text-sm">Projects</span>
-                </div>
-            </div> */}
-            {/* <div className="px-2 pb-2 pt-3flex w-full justify-between" style={{background: 'linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.6) 81%)'}}> */}
+        
             
             <div className="px-2 pb-2 pt-3 flex w-full justify-between">
                 <div className="flex flex-col">
@@ -102,6 +98,77 @@ const Works = () => {
                 </div>
             </div>
         </div>
+
+
+        <div className="rounded-md bg-[#181818] p-1.5 border border-gray-700 relative">
+            <div className="">
+              <img className='w-full rounded-md border border-gray-400 h-full' src={`${imagePath5}`} alt="" />
+            </div>
+        
+            
+            <div className="px-2 pb-2 pt-3 flex w-full justify-between">
+                <div className="flex flex-col">
+                    <h2 className="text-gray-100 font-semibold text-base">Cars Cards - Pages</h2>
+                    <span className="inline-block text-gray-100 uppercase mt-1.5 text-sm">Business</span>
+                </div>
+            </div>
+            
+            <div className="px-3 flex justify-between items-center py-1.5 bg-[#242424] rounded-md">
+                <div className=''>
+                    <span className="text-md font-semibold text-green-500">65$</span>
+                </div>
+                <div className="">
+                    <span className="text-sm bg-violet-600 rounded text-white inline-block px-2 py-1">Preview</span>
+                </div>
+            </div>
+        </div>
+       
+
+        <div className="rounded-md bg-[#181818] p-1.5 border border-gray-700 relative">
+            <div className="">
+              <img className='w-full rounded-md border border-gray-400 h-full' src={`${imagePath3}`} alt="" />
+            </div>
+        
+            
+            <div className="px-2 pb-2 pt-3 flex w-full justify-between">
+                <div className="flex flex-col">
+                    <h2 className="text-gray-100 font-semibold text-base">Cars Cards - Pages</h2>
+                    <span className="inline-block text-gray-100 uppercase mt-1.5 text-sm">Business</span>
+                </div>
+            </div>
+            
+            <div className="px-3 flex justify-between items-center py-1.5 bg-[#242424] rounded-md">
+                <div className=''>
+                    <span className="text-md font-semibold text-green-500">65$</span>
+                </div>
+                <div className="">
+                    <span className="text-sm bg-violet-600 rounded text-white inline-block px-2 py-1">Preview</span>
+                </div>
+            </div>
+        </div>
+        <div className="rounded-md bg-[#181818] p-1.5 border border-gray-700 relative">
+            <div className="">
+              <img className='w-full rounded-md border border-gray-400 h-full' src={`${imagePath6}`} alt="" />
+            </div>
+        
+            
+            <div className="px-2 pb-2 pt-3 flex w-full justify-between">
+                <div className="flex flex-col">
+                    <h2 className="text-gray-100 font-semibold text-base">Cars Cards - Pages</h2>
+                    <span className="inline-block text-gray-100 uppercase mt-1.5 text-sm">Business</span>
+                </div>
+            </div>
+            
+            <div className="px-3 flex justify-between items-center py-1.5 bg-[#242424] rounded-md">
+                <div className=''>
+                    <span className="text-md font-semibold text-green-500">65$</span>
+                </div>
+                <div className="">
+                    <span className="text-sm bg-violet-600 rounded text-white inline-block px-2 py-1">Preview</span>
+                </div>
+            </div>
+        </div>
+       
        
     </div>
    </div>
