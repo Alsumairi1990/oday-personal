@@ -7,7 +7,7 @@ export default function signupLayout({
     return (
             
 
-            <div>
+            <div className="h-full">
             {children}
             </div>
           

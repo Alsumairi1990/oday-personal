@@ -14,6 +14,11 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      colors: {
+        'black-100': '#111',
+        'black-150': '#161616',
+   
+      },
       gridTemplateColumns: {
         '25/75': '25% 75%',
         '20/80' : '20% 80%',

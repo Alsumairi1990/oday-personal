@@ -6,6 +6,7 @@ import About from './_components/About'
 import Blogs from './_components/Blogs'
 import Footerk from './_components/Footer'
 import Works from './_components/Works'
+import Testimonials from './_components/Testimonials'
 
 
 export default function Home() {
@@ -35,13 +36,19 @@ export default function Home() {
       <div className="w-11/12 mx-auto ">
       <Works />
       </div>
+      </div>
+      <div className="w-full my-24 dark:bg-black-100">
+      <Testimonials />
+      </div>
       
-     </div>
+   
      {/* <div>
       <Footerk />
      </div> */}
 
-     
+          <div className='w-full pt-8 bg-[#111]'>
+          <Footerk />
+          </div>
     </main>
   )
 }

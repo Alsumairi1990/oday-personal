@@ -21,20 +21,18 @@ export default function RootLayout({
 }) {
   
   return (
-    <html lang="en" className="dark scroll-smooth">
+    <html lang="en" className="dark scroll-smooth h-full">
      
-      <body className={inter.className} >
+      <body className={`${inter.className} h-full`} >
         
-        <div className="flex flex-col">
+        <div className="flex flex-col h-full">
         
         
-          <div>
+          
           {children}
-          </div>
+          
         
-          <div className='w-full pt-8 bg-[#111]'>
-          <Footerk />
-          </div>
+          
          </div>
         </body>
         
