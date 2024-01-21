@@ -248,7 +248,8 @@ const NavBar = () => {
 
                               <div className="px-4 pt-2 pb-2">
                                 <div className="flex items-center justify-center rounded py-1.5 px-2 bg-orange-500">
-                                  <a href='/login' className="pl-1 text-sm text-white font-semibold capitalize">Login / Subscribe</a>
+                                  <a href='/login' className="pl-1 text-sm text-white font-semibold capitalize">Login </a>
+                                  <a href='/signup' className="pl-1 text-sm text-white font-semibold capitalize">/ Subscribe</a>
                                 </div>
                               </div>
                            </div>    

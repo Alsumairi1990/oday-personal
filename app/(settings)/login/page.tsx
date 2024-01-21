@@ -7,7 +7,7 @@ const Login = () => {
    // <div className="bg-gray-800 h-full">
           <div className="relative h-full flex px-4 w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath})`}}>
    <div className="absolute top-0 z-[-1]  left-0 w-full h-full bg-[#2f2f2fba]  " style={{backgroundImage: 'linear-gradient(to top, rgb(15 23 42 / 68%),rgb(0 0 0 / 55%), rgb(255 255 255 / 0%))'}}></div>
-   <div className ="max-w-[400px] w-full  m-auto p-6 bg-white dark:bg-slate-900 shadow-md dark:shadow-gray-800 rounded-md">
+   <div className ="max-w-[400px] w-full  m-auto p-6 bg-white dark:bg-black-100 border border-gray-800 shadow-md dark:sha0dow-gray-800 rounded-md">
    <div className="flex justify-center text-sm">
       <a href="" className="">
          <img src="https://shreethemes.in/giglink/landing/assets/images/logo-light.png" alt="" />
@@ -21,11 +21,11 @@ const Login = () => {
        
          <div className="mb-4">
             <label className="font-semibold text-md text-gray-200" htmlFor="LoginEmail">Email Address:</label>
-            <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="name@example.com" />
+            <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-150 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="name@example.com" />
          </div>
          <div className="mb-4">
             <label className="font-semibold text-md text-gray-200" htmlFor="LoginPassword">Password:</label>
-            <input id="LoginPassword" type="password" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-slate-900 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="Password:" />
+            <input id="LoginPassword" type="password" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-150 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="Password:" />
          </div>
          <div className="flex justify-between mb-4">
             <div className="inline-flex items-center mb-0">
