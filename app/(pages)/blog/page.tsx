@@ -130,9 +130,9 @@ export default function Blog() {
     }
    ]
 
-   function truncateTitle(title:String, length = 50) {
-    return title.length > length ? title.substring(0, length) + '...' : title;
-  }
+//    function truncateTitle(title:String, length = 50) {
+//     return title.length > length ? title.substring(0, length) + '...' : title;
+//   }
 
     return (
       <div >
@@ -381,7 +381,7 @@ export default function Blog() {
                           <div className="p-3 pb-2 bg-gray-100 rounded-lg border first:mb-2 border-gray-200">
                               <div className="flex bg-white p-2 rounded-md">
                               <div className="flex-50">
-                                  <h3 className="text-xl">{truncateTitle(post.title)}</h3>   
+                                  <h3 className="text-xl">{post.title}</h3>   
                               </div>
                               <div className="flex-50">
                                   <img className="w-full max-w-full rounded-md"  src={post.image || "/images/w01.png"} alt="" /> 
@@ -408,7 +408,7 @@ export default function Blog() {
                           <div className="p-3 pb-2 bg-gray-100 rounded-lg border first:mb-2 border-gray-200">
                               <div className="flex bg-white p-2 rounded-md">
                               <div className="flex-50">
-                                  <h3 className="text-xl"> {truncateTitle(post.title)} </h3>   
+                                  <h3 className="text-xl"> {post.title} </h3>   
                               </div>
                               <div className="flex-50">
                                   <img className="w-full max-w-full rounded-md" src={post.image || "/images/w01.png"} alt="" /> 
