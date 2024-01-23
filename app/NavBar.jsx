@@ -71,8 +71,8 @@ const NavBar = () => {
         </div>
         <div className="px-2 text-sm hidden sm:flex sm:items-center sm:text-base text-gray-100"> 
             <Link href="/" className="px-3 " >Home</Link>
-            <Link href="/" className=" px-3  ">Design Services</Link>
-            <Link href="/" className="px-3 " >Blogs</Link>
+            <Link href="/services" className=" px-3  ">Design Services</Link>
+            <Link href="/blog" className="px-3 " >Blogs</Link>
             <Link href="/" className="px-3 " >Totutiols</Link>
          
             <div className="py-1 px-2 flex">
