@@ -14,9 +14,9 @@ import ServiceApp from './_components/ServiceApp'
 
 export default function Home() {
   return (
-    <main className="flex flex-col bg-[#111]">
+    <main className="flex flex-col dark:bg-[#111]">
        <div className="flex flex-col">
-        <NavBar />
+        <NavBar textColor="gray-100"/>
         
           </div>
       <div className="hed">
@@ -26,16 +26,16 @@ export default function Home() {
       </div>
      
      <div className="clear"></div>
-     <div>
-     <Services />
+     <div className='gray:bg-[#111]"'>
+     <Services  />
      </div>
-     <div className="bg-[#111]">
+     <div className="gray:bg-[#111]">
      <About />
      </div>
-     <div className="bg-[#111]">
+     <div className="dark:bg-[#111]">
      <Blogs />
      </div>
-     <div className="bg-[#111]">
+     <div className="daek:bg-[#111]">
       <div className="w-11/12 mx-auto ">
       <Works />
       </div>
@@ -50,6 +50,7 @@ export default function Home() {
       <div className="w-full my-24 dark:bg-black-100">
       <ServiceApp />
       </div>
+      
       
    
      {/* <div>

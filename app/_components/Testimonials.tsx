@@ -10,7 +10,7 @@ const Testimonials = () => {
     const imagePath6 = '/images/manager3.png';
   return (
     <div className=" w-full">
-        <div className="w-11/12 relative dark:bg-black-150 mx-auto py-8 grid sm:grid-cols-4 ">
+        <div className="w-11/12 relative bg-gray-100 dark:bg-black-150 mx-auto py-8 grid sm:grid-cols-4 ">
             <div className="p-4  flex flex-col justify-center">
                 <span className="-top-8 absolute bg-violet-600 left-2 p-5 rounded-full">
                    <svg fill="#fff" width="28px" height="28px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
@@ -24,9 +24,9 @@ const Testimonials = () => {
                 <h2 className="text-2xl dark:text-gray-100 font-semibold mb-4">
                 20 Testimonial Page Examples, Templates & Best Practices
                 </h2>
-                <p className="text-sm text-gray-200 leading-6">Testimonials. 2,226 inspirational designs, illustrations, and graphic elements from the world's best designers. Want more inspiration?</p>
+                <p className="text-sm text-gray-600 dark:text-gray-200 leading-6">Testimonials. 2,226 inspirational designs, illustrations, and graphic elements from the world's best designers. Want more inspiration?</p>
                 <div className="text-sm  text-gray-100 mt-6 flex items-center rounded">
-                    <span className="border rounded px-2 border-gray-400 py-1 ">Explore more</span>
+                    <span className="border rounded px-2 bg-orange-500 dark:bg-transparent text-white border-white dark:border-gray-400 py-1 ">Explore more</span>
                     <span className="">
                     <svg fill="#fff" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  
                             viewBox="0 0 511.999 511.999" >
@@ -53,11 +53,11 @@ const Testimonials = () => {
             <div className="pl-6 pr-2 col-span-3 ">
               <div className="grid sm:grid-cols-3 gap-6">
 
-                <div className="flex flex-col rounded-md border border-gray-800">
-                    <div className="py-4 px-2 rounded-t-md  bg-black-100">
+                <div className="flex flex-col rounded-md border border-gray-300 shadow-xl dark:shadow-0 dark:border-gray-800">
+                    <div className="py-4 px-2 rounded-t-md bg-white dark:bg-black-100">
                         <div className=""></div>
                         <div className="mb-6 relative">
-                           <span className="inline-block border border-violet-600 bg-violet-6080 left-2 p-1.5 mb-2 rounded-full">
+                           <span className="inline-block border border-orange-500 bg-orange-500 dark:bg-transparent dark:border-violet-600 bg-violet-6080 left-2 p-1.5 mb-2 rounded-full">
                             <svg fill="#fff" width="22px" height="22px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
                                 <defs>
                                 </defs><title>quotes</title>
@@ -71,8 +71,8 @@ const Testimonials = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="h-24 relative flex flex-col justify-end items-center bg-violet-600">
-                        <div className="w-14 bg-white p-0.5 rounded-full absolute -top-6">
+                    <div className="h-24 relative flex flex-col rounded-md justify-end items-center bg-violet-600">
+                        <div className="w-14 bg-white border border-gray-300 dark:border-transparent p-0.5 rounded-full absolute -top-6">
                             <img className='w-full rounded-full max-w-full' src={`${imagePath6}`} alt="" />
                         </div>
                         <div className="p-2 text-center" >
@@ -82,7 +82,65 @@ const Testimonials = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col rounded-md border border-gray-800">
+                <div className="flex flex-col rounded-md border border-gray-300 shadow-xl dark:shadow-0 dark:border-gray-800">
+                    <div className="py-4 px-2 rounded-t-md bg-white dark:bg-black-100">
+                        <div className=""></div>
+                        <div className="mb-6 relative">
+                           <span className="inline-block border border-orange-500 bg-orange-500 dark:bg-transparent dark:border-violet-600 bg-violet-6080 left-2 p-1.5 mb-2 rounded-full">
+                            <svg fill="#fff" width="22px" height="22px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                </defs><title>quotes</title>
+                                <path d="M12,15H6.11A9,9,0,0,1,10,8.86l1.79-1.2L10.69,6,8.9,7.2A11,11,0,0,0,4,16.35V23a2,2,0,0,0,2,2h6a2,2,0,0,0,2-2V17A2,2,0,0,0,12,15Z"/>
+                                <path d="M26,15H20.11A9,9,0,0,1,24,8.86l1.79-1.2L24.7,6,22.9,7.2A11,11,0,0,0,18,16.35V23a2,2,0,0,0,2,2h6a2,2,0,0,0,2-2V17A2,2,0,0,0,26,15Z"/>
+                                <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" className="cls-1 fill-none" width="32" height="32"/>
+                                </svg>
+                            </span>
+                            <p className="text-sm leading-6 dark:text-gray-200">
+                            Testimonials. 2,226 inspirational designs, illustrations, action designs, Information development in predefond and inspirational designs and graphic elements from the world's best designers. Want more inspiration?
+                            </p>
+                        </div>
+                    </div>
+                    <div className="h-24 relative flex flex-col rounded-md justify-end items-center bg-orange-500 dark:bg-violet-600">
+                        <div className="w-14 bg-white border border-gray-300 dark:border-transparent p-0.5 rounded-full absolute -top-6">
+                            <img className='w-full rounded-full max-w-full' src={`${imagePath6}`} alt="" />
+                        </div>
+                        <div className="p-2 text-center" >
+                            <h2 className="text-base  leading-4 font-semibold text-white dark:text-gray-100 mb-0.5">Saleem Ali </h2> 
+                            <p className="text-[13px] font-semibold text-white dark:text-gray-300 my-0">Business Manager at Ai technology</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex flex-col rounded-md border border-gray-300 shadow-xl dark:shadow-0 dark:border-gray-800">
+                    <div className="py-4 px-2 rounded-t-md bg-white dark:bg-black-100">
+                        <div className=""></div>
+                        <div className="mb-6 relative">
+                           <span className="inline-block border border-orange-500 bg-orange-500 dark:bg-transparent dark:border-violet-600 bg-violet-6080 left-2 p-1.5 mb-2 rounded-full">
+                            <svg fill="#fff" width="22px" height="22px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                </defs><title>quotes</title>
+                                <path d="M12,15H6.11A9,9,0,0,1,10,8.86l1.79-1.2L10.69,6,8.9,7.2A11,11,0,0,0,4,16.35V23a2,2,0,0,0,2,2h6a2,2,0,0,0,2-2V17A2,2,0,0,0,12,15Z"/>
+                                <path d="M26,15H20.11A9,9,0,0,1,24,8.86l1.79-1.2L24.7,6,22.9,7.2A11,11,0,0,0,18,16.35V23a2,2,0,0,0,2,2h6a2,2,0,0,0,2-2V17A2,2,0,0,0,26,15Z"/>
+                                <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" className="cls-1 fill-none" width="32" height="32"/>
+                                </svg>
+                            </span>
+                            <p className="text-sm leading-6 dark:text-gray-200">
+                            Testimonials. 2,226 inspirational designs, illustrations, action designs, Information development in predefond and inspirational designs and graphic elements from the world's best designers. Want more inspiration?
+                            </p>
+                        </div>
+                    </div>
+                    <div className="h-24 relative flex flex-col rounded-md justify-end items-center bg-violet-600">
+                        <div className="w-14 bg-white border border-gray-300 dark:border-transparent p-0.5 rounded-full absolute -top-6">
+                            <img className='w-full rounded-full max-w-full' src={`${imagePath6}`} alt="" />
+                        </div>
+                        <div className="p-2 text-center" >
+                            <h2 className="text-base  leading-4 font-semibold text-gray-100 mb-0.5">Ahmed Fuad </h2> 
+                            <p className="text-[13px] font-semibold text-gray-300 my-0">Business Manager at Ai technology</p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* <div className="flex flex-col rounded-md border border-gray-800">
                     <div className="py-4 px-2 rounded-t-md  bg-black-100">
                         <div className=""></div>
                         <div className="mb-6 relative">
@@ -139,7 +197,7 @@ const Testimonials = () => {
                             <p className="text-[13px] font-semibold text-gray-300 my-0">Manager Assitant at Rani Feelmony </p>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
 
               </div>

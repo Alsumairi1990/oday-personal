@@ -9,7 +9,7 @@ const Works = () => {
   const imagePath5 = '/images/w05.jpg';
   const imagePath6 = '/images/w06.jpg';
   return (
-   <div className="">
+   <div className="my-8">
     <div className="flex items-center justify-center">
         <span className="w-8">
         <svg  width="100%" height="100%" viewBox="0 0 24 24" id="right-arrow" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" className="icon flat-color fill-orange-500"><path id="primary" d="M21.71,11.29l-3-3a1,1,0,0,0-1.42,1.42L18.59,11H3a1,1,0,0,0,0,2H18.59l-1.3,1.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,21.71,11.29Z" className='fill-fuchsia-500'></path></svg>
@@ -20,7 +20,7 @@ const Works = () => {
         </span>
     </div>
     <div className="mt-2 flex justify-center">
-        <h2 className="text-2xl capitalize text-gray-200 font-semibold">
+        <h2 className="text-2xl capitalize text-gray-700 dark:text-gray-200 font-semibold">
             Display Our Latest Work
         </h2>
        

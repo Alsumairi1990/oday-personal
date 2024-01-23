@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   
   return (
-    <html lang="en" className="dark scroll-smooth h-full">
+    <html lang="en" className="light scroll-smooth h-full">
      
       <body className={`${inter.className} h-full`} >
         
@@ -34,6 +34,8 @@ export default function RootLayout({
         
           
          </div>
+        
+         
         </body>
         
     </html>

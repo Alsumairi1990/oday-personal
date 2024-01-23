@@ -1,4 +1,5 @@
 import NavBar from "../NavBar"
+import Footerk from "../_components/Footer"
 
 
 
@@ -11,9 +12,13 @@ export default function signupLayout({
             
 
             <div className="h-full">
-                <NavBar />
+                <NavBar  textColor="white" />
             {children}
+            <div className="">
+             <Footerk />
+             </div>
             </div>
+             
           
     )
   }

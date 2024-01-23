@@ -6,10 +6,10 @@ const Blogs = () => {
     const imagePath1 = '/images/p2.webp'
   return (
    <div className="flex w-[90%] mx-auto  items-center flex-col my-8">
-      <h2 className="text-sm uppercase font-bold text-fuchsia-600">Latest News</h2>
+      <h2 className="text-sm uppercase font-bold text-gray-600  dark:text-fuchsia-600 ">Latest News</h2>
       <div className="p-2">
-      <h2 className="text-base sm:text-3xl font-bold text-white mt-3 text-center">Descover More </h2>
-      <h2 className="text-base sm:text-3xl font-bold text-white mt-1 sm:mt-2.5 text-center">About our provided serices</h2>
+      <h2 className="text-base sm:text-3xl font-bold text-blue-600 dark:text-white mt-3 text-center">Descover More </h2>
+      <h2 className="text-base sm:text-2xl font-semibold dark:sm:text-3xl dark:font-bold text-blue-400 dark:text-white mt-1 sm:mt-2.5 text-center">About our provided serices</h2>
       <div className="grid sm:grid-cols-2 gap-3 mt-8">
 
         <div className="grid sm:grid-cols-2">

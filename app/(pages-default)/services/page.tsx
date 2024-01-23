@@ -136,7 +136,7 @@ const Serivices = () => {
                 </div>
                 <div className="flex justify-end relative" >
                     <div className="w-10/12  h-full bg-[#489bc2]">
-                    <img className="w-full absolute -top-24 -left-8 " src="https://cdn.cmarix.com/images/home/mobile-application-development.webp" alt="" />
+                    <img className="w-full absolute -top-28 -left-8 " src="https://cdn.cmarix.com/images/home/mobile-application-development.webp" alt="" />
 
                     </div>
                 </div>

@@ -5,7 +5,7 @@ import {useEffect, useState} from 'react';
 
 
 
-const NavBar = () => {
+const NavBar = ({ textColor }) => {
   const imagePath = '/images/logo.png';
   function showDrop(e){
     const prnt = e.target.closest('.menu-pr');
@@ -56,7 +56,8 @@ const NavBar = () => {
             </span>    
         </div>
         <div className="p-2">
-            <Link href="/" className="text-base sm:text-xl flex items-center pl-1 sm:pl-4 pr-2 text-gray-100 font-bold" > 
+            <Link href="/" className={`text-base sm:text-xl flex items-center pl-1 sm:pl-4 pr-2 text-${textColor} font-bold`} > 
+            
             <span className='w-8 sm:w-[2.7rem] mr-1.5 inline-block'>
               <img src={`${imagePath}`}  alt="" />
             </span>
@@ -69,11 +70,12 @@ const NavBar = () => {
           </span>
           
         </div>
-        <div className="px-2 text-sm hidden sm:flex sm:items-center sm:text-base text-gray-100"> 
+        <div className={`px-2 text-sm hidden sm:flex sm:items-center sm:text-base text-${textColor} `}> 
             <Link href="/" className="px-3 " >Home</Link>
             <Link href="/services" className=" px-3  ">Design Services</Link>
             <Link href="/blog" className="px-3 " >Blogs</Link>
             <Link href="/" className="px-3 " >Totutiols</Link>
+            <Link href="/portfolio" className="px-3 " >Portfolio</Link>
          
             <div className="py-1 px-2 flex">
              <div className="menu-pr ">

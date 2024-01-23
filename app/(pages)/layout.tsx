@@ -1,3 +1,4 @@
+import Footerk from "../_components/Footer"
 import Nav from "./Nav"
 
 
@@ -12,6 +13,9 @@ export default function signupLayout({
             <div className="h-full">
                 <Nav />
             {children}
+            <div className="">
+             <Footerk />
+             </div>
             </div>
           
     )
