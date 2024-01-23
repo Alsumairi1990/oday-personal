@@ -1,30 +1,37 @@
 import React from 'react';
 
 const Subscribe = () => {
-   const imagePath = '/images/200.jpg';
+   const imagePath = '/images/lot.svg';
+   
+   const imagePath2 = 'https://clutch.co/static/images/homepage_profile--desktop.webp';
 
-  return (
+//   return (style={{backgroundImage: `url(${imagePath})`}}
+return(
 
-<section className="relative px-4 w-full bg-no-repeat bg-fixed h-64 flex items-center bg-center bg-cover" style={{backgroundImage: `url(${imagePath})`}}>
 
-   <div className="absolute top-0 left-0  w-full z-0 h-full" style={{background:'rgba(22,28,45,0.75)'}}></div>
-   <div className="container z-10  relative">
-      <div className="row justify-content-center">
-         <div className="col">
-            <div className="section-title text-center">
+     <div className="h-[25rem] w-[93%] mx-auto bg-black-200   rounded overflow-hidden" style={{backgroundImage: `url(${imagePath})`}}>
+      
+      <div className="grid grid-cols-3 pl-4 py-4 ">
+         <div className="h-[22.5rem] w-[21rem]" style={{clipPath: 'polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)'}}>
+            <img className='w-full' src={imagePath2} alt="" />
+            
+         </div>
+         <div className="col-span-2 relative flex flex-col justify-center" >
+         <div className="absolute  top-0 h-14 w-14 right-0" style={{backgroundImage: `url(${imagePath})`}} ></div>
+            <div className=" pr-4">
+               <p className="text-base text-green-500 font-semibold mb-2">Contact US</p>
                <h4 className=" text-white text-xl sm:text-3xl font-semibold mb-6">Ready to start your next web project now?</h4>
-               <p className="text-gray-300 max-sm:px-4 sm:w-7/12 mx-auto mb-0">Launch your campaign and benefit from our expertise on designing and managing conversion centered bootstrap v5 html page.</p>
+               <p className="text-gray-300 max-sm:px-4  mx-auto mb-0">Launch your campaign and benefit from our expertise on designing and managing conversion centered bootstrap v5 html page.</p>
                <div className="mt-4 pt-2">
                   <a href="" className="bg-violet-600 rounded-md px-3 py-1.5 text-white inline-block">Get Started !</a>
                </div>
             </div>
          </div>
       </div>
-   </div>
-   {/* <div id="jarallax-container-1" class="jarallax-container" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; z-index: -100; clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 0px 100%);">
-      <div style="background-position: 50% 50%; background-size: cover; background-repeat: no-repeat; background-image: url(&quot;https://shreethemes.in/upstart/layouts/images/bg/cta.png&quot;); position: absolute; top: 0px; left: 0px; width: 1273px; height: 324px; overflow: hidden; pointer-events: none; transform-style: preserve-3d; backface-visibility: hidden; margin-top: -28px; transform: translate3d(0px, -69.6875px, 0px);"></div>
-   </div> */}
-</section>
+      </div>  
+  
+ 
+
   )
 };
   export default Subscribe;

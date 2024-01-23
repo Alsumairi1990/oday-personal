@@ -9,6 +9,7 @@ import Works from './_components/Works'
 
 import Testimonials from './_components/Testimonials'
 import Subscribe from './_components/Subscribe'
+import ServiceApp from './_components/ServiceApp'
 
 
 export default function Home() {
@@ -44,6 +45,10 @@ export default function Home() {
       </div>
       <div className="w-full my-24 dark:bg-black-100">
       <Subscribe />
+      </div>
+
+      <div className="w-full my-24 dark:bg-black-100">
+      <ServiceApp />
       </div>
       
    

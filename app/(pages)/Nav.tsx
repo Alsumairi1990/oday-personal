@@ -5,11 +5,12 @@ import {useEffect, useState} from 'react';
 
 
 
-const NavBar = () => {
+const Nav = () => {
   const imagePath = '/images/logo.png';
-  function showDrop(e){
+  function showDrop(e:any){
     const prnt = e.target.closest('.menu-pr');
     const menu = prnt.querySelector('.log-menu');
+    
     if(menu.classList.contains('hidden')){
       // alert('called---->'+e);
       menu.classList.remove('hidden');
@@ -21,8 +22,11 @@ const NavBar = () => {
     
   }
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleClickOutside = (event:any) => {
      const menus = document.getElementsByClassName('log-menu');
+    //  const menusArray: HTMLElement[] = [...menus];
+     const menusArray = Array.from(document.getElementsByClassName('log-menu')) as HTMLElement[];
+
       if (event.target.closest('.menu-btn ') !== null) {
         const prnt = event.target.closest('.menu-pr');
         const menu = prnt.querySelector('.log-menu');
@@ -33,11 +37,12 @@ const NavBar = () => {
     }
     else if (event.target.closest('.login-menu ') !== null) return;
     else {
-    for(let menu of menus){
+    for(let menu of menusArray){
       menu.classList.add('hidden');
       
        };
     }
+    
       
     };
   
@@ -49,7 +54,7 @@ const NavBar = () => {
   });
   
   return (
-    <nav className='flex absolute w-full sm:p-2 z-50 items-center justify-between bordrer-b botrder-b-[#484848]'>
+    <nav className='flex  w-full sm:p-2 z-50 items-center justify-between bg-black-100 border-b border-b-[#484848]'>
         <div className='sm:hidden flex items-center pl-1'>
            <span className="w-6 inline-block fill-gray-200 ml-1">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M89.006 490.013h845.978v62.269h-845.978v-62.269zM89.006 226.835h845.978v62.269h-845.978v-62.269zM89.006 753.181h845.978v62.259h-845.978v-62.259z"></path></svg>
@@ -60,7 +65,7 @@ const NavBar = () => {
             <span className='w-8 sm:w-[2.7rem] mr-1.5 inline-block'>
               <img src={`${imagePath}`}  alt="" />
             </span>
-              Design Web</Link>
+              Desfffign Web</Link>
             
         </div>
         <div className='sm:hidden flex items-center pr-2'>
@@ -322,4 +327,4 @@ const NavBar = () => {
   )
 }
 
-export default NavBar
+export default Nav
