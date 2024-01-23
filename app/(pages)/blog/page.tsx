@@ -130,7 +130,7 @@ export default function Blog() {
     }
    ]
 
-   function truncateTitle(title, length = 50) {
+   function truncateTitle(title:String, length = 50) {
     return title.length > length ? title.substring(0, length) + '...' : title;
   }
 
