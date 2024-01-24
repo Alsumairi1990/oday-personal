@@ -70,10 +70,11 @@ const NavBar = ({ textColor }) => {
           </span>
           
         </div>
-        <div className={`px-2 text-sm hidden sm:flex sm:items-center sm:text-base text-${textColor} `}> 
+        <div className={`px-2 text-sm hidden font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `}> 
             <Link href="/" className="px-3 " >Home</Link>
             <Link href="/services" className=" px-3  ">Design Services</Link>
             <Link href="/blog" className="px-3 " >Blogs</Link>
+            <Link href="/works" className="px-3 " >Works</Link>
             <Link href="/" className="px-3 " >Totutiols</Link>
             <Link href="/portfolio" className="px-3 " >Portfolio</Link>
          
