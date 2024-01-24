@@ -7,18 +7,20 @@ import {useEffect, useState} from 'react';
 
 const NavBar = ({ textColor }) => {
   const imagePath = '/images/logo.png';
-  function showDrop(e){
-    const prnt = e.target.closest('.menu-pr');
-    const menu = prnt.querySelector('.log-menu');
-    if(menu.classList.contains('hidden')){
-      // alert('called---->'+e);
-      menu.classList.remove('hidden');
-    }
-    else {
-      alert('called---->'+e);
-      menu.classList.add('hidden');
-    }
-    
+  function switchTheme(e){
+    document.documentElement.classList.remove('dark')
+    alert(e)
+    // const moon = document.querySelector('.moon');
+    // const sun = document.querySelector('.moon');
+
+    // const userTheme = localStorage.getItem("theme");
+    // const systemTheme = window.matchMedia("(prefers-color-theme : dark)").matches;
+
+    // const iconToggle = () => {
+    //   moon.classList.toggle('display-none')
+    //   sun.classList.toggle('display-none')
+    // }
+  
   }
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -32,6 +34,7 @@ const NavBar = ({ textColor }) => {
         }
     }
     else if (event.target.closest('.login-menu ') !== null) return;
+    
     else {
     for(let menu of menus){
       menu.classList.add('hidden');
@@ -79,6 +82,23 @@ const NavBar = ({ textColor }) => {
             <Link href="/portfolio" className="px-3 " >Portfolio</Link>
          
             <div className="py-1 px-2 flex">
+            <div className="">
+              <div className="pl-3 pr-2 cursor-pointer">
+                <div className="flex items-center border border-gray-600 px-1.5 py-1.5 bg-[#00000059] rounded-full pointer relative">
+                  <span className="icon dark-icon relative">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 18.865a.725.725 0 0 1-.534-.215.726.726 0 0 1-.216-.535c0-.213.072-.39.216-.534A.726.726 0 0 1 5 17.365h1.25v-7.25A5.63 5.63 0 0 1 7.5 6.534c.833-1.056 1.917-1.732 3.25-2.026v-.7c0-.353.12-.65.36-.89s.537-.36.89-.36c.352 0 .649.12.89.36.24.24.36.537.36.89v.7c1.333.294 2.417.97 3.25 2.026a5.63 5.63 0 0 1 1.25 3.581v7.25H19c.212 0 .39.072.534.216a.726.726 0 0 1 .216.535c0 .212-.072.39-.216.534a.726.726 0 0 1-.534.215H5Zm7 2.943c-.492 0-.917-.175-1.273-.525A1.73 1.73 0 0 1 10.192 20h3.616c0 .505-.175.933-.525 1.283-.35.35-.778.525-1.283.525Zm-4.25-4.443h8.5v-7.25c0-1.168-.416-2.169-1.249-3.001-.833-.833-1.834-1.249-3.003-1.249-1.17 0-2.17.416-3 1.249-.832.832-1.248 1.833-1.248 3.001v7.25Z" fill="#fff"></path>
+                      </svg>
+                      
+                  </span>
+                </div>
+              </div>
+
+          
+            
+              </div>
+
+
              <div className="menu-pr ">
               <div className="pl-3 menu-btn  pr-2 cursor-pointer">
                 <div className="flex items-center border border-gray-600 px-1.5 py-1.5 bg-[#00000059] rounded-full pointer relative">
