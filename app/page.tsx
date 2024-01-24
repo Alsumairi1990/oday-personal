@@ -10,6 +10,7 @@ import Works from './_components/Works'
 import Testimonials from './_components/Testimonials'
 import Subscribe from './_components/Subscribe'
 import ServiceApp from './_components/ServiceApp'
+import ServicesFull from './_components/ServicesFull'
 
 
 export default function Home() {
@@ -29,6 +30,11 @@ export default function Home() {
      <div className='gray:bg-[#111]"'>
      <Services  />
      </div>
+
+     <div className='gray:bg-[#111]"'>
+     <ServicesFull  />
+     </div>
+
      <div className="gray:bg-[#111]">
      <About />
      </div>
