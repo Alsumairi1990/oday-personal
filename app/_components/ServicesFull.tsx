@@ -12,6 +12,12 @@ const ServicesFull = () => {
   const imagePath_4 = "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg"
   const imagePath_5 = "https://dcstatic.com/images/icons/design-categories/design-categories-vector-design-f83cdf5668.svg"
   const imagePath_6 = "https://dcstatic.com/images/icons/design-categories/design-categories-app-design-27fb7b89e6.svg"
+  const imagePath_7 = "https://dcstatic.com/images/icons/design-categories/design-categories-label-design-275e614d8d.svg"
+  const imagePath_8 = "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg"
+  const imagePath_9 = "https://dcstatic.com/images/icons/design-categories/design-categories-bag-and-tote-design-c1bec00d33.svg"
+  const imagePath_10 = "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg"
+  const imagePath_11 = "https://dcstatic.com/images/icons/design-categories/design-categories-resume-design-b1aa5b01e6.svg"
+  const imagePath_12 = "https://dcstatic.com/images/icons/design-categories/design-categories-magazine-design-f15d13134d.svg"
   return (
 
       <div className="flex flex-col sm:py-8  dark:bg-[#080808]">
@@ -19,7 +25,7 @@ const ServicesFull = () => {
         <h2 className="text-3xl text-center px-8 mb-6 text-blue-700 dark:text-white font-semibold">Our Services</h2>
         <p className="text-base text-gray-600 dark:text-gray-300 text-center leading-7 px-8">Search the world's ,information including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking </p>
        
-        <div className="grid grid-cols-2 sm:grid-cols-6 gap-4 mt-8">
+        <div className="grid grid-cols-2 sm:grid-cols-6 gap-x-4 gap-y-8 mt-8">
 
 
           <div className="p-2 flex flex-col justify-center py-4 sm:pt-2 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
@@ -75,7 +81,66 @@ const ServicesFull = () => {
             </div>
           </div>
 
+          <div className="p-2 flex flex-col justify-center py-4 sm:pt-2 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+              <img className='w-full mx-auto' src={`${imagePath_7}`} alt="" />
+            </div>
+            <div className="sm:p2 mt-1 text-center">
+              <h2 className="text-base sm:text-base capitalize sm:capitalize font-semibold text-orange-500 dark:text-[#ca82ef]">label design</h2>             
+            </div>
+          </div>
+
+         
+
+
+          <div className="p-2 flex flex-col justify-center py-4 sm:pt-2 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+              <img className='w-full mx-auto' src={`${imagePath_8}`} alt="" />
+            </div>
+            <div className="sm:p2 mt-1 text-center">
+              <h2 className="text-base sm:text-base capitalize sm:capitalize font-semibold text-orange-500 dark:text-[#ca82ef]">T-Shirt Design</h2>             
+            </div>
+          </div>
+
+          <div className="p-2 flex flex-col justify-center py-4 sm:pt-2 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+              <img className='w-full mx-auto' src={`${imagePath_9}`} alt="" />
+            </div>
+            <div className="sm:p2 mt-1 text-center">
+              <h2 className="text-base sm:text-base capitalize sm:capitalize font-semibold text-orange-500 dark:text-[#ca82ef]">bag and toat design</h2>             
+            </div>
+          </div>
+
+          <div className="p-2 flex flex-col justify-center py-4 sm:pt-2 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+              <img className='w-full mx-auto' src={`${imagePath_10}`} alt="" />
+            </div>
+            <div className="sm:p2 mt-1 text-center">
+              <h2 className="text-base sm:text-base capitalize sm:capitalize font-semibold text-orange-500 dark:text-[#ca82ef]">flyer design</h2>             
+            </div>
+          </div>
+
+          <div className="p-2 flex flex-col justify-center py-4 sm:pt-2 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+              <img className='w-full mx-auto' src={`${imagePath_11}`} alt="" />
+            </div>
+            <div className="sm:p2 mt-1 text-center">
+              <h2 className="text-base sm:text-base capitalize sm:capitalize font-semibold text-orange-500 dark:text-[#ca82ef]">Resume design</h2>             
+            </div>
+          </div>
+
+          <div className="p-2 flex flex-col justify-center py-4 sm:pt-2 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+              <img className='w-full mx-auto' src={`${imagePath_12}`} alt="" />
+            </div>
+            <div className="sm:p2 mt-1 text-center">
+              <h2 className="text-base sm:text-base capitalize sm:capitalize font-semibold text-orange-500 dark:text-[#ca82ef]">Magazine design</h2>             
+            </div>
+          </div>
           
+        </div>
+        <div className="flex justify-center mt-8">
+          <span className="text-xl inline-block px-3 py-1 text-white bg-orange-500 rounded border border-gray-100 capitalize">Show More</span>
         </div>
         </div>
        
