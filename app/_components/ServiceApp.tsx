@@ -85,13 +85,13 @@ const ServiceApp = () => {
             <div className=" border-b border-b-gray-200 dark:border-gray-800 pb-5">
                 <div className="grid grid-cols-3">
                     <div className="p-1 ">
-                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-11 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="client user" />                      
+                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="client user" />                      
                     </div>
                     <div className="p-1 ">
-                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-11 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="name@example.com" />                      
+                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="name@example.com" />                      
                     </div>
                     <div className="p-1 ">
-                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-11 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="phone" />                      
+                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="phone" />                      
                     </div>
                 
                 </div>
