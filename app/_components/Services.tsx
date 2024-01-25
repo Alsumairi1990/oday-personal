@@ -10,7 +10,7 @@ const Services = () => {
 
       <div className="flex flex-col sm:py-8  dark:bg-[#080808]">
         <div className="p-1 w-11/12 mx-auto">
-        <h2 className="text-3xl text-center px-8 mb-6 text-blue-700 dark:text-white font-semibold">Our Services</h2>
+        <h2 className="text-3xl text-center px-8 mb-6 text-blue-700 dark:text-white font-semibold">Services Categories</h2>
         <p className="text-base text-gray-600 dark:text-gray-300 text-center leading-7 px-8">Search the world's ,information including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking </p>
        
         <div className="grid grid-cols sm:grid-cols-3 gap-8 mt-8">

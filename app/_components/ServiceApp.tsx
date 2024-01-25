@@ -68,9 +68,9 @@ const ServiceApp = () => {
                         </div>
                     </div>
                 </div>
-                <div className="px-4 pt-0">
+                {/* <div className="px-4 pt-0">
                     <h2 className="text-gray-600 text-md font-semibold">Request best quality of <span className='text-orange-500'>Servics</span> based on highest staudards</h2>
-                </div>
+                </div> */}
 
                 
             </div>
@@ -96,11 +96,11 @@ const ServiceApp = () => {
                 
                 </div>
             </div>
-            <div className="p-2 pt-6 ">
+            <div className="p-2 pt-4 ">
                 <div className="">
                     <h2 className="text-black-150 dark:text-white textmd font-semibold mb-1.5">How soon do you want to start the project?*</h2>
                     <div className="py-2 grid grid-cols-3 items-center">
-                        <div className="py-2">
+                        <div className="">
                             <div className="flex items-center ">
                             <div className="inline-flex items-center">
                                     <label className="relative flex items-center px-2 py-3 rounded-full cursor-pointer" htmlFor="check">
@@ -124,7 +124,7 @@ const ServiceApp = () => {
                             </div>
                         </div>
 
-                        <div className="py-2">
+                        <div className="">
                             <div className="flex items-center ">
                                 <div className="inline-flex items-center">
                                         <label className="relative flex items-center px-2 py-3 rounded-full cursor-pointer" htmlFor="check">
@@ -148,7 +148,7 @@ const ServiceApp = () => {
                             </div>
                         </div>
 
-                        <div className="py-2">
+                        <div className="">
                             <div className="flex items-center">
                                 <div className="inline-flex items-center">
                                             <label className="relative flex items-center px-2 py-3 rounded-full cursor-pointer" htmlFor="check">
@@ -173,7 +173,7 @@ const ServiceApp = () => {
                         </div>
 
 
-                        <div className="py-2">
+                        <div className="">
                             <div className="flex items-center">
                             <div className="inline-flex items-center">
                                         <label className="relative flex items-center px-2 py-3 rounded-full cursor-pointer" htmlFor="check">
@@ -198,7 +198,7 @@ const ServiceApp = () => {
                         </div>
 
 
-                        <div className="py-2">
+                        <div className="">
                             <div className="flex items-center">
                             <div className="inline-flex items-center">
                                         <label className="relative flex items-center px-2 py-3 rounded-full cursor-pointer" htmlFor="check">
@@ -223,7 +223,7 @@ const ServiceApp = () => {
                         </div>
 
 
-                        <div className="py-2">
+                        <div className="">
                             <div className="flex items-center">
                             <div className="inline-flex items-center">
                                         <label className="relative flex items-center px-2 py-3 rounded-full cursor-pointer" htmlFor="check">
@@ -258,7 +258,7 @@ const ServiceApp = () => {
 
         </div>
      </div>
-     <div className="my-4 p-2 text-center">
+     <div className="my-2 p-2 text-center">
      <a href="" className="bg-orange-500 dark:bg-violet-600 rounded-md px-6 py-1.5 text-white inline-block">Submite</a>
      </div>
 
