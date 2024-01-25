@@ -45,7 +45,7 @@ export default function Home() {
      <Blogs />
      </div>
      <div className="daek:bg-[#111]">
-      <div className="w-11/12 mx-auto ">
+      <div className="dark:w-11/12 mx-auto  dark:bg-black-100">
       <Works />
       </div>
       </div>
