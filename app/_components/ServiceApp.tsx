@@ -7,14 +7,14 @@ const ServiceApp = () => {
     <div className="shadow-lg  bg-white dark:bg-black-150 border dark:border-gray-600 rounded-md w-11/12 mx-auto  " style={{boxShadow:' 3px 3px 40px rgb(0 0 0/15%)'}}>
      <div className="grid grid-cols-3 ">
         <div className="pr-8">
-            <div className="bg-[#f8f8f8] h-full">
-                <div className="flex mb-4 justify-between py-8 px-4">
+            <div className="bg-[#f8f8f8] dark:bg-black-100 dark:border-r dark:border-r-gray-800 h-full">
+                <div className="flex mb-4 justify-between py-6 px-4">
                     <div className=" flex flex-col flex-48 bg-white border rounded border-[rgba(0,0,0,0.125)] p-2 text-center col-6 flex-fill">
                         <div className="p-1 pb-0">
                             <span className="icon inline-block flex-50 w-[4.5rem] icon-lead ">
                                 <img className='w-full' src="https://dcstatic.com/images/icons/design-categories/design-categories-vector-design-f83cdf5668.svg" alt="" />
                             </span>
-                            <p className="text-lead-feature flex-50 text-[13px] font-weight-semi mb-0">Brochure Details</p>
+                            <p className="text-lead-feature flex-50 text-[13px] dark:text-gray-900 font-weight-semi mb-0">Brochure Details</p>
                         </div>
                        
                     </div>
@@ -23,19 +23,19 @@ const ServiceApp = () => {
                             <span className="icon inline-block flex-50 w-[4.5rem] icon-lead ">
                             <img src="https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg" alt="" />
                             </span>
-                            <p className="text-lead-feature flex-50 text-[13px] font-weight-semi mb-0">Check Detailed</p>
+                            <p className="text-lead-feature flex-50 text-[13px] dark:text-gray-900  font-weight-semi mb-0">Check Detailed</p>
                         </div>
                     </div>
                 </div>
 
 
-                <div className="flex mb-4 justify-between pb-8 px-4">
+                <div className="flex mb-4 justify-between pb-6 px-4">
                     <div className=" flex flex-col flex-48 bg-white border rounded border-[rgba(0,0,0,0.125)] p-2 text-center col-6 flex-fill">
                         <div className="p-1 pb-0">
                             <span className="icon inline-block flex-50 w-[4.5rem] icon-lead ">
                                 <img className='w-full' src="https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg" alt="" />
                             </span>
-                            <p className="text-lead-feature flex-50 text-[13px] font-weight-semi mb-0">Brochure Details</p>
+                            <p className="text-lead-feature flex-50 text-[13px] dark:text-gray-900  font-weight-semi mb-0">Brochure Details</p>
                         </div>
                        
                     </div>
@@ -44,7 +44,7 @@ const ServiceApp = () => {
                             <span className="icon inline-block flex-50 w-[4.5rem] icon-lead ">
                             <img src="https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg" alt="" />
                             </span>
-                            <p className="text-lead-feature flex-50 text-[13px] font-weight-semi mb-0">Check Detailed</p>
+                            <p className="text-lead-feature flex-50 text-[13px] dark:text-gray-900  font-weight-semi mb-0">Check Detailed</p>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@ const ServiceApp = () => {
                             <span className="icon inline-block flex-50 w-[4.5rem] icon-lead ">
                                 <img className='w-full' src="https://dcstatic.com/images/icons/design-categories/design-categories-app-design-27fb7b89e6.svg" alt="" />
                             </span>
-                            <p className="text-lead-feature flex-50 text-[13px] font-weight-semi mb-0">Brochure Details</p>
+                            <p className="text-lead-feature flex-50 text-[13px] dark:text-gray-900  font-weight-semi mb-0">Brochure Details</p>
                         </div>
                        
                     </div>
@@ -64,7 +64,7 @@ const ServiceApp = () => {
                             <span className="icon inline-block flex-50 w-[4.5rem] icon-lead ">
                             <img src="https://dcstatic.com/images/icons/design-categories/design-categories-label-design-275e614d8d.svg" alt="" />
                             </span>
-                            <p className="text-lead-feature flex-50 text-[13px] font-weight-semi mb-0">Check Detailed</p>
+                            <p className="text-lead-feature flex-50 text-[13px] dark:text-gray-900  font-weight-semi mb-0">Check Detailed</p>
                         </div>
                     </div>
                 </div>
@@ -82,21 +82,21 @@ const ServiceApp = () => {
                 </span>
                 <h1 className="text-black-150 dark:text-white text-center text-2xl font-semibold">Which <span className="text-orange-400">services</span> are you looking for?</h1>
             </div>
-            <div className=" border-b border-b-gray-200 dark:border-gray-800 pb-6">
+            <div className=" border-b border-b-gray-200 dark:border-gray-800 pb-5">
                 <div className="grid grid-cols-3">
                     <div className="p-1 ">
-                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-3 px-3 h-12 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="client user" />                      
+                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-11 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="client user" />                      
                     </div>
                     <div className="p-1 ">
-                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-3 px-3 h-12 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="name@example.com" />                      
+                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-11 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="name@example.com" />                      
                     </div>
                     <div className="p-1 ">
-                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-3 px-3 h-12 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="phone" />                      
+                    <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-11 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="phone" />                      
                     </div>
                 
                 </div>
             </div>
-            <div className="p-2 pt-8 ">
+            <div className="p-2 pt-6 ">
                 <div className="">
                     <h2 className="text-black-150 dark:text-white textmd font-semibold mb-1.5">How soon do you want to start the project?*</h2>
                     <div className="py-2 grid grid-cols-3 items-center">
@@ -254,7 +254,7 @@ const ServiceApp = () => {
         <div className="">
 
             <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-600 dark:text-white">Your message</label>
-            <textarea id="message" rows={3} className="block p-2.5 w-full text-sm text-gray-100 bg-gray-50 rounded-lg border border-gray-300 focus:ring-violet-600 focus:border-violet-700 dark:bg-black-150 dark:border-gray-800 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-600 dark:focus:border-violet-700" placeholder="Write your thoughts here..."></textarea>
+            <textarea id="message" rows={2} className="block p-2.5 w-full text-sm text-gray-100 bg-gray-50 rounded-lg border border-gray-300 focus:ring-violet-600 focus:border-violet-700 dark:bg-black-150 dark:border-gray-800 dark:placeholder-gray-400 dark:text-white dark:focus:ring-violet-600 dark:focus:border-violet-700" placeholder="Write your thoughts here..."></textarea>
 
         </div>
      </div>

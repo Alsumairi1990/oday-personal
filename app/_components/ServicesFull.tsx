@@ -29,7 +29,7 @@ const ServicesFull = () => {
 
 
         <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_1}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -38,7 +38,7 @@ const ServicesFull = () => {
           </a>
 
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_2}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -47,7 +47,7 @@ const ServicesFull = () => {
           </a>
 
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_3}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -55,7 +55,7 @@ const ServicesFull = () => {
             </div>
           </a>  
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_4}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -64,7 +64,7 @@ const ServicesFull = () => {
           </a>
 
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_5}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -73,7 +73,7 @@ const ServicesFull = () => {
           </a>
 
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_6}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -82,7 +82,7 @@ const ServicesFull = () => {
           </a>
 
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_7}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -94,7 +94,7 @@ const ServicesFull = () => {
 
 
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_8}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -103,7 +103,7 @@ const ServicesFull = () => {
           </a>
 
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_9}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -112,7 +112,7 @@ const ServicesFull = () => {
           </a>
 
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_10}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -121,7 +121,7 @@ const ServicesFull = () => {
           </a>
 
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_11}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
@@ -130,7 +130,7 @@ const ServicesFull = () => {
           </a>
 
           <a href='' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[9rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7.5rem] dark:sm:w-[7.5rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_12}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">

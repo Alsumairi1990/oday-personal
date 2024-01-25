@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import NavBar from './NavBar.jsx';
 import Footer from './Footer.jsx';
 import Footerk from './_components/Footer';
+import { Providers } from './providers';
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,10 +22,10 @@ export default function RootLayout({
 }) {
   
   return (
-    <html lang="en" className="dark scroll-smooth h-full">
+    <html lang="en" className=" scroll-smooth h-full" suppressHydrationWarning>
      
       <body className={`${inter.className} h-full`} >
-        
+        <Providers>
         <div className="flex flex-col h-full">
         
         
@@ -34,6 +35,7 @@ export default function RootLayout({
         
           
          </div>
+       </Providers>
         
          
         </body>

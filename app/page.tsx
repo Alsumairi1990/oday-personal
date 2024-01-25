@@ -13,6 +13,7 @@ import ServiceApp from './_components/ServiceApp'
 import ServicesFull from './_components/ServicesFull'
 
 
+
 export default function Home() {
   return (
     <main className="flex flex-col dark:bg-[#111]">
@@ -20,11 +21,13 @@ export default function Home() {
         <NavBar textColor="gray-100"/>
         
           </div>
+          
       <div className="hed">
       {/* <NavBar /> */}
        <Hero />
        
       </div>
+      
      
      <div className="clear"></div>
      <div className='gray:bg-[#111]"'>
