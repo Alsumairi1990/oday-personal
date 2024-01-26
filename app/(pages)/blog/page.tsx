@@ -8,16 +8,25 @@ export default function Blog() {
     {
       title :'The best programming book for proframming',
       body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w05.jpg',
+      image : '/images/w02.jpg',
       category :'Business'
     };
     const post = 
     {
       title :'How to define block of css image',
       body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/77.png',
+      image : '/images/w05.jpg',
       category :'Business'
     };
+
+    const topPost = 
+    {
+      title :'How to define block of css image',
+      body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
+      image : '/images/w01.jpg',
+      category :'Web tech'
+    };
+
     const fastPosts = [
         {
           id:1,  
@@ -457,29 +466,24 @@ export default function Blog() {
               </div>
       </section> 
       
-      
+      */}
       <section className="w-11.4/12 my-10 mx-auto">
           <div className="grid sm:grid-cols-22/56/22 gap-x-2 max-sm:gap-y-4">
               <div className="border border-gray-300 rounded-xl max-sm:h-56">
                    <div className="grid h-full">
                       <div className="col-span-full row-span-full">
-                          <img className="w-full max-w-full h-full rounded-xl object-cover" src="{{ asset('uploads/post/'.$posts[3]->featuredImage) }}" alt="">  
+                          <img className="w-full max-w-full h-full rounded-xl object-cover" src={latestPost.image} alt="" />  
                       </div>
                       <div className="col-span-full row-span-full title-full-shadow flex flex-col justify-end h-full self-end text-white p-1 pl-4 rounded-b-xl"> 
                           <p className="mb-0.5 text-base">
-                          @if ($posts[0]->categories->count()> 0)
-                          <a href="">{{$posts[0]->categories[0]->name}}</a>
-                          @endif 
+                          <a href="">{latestPost.category}</a>
+                        
                           </p>
                           <p className="font-bold text-2xl pb-2">
-                          @php ($date = Carbon\Carbon::parse($posts[0]->created_at ))    
-                              @if ($posts[0]->categories->count() > 0)
-                              <a href="{!! route('single',['category' => $posts[0]->categories[0]->slug , 'year' => $date->year,'month' => $date->month,'day'=> $date->day,'slug' =>  $posts[0]->slug ]) !!}" > {{$posts[0]->title}}
-                              </a>
-                              @else
-                              <a href="{!! route(' singlePost',['year' => $date->year,'month' => $date->month,'day'=> $date->day,'slug' =>  $posts[0]->slug ]) !!}" > {{$posts[0]->title}}
-                              </a>
-                          @endif                               
+                          
+                              <a href="" > {latestPost.title}</a>
+                              
+                                                        
                           </p>
                       </div>
                   </div>
@@ -487,23 +491,19 @@ export default function Blog() {
               <div className="border border-gray-300 rounded-xl max-sm:h-56">
               <div className="grid">
                           <div className="col-span-full row-span-full">
-                              <img className="w-full max-w-full h-full rounded-xl" src="{{ asset('uploads/post/'.$posts[4]->featuredImage) }}" alt="">  
+                              <img className="w-full max-w-full h-full rounded-xl" src={post.image} alt="" />  
                           </div>
                           <div className="col-span-full row-span-full title-full-shadow flex flex-col justify-end h-full self-end text-white p-1 pl-4 rounded-b-xl"> 
                               <p className="mb-0.5 text-base">
-                              @if ($posts[0]->categories->count()> 0)
-                              <a href="">{{$posts[0]->categories[0]->name}}</a>
-                              @endif 
+                             
+                              <a href="">{post.category}</a>
+                              
                               </p>
                               <p className="font-bold text-2xl pb-2">
-                              @php ($date = Carbon\Carbon::parse($posts[0]->created_at ))    
-                                  @if ($posts[0]->categories->count() > 0)
-                                  <a href="{!! route('single',['category' => $posts[0]->categories[0]->slug , 'year' => $date->year,'month' => $date->month,'day'=> $date->day,'slug' =>  $posts[0]->slug ]) !!}" > {{$posts[0]->title}}
+                             
+                                  <a href="" > {post.title}
                                   </a>
-                                  @else
-                                  <a href="{!! route(' singlePost',['year' => $date->year,'month' => $date->month,'day'=> $date->day,'slug' =>  $posts[0]->slug ]) !!}" > {{$posts[0]->title}}
-                                  </a>
-                              @endif                               
+                                                          
                               </p>
                           </div>
                       </div>
@@ -511,23 +511,19 @@ export default function Blog() {
               <div className="border border-gray-300 rounded-xl max-sm:h-56">
               <div className="grid h-full">
                           <div className="col-span-full row-span-full">
-                              <img className="w-full max-w-full h-full rounded-xl object-cover" src="{{ asset('uploads/post/'.$posts[2]->featuredImage) }}" alt="">  
+                              <img className="w-full max-w-full h-full rounded-xl object-cover" src={topPost.image} alt="" />  
                           </div>
                           <div className="col-span-full row-span-full title-full-shadow flex flex-col justify-end h-full self-end text-white p-1 pl-4 rounded-b-xl"> 
                               <p className="mb-0.5 text-base">
-                              @if ($posts[1]->categories->count()> 0)
-                              <a href="">{{$posts[1]->categories[0]->name}}</a>
-                              @endif 
+                              
+                              <a href="">{topPost.category}</a>
+                             
                               </p>
                               <p className="font-bold text-2xl pb-2">
-                              @php ($date = Carbon\Carbon::parse($posts[1]->created_at ))    
-                                  @if ($posts[1]->categories->count() > 0)
-                                  <a href="{!! route('single',['category' => $posts[1]->categories[0]->slug , 'year' => $date->year,'month' => $date->month,'day'=> $date->day,'slug' =>  $posts[0]->slug ]) !!}" > {{$posts[0]->title}}
+                             
+                                  <a href="" > {topPost.title}
                                   </a>
-                                  @else
-                                  <a href="{!! route(' singlePost',['year' => $date->year,'month' => $date->month,'day'=> $date->day,'slug' =>  $posts[0]->slug ]) !!}" > {{$posts[0]->title}}
-                                  </a>
-                              @endif                               
+                                                            
                               </p>
                           </div>
                       </div>
@@ -540,30 +536,11 @@ export default function Blog() {
       
       
       
-          <div className="section w-full bg-gray-50 " id="uni-details">
-              <div className="w-11.7/12 sm:w-11.5/12 grid sm:grid-cols-4 mx-auto pt-[2rem]">
-                <div className="sm:cols-start-1 pr-2.5 sm:col-span-3 max-sm:p-2 max-sm:border max-sm:border-gray-300 ">  
-                    <div className="bg-white px-2 py-2">
-                      
-                    </div>
-                  
-                </div>    <!-- End of Content -->
-      
-                
-      
-      
-                
-      
-      
-              </div>
+         
           
-          </div>
+         
             
-          <div className="footer-container">
-              @include('front.layouts.footer')
-          </div>
-      
-       */}
+        
       
       
       

@@ -3,6 +3,8 @@ import Link from 'next/link'
 import React from 'react'
 import {useEffect, useState} from 'react';
 import ThemeToggle from './_components/theme-toggle'
+import ServicesPanel from './_components/ServicesPanel'
+
 
 
 
@@ -76,7 +78,42 @@ const NavBar = ({ textColor }) => {
         </div>
         <div className={`px-2 text-sm hidden font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `}> 
             <Link href="/" className="px-3 " >Home</Link>
-            <Link href="/services" className=" px-3  ">Design Services</Link>
+            {/* <Link href="/services" className=" px-3  ">Services</Link> */}
+            <div className=""> 
+            <div className="menu-pr ">
+              <div className="menu-btn  cursor-pointer">
+                <div className="flex items-center px-3  pointer ">
+                <span className="text-gray-100 text-md capitalize">Services</span>
+                  <span className="icon dark-icon ">
+                   <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M7 10L12 15L17 10" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                      
+                  </span>
+                </div>
+              </div>
+              
+              <div id="log-menu" className=" log-menu hidden w-full  h-full top-0 left-0 " >
+                <ServicesPanel />
+              {/* <div className="  w-full fixed h-full top-0 z-[10] bg-black left-0  " style={{background:'#00000052'}}>
+               </div> */}
+                  
+                  {/* <div className="absolute login-menu left-[10%] top-[4.78rem] max-w-full z-10  bg-white w-8/12   flex flex-col  rounded-tl-xl rounded-bl-sm " style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}> */}
+                      {/* <span className="absolute inline-block w-4 h-4 bg-[#ffebce] top-[-.5rem] sm:right-8 sm:mr-4 sm:rotate-45"></span> */}
+
+                      {/* <div className="pb-2 rounded-tl-xl  h-[31rem]">
+                          <div className="flex flex-col">
+                             
+
+
+                          </div>
+                        </div> */}
+                      {/* </div> */}
+                      
+                  </div>
+                  </div>
+            
+              </div>
             <Link href="/blog" className="px-3 " >Blogs</Link>
             <Link href="/works" className="px-3 " >Works</Link>
             <Link href="/" className="px-3 " >Totutiols</Link>
