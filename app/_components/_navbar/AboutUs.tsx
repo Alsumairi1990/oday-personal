@@ -19,7 +19,7 @@ const AboutUs = () => {
                          <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="#48639E" stroke-width="1.5" stroke-miterlimit="10"></path>
                       </svg>
                    </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600">About Sam</span></div>
+                   <div className=""><span className="ml-2 text-sm font-medium text-gray-600">About Sam</span></div>
                 </a>
              </li>
              <li className=" line-height-20 pr-6">
@@ -35,7 +35,7 @@ const AboutUs = () => {
                          <path d="M17.196 20a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="#24A7D0" stroke-width="1.5" stroke-miterlimit="10"></path>
                       </svg>
                    </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600">Our Reviews</span></div>
+                   <div className=""><span className="ml-2 text-sm font-medium text-gray-600">Our Reviews</span></div>
                 </a>
              </li>
              <li className=" line-height-20 pr-6">
@@ -49,7 +49,7 @@ const AboutUs = () => {
                          </g>
                       </svg>
                    </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600">Our Team</span></div>
+                   <div className=""><span className="ml-2 text-sm font-medium text-gray-600">Our Team</span></div>
                 </a>
              </li>
              <li className=" line-height-20 pr-6">
@@ -64,7 +64,7 @@ const AboutUs = () => {
                          </g>
                       </svg>
                    </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600 capitalize">company portfolio</span></div>
+                   <div className=""><span className="ml-2 text-sm font-medium text-gray-600 capitalize">company portfolio</span></div>
                 </a>
              </li>
              <li className=" line-height-20 pr-6">
@@ -77,7 +77,7 @@ const AboutUs = () => {
                          <circle cx="12" cy="10" r="1" fill="#13A2E4"></circle>
                       </svg>
                    </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600 capitalize">contact us</span></div>
+                   <div className=""><span className="ml-2 text-sm font-medium text-gray-600 capitalize">contact us</span></div>
                 </a>
              </li>
              <li className=" line-height-20 pr-6">
@@ -89,11 +89,11 @@ const AboutUs = () => {
                          <path d="M4.535 8.227h3.067M4.535 11.389h3.067M12.967 8.227h3.067" stroke="#48639E" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"></path>
                       </svg>
                    </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600 capitalize">testimonials</span></div>
+                   <div className=""><span className="ml-2 text-sm font-medium text-gray-600 capitalize">testimonials</span></div>
                 </a>
              </li>
              <li className=" line-height-20 pr-6">
-                <a href="/sitmap" className="flex items-center w-full border border-gray-200 pl-2 rounded-lg py-2.5">
+                <a href="/sitemap" className="flex items-center w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                    <span className="">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <g stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round">
@@ -102,11 +102,11 @@ const AboutUs = () => {
                          </g>
                       </svg>
                    </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600 capitalize">site map</span></div>
+                   <div className=""><span className="ml-2 text-sm font-medium text-gray-600 capitalize">site map</span></div>
                 </a>
              </li>
              <li className=" line-height-20 pr-6">
-                <a href="/study-abroad" className="flex items-center w-full border border-gray-200 pl-2 rounded-lg py-2.5">
+                <a href="/privacy-policy" className="flex items-center w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                    <span className="">
                       <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                          <g stroke-width="1.5" stroke-miterlimit="10">
@@ -115,7 +115,7 @@ const AboutUs = () => {
                          </g>
                       </svg>
                    </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600 capitalize">privecy policy</span></div>
+                   <div className=""><span className="ml-2 text-sm font-medium text-gray-600 capitalize">privecy policy</span></div>
                 </a>
              </li>
 
@@ -127,7 +127,7 @@ const AboutUs = () => {
                          <path d="M6.493 5.593v14.438h11.494V5.593A1.588 1.588 0 0 0 16.383 4h-8.32a1.588 1.588 0 0 0-1.57 1.593Z" stroke="#13A2E4" stroke-width="1.5" stroke-miterlimit="10"></path>
                       </svg>
                    </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600 capitalize">our process</span></div>
+                   <div className=""><span className="ml-2 text-sm font-medium text-gray-600 capitalize">our process</span></div>
                 </a>
              </li>
              {/*}
