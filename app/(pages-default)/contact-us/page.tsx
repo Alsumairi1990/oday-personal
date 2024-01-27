@@ -6,7 +6,7 @@ const ContactUS = () => {
     const imagePath2 = '/images/service2.png';
     
    return (
-      <div className="w-full" >
+      <div className="w-full p-0" >
          <div className=" m-h-lvh sm:min-h-[28rem] sm:h-[28rem] pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath1})`}}>
          <div className="w-full h-full absolute left-0 top-0 bg-black z-10 opacity-70"></div>
           <div className="flex flex-wrap w-11/12 mx-auto z-20">
