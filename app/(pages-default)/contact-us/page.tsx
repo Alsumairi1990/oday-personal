@@ -1,14 +1,14 @@
 
-
+import ContactForm from "@/app/_components/ContactForm";
 const ContactUS = () => {
     const imagePath = 'https://dcstatic.com/images/background/background-about-us-c188d84f24.svg';
-    const imagePath1 = 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/main/about.webp';
+    const imagePath1 = 'https://cdn-kpbff.nitrocdn.com/BIqbPXrNizxHMrZEuWjiIDigcWJtuMrr/assets/images/optimized/rev-3d7ee36/d3mds3ychln71.cloudfront.net/img/banners/38609a28efe1da66fb338fe868fc4428.partners-banner.jpg';
     const imagePath2 = '/images/service2.png';
     
    return (
       <div className="w-full p-0" >
-         <div className=" m-h-lvh sm:min-h-[28rem] sm:h-[28rem] pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath1})`}}>
-         <div className="w-full h-full absolute left-0 top-0 bg-black z-10 opacity-70"></div>
+         <div className=" m-h-lvh  pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath1})`}}>
+         {/* <div className="w-full h-full absolute left-0 top-0 bg-black z-10 opacity-70"></div> */}
           <div className="flex flex-wrap w-11/12 mx-auto z-20">
             
              <div className="flex-100 sm:flex-60">
@@ -37,6 +37,10 @@ const ContactUS = () => {
              <img className="w-full z-20" src={imagePath2} alt="" />
              </div>
           </div>
+         </div>
+         
+         <div className="w-11/12 mx-auto">
+            <ContactForm />
          </div>
          
  
