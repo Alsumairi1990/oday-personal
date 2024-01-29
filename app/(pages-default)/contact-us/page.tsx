@@ -2,12 +2,12 @@
 import ContactForm from "@/app/_components/ContactForm";
 const ContactUS = () => {
     const imagePath = 'https://dcstatic.com/images/background/background-about-us-c188d84f24.svg';
-    const imagePath1 = 'https://cdn-kpbff.nitrocdn.com/BIqbPXrNizxHMrZEuWjiIDigcWJtuMrr/assets/images/optimized/rev-3d7ee36/d3mds3ychln71.cloudfront.net/img/banners/38609a28efe1da66fb338fe868fc4428.partners-banner.jpg';
+    const imagePath1 = 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/main/contact.jpg';
     const imagePath2 = '/images/service2.png';
     
    return (
       <div className="w-full p-0" >
-         <div className=" m-h-lvh  pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath1})`}}>
+         <div className=" m-h-lvh sm:hfull pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath1})`}}>
          {/* <div className="w-full h-full absolute left-0 top-0 bg-black z-10 opacity-70"></div> */}
           <div className="flex flex-wrap w-11/12 mx-auto z-20">
             
@@ -17,7 +17,7 @@ const ContactUS = () => {
                  <h2 className="text-4xl text-white font-bold mb-4">Best API Integration Company</h2>
                  <p className="text-mdnav text-gray-100 leading-7">Let our team of Experts take care of your business app with application maintenance and support services that can help you ensure that your application is secure, up-to-date, and running at peak performance.</p>
                  <div className="flex  mt-6 items-center  ">
-                    <div className="pl-2 pr-4 flex items-center py-2 rounded-md bg-[#f85508] ">
+                    {/* <div className="pl-2 pr-4 flex items-center py-2 rounded-md bg-[#f85508] ">
                        <span className="w-6  mr-1 bainline-block">
                        <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M15 4V5C15 6.88562 15 7.82843 15.5858 8.41421C16.1716 9 17.1144 9 19 9H20.5M20.5 9L18 7M20.5 9L18 11" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -27,7 +27,7 @@ const ContactUS = () => {
                     </div>
                     <div className=" pl-2 pr-4 flex items-center py-2 rounded-md ml-4 bg-white" style={{boxShadow:'rgb(87 156 217) 0px 0px 10px 1px'}}>
                     <span className=" inline-block text-blue-500 text-base font-semibold  ">Contact  </span>
-                    </div>
+                    </div> */}
                     
   
                  </div>
@@ -39,7 +39,7 @@ const ContactUS = () => {
           </div>
          </div>
          
-         <div className="w-11/12 mx-auto">
+         <div className="w-11/12 mx-auto z-20 relative -mt-10">
             <ContactForm />
          </div>
          
