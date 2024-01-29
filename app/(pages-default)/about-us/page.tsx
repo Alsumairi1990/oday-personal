@@ -4,7 +4,7 @@ const AboutUs = () => {
     const imagePath = 'https://dcstatic.com/images/background/background-about-us-c188d84f24.svg';
     const imagePath1 = 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/main/about.webp';
     const imagePath2 = '/images/service2.png';
-    
+   
    return (
       <div className="w-full" >
          <div className=" m-h-lvh sm:min-h-[28rem] sm:h-[28rem] pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath1})`}}>
@@ -39,62 +39,111 @@ const AboutUs = () => {
           </div>
          </div>
          
+
+         <div className="w-full bg-[#f4f2ff]">
+          <div className="w-11/12 mx-auto">
+          <div className="p-2 grid grid-cols-1  sm:grid-cols-2">
+             <div className="p-2">
+                <img className="w-full " src="https://www.controlf5.in/wp-content/uploads/2024/01/Herosectionrightimage.webp" alt="" />
+             </div>
+             <div className="p-4 pl-8">
+                <h2 className="text-xl font-bold text-orange-500 mb-3 uppercase ">Who We are</h2>
+                <p className="text-2xl font-bold text-gray-700 mb-3 ">Building The Best Mobile Application For The World From Our Team Of Creative Minds. </p>
+               <p className="text-base text-gray-500 font-semibold leading-7">We are a professional website and mobile app company with considerable experience in a variety of high-tech verticals such as eCommerce, finance, banking, healthcare, hospitality, and food and beverage. At its core, we assist our clients in innovating and implementing technological transformations.</p>
+               <p className="text-base text-gray-500 font-semibold leading-7">We are a professional website and mobile app company with considerable experience in a variety of high-tech verticals such as eCommerce, finance, banking, </p>
+             </div>
  
-         <div className="w-11/12 mx-auto my-10 " style={{backgroundImage: `url(${imagePath})`}}>
-            <div className="p-4 text-center mb-4" >
-               <h2 className="text-gray-800 font-bold text-2xl mb-2">Company overview</h2>
-               <p className="text-gray-600 text-md">Perfect for custom graphic, logo, web and print design. DesignCrowd is an online creative marketplace that helps start-ups, businesses and entrepreneurs connect with a global network of designers. Perfect for custom graphic, logo, web and print design. DesignCrowd also owns and manages BrandCrowd, an online logo maker.</p>
+          </div>
+          </div>
+         </div>
+
+       
+         <div className="pb-4 w-full mx-auto text-center mb-4 bg-gray-100" >
+              
             
-            <div className="flex items-center gap-x-8 my-8 justify-center text-[#5d6d81]">
-                     <div className="column  small-12 medium-4 large-2">
-                        <span className="font-bold mb-2 inline-block text-3xl">1.2M</span>
-                        <p className="uppercase text-sm">Graphic Designers</p>
+            <div className="grid grid-cols-1 border-t border-t-gray-300 sm:grid-cols-3 gap-x-8 pt-6 mb-8 w-11/12 mx-auto text-[#5d6d81]">
+                    <div className="column  small-12 medium-4 large-2 bg-white p-4 rounded-md shadow-lg">
+                        <div className="p-1 flex items-center justify-center mb-2">
+                           <img src="https://richestsoft.com/wp-content/themes/richnew/images/about-us/about-point1.svg" alt="" />
+                        </div>
+                        <span className="font-bold mb-2 inline-block text-2xl capitalize">Our Vision</span>
+                        <p className="capitalize text-sm">Our mission as an app development company is to offer encouraging business solutions to entrepreneur across the world.</p>
                      </div>
-                     <div className="column  small-12 medium-4 large-2">
-                        <span className="font-bold mb-2 inline-block text-3xl">$71.7M+</span>
-                        <p className="uppercase text-sm">Designs &amp; Contests</p>
+                     <div className="column  small-12 medium-4 large-2 bg-white p-4 rounded-md shadow-lg">
+                        <div className="p-1 flex items-center justify-center mb-2">
+                           <img src="https://richestsoft.com/wp-content/themes/richnew/images/about-us/about-point2.svg" alt="" />
+                        </div>
+                        <span className="font-bold mb-2 inline-block text-2xl capitalize">Our Mission</span>
+                        <p className="capitalize text-sm">Our mission as an app development company is to offer encouraging business solutions to entrepreneur across the world.</p>
                      </div>
-                     <div className="column  small-12 medium-4 large-2">
-                        <span className="font-bold mb-2 inline-block text-3xl">11.3M</span>
-                        <p className="uppercase text-sm">Designs Uploaded</p>
+                     <div className="column  small-12 medium-4 large-2 bg-white p-4 rounded-md shadow-lg">
+                        <div className="p-1 flex items-center justify-center mb-2">
+                           <img src="https://richestsoft.com/wp-content/themes/richnew/images/about-us/about-point3.svg" alt="" />
+                        </div>
+                        <span className="font-bold mb-2 inline-block text-2xl capitalize">Cerified team</span>
+                        <p className="capitalize text-sm">Our mission as an app development company is to offer encouraging business solutions to entrepreneur across the world.</p>
                      </div>
-                    
-                     
-                  </div>
-            
+               </div>
             </div>
-            <div className="flex flex-wrap sm:max-h-[23rem] overflow-hidden">
-               <div className="sm:flex-30 pr-1">
-                  <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-a-a688e63735.jpg" alt="" />
+
+
+
+
+ 
+ 
+         <div className="w-11/12 mx-auto my-10 " >
+            <div className="p-4 text-center mb-4" >
+               <h2 className="text-gray-800 font-bold text-3xl mb-2">Our Core <span className="text-orange-500">Values</span> </h2>
+               <p className="text-gray-600 w-11/12 text-md">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
+               <div className="grid grid-cols-1 sm:grid-cols-3 gap-y-10 gap-x-8 my-8  text-[#5d6d81]">
+                    <div className="column  small-12 medium-4 large-2">
+                        <div className="p-1 flex mx-auto w-24 items-center justify-center mb-2">
+                           <img className="w-full"  src="https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg" alt="" />
+                        </div>
+                        <span className="font-bold mb-2 inline-block text-xl uppercase">Integrity</span>
+                        <p className="capitalize text-sm">Our mission as an app development company is to offer encouraging business solutions to entrepreneur across the world.</p>
+                     </div>
+                     <div className="column  small-12 medium-4 large-2">
+                        <div className="p-1 flex mx-auto w-24 items-center justify-center mb-2">
+                           <img className="w-full" src="https://dcstatic.com/images/icons/design-categories/design-categories-magazine-design-f15d13134d.svg" alt="" />
+                        </div>
+                        <span className="font-bold mb-2 inline-block text-xl uppercase">Teamwork</span>
+                        <p className="capitalize text-sm">Our mission as an app development company is to offer encouraging business solutions to entrepreneur across the world.</p>
+                     </div>
+                     <div className="column  small-12 medium-4 large-2">
+                        <div className="p-1 flex mx-auto w-24 items-center justify-center mb-2">
+                           <img className="w-full"  src="https://dcstatic.com/images/icons/design-categories/design-categories-resume-design-b1aa5b01e6.svg" alt="" />
+                        </div>
+                        <span className="font-bold mb-2 inline-block text-xl uppercase">Constant Improvement</span>
+                        <p className="capitalize text-sm">Our mission as an app development company is to offer encouraging business solutions to entrepreneur across the world.</p>
+                     </div>
+
+                     <div className="column  small-12 medium-4 large-2">
+                        <div className="p-1 flex mx-auto w-24 items-center justify-center mb-2">
+                           <img className="w-full"  src="https://dcstatic.com/images/icons/design-categories/design-categories-vector-design-f83cdf5668.svg" alt="" />
+                        </div>
+                        <span className="font-bold mb-2 inline-block text-xl uppercase">Innovation</span>
+                        <p className="capitalize text-sm">Our mission as an app development company is to offer encouraging business solutions to entrepreneur across the world.</p>
+                     </div>
+                     <div className="column  small-12 medium-4 large-2">
+                        <div className="p-1 flex w-24 mx-auto items-center justify-center mb-2">
+                           <img className="w-full"  src="https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg" alt="" />
+                        </div>
+                        <span className="font-bold mb-2 inline-block text-xl uppercase">Customer Experience</span>
+                        <p className="capitalize text-sm">Our mission as an app development company is to offer encouraging business solutions to entrepreneur across the world.</p>
+                     </div>
+                     <div className="  small-12 medium-4 large-2">
+                        <div className="p-1 mx-auto flex w-24 items-center justify-center mb-2">
+                           <img className="w-full" src="https://dcstatic.com/images/icons/design-categories/design-categories-logo-design-386041ef44.svg" alt="" />
+                        </div>
+                        <span className="font-bold mb-2 inline-block text-xl uppercase">Accountability</span>
+                        <p className="capitalize text-sm">Our mission as an app development company is to offer encouraging business solutions to entrepreneur across the world.</p>
+                     </div>
                </div>
-               <div className="sm:flex-50  ">
-                  <div className="flex h-full gap-y-1 flex-col">
-                  <div className="flex gap-1 ">
-                     <div className="flex-70">
-                       <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-b-80fbea7b4d.jpg" alt="" />
-                     </div>
-                     <div className="flex-30">
-                        <img  className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-c-026dc02946.jpg" alt="" />
-                     </div>
-                  </div>
-                  <div className="flex gap-1">
-                     <div className="flex-30">
-                        <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-d-e748c82180.jpg" alt="" />
-                     </div>
-                     <div className="flex flex-70">
-                        <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-e-010e22fb98.jpg" alt="" />
-                     </div>
-                  </div>
-                  </div>
-                 
-               </div>
-               <div className="sm:flex-20 pl-2">
-                  <div className="h-full">
-                     <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-f-a013c71eaa.jpg" alt="" />
-                  </div>
-               </div>
+            
             </div>
          </div>
+
       </div>
    )
  };
