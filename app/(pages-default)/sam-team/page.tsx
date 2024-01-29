@@ -38,28 +38,112 @@ const CompanyTeam = () => {
           </div>
          </div>
          
-
-         
- 
- 
-         <div className="w-full mt-8 bg-[#f4f2ff]">
-          <div className="w-11/12 mx-auto">
-          <div className="p-2 grid grid-cols-1  sm:grid-cols-2">
-             <div className="p-2">
-                <img className="w-full " src="https://www.controlf5.in/wp-content/uploads/2024/01/Herosectionrightimage.webp" alt="" />
-             </div>
-             <div className="p-4 pl-8">
-                <h2 className="text-3xl font-bold text-gray-900 mb-3">We Are ControlF5</h2>
-                <p className="text-xl font-bold text-gray-700 mb-6 ">Creating advanced and competitive digital solutions for both SMEs and Fortune companies.</p>
-               <p className="text-base text-gray-500 font-semibold leading-7">We are a professional website and mobile app company with considerable experience in a variety of high-tech verticals such as eCommerce, finance, banking, healthcare, hospitality, and food and beverage. At its core, we assist our clients in innovating and implementing technological transformations.</p>
-               <span className="inline-block text-white text-base font-semibold px-3 py-1.5 bg-violet-600 rounded mt-6">Get More </span>
-             </div>
- 
-          </div>
-          </div>
-         
+         <div className="w-full">
+            <div className="flex my-8 flex-col w-11/12 mx-auto items-center">
+               <h2 className="text-3xl text-gray-700 font-bold">Our <span className="text-orange-500">Team</span></h2>
+               <p className="text-md text-center text-gray-600 pt-2 leading-7">Our AGILE approach provides not only effective solutions, but we also provide creative answers and unparalleled services to any technological challenges faced by our clients. Our Team is rich with industry and technology experts.</p>
+            </div>
          </div>
- 
+
+         <div className="w-full mb-8">
+            <div className="flex my-8 flex-col w-11/12 mx-auto items-center">
+               <h2 className="text-3xl text-gray-700 font-bold">Meet Our <span className="text-orange-500">Team</span></h2>
+            </div>
+            <div className="bg-black-150">
+               <div className="grid grid-cols-2 gap-y-8">
+                  <div className="flex items-center p-4">
+                     <div className="flex-25 p-2">
+                        <img className="rounded-full" src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Leaders-1.png" alt="" />
+                     </div>
+                     <div className="flex-75 pl-6">
+                        <h2 className="text-base text-gray-100 font-semibold">Fahed Hassan</h2>
+                        <h2 className="text-base text-orange-500 font-semibold">Founder | CEO | Techinfo </h2>
+                        <b className="text-sm font-medium text-gray-100">Anil Sharma manages the entire Team at Mobulous and is responsible for Sales, Growth, Strategy and Ensures Customer Success. Anil has versatile 13 years + Experience in IT Industry.</b>
+                     </div>
+                  </div>
+
+                  <div className="flex items-center p-4">
+                     <div className="flex-25 p-2">
+                        <img className="rounded-full" src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Leaders-2.png" alt="" />
+                     </div>
+                     <div className="flex-75 pl-6 pt-2.5">
+                        <h2 className="text-base text-gray-100 font-semibold">Mohammed Saleem</h2>
+                        <h2 className="text-base text-orange-500 font-semibold">Head Of Operations & Technology </h2>
+                        <b className="text-sm font-medium text-gray-100">Anil Sharma manages the entire Team at Mobulous and is responsible for Sales, Growth, Strategy and Ensures Customer Success. Anil has versatile 13 years + Experience in IT Industry the entire Team at Mobulous and is responsible for Sales,.</b>
+                     </div>
+                  </div>
+
+                  <div className="flex items-center p-4">
+                     <div className="flex-25 p-2">
+                        <img className="rounded-full" src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Leaders-3.webp" alt="" />
+                     </div>
+                     <div className="flex-75 pl-6">
+                        <h2 className="text-base text-gray-100 font-semibold">Mohammed Saleem</h2>
+                        <h2 className="text-base text-orange-500 font-semibold">Head Of Operations & Technology </h2>
+                        <b className="text-sm font-medium text-gray-100">Anil Sharma manages the entire Team at Mobulous and is responsible for Sales, Growth, Strategy and Ensures Customer Success. Anil has versatile 13 years + Experience in IT Industry.</b>
+                     </div>
+                  </div>
+
+                  <div className="flex items-center p-4">
+                     <div className="flex-25 p-2">
+                        <img className="rounded-full" src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Leaders-4.png" alt="" />
+                     </div>
+                     <div className="flex-75 pl-6">
+                        <h2 className="text-base text-gray-100 font-semibold">Mohammed Saleem</h2>
+                        <h2 className="text-base text-orange-500 font-semibold">Head Of Operations & Technology </h2>
+                        <b className="text-sm font-medium text-gray-100">Anil Sharma manages the entire Team at Mobulous and is responsible for Sales, Growth, Strategy and Ensures Customer Success. Anil has versatile 13 years + Experience in IT Industry.</b>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div className="w-full">
+         <div className="flex my-8 flex-col w-11/12 mx-auto items-center">
+            <h2 className="text-3xl text-gray-700 font-bold">Our <span className="text-orange-500">Managers</span></h2>
+            <p className="text-md text-center text-gray-600 pt-2 leading-7">Our AGILE approach provides not only effective solutions, but we also provide creative answers and unparalleled services to any technological challenges faced by our clients. Our Team is rich with industry and technology experts.</p>
+         </div>
+         <div className="grid sm:grid-cols-4 w-11/12 mx-auto gap-x-5">
+            <div className="p-2">
+               <div className="mb-4">
+                  <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-4.png" alt="" />
+               </div>
+               <div className="flex flex-col justify-center items-center">
+                  <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                  <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+               </div>
+            </div>
+            <div className="p-2">
+               <div className="mb-4">
+                  <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-5.png" alt="" />
+               </div>
+               <div className="flex flex-col justify-center items-center">
+                  <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                  <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+               </div>
+            </div>
+            <div className="p-2">
+               <div className="mb-4">
+                  <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-6.png" alt="" />
+               </div>
+               <div className="flex flex-col justify-center items-center">
+                  <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                  <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+               </div>
+            </div>
+            <div className="p-2">
+               <div className="mb-4">
+                  <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-7.png" alt="" />
+               </div>
+               <div className="flex flex-col justify-center items-center">
+                  <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                  <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+               </div>
+            </div>
+         </div>
+         </div>
+
+
       </div>
    )
  };
