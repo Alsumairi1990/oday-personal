@@ -4,6 +4,7 @@ const ContactUS = () => {
     const imagePath = 'https://dcstatic.com/images/background/background-about-us-c188d84f24.svg';
     const imagePath1 = 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/main/contact.jpg';
     const imagePath2 = '/images/service2.png';
+    const imagePath3 = "https://nextbigtechnology.com/wp-content/uploads/2021/07/contact-bottom.png"
     
    return (
       <div className="w-full p-0" >
@@ -44,58 +45,128 @@ const ContactUS = () => {
          </div>
          
  
-         <div className="w-11/12 mx-auto my-10 " style={{backgroundImage: `url(${imagePath})`}}>
-            <div className="p-4 text-center mb-4" >
+         <div className="w-full px-14 mx-auto mt-10 sm:pb-16 bg-gray-100" style={{backgroundImage: `url(${imagePath})`}}>
+            <div className="p-4 text-center " >
                <h2 className="text-gray-800 font-bold text-2xl mb-2">Company overview</h2>
                <p className="text-gray-600 text-md">Perfect for custom graphic, logo, web and print design. DesignCrowd is an online creative marketplace that helps start-ups, businesses and entrepreneurs connect with a global network of designers. Perfect for custom graphic, logo, web and print design. DesignCrowd also owns and manages BrandCrowd, an online logo maker.</p>
             
-            <div className="flex items-center gap-x-8 my-8 justify-center text-[#5d6d81]">
-                     <div className="column  small-12 medium-4 large-2">
-                        <span className="font-bold mb-2 inline-block text-3xl">1.2M</span>
-                        <p className="uppercase text-sm">Graphic Designers</p>
+            <div className="grid sm:grid-cols-3 gap-8 my-8 justify-center text-[#5d6d81]">
+               <div className="flex rounded-md border border-gray-100 shadow-md px-4 py-4 bg-white">
+                     <div className="flex-20">
+                        <span className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-gray-500 fill-orange-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 16">
+                            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                        </svg>
+                        </span>
                      </div>
-                     <div className="column  small-12 medium-4 large-2">
-                        <span className="font-bold mb-2 inline-block text-3xl">$71.7M+</span>
-                        <p className="uppercase text-sm">Designs &amp; Contests</p>
+                     <div className="flex-80medium-4 pl-3">
+                        <span className="font-bold mb-2 inline-block text-xl">Email</span>
+                        <p className="uppercase text-sm">sam_designs@gmail.com</p>
                      </div>
-                     <div className="column  small-12 medium-4 large-2">
-                        <span className="font-bold mb-2 inline-block text-3xl">11.3M</span>
-                        <p className="uppercase text-sm">Designs Uploaded</p>
+               </div>
+
+               <div className="flex rounded-md border border-gray-100 shadow-md px-4 py-4 bg-white">
+                     <div className="flex-20">
+                        <span className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-gray-500 fill-orange-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 16">
+                            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                        </svg>
+                        </span>
                      </div>
-                    
+                     <div className="flex-80medium-4 pl-3">
+                        <span className="font-bold mb-2 inline-block text-xl">Email</span>
+                        <p className="uppercase text-sm">sam_designs@gmail.com</p>
+                     </div>
+               </div>
+
+               <div className="flex rounded-md border border-gray-100 shadow-md px-4 py-4 bg-white">
+                     <div className="flex-20">
+                        <span className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-gray-500 fill-orange-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 16">
+                            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                        </svg>
+                        </span>
+                     </div>
+                     <div className="flex-80medium-4 pl-3">
+                        <span className="font-bold mb-2 inline-block text-xl">Email</span>
+                        <p className="uppercase text-sm">sam_designs@gmail.com</p>
+                     </div>
+               </div>
+
+               <div className="flex rounded-md border border-gray-100 shadow-md px-4 py-4 bg-white">
+                     <div className="flex-20">
+                        <span className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-gray-500 fill-orange-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 16">
+                            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                        </svg>
+                        </span>
+                     </div>
+                     <div className="flex-80medium-4 pl-3">
+                        <span className="font-bold mb-2 inline-block text-xl">Email</span>
+                        <p className="uppercase text-sm">sam_designs@gmail.com</p>
+                     </div>
+               </div>
+
+               <div className="flex rounded-md border border-gray-100 shadow-md px-4 py-4 bg-white">
+                     <div className="flex-20">
+                        <span className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-gray-500 fill-orange-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 16">
+                            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                        </svg>
+                        </span>
+                     </div>
+                     <div className="flex-80medium-4 pl-3">
+                        <span className="font-bold mb-2 inline-block text-xl">Email</span>
+                        <p className="uppercase text-sm">sam_designs@gmail.com</p>
+                     </div>
+               </div>
+
+               <div className="flex rounded-md border border-gray-100 shadow-md px-4 py-4 bg-white">
+                     <div className="flex-20">
+                        <span className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center">
+                        <svg className="w-6 h-6 text-gray-500 fill-orange-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 16">
+                            <path d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z"/>
+                            <path d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z"/>
+                        </svg>
+                        </span>
+                     </div>
+                     <div className="flex-80medium-4 pl-3">
+                        <span className="font-bold mb-2 inline-block text-xl">Email</span>
+                        <p className="uppercase text-sm">sam_designs@gmail.com</p>
+                     </div>
+               </div>
                      
-                  </div>
-            
+ 
             </div>
-            <div className="flex flex-wrap sm:max-h-[23rem] overflow-hidden">
-               <div className="sm:flex-30 pr-1">
-                  <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-a-a688e63735.jpg" alt="" />
+            </div>
+         </div>
+
+
+         <div className="p-4 w-8/12 mx-auto sm:-mt-16 sm:mb-10 bg-[#ecf1fd] border border-gray-200 rounded-md">
+            <div className="grid grid-cols-2">
+               <div className="p-4">
+                  <h2 className="text-2xl text-gray-700 capitalize font-bold mb-6">Have you question ?</h2>
+                  <div className="flex mb-4">
+                     <span className="text-md flex-45 flex font-semibold pr-4 text-gray-500">Get Free Consultation </span>
+                     <span className="text-md flex-55 flex pr-4 text-orange-500 font-semibold" >: samedu-inq@gmail.com</span>
+                  </div>
+                  <div className="flex mb-4">
+                     <span className="text-md flex flex-45 font-semibold pr-4 text-gray-500">For job enquey    </span>
+                     <span className="text-md flex flex-55 pr-4 text-orange-500 font-semibold" >: samedu-job@gmail.com</span>
+                  </div>
+
+                  <div className="flex mt-4">
+                     <a href="#" className="text-md text-white rounded-md flex flex-55 px-4 py-2.5 mt-4 bg-orange-500 font-semibold" >Let Us talk on wastsapp</a>
+                  </div>
+                  
                </div>
-               <div className="sm:flex-50  ">
-                  <div className="flex h-full gap-y-1 flex-col">
-                  <div className="flex gap-1 ">
-                     <div className="flex-70">
-                       <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-b-80fbea7b4d.jpg" alt="" />
-                     </div>
-                     <div className="flex-30">
-                        <img  className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-c-026dc02946.jpg" alt="" />
-                     </div>
-                  </div>
-                  <div className="flex gap-1">
-                     <div className="flex-30">
-                        <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-d-e748c82180.jpg" alt="" />
-                     </div>
-                     <div className="flex flex-70">
-                        <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-e-010e22fb98.jpg" alt="" />
-                     </div>
-                  </div>
-                  </div>
-                 
-               </div>
-               <div className="sm:flex-20 pl-2">
-                  <div className="h-full">
-                     <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-f-a013c71eaa.jpg" alt="" />
-                  </div>
+               <div className="p-4">
+                  <img src={imagePath3} alt="" />
                </div>
             </div>
          </div>
