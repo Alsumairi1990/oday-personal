@@ -103,7 +103,7 @@ const Portfolio = () => {
               <h2 className="text-3xl text-gray-700 font-bold">Our <span className="text-orange-500">Team</span></h2>
             </div>
             <div className="grid sm:grid-cols-3 gap-6 mx-auto">
-               <div className="relative border border-gray-300 hover:bg-black-150 hover:p-16 hover:fixed hover:w-11/12 hover:mx-auto hover:left-1/2 hover:z-50 hover:h-[90%] hover:overflow-y-scroll hover:top-8 hover:rounded-md hover:-translate-x-1/2" >
+               <div className="relative border border-gray-300 hover:bg-black-150  hover:fixed hover:w-11/12 hover:mx-auto hover:left-1/2 hover:z-50 hover:h-[90%] hover:overflow-y-scroll hover:top-8 hover:rounded-md hover:-translate-x-1/2" >
                   <div className="pb-0">
                      <img src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/portfolio/Get-Fit-Front.webp" alt="" />
                   </div>
