@@ -3,6 +3,7 @@
 const Reviews = () => {
     const imagePath = 'https://dcstatic.com/images/background/background-about-us-c188d84f24.svg';
     const imagePath1 = 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/main/estimate.webp';
+    const imagePath4 = 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/main/estimate.webp';
     const imagePath2 = '/images/service2.png';
     
    return (
