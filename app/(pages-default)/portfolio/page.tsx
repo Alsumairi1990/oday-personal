@@ -125,7 +125,7 @@ const Portfolio = () => {
                   </div>
                </div>
 
-               <div className="relative border border-gray-300">
+               <div className="relative border border-gray-300 hover:bg-black-150  hover:fixed hover:w-11/12 hover:mx-auto hover:left-1/2 hover:z-50 hover:h-[90%] hover:overflow-y-scroll hover:top-8 hover:rounded-md hover:-translate-x-1/2" >
                   <div className="pb-0">
                      <img src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/portfolio/Yummy-Idea-Front.webp" alt="" />
                   </div>
@@ -147,7 +147,7 @@ const Portfolio = () => {
                   </div>
                </div>
 
-                <div className="relative border border-gray-300">
+               <div className="relative border border-gray-300 hover:bg-black-150  hover:fixed hover:w-11/12 hover:mx-auto hover:left-1/2 hover:z-50 hover:h-[90%] hover:overflow-y-scroll hover:top-8 hover:rounded-md hover:-translate-x-1/2" >
                   <div className="pb-0">
                      <img src="https://www.mobulous.com/public/mobufiles/images/wubcare-outerImg.png" alt="" />
                   </div>
