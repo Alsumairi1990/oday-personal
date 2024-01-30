@@ -46,11 +46,11 @@ const CompanyTeam = () => {
          </div>
 
          <div className="w-full mb-8">
-            <div className="flex my-8 flex-col w-11/12 mx-auto items-center">
+            <div className="flex my-8 flex-col w-9/12 mx-auto items-center">
                <h2 className="text-3xl text-gray-700 font-bold">Meet Our <span className="text-orange-500">Team</span></h2>
             </div>
             <div className="bg-black-150">
-               <div className="grid grid-cols-2 gap-y-8">
+               <div className="grid grid-cols-2 gap-y-8 w-11/12 mx-auto">
                   <div className="flex items-center p-4">
                      <div className="flex-25 p-2">
                         <img className="rounded-full" src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Leaders-1.png" alt="" />
@@ -99,48 +99,113 @@ const CompanyTeam = () => {
          </div>
 
          <div className="w-full">
-         <div className="flex my-8 flex-col w-11/12 mx-auto items-center">
-            <h2 className="text-3xl text-gray-700 font-bold">Our <span className="text-orange-500">Managers</span></h2>
-            <p className="text-md text-center text-gray-600 pt-2 leading-7">Our AGILE approach provides not only effective solutions, but we also provide creative answers and unparalleled services to any technological challenges faced by our clients. Our Team is rich with industry and technology experts.</p>
+            <div className="flex my-8 flex-col w-10/12 mx-auto items-center">
+               <h2 className="text-3xl text-gray-700 font-bold">Our <span className="text-orange-500">Managers</span></h2>
+               <p className="text-md text-center text-gray-600 pt-2 leading-7">Our AGILE approach provides not only effective solutions, but we also provide creative answers and unparalleled services to any technological challenges faced by our clients. Our Team is rich with industry and technology experts.</p>
+            </div>
+            <div className="grid sm:grid-cols-4 w-11/12 mx-auto gap-x-5">
+               <div className="p-2">
+                  <div className="mb-4">
+                     <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-4.png" alt="" />
+                  </div>
+                  <div className="flex flex-col justify-center items-center">
+                     <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                     <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+                  </div>
+               </div>
+               <div className="p-2">
+                  <div className="mb-4">
+                     <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-5.png" alt="" />
+                  </div>
+                  <div className="flex flex-col justify-center items-center">
+                     <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                     <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+                  </div>
+               </div>
+               <div className="p-2">
+                  <div className="mb-4">
+                     <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-6.png" alt="" />
+                  </div>
+                  <div className="flex flex-col justify-center items-center">
+                     <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                     <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+                  </div>
+               </div>
+               <div className="p-2">
+                  <div className="mb-4">
+                     <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-7.png" alt="" />
+                  </div>
+                  <div className="flex flex-col justify-center items-center">
+                     <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                     <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+                  </div>
+               </div>
+            </div>
          </div>
-         <div className="grid sm:grid-cols-4 w-11/12 mx-auto gap-x-5">
-            <div className="p-2">
-               <div className="mb-4">
-                  <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-4.png" alt="" />
+
+
+           <div className="w-full bg-gray-100 py-1 mt-8">
+               <div className="flex my-8 flex-col w-10/12 mx-auto items-center">
+                  <h2 className="text-3xl text-gray-700 font-bold">Our <span className="text-orange-500">Managers</span></h2>
+                  <p className="text-md text-center text-gray-600 pt-2 leading-7">Our AGILE approach provides not only effective solutions, but we also provide creative answers and unparalleled services to any technological challenges faced by our clients. Our Team is rich with industry and technology experts.</p>
                </div>
-               <div className="flex flex-col justify-center items-center">
-                  <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
-                  <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+               <div className="grid sm:flex  w-11/12 mx-auto gap-x-5">
+                  <div className="p-2 flex-25">
+                     <div className="p-4">
+                        <div className="mb-4">
+                           <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/UX-Team-1.png" alt="" />
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                           <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                           <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+                        </div>
+                     </div>
+                     <div className="p-4">
+                        <div className="mb-4">
+                           <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/UX-Team-2.png" alt="" />
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                           <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                           <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+                        </div>
+                     </div>
+                    
+                  </div>
+                  <div className="flex flex-col p-6 flex-50">
+                     <div className="mb-4 bg-black-150 rounded-2xl flex flex-col justify-center items-center  h-2/3 p-4 flex-45">
+                        <h2 className="text-2xl text-gray-100 capitalize font-bold">Ali Mohammed</h2>
+                        <p className="text-2xl  text-gray-100 font-bold capitalize">Business Development Manager</p>
+                     </div>
+                     <div className="flex flex-45 flex-col p-8  bg-white rounded-xl items-center">
+                        <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                        <p className="text-sm text-gray-500 leading-7 mt-2 text-center capitalize">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
+                     </div>
+                  </div>
+                   <div className="p-2 flex-25">
+                     <div className="p-4">
+                        <div className="mb-4">
+                           <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/UX-Team-1.png" alt="" />
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                           <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                           <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+                        </div>
+                     </div>
+                     <div className="p-4">
+                        <div className="mb-4">
+                           <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/UX-Team-2.png" alt="" />
+                        </div>
+                        <div className="flex flex-col justify-center items-center">
+                           <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
+                           <p className="text-md text-gray500 capitalize">Business Development Manager</p>
+                        </div>
+                     </div>
+                    
+                  </div>
+               
+
+                 
                </div>
-            </div>
-            <div className="p-2">
-               <div className="mb-4">
-                  <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-5.png" alt="" />
-               </div>
-               <div className="flex flex-col justify-center items-center">
-                  <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
-                  <p className="text-md text-gray500 capitalize">Business Development Manager</p>
-               </div>
-            </div>
-            <div className="p-2">
-               <div className="mb-4">
-                  <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-6.png" alt="" />
-               </div>
-               <div className="flex flex-col justify-center items-center">
-                  <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
-                  <p className="text-md text-gray500 capitalize">Business Development Manager</p>
-               </div>
-            </div>
-            <div className="p-2">
-               <div className="mb-4">
-                  <img className="rounded-xl " src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/team/Team-7.png" alt="" />
-               </div>
-               <div className="flex flex-col justify-center items-center">
-                  <h2 className="text-base text-gray-800 capitalize font-semibold">Ali Mohammed</h2>
-                  <p className="text-md text-gray500 capitalize">Business Development Manager</p>
-               </div>
-            </div>
-         </div>
          </div>
 
 
