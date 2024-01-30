@@ -40,7 +40,7 @@ const Portfolio = () => {
          </div>
          
  
-         <div className="w-11/12 mx-auto my-10 " style={{backgroundImage: `url(${imagePath})`}}>
+         <div className="w-10/12 mx-auto my-10 " style={{backgroundImage: `url(${imagePath})`}}>
             <div className="p-4 text-center mb-4" >
                <h2 className="text-gray-800 font-bold text-2xl mb-2">Company overview</h2>
                <p className="text-gray-600 text-md">Perfect for custom graphic, logo, web and print design. DesignCrowd is an online creative marketplace that helps start-ups, businesses and entrepreneurs connect with a global network of designers. Perfect for custom graphic, logo, web and print design. DesignCrowd also owns and manages BrandCrowd, an online logo maker.</p>
@@ -93,6 +93,84 @@ const Portfolio = () => {
                      <img className="w-full h-full" src="https://dcstatic.com/images/example-projects/en/example-project-f-a013c71eaa.jpg" alt="" />
                   </div>
                </div>
+            </div>
+         </div>
+
+
+         <div className="w-full my-12">
+            <div className="w-10/12 mx-auto">
+            <div className="p-4 text-center mb-4" >
+              <h2 className="text-3xl text-gray-700 font-bold">Our <span className="text-orange-500">Team</span></h2>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-6 mx-auto">
+               <div className="relative border border-gray-300 hover:bg-black-150 hover:p-16 hover:fixed hover:w-11/12 hover:mx-auto hover:left-1/2 hover:z-50 hover:h-[90%] hover:overflow-y-scroll hover:top-8 hover:rounded-md hover:-translate-x-1/2" >
+                  <div className="pb-0">
+                     <img src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/portfolio/Get-Fit-Front.webp" alt="" />
+                  </div>
+                  <div className="px-2 absolute bottom-0 w-full " style={{background:'-webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.8) 100%)'}}>
+                         <div className="mb-0.5 flex items-center text-gray-100 font-semibold text-base">
+                           <span className="">
+                              <svg fill="#fff" width="28px" height="28px" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M50.455 102.855c0 25.177 39.647 105.629 77.265 105.629h.001c37.619 0 77.397-76.894 77.397-108.531 0-20.003-18.606-52.373-77.62-52.373-59.013 0-77.043 35.758-77.043 55.275zm50.039 5.634C86.402 93.277 77.656 77.857 77.656 77.857s14.41-7.175 23.824-9.091c.802-.163 1.62-.338 2.458-.516 8.997-1.916 20.189-4.298 36.328 1.496 33.579 12.056 47.896 34.606 47.896 34.606s-21.609-17.401-45.404-20.895c-13.707-2.013-39.203 6.152-39.203 6.152s8.862 9.38 16.075 23.114c1.137 2.165 2.245 4.147 3.306 6.045 5.668 10.137 9.974 17.838 9.974 37.93 0 14.659-11.08 36.443-11.08 36.443s6.223-28.383 1.204-50.825c-3.627-16.223-6.425-18.719-13.02-24.603-2.528-2.255-5.615-5.008-9.52-9.224z"/>
+                              </svg>
+                           </span>
+                           <span className="pl-1">
+                           E-Rx: The Prescriptions Hub
+                           </span>
+                         
+                        </div>
+                          <p className="font-semibold text-gray-100 uppercase pt-1 pl-7 text-sm pb-3">
+                              Show Details                         
+                          </p>
+                  </div>
+               </div>
+
+               <div className="relative border border-gray-300">
+                  <div className="pb-0">
+                     <img src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/portfolio/Yummy-Idea-Front.webp" alt="" />
+                  </div>
+                  <div className="px-2 absolute bottom-0 w-full " style={{background:'-webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.8) 100%)'}}>
+                         <div className="mb-0.5 flex items-center text-gray-100 font-semibold text-base">
+                           <span className="">
+                              <svg fill="#fff" width="28px" height="28px" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M129.175 107.005A31.85 31.85 0 0 1 112 112a32.54 32.54 0 0 1-1.503-.035l.077.035-12.804 37.383C106.35 155.123 112 164.902 112 176c0 17.673-14.327 32-32 32-17.673 0-32-14.327-32-32 0-17.673 14.327-32 32-32 .87 0 1.731.035 2.583.103l12.14-37.163C85.867 101.248 80 91.31 80 80c0-17.673 14.327-32 32-32 17.673 0 32 14.327 32 32 0 5.51-1.393 10.696-3.846 15.224l19.42 21.308A31.851 31.851 0 0 1 176 112c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32-17.673 0-32-14.327-32-32a31.857 31.857 0 0 1 3.92-15.36l-18.745-21.635zM80 192c8.837 0 16-7.163 16-16s-7.163-16-16-16-16 7.163-16 16 7.163 16 16 16zm32-96c8.837 0 16-7.163 16-16s-7.163-16-16-16-16 7.163-16 16 7.163 16 16 16zm64 64c8.837 0 16-7.163 16-16s-7.163-16-16-16-16 7.163-16 16 7.163 16 16 16z" fill-rule="evenodd"/>
+                              </svg>
+                           </span>
+                           <span className="pl-1">
+                            The Elementor Exmainer
+                           </span>
+                         
+                        </div>
+                          <p className="font-semibold text-gray-100 uppercase pt-1 pl-8 text-sm pb-3">
+                              Show Details                         
+                          </p>
+                  </div>
+               </div>
+
+                <div className="relative border border-gray-300">
+                  <div className="pb-0">
+                     <img src="https://www.mobulous.com/public/mobufiles/images/wubcare-outerImg.png" alt="" />
+                  </div>
+                  <div className="px-2 absolute bottom-0 w-full " style={{background:'-webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.8) 100%)'}}>
+                         <div className="mb-0.5 flex items-center text-gray-100 font-semibold text-base">
+                           <span className="">
+                              <svg fill="#fff" width="28px" height="28px" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M129.175 107.005A31.85 31.85 0 0 1 112 112a32.54 32.54 0 0 1-1.503-.035l.077.035-12.804 37.383C106.35 155.123 112 164.902 112 176c0 17.673-14.327 32-32 32-17.673 0-32-14.327-32-32 0-17.673 14.327-32 32-32 .87 0 1.731.035 2.583.103l12.14-37.163C85.867 101.248 80 91.31 80 80c0-17.673 14.327-32 32-32 17.673 0 32 14.327 32 32 0 5.51-1.393 10.696-3.846 15.224l19.42 21.308A31.851 31.851 0 0 1 176 112c17.673 0 32 14.327 32 32 0 17.673-14.327 32-32 32-17.673 0-32-14.327-32-32a31.857 31.857 0 0 1 3.92-15.36l-18.745-21.635zM80 192c8.837 0 16-7.163 16-16s-7.163-16-16-16-16 7.163-16 16 7.163 16 16 16zm32-96c8.837 0 16-7.163 16-16s-7.163-16-16-16-16 7.163-16 16 7.163 16 16 16zm64 64c8.837 0 16-7.163 16-16s-7.163-16-16-16-16 7.163-16 16 7.163 16 16 16z" fill-rule="evenodd"/>
+                              </svg>
+                           </span>
+                           <span className="pl-1">
+                            The Elementor Exmainer
+                           </span>
+                         
+                        </div>
+                          <p className="font-semibold text-gray-100 uppercase pt-1 pl-8 text-sm pb-3">
+                              Show Details                         
+                          </p>
+                  </div>
+               </div>
+
+            </div>
+
             </div>
          </div>
       </div>
