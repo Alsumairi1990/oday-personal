@@ -45,12 +45,12 @@ const ContactUS = () => {
          </div>
          
  
-         <div className="w-full px-14 mx-auto mt-10 sm:pb-16 bg-gray-100" style={{backgroundImage: `url(${imagePath})`}}>
-            <div className="p-4 text-center " >
+         <div className="w-full mx-auto mt-10 sm:pb-16 bg-gray-100" style={{backgroundImage: `url(${imagePath})`}}>
+            <div className="p-4 text-center w-10/12 mx-auto" >
                <h2 className="text-gray-800 font-bold text-2xl mb-2">Company overview</h2>
                <p className="text-gray-600 text-md">Perfect for custom graphic, logo, web and print design. DesignCrowd is an online creative marketplace that helps start-ups, businesses and entrepreneurs connect with a global network of designers. Perfect for custom graphic, logo, web and print design. DesignCrowd also owns and manages BrandCrowd, an online logo maker.</p>
             
-            <div className="grid sm:grid-cols-3 gap-8 my-8 justify-center text-[#5d6d81]">
+            <div className="grid sm:grid-cols-3 gap-8  my-8 justify-center text-[#5d6d81]">
                <div className="flex rounded-md border border-gray-100 shadow-md px-4 py-4 bg-white">
                      <div className="flex-20">
                         <span className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center">
