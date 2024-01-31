@@ -46,7 +46,7 @@ const Serivices = () => {
          </div>
 
 
-         <div className="py-4 px-8 pt-0 w-full">
+         <div className="py-4 px-8 pt-0 w-full ">
             <div className="flex w-11/12 mb-6 mx-auto">
                 <h2 className="text-3xl text-gray-700 font-semibold leading-10 text-center">We are creating robust, topnotch <span className="text-orange-500">Web Applications</span> With trending Technologies</h2>
             </div>
@@ -54,8 +54,8 @@ const Serivices = () => {
  
  
          <div className="py-4 px-8 pt-0 w-full">
-            <div className="flex flex-wrap">
-             <div className="flex-100 sm:flex-35 p-2 pt-0 ">
+            <div className="grid sm:grid-cols-4 gap-6">
+             {/* <div className="flex-100 sm:flex-35 p-2 pt-0 ">
                 <div className="flex flex-wrap  justify-between">
                   <span className="text-black-100 uppercase text-sm mb-2">KNOW US BETTER</span>
                 </div>
@@ -63,7 +63,7 @@ const Serivices = () => {
                 <div className="flex mt-4">
                    <p className="text-sm leading-7 text-gray-900">Webvolty is an Indian  IT Company for Website Development, Web Designing, Mobile App Development, Software Development, Web Hosting, Search Engine Optimization, Mobile Solutions and lot many IT and IT Enabled Services.</p>
                 </div>
-             </div>
+             </div> */}
              <div className="flex-100 sm:flex-20 p-2">
                 <div className="bg-[#f9f9f9] px-2 py-3 text-center rounded-md">
                    <div className="flex justify-center">
@@ -72,6 +72,18 @@ const Serivices = () => {
                    <div className="p2 mt-3">
                       <p className="text-gray-800 text-2xl mb-2 font-bold pb-2">154+</p>
                       <p className="text-gray-700 text-base">Yers of Experience in Design</p>
+                   </div>
+                </div>
+             </div>
+ 
+             <div className="flex-100 sm:flex-20 p-2">
+                <div className="bg-[#f9f9f9] px-2 py-3 text-center rounded-md  border border-gray-200">
+                   <div className="flex justify-center">
+                      <img src="https://cdn.cmarix.com/images/home/mobile-application-development.webp" alt="" />
+                   </div>
+                   <div className="p2 mt-3">
+                      <p className="text-gray-800 text-2xl mb-2 font-bold pb-2">Custom Designs</p>
+                      <a href="" className="text-gray-700 px-2 py-1 text-sm font-medium border border-gray-400 rounded-md">Details</a>
                    </div>
                 </div>
              </div>
@@ -87,7 +99,7 @@ const Serivices = () => {
                    </div>
                 </div>
              </div>
- 
+
              <div className="flex-100 sm:flex-20 p-2">
                 <div className="bg-[#f9f9f9] px-2 py-3 text-center rounded-md">
                    <div className="flex justify-center">
@@ -103,21 +115,23 @@ const Serivices = () => {
             </div>
          </div>
  
-         <div className="w-full mt-8 bg-[#f8f8f8]">
+         <div className="w-full mt-16 bg-[#f8f8f8] ">
           <div className="w-full mx-auto">
-            <div className="p-2 grid  sm:grid-cols-2">
+            <div className="p-2 flex flex-wrap">
                 
-                <div className=" relative" >
-                    <div className="w-10/12 h-full bg-[#489bc2]">
-                    <img className="w-full absolute -top-6 -right-8 " src="https://cdn.cmarix.com/images/home/enterprise-software-development.webp" alt="" />
+                <div className="flex-100 sm:flex-40 pl-6 lr-2 py-3  relative" >
+                    <div className="h-full bg-white rounded-md border border-gray-200 ">
+                      <img className="w-full sm:absolute top-1.5 -right-16 " src="https://cdn.cmarix.com/images/home/enterprise-software-development.webp" alt="" />
 
                     </div>
                 </div>
-                <div className="p-4  pl-16">
-                    <h2 className="text-3xl font-bold text-[#439bc2] mb-3">We Are ControlF5</h2>
+                <div className="py-3 px-2 flex-100  sm:flex-60 pl-14">
+                  <div className="p-2 pl-4 rounded-md bg-white border border-gray-200">
+                  <h2 className="text-2xl font-bold text-[#439bc2] mb-3">Printing Services</h2>
                     <p className="text-xl font-bold text-gray-700 mb-6 ">Creating advanced and competitive digital solutions </p>
-                <p className="text-md text-gray-700 font-semibold leading-7">When you want to bring new records on ground, working with any off-the-shelf software will not make your game go further. With our custom enterprise software development services, we map all the challenges you have and deliver groundbreaking software. We complete your digital ecosystem with power-pack fully functional, featured custom software..</p>
-                <span className="inline-block text-white text-base font-semibold px-3 py-1.5 bg-violet-600 rounded mt-6">Get More </span>
+                     <p className="text-sm text-gray-700 font-medium leading-8">When you want to bring new records on ground, working with any off-the-shelf software will not make your game go further. With our custom enterprise software development services, we map all the challenges you have and deliver groundbreaking software. We complete your digital ecosystem with power-pack fully functional, featured custom software..</p>
+                     <span className="inline-block text-white text-base font-semibold px-3 py-1.5 bg-violet-600 rounded mt-6">Get More </span>
+                  </div>
                 </div>
             </div>
            </div>
@@ -125,18 +139,18 @@ const Serivices = () => {
 
          <div className="w-full mt-28 bg-[#f8f8f8]">
           <div className="w-full mx-auto">
-            <div className="p-2 grid  sm:grid-cols-2">
+            <div className="p-2 flex flex-wrap max-sm:flex-col-reverse">
                 
                 
-                <div className="p-4 pl-8  pr-16">
+                <div className="p-4 sm:pl-12 sm:flex-60 pr-16">
                     <h2 className="text-3xl font-bold text-[#439bc2] mb-3">We Are ControlF5</h2>
                     <p className="text-xl font-bold text-gray-700 mb-6 ">Creating advanced and competitive digital solutions </p>
-                <p className="text-md text-gray-700 font-semibold leading-7">When you want to bring new records on ground, working with any off-the-shelf software will not make your game go further. With our custom enterprise software development services, we map all the challenges you have and deliver groundbreaking software. We complete your digital ecosystem with power-pack fully functional, featured custom software..</p>
+                <p className="text-sm text-gray-700 font-medium leading-8">When you want to bring new records on ground, working with any off-the-shelf software will not make your game go further. With our custom enterprise software development services, we map all the challenges you have and deliver groundbreaking software. We complete your digital ecosystem with power-pack fully functional, featured custom software..</p>
                 <span className="inline-block text-white text-base font-semibold px-3 py-1.5 bg-violet-600 rounded mt-6">Get More </span>
                 </div>
-                <div className="flex justify-end relative" >
+                <div className="flex sm:flex-40 justify-end relative" >
                     <div className="w-10/12  h-full bg-[#489bc2]">
-                    <img className="w-full absolute -top-28 -left-8 " src="https://cdn.cmarix.com/images/home/mobile-application-development.webp" alt="" />
+                    <img className="w-10/12  sm:absolute -top-24 -left-8 " src="https://cdn.cmarix.com/images/home/mobile-application-development.webp" alt="" />
 
                     </div>
                 </div>
