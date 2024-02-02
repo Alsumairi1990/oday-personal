@@ -2,6 +2,10 @@ import ServiceIntro from "@/app/_components/ServiceIntro";
 import Service from "@/app/_components/_services/Service";
 import ServiceCategories from "@/app/_components/_services/ServiceCategory"
 import { ServiceCategoryInt } from '@/app/models/ServiceCategoryInt';
+import { MdBrowserUpdated } from "react-icons/md";
+
+import { MdAppRegistration } from "react-icons/md";
+
 
 
 const Serivices = () => {
@@ -9,13 +13,15 @@ const Serivices = () => {
     const imagePath1 = '/images/curve.png';
     const imagePath2 = 'https://nextbigtechnology.com/wp-content/themes/nbt/imagesmay2022/clients_projectbg.jpg';
     const imagePath5 = "https://nextbigtechnology.com/wp-content/uploads/2019/09/education-1651259_640.jpg";
+    
+
 
     const serviceCategories:ServiceCategoryInt[] = [
       {
         id: "1",
         name: "White-Label Branding Services",
         desc: "Awarded as the Best Website Development Company by GESIA category region",
-        image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+        image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1532614408_clipkard.jpg",
         services: [  // Added a property name "subCategories" for clarity
           {
             id: "1",
@@ -29,6 +35,24 @@ const Serivices = () => {
             desc: "Awarded as the Best Website Development Company by GESIA category region",
             image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
           },
+          {
+            id: "2",
+            name: "Business & Collateral Design",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-bag-and-tote-design-c1bec00d33.svg",
+          },
+          {
+            id: "2",
+            name: "Packaging & Label ",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-label-design-275e614d8d.svg",
+          },
+          {
+            id: "2",
+            name: "Business Card Design ",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-app-design-27fb7b89e6.svg",
+          }
         ],
       },
 
@@ -36,11 +60,11 @@ const Serivices = () => {
          id: "2",
          name: "White-Label Marketing Services",
          desc: "Awarded as the Best Website Development Company by GESIA category region",
-         image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
-         services: [  // Added a property name "subCategories" for clarity
+         image: "https://dcstatic.com/images/icons/design-categories/design-categories-magazine-design-f15d13134d.svg",
+         services: [  
            {
              id: "1",
-             name: "Prototyping Design",
+             name: "White Label SEO Services ",
              desc: "Awarded as the Best Website Development Company by GESIA category region",
              image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
            },
@@ -48,10 +72,73 @@ const Serivices = () => {
              id: "2",
              name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
              desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
              image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
            },
+           {
+            id: "2",
+            name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+          }
          ],
-       }
+       },
+
+       {
+         id: "3",
+         name: "White-Label Website Services",
+         desc: "Awarded as the Best Website Development Company by GESIA category region",
+         image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1684836367_mijo-logo.png",
+         services: [  
+           {
+             id: "1",
+             name: "White Label SEO Services ",
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+           },
+           {
+             id: "2",
+             name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+           },
+           {
+            id: "2",
+            name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+          }
+         ],
+       },
+
+       
     ];
     
     
@@ -150,14 +237,14 @@ const Serivices = () => {
 
 
          <div className="py-4 px-8 pt-0 mt-10 w-full ">
-            <div className="flex w-11/12 mb-6 mx-auto">
+            <div className="flex w-10/12 mb-6 mx-auto">
                 <h2 className="text-3xl text-gray-700 font-semibold leading-10 text-center">We are creating robust, topnotch <span className="text-orange-500">Web Applications</span> With trending Technologies</h2>
             </div>
         </div>  
  
  
-         <div className="py-4 px-8 pt-0 w-full">
-            <div className="grid sm:grid-cols-4 gap-6 ">
+         <div className="py-4 w-11/12  px-8 pt-0 mx-auto">
+            <div className="grid sm:grid-cols-3 gap-6 ">
         
             
 
@@ -421,6 +508,27 @@ const Serivices = () => {
                            Printing design
                         </h2>
                      </div>
+
+                     <div className="flex-48 flex items-center">
+                        <span className="flex items-center w-6 mr-1.5">
+                           < MdBrowserUpdated className="text-2xl text-gray-200" />
+                       </span>
+                        <h2 className="tex-md  capitalize">
+                        Social Media Management
+                        </h2>
+                     </div>
+
+                     <div className="flex-48 flex items-center">
+                        <span className="flex items-center w-6 mr-1.5">
+                           <MdAppRegistration className="text-2xl text-gray-200" />
+                        </span>
+                        <h2 className="tex-md  capitalize">
+                        Content Marketing
+                        </h2>
+                     </div>
+                  </div>
+                  <div className="flex justify-center mt-2">
+                     <span className="text-white text-sm flex bg-orange-500 border px-2.5 py-1.5 border-orange-500 rounded-2xl capitalize">explore details</span>
                   </div>
                </div>
             
