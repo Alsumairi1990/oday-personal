@@ -1,6 +1,8 @@
 import ServiceIntro from "@/app/_components/ServiceIntro";
+import ProcessPhase from "@/app/_components/_services/ProcessPhase";
 import Service from "@/app/_components/_services/Service";
 import ServiceCategories from "@/app/_components/_services/ServiceCategory"
+import { PhaseInt } from "@/app/models/PhaseInt";
 import { ServiceCategoryInt } from '@/app/models/ServiceCategoryInt';
 import { MdBrowserUpdated } from "react-icons/md";
 
@@ -140,6 +142,216 @@ const Serivices = () => {
 
        
     ];
+
+
+
+
+   //  Process Phases Data
+   const phases:PhaseInt[] = [
+      {
+        id: "1",
+        name: "Brand",
+        desc: "Awarded as the Best Website Development Company by GESIA category region",
+        image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1532614408_clipkard.jpg",
+        steps: [  // Added a property name "subCategories" for clarity
+          {
+            id: "1",
+            name: "Brand Discovery",
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+          },
+          {
+            id: "2",
+            name: "Brand Research",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+          },
+          {
+            id: "2",
+            name: "Guiding Idea",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-bag-and-tote-design-c1bec00d33.svg",
+          },
+          {
+            id: "2",
+            name: "Brand DNA ",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-label-design-275e614d8d.svg",
+          },
+          {
+            id: "2",
+            name: "Brand Core",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-app-design-27fb7b89e6.svg",
+          }
+        ],
+      },
+
+      {
+         id: "2",
+         name: "Content",
+         desc: "Awarded as the Best Website Development Company by GESIA category region",
+         image: "https://dcstatic.com/images/icons/design-categories/design-categories-magazine-design-f15d13134d.svg",
+         steps: [  
+           {
+             id: "1",
+             name: "Discover",
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+           },
+           {
+             id: "2",
+             name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+           },
+           {
+            id: "2",
+            name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+          }
+         ],
+       },
+
+       {
+         id: "3",
+         name: "Build",
+         desc: "Awarded as the Best Website Development Company by GESIA category region",
+         image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1684836367_mijo-logo.png",
+         steps: [  
+           {
+             id: "1",
+             name: "Perpare",
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+           },
+           {
+             id: "2",
+             name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+           },
+           {
+            id: "2",
+            name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+          }
+         ],
+       },
+       {
+         id: "4",
+         name: "Strategy",
+         desc: "Awarded as the Best Website Development Company by GESIA category region",
+         image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1481721237_fog_app_icon.png",
+         steps: [  
+           {
+             id: "1",
+             name: "White Label SEO Services ",
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+           },
+           {
+             id: "2",
+             name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+           },
+           {
+            id: "2",
+            name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+          }
+         ],
+       },
+       {
+         id: "5",
+         name: "Grow",
+         desc: "Awarded as the Best Website Development Company by GESIA category region",
+         image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1704443071_itdp-logo.jpg",
+         steps: [  
+           {
+             id: "1",
+             name: "White Label SEO Services ",
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+           },
+           {
+             id: "2",
+             name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+           },
+           {
+            id: "2",
+            name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+          }
+         ],
+       },
+
+       
+    ];
+    
     
     
 
@@ -532,6 +744,22 @@ const Serivices = () => {
                   </div>
                </div>
             
+            </div>
+           </div>
+         </div>
+
+
+
+         <div className="w-full my-16 ">
+          <div className="w-11/12 mx-auto">
+            <div className="flex flex-col items-center sm:mb-8">
+               <h2 className="sm:text-3xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">How it works</h2>
+               <p className="text-sm leading-7 text-center mt-1.5 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
+            </div>
+            <div className="flex gap-6">
+            {phases.map((phase, index:number) => (
+               <ProcessPhase key={phase.id} phase={phase} index={index} />
+            ))}
             </div>
            </div>
          </div>
