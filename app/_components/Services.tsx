@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Link from 'next/link'
 
 const Services = () => {
   const imagePath = '/images/01.png';
@@ -103,6 +104,8 @@ const Services = () => {
               </div>
             </div>
           </div>
+
+      
 
 
 
@@ -216,6 +219,12 @@ const Services = () => {
             </div>
           </div> */}
         </div>
+        <div className="mt-4 flex justify-center">
+        <Link  href={`/services`}  className="inline-block text-center w-full border-b border-b-gray-200 py-2.5">
+                     More Services
+                </Link>
+        </div>
+        
         </div>
        
       </div>

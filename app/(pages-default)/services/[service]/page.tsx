@@ -1,13 +1,293 @@
+import ServiceHero from "@/app/_components/_services/ServiceHero";
+import { ServiceInt1 } from "@/app/models/ServiceInt";
+import ProcessPhase from "@/app/_components/_services/ProcessPhase";
+
+import { PhaseInt } from "@/app/models/PhaseInt";
+import ServiceOffer from "@/app/_components/_services/ServiceOffer";
+
 
 
 const Serivice = () => {
    const imagePath = '/images/777.png';
    const imagePath1 = '/images/curve.png';
    const imagePath2 = '/images/service2.png';
+   const service:ServiceInt1 = 
+      {
+         id : "1",
+         name : 'Printing Services',
+         desc : 'Awarded as the Best Website Development Company by GESIA category region, Awarded as the Best Website Development Company by GESIA category region, Awarded as the Best Website Development Company by GESIA category region',
+         image : 'https://cdn-kpbff.nitrocdn.com/BIqbPXrNizxHMrZEuWjiIDigcWJtuMrr/assets/images/optimized/rev-3d7ee36/d3mds3ychln71.cloudfront.net/img/banners/web_design_banner.jpg'
+      }
+    
+     //  Process Phases Data
+   const phases:PhaseInt[] = [
+      {
+        id: "1",
+        name: "Brand",
+        desc: "Awarded as the Best Website Development Company by GESIA category region",
+        image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1532614408_clipkard.jpg",
+        steps: [  // Added a property name "subCategories" for clarity
+          {
+            id: "1",
+            name: "Brand Discovery",
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+          },
+          {
+            id: "2",
+            name: "Brand Research",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+          },
+          {
+            id: "2",
+            name: "Guiding Idea",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-bag-and-tote-design-c1bec00d33.svg",
+          },
+          {
+            id: "2",
+            name: "Brand DNA ",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-label-design-275e614d8d.svg",
+          },
+          {
+            id: "2",
+            name: "Brand Core",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-app-design-27fb7b89e6.svg",
+          }
+        ],
+      },
+
+      {
+         id: "2",
+         name: "Content",
+         desc: "Awarded as the Best Website Development Company by GESIA category region",
+         image: "https://dcstatic.com/images/icons/design-categories/design-categories-magazine-design-f15d13134d.svg",
+         steps: [  
+           {
+             id: "1",
+             name: "Discover",
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+           },
+           {
+             id: "2",
+             name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+           },
+           {
+            id: "2",
+            name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+          }
+         ],
+       },
+
+       {
+         id: "3",
+         name: "Build",
+         desc: "Awarded as the Best Website Development Company by GESIA category region",
+         image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1684836367_mijo-logo.png",
+         steps: [  
+           {
+             id: "1",
+             name: "Perpare",
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+           },
+           {
+             id: "2",
+             name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+           },
+           {
+            id: "2",
+            name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+          }
+         ],
+       },
+       {
+         id: "4",
+         name: "Strategy",
+         desc: "Awarded as the Best Website Development Company by GESIA category region",
+         image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1481721237_fog_app_icon.png",
+         steps: [  
+           {
+             id: "1",
+             name: "White Label SEO Services ",
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+           },
+           {
+             id: "2",
+             name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+           },
+           {
+            id: "2",
+            name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+          }
+         ],
+       },
+       {
+         id: "5",
+         name: "Grow",
+         desc: "Awarded as the Best Website Development Company by GESIA category region",
+         image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1704443071_itdp-logo.jpg",
+         steps: [  
+           {
+             id: "1",
+             name: "White Label SEO Services ",
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+           },
+           {
+             id: "2",
+             name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+           },
+           
+           {
+             id: "2",
+             name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+             desc: "Awarded as the Best Website Development Company by GESIA category region",
+             image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+           },
+           {
+            id: "2",
+            name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+            desc: "Awarded as the Best Website Development Company by GESIA category region",
+            image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+          }
+         ],
+       },
+
+       
+    ];
+    
+    
+
+
+    const services = [
+      {
+         id : "1",
+         name : 'Printing Services',
+         desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+         image : 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/Services/Add-On/Services-Icon-1.svg'
+      },
+      {
+         id : "2",
+         name : 'Mobile Dign',
+         desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+         image : 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/Services/Add-On/Services-Icon-2.svg'
+     },
+     {
+       id : "3",
+       name : 'Packaging Services',
+       desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+       image : 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/Services/Add-On/Services-Icon-3.svg'
+     },
+     {
+      id : "1",
+        name : 'Logo Design',
+        desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+        image : 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/Services/Add-On/Services-Icon-4.svg'
+     },
+     {
+      id : "1",
+        name : 'Label Design',
+        desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+        image : 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/Services/Add-On/Services-Icon-3.svg'
+     },
+     {
+      id : "1",
+        name : 'Resume Prepartion',
+        desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+        image : 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/Services/Add-On/Services-Icon-6.svg'
+     },
+     {
+      id : "1",
+        name : 'Eboox Cover',
+        desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+        image : 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/Services/Add-On/Services-Icon-5.svg'
+     },
+     {
+      id : "1",
+        name : 'Bag Design',
+        desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+        image : 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/Services/Add-On/Services-Icon-3.svg'
+     }
+
+   ]
+
+   
 
   return (
      <div className="w-full">
-      <div className=" min-h-lvh pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath})`}}>
+       <div className="w-full mb-16">    
+               <ServiceHero service={service} />
+         </div>
+      {/* <div className=" min-h-lvh pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath})`}}>
          <div className="flex w-11/12 mx-auto">
             <div className="flex-60">
             <span className="text-md text-white mb-6 inline-block">Home / mobile development </span>
@@ -43,7 +323,7 @@ const Serivice = () => {
         <div className="absolute left-0 bottom-0">
          <img className="w-full" src={imagePath1} alt="" />
         </div>
-        </div>
+        </div> */}
 
 
         <div className="py-4 px-8 pt-0 w-full">
@@ -95,6 +375,38 @@ const Serivice = () => {
            
            </div>
         </div>
+
+
+        <div className="w-full my-16 ">
+          <div className="w-11/12 mx-auto">
+            <div className="flex flex-col items-center sm:mb-8">
+               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">How it works</h2>
+               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
+            </div>
+            <div className="flex flex-wrap gap-6 max-sm:p-4">
+            {phases.map((phase, index:number) => (
+               <ProcessPhase key={phase.id} phase={phase} index={index} />
+            ))}
+            </div>
+           </div>
+         </div>
+
+
+         <div className="w-full my-16 ">
+          <div className="w-11/12 mx-auto">
+            <div className="flex flex-col items-center sm:mb-8">
+               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">Our Comprehensive Range of Logo Design Services </h2>
+               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
+            </div>
+            <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
+            {services.map((phase, index:number) => (
+               <ServiceOffer key={phase.id} serviceOffer={phase}  />
+            ))}
+            </div>
+           </div>
+         </div>
+
+
 
         <div className="w-full mt-8 bg-[#f4f2ff]">
          <div className="w-11/12 mx-auto">

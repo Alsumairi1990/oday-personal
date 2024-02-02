@@ -1,8 +1,63 @@
 'use client'
 import React from 'react';
+import Link from 'next/link'
+import { ServiceInt1 } from '../models/ServiceInt';
+import NavElement from './_navbar/NavElement';
 
 const ServicesPanel = () => {
     const imagePath = '/images/10.png';
+
+    const services:ServiceInt1[] = [
+      {
+         id : "1",
+         name : 'Printing Services',
+         desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+         icon : 's1.svg'
+      },
+      {
+         id : "2",
+         name : 'Mobile Dign',
+         desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+         icon : 's2.svg'
+     },
+     {
+       id : "3",
+       name : 'Packaging Services',
+       desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+       icon : 's3.svg'
+     },
+     {
+      id : "1",
+        name : 'Logo Design',
+        desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+        icon : 's1.svg'
+     },
+     {
+      id : "1",
+        name : 'Label Design',
+        desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+        icon : 's4.svg'
+     },
+     {
+      id : "1",
+        name : 'Resume Prepartion',
+        desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+        icon : 's5.svg'
+     },
+     {
+      id : "1",
+        name : 'Eboox Cover',
+        desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+        icon : 's6.svg'
+     },
+     {
+      id : "1",
+        name : 'Bag Design',
+        desc : 'Our skilled logo designers have great expertise innovative tools and technologies, we create stunning monogram logo designs. Our created monogram logo designs can help you attract giant ',
+        icon : 's7.svg'
+     }
+
+   ]
   return (
     <div className="fixed top-[4.5rem] z-10 right-4 bg-white w-7/12 px-2 py-3 flex flex-col rounded-md" style={{filter: 'drop-shadow(rgba(0, 0, 0, 0.08) 0px 0px 18px)'}}>
     <span className="absolute inline-block w-4 h-4 bg-white top-[-.5rem] sm:right-28 sm:mr-4 sm:rotate-45"></span>
@@ -10,35 +65,19 @@ const ServicesPanel = () => {
     <div className="px-3 py-2 grid grid-cols-3">
        <div className="col-start-1 col-span-2">
           <ul className="flex flex-wrap pb-2">
-             <li className="flex-48 line-height-20 pr-6">
-                <a href="/study-abroad" className="flex items-center w-full border-b border-b-gray-200 py-2.5">
-                   <span className="">
-                      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M11.264 2s-9.614 8.691 0 19.994M12.99 2.048s7.237 9.234 0 19.861" stroke="#24A7D0" stroke-width="1.5" stroke-miterlimit="10"></path>
-                         <path d="M2.832 15.993s5.82 4.023 18.336 0M2.241 9.84s5.428 3.065 19.512 0" stroke="#48639E" stroke-width="1.5" stroke-miterlimit="10"></path>
-                         <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10Z" stroke="#48639E" stroke-width="1.5" stroke-miterlimit="10"></path>
-                      </svg>
-                   </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600">Logo Design</span></div>
-                </a>
+            {services.map((service) => (
+
+            
+                <li className="flex-48 line-height-20 pr-6">
+                  <Link  href={`/services/${service.name}`}  className="flex items-center w-full border-b border-b-gray-200 py-2.5">
+                     <NavElement service={service}  />
+                </Link>
              </li>
-             <li className="flex-48 line-height-20 pr-6">
-                <a href="/study-abroad" className="flex items-center w-full border-b border-b-gray-200 py-2.5">
-                   <span className="">
-                      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <g stroke="#48639E" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round">
-                            <path d="m5.488 5.689.646-1.724a1.387 1.387 0 0 1 1.308-.91h7.013a1.398 1.398 0 0 1 1.286.837l.775 1.78a.291.291 0 0 1-.27.41H5.763a.292.292 0 0 1-.275-.393Z"></path>
-                            <path d="M18.616 10.5V4.93a.72.72 0 0 0-.213-.516.736.736 0 0 0-.517-.213H15.87M6.05 4.184H4.291a.73.73 0 0 0-.73.746v16.778a.73.73 0 0 0 .73.73h13.594a.73.73 0 0 0 .73-.73V19.5M9.817 3.055v-.168a1.32 1.32 0 0 1 2.256-.937 1.326 1.326 0 0 1 .389.937v.168M6.976 10.798h8.276M6.976 14.566h8.276"></path>
-                         </g>
-                         <path d="M16.828 10s-4.807 4.346 0 9.997M17.69 10.024s3.62 4.617 0 9.931" stroke="#24A7D0" stroke-width="1.5" stroke-miterlimit="10"></path>
-                         <path d="M12 16s3.174 2.25 10 0M12.317 13.601s2.714-1.532 9.756 0" stroke="#24A7D0" stroke-width="1.5" stroke-miterlimit="10"></path>
-                         <path d="M17.196 20a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z" stroke="#24A7D0" stroke-width="1.5" stroke-miterlimit="10"></path>
-                      </svg>
-                   </span>
-                   <div className=""><span className="ml-2 text-md text-gray-600">label design</span></div>
-                </a>
-             </li>
-             <li className="flex-48 line-height-20 pr-6">
+            ))
+            }
+            
+            
+             {/* <li className="flex-48 line-height-20 pr-6">
                 <a href="/edu/universities" className="flex items-center w-full border-b border-b-gray-200 py-2.5">
                    <span className="">
                       <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -193,7 +232,7 @@ const ServicesPanel = () => {
                    </span>
                    <div className=""><span className="ml-2 text-md text-gray-600">Test Series</span></div>
                 </a>
-             </li>
+             </li> */}
           </ul>
        </div>
        <div className="p-2 rounded-md" style={{background: 'rgba(226, 235, 247, 0.41)'}}>
