@@ -11,6 +11,8 @@ import Testimonials from './_components/Testimonials'
 import Subscribe from './_components/Subscribe'
 import ServiceApp from './_components/ServiceApp'
 import ServicesFull from './_components/ServicesFull'
+import ProcessPhase from './_components/_services/ProcessPhase'
+import { phases } from './utils/Phases'
 
 
 
@@ -43,6 +45,22 @@ export default function Home() {
      </div>
      <div className="dark:bg-[#111]">
      <Blogs />
+     </div>
+     <div className="dark:bg-black-100">
+     <div className="w-full my-16 ">
+          <div className="w-11/12 mx-auto">
+            <div className="flex flex-col items-center sm:mb-8">
+               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">How it works</h2>
+               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
+            </div>
+            <div className="flex flex-wrap gap-6 max-sm:p-4">
+            {phases.map((phase, index:number) => (
+               <ProcessPhase key={phase.id} phase={phase} index={index} />
+            ))}
+            </div>
+           </div>
+         </div>
+
      </div>
      <div className="daek:bg-[#111]">
       <div className="dark:w-11/12 mx-auto  dark:bg-black-100">

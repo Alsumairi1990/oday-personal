@@ -1,6 +1,7 @@
 
 'use client'
-
+import NavBar from '@/app/NavBar'
+import Footerk from '@/app/_components/Footer';
 
 export default function Blog() {
    const imagePath = '/images/w01.jpg';
@@ -8,14 +9,14 @@ export default function Blog() {
     {
       title :'The best programming book for proframming',
       body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w02.jpg',
+      image : '/images/w003.jpg',
       category :'Business'
     };
     const post = 
     {
       title :'How to define block of css image',
       body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w05.jpg',
+      image : '/images/w004.jpg',
       category :'Business'
     };
 
@@ -23,7 +24,7 @@ export default function Blog() {
     {
       title :'How to define block of css image',
       body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w01.jpg',
+      image : '/images/w005.jpg',
       category :'Web tech'
     };
 
@@ -56,28 +57,28 @@ export default function Blog() {
           id:1,  
           title :'The best programming book for proframming',
           body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w01.jpg',
+          image : '/images/w001.jpg',
           category :'Business'
         },
         {
           id:2,  
           title :'The best programming book for proframming',
           body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w05.jpg',
+          image : '/images/w002.jpg',
           category :'Brand'
         },
         {
           id : 3,  
           title :'The best programming book for proframming',
           body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w03.jpg',
+          image : '/images/w004.jpg',
           category :'Products'
         },
         {
           id : 4,
           title :'The best programming book for proframming',
           body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w02.jpg',
+          image : '/images/w005.jpg',
           category :'Printting'
         },
       
@@ -89,7 +90,7 @@ export default function Blog() {
       id:1,  
       title :'The best programming book for proframming',
       body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w01.jpg',
+      image : 'https://jannah.tielabs.com/pets/wp-content/uploads/sites/13/2016/11/jnh-pets-13-780x470.jpg',
       category :'Business'
     },
     {
@@ -144,10 +145,18 @@ export default function Blog() {
 //   }
 
     return (
+       
+        
+        
+        
       <div >
+        <div className=" shadow-sm border-b border-b-gray-200 h-20 ">
+        <NavBar textColor="gray-700" />
+        </div>
+        
 
 
-      <section className="w-11.4/12 max-w-full mx-auto my-3">
+      <section className="w-11.4/12 max-w-full mx-auto mt-8 ">
                 <div className="grid sm:grid-cols-2 gap-[0.3rem] sm:border sm:border-gray-300 rounded p-0.5">
                     <div className="grid">
                       <div className="col-span-full row-span-full">
@@ -475,11 +484,11 @@ export default function Blog() {
                           <img className="w-full max-w-full h-full rounded-xl object-cover" src={latestPost.image} alt="" />  
                       </div>
                       <div className="col-span-full row-span-full title-full-shadow flex flex-col justify-end h-full self-end text-white p-1 pl-4 rounded-b-xl"> 
-                          <p className="mb-0.5 text-base">
-                          <a href="">{latestPost.category}</a>
+                          <p className="text-base mb-2">
+                          <a href="" className='bg-violet-600 text-white px-1.5 rounded py-1 text-sm '>{latestPost.category}</a>
                         
                           </p>
-                          <p className="font-bold text-2xl pb-2">
+                          <p className="font-bold text-2xl pb-2 mb-2">
                           
                               <a href="" > {latestPost.title}</a>
                               
@@ -494,12 +503,12 @@ export default function Blog() {
                               <img className="w-full max-w-full h-full rounded-xl" src={post.image} alt="" />  
                           </div>
                           <div className="col-span-full row-span-full title-full-shadow flex flex-col justify-end h-full self-end text-white p-1 pl-4 rounded-b-xl"> 
-                              <p className="mb-0.5 text-base">
+                              <p className="text-base mb-2">
                              
-                              <a href="">{post.category}</a>
+                              <a href="" className='bg-violet-600 text-white px-1.5 rounded py-1 text-sm '>{post.category}</a>
                               
                               </p>
-                              <p className="font-bold text-2xl pb-2">
+                              <p className="font-bold text-2xl mb-3 pb-2">
                              
                                   <a href="" > {post.title}
                                   </a>
@@ -514,12 +523,12 @@ export default function Blog() {
                               <img className="w-full max-w-full h-full rounded-xl object-cover" src={topPost.image} alt="" />  
                           </div>
                           <div className="col-span-full row-span-full title-full-shadow flex flex-col justify-end h-full self-end text-white p-1 pl-4 rounded-b-xl"> 
-                              <p className="mb-0.5 text-base">
+                              <p className="mb-0.5 text-base mb-2">
                               
-                              <a href="">{topPost.category}</a>
+                              <a href="" className='bg-violet-600 text-white px-1.5 rounded py-1 text-sm '>{topPost.category}</a>
                              
                               </p>
-                              <p className="font-bold text-2xl pb-2">
+                              <p className="font-bold text-2xl pb-2 mb-2">
                              
                                   <a href="" > {topPost.title}
                                   </a>
@@ -544,8 +553,11 @@ export default function Blog() {
       
       
       
-      
+      <div className="">
+         <Footerk />
          </div>
+         </div>
+         
 
 
     )

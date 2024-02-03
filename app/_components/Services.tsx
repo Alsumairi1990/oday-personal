@@ -14,7 +14,7 @@ const Services = () => {
         <h2 className="text-3xl text-center px-8 mb-6 text-blue-700 dark:text-white font-semibold">Services Categories</h2>
         <p className="text-base text-gray-600 dark:text-gray-300 text-center leading-7 px-8">Search the world's ,information including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking Search the world's information, including webpages, images, videos and more. Google has many special features to help you find exactly what you're looking </p>
        
-        <div className="grid grid-cols sm:grid-cols-3 gap-8 mt-8">
+        <div className="grid grid-cols sm:grid-cols-3 gap-10 mt-8">
 
 
           <div className="p-2 flex flex-col justify-center pt-4 sm:pt-8 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
@@ -219,10 +219,9 @@ const Services = () => {
             </div>
           </div> */}
         </div>
-        <div className="mt-4 flex justify-center">
-        <Link  href={`/services`}  className="inline-block text-center w-full border-b border-b-gray-200 py-2.5">
-                     More Services
-                </Link>
+        <div className="mt-8 flex justify-center">
+        <Link href={'/services'} className="capitalize text-gray-700  px-2.5 rounded py-1.5 font-semibold bg-gray-100 ">Show More </Link>
+
         </div>
         
         </div>

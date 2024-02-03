@@ -54,7 +54,7 @@ const Nav = () => {
   });
   
   return (
-    <nav className='flex  w-full sm:p-2 z-50 items-center justify-between bg-black-100 border-b border-b-[#484848]'>
+    <nav className='flex  w-full sm:p-2 z-50 items-center justify-between  border-b border-b-[#484848]'>
         <div className='sm:hidden flex items-center pl-1'>
            <span className="w-6 inline-block fill-gray-200 ml-1">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M89.006 490.013h845.978v62.269h-845.978v-62.269zM89.006 226.835h845.978v62.269h-845.978v-62.269zM89.006 753.181h845.978v62.259h-845.978v-62.259z"></path></svg>
