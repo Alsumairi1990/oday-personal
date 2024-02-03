@@ -4,6 +4,9 @@ import ProcessPhase from "@/app/_components/_services/ProcessPhase";
 
 import { PhaseInt } from "@/app/models/PhaseInt";
 import ServiceOffer from "@/app/_components/_services/ServiceOffer";
+import { fservices } from '@/app/utils/ServicesData';
+import ServiceFeature from "@/app/_components/_services/ServiceFeature";
+
 
 
 
@@ -425,6 +428,21 @@ const Serivice = () => {
          </div>
         
         </div>
+
+
+        <div className="w-full my-16 py-8 bg-gray-100 ">
+          <div className="w-11/12 mx-auto">
+            <div className="flex flex-col items-center sm:mb-8">
+               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">Why Choose our Logo Design company Services? </h2>
+               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">We have an incredibly talented and skilled team of logo designers who ensure quality Logo design services. Let's know some more reasons that make us the top Logo design service company to hire -</p>
+            </div>
+            <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
+            {fservices.map((service, index:number) => (
+               <ServiceFeature key={service.id} servicefeature={service}  />
+            ))}
+            </div>
+           </div>
+         </div>
 
      </div>
   )
