@@ -2,6 +2,7 @@
 'use client'
 import NavBar from '@/app/NavBar'
 import Footerk from '@/app/_components/Footer';
+import Link from 'next/link';
 
 export default function Blog() {
    const imagePath = '/images/w01.jpg';
@@ -167,7 +168,7 @@ export default function Blog() {
                             Markting
                           </p>
                           <p className="font-bold p pt-4 text-2xl pb-5">
-                              <a href="">{latestPost.title}</a>                           
+                              <Link href={`/blog/${latestPost.title}`}>{latestPost.title}</Link>                           
                           </p>
                       </div>
                     </div>  
@@ -184,7 +185,8 @@ export default function Blog() {
                                 <span className="text-sm bg-violet-600 inline-block px-1 border border-gray-500 py-0.5 rounded" >{post.category}</span>
                               </p>
                               <p className="mb-1 text-md font-semibold sm:text-white">
-                               <a href="" className="">{post.title}</a> 
+                                
+                              <Link href={`/blog/${latestPost.title}`}>{latestPost.title}</Link> 
                               </p>
                           </div>
                       </div>
@@ -217,7 +219,7 @@ export default function Blog() {
                                           <div className="article-content">
                                               <div className="article-title"> 
                                                   <p className="text-lg font-bold mt-2">
-                                                      {latestPost.title}
+                                                  <Link href={`/blog/${latestPost.title}`}>{latestPost.title}</Link> 
                                                   </p>
                                                   <p>
                                                   It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here',
@@ -237,7 +239,9 @@ export default function Blog() {
                                               </div>
                                               <div className="flex-70 pl-3">
                                                   <div className="thumb-content">
-                                                     <h3 className="text-sm text-slate-600 font-bold"><a href="">{post.title}</a></h3>
+                                                     <h3 className="text-sm text-slate-600 font-bold">
+                                                     <Link href={`/blog/${post.title}`}>{latestPost.title}</Link> 
+                                                        </h3>
                                                   </div>
                                               </div>
                                           </div>
@@ -260,7 +264,7 @@ export default function Blog() {
                                       </div>
                                       <div className="flex-70">
                                           <div >
-                                             <h3 className="text-sm text-gray-200 pl-2 font-bold mb-0"><a href="">{post.title}</a></h3>
+                                             <h3 className="text-sm text-gray-200 pl-2 font-bold mb-0"><Link href={`/blog/${post.title}`}>{latestPost.title}</Link> </h3>
                                           </div>
                                       </div>
                                   </div>
@@ -288,7 +292,7 @@ export default function Blog() {
                   <div className="sm:pt-3 sm:px-3 sm:pb-20 sm:bg-gray-100  sm:border sm:border-gray-200 max-sm:border max-sm:border-gray-300 max-sm:border-t-0 max-sm:rounded-b-md">
                       <div className="flex bg-white max-sm:flex-col px-2 pb-2 sm:pt-2 sm:rounded-md max-sm:rounded-b-md max-sm:pt-[1.4rem] ">
                         <div className="flex-50 max-sm:flex-100 max-sm:order-2">
-                            <h3 className="text-xl">{post.title }" </h3>   
+                            <h3 className="text-xl"><Link href={`/blog/${post.title}`}>{latestPost.title}</Link> </h3>   
                         </div>
                         <div className="flex-50 max-sm:flex-100 max-sm:order-1">
                           <img className="w-full max-w-full rounded-md" src={post.image || "/images/w01.png"} alt="" /> 
@@ -308,7 +312,7 @@ export default function Blog() {
                                         
                               </div>
                               <div className="max-sm:flex-70 max-sm:max-w-70 px-2 sm:pt-1.5 max-sm:pt-2 pb-2">
-                                  <h3 className="sm:text-base text-[15px] font-semibold ">{post.title}</h3>
+                                  <h3 className="sm:text-base text-[15px] font-semibold "><Link href={`/blog/${post.title}`}>{latestPost.title}</Link> </h3>
                               </div>
                           </a>  
                       </div>
@@ -329,7 +333,7 @@ export default function Blog() {
                   <div className="sm:pt-3 sm:px-3 sm:pb-20 sm:bg-gray-100  sm:border sm:border-gray-200 max-sm:border max-sm:border-gray-300 max-sm:border-t-0 max-sm:rounded-b-md">
                       <div className="flex bg-white max-sm:flex-col px-2 pb-2 sm:pt-2 sm:rounded-md max-sm:rounded-b-md max-sm:pt-[1.4rem] ">
                         <div className="flex-50 max-sm:flex-100 max-sm:order-2">
-                            <h3 className="text-xl">{latestPost.title }" </h3>   
+                            <h3 className="text-xl"><Link href={`/blog/${latestPost.title}`}>{latestPost.title}</Link>  </h3>   
                         </div>
                         <div className="flex-50 max-sm:flex-100 max-sm:order-1">
                           <img className="w-full max-w-full rounded-md" src={latestPost.image || "/images/w01.png"} alt="" /> 
@@ -348,7 +352,7 @@ export default function Blog() {
                                           <span >{post.category}</span>
                               </div>
                               <div className="max-sm:flex-70 max-sm:max-w-70 px-2 sm:pt-1.5 max-sm:pt-2 pb-2">
-                                  <h3 className="sm:text-base text-[15px] font-semibold ">{post.title}</h3>
+                                  <h3 className="sm:text-base text-[15px] font-semibold "><Link href={`/blog/${post.title}`}>{latestPost.title}</Link> </h3>
                               </div>
                           </a>  
                       </div>
@@ -387,9 +391,7 @@ export default function Blog() {
                               </p>
                               <p className="font-bold text-2xl pb-2">
                               
-                                 
-                                  <a href=""> {post.title}
-                                  </a>                              
+                              <Link href={`/blog/${post.title}`}>{latestPost.title}</Link>                             
                               </p>
                           </div>
                       </div> 
@@ -399,7 +401,7 @@ export default function Blog() {
                           <div className="p-3 pb-2 bg-gray-100 rounded-lg border first:mb-2 border-gray-200">
                               <div className="flex bg-white p-2 rounded-md">
                               <div className="flex-50">
-                                  <h3 className="text-xl">{post.title}</h3>   
+                                  <h3 className="text-xl"><Link href={`/blog/${post.title}`}>{latestPost.title}</Link> </h3>   
                               </div>
                               <div className="flex-50">
                                   <img className="w-full max-w-full rounded-md"  src={post.image || "/images/w01.png"} alt="" /> 
@@ -426,7 +428,7 @@ export default function Blog() {
                           <div className="p-3 pb-2 bg-gray-100 rounded-lg border first:mb-2 border-gray-200">
                               <div className="flex bg-white p-2 rounded-md">
                               <div className="flex-50">
-                                  <h3 className="text-xl"> {post.title} </h3>   
+                                  <h3 className="text-xl"> <Link href={`/blog/${post.title}`}>{latestPost.title}</Link> </h3>   
                               </div>
                               <div className="flex-50">
                                   <img className="w-full max-w-full rounded-md" src={post.image || "/images/w01.png"} alt="" /> 
@@ -490,7 +492,7 @@ export default function Blog() {
                           </p>
                           <p className="font-bold text-2xl pb-2 mb-2">
                           
-                              <a href="" > {latestPost.title}</a>
+                          <Link href={`/blog/${latestPost.title}`}>{latestPost.title}</Link> 
                               
                                                         
                           </p>
@@ -510,8 +512,7 @@ export default function Blog() {
                               </p>
                               <p className="font-bold text-2xl mb-3 pb-2">
                              
-                                  <a href="" > {post.title}
-                                  </a>
+                              <Link href={`/blog/${latestPost.title}`}>{post.title}</Link> 
                                                           
                               </p>
                           </div>
