@@ -3,5 +3,6 @@ export interface ServiceWorkInt {
     name: string;
     desc? : string;
     image? : string;
-    icon? : string
+    icon? : string,
+    
 }
