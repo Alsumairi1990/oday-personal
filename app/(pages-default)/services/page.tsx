@@ -430,21 +430,16 @@ const Serivices = () => {
                    <div className=" pl-2 pr-4 flex items-center py-2 rounded-md ml-4 bg-white" style={{boxShadow:'rgb(87 156 217) 0px 0px 10px 1px'}}>
                    <span className=" inline-block text-blue-500 text-base font-semibold  ">Contact  </span>
                    </div>
-                   
- 
                 </div>
              </div>
              {/* <div className="flex-40">
              <img className="w-full z-20" src={imagePath2} alt="" />
              <span className="absolute top-[25%] w-12 left-[60%] z-10"><img src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/mobile/Header/Mobile-Common-Icon-4.png" alt="" /></span>
- 
+
              <span className="absolute top-[30%] w-10 right-8 z-10"><img src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/mobile/Header/Mobile-Common-Icon-5.png" alt="" /></span>
              <span className="absolute bottom-[30%] w-16 left-[50%] z-10"><img src="https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/mobile/Header/Mobile-Common-Icon-3.png" alt="" /></span>
- 
              </div> */}
           </div>
- 
-        
          </div>
 
 
@@ -457,69 +452,9 @@ const Serivices = () => {
  
          <div className="py-4 w-11/12  px-8 pt-0 mx-auto">
             <div className="grid sm:grid-cols-3 gap-6 ">
-        
-            
-
                {serviceCategories.map((categoryService) => (
                   <ServiceCategories key={categoryService.id} serviceCategory={categoryService} />
                ))}
-           
-          
-            
-               
-            
-             {/* <div className="flex-100 sm:flex-20 p-2">
-                  <div className="bg-[#f9f9f9] py-3 text-center rounded-md  border border-gray-200">
-                   <div className="flex px-2  justify-center">
-                      <img src="https://cdn.cmarix.com/images/home/mobile-application-development.webp" alt="" />
-                   </div>
-                   <div className="mt-1.5">
-                      <p className="text-gray-800 text-2xl mb-1 font-bold ">Printing Services</p>
-                      <p className="text-gray-500 text-sm tracking-8 font-medium mb-3">Awarded as the Best Website Development Company by GESIA category region</p>
-                      <a href="" className="text-gray-50 px-2 py-1 bg-orange-500 text-sm font-medium border border-orange-500 rounded-md shadow-md">Details</a>
-                   </div>
-                </div>
-             </div>
- 
-             <div className="flex-100 sm:flex-20 p-2">
-                <div className="bg-[#f9f9f9] py-3 text-center rounded-md  border border-gray-200">
-                   <div className="flex px-2  justify-center">
-                      <img src="https://cdn.cmarix.com/images/home/mobile-application-development.webp" alt="" />
-                   </div>
-                   <div className="mt-1.5">
-                      <p className="text-gray-800 text-2xl mb-1 font-bold ">Custom Designs</p>
-                      <p className="text-gray-500 text-sm tracking-8 font-medium mb-3">Awarded as the Best Website Development Company by GESIA category region</p>
-                      <a href="" className="text-gray-50 px-2 py-1 bg-orange-500 text-sm font-medium border border-orange-500 rounded-md shadow-md">Details</a>
-                   </div>
-                </div>
-             </div>
- 
-             <div className="flex-100 sm:flex-20 p-2">
-                 <div className="bg-[#f9f9f9] py-3 text-center rounded-md  border border-gray-200">
-                   <div className="flex px-2  justify-center">
-                      <img src="https://cdn.cmarix.com/images/home/mobile-application-development.webp" alt="" />
-                   </div>
-                   <div className="mt-1.5">
-                      <p className="text-gray-800 text-2xl mb-1 font-bold ">Branding Design</p>
-                      <p className="text-gray-500 text-sm tracking-8 font-medium mb-3">Awarded as the Best Website Development Company by GESIA category region</p>
-                      <a href="" className="text-gray-50 px-2 py-1 bg-orange-500 text-sm font-medium border border-orange-500 rounded-md shadow-md">Details</a>
-                   </div>
-                </div>
-             </div>
-
-             <div className="flex-100 sm:flex-20 p-2">
-                 <div className="bg-[#f9f9f9] py-3 text-center rounded-md  border border-gray-200">
-                   <div className="flex px-2  justify-center">
-                      <img src="https://cdn.cmarix.com/images/home/mobile-application-development.webp" alt="" />
-                   </div>
-                   <div className="mt-1.5">
-                      <p className="text-gray-800 text-2xl mb-1 font-bold ">Ebook cover Design</p>
-                      <p className="text-gray-500 text-sm tracking-8 font-medium mb-3">Awarded as the Best Website Development Company by GESIA category region</p>
-                      <a href="" className="text-gray-50 px-2 py-1 bg-orange-500 text-sm font-medium border border-orange-500 rounded-md shadow-md">Details</a>
-                   </div>
-                </div>
-             </div>
-             */}
             </div>
          </div>
 

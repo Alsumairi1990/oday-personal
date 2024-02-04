@@ -1,5 +1,6 @@
+import NavBar from "../NavBar"
 import Footerk from "../_components/Footer"
-import Nav from "./Nav"
+// import Nav from "./Nav"
 
 
 export default function signupLayout({
@@ -11,7 +12,7 @@ export default function signupLayout({
             
 
             <div className="h-full">
-                <Nav />
+                {/* <NavBar  /> */}
             {children}
             <div className="">
              <Footerk />

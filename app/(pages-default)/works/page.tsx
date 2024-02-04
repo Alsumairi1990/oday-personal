@@ -1,3 +1,5 @@
+import ServiceWork from "@/app/_components/_services/ServiceWork";
+import { serviceWorks } from '@/app/utils/ServiceWorks';
 
 
 const Works = () => {
@@ -23,6 +25,24 @@ const Works = () => {
           </div>
           </div>
          </div>
+
+
+
+         <div className="w-full my-16 py-8 ">
+          <div className="w-11/12 mx-auto">
+            <div className="flex flex-col items-center sm:mb-8">
+               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">Why Choose our Logo Design company Services? </h2>
+               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">We have an incredibly talented and skilled team of logo designers who ensure quality Logo design services. Let's know some more reasons that make us the top Logo design service company to hire -</p>
+            </div>
+            <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
+            {serviceWorks.map((work) => (
+               <ServiceWork key={work.id} serviceWork={work}  />
+            ))}
+            </div>
+           </div>
+         </div>
+
+
  
          <div className="w-11/12 mx-auto my-10 " style={{backgroundImage: `url(${imagePath})`}}>
             <div className="p-4 text-center mb-4" >
