@@ -524,7 +524,7 @@ export default function Blog() {
                               <img className="w-full max-w-full h-full rounded-xl object-cover" src={topPost.image} alt="" />  
                           </div>
                           <div className="col-span-full row-span-full title-full-shadow flex flex-col justify-end h-full self-end text-white p-1 pl-4 rounded-b-xl"> 
-                              <p className="mb-0.5 text-base mb-2">
+                              <p className="text-base mb-2">
                               
                               <a href="" className='bg-violet-600 text-white px-1.5 rounded py-1 text-sm '>{topPost.category}</a>
                              
