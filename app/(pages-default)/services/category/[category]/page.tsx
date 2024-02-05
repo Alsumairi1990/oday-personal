@@ -23,7 +23,7 @@ const ServiceCategory = () => {
          id : "1",
          name : 'Printing Services',
          desc : 'Awarded as the Best Website Development Company by GESIA category region, Awarded as the Best Website Development Company by GESIA category region, Awarded as the Best Website Development Company by GESIA category region',
-         image : 'https://cdn-kpbff.nitrocdn.com/BIqbPXrNizxHMrZEuWjiIDigcWJtuMrr/assets/images/optimized/rev-3d7ee36/d3mds3ychln71.cloudfront.net/img/banners/web_design_banner.jpg'
+         image : '/images/curve.png'
       }
     
      //  Process Phases Data
@@ -339,7 +339,7 @@ const ServiceCategory = () => {
                <div className="flex flex-wrap  justify-between">
                  <span className="text-black-100 uppercase text-sm mb-2">KNOW US BETTER</span>
                </div>
-               <h2 className="text-3xl font-bold text-gray-">What Company Do?</h2>
+               <h2 className="text-3xl font-bold text-gray-">What1 Company Do?</h2>
                <div className="flex mt-4">
                   <p className="text-sm leading-7 text-gray-900">Webvolty is an Indian  IT Company for Website Development, Web Designing, Mobile App Development, Software Development, Web Hosting, Search Engine Optimization, Mobile Solutions and lot many IT and IT Enabled Services.</p>
                </div>

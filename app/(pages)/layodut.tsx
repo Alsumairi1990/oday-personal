@@ -1,4 +1,4 @@
-import NavBar from "../NavBar"
+import NavBar from "../NavBar.jsx"
 import Footerk from "../_components/Footer"
 // import Nav from "./Nav"
 

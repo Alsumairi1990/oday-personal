@@ -3,8 +3,10 @@ import Link from 'next/link'
 import React from 'react'
 import {useEffect, useState} from 'react';
 import ThemeToggle from './_components/theme-toggle'
-import ServicesPanel from './_components/ServicesPanel'
+import ServicePanel from './_components/_navbar/ServicesPanel'
 import AboutUs from'./_components/_navbar/AboutUs'
+import WorksPanel from './_components/_navbar/WorksPanel'
+
 
 
 
@@ -117,12 +119,30 @@ const NavBar = ({ textColor }) => {
                 </div>
               </div>
               <div id="log-menu" className=" log-menu hidden w-full  h-full top-0 left-0 " >
-                <ServicesPanel />    
+         
+                <ServicePanel />    
                   </div>
                   </div>
             </div>
             <Link href="/blog" className="px-3 text-sm font-medium " >Blogs</Link>
-            <Link href="/works" className="px-3 text-sm font-medium " >Works</Link>
+            <div className=""> 
+            <div className="menu-pr ">
+              <div className="menu-btn  cursor-pointer">
+                <div className="flex items-center px-3  pointer ">
+                <span className="text-gray-100 text-sm font-medium  capitalize">Our Works</span>
+                  <span className="icon dark-icon ">
+                   <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M7 10L12 15L17 10" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+              <div id="log-menu" className=" log-menu hidden w-full  h-full top-0 left-0 " >
+         
+                <WorksPanel />    
+                  </div>
+                  </div>
+            </div>
             <Link href="/" className="px-3 text-sm font-medium " >Totutiols</Link>
             <Link href="/portfolio" className="px-3 text-sm font-medium " >Portfolio</Link>
          
