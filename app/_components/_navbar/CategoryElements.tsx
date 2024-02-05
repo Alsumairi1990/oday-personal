@@ -10,7 +10,7 @@ interface ServiceCategoryProps {
   
   function CategoryElements({ serviceCategory }: ServiceCategoryProps) {
     return (
-      <div className='rounded-xl sm:flex-25 pb-6 pt-0 px-2  '>
+      <div className='rounded-xl sm:flex-25 pb-2 pt-0 px-2  '>
         {/* <div className="flex justify-center" >
          <img className='p-1.5 bg-white rounded-md' src={serviceCategory.image} alt={serviceCategory.name} style={{boxShadow:'0 0 5px #ccc'}} />
           
@@ -31,7 +31,7 @@ interface ServiceCategoryProps {
                     <img className='w-full' src={service.image} alt={service.name} />
                   </div>
                   
-                  <h3 className='text-sm text-gray-700 font-medium'>{service.name}</h3>
+                  <h3 className='text-sm text-gray-700 font-medium nav-font'>{service.name}</h3>
                   
                 </li>
               ))}

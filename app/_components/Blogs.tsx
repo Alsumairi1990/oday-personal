@@ -99,7 +99,7 @@ const Blogs = () => {
         
       </div>
       <div className="py-2 flex justify-center mt-4">
-      <Link href={'/blog'} className="capitalize text-white  px-2.5 rounded py-1.5 font-semibold bg-orange-500 ">More Blogs</Link>
+      <Link href={'/blog'} className="capitalize text-white  px-2.5 rounded py-1.5 font-semibold bg-orange-500 dark:bg-fuchsia-600 ">More Blogs</Link>
       </div>
          
       </div>

@@ -20,9 +20,6 @@ interface ServiceCategoryProps {
         <p className='mt-3 text-sm leading-6 text-gray-500 font-semibold pl-4'>{serviceCategory.desc}</p>
         </div>
         
-        
-  
-        {/* Check if services exist */}
         {serviceCategory.services && serviceCategory.services.length > 0 && (
           <div className='mt-2'>
            
