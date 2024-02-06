@@ -77,7 +77,7 @@ const ContactForm = () => {
 
 
   return (
-    <div className="shadow-lg  bg-white dark:bg-black-150 border dark:border-gray-600 rounded-xl w-11/12 mx-auto  " style={{boxShadow:' 3px 3px 40px rgb(0 0 0/15%)'}}>
+    <div className="shadow-lg  bg-white dark:bg-black-150 border dark:border-gray-600 rounded-xl w-10/12 mx-auto  " style={{boxShadow:' 3px 3px 40px rgb(0 0 0/15%)'}}>
      <div className="grid grid-cols-1 sm:grid-cols-3 ">
         <div className="pr-8">
             <div className="bg-[#162d42] dark:bg-black-100 dark:border-r bg-no-repeat bg-center bg-cover rounded-l-xl dark:border-r-gray-800 h-full" style={{backgroundImage:`url(${imagePath1})`}}>

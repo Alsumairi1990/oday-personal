@@ -16,12 +16,12 @@ interface ServiceCategoryProps {
           
         </div> */}
         <div className="py-1">
-        <h2 className='text-sm  px-4 text-orange-500 tracking-wide font-semibold mt-2 '>{serviceCategory.name}</h2>  
+        <h2 className='text-sm  px-4 text-orange-500 tracking-wide font-semibold'>{serviceCategory.name}</h2>  
         {/* <p className='mt-3 text-sm leading-6 text-gray-500 font-semibold pl-4'>{serviceCategory.desc}</p> */}
         </div>
         
         {serviceCategory.services && serviceCategory.services.length > 0 && (
-          <div className='mt-1'>
+          <div className='my-1 mb-1'>
            
             <ul className='flex flex-col px-4'>
               {serviceCategory.services.map((service) => (

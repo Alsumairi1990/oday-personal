@@ -37,18 +37,7 @@ export const serviceCategories:ServiceCategoryInt[] = [
           desc: "Awarded as the Best Website Development Company by GESIA category region",
           image: "https://dcstatic.com/images/icons/design-categories/design-categories-app-design-27fb7b89e6.svg",
         },
-        {
-            id: "6",
-            name: "Responsive Assets",  // Corrected typo "Dign" to "Design"
-            desc: "Awarded as the Best Website Development Company by GESIA category region",
-            image: "https://dcstatic.com/images/icons/design-categories/design-categories-label-design-275e614d8d.svg",
-          },
-          {
-            id: "7",
-            name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
-            desc: "Awarded as the Best Website Development Company by GESIA category region",
-            image: "https://dcstatic.com/images/icons/design-categories/design-categories-label-design-275e614d8d.svg",
-          },
+      
         //   {
         //     id: "7",
         //     name: "Business Card Design ",  // Corrected typo "Dign" to "Design"
@@ -101,7 +90,9 @@ export const serviceCategories:ServiceCategoryInt[] = [
           name: "Video Marketing",  // Corrected typo "Dign" to "Design"
           desc: "Awarded as the Best Website Development Company by GESIA category region",
           image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
-        }
+        },
+      
+      
        ],
      },
 
@@ -140,6 +131,18 @@ export const serviceCategories:ServiceCategoryInt[] = [
          {
           id: "2",
           name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+          desc: "Awarded as the Best Website Development Company by GESIA category region",
+          image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+        },
+        {
+          id: "2",
+          name: "Creative Strategy",  // Corrected typo "Dign" to "Design"
+          desc: "Awarded as the Best Website Development Company by GESIA category region",
+          image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+        },
+        {
+          id: "2",
+          name: "Identity snd Branding",  // Corrected typo "Dign" to "Design"
           desc: "Awarded as the Best Website Development Company by GESIA category region",
           image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
         }

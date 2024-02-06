@@ -9,7 +9,7 @@ const ServiceApp = () => {
    return (
       <div className="w-full p-0" >
          <div className=" h-full pb-4 sm:pb-0 left-0 bg-[#000000a6] flex px-4  fixed top-0 w-full bg-no-repeat bg-blend-multiply bg-center bg-cover z-[60]" style={{backgroundImage: `url(${imagePath1})`}}>
-            <div className="w-full absolute  top-24  mx-auto z-[70]  -mt-10">
+            <div className="w-full absolute top-24 left-0 mx-auto z-[70] ">
                 <div className=" mx-auto w-11/12">
                 <ContactForm />
                 </div>
