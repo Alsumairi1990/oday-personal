@@ -27,7 +27,9 @@
   font-optical-sizing: auto;
   font-weight: 500;
 }
-
+.fill-primarygg-btn{
+  fill: aqua;
+}
 body {
 
   
