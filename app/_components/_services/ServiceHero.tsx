@@ -1,13 +1,29 @@
 
 import React from 'react';
 import { ServiceInt1 } from '@/app/models/ServiceInt'
+import PanelSearch from '../SearchPanel';
 interface ServiceProps {
     service: ServiceInt1;
   }
 const ServiceHero = ({ service }: ServiceProps) => {
   return (
         <div className="w-full " >  
-        <div className=" max-sm:min-h-lvh pt-[100px] sm:pb-8 flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${service.image})`}}>
+           <div className=" m-h-lvh sm:min-h-[28rem] sm:h-[28rem] pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${service.image})`}}>
+            <div className="w-full h-full absolute left-0 top-0 bg-black z-10 opacity-60"></div>
+            <div className="flex flex-wrap w-11/12 mx-auto z-20">
+            <div className="flex w-full flex-col items-center justify-center ">
+                <h2 className="text-4xl text-white tracking-wider font-bold mb-1">The Highest Standards. The Happiest Clients.</h2>
+                <div className="py-4 w-full">
+                    <PanelSearch />
+                </div>
+                <p className="text-md  text-gray-100 uppercase tracking-wide leading-7">WE LOVE OUR CLIENTS AND THEY LOVE US BACK. HEAR WHAT THEY’RE SAYING…</p>
+                <div className="flex flex-col items-center  ">
+                    <p className="text-md  text-orange-500">*Ratings base a claim on observations by various global IT research firms.*</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        {/* <div className=" max-sm:min-h-lvh pt-[100px] sm:pb-8 flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${service.image})`}}>
           <div className="flex w-11/12 mx-auto">
              <div className="flex-60">
                 <span className="text-sm text-white mb-6 inline-block">Home / mobile development </span>
@@ -32,7 +48,7 @@ const ServiceHero = ({ service }: ServiceProps) => {
              <img className="w-full z-20" src="https://149808042.v2.pressablecdn.com/wp-content/uploads/2023/06/Content-Research-Process-Steps.png" alt="" />
              </div>
           </div>
-         </div>
+         </div> */}
     </div>
   );
 };

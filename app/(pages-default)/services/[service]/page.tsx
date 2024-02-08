@@ -23,7 +23,7 @@ const Serivice = () => {
          id : "1",
          name : 'Printing Services',
          desc : 'Awarded as the Best Website Development Company by GESIA category region, Awarded as the Best Website Development Company by GESIA category region, Awarded as the Best Website Development Company by GESIA category region',
-         image : 'https://cdn-kpbff.nitrocdn.com/BIqbPXrNizxHMrZEuWjiIDigcWJtuMrr/assets/images/optimized/rev-3d7ee36/d3mds3ychln71.cloudfront.net/img/banners/web_design_banner.jpg'
+         image : '/images/w06.jpg'
       }
     
      //  Process Phases Data

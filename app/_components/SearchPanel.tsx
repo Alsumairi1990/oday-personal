@@ -32,7 +32,7 @@ const PanelSearch = () => {
         else if (event.target.closest('.login-menu ') !== null) return;
         
         else {
-            alert('out')
+            
        for (let i = 0; i < menus.length; i++) {
             menus[i].classList.add('hidden');
             }
@@ -109,16 +109,14 @@ const PanelSearch = () => {
     },
 ];
   return (
-    <div className="flex-100 bg-white rounded-xl mt-2 mb-3">
+    <div className="w-full sm:bg-white rounded-xl mt-2 mb-3">
    <div  className="search-top p-0">
-      <div  className="grid sm:grid-cols-25/25/40/10 search-row items-center rounded">
+      <div  className="grid sm:grid-cols-25/25/40/10 max-sm:gap-4 search-row items-center rounded">
          <div  className="p-1">
             <div  className="menu-pr ran-c flex relative py-[3px] bg-white rounded-lg search-otp-rnk">
                <div  className="pl-[10px] self-end">
                  <span className="flex w-5 items-center h-5">
                   <CgDribbble className='text-sky-800 text-lg' />
-                 {/* <svg viewBox="0 0 24 24" className='w-6 h-6' fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 17V7C3 5.89543 3.89543 5 5 5H19C20.1046 5 21 5.89543 21 7V17C21 18.1046 20.1046 19 19 19H5C3.89543 19 3 18.1046 3 17Z" className="stroke-orange-500" stroke-width="1.5"></path> <path d="M11.6667 9L10 12H14L12.3333 15" className="stroke-orange-500"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 8H7" className="stroke-orange-500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> */}
                  </span>
                </div>
                <div  className="menu-btn rnk-opt-btn  pl-[5px] flex flex-col py-1 h-[50px] border-r border-r-gray-300 w-full">
@@ -130,7 +128,6 @@ const PanelSearch = () => {
                      <span  className="ml-auto mr-[15px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
                </div>
-               {/* <div  className="rnk-opt-menu  sm:py-2 sm:pr-0 sm:pl-[0px] w-full max-sm:fixed max-sm:top-0 max-sm:h-screen z-20 absolute top-[4.1rem] text-left left-0 rounded-md sm:bg-white bg-[#f5f5f5] h-[17.5rem] border !border-gray-300" > */}
                   <div id="dropdownRadioHelper" className="drop-menu log-menu hidden !z-50 max-h-56  overflow-y-auto absolute  top-16 sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
                             {projectTypes.map((project, index) => (
@@ -162,10 +159,8 @@ const PanelSearch = () => {
          <div  className="flex-100 relative max-w-full p-1">
             <div  className="menu-pr flex py-[3px] bg-white rounded-lg search-otp-rnk">
                <div  className="pl-[10px] self-end">
-               <span className="flex w-5 items-center h-5">
+                 <span className="flex w-5 items-center h-5">
                   <CgTikcode className='text-sky-800 text-lg' />
-                 {/* <svg viewBox="0 0 24 24" className='w-6 h-6' fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 17V7C3 5.89543 3.89543 5 5 5H19C20.1046 5 21 5.89543 21 7V17C21 18.1046 20.1046 19 19 19H5C3.89543 19 3 18.1046 3 17Z" className="stroke-orange-500" stroke-width="1.5"></path> <path d="M11.6667 9L10 12H14L12.3333 15" className="stroke-orange-500"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 8H7" className="stroke-orange-500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> */}
                  </span>
                </div>
                <div  className="menu-btn rnk-opt-btn pl-[5px] flex flex-col py-1 h-[50px] w-full border-r border-r-gray-300">
@@ -178,9 +173,7 @@ const PanelSearch = () => {
                      </div>
                      <span  className="ml-auto mr-[15px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
-               </div>
-               {/* <div  className="rnk-opt-menu  sm:py-2 sm:pr-0 sm:pl-[0px] w-full max-sm:fixed max-sm:top-0 max-sm:h-screen z-20 absolute top-[4.2rem] text-left left-0 rounded-md sm:bg-white bg-[#f5f5f5] h-[20.4rem] border !border-gray-300"  id=""> */}
-                 
+               </div>                 
                <div id="dropdownRadioHelper" className="drop-menu hidden log-menu !z-50 max-h-56  overflow-y-auto absolute  top-[4.2rem] sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
                             {projectTypes.map((project, index) => (
@@ -212,10 +205,8 @@ const PanelSearch = () => {
          <div  className="p-1 relative">
             <div  className="menu-pr flex py-[3px] bg-white rounded-lg search-otp-rnk">
                <div  className="pl-[10px] self-end">
-               <span className="flex w-5 items-center h-5">
+                 <span className="flex w-5 items-center h-5">
                   <CgTwilio className='text-sky-800 text-lg' />
-                 {/* <svg viewBox="0 0 24 24" className='w-6 h-6' fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M3 17V7C3 5.89543 3.89543 5 5 5H19C20.1046 5 21 5.89543 21 7V17C21 18.1046 20.1046 19 19 19H5C3.89543 19 3 18.1046 3 17Z" className="stroke-orange-500" stroke-width="1.5"></path> <path d="M11.6667 9L10 12H14L12.3333 15" className="stroke-orange-500"  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M6 8H7" className="stroke-orange-500" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg> */}
                  </span>
                </div>
                <div  className="menu-btn rnk-opt-btn pl-[5px] flex flex-col py-1 h-[50px] w-full">

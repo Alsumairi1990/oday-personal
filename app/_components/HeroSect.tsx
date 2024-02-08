@@ -1,6 +1,7 @@
 
 import React from 'react';
 import hero from '@/public/images/hero.jpg';
+import PanelSearch from './SearchPanel';
 
 const Hero = () => {
     const imagePath = '/images/hero.jpg';
@@ -13,6 +14,10 @@ const Hero = () => {
           <h1 className="text-xl sm:text-3xl sm:max-w-[70%] text-center max-sm:mb-4 sm:leading-10 uppercase pt-4 px-4 font-bold text-white" style={{textShadow:'0 0 10px #000'}}>
             Design Shine Gate for Template and Web devlopment
           </h1>
+          <div className="w-11/12 mt-2  mx-auto">
+              <PanelSearch />
+          </div>
+          
           <p className="text-gray-300 max-sm:hidden sm:max-w-[70%] text-center text-sm sm:text-base mb-4">He formatting rules are not configurable but are already optimized for the best possible output. Note that the formatter will keep spaces and tabs between content tags such as div and span </p>
           <a href="/" className="inline-block text-base sm:text-lg text-white bg-green-600 py-1.5 sm:py-1 px-3 border hover:!bg-green-700 border-green-500  ">Discover Work</a>
         </div>
