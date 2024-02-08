@@ -9,10 +9,36 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+model Post {
+  id        String     @default(cuid()) @id
+  title     String
+  content   String?
+  published Boolean @default(false)
+  author    User?   @relation(fields: [authorId], references: [id])
+  authorId  String?
+}
+
+model Service {
+  id        Int      @id @default(autoincrement())
+  name      String
+  title String?
+  des String?
+  image String?
+  icon String?
+  userId    String     // References one specific user (modified)
+  user      User?   @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model User {
-  id            Int       @default(autoincrement()) @id
+  id            String       @default(cuid()) @id
   name          String?
   email         String?   @unique
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  posts         Post[]
+  services  Service[]
+  @@map(name: "users")
+
 }
