@@ -6,6 +6,7 @@ import ThemeToggle from './_components/theme-toggle'
 import ServicePanel from './_components/_navbar/ServicesPanel'
 import AboutUs from'./_components/_navbar/AboutUs'
 import WorksPanel from './_components/_navbar/WorksPanel'
+import IndustriesPanel from './_components/_navbar/IndustriesPanel'
 
 
 
@@ -88,7 +89,7 @@ const NavBar = ({ textColor }) => {
         <div className=""> 
             <div className="menu-pr ">
               <div className="menu-btn  cursor-pointer">
-                <div className="flex items-center px-3  pointer ">
+                <div className="flex items-center px-2  pointer ">
                 <span className="text-gray-100 text-md  tracking-wide font-medium capitalize">About Us</span>
                   <span className="icon dark-icon ">
                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -109,7 +110,7 @@ const NavBar = ({ textColor }) => {
             <div className=""> 
             <div className="menu-pr ">
               <div className="menu-btn  cursor-pointer">
-                <div className="flex items-center px-3  pointer ">
+                <div className="flex items-center px-2  pointer ">
                 <span className="text-gray-100 text-md  tracking-wide font-medium  capitalize">Services</span>
                   <span className="icon dark-icon ">
                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,11 +125,11 @@ const NavBar = ({ textColor }) => {
                   </div>
                   </div>
             </div>
-            <Link href="/blog" className="px-3 text-md  tracking-wide font-medium " >Blogs</Link>
+            
             <div className=""> 
             <div className="menu-pr ">
               <div className="menu-btn  cursor-pointer">
-                <div className="flex items-center px-3  pointer ">
+                <div className="flex items-center px-2  pointer ">
                 <span className="text-gray-100 text-md  tracking-wide font-medium  capitalize">Our Works</span>
                   <span className="icon dark-icon ">
                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -138,27 +139,57 @@ const NavBar = ({ textColor }) => {
                 </div>
               </div>
               <div id="log-menu" className=" log-menu hidden w-full  h-full top-0 left-0 " >
-         
                 <WorksPanel />    
                   </div>
                   </div>
             </div>
-            <Link href="/" className="px-3 text-md  tracking-wide font-medium " >Totutiols</Link>
-            <Link href="/portfolio" className="px-3 text-md  tracking-wide font-medium " >Portfolio</Link>
-         
+
+            
+
+            <div className=""> 
+              <div className="menu-pr ">
+                <div className="menu-btn  cursor-pointer">
+                  <div className="flex items-center px-2  pointer ">
+                  <span className="text-gray-100 text-md  tracking-wide font-medium  capitalize">Industries</span>
+                    <span className="icon dark-icon ">
+                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 10L12 15L17 10" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+                <div id="log-menu" className=" log-menu hidden w-full  h-full top-0 left-0 " >
+                  <IndustriesPanel />    
+                </div>
+              </div>
+            </div>
+            <Link href="/blog" className="px-3 text-md  tracking-wide font-medium " >Blogs</Link>
+            <div className=""> 
+              <div className="menu-pr ">
+                <div className="menu-btn  cursor-pointer">
+                  <div className="flex items-center px-2  pointer ">
+                  <span className="text-gray-100 text-md  tracking-wide font-medium  capitalize">Technologies</span>
+                    <span className="icon dark-icon ">
+                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 10L12 15L17 10" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </div>
+                </div>
+                <div id="log-menu" className=" log-menu hidden w-full  h-full top-0 left-0 " >
+                  <IndustriesPanel />    
+                </div>
+              </div>
+            </div>
+
             <div className="py-1 px-2 flex">
             <div className="">
               <div className="pl-3 pr-0.5 cursor-pointer">
                 <div className="flex items-center border border-gray-600 px-1.5 py-1.5 bg-[#00000059] rounded-full pointer relative">
-                
                   <ThemeToggle />
-                
                 </div>
               </div>
-
-          
-            
-              </div>
+            </div>
 
 
              <div className="menu-pr ">

@@ -23,7 +23,7 @@ const ServiceCategory = () => {
          id : "1",
          name : 'Printing Services',
          desc : 'Awarded as the Best Website Development Company by GESIA category region, Awarded as the Best Website Development Company by GESIA category region, Awarded as the Best Website Development Company by GESIA category region',
-         image : '/images/curve.png'
+         image : '/images/77.png'
       }
     
      //  Process Phases Data
