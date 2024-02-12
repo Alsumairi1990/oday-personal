@@ -72,7 +72,7 @@ const NavBar = ({ textColor }) => {
             </span>    
         </div>
         <div className="p-2">
-            <Link href="/" className={`text-base sm:text-xl flex items-center pl-1 sm:pl-4 pr-2 text-${textColor} font-bold`} > 
+            <Link href="/" className={`text-xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2 text-${textColor} font-bold`} > 
             
             <span className='w-8 sm:w-[2.7rem] mr-1.5 inline-block'>
               <img src={`${imagePath}`}  alt="" />

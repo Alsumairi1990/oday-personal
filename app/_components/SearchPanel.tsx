@@ -249,7 +249,13 @@ const PanelSearch = () => {
                     </div>
             </div>
          </div>
-         <div  className="search-btn text-center sm:border-l sm:border-l-gray-300"><a  href="" className="inline-block pl-[15px]"><button  className="searchBtn py-[5px] px-[10px] bg-primary-btn border-1 border-white"><span ><MdOutlineManageSearch className='text-2xl' /></span></button></a></div>
+         <div  className="search-btn max-sm:px-1 text-center sm:border-l sm:border-l-gray-300">
+            <div className="inline-block max-sm:bg-white  rounded-xl max-sm:w-full sm:pl-[15px]">
+                <button  className="searchBtn py-[5px] px-[10px] bg-primary-btn border-1 border-white">
+                    <span ><MdOutlineManageSearch className='text-2xl' /></span>
+                    </button>
+                    </div>
+                    </div>
       </div>
    </div>
 </div>

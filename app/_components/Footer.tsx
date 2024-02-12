@@ -12,7 +12,7 @@ const Footerk = () => {
           <div className="border border-gray-700 my-4 sm:px-8 rounded bg-[#2a2a2a]">
              <div className="p-1.5">
                 <form action="" className="m-0">
-                   <div className="grid grid-cols-25/25/40/10">
+                   <div className="grid grid-cols-2 sm:grid-cols-25/25/40/10">
                       <div className="p-1 border-r border-gray-700">
                         <input type="text" className="border-0 bg-transparent text-sm text-gray-300 py-2" placeholder="EMAIL ID"/>
                         </div>
