@@ -5,7 +5,7 @@ const ServiceApp = () => {
     const imagePath = '/images/service-logo.svg';
   return (
     <div className="shadow-lg  bg-white dark:bg-black-150 border dark:border-gray-600 rounded-md w-11/12 mx-auto  " style={{boxShadow:' 3px 3px 40px rgb(0 0 0/15%)'}}>
-     <div className="grid grid-cols-3 ">
+     <div className="grid sm:grid-cols-3 ">
         <div className="pr-8">
             <div className="bg-[#f8f8f8] dark:bg-black-100 dark:border-r dark:border-r-gray-800 h-full">
                 <div className="flex mb-4 justify-between py-6 px-4">
