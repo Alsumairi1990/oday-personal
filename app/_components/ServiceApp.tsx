@@ -6,7 +6,7 @@ const ServiceApp = () => {
   return (
     <div className="shadow-lg  bg-white dark:bg-black-150 border dark:border-gray-600 rounded-md w-11/12 mx-auto  " style={{boxShadow:' 3px 3px 40px rgb(0 0 0/15%)'}}>
      <div className="grid sm:grid-cols-3 ">
-        <div className="pr-8">
+        <div className="sm:pr-8">
             <div className="bg-[#f8f8f8] dark:bg-black-100 dark:border-r dark:border-r-gray-800 h-full">
                 <div className="flex mb-4 justify-between py-6 px-4">
                     <div className=" flex flex-col flex-48 bg-white border rounded border-[rgba(0,0,0,0.125)] p-2 text-center col-6 flex-fill">
@@ -83,14 +83,14 @@ const ServiceApp = () => {
                 <h1 className="text-black-150 dark:text-white text-center text-2xl font-semibold">Which <span className="text-orange-400">services</span> are you looking for?</h1>
             </div>
             <div className=" border-b border-b-gray-200 dark:border-gray-800 pb-5">
-                <div className="grid grid-cols-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3">
                     <div className="p-1 ">
                     <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="client user" />                      
                     </div>
                     <div className="p-1 ">
                     <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="name@example.com" />                      
                     </div>
-                    <div className="p-1 ">
+                    <div className="p-1 self-stretch">
                     <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-100 dark:text-slate-200 rounded-xl outline-none border border-gray-200 focus:border-orange-500 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="phone" />                      
                     </div>
                 
