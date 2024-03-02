@@ -3,7 +3,7 @@
 const Reviews = () => {
    const imagePath = 'https://dcstatic.com/images/background/background-about-us-c188d84f24.svg';
   //  const imagePath1 = 'https://mobulous.s3.ap-south-1.amazonaws.com/Web/images/main/estimate.webp';
-  const imagePath1 = 'https://cdn-kpbff.nitrocdn.com/BIqbPXrNizxHMrZEuWjiIDigcWJtuMrr/assets/images/optimized/rev-3d7ee36/d3mds3ychln71.cloudfront.net/img/banners/testimonial_banner.jpg';
+  const imagePath1 = '/images/w-001.jpg';
 
    const imagePath2 = '/images/service2.png';
    const reviews = [
