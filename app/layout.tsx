@@ -24,8 +24,8 @@ export default function RootLayout({
   return (
     <html lang="en" className=" scroll-smooth h-full" suppressHydrationWarning>
      
-      <body className={`${inter.className} h-full`} >
-      {/* <body className="h-full" > */}
+      {/* <body className={`${inter.className} h-full`} > */}
+       <body className="h-full" > 
         <Providers>
         <div className="flex flex-col h-full">
         
