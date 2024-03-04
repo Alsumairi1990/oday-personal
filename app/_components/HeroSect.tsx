@@ -15,7 +15,7 @@ const Hero = () => {
      <h1 className="text-2xl w-full px-1 sm:text-3xl sm:max-w-[70%] text-center max-sm:mb-4 sm:leading-10 uppercase pt-4  font-bold text-white" style={{textShadow:'0 0 10px #000'}}>
              Design Shine Gate for Template and Web devlopment
            </h1>
-         <div className="py-4 w-full">
+           <div className="py-2 px-2 my-2 rounded-xl max-sm:bg-[#00000021] max-sm:border max-sm:border-[#4c4c4c] w-full">
              <PanelSearch />
          </div>
          <p className="text-md  text-gray-100 uppercase tracking-wide leading-7">WE LOVE OUR CLIENTS AND THEY LOVE US BACK. HEAR WHAT THEY’RE SAYING…</p>

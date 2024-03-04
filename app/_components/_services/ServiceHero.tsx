@@ -15,7 +15,7 @@ const ServiceHero = ({ service }: ServiceProps) => {
             <div className="flex flex-wrap w-11/12 mx-auto z-20">
             <div className="flex w-full flex-col items-center justify-center ">
                 <h2 className="text-4xl text-white tracking-wider font-bold mb-1">The Highest Standards. The Happiest Clients.</h2>
-                <div className="py-4 w-full">
+                <div className="py-2 px-2 rounded-xl my-2 max-sm:bg-[#00000021] max-sm:border max-sm:border-[#4c4c4c] w-full">
                     <PanelSearch />
                 </div>
                 <p className="text-md  text-gray-100 uppercase tracking-wide leading-7">WE LOVE OUR CLIENTS AND THEY LOVE US BACK. HEAR WHAT THEY’RE SAYING…</p>

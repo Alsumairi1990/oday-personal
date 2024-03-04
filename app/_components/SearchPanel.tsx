@@ -109,7 +109,7 @@ const PanelSearch = () => {
     },
 ];
   return (
-    <div className="w-full sm:bg-white rounded-xl mt-2 mb-3">
+    <div className="w-full sm:bg-white rounded-xl ">
    <div  className="search-top p-0">
       <div  className="grid sm:grid-cols-25/25/40/10 max-sm:gap-4 search-row items-center rounded">
          <div  className="p-1">
