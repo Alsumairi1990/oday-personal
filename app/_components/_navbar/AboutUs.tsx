@@ -4,13 +4,13 @@ import React from 'react';
 const AboutUs = () => {
     const imagePath = '/images/10.png';
   return (
-   <div className="absolute top-[4.5rem] z-10 left-1/2 bg-white w-11/12  mx-auto px-2 py-3 flex flex-col rounded-md" style={{filter: 'drop-shadow(rgba(0, 0, 0, 0.08) 0px 0px 18px)',transform: 'translateX(-50%)'}}>
+   <div className="sm:absolute max-sm:mt-1 sm:top-[4.5rem] z-10 sm:left-0 bg-white w-full  mx-auto px-2 py-3 flex flex-col max-sm:rounded-md" style={{filter: 'drop-shadow(rgba(0, 0, 0, 0.08) 0px 0px 18px)'}}>
    {/* <span className="absolute inline-block w-4 h-4 bg-white top-[-.5rem] sm:right-28 sm:mr-4 sm:rotate-45"></span> */}
    {/* <div className="p-2"><span className="text-md text-gray-500 font-semibold">Explore More</span></div> */}
-   <div className="px-3 py-2 grid grid-cols-1">
+   <div className="sm:px-3 py-2 grid  sm:grid-cols-1 ">
       <div className="">
-         <ul className="grid sm:grid-cols-3 gap-y-4 pb-2">
-            <li className=" line-height-20 pr-6">
+         <ul className="grid grid-cols-2 sm:grid-cols-3 gap-y-4 max-sm:gap-x-4 pb-2">
+            <li className=" line-height-20 sm:pr-6">
                <a href="/about-us" className="flex w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                   <span className="">
                      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,11 +21,11 @@ const AboutUs = () => {
                   </span>
                   <div className="">
                     <span className="ml-2 text-sm font-medium mb-1 text-gray-600 capitalize">about us</span>
-                    <p className="text-[13px] text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
+                    <p className="text-[13px] max-sm:hidden text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
                  </div>
                </a>
             </li>
-            <li className=" line-height-20 pr-6">
+            <li className=" line-height-20 sm:pr-6">
                <a href="/reviews" className="flex  w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                   <span className="">
                      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -40,11 +40,11 @@ const AboutUs = () => {
                   </span>
                   <div className="">
                     <span className="ml-2 text-sm font-medium mb-1 text-gray-600">Our Reviews</span>
-                    <p className="text-[13px] text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
+                    <p className="text-[13px] max-sm:hidden text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
                  </div>
                </a>
             </li>
-            <li className=" line-height-20 pr-6">
+            <li className=" line-height-20 sm:pr-6">
                <a href="/sam-team" className="flex w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                   <span className="">
                      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -57,11 +57,11 @@ const AboutUs = () => {
                   </span>
                   <div className="">
                     <span className="ml-2 text-sm font-medium mb-1 text-gray-600">Our Team</span>
-                    <p className="text-[13px] text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
+                    <p className="text-[13px] max-sm:hidden text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
                  </div>
                </a>
             </li>
-            <li className=" line-height-20 pr-6">
+            <li className=" line-height-20 sm:pr-6">
                <a href="/portfolio" className="flex w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                   <span className="">
                      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,12 +74,12 @@ const AboutUs = () => {
                      </svg>
                   </span>
                   <div className="">
-                    <span className="ml-2 text-sm font-medium mb-1 text-gray-600 capitalize">company portfolio</span>
-                    <p className="text-[13px] text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
+                    <span className="ml-2 text-sm font-medium mb-1 text-gray-600 capitalize"> Portfolio</span>
+                    <p className="text-[13px] max-sm:hidden text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
                  </div>
                </a>
             </li>
-            <li className=" line-height-20 pr-6">
+            <li className=" line-height-20 sm:pr-6">
                <a href="/contact-us" className="flex w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                   <span className="">
                      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,11 +91,11 @@ const AboutUs = () => {
                   </span>
                   <div className="">
                     <span className="ml-2 text-sm font-medium mb-1 text-gray-600 capitalize">contact us</span>
-                    <p className="text-[13px] text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
+                    <p className="text-[13px] max-sm:hidden text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
                  </div>
                </a>
             </li>
-            <li className=" line-height-20 pr-6">
+            <li className=" line-height-20 sm:pr-6">
                <a href="/testimonials" className="flex w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                   <span className="">
                      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,11 +106,11 @@ const AboutUs = () => {
                   </span>
                   <div className="">
                     <span className="ml-2 text-sm font-medium mb-1 text-gray-600 capitalize">testimonials</span>
-                    <p className="text-[13px] text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
+                    <p className="text-[13px] max-sm:hidden text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
                  </div>
                </a>
             </li>
-            <li className=" line-height-20 pr-6">
+            <li className=" line-height-20 sm:pr-6">
                <a href="/sitemap" className="flex w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                   <span className="">
                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,11 +122,11 @@ const AboutUs = () => {
                   </span>
                   <div className="">
                     <span className="ml-2 text-sm font-medium mb-1 text-gray-600 capitalize">site map</span>
-                    <p className="text-[13px] text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
+                    <p className="text-[13px] max-sm:hidden text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
                  </div>
                </a>
             </li>
-            <li className=" line-height-20 pr-6">
+            <li className=" line-height-20 sm:pr-6">
                <a href="/privacy-policy" className="flex  w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                   <span className="">
                      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -138,12 +138,12 @@ const AboutUs = () => {
                   </span>
                   <div className="">
                     <span className="ml-2 text-sm font-medium mb-1 text-gray-600 capitalize">privecy policy</span>
-                    <p className="text-[13px] text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
+                    <p className="text-[13px] max-sm:hidden text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
                   </div>
               </a>
             </li>
 
-            <li className=" line-height-20 pr-6">
+            <li className=" line-height-20 sm:pr-6">
                <a href="/our-process" className="flex w-full border border-gray-200 pl-2 rounded-lg py-2.5">
                   <span className="">
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -153,7 +153,7 @@ const AboutUs = () => {
                   </span>
                   <div className="">
                     <span className="ml-2 text-sm font-medium mb-1 text-gray-600 capitalize">our process</span>
-                    <p className="text-[13px] text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
+                    <p className="text-[13px] max-sm:hidden text-gray-500 px-2 leading-5 font-medium">Design is essential to every area of our lives. Every product we use, place we go, </p>
                   </div>
                </a>
             </li>
