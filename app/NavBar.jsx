@@ -32,24 +32,45 @@ const NavBar = ({ textColor }) => {
   }
   useEffect(() => {
     const handleClickOutside = (event) => {
+      
      const menus = document.getElementsByClassName('log-menu');
       if (event.target.closest('.menu-btn ') !== null) {
         const prnt = event.target.closest('.menu-pr');
         const menu = prnt.querySelector('.log-menu');
         if(menu.classList.contains('hidden')){
           for (let i = 0; i < menus.length; i++) {
+            
             menus[i].classList.add('hidden');
           }
           
           menu.classList.remove('hidden');
         }
         else if(!menu.classList.contains('hidden')){
+          
           menu.classList.add('hidden');
         }
     }
-    else if (event.target.closest('.login-menu ') !== null) return;
+    else if (event.target.closest('.login-menu ') !== null) return;  
+    else if (event.target.closest('.main-menu-btn') !== null) {
+      const mainPrnt = event.target.closest('.main-nav');
+        const menu = mainPrnt.querySelector('.main-drop-menu');
+        if(menu.classList.contains('hidden')){
+          
+          menu.classList.remove('hidden');
+        }
+        else if(!menu.classList.contains('hidden')){
+          
+          menu.classList.add('hidden');
+        }
+
+    }
+    else if (event.target.closest('.log-menu ') !== null) return;
+  //   else if (event.target.closest('.service-btn ') !== null) {
+  //     alert('clicked')
+  //  }
     
     else {
+      
     for(let menu of menus){
       menu.classList.add('hidden');
       
@@ -66,8 +87,8 @@ const NavBar = ({ textColor }) => {
   });
   
   return (
-    <nav className='flex absolute max-sm:border-b max-sm:border-b-gray-700 w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b botrder-b-[#484848]'>
-        <div className='sm:hidden flex items-center pl-1'>
+    <nav className='flex main-nav absolute max-sm:border-b max-sm:border-b-gray-700 w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b botrder-b-[#484848]'>
+        <div className='sm:hidden main-menu-btn flex items-center pl-1'>
            <span className="w-8 inline-block fill-gray-200 ml-1">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M89.006 490.013h845.978v62.269h-845.978v-62.269zM89.006 226.835h845.978v62.269h-845.978v-62.269zM89.006 753.181h845.978v62.259h-845.978v-62.259z"></path></svg>
             </span>    
@@ -86,7 +107,7 @@ const NavBar = ({ textColor }) => {
           </span>
           
         </div>
-        <div className={`px-2 text-sm max-sm:hnav-calc max-sm:overflow-y-auto hiidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full max-sm:bg-white font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `} > 
+        <div className={`main-drop-menu px-2 text-sm max-sm:hnav-calc max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full max-sm:bg-white font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `} > 
           <div className='max-sm:h-full w-full max-sm:bg-gray-50 max-sm:mt-2 max-sm:border max-sm:border-gray-200 sm:flex sm:items-center'>
           <div className="py-3 max-sm:border-b  max-sm:border-b-gray-200"> 
             <div className="menu-pr ">
@@ -101,7 +122,7 @@ const NavBar = ({ textColor }) => {
                 </div>
               </div>
               <div id="log-menu" className=" log-menu hidden w-full  h-full top-0 left-0 " >
-                <div className="flex items-center sm:w-11/12 mx-auto px-2 sm:px-4 justify-center">
+                <div className="flex items-center sm:w-11/12 mx-aut sm:px-4 justify-center">
                 <AboutUs  />  
                 </div>
                  

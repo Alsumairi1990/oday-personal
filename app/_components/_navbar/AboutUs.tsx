@@ -4,7 +4,7 @@ import React from 'react';
 const AboutUs = () => {
     const imagePath = '/images/10.png';
   return (
-   <div className="sm:absolute max-sm:mt-1 sm:top-[4.5rem] z-10 sm:left-0 bg-white w-full  mx-auto px-2 py-3 flex flex-col max-sm:rounded-md" style={{filter: 'drop-shadow(rgba(0, 0, 0, 0.08) 0px 0px 18px)'}}>
+   <div className="sm:absolute sm:top-[4.5rem] z-10 sm:left-0 bg-white w-full max-sm:mt-3  mx-auto px-2 py-3 flex flex-col" style={{filter: 'drop-shadow(rgba(0, 0, 0, 0.08) 0px 0px 18px)'}}>
    {/* <span className="absolute inline-block w-4 h-4 bg-white top-[-.5rem] sm:right-28 sm:mr-4 sm:rotate-45"></span> */}
    {/* <div className="p-2"><span className="text-md text-gray-500 font-semibold">Explore More</span></div> */}
    <div className="sm:px-3 py-2 grid  sm:grid-cols-1 ">

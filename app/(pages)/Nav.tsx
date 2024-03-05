@@ -9,7 +9,7 @@ const Nav = () => {
   const imagePath = '/images/logo.png';
   function showDrop(e:any){
     const prnt = e.target.closest('.menu-pr');
-    const menu = prnt.querySelector('.log-menu');
+    const menu = prnt.querySelector('.log-menu33');
     
     if(menu.classList.contains('hidden')){
       // alert('called---->'+e);
@@ -21,37 +21,7 @@ const Nav = () => {
     }
     
   }
-  useEffect(() => {
-    const handleClickOutside = (event:any) => {
-     const menus = document.getElementsByClassName('log-menu');
-    //  const menusArray: HTMLElement[] = [...menus];
-     const menusArray = Array.from(document.getElementsByClassName('log-menu')) as HTMLElement[];
-
-      if (event.target.closest('.menu-btn ') !== null) {
-        const prnt = event.target.closest('.menu-pr');
-        const menu = prnt.querySelector('.log-menu');
-        if(menu.classList.contains('hidden')){
-          // alert('called---->'+e);
-          menu.classList.remove('hidden');
-        }
-    }
-    else if (event.target.closest('.login-menu ') !== null) return;
-    else {
-    for(let menu of menusArray){
-      menu.classList.add('hidden');
-      
-       };
-    }
-    
-      
-    };
-  
-    document.addEventListener('click', handleClickOutside);
-  
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  });
+ 
   
   return (
     <nav className='flex  w-full sm:p-2 z-50 items-center justify-between  border-b border-b-[#484848]'>

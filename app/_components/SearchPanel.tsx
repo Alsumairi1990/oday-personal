@@ -13,11 +13,11 @@ import {useEffect} from 'react'
 const PanelSearch = () => {
 
     useEffect(() => {
-        const handleClickOutside = (event:any) => {
-         const menus = document.getElementsByClassName('log-menu');
+        const handleClickOutsidr = (event:any) => {
+         const menus = document.getElementsByClassName('log-menu1');
           if (event.target.closest('.menu-btn ') !== null) {
             const prnt = event.target.closest('.menu-pr');
-            const menu = prnt.querySelector('.log-menu');
+            const menu = prnt.querySelector('.log-menu1');
             if(menu.classList.contains('hidden')){
               for (let i = 0; i < menus.length; i++) {
                 menus[i].classList.add('hidden');
@@ -38,10 +38,10 @@ const PanelSearch = () => {
             }
         }
         };
-        document.addEventListener('click', handleClickOutside);
+        document.addEventListener('click', handleClickOutsidr);
       
         return () => {
-          document.removeEventListener('click', handleClickOutside);
+          document.removeEventListener('click', handleClickOutsidr);
         };
       });
 
@@ -128,7 +128,7 @@ const PanelSearch = () => {
                      <span  className="ml-auto mr-[15px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
                </div>
-                  <div id="dropdownRadioHelper" className="drop-menu log-menu hidden !z-50 max-h-56  overflow-y-auto absolute  top-16 sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
+                  <div id="dropdownRadioHelper" className="drop-menu log-menu1 hidden !z-50 max-h-56  overflow-y-auto absolute  top-16 sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
                             {projectTypes.map((project, index) => (
                                 <li key={index}>
@@ -174,7 +174,7 @@ const PanelSearch = () => {
                      <span  className="ml-auto mr-[15px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
                </div>                 
-               <div id="dropdownRadioHelper" className="drop-menu hidden log-menu !z-50 max-h-56  overflow-y-auto absolute  top-[4.2rem] sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
+               <div id="dropdownRadioHelper" className="drop-menu hidden log-menu1 !z-50 max-h-56  overflow-y-auto absolute  top-[4.2rem] sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
                             {projectTypes.map((project, index) => (
                                 <li key={index}>
@@ -222,7 +222,7 @@ const PanelSearch = () => {
                      <span  className="ml-auto mr-[5px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
                </div>
-               <div id="dropdownRadioHelper" className="drop-menu hidden log-menu !z-50 max-h-56  overflow-y-auto absolute  top-16 sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
+               <div id="dropdownRadioHelper" className="drop-menu hidden log-menu1 !z-50 max-h-56  overflow-y-auto absolute  top-16 sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
                             {projectTypes.map((project, index) => (
                                 <li key={index}>
