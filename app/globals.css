@@ -35,6 +35,18 @@ body {
   
   
 }
+
+@layer components{
+  .hnav-calc{
+    height: calc(100vh - 80px);
+  }
+}
+@layer utilities{
+  .hnav-calc{
+    height: calc(100vh - 80px);
+  }
+}
+
 .display-none{
   @apply hidden;
 }

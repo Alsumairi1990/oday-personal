@@ -86,8 +86,9 @@ const NavBar = ({ textColor }) => {
           </span>
           
         </div>
-        <div className={`px-2 text-sm max-sm:h-lvh hiidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-14 max-sm:w-full max-sm:bg-white font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `}> 
-        <div className="py-3 max-sm:border-b max-sm:border-b-gray-200"> 
+        <div className={`px-2 text-sm max-sm:hnav-calc max-sm:overflow-y-auto hiidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full max-sm:bg-white font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `} > 
+          <div className='max-sm:h-full w-full max-sm:bg-gray-50 max-sm:mt-2 max-sm:border max-sm:border-gray-200 sm:flex sm:items-center'>
+          <div className="py-3 max-sm:border-b  max-sm:border-b-gray-200"> 
             <div className="menu-pr ">
               <div className="menu-btn  cursor-pointer">
                 <div className="flex items-center px-2  pointer ">
@@ -178,7 +179,8 @@ const NavBar = ({ textColor }) => {
                   </div>
                   <div id="log-menu" className=" log-menu hidden w-full  h-full top-0 left-0 " >
                     <div className="flex items-center sm:w-11/12 mx-auto px-2 sm:px-4 justify-center">
-                    <AboutUs  />  
+                    
+                       <AboutUs  />  
                     </div>
                     
                       </div>
@@ -452,7 +454,7 @@ const NavBar = ({ textColor }) => {
               </div>
 
             </div>
-          
+          </div>
         </div>
     </nav>
   )
