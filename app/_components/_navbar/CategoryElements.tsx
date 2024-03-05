@@ -10,13 +10,16 @@ interface ServiceCategoryProps {
   
   function CategoryElements({ serviceCategory }: ServiceCategoryProps) {
     return (
-      <div className='rounded-xl sm:flex-25 pb-2 pt-0 sm:px-2  '>
+      <div className='rounded-xl sm:flex-25 max-sm:px-2 max-sm-py-1 sm:pb-2 pt-0 sm:px-2 max-sm:rounded-md max-sm:border max-sm:border-gray-200'>
         {/* <div className="flex justify-center" >
          <img className='p-1.5 bg-white rounded-md' src={serviceCategory.image} alt={serviceCategory.name} style={{boxShadow:'0 0 5px #ccc'}} />
           
         </div> */}
-        <div className="py-1">
-        <h2 className='text-sm  px-4 text-orange-500 tracking-wide font-semibold'>{serviceCategory.name}</h2>  
+        <div className="py-1 max-sm:flex max-sm:items-center ">
+          <span className="w-8 sm:hidden inline-block">
+            <img className='w-full' src={serviceCategory.icon} alt="" />
+            </span>
+          <h2 className='text-sm  px-4 text-orange-500 tracking-wide font-medium sm:font-semibold'>{serviceCategory.name}</h2>  
         {/* <p className='mt-3 text-sm leading-6 text-gray-500 font-semibold pl-4'>{serviceCategory.desc}</p> */}
         </div>
         

@@ -6,6 +6,7 @@ export interface ServiceCategoryInt {
         name: string;
         desc: string;
         image: string;
+        icon? : string;
         services?: ServiceInt1[];
     
  
