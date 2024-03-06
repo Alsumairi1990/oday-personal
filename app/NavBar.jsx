@@ -107,8 +107,64 @@ const NavBar = ({ textColor }) => {
           </span>
           
         </div>
-        <div className={`main-drop-menu px-2 text-sm max-sm:hnav-calc max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full max-sm:bg-white font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `} > 
-          <div className='max-sm:h-full w-full max-sm:bg-gray-50 max-sm:mt-2 max-sm:border max-sm:border-gray-200 sm:flex sm:items-center'>
+        <div className={`main-drop-menu text-sm max-sm:hnav-calc max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `} > 
+          <div className=" px-4 py-4 flex flex-col bg-[#ffebce] sm:hidden">
+            <div className="flex pt-3">
+                <div className="flex-15">
+                    <span className="flex w-10 ">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                            width="100%" height="100%" viewBox="0 0 800 800" enable-background="new 0 0 800 800" >
+                          <circle fill="#f9f9f9" stroke="#ddd" stroke-width="14" stroke-miterlimit="10" cx="401.486" cy="403.474" r="385.666"/>
+                          <path fill="#dbd7d7" d="M615.836,603.92c-0.537-6.221-2.008-12.369-4.213-18.314c-12.099-32.615-47.855-60.487-96.58-77.602
+                            c-15.717-5.581-32.862-9.936-50.932-13.056l-5.847-34.064h-0.033v-0.065c11.829-11.498,22.926-27.871,35.893-51.798
+                            c2.071,0.933,4.344,1.736,6.684,1.071c8.955-2.676,13.032-14.844,15.504-22.126l0.27-0.804c1.804-5.476,3.54-11.56,5.279-19.249
+                            c0.4-1.534,0.87-3.204,1.337-5.078c1.671-6.286,3.608-13.505,2.807-19.718c-0.802-6.416-4.076-11.696-8.754-14.366
+                            c-2.609-1.411-5.415-2.01-8.289-1.809c2.138-8.29,5.347-23.929,5.079-42.244c-0.133-12.427-1.871-24.059-5.212-34.751
+                            c-6.884-22.062-19.786-18.047-19.786-18.047c-1.27-2.879-0.533-19.517-19.448-34.358c-0.065-0.131-0.136-0.197-0.268-0.197
+                            c-8.221-6.553-20.185-12.564-37.63-17.048c-0.936-0.26-1.869-0.463-2.871-0.731c-6.886-1.807-15.241-3.61-23.796-4.412
+                            c-0.735-0.063-1.47-0.13-2.342-0.063c-4.609-0.537-9.421-1.006-14.57-1.338c-69.375-4.681-80.403-19.452-80.403-19.452
+                            s2.672,15.972,11.494,37.694c-28.939-0.869-38.565-10.026-39.634-11.089c1.002,2.337,9.959,21.252,26.133,41.773
+                            c-15.306,10.829-20.651,22.257-21.99,25.665c-0.132,0.399-0.198,0.73-0.266,0.869c0.134-0.139,0.4-0.269,1.068-0.536h0.069
+                            c1.402-0.666,4.343-1.403,10.627-2.207c-0.669,1.874-1.272,3.813-1.805,5.75c-0.067,0.194-0.134,0.398-0.134,0.666
+                            c-2.808,9.824-4.278,20.456-4.412,31.813c-0.2,18.38,3.009,33.954,5.08,42.244c-2.873-0.268-5.612,0.397-8.22,1.809
+                            c-4.745,2.669-7.953,7.883-8.755,14.3c-0.803,6.278,1.069,13.497,2.807,19.848c0.469,1.809,0.935,3.545,1.27,5.079
+                            c1.805,7.623,3.475,13.707,5.347,19.183l0.267,0.869c2.405,7.218,6.55,19.386,15.438,22.062c2.34,0.665,4.681-0.139,6.751-1.071
+                            c12.967,23.927,23.995,40.3,35.825,51.863v0.197l-5.813,33.867c-18.059,3.12-35.15,7.475-50.866,13.056
+                            c-48.792,17.114-84.548,44.986-96.579,77.602c-2.541,6.683-4.012,13.635-4.413,20.717v0.065c-0.133,1.206-0.133,2.473-0.2,3.681
+                            v42.577h429.299c0-7.825,0.066-15.111,0.066-22.063v-20.514C616.169,608.056,616.103,605.988,615.836,603.92z"/>
+                          </svg>
+                    </span>
+                </div>
+                <div className="flex-85 pl-3">
+                    <div className="">
+                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-100">Hello, Welcome To Collegedunia</span>
+                    </div>
+                    <div className="pt-1 px-2">
+                    <span className="text-[13px] text-gray-600 dark:text-gray-100">Search Colleges, Exams, Courses & More</span>
+                    </div>
+                </div>
+            </div>
+           
+
+            <div className="px-4 py-3">
+              <div className="flex items-center  rounded py-2 px-2 bg-white border border-[#f7b065] dark:border-violet-600">
+                <span className="pl-1 text-sm text-gray-500  capitalize">Get Collage Rank</span>
+                <span className="ml-auto">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4.295 15.833h1.03l7.717-7.716-1.03-1.03-7.717 7.716v1.03Zm11.42-8.62-2.813-2.787 1.095-1.094c.24-.24.534-.36.884-.36s.646.12.885.36l1.03 1.03c.24.24.364.53.372.872.009.342-.107.633-.346.872l-1.107 1.107Zm-11.917 9.87a.73.73 0 0 1-.538-.215.73.73 0 0 1-.215-.538v-1.745c0-.1.018-.196.054-.287a.755.755 0 0 1 .172-.253l8.727-8.728 2.813 2.813-8.728 8.727a.754.754 0 0 1-.253.172.766.766 0 0 1-.287.054H3.798Z" fill="#1C1B1F"></path>
+                  </svg>
+                </span>
+              </div>
+            </div>
+
+            <div className="px-4 pt-2 pb-2">
+              <div className="flex items-center justify-center rounded py-1.5 px-2 bg-orange-500">
+                <a href='/login' className="pl-1 text-sm text-white font-semibold capitalize">Login </a>
+                <a href='/signup' className="pl-1 text-sm text-white font-semibold capitalize">/ Subscribe</a>
+              </div>
+            </div>
+          </div> 
+          <div className='max-sm:h-full w-full mx-auto max-sm:bg-white px-4 max-sm:border max-sm:border-gray-200 sm:flex sm:items-center'>
           <div className="py-3 max-sm:border-b  max-sm:border-b-gray-200"> 
             <div className="menu-pr ">
               <div className="menu-btn  cursor-pointer">
