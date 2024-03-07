@@ -68,15 +68,15 @@ interface ServiceCategoryProps {
             </div>
             
            
-            <ul className='grid grid-cols-2 sm:flex  sm:flex-col max-sm:gap-4 sm:px-4'>
+            <ul className='grid grid-cols-2 sm:flex max-sm:mt-6 sm:flex-col max-sm:gap-4 sm:px-4 max-sm:px-6'>
               {serviceCategory.services.map((service) => (
                 
-                <li className='flex max-sm:flex-wrap items-center py-2 sm:py-1 max-sm:border max-sm:border-gray-300 max-sm:rounded-md'  key={service.id}>
-                  <div className="bg-white border w-[22px] border-gray-400 p-1 mr-2  justify-center flex items-center rounded-full "  >
+                <li className='flex items-center py-2 max-sm:px-2 sm:py-1 max-sm:border max-sm:border-gray-300 max-sm:rounded-md'  key={service.id}>
+                  <div className="max-sm:flex-15 bg-white border w-[22px] border-gray-400 p-1 mr-2  justify-center flex items-center rounded-full "  >
                     <img className='w-full' src={service.image} alt={service.name} />
                   </div>
                   
-                  <h3 className='text-sm text-gray-700 font-medium nav-font'>{service.name}</h3>
+                  <h3 className='max-sm:flex-85 text-sm sm:text-sm text-gray-800 font-medium '>{service.name}</h3>
                   
                 </li>
               ))}
