@@ -45,7 +45,7 @@ body {
     height: calc(100vh - 80px);
   }
   .nav-mob{
-    animation: moveLeft 1s alternate ease-in-out;
+    animation: moveLeft .2s alternate ease-in-out;
   }
 }
 @layer utilities{
@@ -53,7 +53,7 @@ body {
     height: calc(100vh - 80px);
   }
   .nav-mob{
-    animation: moveLeft .5s alternate ease-in-out;
+    animation: moveLeft .2s alternate ease-in-out;
   }
 }
 
