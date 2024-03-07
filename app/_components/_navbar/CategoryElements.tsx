@@ -19,11 +19,9 @@ interface ServiceCategoryProps {
     const prnt = clickedDiv.closest('.service-outer');
     const menu = prnt.querySelector('.services-menu');
     if(menu.classList.contains('max-sm:hidden')){
-      // alert(menu.className);
       menu.classList.remove('max-sm:hidden');
     }
     else if(!menu.classList.contains('max-sm:hidden')){
-          // alert('no')
       menu.classList.add('max-sm:hidden');
     }
 
@@ -55,7 +53,7 @@ interface ServiceCategoryProps {
         </div>
         
         {serviceCategory.services && serviceCategory.services.length > 0 && (
-          <div className='my-1 mb-1 services-menu max-sm:hidden max-sm:fixed max-sm:mt-0 max-sm:top-0 max-sm:h-full max-sm:left-0 max-sm:w-full max-sm:bg-white'>
+          <div className='my-1 mb-1 max-sm:nav-mob services-menu max-sm:hidden max-sm:fixed max-sm:mt-0 max-sm:top-0 max-sm:h-full max-sm:left-0 max-sm:w-full max-sm:bg-white'>
             <div className="sm:hidden flex mb-2 flex-col bg-slate-500 ">
               <span className="sm:hidden pl-2 pt-2"  onClick={closeMenu}>
                 <FiArrowLeft className="text-xl font-semibold text-white " />
@@ -72,7 +70,7 @@ interface ServiceCategoryProps {
               {serviceCategory.services.map((service) => (
                 
                 <li className='flex max-sm:flex-col items-center py-2 max-sm:shadow-md max-sm:px-2 sm:py-1 max-sm:border max-sm:border-gray-300 max-sm:rounded-md'  key={service.id}>
-                  <div className=" bg-white border max-sm:mb-2 w-[26px] sm:w-[22px] border-gray-400 p-1 mr-2  justify-center flex items-center rounded-full "  >
+                  <div className=" bg-white border max-sm:mb-2 w-8 sm:w-[22px] border-gray-400 p-1 mr-2  justify-center flex items-center rounded-full "  >
                     <img className='w-full' src={service.image} alt={service.name} />
                   </div>
                   

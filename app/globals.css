@@ -35,15 +35,25 @@ body {
   
   
 }
+@keyframes moveLeft {
+  from { left: 100%; }
+  to { left: 0; }
+}
 
 @layer components{
   .hnav-calc{
     height: calc(100vh - 80px);
   }
+  .nav-mob{
+    animation: moveLeft 1s alternate ease-in-out;
+  }
 }
 @layer utilities{
   .hnav-calc{
     height: calc(100vh - 80px);
+  }
+  .nav-mob{
+    animation: moveLeft .5s alternate ease-in-out;
   }
 }
 
