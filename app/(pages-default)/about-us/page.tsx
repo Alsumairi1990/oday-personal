@@ -10,7 +10,7 @@ export default async function AboutUs() {
      // Handle the error appropriately
    }
  
-   // Rest of your code
+  
  }
 
 // export default async function AboutUs(){

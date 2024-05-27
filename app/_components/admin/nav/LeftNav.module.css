@@ -1,0 +1,21 @@
+.side-content::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  .side-content::-webkit-scrollbar-track {
+    background: gainsboro;
+    border-radius: 2px;
+  }
+  
+  /* Handle */
+  .side-content::-webkit-scrollbar-thumb {
+     background: rgb(48, 48, 48);
+    
+    opacity: 0.2;
+    border-radius: 3px;
+  }
+
+  .side-content::-webkit-scrollbar-thumb:hover {
+    background: rgb(58, 57, 57);
+  }

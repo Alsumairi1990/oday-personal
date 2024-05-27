@@ -1,9 +1,25 @@
+import LeftNav from "@/app/_components/admin/nav/LeftNav";
 
 
-export default function Home() {
+
+
+
+
+
+
+
+
+
+
+
+const Home = () => {
+
+    const imagePath1 = '/images/navbg.webp';
+
     return (
-      
-      <h1 className="text-xl font-bold">Home page</h1>
-      
-    )
-  }
+      <div className="p-2">
+        <span className="text-gray-600">4gft5gt</span>
+      </div>
+)
+};
+export default Home;
