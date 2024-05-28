@@ -16,6 +16,7 @@ export default function SigninPage({searchParams}: Props) {
 
       <div className="flex relative items-center h-full  justify-center bg-no-repeat bg-center bg-cover -z-0"  style={{backgroundImage:`url(${imageBg})`}}>
         <div className="absolute top-0 z-10  left-0 w-full  h-full bg-[#0000001f]  " ></div>
+        <div className="flex items-center justify-center z-20 bg-white rounded-xl">
         <div className="flex-40  border-r border-b-gray-200">
            <div className="img-loginOuter"  >
                 <div className="font-semibold capitalize flex items-center text-2xl pl-2 pt-3">
@@ -48,6 +49,7 @@ export default function SigninPage({searchParams}: Props) {
             </div>
             </div>
         </div> 
+        </div>
       </div>
     )
   }
