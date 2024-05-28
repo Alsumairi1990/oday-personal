@@ -50,7 +50,7 @@ const SignInForm = (props : Props) => {
             toast.error(result?.error);
             return;
           }
-          toast.success("Welcome To Sakura Dev Channel");
+          toast.success("Welcome To Oday Platfrom");
           console.log("-------------------urlback"+props.callbackUrl)
         //   router.push(props.callbackUrl ? props.callbackUrl as string : "/");
         router.push("/admin/home");
@@ -59,7 +59,7 @@ const SignInForm = (props : Props) => {
 
 
     return(
-        <div className="w-full mx-w-full sm:max-w-[400px]   m-auto p-6 bg-white dark:bg-black-100 border dark:border-gray-800 shadow-md dark:sha0dow-gray-800 rounded-md">
+    <div className="">
      <form onSubmit={handleSubmit(onSubmit)} className="text-start z-40  ">
         <div className="grid grid-cols-1">
         

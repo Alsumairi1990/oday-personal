@@ -1,7 +1,7 @@
 
 
 
-export default function signupLayout({
+export default function authPages({
     children,
   }: {
     children: React.ReactNode
