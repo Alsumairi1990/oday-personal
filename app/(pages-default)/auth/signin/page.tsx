@@ -14,9 +14,9 @@ export default function SigninPage({searchParams}: Props) {
 
     return (
 
-      <div className="flex relative items-center h-full  justify-center bg-no-repeat bg-center bg-cover z-[50]"  style={{backgroundImage:`url(${imageBg})`}}>
+      <div className="flex fixed top-0 left-0 h-full w-full items-center  justify-center bg-no-repeat bg-center bg-cover  z-[50]"  style={{backgroundImage:`url(${imageBg})`}}>
         <div className="absolute top-0 z-[60]  left-0 w-full  h-full bg-[#0000001f]  " ></div>
-        <div className="flex items-center justify-center z-[70] bg-white rounded-xl">
+        <div className="flex items-center flex-wrap justify-center z-[70] bg-white rounded-xl">
         <div className="flex-100 sm:flex-40  border-r border-b-gray-200">
            <div className="img-loginOuter"  >
                 <div className="font-semibold capitalize flex items-center text-2xl pl-2 pt-3">
@@ -41,7 +41,7 @@ export default function SigninPage({searchParams}: Props) {
         </div>
         <div className="flex-100 sm:flex-60 flex flex-col items-center justify-center">
          
-        <div className="w-full mx-w-full sm:max-w-8/12   m-auto p-6 bg-white dark:bg-black-100 border dark:border-gray-800 shadow-md dark:sha0dow-gray-800 rounded-md">
+        <div className="w-full max-w-full sm:w-8/12 sm:max-w-full  m-auto p-6 bg-white dark:bg-black-100 border dark:border-gray-800 shadow-md dark:sha0dow-gray-800 rounded-md">
           <div className="mt-2 mb-5 flex flex-col items-center text-center">
               <span className="flex mb-5 ">
                   <svg className="h-14 w-14 " viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
