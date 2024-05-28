@@ -7,9 +7,7 @@ import { User } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 
 const handler = NextAuth({
-  session: {
-    strategy: "jwt",
-  },
+ 
 
   pages: {
     signIn: "/auth/signin",
