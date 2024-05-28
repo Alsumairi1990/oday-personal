@@ -13,7 +13,7 @@ export default function SigninPage({searchParams}: Props) {
 
     return (
 
-      <div className="w-5/12 mx-auto mt-4 flex flex-col justify-center items-center ">
+      <div className="w-11.8/12 mx-auto mt-4 flex flex-col justify-center items-center ">
         
          <SignInForm callbackUrl={searchParams.callbackUrl}/>
          <div className="text-center">
