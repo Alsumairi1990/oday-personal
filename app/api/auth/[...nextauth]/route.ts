@@ -9,9 +9,9 @@ import NextAuth from "next-auth/next";
 import { User } from "@prisma/client";
 
 export const  authOptions : AuthOptions= {
-  pages: {
-    signIn: "/auth/signin",
-  },
+  // pages: {
+  //   signIn: "/auth/signin",
+  // },
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -63,5 +63,6 @@ export const  authOptions : AuthOptions= {
     },
 };
 const handler = NextAuth(authOptions);
-export default NextAuth(authOptions);
+
 // export { handler as GET, handler as POST };
+export default handler;
