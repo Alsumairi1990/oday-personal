@@ -2,6 +2,8 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
+import prisma from "@/utils/prisma";
+import { User } from "@prisma/client";
 
 const handler = NextAuth({
   session: {
