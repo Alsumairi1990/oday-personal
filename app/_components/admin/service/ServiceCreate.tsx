@@ -41,8 +41,8 @@ const ServiceCreate = () => {
                 <AddingBtn 
                 title="Basic Info"
                 svgUrl="kmkfmr"
-                onClick={toggleMenu('basic')}
-                class="uni-add-btn"
+                
+               
                 />
          </div>
         </div>
