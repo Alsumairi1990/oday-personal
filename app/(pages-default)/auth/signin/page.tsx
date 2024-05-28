@@ -17,7 +17,7 @@ export default function SigninPage({searchParams}: Props) {
       <div className="flex fixed top-0 left-0 h-full w-full items-center  justify-center bg-no-repeat bg-center bg-cover  z-[50]"  style={{backgroundImage:`url(${imageBg})`}}>
         <div className="absolute top-0 z-[60]  left-0 w-full  h-full bg-[#0000001f]  " ></div>
         <div className="flex items-center flex-wrap justify-center z-[70] bg-white rounded-xl">
-        <div className="flex-100 sm:flex-40  border-r border-b-gray-200">
+        <div className="flex-100 sm:flex-40 max-sm:hidden border-r border-b-gray-200">
            <div className="img-loginOuter"  >
                 <div className="font-semibold capitalize flex items-center text-2xl pl-2 pt-3">
                    <h1 className="font-semibold text-blue-700 mr-1" >Arab </h1><h1 className="text-pink-700">Gate</h1>
