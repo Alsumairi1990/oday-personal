@@ -8,7 +8,7 @@ interface Props{
   }
 }
 export default function SigninPage({searchParams}: Props) {
-  console.log(searchParams)
+  console.log("serach param"+searchParams)
    const imagePath = '/images/w01.jpg';
 
     return (
