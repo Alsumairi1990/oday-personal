@@ -7,7 +7,9 @@ import { User } from "@prisma/client";
 import * as bcrypt from "bcrypt";
 
 const handler = NextAuth({
- 
+  session: {
+    strategy: "jwt",
+  },
 
   pages: {
     signIn: "/auth/signin",
@@ -29,14 +31,15 @@ const handler = NextAuth({
           },
       },
       async authorize(credentials, req) {
+        console.log('start authorize method')
         const user = await prisma.user.findUnique({
                           where: {
                             email: credentials?.username,
                           },
                         });
-                
+                       console.log("user name"+user?.user_name)
                         if (!user) throw new Error("User name or password is not correct");
-              
+                          
                         if (!credentials?.password) throw new Error("Please Provide Your Password");
                         const isPassowrdCorrect = await bcrypt.compare(credentials.password, user.password);
                 
@@ -45,6 +48,7 @@ const handler = NextAuth({
                         if (!user.email) throw new Error("Please verify your email first!");
                 
                         const { password, ...userWithoutPass } = user;
+                        console.log('last authorize method'+userWithoutPass)
                         return userWithoutPass;
       },
     }),
