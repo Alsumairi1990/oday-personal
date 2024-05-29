@@ -3,7 +3,7 @@ import { sendMail } from "@/utils/mail";
 
 export default async function AboutUs() {
    try {
-     await sendMail({ to: "sumairia63.gmail.com", subject: "mailtest", body: "bodymessage" });
+     await sendMail({ to: "sumairia63@gmail.com", subject: "mailtest", body: "bodymessage" });
      console.log("Email sent successfully!");
    } catch (error) {
      console.error("Error sending email:", error);
