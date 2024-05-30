@@ -23,12 +23,15 @@ export async function registerUser(user: Omit<User,"id" | "emailVerified" | "ima
     const body = compileActivationTemplate(user.user_name!,activeUrl)
     // const body = "active body";
     console.log("---------------------- after calling compileActivationTemplate ----------------");
+    if (user.email) {
     const sendResult = await sendMail({
         to: user.email,
         subject: "Reset Password",
         body: body,
       });
       console.log("sendResult"+sendResult)
+    }
+      
 
 }
 
