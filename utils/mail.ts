@@ -16,16 +16,26 @@ export async function sendMail({
   subject: string;
   body: string;
 }) {
-  const { SMPT_EMAIL, SMTP_GMAIL_PASS, SMTP_USER, SMTP_PASS } = process.env;
+  const { SMTP_GMAIL,SMTP_GMAIL_PASS } = process.env;
   //
-    var transport = nodemailer.createTransport({
-        host: "sandbox.smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-        user: "50d34df012d3c7",
-        pass: "d66a9e9552bfa7"
-        }
-    });
+    // var transport = nodemailer.createTransport({
+    //     host: "sandbox.smtp.mailtrap.io",
+    //     port: 2525,
+    //     auth: {
+    //     user: "50d34df012d3c7",
+    //     pass: "d66a9e9552bfa7"
+    //     }
+    // });
+
+   console.log('Email:', SMTP_GMAIL);   
+  console.log('Email Pass:', SMTP_GMAIL_PASS); 
+  const transport = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: SMTP_GMAIL,
+    pass: SMTP_GMAIL_PASS
+  }
+});
   try {
     const testResult = await transport.verify();
     console.log("Test Result Of Transport", testResult);
@@ -34,7 +44,7 @@ export async function sendMail({
   }
   try {
     const sendResult = await transport.sendMail({
-      from: SMPT_EMAIL,
+      from: SMTP_GMAIL,
       to,
       subject,
       html: body,
@@ -47,11 +57,13 @@ export async function sendMail({
 }
 
 export function compileActivationTemplate(name: string, url: string) {
+  console.log("---------------------- indide compileActivationTemplate ----------------");
   const template = Handlebars.compile(activationTemplate);
   const htmlBody = template({
     name,
     url,
   });
+  console.log("---------------------- after calling Handlebars  ---------------- HTMLBODY"+htmlBody);
   return htmlBody;
 }
 // export function compileResetPassTemplate(name: string, url: string) {
