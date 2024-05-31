@@ -12,9 +12,9 @@ export default function Signup() {
     return (
 
     
-      <div className="flex fixed top-0 left-0 h-full w-full items-center sm:p-2.5 justify-center bg-no-repeat bg-center bg-cover  z-[50]"  style={{backgroundImage:`url(${imageBg})`}}>
+      <div className="flex fixed top-0 left-0 h-full w-full items-center  justify-center bg-no-repeat bg-center bg-cover  z-[50]"  style={{backgroundImage:`url(${imageBg})`}}>
         <div className="absolute top-0 z-[60]  left-0 w-full  h-full bg-[#0000001f]  " ></div>
-        <div className="flex items-cfenter h-full w-full sm:h-[calc(100%_-_4rem)]  sm:w-9/12 flex-wrap justify-center z-[70] bg-white rounded-xl">
+        <div className="flex items-cfenter h-full w-full sm:h-[calc(100%_-_4rem)]  sm:w-9/12 flex-wrap justify-center z-[70] sm-bg-white bg-gray-300 max-sm:p-4 rounded-xl">
         <div className="flex-100 sm:flex-40 max-sm:hidden border-r border-b-gray-200">
            <div className="img-loginOuter flex flex-col"  >
                 <div className="font-semibold flex-10 capitalize flex items-center text-2xl pl-2 pt-3">
@@ -39,7 +39,7 @@ export default function Signup() {
         </div>
         <div className="flex-100 sm:flex-60 flex flex-col h-full items-center  justify-center ">
          
-        <div className="w-full max-w-full sm:max-w-full h-[calc(100%_-_2rem)] overflow-y-auto  m-auto p-3 pt-2 sm:pt-5 bg-white dark:bg-black-100  dark:border-gray-800  rounded-md">
+        <div className="w-full max-w-full sm:max-w-full h-[calc(100%_-_2rem)] overflow-y-auto  m-auto p-3 pt-2 sm:pt-5 max-sm:bg-white dark:bg-black-100 max-sm:border max-sm:border-gray-400 dark:border-gray-800  rounded-md">
               <div className=" mb-1 flex flex-col   items-center text-center">
                   <span className="flex mb-3 ">
                       <svg className="h-14 w-14 " viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
