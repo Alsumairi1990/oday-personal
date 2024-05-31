@@ -4,6 +4,7 @@ import prisma from "./prisma"
 
 import * as bcrypt from "bcrypt";
 import { compileActivationTemplate , sendMail} from "./mail";
+import { signJwt } from "./jwt";
 
 
 console.log("before  refister");
@@ -17,8 +18,12 @@ export async function registerUser(user: Omit<User,"id" | "emailVerified" | "ima
     });
 
     console.log("after refister"+user);
+    const jwtUserId = signJwt({
+        id: result.id,
+      });
+    // const activeUrl = `${process.env.NEXTAUTH_URL}/auth/activation/${result.id}`
+    const activeUrl = `${process.env.NEXTAUTH_URL}/auth/activation/${jwtUserId}`;
 
-    const activeUrl = `${process.env.NEXTAUTH_URL}/auth/activation/${result.id}`
     console.log("---------------------- bedore calling compileActivationTemplate ----------------");
     const body = compileActivationTemplate(user.user_name!,activeUrl)
     // const body = "active body";
