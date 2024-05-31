@@ -80,17 +80,8 @@ const SignUpForm = () => {
       }, [watch().password]);
     
   return (
-   <div className="w-full sm:max-w-[400px] max-h-[100vh] max-sm:overflow-y-auto m-auto p-6 bg-white dark:bg-black-100 border dark:border-gray-800 shadow-md dark:sha0dow-gray-800 rounded-md">
-      <div className="mt-2 mb-5 flex flex-col items-center text-center">
-          <span className="flex mb-5 ">
-              <svg className="h-14 w-14 " viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="512" cy="512" r="512" className="fill-[#112e51]"/>
-              <path d="m458.15 617.7 18.8-107.3a56.94 56.94 0 0 1 35.2-101.9V289.4h-145.2a56.33 56.33 0 0 0-56.3 56.3v275.8a33.94 33.94 0 0 0 3.4 15c12.2 24.6 60.2 103.7 197.9 164.5V622.1a313.29 313.29 0 0 1-53.8-4.4zM656.85 289h-144.9v119.1a56.86 56.86 0 0 1 35.7 101.4l18.8 107.8A320.58 320.58 0 0 1 512 622v178.6c137.5-60.5 185.7-139.9 197.9-164.5a33.94 33.94 0 0 0 3.4-15V345.5a56 56 0 0 0-16.4-40 56.76 56.76 0 0 0-40.05-16.5z" className="fill-white"/>
-              </svg>
-          </span>
-          <h1 className="text-xl font-bold mb-1 ">Oday Platform Page </h1> 
-          <p className="">Get more things done with Loggin platform.</p>
-      </div>
+   <div className="w-full max-h-[100vh] max-sm:overflow-y-auto m-auto p-6 max-sm:pt-4 bg-white dark:bg-black-100 bordfer dark:border-gray-800 sm:shadw-md dark:sha0dow-gray-800 rounded-md">
+    
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  ">
         <div className="grid grid-cols-1">
         
