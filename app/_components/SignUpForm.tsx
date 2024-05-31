@@ -80,8 +80,7 @@ const SignUpForm = () => {
       }, [watch().password]);
     
   return (
-   <div className="w-full max-h-[100vh] max-sm:overflow-y-auto m-auto p-6 max-sm:pt-4 bg-white dark:bg-black-100 bordfer dark:border-gray-800 sm:shadw-md dark:sha0dow-gray-800 rounded-md">
-    
+   <div className="max-w-[400px] w-full max-sm:border max-sm:border-gray-300  m-auto p-6 bg-white dark:bg-black-100 border dark:border-gray-800 shadow-md dark:sha0dow-gray-800 rounded-md">
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  ">
         <div className="grid grid-cols-1">
         
@@ -162,23 +161,6 @@ const SignUpForm = () => {
             </div>
 
             
-
-           
-
-
-            {/* <div className="mb-4 ">
-                <label className="font-medium relative text-md text-gray-600 dark:text-gray-200" htmlFor="name">Name : </label>
-                <input id="name" type="email" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-150 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="user name" />
-                
-            </div> */}
-            {/* <div className="mb-4">
-                <label className="font-medium text-md text-gray-600 dark:text-gray-200" htmlFor="LoginEmail">Email Address:</label>
-                <input id="LoginEmail" type="email" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-150 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="name@example.com" />
-            </div>
-            <div className="mb-4">
-                <label className="font-medium text-md text-gray-600 dark:text-gray-200" htmlFor="LoginPassword">Password:</label>
-                <input id="LoginPassword" type="password" className="form-input w-full text-[15px] py-2 px-3 h-10 bg-transparent dark:bg-black-150 dark:text-slate-200 rounded-full outline-none border border-gray-200 focus:border-violet-600 dark:border-gray-800 dark:focus:border-violet-600 focus:ring-0 mt-3" placeholder="Password:" />
-            </div> */}
             <div className="flex items-center mb-4">
                     <input className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-violet-600 focus:border-violet-600/30 focus:ring focus:ring-offset-0 focus:ring-violet-600/20 focus:ring-opacity-50 me-2" type="checkbox" value="" id="accept" />
                     <label className="form-checkbox-label dark:text-slate-400" htmlFor="accept">I Accept <a href="" className="text-violet-600">Terms And Condition</a></label>
