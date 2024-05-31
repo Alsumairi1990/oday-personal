@@ -12,8 +12,10 @@ export function signJwt(
   payload: JwtPayload,
   option: SignOption = DEFAULT_SIGN_OPTION
 ) {
+  console.log("---------------------- start SignJWT ----------------");
   const secretKey = process.env.JWT_USER_ID_SECRET!;
   const token = jwt.sign(payload, secretKey);
+  console.log("---------------------- last SignJWT ----------------");
   return token;
 }
 
