@@ -9,7 +9,7 @@ export default function Signup() {
 
     return (
 
-      <div className="w-5/12 mx-auto mt-4 flex flex-col justify-center items-center ">
+      <div className="w-full max-sm:fixed max-sm:top-0 h-full max-sm:left-0 mx-auto pb-16 flex flex-col justify-center items-center ">
         
         <SignUpForm />
       </div> 
