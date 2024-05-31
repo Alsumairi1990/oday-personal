@@ -39,7 +39,7 @@ export default function Signup() {
         </div>
         <div className="flex-100 sm:flex-60 flex flex-col h-full items-center  justify-center ">
          
-        <div className="w-full max-w-full sm:max-w-full h-full sm:h-[calc(100%_-_2rem)] overflow-y-auto  m-auto p-3  sm:pt-5 max-sm:bg-gray-200 dark:bg-black-100  dark:border-gray-800  rounded-md">
+        <div className="w-full max-w-full sm:max-w-full h-full sm:h-[calc(100%_-_2rem)] overflow-y-auto  m-auto p-3  sm:pt-5 max-sm:bg-gray-200 dark:bg-black-100  dark:border-gray-800  sm:rounded-md">
               <div className=" mb-1 flex flex-col w-full  items-center text-center max-sm:bg-white max-sm:border max-sm:border-gray-300 max-sm:rounded-md">
                   <span className="flex mb-3 ">
                       <svg className="h-14 w-14 " viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
