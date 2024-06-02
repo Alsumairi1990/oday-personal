@@ -57,8 +57,8 @@ const LeftNav = () => {
             </div>
             <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex align-items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                    <span className=" bg-gray-300 h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <BiBasketball className="text-xl text-gray-900" />
+                    <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <BiBasketball className="text-xl text-[#878787]" />
                     </span>
                         Universties Services
                     <div className="ml-auto">
@@ -86,8 +86,8 @@ const LeftNav = () => {
 
             <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                <span className=" bg-gray-300 h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <BiChip className="text-xl text-gray-900" />
+                <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <BiChip className="text-xl text-[#878787]" />
                     </span>
                         Scholarships
                     <div className="ml-auto">
@@ -115,8 +115,8 @@ const LeftNav = () => {
            
             <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                <span className=" bg-gray-300 h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <BiLayer className="text-xl text-gray-900" />
+                <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <BiLayer className="text-xl text-[#878787]" />
                     </span>
                         Exams
                     <div className="ml-auto">
@@ -144,8 +144,8 @@ const LeftNav = () => {
 
             <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                <span className=" bg-gray-300 h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <BiLogoCodepen className="text-xl text-gray-900" />
+                <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <BiLogoCodepen className="text-xl text-[#878787]" />
                     </span>
                         Ranking Systems
                     <div className="ml-auto">
@@ -175,8 +175,8 @@ const LeftNav = () => {
             </div>
             <li className="side-item-btn py-0 pl-1 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                <span className=" bg-gray-300 h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <HiAcademicCap className="text-xl text-gray-900" />
+                <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <HiAcademicCap className="text-xl text-[#878787]" />
                     </span>
                         Programms
                     <div className="ml-auto">
@@ -205,8 +205,8 @@ const LeftNav = () => {
            
            <li className="side-item-btn py-0 pl-1 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                <span className=" bg-gray-300 h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <HiBoltSlash className="text-xl text-gray-900" />
+                <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <HiBoltSlash className="text-xl text-[#878787]" />
                     </span>
                         Disciplines
                     <div className="ml-auto">
@@ -234,8 +234,8 @@ const LeftNav = () => {
 
             <li className="side-item-btn py-0 pl-1 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                <span className=" bg-gray-300 h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <HiCurrencyBangladeshi className="text-xl text-gray-900" />
+                <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <HiCurrencyBangladeshi className="text-xl text-[#878787]" />
                     </span>
                         Education Skills
                     <div className="ml-auto">
@@ -263,8 +263,8 @@ const LeftNav = () => {
 
             <li className="side-item-btn py-0 pl-1 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                <span className=" bg-gray-300 h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <MdOutlineCastForEducation className="text-xl text-gray-900" />
+                <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <MdOutlineCastForEducation className="text-xl text-[#878787]" />
                     </span>
                         Scholarship App
                     <div className="ml-auto">
@@ -292,8 +292,8 @@ const LeftNav = () => {
 
             <li className="side-item-btn py-0 pl-1 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                <span className=" bg-gray-300 h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <RiMoneyDollarCircleFill className="text-xl text-gray-900" />
+                <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <RiMoneyDollarCircleFill className="text-xl text-[#878787]" />
                     </span>
                         Fees  
                     <div className="ml-auto">
@@ -322,8 +322,8 @@ const LeftNav = () => {
            
             <li className="side-item-btn py-0 pl-1 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                <span className=" bg-gray-300 h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <LiaCertificateSolid className="text-xl text-gray-900" />
+                <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <LiaCertificateSolid className="text-xl text-[#878787]" />
                     </span>
                         Admissions  
                     <div className="ml-auto">
