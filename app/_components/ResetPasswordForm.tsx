@@ -1,13 +1,10 @@
 "use client";
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { FaUserTie } from "react-icons/fa";
-import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
-import { FaPhoneAlt } from "react-icons/fa";
-import validator from 'validator';
+
 
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -17,6 +14,9 @@ import { passwordStrength } from 'check-password-strength';
 import PasswordStrengthCheck from './PasswordStrengthCheck';
 import { registerUser } from '@/utils/authActions';
 import { toast } from 'react-toastify';
+interface Props {
+    jwtUserId: string;
+  }
 const formSchema = z.object({
     
     password : z.string()
@@ -35,7 +35,7 @@ const formSchema = z.object({
 type inputType = z.infer<typeof formSchema>;
 
 
-const SignUpForm = () => {
+const ResetPasswordForm = ({ jwtUserId }: Props) => {
     // const {register,handleSubmit,reset,control,formState:{errors}} = useForm<inputType>({
     //     resolver: zodResolver(formSchema)
     // });
@@ -56,15 +56,7 @@ const SignUpForm = () => {
     const toggleVisible = () => {setIsVisiable((prev) => !prev)}
     const toggleVisibleConif = () => {setIsVisiableConf((prev) => !prev)}
     const saveUser: SubmitHandler<inputType> = async (data)=>{
-        const user = data;
-        try{
-            const result = await registerUser(user)
-            console.log("sucess");
-            toast.success("successfully data added")
-
-        }catch(error){
-            toast.error("sothing went wrong");
-        }
+       
     }
     // useEffect(()=>{
     //     setPassStrength(passwordStrength(watch().password).id);
@@ -73,7 +65,7 @@ const SignUpForm = () => {
     useEffect(() => {
         setPassStrength(passwordStrength(watch().password).id);
       }, [watch().password]);
-    
+      ResetPasswordForm
   return (
    <div className="max-w-[400px] w-full max-sm:border max-sm:border-gray-300  m-auto p-6 bg-white dark:bg-black-100 border dark:border-gray-800 shadow-md dark:sha0dow-gray-800 rounded-md">
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  ">
@@ -124,4 +116,4 @@ const SignUpForm = () => {
   );
 };
 
-export default SignUpForm;
+export default ResetPasswordForm;
