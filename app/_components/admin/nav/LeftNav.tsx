@@ -57,7 +57,7 @@ const LeftNav = () => {
             </div>
             <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <a  className="flex align-items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
-                    <span className=" bg-[#206681] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
+                    <span className=" bg-[#206681] border border-[#878787] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
                     <BiBasketball className="text-xl text-white" />
                     </span>
                         Universties Services
