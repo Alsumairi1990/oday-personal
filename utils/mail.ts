@@ -1,6 +1,10 @@
 import Handlebars from "handlebars";
 import nodemailer from "nodemailer";
+
+
+
 import { activationTemplate } from "@/utils/email-templates/activation"
+import { resetPasswordTemplate } from "@/utils/email-templates/resetPass";
 
 
 
@@ -66,6 +70,18 @@ export function compileActivationTemplate(name: string, url: string) {
   console.log("---------------------- after calling Handlebars  ---------------- HTMLBODY"+htmlBody);
   return htmlBody;
 }
+
+export function compileResetPassTemplate(name: string, url: string) {
+  const template = Handlebars.compile(resetPasswordTemplate);
+  const htmlBody = template({
+    name,
+    url,
+  });
+  return htmlBody;
+}
+
+
+
 // export function compileResetPassTemplate(name: string, url: string) {
 //   const template = Handlebars.compile(resetPasswordTemplate);
 //   const htmlBody = template({

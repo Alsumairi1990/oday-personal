@@ -3,7 +3,7 @@ import { User } from "@prisma/client"
 import prisma from "./prisma"
 
 import * as bcrypt from "bcrypt";
-import { compileActivationTemplate , sendMail} from "./mail";
+import { compileActivationTemplate ,compileResetPassTemplate, sendMail} from "./mail";
 import { signJwt, verifyJwt } from "./jwt";
 
 
@@ -31,7 +31,7 @@ export async function registerUser(user: Omit<User,"id" | "emailVerified" | "ima
     if (user.email) {
     const sendResult = await sendMail({
         to: user.email,
-        subject: "Reset Password",
+        subject: "Email Activation",
         body: body,
       });
       console.log("sendResult"+sendResult)
@@ -63,6 +63,30 @@ type ActivateUserFunc = (
     });
     return "success";
   };  
+
+
+  export async function forgotPassword(email: string) {
+          const user = await prisma.user.findUnique({
+            where: {
+              email: email,
+            },
+          });
+
+          if (!user) throw new Error("The User Does Not Exist!");
+
+          //  Send Email with Password Reset Link
+          const jwtUserId = signJwt({
+            id: user.id,
+          });
+          const resetPassUrl = `${process.env.NEXTAUTH_URL}/auth/resetPass/${jwtUserId}`;
+          const body = compileResetPassTemplate(user.firstName, resetPassUrl);
+          const sendResult = await sendMail({
+            to: user.email,
+            subject: "Reset Password",
+            body: body,
+          });
+          return sendResult;
+        }
 
 // function sendMail(arg0: { to: string | null; subject: string; body: string; }) {
 //     throw new Error("Function not implemented.");
