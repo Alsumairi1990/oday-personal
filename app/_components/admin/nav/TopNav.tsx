@@ -1,43 +1,102 @@
+'use client'
 import React from 'react';
 
 const TopNav = () => {
    const imagePath = '/images/navbg.webp';
    const imagePath2 = '/images/logo.png';
    const evetAct = ()=> {
-    document.addEventListener("click", function(event) {
-        
+}
+    const hidLeft = () => {
+
+      let leftNav = document.getElementById('adminLeft');
+      let leftNav1 = document.getElementById('logoMenu');
+      let leftNav2 = document.getElementById('leftAdmin');
+      const windowWidth = window.innerWidth;
+       const classes = ['!max-sm:min-0', '!sm:min-w-0','!w-0',''];
+       const classes1 = ['max-sm:min-w-0', 'max-sm:w-0'];
+       if(windowWidth >=768){
+
+
+        if(!leftNav.classList.contains("leftNavShow")){
+            leftNav?.classList.add('leftNavShow');
+            leftNav?.classList.add(...classes);
+            leftNav1?.classList.add(...classes);
+            leftNav2?.classList.add(...classes);
+         }
+         else{
+           leftNav?.classList.remove('leftNavShow');
+            leftNav?.classList.remove(...classes);
+            leftNav1?.classList.remove(...classes);
+            leftNav2?.classList.remove(...classes);
+         }
+       }else{
+
+         if(!leftNav.classList.contains("leftNavShow")){
+           alert("mobile show")
+             leftNav?.classList.add('leftNavShow');
+             // leftNav?.classList.add(...classes);
+             // leftNav1?.classList.add(...classes);
+             // leftNav2?.classList.add(...classes);
+
+             leftNav?.classList.add('max-sm:min-w-[240px]');
+             leftNav1?.classList.add('max-sm:min-w-[240px]');
+             leftNav2?.classList.add('max-sm:min-w-[240px]');
+
+             leftNav?.classList.add('max-sm:w-[240px]');
+             leftNav1?.classList.add('max-sm:w-[240px]');
+             leftNav2?.classList.add('max-sm:w-[240px]');
+          }
+          else{
+            alert("mobile hiden else")
+            leftNav?.classList.remove('leftNavShow');
+            leftNav?.classList.remove('max-sm:min-w-0');
+            leftNav1?.classList.remove('max-sm:min-w-0');
+            leftNav2?.classList.remove('max-sm:min-w-0');
+
+            leftNav?.classList.remove('max-sm:w-0');
+            leftNav1?.classList.remove('max-sm:w-0');
+            leftNav2?.classList.remove('max-sm:w-0');
+
+
+          }
+
+       }
+
+    }
+    // document.addEventListener("click", function(event) {
+
         // let menus = document.getElementsByClassName('auth-menu');
         // let closest = event.target.closest('.auth-menu');
         // if(event.target.closest(".openAuthBtn")) {
-        //     let prnt=  event.target.closest('.auth-outer'); 
+        //     let prnt=  event.target.closest('.auth-outer');
         //     let cu1 = prnt.querySelector('.auth-menu');
         //     const drop = document.getElementById('dropDis');
         //       if(!cu1.classList.contains("opend-src")){
         //         for (let menu of menus) {
         //                 menu.classList.remove('opend-src');
         //             }
-        //          cu1.classList.add('opend-src');   
+        //          cu1.classList.add('opend-src');
         //       }
         //       else if(cu1.classList.contains("opend-src") ){
-                
+
         //             for (let menu of menus) {
         //                   menu.classList.remove('opend-src');
-                          
-        //                   }    
-        //         } 
-        //     } 
-        // else if(event.target.closest(".auth-menu")) return ;    
-        // else if (!closest) {        
+
+        //                   }
+        //         }
+        //     }
+        // else if(event.target.closest(".auth-menu")) return ;
+        // else if (!closest) {
         //         for (let menu of menus) {
         //                   menu.classList.remove('opend-src');
-                           
-        //                   } 
+
+        //                   }
         //   }
-        })
-   }
+        // })
+   // }
   return (
     <div className="flex h-14 items-centre justify-center ">
-        <div className="p-2 flex h-full bg-[#020910] items-center min-w-[240px] border-b border-b-gray-800">
+        <div id='logoMenu' style={{transition: 'width 0.9s ease-in-out' }} className=" flex h-full bg-[#020910] items-center max-sm:min-w-0 max-sm:w-0 sm:min-w-[240px] border-b border-b-gray-800">
             <div className="w-10">
                 <img className="w-full" src={imagePath2} alt="" />
             </div>
@@ -49,7 +108,21 @@ const TopNav = () => {
         </div>
         <div className="w-full  flex items-center bg-white border-b border-b-gray-200" style={{boxShadow:'0 10px 30px 0 rgb(82 63 104 / 6%)'}}>
             <div className="pl-2">
-                <span className="text-md text-gray-600">menu</span>
+             <div class="  flex items-center h-full">
+                    <span onClick={hidLeft}  class="w-8">
+                    <svg width="100%" height="100%" class="ml-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="Menu / Menu_Alt_03">
+                    <path id="Vector" d="M5 17H13M5 12H19M5 7H13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    </svg>
+                    </span>
+
+
+                    <span class=" pl-3">
+                        <span class="text-[#4b7b98] text-lg font-medium" >Scholarship | Adding Data</span>
+                    </span>
+
+                </div>
             </div>
             <div className="ml-auto">
             <div className="flex p-1 mr-2 items-center flex-row-reverse gap-x-3 ">
@@ -81,14 +154,14 @@ const TopNav = () => {
                   v42.577h429.299c0-7.825,0.066-15.111,0.066-22.063v-20.514C616.169,608.056,616.103,605.988,615.836,603.92z"/>
                 </svg>
                 </span>
-                         
+
                       </button>
-                      
+
                       <div className="z-10 auth-menu absolute top-12 hidden bg-white rounded-md border !border-gray-300 shadow w-full mt-2 dark:bg-gray-700" style={{boxShadow: 'rgb(0 0 0 / 3%) 0px 12.5px 10px, rgb(0 0 0 / 6%) 0px 100px 80px'}}>
                           <div className="h-48 px-2 pb-3 pt-1 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" >
                               <span>uwhfu</span>
                           </div>
-                       
+
                       </div>
         </div>
 
@@ -101,9 +174,9 @@ const TopNav = () => {
                         <path d="M5 18.865a.725.725 0 0 1-.534-.215.726.726 0 0 1-.216-.535c0-.213.072-.39.216-.534A.726.726 0 0 1 5 17.365h1.25v-7.25A5.63 5.63 0 0 1 7.5 6.534c.833-1.056 1.917-1.732 3.25-2.026v-.7c0-.353.12-.65.36-.89s.537-.36.89-.36c.352 0 .649.12.89.36.24.24.36.537.36.89v.7c1.333.294 2.417.97 3.25 2.026a5.63 5.63 0 0 1 1.25 3.581v7.25H19c.212 0 .39.072.534.216a.726.726 0 0 1 .216.535c0 .212-.072.39-.216.534a.726.726 0 0 1-.534.215H5Zm7 2.943c-.492 0-.917-.175-1.273-.525A1.73 1.73 0 0 1 10.192 20h3.616c0 .505-.175.933-.525 1.283-.35.35-.778.525-1.283.525Zm-4.25-4.443h8.5v-7.25c0-1.168-.416-2.169-1.249-3.001-.833-.833-1.834-1.249-3.003-1.249-1.17 0-2.17.416-3 1.249-.832.832-1.248 1.833-1.248 3.001v7.25Z" fill="#333"></path>
                     </svg>
                   <span className="absolute bg-orange-500 dark:bg-fuchsia-500 right-1 rounded-full h-2.5 w-2.5 top-0 z-20"></span>
-                  </span> 
+                  </span>
                 </div>
-                
+
                 <div className="z-10 auth-menu absolute top-12 hidden bg-white rounded-md border !border-gray-300 shadow w-full mt-2 dark:bg-gray-700" style={{boxShadow: 'rgb(0 0 0 / 3%) 0px 12.5px 10px, rgb(0 0 0 / 6%) 0px 100px 80px'}}>
                     <div className="h-48 px-2 pb-3 pt-1 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" >
                         <span>uwhfu</span>
@@ -120,9 +193,9 @@ const TopNav = () => {
                     <path className="fill-[#a9a7a7] opacity-" d="M16.172 5.313h-.375v3.562a3.19 3.19 0 0 1-3.187 3.188H3.798v1.687c0 1.137.925 2.062 2.062 2.062h.937V17.5a.562.562 0 0 0 .977.38l1.895-2.068h6.503a2.064 2.064 0 0 0 2.062-2.062V7.375a2.065 2.065 0 0 0-2.062-2.063Z"></path>
                     <path fill="currentColor" d="M12.61.813H1.734A1.69 1.69 0 0 0 .047 2.5v6.375c0 .93.757 1.688 1.688 1.688H12.61a1.69 1.69 0 0 0 1.688-1.688V2.5A1.691 1.691 0 0 0 12.609.812Zm.187 3.33L7.742 6.595a1.273 1.273 0 0 1-1.14 0L1.547 4.143V2.897L7.09 5.584c.053.03.112.03.165 0l5.543-2.686-.001 1.244Z"></path>
                   </svg>
-                  </span> 
+                  </span>
                 </div>
-                
+
                 <div className="z-10 auth-menu absolute top-12 hidden bg-white rounded-md border !border-gray-300 shadow w-full mt-2 dark:bg-gray-700" style={{boxShadow: 'rgb(0 0 0 / 3%) 0px 12.5px 10px, rgb(0 0 0 / 6%) 0px 100px 80px'}}>
                     <div className="h-48 px-2 pb-3 pt-1 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" >
                         <span>uwhfu</span>
@@ -134,9 +207,9 @@ const TopNav = () => {
                 <div  className=" openAuthBtn max-sm:hidden border-x cursor-pointer border-y border-x-gray-200 border-y-200 flex items-center justify-center bg-[#f9f9f9] rounded-3xl w-9 h-9" >
                   <span className="flex items-center ">
                   <svg className="fill-slate-500 icon flat-color" width="18px" height="18px" viewBox="0 0 24 24" id="maximize-size" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg"><path id="secondary" d="M9.71,8.29a1,1,0,0,1,0,1.42,1,1,0,0,1-1.42,0L4,5.41V8A1,1,0,0,1,2,8V4A2,2,0,0,1,4,2H8A1,1,0,0,1,8,4H5.41ZM21,15a1,1,0,0,0-1,1v2.59l-4.29-4.3a1,1,0,0,0-1.42,1.42L18.59,20H16a1,1,0,0,0,0,2h4a2,2,0,0,0,2-2V16A1,1,0,0,0,21,15Z" style={{fill: 'rgb(44, 169, 188)'}}></path><path id="primary" d="M9.71,14.29a1,1,0,0,1,0,1.42L5.41,20H8a1,1,0,0,1,0,2H4a2,2,0,0,1-2-2V16a1,1,0,0,1,2,0v2.59l4.29-4.3A1,1,0,0,1,9.71,14.29ZM20,2H16a1,1,0,0,0,0,2h2.59l-4.3,4.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0L20,5.41V8a1,1,0,0,0,2,0V4A2,2,0,0,0,20,2Z" ></path></svg>
-                  </span> 
+                  </span>
                 </div>
-                
+
                 <div className="z-10 auth-menu absolute top-12 hidden bg-white rounded-md border !border-gray-300 shadow w-full mt-2 dark:bg-gray-700" style={{boxShadow: 'rgb(0 0 0 / 3%) 0px 12.5px 10px, rgb(0 0 0 / 6%) 0px 100px 80px'}}>
                     <div className="h-48 px-2 pb-3 pt-1 overflow-y-auto text-sm text-gray-700 dark:text-gray-200" >
                         <span>uwhfu</span>
@@ -144,22 +217,22 @@ const TopNav = () => {
                 </div>
         </div>
 
-       
-      
-       
+
+
+
 </div>
 
 
-    
 
 
 
 
- 
+
+
 
 
             </div>
-            
+
 
         </div>
     </div>
@@ -167,4 +240,4 @@ const TopNav = () => {
 };
 
 
-export default TopNav; 
+export default TopNav;

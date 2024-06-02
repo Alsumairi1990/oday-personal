@@ -32,8 +32,8 @@
 }
 body {
 
-  
-  
+
+
 }
 @keyframes moveLeft {
   from { left: 100%; }
@@ -70,12 +70,17 @@ body {
 @media screen and (max-width:720px){
   .mobile-clip{
     clip-path: polygon( 37.60% 0.00%, 63.8% 0.00%, 100% 0.00%, 101% 101%, 50% 86.2%, 0.00% 101%, 0.00% 0.00% );
-    
+
     }
 }
 
+.leftNavShow{
+  
+}
+.leftNavhid{
+  width: 240px;
 
-
+}
 .side-content::-webkit-scrollbar {
   width: 8px;
 }
@@ -89,7 +94,7 @@ body {
 /* Handle */
 .side-content::-webkit-scrollbar-thumb {
    background: rgb(48, 48, 48);
-  
+
   opacity: 0.2;
   border-radius: 3px;
 }

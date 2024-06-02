@@ -19,16 +19,16 @@ const Service = () => {
    }
   return (
     <div className='w-11.8/12 mx-auto p-2'>
-       <div className="grid grid-cols-4 gap-x-8">
+       <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
          <div className="bg-pink-800 px-2 py-2 rounded-2xl shadow-xl bg-right bg-no-repeat bg-blend-overlay" style={{ backgroundImage: `url(${imagePath2})`}}>
             <div className="flex border-b mb-2 pt-2 pb-3 border-b-gray-400 ">
-                
+
                 <div className="icon flex-30 pt-1 pl-1">
                         <span className="h-12 inline-block w-12">
-                        
+
                         <svg className="w-full h-full icon line-color fill-black icon flat-color" width="50px" height="50px" viewBox="0 0 24 24" id="add-file-6" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" >
                         <path id="secondary" className="fill-none stroke-white stroke-1" d="M16,19h4m-2-2v4M8,13h6m0-4H8" ></path>
-                        <path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6" ></path></svg>                
+                        <path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6" ></path></svg>
                     </span>
                 </div>
                 <div className="flex-70 flex flex-col justify-center items-center">
@@ -121,7 +121,7 @@ const Service = () => {
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
 
 
                 <div className="bg-green-700 px-2 py-2 rounded-2xl shadow-xl bg-right bg-no-repeat bg-blend-overlay" style={{ backgroundImage: `url(${imagePath2})`}}>
@@ -148,24 +148,22 @@ const Service = () => {
                             </div>
                         </div>
                     </div>
-                </div> 
-                
+                </div>
 
 
-    
-    
+
+
+
     </div>
 
     <div className="my-6 p-4">
         <ServicesPanel />
     </div>
-        
-        
-</div>     
+
+
+</div>
   )
 };
 
 
-export default Service; 
-
-
+export default Service;
