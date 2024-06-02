@@ -12,7 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { error } from 'console';
 import { passwordStrength } from 'check-password-strength';
 import PasswordStrengthCheck from './PasswordStrengthCheck';
-import { registerUser } from '@/utils/authActions';
+import { registerUser, resetPassword } from '@/utils/authActions';
 import { toast } from 'react-toastify';
 interface Props {
     jwtUserId: string;
@@ -56,7 +56,14 @@ const ResetPasswordForm = ({ jwtUserId }: Props) => {
     const toggleVisible = () => {setIsVisiable((prev) => !prev)}
     const toggleVisibleConif = () => {setIsVisiableConf((prev) => !prev)}
     const saveUser: SubmitHandler<inputType> = async (data)=>{
-       
+         try {
+      const result = await resetPassword(jwtUserId, data.password);
+      if (result === "success")
+        toast.success("Your password has been reset successfully!");
+    } catch (err) {
+      toast.error("Something went wrong!");
+      console.error(err);
+    }
     }
     // useEffect(()=>{
     //     setPassStrength(passwordStrength(watch().password).id);
