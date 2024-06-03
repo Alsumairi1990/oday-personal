@@ -21,7 +21,7 @@ export default function signupLayout({
   }) {
     const [parentValue, setParentValue] = useState(true);
 
-    const handleChildClick = (newValue:String) => {
+    const handleChildClick = (newValue:boolean) => {
     setParentValue(newValue);
   };
   useEffect(() => {
