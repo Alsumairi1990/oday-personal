@@ -29,7 +29,7 @@ const LeftNav = () => {
    const imagePath2 = '/images/manager2.png';
   return (
     <div className="relative">
-<div id="adminLeft" className="fixed top-14   h-full left-0 max-sm:w-0 sm:w-[240px] " style={{transition: 'width 0.5s ease-in-out' }}>
+<div id="adminLeft" className="fixed top-14   h-full left-0  sm:w-[240px] " style={{transition: 'width 0.5s ease-in-out' }}>
 <div className="h-full overflow-y-hidden overflow-x-hidden bg-cover bg-[#051118] bg-blend-multiply " style={{backgroundImage: `url(${imagePath})`}} >
    
     

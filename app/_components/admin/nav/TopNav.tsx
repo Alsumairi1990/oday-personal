@@ -1,68 +1,17 @@
 'use client'
-import React from 'react';
+// import React from 'react';
+import React, { useState } from 'react';
 
-const TopNav = () => {
+const TopNav = (props) => {
    const imagePath = '/images/navbg.webp';
    const imagePath2 = '/images/logo.png';
    const evetAct = ()=> {
 }
-    const hidLeft = () => {
-
-      let leftNav = document.getElementById('adminLeft');
-      let leftNav1 = document.getElementById('logoMenu');
-      let leftNav2 = document.getElementById('leftAdmin');
-      const windowWidth = window.innerWidth;
-       const classes = ['!max-sm:min-0', '!sm:min-w-0','!w-0',''];
-       const classes1 = ['max-sm:min-w-0', 'max-sm:w-0'];
-       if(windowWidth >=768){
-
-
-        if(!leftNav?.classList.contains("leftNavShow")){
-            leftNav?.classList.add('leftNavShow');
-            leftNav?.classList.add(...classes);
-            leftNav1?.classList.add(...classes);
-            leftNav2?.classList.add(...classes);
-         }
-         else{
-           leftNav?.classList.remove('leftNavShow');
-            leftNav?.classList.remove(...classes);
-            leftNav1?.classList.remove(...classes);
-            leftNav2?.classList.remove(...classes);
-         }
-       }else{
-
-         if(!leftNav?.classList.contains("leftNavShow")){
-           alert("mobile show")
-             leftNav?.classList.add('leftNavShow');
-             // leftNav?.classList.add(...classes);
-             // leftNav1?.classList.add(...classes);
-             // leftNav2?.classList.add(...classes);
-
-             leftNav?.classList.add('max-sm:min-w-[240px]');
-             leftNav1?.classList.add('max-sm:min-w-[240px]');
-             leftNav2?.classList.add('max-sm:min-w-[240px]');
-
-             leftNav?.classList.add('max-sm:w-[240px]');
-             leftNav1?.classList.add('max-sm:w-[240px]');
-             leftNav2?.classList.add('max-sm:w-[240px]');
-          }
-          else{
-            alert("mobile hiden else")
-            leftNav?.classList.remove('leftNavShow');
-            leftNav?.classList.remove('max-sm:min-w-0');
-            leftNav1?.classList.remove('max-sm:min-w-0');
-            leftNav2?.classList.remove('max-sm:min-w-0');
-
-            leftNav?.classList.remove('max-sm:w-0');
-            leftNav1?.classList.remove('max-sm:w-0');
-            leftNav2?.classList.remove('max-sm:w-0');
-
-
-          }
-
-       }
-
-    }
+      const [openNav, setOpenNav] = useState(true);
+      const changeParentValue = () => {
+       setOpenNav((prevState) => !prevState); 
+       props.handleClick(!openNav); 
+      };
     // document.addEventListener("click", function(event) {
 
         // let menus = document.getElementsByClassName('auth-menu');
@@ -109,7 +58,7 @@ const TopNav = () => {
         <div className="w-full  flex items-center bg-white border-b border-b-gray-200" style={{boxShadow:'0 10px 30px 0 rgb(82 63 104 / 6%)'}}>
             <div className="pl-2">
              <div className="  flex items-center h-full">
-                    <span onClick={hidLeft}  className="w-8">
+                    <span onClick={changeParentValue}  className="w-8">
                     <svg width="100%" height="100%" className="ml-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Menu / Menu_Alt_03">
                     <path id="Vector" d="M5 17H13M5 12H19M5 7H13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
