@@ -1,8 +1,10 @@
 'use client'
 // import React from 'react';
 import React, { useState } from 'react';
-
-const TopNav = (props) => {
+interface ChildProps {
+  handleClick: (newValue: boolean) => void; 
+}
+const TopNav = (props:ChildProps) => {
    const imagePath = '/images/navbg.webp';
    const imagePath2 = '/images/logo.png';
    const evetAct = ()=> {
