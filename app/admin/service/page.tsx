@@ -6,7 +6,7 @@ const Serivce = () => {
 
     return (
       <div className="p-2">
-        <span className="text-gray-600 pt-3">Serivce Page</span>
+        <span className="text-gray-600 pt-3 mb-4">Serivce Page</span>
         <Service  />
       </div>
 )
