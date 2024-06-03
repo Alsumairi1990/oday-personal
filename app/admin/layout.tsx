@@ -27,7 +27,6 @@ export default function signupLayout({
   useEffect(() => {
     const handleResize = () => {
       const isMobile = window.innerWidth <= 768; // Adjust breakpoint as needed
-      alert('mob');
       setParentValue(!isMobile); // Set based on mobile state
     };
 
