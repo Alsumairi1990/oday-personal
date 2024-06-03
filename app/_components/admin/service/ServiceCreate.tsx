@@ -33,14 +33,14 @@ const ServiceCreate = () => {
 
    }
    const changeBtnMenu = (value:string)=> {
-    alert(value);
+    
     setOpenMenu(value);
    }
 
   return (
     <div  className="flex flex-wrap min-h-[100vh] h-auto" >
     <div id="add-main-panel" className="w-11.8/12 mx-auto add-main-panel  flex h-full flex-col  rounded-md  borrder borrder-gray-200 bg-whitey">
-        <div className="flex-100 grid grid-cols-5 gap-4 rounded bjg-[#4568e7] px-2.5 "  >
+        <div className="flex-100 grid grid-cols-2 sm:grid-cols-5 gap-4 rounded bjg-[#4568e7] px-2.5 "  >
           <div className="add-main">
               {/* <AddingBtn
                 svgUrl="grtgtr"
@@ -55,7 +55,7 @@ const ServiceCreate = () => {
                 changeMenu={changeBtnMenu}
                 />
                 {isOpen('basic') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
-                        <div   className="flex flex-col w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300" style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                        <div   className="flex flex-col w-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300" style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                           <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
                               <div className="flex items-center">
                                   <span className="inline-flex h-full w-9 pb-1 justify-center items-center">
