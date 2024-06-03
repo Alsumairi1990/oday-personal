@@ -11,7 +11,7 @@ const Create = () => {
 
     return (
       <div className="p-2">
-        <span className="text-gray-600 pt-3">Serivce Page</span>
+        <span className="text-gray-600 pt-3 mb-6">Serivce Page</span>
         <ServiceCreate  />
       </div>
 )

@@ -16,7 +16,7 @@ const AddingBtn =({title,svgUrl,title_name,changeMenu}:Props)=> {
          changeMenu(title_name); 
       }
     return(
-        <div className=" px-2 bg-white rounded-md border mb-4 relative pt-1 border-gray-300 hover:bg-gray-100 cursor-pointer  " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+        <div className=" px-2 bg-white rounded-md border mb-4 relative pt-1 border-gray-300 hover:bg-gray-100 cursor-pointer  border-b-2 border-b-red-700" style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
             <div  onClick={toggleBtn} className="add-btn flex flex-col items-center w-full  py-2 ">
                 <span   className="text-2xl text-orange-600 mb-2.5 bg-[#eee] h-11 w-11 p-1 flex rounded-lg border border-[#ccc] items-center justify-center">
                   <img src={svgUrl} alt="" />
