@@ -24,17 +24,27 @@ export default function signupLayout({
     const handleChildClick = (newValue:boolean) => {
     setParentValue(newValue);
   };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     const isMobile = window.innerWidth <= 768; 
+  //     setParentValue(!isMobile);
+  //   };
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
+
   useEffect(() => {
     const handleResize = () => {
-      const isMobile = window.innerWidth <= 768; // Adjust breakpoint as needed
-      setParentValue(!isMobile); // Set based on mobile state
+      const isMobile = window.innerWidth <= 768;
+      setParentValue(!isMobile);
     };
-
     window.addEventListener('resize', handleResize);
-
-    // Cleanup function on component unmount
+    handleResize(); 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+
+
     return (
 
 
