@@ -18,6 +18,10 @@ const ServiceCreate = () => {
    const [openNav, setOpenNav] = useState(true);
    const [basic,setBasic] = useState('/images/basic-2.svg');
    const [extra,setExtra] = useState('/images/basic-3.svg');
+   const [phases,setPhases] = useState('/images/basic4.svg');
+   const [pricing,setPricing] = useState('/images/basic5.svg');  
+   const [testimonials,setTestimonials] = useState('/images/basic6.svg');
+
    const openDisplay =()=>{
     alert("vrvtrv")
    }
@@ -92,6 +96,110 @@ const ServiceCreate = () => {
                                     <svg className="w-full h-full icon line-color fill-black icon flat-color" width="50px" height="50px" viewBox="0 0 24 24" id="add-file-6" data-name="Line Color" xmlns="http://www.w3.org/2000/svg"><path id="secondary" className="fill-none stroke-white stroke-1" d="M16,19h4m-2-2v4M8,13h6m0-4H8"></path><path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6"></path></svg>
                                   </span>
                                   <span className="text-base font-semibold text-white">Basic Data</span>
+                              </div>
+                              <div className="ml-auto">
+                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                      </svg>
+                                      <span className="sr-only">Close modal</span>
+                                  </button>
+                              </div>
+                              </div>
+                         <div  className="w-full max-h-[100vh] overflow-y-auto">
+                         <BasicInfo  />
+                      </div>
+                     </div>
+                 </div>
+                )}
+
+             </div>
+
+            <div className="add-main">
+                <AddingBtn
+                title="Service Phases"
+                svgUrl={phases}
+                title_name="phases"
+                changeMenu={changeBtnMenu}
+                />
+                {isOpen('phases') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                          <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
+                              <div className="flex items-center">
+                                  <span className="inline-flex h-full w-9 pb-1 justify-center items-center">
+                                    <svg className="w-full h-full icon line-color fill-black icon flat-color" width="50px" height="50px" viewBox="0 0 24 24" id="add-file-6" data-name="Line Color" xmlns="http://www.w3.org/2000/svg"><path id="secondary" className="fill-none stroke-white stroke-1" d="M16,19h4m-2-2v4M8,13h6m0-4H8"></path><path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6"></path></svg>
+                                  </span>
+                                  <span className="text-base font-semibold text-white">phases Data</span>
+                              </div>
+                              <div className="ml-auto">
+                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                      </svg>
+                                      <span className="sr-only">Close modal</span>
+                                  </button>
+                              </div>
+                              </div>
+                         <div  className="w-full max-h-[100vh] overflow-y-auto">
+                         <BasicInfo  />
+                      </div>
+                     </div>
+                 </div>
+                )}
+
+             </div>
+
+
+              <div className="add-main">
+                <AddingBtn
+                title="Pricing Details"
+                svgUrl={pricing}
+                title_name="pricing"
+                changeMenu={changeBtnMenu}
+                />
+                {isOpen('pricing') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                          <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
+                              <div className="flex items-center">
+                                  <span className="inline-flex h-full w-9 pb-1 justify-center items-center">
+                                    <svg className="w-full h-full icon line-color fill-black icon flat-color" width="50px" height="50px" viewBox="0 0 24 24" id="add-file-6" data-name="Line Color" xmlns="http://www.w3.org/2000/svg"><path id="secondary" className="fill-none stroke-white stroke-1" d="M16,19h4m-2-2v4M8,13h6m0-4H8"></path><path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6"></path></svg>
+                                  </span>
+                                  <span className="text-base font-semibold text-white">Pricing Data</span>
+                              </div>
+                              <div className="ml-auto">
+                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                      </svg>
+                                      <span className="sr-only">Close modal</span>
+                                  </button>
+                              </div>
+                              </div>
+                         <div  className="w-full max-h-[100vh] overflow-y-auto">
+                         <BasicInfo  />
+                      </div>
+                     </div>
+                 </div>
+                )}
+
+             </div>
+
+
+              <div className="add-main">
+                <AddingBtn
+                title="testimonials Data"
+                svgUrl={testimonials}
+                title_name="testimonials"
+                changeMenu={changeBtnMenu}
+                />
+                {isOpen('testimonials') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                          <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
+                              <div className="flex items-center">
+                                  <span className="inline-flex h-full w-9 pb-1 justify-center items-center">
+                                    <svg className="w-full h-full icon line-color fill-black icon flat-color" width="50px" height="50px" viewBox="0 0 24 24" id="add-file-6" data-name="Line Color" xmlns="http://www.w3.org/2000/svg"><path id="secondary" className="fill-none stroke-white stroke-1" d="M16,19h4m-2-2v4M8,13h6m0-4H8"></path><path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6"></path></svg>
+                                  </span>
+                                  <span className="text-base font-semibold text-white">testimonials Data</span>
                               </div>
                               <div className="ml-auto">
                                   <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
