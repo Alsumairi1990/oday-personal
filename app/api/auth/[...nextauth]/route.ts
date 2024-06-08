@@ -58,12 +58,13 @@ const handler = NextAuth({
       callbacks: {
       async jwt({ token, user }) {
         if (user) token.user = user as User & { role: string };
-          
+          console.log("----------------- inside jwr vallback-------------------")
         
         return token;
       },
   
       async session({ token, session }) {
+        console.log("----------------- inside session callback-------------------")
         session.user = token.user;
         return session;
       },
