@@ -52,17 +52,20 @@ const SignInForm = (props : Props) => {
             toast.error(result?.error);
             return;
           }
-          await new Promise((resolve) => setTimeout(resolve, 1000));
-          if(session){
-            console.log("-------------------  session is not null-------------");
-          }
-          console.log("-------------------  before toast od user role-------------");
-          toast.success("Welcome To Oday Platfrom"+session!.user.role);
-          console.log("-------------------urlback"+props.callbackUrl)
-           console.log("################## User Role "+session!.user.email+"#########################");
-
-        //   router.push(props.callbackUrl ? props.callbackUrl as string : "/");
-        router.push("/admin/home");
+          const handleSessionUpdate = async () => {
+            // Wait for session update
+            await new Promise((resolve) => setTimeout(resolve, 100)); // Adjust timeout as needed
+        
+            console.log("-------------------  before toast of user role-------------");
+            toast.success("Welcome To Oday Platfrom " + session!.user.role);
+            console.log("-------------------urlback" + props.callbackUrl);
+            console.log("################## User Role " + session!.user.email + "#########################");
+        
+            //   router.push(props.callbackUrl ? props.callbackUrl as string : "/");
+            router.push("/admin/home");
+          };
+        
+          handleSessionUpdate(); // Call the callback function
 
       }
 
