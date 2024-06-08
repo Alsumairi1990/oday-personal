@@ -52,9 +52,9 @@ const SignInForm = (props : Props) => {
             toast.error(result?.error);
             return;
           }
-          toast.success("Welcome To Oday Platfrom"+session.user.role);
+          toast.success("Welcome To Oday Platfrom"+session!.user.role);
           console.log("-------------------urlback"+props.callbackUrl)
-           console.log("################## User Role "+session.email+"#########################");
+           console.log("################## User Role "+session!.user.email+"#########################");
 
         //   router.push(props.callbackUrl ? props.callbackUrl as string : "/");
         router.push("/admin/home");
