@@ -52,7 +52,10 @@ const SignInForm = (props : Props) => {
             toast.error(result?.error);
             return;
           }
-          await new Promise((resolve) => setTimeout(resolve, 100));
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          if(session){
+            console.log("-------------------  session is not null-------------");
+          }
           console.log("-------------------  before toast od user role-------------");
           toast.success("Welcome To Oday Platfrom"+session!.user.role);
           console.log("-------------------urlback"+props.callbackUrl)
