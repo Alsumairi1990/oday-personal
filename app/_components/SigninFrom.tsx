@@ -55,7 +55,11 @@ const SignInForm = (props : Props) => {
           const handleSessionUpdate = async () => {
             // Wait for session update
             await new Promise((resolve) => setTimeout(resolve, 100)); // Adjust timeout as needed
-        
+            if (session) {
+              console.log(session.user.role); // Access user data only if session is available
+            } else {
+              console.log("Session not yet updated");
+            }
             console.log("-------------------  before toast of user role-------------");
             toast.success("Welcome To Oday Platfrom " + session!.user.role);
             console.log("-------------------urlback" + props.callbackUrl);
