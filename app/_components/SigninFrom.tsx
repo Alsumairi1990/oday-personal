@@ -42,7 +42,7 @@ const SignInForm = (props : Props) => {
       });
 
       const onSubmit: SubmitHandler<InputType> = async (data) => {
-        let name = null;
+        console.log("-------------------  start of signin form -------------");
         const result = await signIn('credentials',{
             redirect: false,
             username : data.email,
@@ -52,6 +52,7 @@ const SignInForm = (props : Props) => {
             toast.error(result?.error);
             return;
           }
+          console.log("-------------------  before toast od user role-------------");
           toast.success("Welcome To Oday Platfrom"+session!.user.role);
           console.log("-------------------urlback"+props.callbackUrl)
            console.log("################## User Role "+session!.user.email+"#########################");
