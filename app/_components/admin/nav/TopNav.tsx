@@ -46,14 +46,14 @@ const TopNav = (props:ChildProps) => {
         // })
    // }
   return (
-    <div className="flex h-14 items-centre justify-center ">
+    <div className="flex h-14 items-centre justify-center sticky top-0">
         <div id='logoMenu' style={{transition: 'width 0.9s ease-in-out' }} className=" flex h-full bg-[#020910] items-center max-sm:min-w-0 max-sm:w-0 sm:min-w-[240px] border-b border-b-gray-800">
             <div className="w-10">
                 <img className="w-full" src={imagePath2} alt="" />
             </div>
             <div className="ml-2">
                 <span className="text-base font-semibold text-white capitalized">
-                    Sam Technology
+                    SAM TECHNOLOGIES
                 </span>
             </div>
         </div>

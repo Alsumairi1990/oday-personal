@@ -7,7 +7,7 @@ generator client {
 
 datasource db {
 provider = "postgresql"
-//provider = "mysql"
+#provider = "mysql"
   url      = env("DATABASE_URL")
 }
 model Post {
@@ -71,6 +71,7 @@ model User {
   updatedAt     DateTime  @updatedAt @map(name: "updated_at")
   emailVerified DateTime?
   image         String?
+  role          String?
   posts         Post[]
   services  Service[]
   @@map(name: "users")

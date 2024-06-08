@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 
 import { useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { signIn } from "next-auth/react";
+import { signIn , useSession} from "next-auth/react";
 import { toast } from "react-toastify";
 
 
@@ -29,6 +29,7 @@ const FormSchema = z.object({
 type InputType = z.infer<typeof FormSchema>;
 const SignInForm = (props : Props) => {
     const router = useRouter();
+   const { data: session } = useSession();
 
     const [isVisiable,setIsVisiable] = useState(false);
     const toggleVisible = () => {setIsVisiable((prev) => !prev)}
@@ -41,6 +42,7 @@ const SignInForm = (props : Props) => {
       });
 
       const onSubmit: SubmitHandler<InputType> = async (data) => {
+        let name = null;
         const result = await signIn('credentials',{
             redirect: false,
             username : data.email,
@@ -50,12 +52,18 @@ const SignInForm = (props : Props) => {
             toast.error(result?.error);
             return;
           }
-          toast.success("Welcome To Oday Platfrom");
+          toast.success("Welcome To Oday Platfrom"+session.user.role);
           console.log("-------------------urlback"+props.callbackUrl)
+           console.log("################## User Role "+session.email+"#########################");
+
         //   router.push(props.callbackUrl ? props.callbackUrl as string : "/");
         router.push("/admin/home");
 
       }
+
+       
+          
+         
 
 
     return(
