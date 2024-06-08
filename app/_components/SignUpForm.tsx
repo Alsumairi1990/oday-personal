@@ -61,7 +61,12 @@ const SignUpForm = () => {
     const toggleVisible = () => {setIsVisiable((prev) => !prev)}
     const toggleVisibleConif = () => {setIsVisiableConf((prev) => !prev)}
     const saveUser: SubmitHandler<inputType> = async (data)=>{
-        const user = data;
+        // const user = data;
+        const user = {
+            ...data,
+            role : 'user'
+
+        }
         try{
             const result = await registerUser(user)
             console.log("sucess");
