@@ -79,13 +79,13 @@ const LeftNav = () => {
             </li>
 
             <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
-                <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
+                <Link href="/user/projects" className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
                 <span className=" bg-[#206681] border border-[#878787] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
                     <BiChip className="text-xl text-white" />
                     </span>
-                        Applications
+                        Projects
                  
-                </a>
+                </Link>
                 <ul className="side-sub font-normal text-[.9rem] pt-1 ml-[1.8rem] hidden border-l border-[#355476] mb-2">
                     <li className="pl-6 py-1 relative after:content-[''] after:absolute after:h-px after:w-5 after:bg-[#355476] after:left-0 after:top-4">
                         <a href="/admin/scholarship-manage" className="pl-2 relative after:content-[''] after:absolute after:h-1.5 after:w-1.5 after:bg-[#355476] after:left-[-2px] after:top-1.7 after:rounded">Manage </a>
@@ -140,17 +140,17 @@ const LeftNav = () => {
                     </li>
                 </ul>
             </li>
-            <div className="pl-1 mt-1">
+           {/* <div className="pl-1 mt-1">
                 <span className="text-md text-gray-300 font-normal capitalize">Articles</span>
-            </div>
+            </div>*/}
             <li className="side-item-btn py-0 pl-1 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
-                <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
+                <Link href="/user/billing" className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
                 <span className=" bg-[#206681] border border-[#878787] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
                     <HiAcademicCap className="text-xl text-white" />
                     </span>
-                        Programms
+                        Billing- Palnse
                     
-                </a>
+                </Link>
                 <ul className="side-sub font-normal text-[.9rem] pt-1 ml-[1.8rem] hidden border-l border-[#355476] mb-2">
                     <li className="pl-6 py-1 relative after:content-[''] after:absolute after:h-px after:w-5 after:bg-[#355476] after:left-0 after:top-4">
                         <a href="/admin/exams-manage" className="pl-2 relative after:content-[''] after:absolute after:h-1.5 after:w-1.5 after:bg-[#355476] after:left-[-2px] after:top-1.7 after:rounded">Manage </a>
