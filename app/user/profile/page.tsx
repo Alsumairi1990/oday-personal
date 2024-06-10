@@ -9,7 +9,7 @@ const ProfilePage = () => {
    const postHight = 'https://tixia.dexignzone.com/xhtml/images/profile/1.jpg';
     return (
       <div className="p-2">
-        <div class="px-3 py-2 bg-white border border-gray-200 mb-2 rounded-md">
+        <div className="px-3 py-2 bg-white border border-gray-200 mb-2 rounded-md">
            <p className="text-gray-600  mb-0 max-sm:hidden">Profile Page</p>
         </div>
         <div className="bg-white flex flex-col shadow" >
@@ -89,8 +89,8 @@ const ProfilePage = () => {
                <div className="">
                   <div className="profile-blog">
                      <h4 className="text-base font-semibold text-blue-600">Today Highlights</h4>
-                     <img src={postHight} alt="" class="mt-4 mb-4 w-100 rounded" />
-                     <h4><a href="post-details.html" class="text-black text-base my-2 font-semibold">Creative Ticket Agency Theme</a></h4>
+                     <img src={postHight} alt="" className="mt-4 mb-4 w-100 rounded" />
+                     <h4><a href="post-details.html" className="text-black text-base my-2 font-semibold">Creative Ticket Agency Theme</a></h4>
                      <p className="mb-0 mt-3 text-gray-600 text-md">A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
                   </div>
                </div>
