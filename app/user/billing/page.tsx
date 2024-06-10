@@ -86,7 +86,7 @@ const BillingPage = () => {
                               </span>
                             </div>
                           </div>
-                          <div class="flex gap-x-3 items-center mt-2">
+                          <div className="flex gap-x-3 items-center mt-2">
                               <div className="w-full md:w-1/2 ">
                                 <label htmlFor="paymentName" className="text-sm text-gray-500">Name</label>
                                 <input type="text" id="paymentName" className="border px-2 placeholder:text-sm border-gray-200 rounded-md h-10 w-full" placeholder="John Doe" />

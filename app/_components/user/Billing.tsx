@@ -65,7 +65,7 @@ const Billing = () => {
   return (
    <div className="w-full max-sm:border max-sm:border-gray-300 shadow-md  m-auto p-6 bg-white dark:bg-black-100 dark:border dark:border-gray-800  rounded-md">
      <div className="py-1 mb-4">
-        <span class="text-base font-medium text-gray-700">Billing Data </span>
+        <span className="text-base font-medium text-gray-700">Billing Data </span>
      </div>
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  ">
         <div className="flex flex-wrap justify-between sm:gap-y-2">
