@@ -1,8 +1,15 @@
 
 import React from 'react';
  
+interface Project {
+   id : number
+   name: string;
+   image: string; 
+   achived : string;
+
+}
  interface Props {
-      project : Object
+      project : Project
  }
 
 const Project = ({project}:Props) => {
@@ -65,18 +72,7 @@ const Project = ({project}:Props) => {
                    </div>
                    <div className="flex items-center">
                       <div className="flex items-center">
-                         {/* <ul className="flex -space-x-2">
-                            <li className="tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Vinnie Mostowy">
-                               <img className="rounded-full w-6 h-6" src="../../assets/img/avatars/5.png" alt="Avatar" />
-                            </li>
-                            <li className="tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Allen Rieske">
-                               <img className="rounded-full w-6 h-6" src="../../assets/img/avatars/12.png" alt="Avatar" />
-                            </li>
-                            <li className="tooltip" data-bs-toggle="tooltip" data-bs-placement="top" title="Julee Rossignol" >
-                               <img className="rounded-full w-6 h-6" src="../../assets/img/avatars/6.png" alt="Avatar" />
-                            </li>
-                            <li><small className="text-gray-500">280 Members</small></li>
-                         </ul> */}
+                         
                       </div>
                       <div className="ml-auto">
                          <a href="javascript:void(0);" className="text-gray-500 flex items-center"><i className="ri-wechat-line ri-24px mr-1"></i>15</a>
