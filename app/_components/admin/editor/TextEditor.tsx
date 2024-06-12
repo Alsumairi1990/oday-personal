@@ -42,9 +42,9 @@ const [isFontMenuVisible, setIsFontMenuVisible] = useState(false);
     setIsEditMenuVisible(!isEditMenuVisible);
   };
 
-  const handleHeadingClick = (level) => {
-    editor.chain().focus().toggleHeading({ level }).run();
-  };
+  // const handleHeadingClick = (level) => {
+  //   editor.chain().focus().toggleHeading({ level }).run();
+  // };
 
 
   const toggleFileMenu = () => {
@@ -349,14 +349,14 @@ const [isFontMenuVisible, setIsFontMenuVisible] = useState(false);
                                               className="flex-15 bg-[#003300] text-sm w-[25px] font-semibold text-gray-600"
                                             ></button>
                                           </div>
-                                          <div className="flex items-center border w-auto rounded bg-gray-100 text-md font-semibold px-1 self-center my-2">
+                                          {/* <div className="flex items-center border w-auto rounded bg-gray-100 text-md font-semibold px-1 self-center my-2">
                                             <span className="text-gray-500 mr-2">More Colors</span>
                                             <input
                                               className="w-[25px]"
                                               type="color"
                                               onInput={(e) => editor.chain().focus().setColor(e.target.value).run()}
                                             />
-                                          </div>
+                                          </div> */}
                                         </div>
                                       )}
                                     </div>
@@ -373,12 +373,16 @@ const [isFontMenuVisible, setIsFontMenuVisible] = useState(false);
                                             </button>
                                             <div className={`absolute edit-menu ${showMenu ? 'block' : 'hidden'} top-[35px] left-0 flex flex-col bg-white z-[40] border-x border-y border-x-gray-300 border-y-gray-300`}>
                                                 <p className="mb-0 py-1 bg-gray-100 text-mm px-2">Color options</p>
-                                                  <input
-                                                    type="color"
-                                                    onInput={event => editor.chain().focus().setColor(event.target.value).run()}
-                                                    value={editor.getAttributes('textStyle').color}
-                                                    data-testid="setColor"
-                                                  />
+                                                <input
+                                                      type="color"
+                                                      onInput={event => {
+                                                        const target = event.target as HTMLInputElement;
+                                                        editor.chain().focus().setColor(target.value).run();
+                                                      }}
+                                                      value={editor.getAttributes('textStyle').color}
+                                                      data-testid="setColor"
+                                                    />
+
                                                 <div className="p-2 flex w-48 flex-wrap gap-y-1 justify-between">
                                                  <button
                                                     onClick={() => editor.chain().focus().setColor('#958DF1').run()}
@@ -395,7 +399,10 @@ const [isFontMenuVisible, setIsFontMenuVisible] = useState(false);
                                                 </div>
                                                 <div className="flex items-center border w-auto rounded bg-gray-100 text-md font-semibold px-1 self-center my-2">
                                                     <span className="text-gray-500 mr-2">More Colors</span>
-                                                    <input className="w-[25px]" type="color" onInput={(e) => { editor.chain().focus().setColor(e.target.value).run(); }} />
+                                                    <input className="w-[25px]" type="color" onInput={(e) => { 
+                                                      const target = e.target as HTMLInputElement;
+                                                      editor.chain().focus().setColor(target.value).run(); 
+                                                      }} />
                                                 </div>
                                             </div>
                                         </div>
