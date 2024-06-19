@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useEditor, EditorContent } from "@tiptap/react";
+import Document from "@tiptap/extension-document";
 import { Color } from "@tiptap/extension-color";
 import Placeholder from "@tiptap/extension-placeholder";
 import Heading from "@tiptap/extension-heading";
@@ -16,6 +17,9 @@ import { FaBold } from "react-icons/fa6";
 import { FaItalic } from "react-icons/fa";
 import { FaStrikethrough } from "react-icons/fa6";
 import { FaUnderline } from "react-icons/fa6";
+import { IoMdColorFill } from "react-icons/io";
+
+import { FaCaretDown } from "react-icons/fa";
 
 const TextEditor = () => {
   const [isFileMenuVisible, setIsFileMenuVisible] = useState(false);
@@ -23,6 +27,7 @@ const TextEditor = () => {
   const [isEditorMenuVisible, setIsEditorMenuVisible] = useState(false);
   const [isEditMenuVisible, setIsEditMenuVisible] = useState(false);
   const [isFontMenuVisible, setIsFontMenuVisible] = useState(false);
+  const [isFontSizeVisible, setIsFontSizeVisible] = useState(false);
 
   const [showMenu, setShowMenu] = useState(false);
 
@@ -84,7 +89,9 @@ const TextEditor = () => {
       StarterKit,
       Bold,
       Text,
-      Heading,
+      Heading.configure({
+        levels: [1, 2, 3],
+      }),
       TextStyle,
       Underline,
       Color,
@@ -113,11 +120,11 @@ const TextEditor = () => {
       <div
         className="p "
         style={{
-          backgroundImage:
-            "linear-gradient(360deg, #f7f7f7, #ffffff, #f9f9f9);     box-shadow: 0 2px 5px -2px #9d9898",
+          backgroundImage: "linear-gradient(360deg, #f7f7f7, #ffffff, #f9f9f9)",
+          boxShadow: "0 2px 5px -2px #9d9898",
         }}
       >
-        <div className="flex px-4 border-b bg-[#dbdbdb14] border-b-gray-200 bg-gradioent-to-t from-[#e1e4e5] to-[#fbfbfb]">
+        <div className="flex hidden px-4 border-b bg-[#dbdbdb14] border-b-gray-200 bg-gradioent-to-t from-[#e1e4e5] to-[#fbfbfb]">
           <div className="relative edit-btn flex flex-col items-center">
             <button
               onClick={toggleFileMenu}
@@ -240,10 +247,10 @@ const TextEditor = () => {
         </div>
 
         <div
-          className="flex gap-y-2 px-4 flex-wrap relative"
+          className="flex  px-4 flex-wrap relative"
           style={{ boxShadow: "0 2px 5px -2px #9d9898" }}
         >
-          <div className="p-2 flex flex-20 gap-y-3 flex-wrap items-center border-r border-r-gray-200">
+          <div className="p-2 flex flex-20 gap-y-5 flex-wrap items-center border-r border-r-gray-200">
             <button
               onClick={() => editor.chain().focus().toggleBold().run()}
               className={`text-sm text-gray-600 w-[25px] rounded ${!editor.can().chain().focus().toggleBold().run() ? "disabled" : ""} ${editor.isActive("bold") ? "is-active bg-blue-400 text-white" : ""}`}
@@ -276,7 +283,7 @@ const TextEditor = () => {
               </button>
               {isEditMenuVisible && (
                 <div className="absolute edit-menu top-[35px] left-0 flex flex-col bg-white overflow-y-auto max-h-40 z-[40] border-x border-y border-x-gray-300 border-y-gray-300">
-                  <p className="mb-0 p2 bg-gray-300 text-sm px-2">Paragrapg</p>
+                  <p className="mb-0 p2 bg-gray-300 text-sm px-2">Payragrapg</p>
                   <div className="p-2 flex flex-col">
                     <button
                       onClick={() =>
@@ -330,16 +337,136 @@ const TextEditor = () => {
               <FaUnderline />
             </button>
 
-            <div className="relative edit-btn flex flex-col items-center pt-1 w-[55px] mx-1">
+            <div className="relative edit-btn flex flex-col items-center  w-[40px] mx-1">
               <button
                 type="button"
-                className="text-[14px] text-gray-600 border w-[55px] flex justify-between px-1 rounded"
-                onClick={() => setIsFontMenuVisible(!isFontMenuVisible)}
+                className=" text-[14px] text-gray-600 border w-[55px] flex justify-between px-1 rounded "
               >
                 <span className="leading-[21px] font-semibold mr-0.5">
                   Font
                 </span>
-                <i className="fas fa-caret-down pt-1 text-xs text-gray-500 ml-1"></i>
+                <FaCaretDown className="text-md pt-1 text-gray-500 ml-1" />
+              </button>
+
+              {isFontMenuVisible && (
+                <div className="absolute edit-menu top-[35px] left-0 flex flex-col bg-white z-[40] border-x border-y border-x-gray-300 border-y-gray-300">
+                  <p className="mb-0 py-1 bg-gray-100 text-mm px-2">
+                    Color options
+                  </p>
+                  <div className="p-2 flex w-48 flex-wrap gap-y-1 justify-between">
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#ffc078" })
+                          .run()
+                      }
+                      className="flex-15 h-[25px] bg-[#ffc078] text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#ef4444" })
+                          .run()
+                      }
+                      className="flex-15 bg-red-500 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#2563eb" })
+                          .run()
+                      }
+                      className="flex-15 bg-blue-600 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#000" })
+                          .run()
+                      }
+                      className="flex-15 bg-black text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#4b5563" })
+                          .run()
+                      }
+                      className="flex-15 bg-gray-600 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#eab308" })
+                          .run()
+                      }
+                      className="flex-15 bg-yellow-500 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 1 }).run()
+                      }
+                      className="flex-15 h-[25px] bg-red-300 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 2 }).run()
+                      }
+                      className="flex-15 bg-blue-800 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 3 }).run()
+                      }
+                      className="flex-15 bg-sky-600 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 4 }).run()
+                      }
+                      className="flex-15 bg-[#800080] text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 5 }).run()
+                      }
+                      className="flex-15 bg-[#dd0] text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 6 }).run()
+                      }
+                      className="flex-15 bg-[#003300] text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="relative edit-btn flex flex-col items-center  w-[30px] mx-1 ml-2">
+              <button
+                type="button"
+                className="text-[14px] text-gray-600   w-[35px] flex justify-center px-1 rounded"
+                onClick={() => setIsFontMenuVisible(!isFontMenuVisible)}
+              >
+                <span className="w-4 flex justify-center border-b-2 border-b-gray-500 items-center ml-2 ">
+                  <IoMdColorFill className="text-2xl" />
+                </span>
+                <span>
+                  <FaCaretDown className="text-md pt-1 text-gray-500 ml-0" />
+                </span>
               </button>
               {isFontMenuVisible && (
                 <div className="absolute edit-menu top-[35px] left-0 flex flex-col bg-white z-[40] border-x border-y border-x-gray-300 border-y-gray-300">
@@ -444,26 +571,19 @@ const TextEditor = () => {
                       className="flex-15 bg-[#003300] text-sm w-[25px] font-semibold text-gray-600"
                     ></button>
                   </div>
-                  {/* <div className="flex items-center border w-auto rounded bg-gray-100 text-md font-semibold px-1 self-center my-2">
-                                            <span className="text-gray-500 mr-2">More Colors</span>
-                                            <input
-                                              className="w-[25px]"
-                                              type="color"
-                                              onInput={(e) => editor.chain().focus().setColor(e.target.value).run()}
-                                            />
-                                          </div> */}
                 </div>
               )}
             </div>
 
-            <div className="relative flex edit-btn flex-col items-center w-[35px] mr-1">
+            <div className="relative flex edit-btn flex-col items-center w-[30px] mr-1 ml-2">
               <button
                 onClick={toggleMenu}
-                className="text-md text-gray-600 w-[35px] px-1 pb-0.5 rounded"
+                className="text-md text-gray-600 w-[35px] px-1 flex  rounded"
               >
                 <span className="font-bold px-0.5 border-b-2 border-b-gray-500 mr-0.5">
                   A
                 </span>
+                <FaCaretDown className="text-md pt-1 text-gray-500 ml-0.5" />
               </button>
               <div
                 className={`absolute edit-menu ${showMenu ? "block" : "hidden"} top-[35px] left-0 flex flex-col bg-white z-[40] border-x border-y border-x-gray-300 border-y-gray-300`}
@@ -585,6 +705,122 @@ const TextEditor = () => {
                   />
                 </div>
               </div>
+            </div>
+
+            <div className="relative edit-btn flex flex-col items-center  w-[35px] mx-1 ml-4">
+              <button
+                type="button"
+                className=" text-[14px] text-gray-600 border w-[55px] flex justify-between px-1 rounded "
+                onClick={() => setIsFontSizeVisible(!isFontSizeVisible)}
+              >
+                <span className=" text-md font-semibold mr-0.5">size</span>
+                <FaCaretDown className="text-md pt-1 text-gray-500 ml-1" />
+              </button>
+              {isFontSizeVisible && (
+                <div className="absolute edit-menu top-[35px] left-0 flex flex-col bg-white z-[40] border-x border-y border-x-gray-300 border-y-gray-300">
+                  <p className="mb-0 py-1 bg-gray-100 text-mm px-2">
+                    Color options
+                  </p>
+                  <div className="p-2 flex w-48 flex-wrap gap-y-1 justify-between">
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#ffc078" })
+                          .run()
+                      }
+                      className="flex-15 h-[25px] bg-[#ffc078] text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#ef4444" })
+                          .run()
+                      }
+                      className="flex-15 bg-red-500 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#2563eb" })
+                          .run()
+                      }
+                      className="flex-15 bg-blue-600 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#000" })
+                          .run()
+                      }
+                      className="flex-15 bg-black text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#4b5563" })
+                          .run()
+                      }
+                      className="flex-15 bg-gray-600 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor
+                          .chain()
+                          .focus()
+                          .toggleHighlight({ color: "#eab308" })
+                          .run()
+                      }
+                      className="flex-15 bg-yellow-500 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 1 }).run()
+                      }
+                      className="flex-15 h-[25px] bg-red-300 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 2 }).run()
+                      }
+                      className="flex-15 bg-blue-800 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 3 }).run()
+                      }
+                      className="flex-15 bg-sky-600 text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 4 }).run()
+                      }
+                      className="flex-15 bg-[#800080] text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 5 }).run()
+                      }
+                      className="flex-15 bg-[#dd0] text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().toggleHeading({ level: 6 }).run()
+                      }
+                      className="flex-15 bg-[#003300] text-sm w-[25px] font-semibold text-gray-600"
+                    ></button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
