@@ -108,47 +108,75 @@ body {
 .side-content::-webkit-scrollbar-thumb:hover {
   background: rgb(58, 57, 57);
 }
-.tiptap {
-  :first-child {
-    margin-top: 0;
-  }
-
-  /* Heading styles */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    line-height: 1.1;
-    margin-top: 2.5rem;
-    text-wrap: pretty;
-  }
-
-  h1,
-  h2 {
-    margin-top: 3.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  h1 {
-    font-size: 1.4rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
-
-  h3 {
-    font-size: 1.1rem;
-  }
-
-  h4,
-  h5,
-  h6 {
-    font-size: 1rem;
-  }
+.tiptap blockquote {
+  border-left: 3px solid #ddd;
+  margin: 1.5rem 0;
+  padding-left: 1rem;
 }
+.tiptap h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1;
+  margin-top: 2.5rem;
+}
+.tiptap h1,
+h2 {
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+}
+.tiptap h1 {
+  font-size: 1.4rem;
+}
+.tiptap h2 {
+  font-size: 1.2rem;
+}
+.tiptap h3 {
+  font-size: 1.1rem;
+}
+.tiptap h4 {
+  font-size: 1rem;
+}
+.tiptap a {
+  color: rgb(16, 153, 231);
+  cursor: pointer;
+}
+
+.tiptap a:hover {
+  color: rgb(48, 172, 243);
+}
+
+.tiptap hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  cursor: pointer;
+  margin: 2rem 0;
+}
+
+.tiptap hr.ProseMirror-selectednode {
+  border-top: 1px solid #ddd;
+}
+
+.tiptap code {
+  background-color: rgba(#616161, 0.1);
+  color: #616161;
+}
+.tiptap pre {
+  background: #0d0d0d;
+  color: #fff;
+  font-family: "JetBrainsMono", monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+}
+.tiptap pre code {
+  color: inherit;
+  padding: 0;
+  background: none;
+  font-size: 0.8rem;
+}
+
 .ProseMirror p.is-editor-empty:first-child::before {
   color: #adb5bd;
   content: attr(data-placeholder);
@@ -156,75 +184,17 @@ body {
   height: 0;
   pointer-events: none;
 }
+.tiptap img {
+  max-width: 100%;
+  height: auto;
+}
+
+.tiptap ul,
+ol {
+  padding: 0 1rem;
+}
 
 /* Basic editor styles */
-.ProseMirror {
-  > * + * {
-    margin-top: 0.75em;
-  }
-
-  ul,
-  ol {
-    padding: 0 1rem;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    line-height: 1.1;
-  }
-  h1 {
-    font-size: 1.4rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-  }
-
-  h3 {
-    font-size: 1.1rem;
-  }
-  code {
-    background-color: rgba(#616161, 0.1);
-    color: #616161;
-  }
-
-  pre {
-    background: #0d0d0d;
-    color: #fff;
-    font-family: "JetBrainsMono", monospace;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-
-    code {
-      color: inherit;
-      padding: 0;
-      background: none;
-      font-size: 0.8rem;
-    }
-  }
-
-  img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  blockquote {
-    padding-left: 1rem;
-    border-left: 2px solid rgba(#0d0d0d, 0.1);
-  }
-
-  hr {
-    border: none;
-    border-top: 2px solid rgba(#0d0d0d, 0.1);
-    margin: 2rem 0;
-  }
-
-  ul,
-  ol {
-    padding: 0 1rem;
-  }
+.ProseMirror > * + * {
+  margin-top: 0.75em;
 }
