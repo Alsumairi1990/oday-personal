@@ -6,11 +6,19 @@ declare module "next-auth" {
   }
 }
 
-
 declare module "next-auth/jwt" {
   interface JWT {
-    user: User &{
-      role : string
-    }
+    user: User & {
+      role: string;
+    };
+  }
+}
+
+declare module "@tiptap/core" {
+  interface Commands<ReturnType> {
+    indent: {
+      indent: () => ReturnType;
+      outdent: () => ReturnType;
+    };
   }
 }

@@ -18,17 +18,55 @@ import Superscript from "@tiptap/extension-superscript";
 import Subscript from "@tiptap/extension-subscript";
 import Blockquote from "@tiptap/extension-blockquote";
 import HardBreak from "@tiptap/extension-hard-break";
-
+import CodeBlock from "@tiptap/extension-code-block";
+import CodeBlockLowlight from "@tiptap/extension-code-block-lowlight";
 import { FaBold } from "react-icons/fa6";
 import { FaItalic } from "react-icons/fa";
 import { FaStrikethrough } from "react-icons/fa6";
 import { FaUnderline } from "react-icons/fa6";
 import { IoMdColorFill } from "react-icons/io";
 import Link from "@tiptap/extension-link";
+import Indent from "./IndentNode.js";
+import TaskItem from "@tiptap/extension-task-item";
+import BulletList from "@tiptap/extension-bullet-list";
+import ListItem from "@tiptap/extension-list-item";
+import { FaListUl } from "react-icons/fa6";
+import { MdFormatListBulletedAdd } from "react-icons/md";
+import OrderedList from "@tiptap/extension-ordered-list";
+import { GoListOrdered } from "react-icons/go";
+import { FaTasks } from "react-icons/fa";
+import TaskList from "@tiptap/extension-task-list";
+import Image from "@tiptap/extension-image";
+import { BsFillImageFill } from "react-icons/bs";
+import ImageUploadModal from "./ImageUploadModal";
 
 // import "../../../globals.css";
-
+import hljs from "highlight.js";
 import { FaCaretDown } from "react-icons/fa";
+import { GoTasklist } from "react-icons/go";
+import ImageAlign from "./ImageAlign";
+
+// import { createLowlight } from "lowlight";
+// import lowlight from "lowlight";
+import { common, createLowlight } from "lowlight";
+
+import javascript from "highlight.js/lib/languages/javascript";
+import css from "highlight.js/lib/languages/css";
+
+import ts from "highlight.js/lib/languages/typescript";
+import html from "highlight.js/lib/languages/xml";
+const lowlight = createLowlight();
+
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("css", css);
+hljs.registerLanguage("ts", ts);
+hljs.registerLanguage("html", html);
+lowlight.register({ javascript });
+lowlight.register({ css });
+lowlight.register({ ts });
+lowlight.register({ html });
+// lowlight?.register("js", javascript);
+// lowlight?.registerLanguage("ts", ts);
 
 const TextEditor = () => {
   const [isFileMenuVisible, setIsFileMenuVisible] = useState(false);
@@ -47,6 +85,26 @@ const TextEditor = () => {
     setIsEditMenuVisible(!isEditMenuVisible);
   };
 
+  const [bulletListVisible, setBulletListVisible] = useState(false);
+  const toggleMBulletList = () => {
+    setBulletListVisible(!bulletListVisible);
+  };
+
+  const [orderedListVisible, setOrderedListVisible] = useState(false);
+  const toggleOrderedList = () => {
+    setOrderedListVisible(!orderedListVisible);
+  };
+
+  const [imageModelVisible, setImageModelVisible] = useState(false);
+  const toggleImageModelVisible = () => {
+    setImageModelVisible(!imageModelVisible);
+  };
+
+  const [taskListVisible, setTaskListVisible] = useState(false);
+  const toggleTaskdList = () => {
+    setTaskListVisible(!taskListVisible);
+  };
+
   // const handleHeadingClick = (level) => {
   //   editor.chain().focus().toggleHeading({ level }).run();
   // };
@@ -61,6 +119,11 @@ const TextEditor = () => {
 
   const toggleEditorMenu = () => {
     setIsEditorMenuVisible(!isEditorMenuVisible);
+  };
+
+  const handleCloseModal = () => {
+    setImageModelVisible(false);
+    console.log("close Image:");
   };
 
   // const [editor, setEditor] = useState(null);
@@ -98,6 +161,11 @@ const TextEditor = () => {
       StarterKit,
       Document,
       Bold,
+      Image,
+      TaskList,
+      TaskItem.configure({
+        nested: true,
+      }),
       TextAlign.configure({
         types: ["heading", "paragraph"],
       }),
@@ -105,14 +173,23 @@ const TextEditor = () => {
       Text,
       Blockquote,
       HorizontalRule,
+      CodeBlock,
       Heading.configure({
         levels: [1, 2, 3],
       }),
       TextStyle,
+      BulletList,
+      ListItem,
       Underline,
       Superscript,
       HardBreak,
+      Indent,
       Color,
+      ImageAlign,
+      OrderedList,
+      CodeBlockLowlight.configure({
+        lowlight,
+      }),
       Link.configure({
         openOnClick: false,
         autolink: true,
@@ -164,6 +241,56 @@ const TextEditor = () => {
   if (!editor) {
     return null;
   }
+  const handleInsertImage = (imageNm: any) => {
+    const { schema } = editor.state;
+    uploadImage(imageNm).then((response) => {
+      console.log(response.data);
+      const node = schema.nodes.image.create({ src: response.data });
+      const transaction = editor.state.tr.insert(
+        editor.view.state.selection.from,
+        node,
+      );
+      editor.view.dispatch(transaction);
+    });
+  };
+  const uploadImage = async (imageName: any) => {
+    alert("File comes from " + imageName);
+    const data = new FormData();
+    data.append("file", imageName);
+
+    try {
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: data,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      throw error;
+    }
+  };
+
+  const handleAlign = (align: string) => {
+    const { state, view, schema } = editor!;
+    const { from, to } = state.selection;
+
+    // Find the image node in the current selection
+    const imageNode = state.doc.nodeAt(from);
+
+    if (imageNode && imageNode.type === schema.nodes.image) {
+      const transaction = state.tr.setNodeMarkup(from, null, {
+        ...imageNode.attrs,
+        align,
+      });
+      view.dispatch(transaction);
+    }
+  };
 
   return (
     <div className="">
@@ -1126,7 +1253,8 @@ const TextEditor = () => {
             <button
               type="button"
               onClick={setLink}
-              className={editor.isActive("link") ? "is-active" : ""}
+              // className={editor.isActive("link") ? "is-active" : ""}
+              className={`flex-20 px-1 ${editor.isActive("link") ? "is-active" : ""}`}
               // className="flex-20 px-1"
             >
               <svg
@@ -1143,10 +1271,395 @@ const TextEditor = () => {
                 </g>
               </svg>
             </button>
+
+            <button
+              type="button"
+              onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+              className={`flex-20 px-1 ${editor.isActive("codeBlock") ? "is-active" : ""}`}
+              // className="flex-20 px-1"
+            >
+              <svg
+                className="icon"
+                width="21"
+                height="21"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#666"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm1 2v14h16V5H4zm8 10h6v2h-6v-2zm-3.333-3L5.838 9.172l1.415-1.415L11.495 12l-4.242 4.243-1.415-1.415L8.667 12z"></path>
+                </g>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+              className={`flex-20 px-1 ${editor.isActive("codeBlock") ? "is-active" : ""}`}
+              // className="flex-20 px-1"
+            >
+              <svg
+                className="icon"
+                width="21"
+                height="21"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#666"
+                viewBox="0 0 24 24"
+              >
+                <g>
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <path d="M3 3h18a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zm9 12v2h6v-2h-6zm-3.586-3l-2.828 2.828L7 16.243 11.243 12 7 7.757 5.586 9.172 8.414 12z"></path>
+                </g>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => editor.chain().focus().indent().run()}
+              className={`flex-20 px-1 ${editor.isActive("codeBlock") ? "is-active" : ""}`}
+              // className="flex-20 px-1"
+            >
+              <svg
+                fill="#333"
+                width="22px"
+                height="22px"
+                viewBox="0 0 36 36"
+                version="1.1"
+                preserveAspectRatio="xMidYMid meet"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>indent-line</title>
+                <path
+                  d="M31.06,9h-26a1,1,0,1,1,0-2h26a1,1,0,1,1,0,2Z"
+                  className="clr-i-outline clr-i-outline-path-1"
+                ></path>
+                <path
+                  d="M31.06,14h-17a1,1,0,0,1,0-2h17a1,1,0,1,1,0,2Z"
+                  className="clr-i-outline clr-i-outline-path-2"
+                ></path>
+                <path
+                  d="M31.06,19h-17a1,1,0,0,1,0-2h17a1,1,0,1,1,0,2Z"
+                  className="clr-i-outline clr-i-outline-path-3"
+                ></path>
+                <path
+                  d="M31.06,24h-17a1,1,0,0,1,0-2h17a1,1,0,1,1,0,2Z"
+                  className="clr-i-outline clr-i-outline-path-4"
+                ></path>
+                <path
+                  d="M31.06,29h-26a1,1,0,0,1,0-2h26a1,1,0,1,1,0,2Z"
+                  className="clr-i-outline clr-i-outline-path-5"
+                ></path>
+                <path
+                  d="M5.56,22.54a1,1,0,0,1-.7-1.71L7.68,18,4.86,15.17a1,1,0,0,1,0-1.41,1,1,0,0,1,1.41,0L10.51,18,6.27,22.24A1,1,0,0,1,5.56,22.54Z"
+                  className="clr-i-outline clr-i-outline-path-6"
+                ></path>
+                <rect
+                  x="0"
+                  y="0"
+                  width="36"
+                  height="36"
+                  fill-opacity="0"
+                ></rect>
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => editor.chain().focus().outdent().run()}
+              className={`flex-20 px-1 ${editor.isActive("codeBlock") ? "is-active" : ""}`}
+              // className="flex-20 px-1"
+            >
+              <svg
+                fill="#333"
+                width="22px"
+                height="22px"
+                viewBox="0 0 36 36"
+                version="1.1"
+                preserveAspectRatio="xMidYMid meet"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <title>outdent-line</title>
+                <path
+                  d="M31.06,9h-26a1,1,0,1,1,0-2h26a1,1,0,1,1,0,2Z"
+                  className="clr-i-outline clr-i-outline-path-1"
+                ></path>
+                <path
+                  d="M31.06,14h-17a1,1,0,0,1,0-2h17a1,1,0,1,1,0,2Z"
+                  className="clr-i-outline clr-i-outline-path-2"
+                ></path>
+                <path
+                  d="M31.06,19h-17a1,1,0,0,1,0-2h17a1,1,0,1,1,0,2Z"
+                  className="clr-i-outline clr-i-outline-path-3"
+                ></path>
+                <path
+                  d="M31.06,24h-17a1,1,0,0,1,0-2h17a1,1,0,1,1,0,2Z"
+                  className="clr-i-outline clr-i-outline-path-4"
+                ></path>
+                <path
+                  d="M31.06,29h-26a1,1,0,0,1,0-2h26a1,1,0,1,1,0,2Z"
+                  className="clr-i-outline clr-i-outline-path-5"
+                ></path>
+                <path
+                  d="M9.56,22.54a1,1,0,0,1-.7-.3L4.61,18l4.25-4.24a1,1,0,0,1,1.41,1.41L7.44,18l2.83,2.83a1,1,0,0,1-.71,1.71Z"
+                  className="clr-i-outline clr-i-outline-path-6"
+                ></path>
+                <rect x="0" y="0" width="36" height="36" fill-opacity="0" />
+              </svg>
+            </button>
           </div>
           {/* End of  third - 3   Area */}
           {/* --------------------------------------------------------------------------------------------- */}
+
+          {/* Start of  forth - 4   Area */}
+          <div className="py-2 px-1 flex flex-15 gap-y-3 gap-x-1 flex-wrap items-center  border-r border-r-gray-200">
+            {/* Start of BulletList */}
+            <div className="relative flex edit-btn flex-col flex-20 items-center">
+              <button
+                type="button"
+                className="text-md text-gray-600  items-center flex  rounded"
+                onClick={toggleMBulletList}
+              >
+                <span className=" flex">
+                  <svg
+                    width="24px"
+                    height="24px"
+                    viewBox="-2 -2 18 18"
+                    fill="#444"
+                    style={{
+                      margin: "0px",
+                      border: "0px",
+                      alignSelf: "self-start",
+                    }}
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M5 11.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm-3 1a1 1 0 100-2 1 1 0 000 2zm0 4a1 1 0 100-2 1 1 0 000 2zm0 4a1 1 0 100-2 1 1 0 000 2z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </span>
+                <FaCaretDown className="text-base pt-1 text-gray-500" />
+              </button>
+              {bulletListVisible && (
+                <div className="absolute edit-menu top-[24px] left-[10px] flex flex-col bg-white tounded z-[40]">
+                  <div
+                    className="pl-1 py-2 flex flex-col w-32 gap-y-1 items-start rounded"
+                    style={{
+                      boxShadow:
+                        "0 1px 1px -4px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 4%), 0 1px 5px 0 rgb(0 0 0 / 13%)",
+                    }}
+                  >
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().splitListItem("listItem").run()
+                      }
+                      disabled={!editor.can().splitListItem("listItem")}
+                      className="text-sm py-1 text-gray-600 hover:bg-gray-200 px-2 rounded"
+                    >
+                      Split List Item
+                    </button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().sinkListItem("listItem").run()
+                      }
+                      disabled={!editor.can().sinkListItem("listItem")}
+                      className="text-sm text-gray-600 py-1 hover:bg-gray-200 px-2 rounded "
+                    >
+                      Sink List Item
+                    </button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().liftListItem("listItem").run()
+                      }
+                      disabled={!editor.can().liftListItem("listItem")}
+                      className="text-sm text-gray-600 py-1 hover:bg-gray-200 px-2 rounded "
+                    >
+                      Lift List Item
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* End of BulletList */}
+
+            {/* Start of OrderList */}
+            <div className="relative flex edit-btn flex-col flex-20 items-center">
+              <button
+                type="button"
+                className="text-md text-gray-600  items-center flex  rounded"
+                onClick={toggleOrderedList}
+              >
+                <span className=" flex">
+                  <svg
+                    width="23"
+                    height="23"
+                    viewBox="-2 -2 18 18"
+                    fill="#444"
+                    className="m-0 border-0 "
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5 11.5a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5zm0-4a.5.5 0 01.5-.5h9a.5.5 0 010 1h-9a.5.5 0 01-.5-.5z"
+                      clip-rule="evenodd"
+                    ></path>
+                    <path d="M1.713 11.865v-.474H2c.217 0 .363-.137.363-.317 0-.185-.158-.31-.361-.31-.223 0-.367.152-.373.31h-.59c.016-.467.373-.787.986-.787.588-.002.954.291.957.703a.595.595 0 01-.492.594v.033a.615.615 0 01.569.631c.003.533-.502.8-1.051.8-.656 0-1-.37-1.008-.794h.582c.008.178.186.306.422.309.254 0 .424-.145.422-.35-.002-.195-.155-.348-.414-.348h-.3zm-.004-4.699h-.604v-.035c0-.408.295-.844.958-.844.583 0 .96.326.96.756 0 .389-.257.617-.476.848l-.537.572v.03h1.054V9H1.143v-.395l.957-.99c.138-.142.293-.304.293-.508 0-.18-.147-.32-.342-.32a.33.33 0 00-.342.338v.041zM2.564 5h-.635V2.924h-.031l-.598.42v-.567l.629-.443h.635V5z"></path>
+                  </svg>
+                </span>
+                <FaCaretDown className="text-base pt-1 text-gray-500" />
+              </button>
+              {orderedListVisible && (
+                <div className="absolute edit-menu top-[24px] left-[10px] flex flex-col bg-white tounded z-[40]">
+                  <div
+                    className="pl-1 py-2 flex flex-col w-32 gap-y-1 items-start rounded"
+                    style={{
+                      boxShadow:
+                        "0 1px 1px -4px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 4%), 0 1px 5px 0 rgb(0 0 0 / 13%)",
+                    }}
+                  >
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().splitListItem("listItem").run()
+                      }
+                      disabled={!editor.can().splitListItem("listItem")}
+                      className="text-sm py-1 text-gray-600 hover:bg-gray-200 px-2 rounded"
+                    >
+                      Split List Item
+                    </button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().sinkListItem("listItem").run()
+                      }
+                      disabled={!editor.can().sinkListItem("listItem")}
+                      className="text-sm text-gray-600 py-1 hover:bg-gray-200 px-2 rounded "
+                    >
+                      Sink List Item
+                    </button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().liftListItem("listItem").run()
+                      }
+                      disabled={!editor.can().liftListItem("listItem")}
+                      className="text-sm text-gray-600 py-1 hover:bg-gray-200 px-2 rounded "
+                    >
+                      Lift List Item
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* End of OrderList */}
+
+            {/* Start of TaskList */}
+            <div className="relative flex edit-btn flex-col flex-20 items-center">
+              <button
+                type="button"
+                className="text-md text-gray-600  items-center flex  rounded"
+                onClick={toggleTaskdList}
+              >
+                <span className=" flex">
+                  <FaTasks className="text-base text-gray-500" />
+                </span>
+                <FaCaretDown className="text-base pt-1 text-gray-500" />
+              </button>
+              {taskListVisible && (
+                <div className="absolute edit-menu top-[24px] left-[10px] flex flex-col bg-white tounded z-[40]">
+                  <div
+                    className="pl-1 py-2 flex flex-col w-32 gap-y-1 items-start rounded"
+                    style={{
+                      boxShadow:
+                        "0 1px 1px -4px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 4%), 0 1px 5px 0 rgb(0 0 0 / 13%)",
+                    }}
+                  >
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().splitListItem("taskItem").run()
+                      }
+                      disabled={!editor.can().splitListItem("taskItem")}
+                      className="text-sm py-1 text-gray-600 hover:bg-gray-200 px-2 rounded"
+                    >
+                      Split TaskList
+                    </button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().sinkListItem("taskItem").run()
+                      }
+                      disabled={!editor.can().sinkListItem("taskItem")}
+                      className="text-sm text-gray-600 py-1 hover:bg-gray-200 px-2 rounded "
+                    >
+                      Sink TaskList
+                    </button>
+                    <button
+                      onClick={() =>
+                        editor.chain().focus().liftListItem("taskItem").run()
+                      }
+                      disabled={!editor.can().liftListItem("taskItem")}
+                      className="text-sm text-gray-600 py-1 hover:bg-gray-200 px-2 rounded "
+                    >
+                      Lift TaskList
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+            {/* End of TaskList */}
+
+            <button
+              type="button"
+              onClick={() => editor.chain().focus().toggleBulletList().run()}
+              className={`flex-15 px-1 items-center flex   ${editor.isActive("bulletList") ? "is-active" : ""}`}
+            >
+              <span className="flex pt-0.5">
+                <MdFormatListBulletedAdd className="text-xl text-gray-900" />
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => editor.chain().focus().toggleOrderedList().run()}
+              className={`flex-15 px-1 items-center flex   ${editor.isActive("orderedList") ? "is-active" : ""}`}
+            >
+              <span className="flex pt-0.5">
+                <GoListOrdered className="text-[1.40rem] text-gray-600" />
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => editor.chain().focus().toggleTaskList().run()}
+              className={`flex-15 px-1 items-center flex   ${editor.isActive("taskList") ? "is-active" : ""}`}
+            >
+              <span className="flex pt-0.5">
+                <GoTasklist className="text-[1.40rem] text-gray-600" />
+              </span>
+            </button>
+
+            <button
+              type="button"
+              onClick={toggleImageModelVisible}
+              className={`flex-15 px-1 items-center flex   ${editor.isActive("taskList") ? "is-active" : ""}`}
+            >
+              <span className="flex pt-0.5">
+                <BsFillImageFill className="text-lg text-gray-600" />
+              </span>
+            </button>
+
+            <button onClick={() => handleAlign("left")}>Left</button>
+            <button onClick={() => handleAlign("center")}>Center</button>
+            <button onClick={() => handleAlign("right")}>Right</button>
+          </div>
+
+          {/* End of of  forth - 4   Area */}
+          {/* --------------------------------------------------------------------------------------------- */}
         </div>
+        {imageModelVisible && (
+          <div className="w-full">
+            <ImageUploadModal
+              onClose={handleCloseModal}
+              onInsertImage={handleInsertImage}
+            />
+          </div>
+        )}
       </div>
       <EditorContent editor={editor} />
     </div>
