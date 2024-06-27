@@ -39,12 +39,23 @@ import TaskList from "@tiptap/extension-task-list";
 import Image from "@tiptap/extension-image";
 import { BsFillImageFill } from "react-icons/bs";
 import ImageUploadModal from "./ImageUploadModal";
+import { RiImageAddFill } from "react-icons/ri";
+import { RiImageEditFill } from "react-icons/ri";
+import { IoImageOutline } from "react-icons/io5";
+import { MdBrokenImage } from "react-icons/md";
+
+import { useStore } from "./Store";
+// import { CustomHeading } from "./CustomHeading";
+import CustomHeading from "./CustomHeading";
 
 // import "../../../globals.css";
 import hljs from "highlight.js";
 import { FaCaretDown } from "react-icons/fa";
 import { GoTasklist } from "react-icons/go";
 import ImageAlign from "./ImageAlign";
+import { LuImagePlus } from "react-icons/lu";
+import { PiImagesSquareDuotone } from "react-icons/pi";
+import { Node, mergeAttributes } from "@tiptap/core";
 
 // import { createLowlight } from "lowlight";
 // import lowlight from "lowlight";
@@ -77,6 +88,9 @@ const TextEditor = () => {
   const [isFontSizeVisible, setIsFontSizeVisible] = useState(false);
 
   const [showMenu, setShowMenu] = useState(false);
+  // const [headings, setHeadings] = useState([]);
+  const headings: any = [];
+  const [imageWidth, setImageWidth] = useState<number | null>(null);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -93,6 +107,20 @@ const TextEditor = () => {
   const [orderedListVisible, setOrderedListVisible] = useState(false);
   const toggleOrderedList = () => {
     setOrderedListVisible(!orderedListVisible);
+  };
+
+  const [imageOptionsVisible, setImageOptionsVisible] = useState(false);
+  const toggleImageOptions = () => {
+    setImageOptionsVisible(!imageOptionsVisible);
+  };
+  const [imageRadiusVisible, setImageRadiusVisible] = useState(false);
+  const toggleImageRadius = () => {
+    setImageRadiusVisible(!imageRadiusVisible);
+  };
+
+  const [imageWidthVisible, setImageWidthVisible] = useState(false);
+  const toggleImageWidth = () => {
+    setImageWidthVisible(!imageWidthVisible);
   };
 
   const [imageModelVisible, setImageModelVisible] = useState(false);
@@ -126,39 +154,75 @@ const TextEditor = () => {
     console.log("close Image:");
   };
 
-  // const [editor, setEditor] = useState(null);
+  const TOCNode = Node.create({
+    name: "toc",
+    content: "inline*", // Allow inline content within TOC node
+    group: "block", // Group the TOC node as a block node
+    defining: true, // Set the TOC node as a defining node to prevent nested TOC nodes
+    draggable: false, // Disable dragging the TOC node
 
-  // useEffect(() => {
-  //   const newEditor = new Editor({
-  //     content: '',
-  //     editable: true,
-  //     extensions: [
-  //       StarterKit,
-  //       Placeholder.configure({
-  //         emptyEditorClass: 'is-editor-empty',
-  //         placeholder: 'My Custom Placeholder',
-  //       }),
+    addAttributes() {
+      return {
+        title: {
+          default: "Table of Contents",
+        },
+      };
+    },
 
-  //       Paragraph,
+    parseHTML() {
+      return [
+        {
+          tag: "div",
+        },
+      ];
+    },
 
-  //     ],
-  //     editorProps: {
-  //       attributes: {
-  //         class: 'prose dark:prose-invert prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none border-x-0 p-4 border-y-0',
-  //       },
-  //     },
-  //   });
+    renderHTML({ HTMLAttributes }) {
+      const tocContent = generateTOCContent();
+      const tocElement = createDOMElementFromHTMLString(tocContent);
+      return ["div", mergeAttributes(HTMLAttributes), ...tocElement.childNodes];
+    },
+  });
 
-  //   setEditor(newEditor);
+  const generateTOCContent = () => {
+    alert("mmm" + headings.length);
+    headings.map((heading: any) => {
+      console.log("headings---&&&&&&--->>" + heading.text);
+    });
+    if (headings.length > 0) {
+      const tocList = headings
+        .map(
+          (entry: any) =>
+            `<li class="list-none my-1.5 cursor-pointer"><span >${entry.text}</span></li>`,
+        )
+        .join("");
 
-  //   return () => {
-  //     newEditor.destroy();
-  //   };
-  // }, []);
+      return `
+      <div class="toc">
+        <div class="border bg-gray-200 rounded-md p-3">
+          <p class="text-base font-bold">Table of Contents</p>
+          <ul class="list-none mt-2">${tocList}</ul>
+        </div>
+      </div>`;
+    } else {
+      return `
+      <div class="toc">
+        <p>Table of Contents</p>
+        <p>No headings found in the article.</p>
+      </div>`;
+    }
+  };
+
+  const createDOMElementFromHTMLString = (htmlString: any) => {
+    const template = document.createElement("template");
+    template.innerHTML = htmlString.trim();
+    return template.content.firstChild;
+  };
 
   const editor = useEditor({
     extensions: [
       StarterKit,
+      CustomHeading,
       Document,
       Bold,
       Image,
@@ -174,15 +238,16 @@ const TextEditor = () => {
       Blockquote,
       HorizontalRule,
       CodeBlock,
-      Heading.configure({
-        levels: [1, 2, 3],
-      }),
+      // Heading.configure({
+      //   levels: [1, 2, 3],
+      // }),
       TextStyle,
       BulletList,
       ListItem,
       Underline,
       Superscript,
       HardBreak,
+      TOCNode,
       Indent,
       Color,
       ImageAlign,
@@ -211,6 +276,49 @@ const TextEditor = () => {
       },
     },
   });
+  // const { headings, setHeadings } = useStore();
+  useEffect(() => {
+    if (editor) {
+      editor.on("selectionUpdate", ({ transaction }) => {
+        const { state } = editor;
+        const { from, to } = state.selection;
+        let tr = state.tr;
+
+        state.doc.descendants((node, pos) => {
+          if (node.type.name === "image") {
+            const isSelected = from <= pos && to >= pos + node.nodeSize;
+            tr = tr.setNodeMarkup(pos, undefined, {
+              ...node.attrs,
+              selected: isSelected,
+            });
+          }
+        });
+
+        editor.view.dispatch(tr);
+      });
+    }
+    if (editor) {
+      editor.on("update", ({ editor }) => {
+        editor?.state.doc.descendants((node) => {
+          if (node.type.name === "heading") {
+            headings.push({
+              level: node.attrs.level,
+              id: node.attrs.id,
+              text: node.textContent,
+            });
+          }
+        });
+
+        headings.map((heading: any) => {
+          console.log("headings------>>" + heading.text);
+        });
+      });
+    }
+  }, [editor]);
+
+  const handleInsertTOC = () => {
+    editor?.commands.insertContent({ type: "toc" });
+  };
 
   const setLink = useCallback(() => {
     const previousUrl = editor!.getAttributes("link").href;
@@ -289,6 +397,56 @@ const TextEditor = () => {
         align,
       });
       view.dispatch(transaction);
+    }
+  };
+
+  const handleSetWidth = (width: number) => {
+    setImageWidth(width); // Update state with new width
+    resizeImage(width); // Call function to resize image
+  };
+
+  const resizeImage = (width: number) => {
+    const { state, view, schema } = editor!;
+    const { from } = state.selection;
+
+    // Find the image node in the current selection
+    const imageNode = state.doc.nodeAt(from);
+
+    if (imageNode && imageNode.type === schema.nodes.image) {
+      const transaction = state.tr.setNodeMarkup(from, null, {
+        ...imageNode.attrs,
+        width: `${width}%`, // Set new width percentage
+      });
+      view.dispatch(transaction);
+    }
+  };
+
+  const handleSetBorderRadius = (borderRadius: string) => {
+    const { state, view, schema } = editor!;
+    const { from } = state.selection;
+
+    const imageNode = state.doc.nodeAt(from);
+    if (imageNode && imageNode.type === schema.nodes.image) {
+      const transaction = state.tr.setNodeMarkup(from, null, {
+        ...imageNode.attrs,
+        borderRadius,
+      });
+      view.dispatch(transaction);
+    }
+  };
+
+  const toggleTOC = () => {
+    var flag = true;
+    editor?.state.doc.descendants((node) => {
+      if (node.type.name === "toc") {
+        flag = false;
+      }
+      return true;
+    });
+    if (flag) {
+      editor?.chain().focus().insertContent({ type: "toc" }).run();
+    } else {
+      editor?.commands.deleteNode("toc");
     }
   };
 
@@ -1633,23 +1791,165 @@ const TextEditor = () => {
                 <GoTasklist className="text-[1.40rem] text-gray-600" />
               </span>
             </button>
-
-            <button
-              type="button"
-              onClick={toggleImageModelVisible}
-              className={`flex-15 px-1 items-center flex   ${editor.isActive("taskList") ? "is-active" : ""}`}
-            >
-              <span className="flex pt-0.5">
-                <BsFillImageFill className="text-lg text-gray-600" />
-              </span>
-            </button>
-
-            <button onClick={() => handleAlign("left")}>Left</button>
-            <button onClick={() => handleAlign("center")}>Center</button>
-            <button onClick={() => handleAlign("right")}>Right</button>
           </div>
 
           {/* End of of  forth - 4   Area */}
+          {/* --------------------------------------------------------------------------------------------- */}
+
+          {/* Start of  fifth - 5   Area */}
+          <div className="py-2 px-1 flex flex-15 gap-y-3 gap-x-1 flex-wrap items-center  border-r border-r-gray-200">
+            <button
+              type="button"
+              onClick={toggleImageModelVisible}
+              className="flex-15 px-1 items-center flex"
+            >
+              <span className="flex pt-0.5">
+                {/* <RiImageAddFill className="text-xl text-gray-600" /> */}
+                <LuImagePlus className="text-xl text-gray-600" />
+              </span>
+            </button>
+
+            <div className="relative flex edit-btn flex-col flex-20 items-center">
+              <button
+                type="button"
+                className="text-md text-gray-600  items-center flex  rounded"
+                onClick={toggleImageOptions}
+              >
+                <span className=" flex pt-0.5">
+                  <RiImageEditFill className="text-xl text-gray-600" />
+                </span>
+                <FaCaretDown className="text-base pt-1 text-gray-500" />
+              </button>
+              {imageOptionsVisible && (
+                <div className="absolute edit-menu top-[24px] left-[10px] flex flex-col bg-white tounded z-[40]">
+                  <div
+                    className="pl-1 py-2 flex flex-col w-32 gap-y-1 items-start rounded"
+                    style={{
+                      boxShadow:
+                        "0 1px 1px -4px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 4%), 0 1px 5px 0 rgb(0 0 0 / 13%)",
+                    }}
+                  >
+                    <button
+                      className="text-sm py-1 text-gray-600 hover:bg-gray-200 px-2 rounded"
+                      onClick={() => handleAlign("left")}
+                    >
+                      Align Left
+                    </button>
+                    <button
+                      onClick={() => handleAlign("center")}
+                      className="text-sm text-gray-600 py-1 hover:bg-gray-200 px-2 rounded "
+                    >
+                      Align center
+                    </button>
+                    <button
+                      onClick={() => handleAlign("right")}
+                      className="text-sm text-gray-600 py-1 hover:bg-gray-200 px-2 rounded "
+                    >
+                      Aign Right
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="relative flex edit-btn flex-col flex-20 items-center">
+              <button
+                type="button"
+                className="text-md text-gray-600  items-center flex  rounded"
+                onClick={toggleImageWidth}
+              >
+                <span className=" flex pt-0.5">
+                  <PiImagesSquareDuotone className="text-xl text-gray-600" />
+                </span>
+                <FaCaretDown className="text-base pt-1 text-gray-500" />
+              </button>
+              {imageWidthVisible && (
+                <div className="absolute edit-menu top-[24px] left-[10px] flex flex-col bg-white tounded z-[40]">
+                  <div
+                    className="pl-1 py-2 flex flex-col w-36 gap-y-1 items-start rounded"
+                    style={{
+                      boxShadow:
+                        "0 1px 1px -4px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 4%), 0 1px 5px 0 rgb(0 0 0 / 13%)",
+                    }}
+                  >
+                    <label className="">
+                      Width:
+                      <input
+                        type="range"
+                        min="10"
+                        max="100"
+                        onChange={(e) =>
+                          handleSetWidth(parseInt(e.target.value))
+                        }
+                      />
+                    </label>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="relative flex edit-btn flex-col flex-20 items-center">
+              <button
+                type="button"
+                className="text-md text-gray-600  items-center flex  rounded"
+                onClick={toggleImageRadius}
+              >
+                <span className=" flex pt-0.5">
+                  <MdBrokenImage className="text-xl text-gray-600" />
+                </span>
+                <FaCaretDown className="text-base pt-1 text-gray-500" />
+              </button>
+              {imageRadiusVisible && (
+                <div className="absolute edit-menu top-[24px] left-[10px] flex flex-col bg-white tounded z-[40]">
+                  <div
+                    className="pl-1 py-2 flex flex-col w-36 gap-y-1 items-start rounded"
+                    style={{
+                      boxShadow:
+                        "0 1px 1px -4px rgb(0 0 0 / 20%), 0 2px 2px 0 rgb(0 0 0 / 4%), 0 1px 5px 0 rgb(0 0 0 / 13%)",
+                    }}
+                  >
+                    <label>
+                      Border Radius:
+                      <input
+                        type="text"
+                        placeholder="e.g., 10px"
+                        className="w-[90%]"
+                        onBlur={(e) => handleSetBorderRadius(e.target.value)}
+                      />
+                    </label>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <button
+              type="button"
+              onClick={toggleTOC}
+              // onClick={() => setHeadings([...headings, "New Heading"])}
+              className="flex-15 px-1 items-center flex"
+            >
+              <span className="flex pt-0.5">
+                <svg
+                  className="ck ck-icon ck-reset_all-excluded w-5 h-5 fill-gray-600 ck-icon_inherit-color ck-button__icon"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M3 19a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8.022a6.47 6.47 0 0 0-1.5-.709V2a.5.5 0 0 0-.5-.5H3a.5.5 0 0 0-.5.5v15a.5.5 0 0 0 .5.5h6.313c.173.534.412 1.037.709 1.5H3Z"></path>
+                  <path d="M9.174 14a6.489 6.489 0 0 0-.155 1H6v-1h3.174Z"></path>
+                  <path d="M10.022 12c-.202.316-.378.65-.524 1H4v-1h6.022Z"></path>
+                  <path d="M12.034 10c-.448.283-.86.62-1.224 1H6v-1h6.034Z"></path>
+                  <path d="M12 4v1H4V4h8Z"></path>
+                  <path d="M14 7V6H6v1h8Z"></path>
+                  <path d="M15 9V8H7v1h8Z"></path>
+                  <path
+                    clip-rule="evenodd"
+                    d="M20 15.5a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM15.5 13a.5.5 0 0 0-.5.5V15h-1.5a.5.5 0 0 0 0 1H15v1.5a.5.5 0 0 0 1 0V16h1.5a.5.5 0 0 0 0-1H16v-1.5a.5.5 0 0 0-.5-.5Z"
+                  ></path>
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          {/* End of of  fifth - 5   Area */}
           {/* --------------------------------------------------------------------------------------------- */}
         </div>
         {imageModelVisible && (

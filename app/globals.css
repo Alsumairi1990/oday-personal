@@ -260,3 +260,10 @@ ol li p {
   /* Optional: If you want to center align the caption */
   text-align: center;
 }
+.tiptap img.resizable {
+  max-width: 100%; /* Ensure images do not exceed container width */
+  height: auto; /* Maintain aspect ratio */
+}
+.tiptap img.selected {
+  border: 2px solid rgb(0, 163, 228);
+}

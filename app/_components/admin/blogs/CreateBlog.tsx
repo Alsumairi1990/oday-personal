@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import AddingBtn from "./AddingBtn";
 import ArticleContent from "./ArticleContent";
+import { StoreProvider } from "../editor/Store";
 import TextEditor from "../editor/TextEditor";
 
 const CreateBlog = () => {
@@ -107,7 +108,9 @@ const CreateBlog = () => {
                     </div>
                   </div>
                   <div className="w-full h-full overflow-y-auto">
-                    <TextEditor />
+                    <StoreProvider>
+                      <TextEditor />
+                    </StoreProvider>
                   </div>
                 </div>
               </div>

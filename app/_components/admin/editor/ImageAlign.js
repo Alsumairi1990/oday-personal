@@ -29,15 +29,35 @@ const ImageAlign = Image.extend({
           };
         },
       },
+      borderRadius: {
+        default: "0",
+        renderHTML: (attributes) => {
+          return {
+            style: `border-radius: ${attributes.borderRadius};`,
+          };
+        },
+      },
+      selected: {
+        default: false,
+        renderHTML: (attributes) => {
+          return {
+            class: attributes.selected ? "selected" : "",
+          };
+        },
+      },
     };
   },
 
   renderHTML({ HTMLAttributes }) {
     return [
-      "figure",
-      { style: HTMLAttributes.style },
-      ["img", mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)],
+      "img",
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
     ];
+    // return [
+    //   "figure",
+    //   { style: HTMLAttributes.style },
+    //   ["img", mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)],
+    // ];
   },
 });
 
