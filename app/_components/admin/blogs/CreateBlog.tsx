@@ -107,10 +107,8 @@ const CreateBlog = () => {
                       </button>
                     </div>
                   </div>
-                  <div className="w-full h-full overflow-y-auto">
-                    <StoreProvider>
-                      <TextEditor />
-                    </StoreProvider>
+                  <div className="w-full h-full ">
+                    <TextEditor />
                   </div>
                 </div>
               </div>

@@ -19,6 +19,11 @@ declare module "@tiptap/core" {
     indent: {
       indent: () => ReturnType;
       outdent: () => ReturnType;
+      setTweetAlignment: (code) => ReturnType;
+      setTweeterEmbed: (code) => ReturnType;
+      setFacebookEmbed: (code) => ReturnType;
+      setInstagramEmbed: (code) => ReturnType;
+      setTikTokEmbed: (code) => ReturnType;
     };
   }
 }

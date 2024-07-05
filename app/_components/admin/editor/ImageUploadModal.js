@@ -85,7 +85,7 @@ const ImageUploadModal = ({ onClose, onInsertImage }) => {
   };
 
   return (
-    <div className="image-upload-modal flex justify-center items-center fixed top-0 left-0 w-full h-full bg-[#0000008c] p-3">
+    <div className="image-upload-modal flex justify-center items-center fixed top-0 left-0 w-full h-full bg-[#0000008c] p-3 z-[50]">
       <div
         className="p-2 rounded-md bg-white w-50"
         style={{ boxShadow: "rgb(51, 51, 51) 4px 4px 10px" }}
