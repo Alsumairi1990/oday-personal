@@ -331,7 +331,7 @@ ol li p {
 }
 
 .tiptap table .column-resize-handle {
-  background-color: #ddd;
+  background-color: #0c8;
   bottom: -2px;
   pointer-events: none;
   position: absolute;

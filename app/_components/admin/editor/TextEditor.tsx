@@ -2025,7 +2025,7 @@ const TextEditor = () => {
 
                     <button
                       type="button"
-                      onClick={toggleImageModelVisible}
+                      onClick={() => editor.chain().focus().deleteTable().run()}
                       className="text-md text-gray-600 py-1  items-center flex w-full rounded"
                     >
                       <span className="mr-2 ">
@@ -2092,9 +2092,30 @@ const TextEditor = () => {
                             }}
                           >
                             <div className="text-sm text-gray-600 w-full rounded ">
-                              <label className="inline-block pb-1.5">
-                                Insert rows
-                              </label>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor.chain().focus().addRowBefore().run()
+                                }
+                              >
+                                Add row before
+                              </button>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor.chain().focus().addRowAfter().run()
+                                }
+                              >
+                                Add row after
+                              </button>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor.chain().focus().deleteRow().run()
+                                }
+                              >
+                                Delete row
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -2146,9 +2167,30 @@ const TextEditor = () => {
                             }}
                           >
                             <div className="text-sm text-gray-600 w-full rounded ">
-                              <label className="inline-block pb-1.5">
-                                Insert Column
-                              </label>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor.chain().focus().addColumnBefore().run()
+                                }
+                              >
+                                Add column before
+                              </button>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor.chain().focus().addColumnAfter().run()
+                                }
+                              >
+                                Add column after
+                              </button>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor.chain().focus().deleteColumn().run()
+                                }
+                              >
+                                Delete column
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -2188,9 +2230,54 @@ const TextEditor = () => {
                             }}
                           >
                             <div className="text-sm text-gray-600 w-full rounded ">
-                              <label className="inline-block pb-1.5">
-                                Insert Column
-                              </label>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor.chain().focus().mergeCells().run()
+                                }
+                              >
+                                Merge cells
+                              </button>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor.chain().focus().splitCell().run()
+                                }
+                              >
+                                Spilt cells
+                              </button>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor
+                                    .chain()
+                                    .focus()
+                                    .toggleHeaderCell()
+                                    .run()
+                                }
+                              >
+                                Toggle header cell
+                              </button>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor.chain().focus().mergeOrSplit().run()
+                                }
+                              >
+                                Merge or split
+                              </button>
+                              <button
+                                className="inline-block py-1.5 hover:bg-gray-200 w-full rounded-md"
+                                onClick={() =>
+                                  editor
+                                    .chain()
+                                    .focus()
+                                    .toggleHeaderCell()
+                                    .run()
+                                }
+                              >
+                                Set cell attribute
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -2199,6 +2286,7 @@ const TextEditor = () => {
 
                     <button
                       type="button"
+                      onClick={() => editor.chain().focus().goToNextCell().run()}
                       className="text-md text-gray-600 flex items-center w-full py-1 rounded"
                     >
                       <span className="mr-2">
@@ -2224,6 +2312,7 @@ const TextEditor = () => {
                     </button>
                     <button
                       type="button"
+                      onClick={() => editor.chain().focus().goToPreviousCell().run()}
                       className="text-md text-gray-600 flex items-center w-full py-1 rounded"
                     >
                       <span className="mr-2 ">
