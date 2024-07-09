@@ -48,7 +48,7 @@ const ServiceCreate = () => {
         <div className="flex-100 grid grid-cols-2 sm:grid-cols-5 gap-4 rounded bjg-[#4568e7] px-2.5 "  >
           <div className="add-main">
                 <AddingBtn
-                title="Basic Info"
+                title="Basic Data"
                 svgUrl={basic}
                 title_name="basic"
                 changeMenu={changeBtnMenu}
