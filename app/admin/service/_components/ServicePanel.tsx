@@ -1,7 +1,9 @@
 'use client'
+
+import FilterPanel from '@/app/_components/admin/common/FilterPanel';
+import ServiceTable from '@/app/_components/admin/common/ServiceTable';
 import React from 'react';
-import FilterPanel from '../common/FilterPanel';
-import ServiceTable from '../common/ServiceTable';
+
 
 const ServicePanel = () => {
    const imagePath = '/images/navbg.webp';
