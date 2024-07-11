@@ -13,8 +13,12 @@ CREATE TABLE "Post" (
 CREATE TABLE "Service" (
     "id" SERIAL NOT NULL,
     "name" TEXT NOT NULL,
+    "name_slug" TEXT NOT NULL,
     "title" TEXT,
-    "des" TEXT,
+    "code" TEXT,
+    "price" DOUBLE PRECISION NOT NULL,
+    "description" TEXT,
+    "discount" DOUBLE PRECISION,
     "image" TEXT,
     "icon" TEXT,
     "userId" TEXT NOT NULL,

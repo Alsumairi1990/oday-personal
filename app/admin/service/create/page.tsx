@@ -1,9 +1,12 @@
 
 
 
+import ServiceCreate from "../_components/ServiceCreate";
 
 
-import ServiceCreate from "@/app/_components/admin/service/ServiceCreate";
+
+
+
 
 const Create = () => {
 

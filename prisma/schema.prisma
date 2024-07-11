@@ -20,16 +20,20 @@ model Post {
 }
 
 model Service {
-  id        Int      @id @default(autoincrement())
-  name      String
-  title String?
-  des String?
-  image String?
-  icon String?
-  userId    String     // References one specific user (modified)
-  user      User?   @relation(fields: [userId], references: [id]) // Relation to User
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                 Int      @id @default(autoincrement())
+  name               String
+  name_slug          String
+  title              String?
+  code               String?
+  price              Float   
+  description        String?
+  discount           Float?  
+  image              String?
+  icon               String?
+  userId             String     // References one specific user (modified)
+  user               User?   @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
 
 model Account {
