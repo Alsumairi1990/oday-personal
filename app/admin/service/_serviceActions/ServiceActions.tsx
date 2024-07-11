@@ -38,20 +38,19 @@ export async function addBasicInfo(data:BasicServiceInfo) {
 
   const userId = session.user.id;
     console.log("server action"+ data?.service_name);
-    try {
-      const newService = await prisma.service.create({
-        data: {
-          name: data.service_name,
-          userId : userId
-          // You can omit other fields, they will either use default values or be null
-        },
-      });
-      console.log("server action", newService);
-      return newService;
-    } catch (error) {
-      console.error('Error creating service:', error);
-      throw new Error('Error creating service');
-    }
+    // try {
+    //   const newService = await prisma.service.create({
+    //     data: {
+    //       name: data.service_name,
+    //       userId : userId
+    //     },
+    //   });
+    //   console.log("server action", newService);
+    //   return newService;
+    // } catch (error) {
+    //   console.error('Error creating service:', error);
+    //   throw new Error('Error creating service');
+    // }
 
 //   const result = addSchema.safeParse(Object.fromEntries(formData.entries()))
 //   if (result.success === false) {
