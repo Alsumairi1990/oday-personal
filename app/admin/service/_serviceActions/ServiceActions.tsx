@@ -12,6 +12,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { BasicServiceInfo } from "../util/BasicServiceInfo";
 import { getServerSession } from 'next-auth/next';
 import authOptions from "@/utils/AuthOptions";
+import { slugify } from "@/utils/TextUtils";
 
 
 // const fileSchema = z.instanceof(File, { message: "Required" })
@@ -38,19 +39,21 @@ export async function addBasicInfo(data:BasicServiceInfo) {
 
   const userId = session.user.id;
     console.log("server action"+ data?.service_name);
-    // try {
-    //   const newService = await prisma.service.create({
-    //     data: {
-    //       name: data.service_name,
-    //       userId : userId
-    //     },
-    //   });
-    //   console.log("server action", newService);
-    //   return newService;
-    // } catch (error) {
-    //   console.error('Error creating service:', error);
-    //   throw new Error('Error creating service');
-    // }
+    const nameSlug = slugify(data.service_name);
+    try {
+      const newService = await prisma.service.create({
+        data: {
+          name: data.service_name,
+          name_slug: nameSlug,
+          userId : userId
+        },
+      });
+      console.log("server action", newService);
+      return newService;
+    } catch (error) {
+      console.error('Error creating service:', error);
+      throw new Error('Error creating service');
+    }
 
 //   const result = addSchema.safeParse(Object.fromEntries(formData.entries()))
 //   if (result.success === false) {

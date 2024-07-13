@@ -18,20 +18,19 @@ import { passwordStrength } from 'check-password-strength';
 import { registerUser } from '@/utils/authActions';
 import { toast } from 'react-toastify';
 import { Service } from '@prisma/client';
+import { BasicServiceInfo } from '../util/BasicServiceInfo';
 const formSchema = z.object({
-    service_name : z.string().min(4, "User Name Must be at least 4 chars")
-                          .max(45, "User Name Must less than 45 chars")
-                          .regex(new RegExp("^[a-zA-Z]+$"), "No special character allowed!"),
+    service_name : z.string().min(4, "Service Name Must be at least 4 chars")
+                          .max(45, "Service Name Must less than 45 chars"),
+    title : z.string().max(45, "Service Title Must less than 45 chars"),
+                          // .regex(new RegExp("^[a-zA-Z]+$"), "No special character allowed!"),
                           
 
 })
-interface BasicServiceData {
-  service_name: string;
-}
 
 
 interface Props {
-  addBasicForm: (value: BasicServiceData) => void
+  addBasicForm: (value: BasicServiceInfo) => void
   }
 
 type inputType = z.infer<typeof formSchema>;
@@ -91,6 +90,18 @@ const BasicInfo = ({addBasicForm}:Props) => {
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.service_name?.message} </span>
             </div>
+
+            <div className=" flex flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="title" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Title</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('title')}  type="text" name="title" id="title" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Service Title ..." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.title?.message} </span>
+            </div>
+
+            
 
 
 

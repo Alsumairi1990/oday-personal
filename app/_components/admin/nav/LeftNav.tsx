@@ -116,11 +116,11 @@ const LeftNav = () => {
             </li>
 
             <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
-                <a  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
+                <Link href="/admin/category"  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
                 <span className=" bg-[#206681] border border-[#878787] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
                     <BiLayer className="text-xl text-white" />
                     </span>
-                        Exams
+                        Category
                     <div className="ml-auto">
                         <svg className="mr-2 fill-white sv-plus" width="13" height="13px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
                             <title>plus</title>
@@ -130,7 +130,7 @@ const LeftNav = () => {
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M2 11.5C2 10.9477 2.44772 10.5 3 10.5L21 10.5C21.5523 10.5 22 10.9477 22 11.5V12.5C22 13.0523 21.5523 13.5 21 13.5H3C2.44772 13.5 2 13.0523 2 12.5V11.5Z" fill="#ddd"/>
                         </svg>
                     </div>
-                </a>
+                </Link>
                 <ul className="side-sub font-normal text-[.9rem] pt-1 ml-[1.8rem] hidden border-l border-[#355476] mb-2">
                     <li className="pl-6 py-1 relative after:content-[''] after:absolute after:h-px after:w-5 after:bg-[#355476] after:left-0 after:top-4">
                         <a href="/admin/exams-manage" className="pl-2 relative after:content-[''] after:absolute after:h-1.5 after:w-1.5 after:bg-[#355476] after:left-[-2px] after:top-1.7 after:rounded">Manage </a>
