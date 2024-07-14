@@ -90,6 +90,8 @@ model Category {
   works              WorkCategory[]
   userId             String     // References one specific user (modified)
   user               User?   @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 }
 
 model Tag {
@@ -103,6 +105,8 @@ model Tag {
   works              WorkTag[]
   userId             String     // References one specific user (modified)
   user               User?   @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 }
 
 
@@ -190,10 +194,8 @@ model Work {
   locationId         Int?
   location           Location? @relation(fields: [locationId], references: [id])
   client             String?   // Client name or organization
-  projectDate        DateTime? // Date or period of the project
   projectUrl         String?   // URL or link to more details
   technologies       String?   // Technologies used
-  outcome            String?   // Project outcome or results
   additionalImages   String[] // Array of additional image URLs
   highlights         String?   // Key highlights of the project
   createdAt          DateTime  @default(now())

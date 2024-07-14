@@ -16,6 +16,7 @@ import { slugify } from "@/utils/TextUtils";
 import { Category } from "@prisma/client";
 
 
+
 // const fileSchema = z.instanceof(File, { message: "Required" })
 // const imageSchema = fileSchema.refine(
 //   file => file.size === 0 || file.type.startsWith("image/")
@@ -34,6 +35,57 @@ const addSchema = z.object({
   category_name: z.string().min(3),
   description: z.string().min(1),
 })
+
+export async function getCatByName(name:string): Promise<Category | null> {
+  const category = await prisma.category.findFirst({
+    where: {
+      name: name,
+    },
+  });
+  return category;
+}
+
+export async function editCategory(data:Category): Promise<Category | null> {
+  
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    throw new Error('User not authenticated');
+  }
+
+  const userId = session.user.id;
+    console.log("server action"+ data?.name);
+    const nameSlug = slugify(data.name);
+    try {
+      const newService = await prisma.category.create({
+              data: {
+              name: data.name,
+              slug: nameSlug,
+              description: data.description,
+              userId: userId,
+            }
+      });
+      console.log("server action", newService);
+      // const cat:Category ={
+      //   name:'thythyt',
+      // }
+      return newService;
+
+    } catch (error) {
+      console.error('Error creating service:', error);
+      throw new Error('Error creating service');
+    }
+}
+
+
+
+export async function getCategoriesNames(): Promise<string[]> {
+  const categories = await prisma.category.findMany({
+    select: {
+      name: true,
+    },
+  });
+  return categories.map(category => category.name);
+}
 
 export async function addCategory(data:CategoryInput) {
   const session = await getServerSession(authOptions);
@@ -65,6 +117,8 @@ export async function addCategory(data:CategoryInput) {
       throw new Error('Error creating service');
     }
 
+
+    
     // export async function addCategory(prevState: unknown,dataForm:FormData) {
     //   console.log("called ");
     //   const session = await getServerSession(authOptions);

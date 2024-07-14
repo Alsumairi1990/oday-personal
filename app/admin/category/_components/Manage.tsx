@@ -92,7 +92,7 @@ const CategoryManage = () => {
 
                 <div className="bg-sky-600 px-2 py-2 rounded-2xl shadow-xl bg-right bg-no-repeat bg-blend-overlay" style={{ backgroundImage: `url(${imagePath2})`}}>
                     <div className="flex border-b mb-2 pt-2 pb-3 border-b-gray-400 ">
-                        <div className="icon flex-30 pt-1 pl-1">
+                        <div  className="icon flex-30 pt-1 pl-1">
                             <span className="h-10 inline-block w-10">
                                 <svg width="35px" height="35px" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_901_2475)">
@@ -111,7 +111,7 @@ const CategoryManage = () => {
                             <p className="text-white font-bold text-base">161</p>
                         </div>
                     </div>
-                    <div onClick={openEdit}  className="flex-70 w-6/12  bg-sky-700 border !border-[#439ecd] mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer">
+                    <Link href="/admin/category/edit"  className="flex-70 w-6/12  bg-sky-700 border !border-[#439ecd] mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer">
                         <div className="flex items-center rounded-2xl py-[2px] px-[5px] " >
                             <span className=" text-gray-50 font-semibold capitalize text-md pr-2.5 pl-1" > Edite </span>
                             <div className="px-1 py-0.5 flex" >
@@ -120,7 +120,7 @@ const CategoryManage = () => {
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
 
 
