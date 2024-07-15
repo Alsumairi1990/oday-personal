@@ -67,3 +67,16 @@
       @apply bg-background text-foreground;
     }
   }
+
+.scr-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.scr-container::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.212);
+    border-radius: 5px;
+}
+
+.scr-container::-webkit-scrollbar-track {
+    background: transparent;
+}
