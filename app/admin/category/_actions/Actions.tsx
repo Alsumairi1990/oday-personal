@@ -14,6 +14,9 @@ import { getServerSession } from 'next-auth/next';
 import authOptions from "@/utils/AuthOptions";
 import { slugify } from "@/utils/TextUtils";
 import { Category } from "@prisma/client";
+import { categoryParam } from "../util/CategoryParam";
+import { File } from "buffer";
+import { inputType } from "../util/InptParam";
 
 
 
@@ -34,6 +37,16 @@ type CategoryInput = Omit<Category, 'id' | 'slug' | 'userId' | 'image' | 'icon' 
 const addSchema = z.object({
   category_name: z.string().min(3),
   description: z.string().min(1),
+  image: z.custom<File>((file) => {    
+    return true;
+  }, {
+    message: "Invalid image file. Only JPEG, PNG, and GIF files are allowed, and must be less than 5MB."
+  }),
+  icon: z.custom<File>((file) => {    
+    return true;
+  }, {
+    message: "Invalid image file. Only JPEG, PNG, and GIF files are allowed, and must be less than 5MB."
+  }),
 })
 
 export async function getCatByName(name:string): Promise<Category | null> {
@@ -44,36 +57,71 @@ export async function getCatByName(name:string): Promise<Category | null> {
   });
   return category;
 }
-
-export async function editCategory(data:Category): Promise<Category | null> {
-  
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    throw new Error('User not authenticated');
+export async function edtCategory(dataForm:FormData): Promise<string | null > {
+  const result = addSchema.safeParse(Object.fromEntries(dataForm.entries()))
+  if (result.success) {
+    const data1 = result.data; 
+    console.log("------------00000000000"+data1.icon.name);
+    await fs.mkdir("public/categories", { recursive: true })
+    console.log("----------->>>"+data1.image);
+    const imagePath = `/categories/${crypto.randomUUID()}-${data1.image.name}`
+    await fs.writeFile(
+      `public${imagePath}`,
+      Buffer.from(await data1.image.arrayBuffer())
+    )
+  } else {
+    console.error('Error parsing data:', result.error);
   }
+  return null;
 
-  const userId = session.user.id;
-    console.log("server action"+ data?.name);
-    const nameSlug = slugify(data.name);
-    try {
-      const newService = await prisma.category.create({
-              data: {
-              name: data.name,
-              slug: nameSlug,
-              description: data.description,
-              userId: userId,
-            }
-      });
-      console.log("server action", newService);
-      // const cat:Category ={
-      //   name:'thythyt',
-      // }
-      return newService;
+}
+export async function editCategory(data:FormData): Promise<string | null > {
+  console.log("0-0-0-0-0-0-0-0-0-0-0");
+  const result = addSchema.safeParse(Object.fromEntries(data.entries()))
+  if (result.success) {
+    const data1 = result.data; 
+    console.log("------------00000000000"+data1.icon.name);
+  }
+  // const session = await getServerSession(authOptions);
+  // if (!session) {
+  //   throw new Error('User not authenticated');
+  // }
+ 
 
-    } catch (error) {
-      console.error('Error creating service:', error);
-      throw new Error('Error creating service');
-    }
+  // await fs.mkdir("public/categories", { recursive: true })
+  // console.log("----------->>>"+data.image);
+  // const imagePath = `/categories/${crypto.randomUUID()}-${data.image[0].name}`
+  // await fs.writeFile(
+  //   `public${imagePath}`,
+  //   Buffer.from(await data.image[0].arrayBuffer())
+  // )
+
+  // const userId = session.user.id;
+  //   console.log("server action"+ data.category_name);
+  //   const nameSlug = slugify(data.category_name);
+  //   const category = await prisma.category.findFirst({
+  //     where: { slug: nameSlug },
+  //   });
+  //  if (category){
+  //   try {
+  //     const updatedCategory = await prisma.category.update({
+  //       where: { id : category.id},
+  //       data: {
+  //         name: data.category_name,
+  //         description: data.description,
+  //         image: imagePath,
+  //       },
+  //     });
+  //     console.log("server action", updatedCategory);
+    
+  //     return updatedCategory.name;
+
+  //   } catch (error) {
+  //     console.error('Error creating service:', error);
+  //     throw new Error('Error creating service');
+  //   }
+  // }
+  return null;
 }
 
 

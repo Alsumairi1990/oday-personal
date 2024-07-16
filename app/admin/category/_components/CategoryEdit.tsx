@@ -23,6 +23,7 @@ import { addCategory, getCategoriesNames } from '../_actions/Actions';
 import SuccessMessage from './SuccessMessage';
 import { useFormStatus } from 'react-dom';
 import FormEdit from './FormEdit';
+import FormEdit1 from './FromEdit1';
 
 
 

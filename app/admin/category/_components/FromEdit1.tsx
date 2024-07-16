@@ -19,9 +19,8 @@ import { VscCloudUpload } from "react-icons/vsc";
 
 import { Input } from "@/components/ui/input"
 
-import { editCategory, getCatByName } from '../_actions/Actions';
+import { editCategory, edtCategory, getCatByName } from '../_actions/Actions';
 import { categoryParam } from '../util/CategoryParam';
-import { formSchema } from '../util/formSchema';
 interface FormEditProps {
     name: string;
   }
@@ -29,7 +28,7 @@ interface FormEditProps {
 
   
 
-const FormEdit = ({name}:FormEditProps) => {
+const FormEdit1 = ({name}:FormEditProps) => {
   const [category, setCategory] = useState<Category | null>(null); 
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [iconSrc, setIconSrc] = useState<string | null>(null);
@@ -57,81 +56,10 @@ const FormEdit = ({name}:FormEditProps) => {
               reader.readAsDataURL(file);
           }
       };
-      const fileSchema = z.instanceof(File, { message: "Required" })
-      const imageSchema = fileSchema.refine(
-        file => file.size === 0 || file.type.startsWith("image/")
-      )
+    
 
-   
-      type inputType = z.infer<typeof formSchema>;
-      const transformToCategoryInput = (data: inputType): categoryParam => {
-          return {
-            name: data.category_name,
-            description: data.description,
-            image : data.image,
-            icon : data.icon
-      
-            // Include other fields here if needed, or set default values
-          };
-        };
-      const {
-          register,
-          handleSubmit,
-          reset,
-          control,
-          watch,
-          formState: { errors },
-        } = useForm<inputType>({
-          resolver: zodResolver(formSchema),
-          defaultValues: {
-            description: category?.description || '',
-            category_name : category?.name || '',
-            image: undefined,
-            icon : undefined
-          }
-        });
-        const saveUser: SubmitHandler<inputType> = async (data)=>{
-
-          const formData = new FormData();
-
-          // Append form fields
-          for (const key in data) {
-            formData.append(key, data[key as keyof inputType].toString());
-          }
-          console.log("form data after converted"+formData);
-          const fileInputs = document.querySelectorAll('input[type="file"]') as NodeListOf<HTMLInputElement>;
-          fileInputs.forEach((fileInput) => {
-            if (fileInput.files?.length) {
-              formData.append(fileInput.name, fileInput.files[0]);
-            } else {
-              // setFileErrors((prev) => ({ ...prev, [fileInput.name]: `${fileInput.name} is required` }));
-            }
-          })
-          // console.log("ppppppp"+data.image);
-          // const files = data.image; 
-          // if (files instanceof FileList) {
-          //   console.log("size---" + files.length);
-          //   for (let i = 0; i < files.length; i++) {
-
-          //     const file = files[i];
-          //     console.log(file.name); 
-          //   }
-          // }
-  
-          try{
-              console.log("before call edit category");
-              
-
-             await editCategory(formData);
-             console.log("after call edit category");
-              
-          }catch(error){
-              toast.error("soth77777ing went wrong"+error);
-          }
-      }
       const getCategory = async () =>{
         const categoryDa = await getCatByName(name);
-             
         setCategory(categoryDa);
       }
       
@@ -141,7 +69,7 @@ const FormEdit = ({name}:FormEditProps) => {
 
   return (
    <div className="fixed bg-[#0000003f] h-full flex overflow-hidden items-center justify-center w-full left-0 top-0 m-auto z-50 p-6 max-h[100vh]">
-           {category && <form onSubmit={handleSubmit(saveUser)} className='w-6/12 bg-white rounded-md shadow-2xl scr-container overflow-y-auto h-[95vh]' >
+           {category && <form action={edtCategory} className='w-6/12 bg-white rounded-md shadow-2xl scr-container overflow-y-auto h-[95vh]' >
               
                <div className="p-2 sticky top-1.5 w-[98%] mx-auto z-40 flex items-center rounded-md bg-[#7648e5] mb-3">
                 <div className="flex items-center">
@@ -160,21 +88,20 @@ const FormEdit = ({name}:FormEditProps) => {
                             <label htmlFor="category_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Category Name</label>
                             <div className="flex items-center w-full">
                                 <div className="relative flex w-full">
-                                <input {...register('category_name')} type="text" name="category_name" id="category_name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Web Designing ..." required />
+                                <input type="text" name="category_name" id="category_name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Web Designing ..." required />
                                 </div>
                             </div> 
-                            
-                            <span className="text-red-400 text-xs mt-2">{errors.category_name?.message} </span>
+                            {/* <span className="text-red-400 text-xs mt-2">{errors.category_name?.message} </span> */}
                     </div>
 
                     <div className=" flex flex-col z-0 w-full mb-5 group">
                             <label htmlFor="description" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Categoty Description</label>
                             <div className="flex items-center w-full">
                                 <div className="relative flex w-full">
-                                <input {...register('description')}   type="text" name="description" id="description" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Web Designing ..." required />
+                                <input   type="text" name="description" id="description" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Web Designing ..." required />
                                 </div>
                             </div> 
-                            <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
+                            {/* <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span> */}
                     </div>
 
                     <div className="flex flex-col z-0 w-full mb-5 group">
@@ -202,13 +129,11 @@ const FormEdit = ({name}:FormEditProps) => {
 
                           </div>
                           {imageSrc  && <span className='text-gray-600 text-md'>Change Image</span>}
-                          <input id="image" {...register('image')}  type="file" name="image" className="opacity-0" onChange={handleFileChange} />
+                          <Input id="image"  type="file" name="image" className="hidden" onChange={handleFileChange} />
                       </label>
-                      {errors.image?.message && <p>{errors.image.message as string}</p>}
+                      {/* {errors.image?.message && <p>{errors.image.message as string}</p>} */}
 
                   </div> 
-                            {/* <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span> */}
-
                   <div className="flex flex-col z-0 w-full pt-2 mb-2 mt-3 group border-t border-t-gray-200">
                       <label htmlFor="description" className="font-medium mb-3 text-sm text-gray-500 dark:text-gray-400 duration-300">
                           Icon
@@ -234,7 +159,7 @@ const FormEdit = ({name}:FormEditProps) => {
 
                           </div>
                           {imageSrc  && <span className='text-gray-600 text-md'>Change Image</span>}
-                          <input id="icon" {...register('icon')}  type="file" name="icon" className="hiddenv" onChange={handleIconChange} />
+                          <input id="icon" type="file" name="icon" className="hidden" onChange={handleIconChange} />
                       </label>
                   </div> 
 
@@ -251,4 +176,4 @@ const FormEdit = ({name}:FormEditProps) => {
   );
 };
 
-export default FormEdit;
+export default FormEdit1;
