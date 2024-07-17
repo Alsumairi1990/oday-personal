@@ -28,12 +28,12 @@ import { useFormState } from 'react-dom';
 
 
 const Create = () => {
-    const [error, action] = useFormState(addCategory,{}
-      )
+    // const [error, action] = useFormState(addCategory,{}
+    //   )
    
   return (
    <div className="w-full sm:w-11.8/12 max-sm:border max-sm:border-gray-300  m-auto p-6 bg-white border border-gray-300 rounded-md">
-     <form action={action} className="text-start z-40  ">
+     <form  className="text-start z-40  ">
         <div className="grid grid-cols-1">
         {/* {category &&
           <SuccessMessage category={category}/>

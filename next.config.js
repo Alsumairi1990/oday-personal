@@ -4,6 +4,9 @@ const nextConfig = {
       // Add your public URL or any other environment variables here
       PUBLIC_URL: process.env.PUBLIC_URL || 'http://localhost:3000',
     },
+    images: {
+      domains: ['localhost'],
+  },
   };
   
   module.exports = nextConfig;

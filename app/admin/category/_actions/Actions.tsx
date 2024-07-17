@@ -75,55 +75,91 @@ export async function edtCategory(dataForm:FormData): Promise<string | null > {
   return null;
 
 }
-export async function editCategory(data:FormData): Promise<string | null > {
+export async function editCategory(data:FormData,id:number): Promise<string | null > {
   console.log("0-0-0-0-0-0-0-0-0-0-0");
   const result = addSchema.safeParse(Object.fromEntries(data.entries()))
-  if (result.success) {
-    const data1 = result.data; 
-    console.log("------------00000000000"+data1.icon.name);
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    throw new Error('User not authenticated');
   }
-  // const session = await getServerSession(authOptions);
-  // if (!session) {
-  //   throw new Error('User not authenticated');
-  // }
+
+  if (result.success) {
+    const data = result.data; 
+    let imagePath = '';
+    let iconPath = '';
+    if(data.image){
+      await fs.mkdir("public/categories/images", { recursive: true })
+      imagePath = `/categories/images/${crypto.randomUUID()}-${data.image.name}`
+      await fs.writeFile(
+        `public${imagePath}`,
+        Buffer.from(await data.image.arrayBuffer())
+        )
+      }
+
+      if(data.icon){
+        await fs.mkdir("public/categories/icons", { recursive: true })
+        iconPath = `/categories/icons/${crypto.randomUUID()}-${data.icon.name}`
+        await fs.writeFile(
+          `public${iconPath}`,
+          Buffer.from(await data.icon.arrayBuffer())
+          )
+        }
+
+        console.log("icon path"+iconPath);
+
+          const nameSlug = slugify(data.category_name);
+          // const category = await prisma.category.findFirst({
+          // where: { slug: nameSlug },
+          // });
+          // console.log(category?.name)
+          // if (category){
+          console.log("------------------------++id"+id)
+            try {
+              const updatedCategory = await prisma.category.update({
+                where: { id : id},
+                data: {
+                  name: data.category_name,
+                  description: data.description,
+                  image: imagePath,
+                  icon: iconPath
+                },
+              });
+              console.log("server action", updatedCategory);
+            
+              return updatedCategory.name;
+        
+            } catch (error) {
+              console.error('Error creating service:', error);
+              throw new Error('Error creating service');
+            }
+          // }
+  
+  }
+  
  
 
-  // await fs.mkdir("public/categories", { recursive: true })
-  // console.log("----------->>>"+data.image);
-  // const imagePath = `/categories/${crypto.randomUUID()}-${data.image[0].name}`
-  // await fs.writeFile(
-  //   `public${imagePath}`,
-  //   Buffer.from(await data.image[0].arrayBuffer())
-  // )
+  
 
-  // const userId = session.user.id;
-  //   console.log("server action"+ data.category_name);
-  //   const nameSlug = slugify(data.category_name);
-  //   const category = await prisma.category.findFirst({
-  //     where: { slug: nameSlug },
-  //   });
-  //  if (category){
-  //   try {
-  //     const updatedCategory = await prisma.category.update({
-  //       where: { id : category.id},
-  //       data: {
-  //         name: data.category_name,
-  //         description: data.description,
-  //         image: imagePath,
-  //       },
-  //     });
-  //     console.log("server action", updatedCategory);
-    
-  //     return updatedCategory.name;
-
-  //   } catch (error) {
-  //     console.error('Error creating service:', error);
-  //     throw new Error('Error creating service');
-  //   }
-  // }
+  
+  
   return null;
 }
 
+
+
+export async function deleteCategories(ids:string[]): Promise<number[]> {
+  const numberIds = ids.map(id => Number(id));
+
+  const catgs = await prisma.category.deleteMany({
+    where: {
+      id: {
+        in: numberIds
+      }
+    }
+  });
+  console.log('number deleted '+ numberIds);
+  return numberIds;
+}
 
 
 export async function getCategoriesNames(): Promise<string[]> {
@@ -134,6 +170,15 @@ export async function getCategoriesNames(): Promise<string[]> {
   });
   return categories.map(category => category.name);
 }
+
+export async function getCategories(): Promise<Category[]> {
+  const categories = await prisma.category.findMany({
+   
+  });
+  return categories;
+}
+
+
 
 export async function addCategory(data:CategoryInput) {
   const session = await getServerSession(authOptions);

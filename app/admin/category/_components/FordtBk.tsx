@@ -1,7 +1,12 @@
 "use client";
 import React, { ChangeEvent, useEffect } from 'react';
+import { GrCheckmark } from "react-icons/gr";
 import { Category, Service } from '@prisma/client';
 import { useState } from 'react';
+import { CategoryDTO } from '../util/CategoryDTO';
+import Link from 'next/link';
+import router from 'next/router';
+import { useRouter } from 'next/navigation';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,95 +14,131 @@ import { toast } from 'react-toastify';
 import { IoMdCloseCircle } from "react-icons/io";
 import { BiSolidCommentEdit } from "react-icons/bi";
 import Image from 'next/image';
+import { VscCloudUpload } from "react-icons/vsc";
+
+
+import { Input } from "@/components/ui/input"
+
 import { editCategory, getCatByName } from '../_actions/Actions';
+import { categoryParam } from '../util/CategoryParam';
 import { formSchema } from '../util/formSchema';
-
 interface FormEditProps {
-  name: string;
-}
+    name: string;
+  }
+  type CategoryInput = Omit<Category, 'id' | 'slug' | 'userId' | 'createdAt' | 'updatedAt'>;
 
-const FormEdit = ({ name }: FormEditProps) => {
+  
+
+const FormEditBk = ({name}:FormEditProps) => {
   const [category, setCategory] = useState<Category | null>(null); 
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [iconSrc, setIconSrc] = useState<string | null>(null);
+  
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // alert("---");
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImageSrc(reader.result as string);
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImageSrc(reader.result as string);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    const handleIconChange = (e: ChangeEvent<HTMLInputElement>) => {
+      // alert("---");
+      const file = e.target.files?.[0];
+          if (file) {
+              const reader = new FileReader();
+              reader.onloadend = () => {
+                  setIconSrc(reader.result as string);
+              };
+              reader.readAsDataURL(file);
+          }
       };
-      reader.readAsDataURL(file);
-    }
-  };
+      const fileSchema = z.instanceof(File, { message: "Required" })
+      const imageSchema = fileSchema.refine(
+        file => file.size === 0 || file.type.startsWith("image/")
+      )
 
-  const handleIconChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setIconSrc(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+   
+      type inputType = z.infer<typeof formSchema>;
+      const transformToCategoryInput = (data: inputType): categoryParam => {
+          return {
+            name: data.category_name,
+            description: data.description,
+            image : data.image,
+            icon : data.icon
+      
+            // Include other fields here if needed, or set default values
+          };
+        };
+      const {
+          register,
+          handleSubmit,
+          reset,
+          control,
+          watch,
+          formState: { errors },
+        } = useForm<inputType>({
+          resolver: zodResolver(formSchema),
+          defaultValues: {
+            description: category?.description || '',
+            category_name : category?.name || '',
+            image: undefined,
+            icon : undefined
+          }
+        });
+        const saveUser: SubmitHandler<inputType> = async (data)=>{
+          alert("called");
 
-  type inputType = z.infer<typeof formSchema>;
+          const formData = new FormData();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<inputType>({
-    resolver: zodResolver(formSchema),
-  });
+          // Append form fields
+          for (const key in data) {
+            formData.append(key, data[key as keyof inputType].toString());
+          }
+          console.log("form data after converted"+formData);
+          const fileInputs = document.querySelectorAll('input[type="file"]') as NodeListOf<HTMLInputElement>;
+          fileInputs.forEach((fileInput) => {
+            if (fileInput.files?.length) {
+              formData.append(fileInput.name, fileInput.files[0]);
+            } else {
+              // setFileErrors((prev) => ({ ...prev, [fileInput.name]: `${fileInput.name} is required` }));
+            }
+          })
+          // formData.append('id',String(category?.id));
+          // console.log("ppppppp"+data.image);
+          // const files = data.image; 
+          // if (files instanceof FileList) {
+          //   console.log("size---" + files.length);
+          //   for (let i = 0; i < files.length; i++) {
 
-  const saveUser: SubmitHandler<inputType> = async (data) => {
-    alert("called");
-    const formData = new FormData();
-    for (const key in data) {
-      formData.append(key, data[key as keyof inputType].toString());
-    }
-    const fileInputs = document.querySelectorAll('input[type="file"]') as NodeListOf<HTMLInputElement>;
-    fileInputs.forEach((fileInput) => {
-      if (fileInput.files?.length) {
-        formData.append(fileInput.name, fileInput.files[0]);
-      } 
-    });
-
-    try {
-      if (category?.id !== undefined) {
-        await editCategory(formData, category?.id);
-      }              
-    } catch (error) {
-      toast.error("something went wrong" + error);
-    }
-  };
-
-  const getCategory = async () => {
-    const categoryDa = await getCatByName(name);
-    setCategory(categoryDa);
-  };
-
-  useEffect(() => {
-    getCategory();
-  }, []);
-
-  useEffect(() => {
-    if (category) {
-      reset({
-        description: category.description ?? '',
-        category_name: category.name ?? '',
-        image: undefined,
-        icon: undefined,
-      });
-    }
-    if(category?.image){setImageSrc(category?.image);}
-    if(category?.icon){setIconSrc(category?.icon);}
-    
-  }, [category, reset]);
+          //     const file = files[i];
+          //     console.log(file.name); 
+          //   }
+          // }
+  
+          try{
+              console.log("before call edit category");
+              if (category?.id !== undefined) {
+             await editCategory(formData,category?.id);}
+             console.log("after call edit category");
+              
+          }catch(error){
+              toast.error("soth77777ing went wrong"+error);
+          }
+      }
+      const getCategory = async () =>{
+        const categoryDa = await getCatByName(name);
+             
+        setCategory(categoryDa);
+      }
+      
+      useEffect(() => {
+        getCategory();
+    }, []);
 
   return (
    <div className="fixed bg-[#0000003f] h-full flex overflow-hidden items-center justify-center w-full left-0 top-0 m-auto z-50 p-6 max-h[100vh]">
@@ -114,6 +155,8 @@ const FormEdit = ({ name }: FormEditProps) => {
                 <span className="ml-auto"><IoMdCloseCircle className='text-3xl cursor-pointer text-white' /></span>
                </div>
                <div className="p-5">
+
+              
                 <div className=" flex flex-col z-0 w-full mb-5 group">
                             <label htmlFor="category_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Category Name</label>
                             <div className="flex items-center w-full">
@@ -157,6 +200,7 @@ const FormEdit = ({ name }: FormEditProps) => {
                             <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                             </div>
                       )} 
+
                           </div>
                           {imageSrc  && <span className='text-gray-600 text-md'>Change Image</span>}
                           <input id="image" {...register('image')}  type="file" name="image" className="opacity-0" onChange={handleFileChange} />
@@ -164,7 +208,8 @@ const FormEdit = ({ name }: FormEditProps) => {
                       {errors.image?.message && <p>{errors.image.message as string}</p>}
 
                   </div> 
-                      {/* <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span> */}
+                            {/* <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span> */}
+
                   <div className="flex flex-col z-0 w-full pt-2 mb-2 mt-3 group border-t border-t-gray-200">
                       <label htmlFor="description" className="font-medium mb-3 text-sm text-gray-500 dark:text-gray-400 duration-300">
                           Icon
@@ -187,19 +232,24 @@ const FormEdit = ({ name }: FormEditProps) => {
                             <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                             </div>
                       )} 
+
                           </div>
                           {imageSrc  && <span className='text-gray-600 text-md'>Change Image</span>}
                           <input id="icon" {...register('icon')}  type="file" name="icon" className="hiddenv" onChange={handleIconChange} />
                       </label>
                   </div> 
-                  <div className="mb-4 sticky bottom-2">
+
+                  
+
+
+                    <div className="mb-4 sticky bottom-2">
                         <input type="submit" className="btn py-2.5 bg-slate-900  hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full w-full" value="Add Actegory" />
                     </div>
-                  </div>
+                    </div>
             </form> 
               }
    </div>
   );
 };
 
-export default FormEdit;
+export default FormEditBk;
