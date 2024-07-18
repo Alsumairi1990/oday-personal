@@ -87,7 +87,7 @@ export async function editCategory(data:FormData,id:number): Promise<string | nu
     const data = result.data; 
     let imagePath = '';
     let iconPath = '';
-    if(data.image){
+    if(data.image && data.image.name){
       await fs.mkdir("public/categories/images", { recursive: true })
       imagePath = `/categories/images/${crypto.randomUUID()}-${data.image.name}`
       await fs.writeFile(
@@ -96,7 +96,7 @@ export async function editCategory(data:FormData,id:number): Promise<string | nu
         )
       }
 
-      if(data.icon){
+      if(data.icon && data.icon.name){
         await fs.mkdir("public/categories/icons", { recursive: true })
         iconPath = `/categories/icons/${crypto.randomUUID()}-${data.icon.name}`
         await fs.writeFile(
@@ -115,18 +115,53 @@ export async function editCategory(data:FormData,id:number): Promise<string | nu
           // if (category){
           console.log("------------------------++id"+id)
             try {
-              const updatedCategory = await prisma.category.update({
-                where: { id : id},
-                data: {
-                  name: data.category_name,
-                  description: data.description,
-                  image: imagePath,
-                  icon: iconPath
-                },
-              });
-              console.log("server action", updatedCategory);
-            
-              return updatedCategory.name;
+              if(imagePath != '' && iconPath != ''){
+                const updatedCategory = await prisma.category.update({
+                  where: { id : id},
+                  data: {
+                    name: data.category_name,
+                    description: data.description,
+                    image: imagePath,
+                    icon: iconPath
+                  },
+                });
+                return null;
+              }
+
+              if(imagePath != '' && iconPath =='' ){
+                const updatedCategory = await prisma.category.update({
+                  where: { id : id},
+                  data: {
+                    name: data.category_name,
+                    description: data.description,
+                    image: imagePath,
+                  },
+                });
+                return null;
+              }
+
+              if(iconPath != '' && imagePath =='' ){
+                const updatedCategory = await prisma.category.update({
+                  where: { id : id},
+                  data: {
+                    name: data.category_name,
+                    description: data.description,
+                    icon: iconPath,
+                  },
+                });
+                return null;
+              }
+              if(iconPath == '' && imagePath =='' ){
+                const updatedCategory = await prisma.category.update({
+                  where: { id : id},
+                  data: {
+                    name: data.category_name,
+                    description: data.description,
+                  },
+                });
+                return null;
+              }
+
         
             } catch (error) {
               console.error('Error creating service:', error);
@@ -173,8 +208,15 @@ export async function getCategoriesNames(): Promise<string[]> {
 
 export async function getCategories(): Promise<Category[]> {
   const categories = await prisma.category.findMany({
-   
+    include: {
+      user: {
+        select: {
+          user_name: true,
+        },
+      },
+    },
   });
+  
   return categories;
 }
 

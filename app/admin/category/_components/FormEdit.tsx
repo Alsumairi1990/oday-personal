@@ -14,9 +14,10 @@ import { formSchema } from '../util/formSchema';
 
 interface FormEditProps {
   name: string;
+  closeModel : (value : boolean) => void 
 }
 
-const FormEdit = ({ name }: FormEditProps) => {
+const FormEdit = ({ name, closeModel }: FormEditProps) => {
   const [category, setCategory] = useState<Category | null>(null); 
   const [imageSrc, setImageSrc] = useState<string | null>(null);
   const [iconSrc, setIconSrc] = useState<string | null>(null);
@@ -32,6 +33,7 @@ const FormEdit = ({ name }: FormEditProps) => {
     }
   };
 
+  
   const handleIconChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -111,7 +113,7 @@ const FormEdit = ({ name }: FormEditProps) => {
                   Edit Category</span> 
 
                 </div>
-                <span className="ml-auto"><IoMdCloseCircle className='text-3xl cursor-pointer text-white' /></span>
+                <button type="button" onClick={()=> closeModel(false)} className="ml-auto"><IoMdCloseCircle className='text-3xl cursor-pointer text-white' /></button>
                </div>
                <div className="p-5">
                 <div className=" flex flex-col z-0 w-full mb-5 group">

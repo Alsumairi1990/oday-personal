@@ -29,18 +29,25 @@ const CategoryCard = ({category}:Props) => {
    <div className="w-full ">
       {category && 
            <div className=" w-full sm:flex sm:mx-auto items-center bg-white border-r border-r-gray-300 rounded-l-md">
-             <div className="sm:flex-23  border-r border-r-gray-300">
-                 <img className=' rounded-l-md' src={`${baseUrl}/${category?.image}`} alt="" />
+             <div className="sm:flex-23 rounded-l-md bg-black border-r border-r-gray-300">
+                 <img className=' opacity-75 rounded-l-md' src={`${baseUrl}/${category?.image}`} alt="" />
              </div>
-             <div className="p-2 pl-4  ">
-                <div className="sm:flex-15 mb-4 flex items-center">
+             <div className="p-2 pl-4  w-full">
+                <div className="w-full mb-2 flex items-center">
                     <img className=' rounded-md w-8  mr-2' src={`${baseUrl}/${category?.icon}`} alt="" />
                     <span className="text-base  text-black  font-semibold">{category?.name}</span>
+                    <div className="ml-auto">
+                      <span className="text-sm text-gray-700">Added By : </span>
+                      <span className="text-sm text-red-700 ml-1 capitalize">{ category?.user?.user_name}</span>
+                    </div>
                 </div>
-                <div className="sm:flex-15">
-                    <span className="text-sm font-semibold">{category?.slug}</span>
+                <div className="">
+                    <span className="text-sm text-gray-700 mr-1">
+                      Caregory Slug : 
+                    </span>
+                    <span className="text-sm font-medium">{category?.slug}</span>
                 </div>
-                <div className="sm:flex-15">
+                <div className="">
                     <span className="text-sm font-semibold">{category?.description}</span>
                 </div>
              </div>

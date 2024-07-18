@@ -47,6 +47,9 @@ const CategoryEdit = () => {
     setSelectedCategory(categoryName);
   };
 
+  const closeModel = (edit:boolean) => {
+    setShowEdit(edit);
+  }
   const editCat = (categoryM:any)=>{
     setShowEdit(true);
     setSelectedCategory(categoryM);
@@ -134,7 +137,7 @@ const CategoryEdit = () => {
                
                 )}
             </div>
-            {showEdit &&  <FormEdit name={selectedCategory} /> }
+            {showEdit &&  <FormEdit name={selectedCategory} closeModel={closeModel} /> }
         
            
         </div>
