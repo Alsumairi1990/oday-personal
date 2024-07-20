@@ -11,6 +11,7 @@ import React, { useState , useEffect} from 'react';
 import LeftNav from "../_components/admin/nav/LeftNav"
 import TopNav from "../_components/admin/nav/TopNav"
 import Footerk from "../_components/Footer"
+import NextTopLoader from 'nextjs-toploader';
 
 
 
@@ -60,6 +61,7 @@ export default function signupLayout({
 
 
                 <div className="w-full  h-full">
+                <NextTopLoader />
                 {children}
                 </div>
             </div>

@@ -24,7 +24,7 @@ import SuccessMessage from './SuccessMessage';
 import { useFormStatus } from 'react-dom';
 import FormEdit from './FormEdit';
 import FormEdit1 from './FromEdit1';
-
+import HashLoader from "react-spinners/HashLoader";
 
 
 type CategoryInput = Omit<Category, 'id' | 'slug' | 'userId' | 'image' | 'icon' | 'createdAt' | 'updatedAt'>;
@@ -72,11 +72,9 @@ const CategoryEdit = () => {
   }, []);
     
   if (loading) {
-    return (<div className=" relative h-16  w-11.8/12 mx-auto items-center bg-white border border-gray-300 rounded-md flex justify-center">
-    <div className="w-12 h-12 rounded-full animate-spin absolute border-4 border-dashed border-green-500 border-t-transparent">
-
-  </div>
-  </div>)
+    return (<div className="h-40 w-11.8/12 flex justify-center pt-8 bg-white border border-gray-300 rounded-md">
+      <HashLoader />
+      </div>)
   }
 
     

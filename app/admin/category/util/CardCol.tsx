@@ -15,7 +15,7 @@ interface Props {
   }
 
 
-const CategoryCard = ({category}:Props) => {
+const CardCol = ({category}:Props) => {
     const router = useRouter();
     const [categories, setCategories] = useState<CategoryInput | null>(null); // Use Category type
     const [baseUrl, setBaseUrl] = useState<string>('');
@@ -28,16 +28,16 @@ const CategoryCard = ({category}:Props) => {
   return (
    <div className="w-full ">
       {category && 
-           <div className=" w-full h-32 sm:flex sm:mx-auto items-center bg-white border-r border-r-gray-300 rounded-l-md">
-             <div className="sm:flex-23 h-full rounded-l-md bg-black border-r border-r-gray-300">
+           <div className=" w-full flex flex-col sm:mx-auto items-center bg-white rounded-t-md">
+             <div className="sm:flex-100 max-h-44 overflow-hidden rounded-t-md bg-black ">
                  <img className=' opacity-75 h-full rounded-l-md' src={`${baseUrl}/${category?.image}`} alt="" />
              </div>
-             <div className="p-2 pl-4  w-full">
+             <div className="p-2 pl-4 flex-100 mt-1">
                 <div className="w-full mb-2 flex items-center">
                     <img className=' rounded-md w-6  mr-2' src={`${baseUrl}/${category?.icon}`} alt="" />
                     <span className="text-base  text-black  font-semibold">{category?.name}</span>
                     <div className="ml-auto">
-                      <span className="text-sm text-gray-700">Added By : </span>
+                      <span className="text-sm text-gray-700">By : </span>
                       <span className="text-sm text-red-700 ml-1 capitalize">{ category?.user?.user_name}</span>
                     </div>
                 </div>
@@ -61,4 +61,4 @@ const CategoryCard = ({category}:Props) => {
   );
 };
 
-export default CategoryCard;
+export default CardCol;

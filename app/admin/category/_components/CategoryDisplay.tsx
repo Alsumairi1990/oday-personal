@@ -6,6 +6,14 @@ import { Category } from '@prisma/client';
 import DeleteCategory from './DeleteCategory';
 import CategoryCard from '../util/CategoryCard';
 import GridView from './GridView';
+import HashLoader from 'react-spinners/HashLoader';
+import { FaThList } from "react-icons/fa";
+import { BsTable } from "react-icons/bs";
+import { RiLayoutGridFill } from "react-icons/ri";
+import TableView from './TableView';
+import GridColsView from './GridColsView';
+
+
 
 
 const CategoryDisplay = () => {
@@ -14,7 +22,12 @@ const CategoryDisplay = () => {
    const [slected, setSlected] = useState<boolean>(false);
    const [svalues, setSvalues] = useState<string[]>([]);
    const [trigger, setTrigger] = useState(0); 
+   const [loading, setLoading] = useState<boolean>(true);
    const [showDelete, setShowDelete] = useState(false);
+   const [showGrid, setShowGrid] = useState(true);
+   const [showTable, setShowTable] = useState(false);
+   const [showGridCols, setGridCols] = useState(false);
+   
 
    const openDisplay =()=>{
     alert("vrvtrv")
@@ -47,13 +60,18 @@ const CategoryDisplay = () => {
     setCategories(catgs)
    }
    useEffect(() => {
+    setLoading(true)
     getAllCategories();
+    setLoading(false)
 
 }, []);
 
-useEffect(() => {
-    // alert('size after changed:'+ svalues.length);
-}, [trigger]); 
+if (loading) {
+    return (<div className="h-72 mx-auto w-11.8/12 flex justify-center pt-8 bg-white border border-gray-300 rounded-md">
+      <HashLoader />
+      </div>)
+  }
+
   return (
 
 
@@ -61,10 +79,6 @@ useEffect(() => {
 
 
     <div className="flex-100  bg-white sm:rounded-lg shadow-md ">
-
-
-
-
             <div className="flex flex-col p-2  my-3 pb-3 border-b border-gray-300">
                 <div className="px-2 w-full flex pb-3 border-b border-b-gray-300">
                     <div className="flex max-sm:flex-col items-center">
@@ -211,16 +225,26 @@ useEffect(() => {
                                 /> */}
                         </div>
                   </div>
+                  <div className="!ml-auto lx-3 gap-x-4 flex items-center">
+                    <button type='button' onClick={()=>{setShowTable(false);setGridCols(false); setShowGrid(true)}}><FaThList className='text-xl text-gray-600' /></button>
+                    <button type='button' onClick={()=>{setShowGrid(false);setGridCols(false);setShowTable(true) }}><BsTable className='text-xl text-gray-600' /></button>
+                    <button type='button' onClick={()=>{setShowGrid(false);setShowTable(false);setGridCols(true) }}><RiLayoutGridFill className='text-[22px] text-gray-600' /></button>
+                    
+                  </div>
              </div>
             </div>
 
             <div className="relative overflow-x-auto  h-[90vh] scr-container overflow-y-auto">
                 <div className="w-full text-sm text-left  rtl:text-right text-gray-500 dark:text-gray-400">
-                  
-                     {categories && categories?.length > 0 && 
+                     {showGrid && categories && categories?.length > 0 && 
                         <GridView categories={categories} unSelected={unSelected} getSelected={getSelected}  />
                         }
-                   
+                    {showTable && categories && categories?.length > 0 && 
+                    <TableView categories={categories} unSelected={unSelected} getSelected={getSelected}  />
+                    }
+                    {showGridCols && categories && categories?.length > 0 && 
+                    <GridColsView categories={categories} unSelected={unSelected} getSelected={getSelected}  />
+                    }
                 </div>
             </div>
 

@@ -49,6 +49,24 @@ const addSchema = z.object({
   }),
 })
 
+export async function getCatById(id:string): Promise<Category | null>{
+const cid = Number(id);
+  const category = await prisma.category.findFirst({
+      where: {
+        id: cid,
+      },
+      include: {
+        user: {
+          select: { user_name: true } 
+        },
+        services: true
+      }
+    });
+
+   
+    return category;
+}
+
 export async function getCatByName(name:string): Promise<Category | null> {
   const category = await prisma.category.findFirst({
     where: {
