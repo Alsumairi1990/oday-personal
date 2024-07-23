@@ -1,0 +1,18 @@
+import Link from "next/link";
+import EditTool from "../_components/EditTool";
+
+const TagEditPage = () => {
+    return (
+      <div className="p-2">
+        <div className="text-gray-600 py-2 flex items-center mx-auto text-md w-11.8/12 bg-white border rounded-md border-gray-200 px-2 mb-4">
+           <Link href="/admin/tools">
+           Tools
+           </Link>
+           <span className="text-gtay-700 mx-2 inline-flex h-3 bg-gray-600 w-[1px]"></span>
+           Edit
+        </div>
+        <EditTool  />
+      </div>
+)
+};
+export default TagEditPage;

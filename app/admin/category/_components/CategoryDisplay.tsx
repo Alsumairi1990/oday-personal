@@ -65,6 +65,10 @@ const CategoryDisplay = () => {
     setLoading(false)
 
 }, []);
+const closeConfirm = (flag:boolean) =>{
+    setShowDelete(flag);
+    
+  }
 
 if (loading) {
     return (<div className="h-72 mx-auto w-11.8/12 flex justify-center pt-8 bg-white border border-gray-300 rounded-md">
@@ -75,7 +79,7 @@ if (loading) {
   return (
 
 
-    <div className="relative sm:w-[97%] mx-auto flex flex-wrap self-center mt-8 max-h-[95vh] rounded-md w-full  ">
+    <div className="relative sm:w-11.8/12 sm:pb-8 mx-auto flex flex-wrap self-center mt-4  rounded-md w-full  ">
 
 
     <div className="flex-100  bg-white sm:rounded-lg shadow-md ">
@@ -91,7 +95,7 @@ if (loading) {
                             </button>
                        </div>
                       }
-                      {showDelete && <DeleteCategory categoryIds={svalues}  />}  
+                      {showDelete && <DeleteCategory categoryIds={svalues} closeModel={closeConfirm}  />}  
                      {/* <span>  -{svalues.length}</span> */}
                       <div className="ml-auto">
                         <div className="flex items-center max-sm:flex-wrap space-x-2 ">
@@ -234,7 +238,7 @@ if (loading) {
              </div>
             </div>
 
-            <div className="relative overflow-x-auto  h-[90vh] scr-container overflow-y-auto">
+            <div className="relative overflow-x-auto  scr-container overflow-y-autحo">
                 <div className="w-full text-sm text-left  rtl:text-right text-gray-500 dark:text-gray-400">
                      {showGrid && categories && categories?.length > 0 && 
                         <GridView categories={categories} unSelected={unSelected} getSelected={getSelected}  />

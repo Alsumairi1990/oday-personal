@@ -17,6 +17,7 @@ import { Category } from "@prisma/client";
 import { categoryParam } from "../util/CategoryParam";
 import { File } from "buffer";
 import { inputType } from "../util/InptParam";
+import { promises } from "dns";
 
 
 
@@ -185,16 +186,8 @@ export async function editCategory(data:FormData,id:number): Promise<string | nu
               console.error('Error creating service:', error);
               throw new Error('Error creating service');
             }
-          // }
-  
+
   }
-  
- 
-
-  
-
-  
-  
   return null;
 }
 
@@ -238,7 +231,113 @@ export async function getCategories(): Promise<Category[]> {
   return categories;
 }
 
+export async function  addingCategory(data:FormData):Promise<Category | null>{
 
+  console.log("0-0-0-0-0-0-0-0-0-0-0");
+  const result = addSchema.safeParse(Object.fromEntries(data.entries()))
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    throw new Error('User not authenticated');
+  }
+
+  const userId = session.user.id;
+
+  if (result.success) {
+    const data = result.data; 
+    let imagePath = '';
+    let iconPath = '';
+    
+    if(data.image && data.image.name){
+      await fs.mkdir("public/categories/images", { recursive: true })
+      imagePath = `/categories/images/${crypto.randomUUID()}-${data.image.name}`
+      await fs.writeFile(
+        `public${imagePath}`,
+        Buffer.from(await data.image.arrayBuffer())
+        )
+      }
+
+      if(data.icon && data.icon.name){
+        await fs.mkdir("public/categories/icons", { recursive: true })
+        iconPath = `/categories/icons/${crypto.randomUUID()}-${data.icon.name}`
+        await fs.writeFile(
+          `public${iconPath}`,
+          Buffer.from(await data.icon.arrayBuffer())
+          )
+        }
+
+        console.log("icon path"+iconPath);
+
+          const nameSlug = slugify(data.category_name);
+          // const category = await prisma.category.findFirst({
+          // where: { slug: nameSlug },
+          // });
+          // console.log(category?.name)
+          // if (category){
+          
+            try {
+              if(imagePath != '' && iconPath != ''){
+                const category = await prisma.category.create({
+                  data: {
+                  name: data.category_name,
+                  slug: nameSlug,
+                  description: data.description,
+                  userId: userId,
+                  image: imagePath,
+                  icon : iconPath
+                },
+              
+              });
+                return category;
+              }
+
+              if(imagePath != '' && iconPath =='' ){
+                const category = await prisma.category.create({
+                  data: {
+                  name: data.category_name,
+                  slug: nameSlug,
+                  description: data.description,
+                  userId: userId,
+                  image: imagePath,
+                },
+               
+              });
+                return category;
+              }
+
+              if(iconPath != '' && imagePath =='' ){
+                const category = await prisma.category.create({
+                  data: {
+                  name: data.category_name,
+                  slug: nameSlug,
+                  description: data.description,
+                  userId: userId,
+                  icon : iconPath
+                },
+              });
+                return category;
+              }
+              if(iconPath == '' && imagePath =='' ){
+                const category = await prisma.category.create({
+                  data: {
+                  name: data.category_name,
+                  slug: nameSlug,
+                  description: data.description,
+                  userId: userId,
+                },
+              });
+                return category;
+              }
+
+        
+            } catch (error) {
+              console.error('Error creating service:', error);
+              throw new Error('Error creating service');
+            }
+
+  }
+  return null;
+
+}
 
 export async function addCategory(data:CategoryInput) {
   const session = await getServerSession(authOptions);

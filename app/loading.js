@@ -1,7 +1,9 @@
+import HashLoader from "react-spinners/HashLoader";
+
 export default function Loading() {
     return (
-        <div className="fixed inset-0 bg-blue-500 z-[10000] flex flex-1 items-center justify-center">
-        Loading
+        <div className="fixed h-full w-full  inset-0  flex top-0 left-0 items-center justify-center">
+         <div className="loader"> </div>
         </div>
     );
 }

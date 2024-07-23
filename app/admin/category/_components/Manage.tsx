@@ -137,7 +137,7 @@ const CategoryManage = () => {
                         </div>
                     </div>
                     <div  className="w-6/12 bg-green-800 border !border-[#41a165] mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer">
-                        <div  onClick={openDelete} className="flex items-center rounded-2xl py-[2px]  " >
+                        <Link href="/admin/category/delete" className="flex items-center rounded-2xl py-[2px]  " >
                             <span className=" text-gray-50 font-semibold capitalize pr-2.5 pl-1" >Delete </span>
                             <div className="px-1 py-0.5 flex" >
                                 <span className=" bg-white h-6 w-6 p-1 rounded-full flex items-center justify-center" data-v-a1c57ce8="">
@@ -146,7 +146,7 @@ const CategoryManage = () => {
                                   {/* <!-- <svg className="h-full w-full fill-slate-700 "  viewBox="-1.7 0 20.4 20.4" xmlns="http://www.w3.org/2000/svg" ><path d="M16.417 10.283A7.917 7.917 0 1 1 8.5 2.366a7.916 7.916 0 0 1 7.917 7.917zm-6.804.01 3.032-3.033a.792.792 0 0 0-1.12-1.12L8.494 9.173 5.46 6.14a.792.792 0 0 0-1.12 1.12l3.034 3.033-3.033 3.033a.792.792 0 0 0 1.12 1.119l3.032-3.033 3.033 3.033a.792.792 0 0 0 1.12-1.12z"/></svg> --> */}
                                 </span>
                             </div>
-                        </div>
+                        </Link>
                     </div>
                 </div>
 

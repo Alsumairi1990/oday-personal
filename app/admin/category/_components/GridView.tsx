@@ -4,6 +4,7 @@ import {useState} from 'react';
 import CategoryCard from '../util/CategoryCard';
 import FormEdit from './FormEdit';
 import Link from 'next/link';
+import DeleteCategory from './DeleteCategory';
 interface Props{
     categories:Category[],
     getSelected :(value: string) => void
@@ -14,7 +15,10 @@ const GridView = ({categories,getSelected,unSelected}:Props) => {
     const [baseUrl, setBaseUrl] = useState<string>('');
     const [editShow, setEditShow] = useState<boolean>(false);
     const [catName, setCatName] = useState<string>('');
-    let [selectedValues, setSelectedValues] = useState<string[]>([]);
+    const [showDelete ,setShowDelete] =useState<boolean>(false);
+    const [selectedValues, setSelectedValues] = useState<string[]>([]);
+    const [svalues, setSvalues] = useState<string[]>([]);
+    const [trigger, setTrigger] = useState(0);
     useEffect(() => {
         const { protocol, host } = window.location;
         setBaseUrl(`${protocol}//${host}`);
@@ -22,13 +26,25 @@ const GridView = ({categories,getSelected,unSelected}:Props) => {
     const closeModel = (showModel:boolean)=>{
         setEditShow(showModel);
     }
-  
+  const closeDelet = (flag:boolean) => {
+    setShowDelete(flag);
+    setSelectedValues([]);
+  }
+  const addSelected= (selected:string)=>{
+    setSelectedValues(prevValues => {
+        const newValues = [...prevValues, selected];
+        setTrigger(trigger + 1);
+        setShowDelete(true);
+        return newValues;
+            }
+        );         
+   }
   return (
     <div>
     {
      categories.map((category:any) => (
         <div className=" relative border flex my-4 w-[98%] mx-auto items-center  border-gray-200 rounded-md " >
-           <div className="inline-flex absolute z-20 bg-white top-3 left-3  justify-center   border-r border-t-gray-300  rounded-md">
+           <div className="inline-flex absolute z-20 bg-white top-3 left-3  justify-center   border border-gray-300  rounded-md">
                 <label className="relative bg-whit justify-center flex items-center  rounded-full cursor-pointer" htmlFor="checkbox">
                     <input type="checkbox"
                         className="before:content[''] peer relative h-[18px] w-[18px] cursor-pointer appearance-none rounded-md border !border-[#ccc] transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-indigo-600 checked:bg-indigo-600 checked:before:bg-indigo-600 hover:before:opacity-10"
@@ -77,14 +93,18 @@ const GridView = ({categories,getSelected,unSelected}:Props) => {
                     </g>
                     </svg>
                 </Link>
-                <span className="inline-flex items-center justify-center bg-red-100 border !border-red-200 hover:!bg-red-200 rounded-md flex-23">
+                <button 
+                      type='button'
+                      onClick={()=>{addSelected(category.id)}}
+                      className="inline-flex items-center justify-center bg-red-100 border !border-red-200 hover:!bg-red-200 rounded-md flex-23">
+                        
                         <svg className="w-4 h-4 p-0.5 fill-red-500"  viewBox="0 0 32 32" >
                             <g fill="none" fill-rule="evenodd">
                             <path d="m0 0h32v32h-32z"/>
                             <path className="fill-red-500" d="m31 6c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1l-3-.001v18.001c0 3.3137085-2.6862915 6-6 6h-12c-3.3137085 0-6-2.6862915-6-6v-18h-3c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm-18 8c-.5522847 0-1 .4477153-1 1v7c0 .5522847.4477153 1 1 1s1-.4477153 1-1v-7c0-.5522847-.4477153-1-1-1zm6 0c-.5522847 0-1 .4477153-1 1v7c0 .5522847.4477153 1 1 1s1-.4477153 1-1v-7c0-.5522847-.4477153-1-1-1zm4.5-13c.8284271 0 1.5.67157288 1.5 1.5s-.6715729 1.5-1.5 1.5h-15c-.82842712 0-1.5-.67157288-1.5-1.5s.67157288-1.5 1.5-1.5z" />
                             </g>
                             </svg>
-                    </span>
+                </button>
 
             </div>
         </div>
@@ -92,6 +112,8 @@ const GridView = ({categories,getSelected,unSelected}:Props) => {
 
 }
 {editShow && <FormEdit name={catName} closeModel={closeModel}  /> }
+{showDelete && <DeleteCategory categoryIds={selectedValues} closeModel={closeDelet}  /> }
+{}
 
 </div>  
   )

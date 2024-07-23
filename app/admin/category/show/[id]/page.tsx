@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import ShowSingle from "../../_components/ShowSingle";
 import HashLoader from "react-spinners/HashLoader";
+import Link from "next/link";
 
 interface Props {
     params: {
@@ -19,7 +20,14 @@ const ShowCategoryPage = ({params}:Props) => {
     }, []);
     return (
       <div className="p-2">
-            <p className="text-gray-600 py-2  mx-auto w-11.8/12 bg-white border rounded-md border-gray-200 px-2 mb-6">Edit Category</p>
+         <div className="text-gray-600 py-2 flex items-center mx-auto text-md w-11.8/12 bg-white border rounded-md border-gray-200 px-2 mb-4">
+           <Link href="/admin/category">
+           Category
+           </Link>
+           <span className="text-gtay-700 mx-2 inline-flex h-3 bg-gray-600 w-[1px]"></span>
+           show
+        </div>
+
             {isLoading ? <div className="h-72 mx-auto w-11.8/12 flex justify-center pt-8 bg-white border border-gray-300 rounded-md">
       <HashLoader />
       </div>
