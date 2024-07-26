@@ -9,7 +9,15 @@ import ServicesPanel from './ServicePanel';
 import AddingBtn from './AddingBtn';
 import BasicInfo from './BasicInfo';
 import { addBasicInfo } from '../_serviceActions/ServiceActions';
-import { BasicServiceInfo } from '../util/BasicServiceInfo';
+import { BasicServiceInfo } from '../utils/BasicServiceInfo';
+import BasicCreate from './BasicCreate';
+import CategoryCreate from './CategoryCreate';
+import ToolCreate from './ToolCreate';
+import { LuAlertOctagon } from "react-icons/lu";
+import { MdAssignmentAdd } from "react-icons/md";
+import TagCreate from './TagCreate';
+
+
 
 const ServiceCreate = () => {
    const imagePath = '/images/navbg.webp';
@@ -19,10 +27,16 @@ const ServiceCreate = () => {
    const [openMenu,setOpenMenu] = useState('');
    const [openNav, setOpenNav] = useState(true);
    const [basic,setBasic] = useState('/images/basic-2.svg');
-   const [extra,setExtra] = useState('/images/basic-3.svg');
+   const [category,setCategoty] = useState('/images/basic10.svg');
+//    const [extra,setExtra] = useState('/images/basic-3.svg');
+   const [tool,setTool] = useState('/images/basic-3.svg');
    const [phases,setPhases] = useState('/images/basic4.svg');
    const [pricing,setPricing] = useState('/images/basic5.svg');  
+   const [code,setCode] = useState('/images/basic11.svg');  
    const [testimonials,setTestimonials] = useState('/images/basic6.svg');
+   const [works,setWorks] = useState('/images/basic12.svg');
+   const [tags,setTags] = useState('/images/basic13.svg');   
+   const [serviceId, setServiceId] = useState<number>(0)
 
    const openDisplay =()=>{
     alert("vrvtrv")
@@ -43,11 +57,13 @@ const ServiceCreate = () => {
     
     setOpenMenu(value);
    }
-   const addBasicData = (value:BasicServiceInfo)=> {
-        addBasicInfo(value);
+   const addBasicData = (value:number)=> {
+         setServiceId(value);
     // console.log(value);
    }
-
+const close = (v:boolean)=> {
+    setOpenMenu('');
+}
   return (
     <div  className="flex flex-wrap min-h-[100vh] h-auto" >
     <div id="add-main-panel" className="w-11.8/12 mx-auto add-main-panel  flex h-full flex-col  rounded-md  borrder borrder-gray-200 bg-whitey">
@@ -63,9 +79,7 @@ const ServiceCreate = () => {
                         <div   className="flex flex-col w-full sm:w-6/12 max-sm:h-full add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                           <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
                               <div className="flex items-center">
-                                  <span className="inline-flex h-full w-9 pb-1 justify-center items-center">
-                                    <svg className="w-full h-full icon line-color fill-black icon flat-color" width="50px" height="50px" viewBox="0 0 24 24" id="add-file-6" data-name="Line Color" xmlns="http://www.w3.org/2000/svg"><path id="secondary" className="fill-none stroke-white stroke-1" d="M16,19h4m-2-2v4M8,13h6m0-4H8"></path><path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6"></path></svg>
-                                  </span>
+                              <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
                                   <span className="text-base font-semibold text-white">Basic Data</span>
                               </div>
                               <div className="ml-auto">
@@ -78,7 +92,48 @@ const ServiceCreate = () => {
                               </div>
                               </div>
                          <div  className="w-full max-h-[100vh] overflow-y-auto">
-                         <BasicInfo  addBasicForm={addBasicData} />
+                         <BasicCreate  addBasicId={addBasicData} closeModel={close} />
+                      </div>
+                     </div>
+                 </div>
+                )}
+
+             </div>
+
+
+
+             <div className="add-main">
+                <AddingBtn
+                title="Categoty Details"
+                svgUrl={category}
+                title_name="category"
+                changeMenu={changeBtnMenu}
+                />
+                {isOpen('category') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                          <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
+                              <div className="flex items-center">
+                                  <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
+                                  <span className="text-base font-semibold text-white">Categories</span>
+                              </div>
+                              <div className="ml-auto">
+                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                      </svg>
+                                      <span className="sr-only">Close modal</span>
+                                  </button>
+                              </div>
+                              </div>
+                         <div  className="w-full max-h-[100vh] overflow-y-auto">
+                         {/* <CategoryCreate serviceId={serviceId}  /> */}
+                         {serviceId ? <CategoryCreate serviceId={serviceId}  /> :
+                         <div className='flex items-center gap-3 px-4'>
+                            <LuAlertOctagon className='text-gray-500  text-xl' />
+                            <span className='text-orange-500 text-base inline-flex py-4'>No Service added </span>
+
+                         </div>}
+
                       </div>
                      </div>
                  </div>
@@ -89,19 +144,48 @@ const ServiceCreate = () => {
 
              <div className="add-main">
                 <AddingBtn
-                title="Tech Details"
-                svgUrl={extra}
-                title_name="addation"
+                title="Tool Details"
+                svgUrl={tool}
+                title_name="tool"
                 changeMenu={changeBtnMenu}
                 />
-                {isOpen('addation') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
+                {isOpen('tool') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
                         <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
-                          <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
+                           <div className="flex w-full  bg-[hsl(262,83%,58%)] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300" style={{boxShadow:'0 6px 19px -13px #9f9494;'}}>
                               <div className="flex items-center">
-                                  <span className="inline-flex h-full w-9 pb-1 justify-center items-center">
-                                    <svg className="w-full h-full icon line-color fill-black icon flat-color" width="50px" height="50px" viewBox="0 0 24 24" id="add-file-6" data-name="Line Color" xmlns="http://www.w3.org/2000/svg"><path id="secondary" className="fill-none stroke-white stroke-1" d="M16,19h4m-2-2v4M8,13h6m0-4H8"></path><path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6"></path></svg>
-                                  </span>
-                                  <span className="text-base font-semibold text-white">Basic Data</span>
+                                     <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
+                                  <span className="text-base font-semibold text-white">Service Tools</span>
+                              </div>
+                              <div className="ml-auto">
+                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                      </svg>
+                                      <span className="sr-only">Close modal</span>
+                                  </button>
+                              </div>
+                            </div>
+                         <div  className="w-full max-h-[90vh] overflow-y-auto scr-container">
+                         {serviceId ? <ToolCreate serviceId={serviceId}  /> : <span className='text-orange-500 text-base px-4 inline-flex py-4'>No Service added </span>}
+                      </div>
+                     </div>
+                 </div>
+                )}
+             </div>
+
+             <div className="add-main">
+                <AddingBtn
+                title="Tags Details"
+                svgUrl={tags}
+                title_name="tags"
+                changeMenu={changeBtnMenu}
+                />
+                {isOpen('tags') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                          <div className="flex w-full bg-[hsl(262,83%,58%)] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
+                              <div className="flex items-center">
+                                     <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
+                                  <span className="text-base font-semibold text-white">Tags Tools</span>
                               </div>
                               <div className="ml-auto">
                                   <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
@@ -113,13 +197,77 @@ const ServiceCreate = () => {
                               </div>
                               </div>
                          <div  className="w-full max-h-[100vh] overflow-y-auto">
-                         <BasicInfo addBasicForm={addBasicData}   />
+                         {serviceId ? <TagCreate serviceId={serviceId}  /> : <span className='text-orange-500 text-base px-4 inline-flex py-4'>No Service added </span>}
                       </div>
                      </div>
                  </div>
                 )}
-
              </div>
+
+
+             <div className="add-main">
+                <AddingBtn
+                title="Service Codes "
+                svgUrl={code}
+                title_name="code"
+                changeMenu={changeBtnMenu}
+                />
+                {isOpen('code') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                          <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
+                              <div className="flex items-center">
+                                  <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
+                                  <span className="text-base font-semibold text-white">Service code</span>
+                              </div>
+                              <div className="ml-auto">
+                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                      </svg>
+                                      <span className="sr-only">Close modal</span>
+                                  </button>
+                              </div>
+                              </div>
+                         <div  className="w-full max-h-[100vh] overflow-y-auto">
+                         {/* <BasicInfo addBasicForm={addBasicData}   /> */}
+                      </div>
+                     </div>
+                 </div>
+                )}
+             </div>
+
+
+             <div className="add-main">
+                <AddingBtn
+                title="Works Details"
+                svgUrl={works}
+                title_name="works"
+                changeMenu={changeBtnMenu}
+                />
+                {isOpen('works') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                          <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
+                              <div className="flex items-center">
+                                  <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
+                                  <span className="text-base font-semibold text-white">Works</span>
+                              </div>
+                              <div className="ml-auto">
+                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                      </svg>
+                                      <span className="sr-only">Close modal</span>
+                                  </button>
+                              </div>
+                              </div>
+                         <div  className="w-full max-h-[100vh] overflow-y-auto">
+                         <CategoryCreate serviceId={serviceId}  />
+                      </div>
+                     </div>
+                 </div>
+                )}
+             </div>
+
 
             <div className="add-main">
                 <AddingBtn
@@ -132,9 +280,7 @@ const ServiceCreate = () => {
                         <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                           <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
                               <div className="flex items-center">
-                                  <span className="inline-flex h-full w-9 pb-1 justify-center items-center">
-                                    <svg className="w-full h-full icon line-color fill-black icon flat-color" width="50px" height="50px" viewBox="0 0 24 24" id="add-file-6" data-name="Line Color" xmlns="http://www.w3.org/2000/svg"><path id="secondary" className="fill-none stroke-white stroke-1" d="M16,19h4m-2-2v4M8,13h6m0-4H8"></path><path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6"></path></svg>
-                                  </span>
+                                  <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
                                   <span className="text-base font-semibold text-white">phases Data</span>
                               </div>
                               <div className="ml-auto">
@@ -147,7 +293,7 @@ const ServiceCreate = () => {
                               </div>
                               </div>
                          <div  className="w-full max-h-[100vh] overflow-y-auto">
-                         <BasicInfo addBasicForm={addBasicData}  />
+                         {/* <BasicInfo addBasicForm={addBasicData}  /> */}
                       </div>
                      </div>
                  </div>
@@ -167,9 +313,7 @@ const ServiceCreate = () => {
                         <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                           <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
                               <div className="flex items-center">
-                                  <span className="inline-flex h-full w-9 pb-1 justify-center items-center">
-                                    <svg className="w-full h-full icon line-color fill-black icon flat-color" width="50px" height="50px" viewBox="0 0 24 24" id="add-file-6" data-name="Line Color" xmlns="http://www.w3.org/2000/svg"><path id="secondary" className="fill-none stroke-white stroke-1" d="M16,19h4m-2-2v4M8,13h6m0-4H8"></path><path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6"></path></svg>
-                                  </span>
+                                  <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
                                   <span className="text-base font-semibold text-white">Pricing Data</span>
                               </div>
                               <div className="ml-auto">
@@ -182,7 +326,7 @@ const ServiceCreate = () => {
                               </div>
                               </div>
                          <div  className="w-full max-h-[100vh] overflow-y-auto">
-                         <BasicInfo addBasicForm={addBasicData}  />
+                         {/* <BasicInfo addBasicForm={addBasicData}  /> */}
                       </div>
                      </div>
                  </div>
@@ -202,9 +346,7 @@ const ServiceCreate = () => {
                         <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                           <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
                               <div className="flex items-center">
-                                  <span className="inline-flex h-full w-9 pb-1 justify-center items-center">
-                                    <svg className="w-full h-full icon line-color fill-black icon flat-color" width="50px" height="50px" viewBox="0 0 24 24" id="add-file-6" data-name="Line Color" xmlns="http://www.w3.org/2000/svg"><path id="secondary" className="fill-none stroke-white stroke-1" d="M16,19h4m-2-2v4M8,13h6m0-4H8"></path><path id="primary" className="fill-none stroke-white stroke-1" d="M12,21H5a1,1,0,0,1-1-1V4A1,1,0,0,1,5,3h9l4,4v6"></path></svg>
-                                  </span>
+                                  <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
                                   <span className="text-base font-semibold text-white">testimonials Data</span>
                               </div>
                               <div className="ml-auto">
@@ -217,7 +359,7 @@ const ServiceCreate = () => {
                               </div>
                               </div>
                          <div  className="w-full max-h-[100vh] overflow-y-auto">
-                         <BasicInfo addBasicForm={addBasicData}  />
+                         {/* <BasicInfo addBasicForm={addBasicData}  /> */}
                       </div>
                      </div>
                  </div>

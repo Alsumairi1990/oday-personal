@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from "next/link";
-import LocationDisplay from '../_components/LocationDisplay';
+import ServiceDisplay from '../_components/ServiceDisplay';
 
 const DisplayPage = () => {
     return (
@@ -12,7 +12,7 @@ const DisplayPage = () => {
            <span className="text-gtay-700 mx-2 inline-flex h-3 bg-gray-600 w-[1px]"></span>
            Show
         </div>
-        <LocationDisplay  />
+        <ServiceDisplay  />
       </div>
 )
 };

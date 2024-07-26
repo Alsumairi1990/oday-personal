@@ -1,15 +1,15 @@
 "use client";
 import React, { useEffect } from 'react';
-import { ServiceCode, Tag} from '@prisma/client';
+import { Location, ServiceCode, Tag} from '@prisma/client';
 import { useState } from 'react';
 import { ToolWithUser } from './ToolWithUser';
 
 interface Props {
-    code: ServiceCode;
+    location: Location;
   }
 
 
-const TagCard = ({code}:Props) => {
+const TagCard = ({location}:Props) => {
     const [baseUrl, setBaseUrl] = useState<string>('');
   
     useEffect(() => {
@@ -19,15 +19,15 @@ const TagCard = ({code}:Props) => {
 
   return (
    <div className="w-full ">
-      {code && 
+      {location && 
            <div className=" w-full sm:h-32 flex flex-wrap sm:mx-auto items-center bg-white border-r border-r-gray-300 rounded-l-md">
              <div className="flex-100 sm:flex-23 h-full rounded-l-md bg-black border-r border-r-gray-300">
-                 <img className=' opacity-75 h-full rounded-l-md' src={`${baseUrl}/${code?.image}`} alt="" />
+                 <img className=' opacity-75 h-full rounded-l-md' src={`${baseUrl}/${location?.image}`} alt="" />
              </div>
              <div className="p-2 pl-4 flex-100 sm:flex-77 w-full">
                 <div className="w-full mb-2 flex items-center">
-                    <img className=' rounded-md w-6  mr-2' src={`${baseUrl}/${code?.icon}`} alt="" />
-                    <span className="text-base  text-black  font-semibold">{code?.code}</span>
+                    <img className=' rounded-md w-6  mr-2' src={`${baseUrl}/${location?.country}`} alt="" />
+                    <span className="text-base  text-black  font-semibold">{location?.city}</span>
                     <div className="ml-auto">
                       <span className="text-sm text-gray-700">Added By : </span>
                       <span className="text-sm text-red-700 ml-1 capitalize">Ahmed</span>
@@ -40,7 +40,7 @@ const TagCard = ({code}:Props) => {
                     <span className="text-sm text-gray-900 font-medium">Aly vode</span>
                 </div>
                 <div className="mt-2.5">
-                    <span className="text-sm font-normal line-clamp-2 leading-6">{code?.description}</span>
+                    <span className="text-sm font-normal line-clamp-2 leading-6">{location.createdAt.toLocaleDateString()}</span>
                 </div>
              </div>
             

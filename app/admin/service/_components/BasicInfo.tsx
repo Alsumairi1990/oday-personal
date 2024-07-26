@@ -18,7 +18,7 @@ import { passwordStrength } from 'check-password-strength';
 import { registerUser } from '@/utils/authActions';
 import { toast } from 'react-toastify';
 import { Service } from '@prisma/client';
-import { BasicServiceInfo } from '../util/BasicServiceInfo';
+import { BasicServiceInfo } from '../utils/BasicServiceInfo';
 const formSchema = z.object({
     service_name : z.string().min(4, "Service Name Must be at least 4 chars")
                           .max(45, "Service Name Must less than 45 chars"),

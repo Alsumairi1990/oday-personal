@@ -32,11 +32,11 @@ const LocationManage = () => {
                     </span>
                 </div>
                 <div className="flex-70 flex flex-col justify-center items-center">
-                    <p className="text-white  font-semibold text-base capitalize">Total Tools </p>
+                    <p className="text-white  font-semibold text-base capitalize">Total Services </p>
                     <p className="text-white font-bold text-base">765</p>
                 </div>
             </div>
-              <Link href="/admin/location/create" className="flex-70 border bg-pink-900 !border-[#9d3861] w-6/12 mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer">
+              <Link href="/admin/service/create" className="flex-70 border bg-pink-900 !border-[#9d3861] w-6/12 mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer">
                 <div className="flex items-center  rounded-2xl py-[2px] px-[5px] " >
                     <span className=" text-gray-50 font-semibold text-md capitalize pr-2.5 pl-1" >New</span>
                     <div className="px-1 flex py-0.5 " >
@@ -70,7 +70,7 @@ const LocationManage = () => {
                             <p className="text-white font-bold text-base">456</p>
                         </div>
                     </div>
-                    <Link href="/admin/location/display" className="flex-70 w-6/12 border !border-[#9386d5] mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer" style={{background: 'linear-gradient(to top, rgb(100 76 218), rgb(98 74 213) )'}}>
+                    <Link href="/admin/service/display" className="flex-70 w-6/12 border !border-[#9386d5] mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer" style={{background: 'linear-gradient(to top, rgb(100 76 218), rgb(98 74 213) )'}}>
                         <div  className="flex items-center rounded-2xl py-[2px] px-[5px] " >
                             <span className=" text-gray-50 font-semibold text-md capitalize pr-2.5 pl-1 text-base" data-v-a1c57ce8=""> Display</span>
                             <div className="px-1 py-0.5 flex" >

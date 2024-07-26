@@ -1,33 +1,25 @@
 "use client";
 import React, { ChangeEvent, useEffect } from 'react';
-import { Category, Service, ServiceCode } from '@prisma/client';
+import { Category, Location, Service, ServiceCode } from '@prisma/client';
 import { useState } from 'react';
-import { z } from 'zod';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'react-toastify';
-import { IoMdCloseCircle } from "react-icons/io";
-import { BiSolidCommentEdit } from "react-icons/bi";
-import Image from 'next/image';
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FcShop } from "react-icons/fc";
 import { FcIdea } from "react-icons/fc";
-import { getCodeById } from '../_actions/Actions';
-import { ToolWithUser } from '../utils/ToolWithUser';
+import { getLocationById } from '../_actions/Actions';
 interface FormEditProps {
   id : string;
   
 }
 
 const ShowSingle = ({ id}: FormEditProps) => {
-  const [code, setCode] = useState<ServiceCode | null>(null); 
+  const [location, setLocation] = useState<Location | null>(null); 
   const [baseUrl, setBaseUrl] = useState<string>('');
   const [showEdit, setShowEdit] = useState<boolean>(false);
 
   const getTool = async () => {
-    const Data = await getCodeById(id);
-    setCode(Data);
+    const Data = await getLocationById(id);
+    setLocation(Data);
   };
   
   
@@ -44,13 +36,13 @@ const ShowSingle = ({ id}: FormEditProps) => {
 
   return (
    <div className="h-auto flex items-center justify-center w-full m-auto p-6 ">
-           {code && 
+           {location && 
              <div className="w-full">
                 <div className="flex items-center flex-col">
                     <div className="w-10/12 relative lack rounded-md border border-gray-300">
                      <div className="p2 bg-black rounded-md border-[.3rem] border-white">
                         {/* <span>jherhfref</span> */}
-                       <img className=' h-full opacity-70  rounded-md' src={`${baseUrl}/${code?.image}`} alt="" />
+                       <img className=' h-full opacity-70  rounded-md' src={`${baseUrl}/${location?.image}`} alt="" />
                      </div>
                      <div className="absolute flex space-x-2 top-3 right-3">
                         <button type='button' className='py-1 flex items-center px-1.5 rounded-md bg-white text-gray-900 ' onClick={()=>setShowEdit(true)}>
@@ -65,10 +57,10 @@ const ShowSingle = ({ id}: FormEditProps) => {
                      </div>
                      <div className="absolute  px-2 rounded-md justify-center left-0 flex space-x-4  bottom-4   right-2">
                         <div className="p-2 flex-25 capitalize text-md bg-white border border-gray-500  flex flex-col space-x-2 space-y-3 items-center rounded-md">
-                          <img className='w-9 h-9  border border-gray-300 justify-center rounded-md '  src={`${baseUrl}/${code?.icon}`} alt="" />
+                          <img className='w-9 h-9  border border-gray-300 justify-center rounded-md '  src={`${baseUrl}/${location?.image}`} alt="" />
                           <div className="flex">
-                            <span className='text-gray-800 font-semibold mr-1'>Name : </span> 
-                            <span className='text-orange-500 font-medium ml-1'>{code.code}</span> 
+                            <span className='text-gray-800 font-semibold mr-1'>Country : </span> 
+                            <span className='text-orange-500 font-medium ml-1'>{location.country}</span> 
                           </div>
                          </div>
                          <div className="p-2 flex-25 capitalize text-md bg-white border border-gray-500  flex flex-col space-x-2 space-y-3 items-center rounded-md">
@@ -81,8 +73,8 @@ const ShowSingle = ({ id}: FormEditProps) => {
                          <div className="p-2 flex-25 capitalize text-md bg-white border border-gray-500  flex flex-col space-x-2 space-y-3 items-center rounded-md">
                           <span className='w-9 h-9 items-center border border-gray-300 justify-center rounded-md inline-flex' ><FcIdea className='text-3xl '/></span>
                           <div className="flex">
-                            <span className='text-gray-800 font-medium mr-1'>Tag ID : </span> 
-                            <span className='text-orange-500 font-semibold ml-1'>{code.id}</span> 
+                            <span className='text-gray-800 font-medium mr-1'>Location ID : </span> 
+                            <span className='text-orange-500 font-semibold ml-1'>{location.id}</span> 
                           </div>
                          </div>
                         {/* <div className="p-2 flex-25 bg-[#00000062] border border-gray-500  flex flex-col space-x-2 space-y-3 items-center rounded-md">
@@ -99,10 +91,10 @@ const ShowSingle = ({ id}: FormEditProps) => {
                     </div>
                       <div className="px-2 my-2 py-3 flex border-b border-b-gray-200  ">
                         <div className="flex-25 border-r border-r-gray-300">
-                          <span className="text-base font-semibold pl-2">Service Code </span>
+                          <span className="text-base font-semibold pl-2">Location name </span>
                         </div>
                         <div className="flex-75 pl-4 ">
-                          <div className="text-md text-gray-800 font-medium">{code.code}</div>
+                          <div className="text-md text-gray-800 font-medium">{location.country}</div>
                         </div>
                       </div>
                       <div className="px-2 my-2 py-3 flex border-b border-b-gray-200  ">
@@ -126,7 +118,7 @@ const ShowSingle = ({ id}: FormEditProps) => {
                           <span className="text-base font-semibold pl-2">Description</span>
                         </div>
                         <div className="flex-75 pl-4 ">
-                          <div className="text-md text-gray-800 font-medium leading-8">{code.description}</div>
+                          <div className="text-md text-gray-800 font-medium leading-8">{location.city}</div>
                         </div>
                       </div>
                       <div className="px-2 my-2 py-3 flex border-b border-b-gray-200  ">
@@ -134,7 +126,7 @@ const ShowSingle = ({ id}: FormEditProps) => {
                           <span className="text-base font-semibold pl-2">Created At</span>
                         </div>
                         <div className="flex-75 pl-4 ">
-                          <div className="text-md text-gray-800 font-medium leading-8">{code.createdAt.toLocaleDateString()}</div>
+                          <div className="text-md text-gray-800 font-medium leading-8">{location.createdAt.toLocaleDateString()}</div>
                         </div>
                       </div>
                       <div className="px-2 my-2 py-3 flex border-b border-b-gray-200  ">
@@ -142,7 +134,7 @@ const ShowSingle = ({ id}: FormEditProps) => {
                           <span className="text-base font-semibold pl-2">Updated At</span>
                         </div>
                         <div className="flex-75 pl-4 ">
-                          <div className="text-md text-gray-800 font-medium leading-8">{code.updatedAt.toLocaleDateString()}</div>
+                          <div className="text-md text-gray-800 font-medium leading-8">{location.updatedAt.toLocaleDateString()}</div>
                         </div>
                       </div>
                       <div className="px-2 my-2 py-3 flex border-b border-b-gray-200  ">

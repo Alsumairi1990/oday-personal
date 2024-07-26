@@ -22,9 +22,9 @@ export async function getCodesByNames(): Promise<string[]> {
   return codes.map(code => code.code);
 }
 
-export async function getCodeById(id:string): Promise<ServiceCode | null>{
+export async function getLocationById(id:string): Promise<Location | null>{
   const cid = Number(id);
-    const code = await prisma.serviceCode.findFirst({
+    const code = await prisma.location.findFirst({
         where: {
           id: cid,
         },
@@ -132,8 +132,8 @@ export async function editLocation(data:FormData,id:number): Promise<Location | 
 }
 
 
-export async function getCodes(): Promise<ServiceCode[]> {
-  const codes = await prisma.serviceCode.findMany({
+export async function getLocations(): Promise<Location[]> {
+  const codes = await prisma.location.findMany({
     // include: {
     //   user: {
     //     select: {

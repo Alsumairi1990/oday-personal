@@ -14,7 +14,7 @@ interface Props {
   }
 
 
-const DeleteTag = ({ids,closeModel}:Props) => {
+const DeleteLocation = ({ids,closeModel}:Props) => {
     const router = useRouter();
     const [categories, setCategories] = useState<CategoryInput | null>(null); // Use Category type
     const [result, setResult] = useState<number[]>([]);
@@ -91,4 +91,4 @@ const DeleteTag = ({ids,closeModel}:Props) => {
   );
 };
 
-export default DeleteTag;
+export default DeleteLocation;

@@ -1,22 +1,23 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { ServiceCode, Tag, Tool } from '@prisma/client';
+import { Location, Service} from '@prisma/client';
 import HashLoader from 'react-spinners/HashLoader';
 import { FaThList } from "react-icons/fa";
 import { BsTable } from "react-icons/bs";
 import { RiLayoutGridFill } from "react-icons/ri";
-import { getCodes} from '../_actions/Actions';
-import DeleteTag from './DeleteTag';
 import GridView from './GridView';
-import GridColsView from './GridColsView';
 import TableView from './TableView';
+import { getAllServices, getServices } from '../_serviceActions/ServiceActions';
+import { ServiceWCategory } from '../utils/ServiceWCategory';
+
+
 
 
 
 
 const CodeDisplay = () => {
   
-   const [codes, setCodes] = useState<ServiceCode[] | null>(null);
+   const [services, setServices] = useState<ServiceWCategory[] | null>(null);
    const [svalues, setSvalues] = useState<string[]>([]);
    const [trigger, setTrigger] = useState(0); 
    const [loading, setLoading] = useState<boolean>(true);
@@ -52,13 +53,14 @@ const CodeDisplay = () => {
         return newValues;
     });
    }
-   const getAllCodes = async () => {
-    const catgs = await getCodes();
-    setCodes(catgs)
+   const getAlServices = async () => {
+    // const catgs = await getServices();
+    const catgs = await getAllServices();
+    setServices(catgs)
    }
    useEffect(() => {
     setLoading(true)
-    getAllCodes();
+    getAlServices();
     setLoading(false)
 
 }, []);
@@ -92,8 +94,8 @@ if (loading) {
                             </button>
                        </div>
                       }
-                      {showDelete && <DeleteTag toolIds={svalues} closeModel={closeConfirm}  />}  
-                     {/* <span>  -{svalues.length}</span> */}
+                      {/* {showDelete && <DeleteLocation ids={svalues} closeModel={closeConfirm}  />}   */}
+                     
                       <div className="ml-auto">
                         <div className="flex items-center max-sm:flex-wrap space-x-2 ">
                             <span className="max-sm:flex-100">
@@ -237,15 +239,16 @@ if (loading) {
 
             <div className="relative overflow-x-auto  scr-container overflow-y-autحo">
                 <div className="w-full text-sm text-left  rtl:text-right text-gray-500 dark:text-gray-400">
-                     {showGrid && codes && codes?.length > 0 && 
-                        <GridView codes={codes} unSelected={unSelected} getSelected={getSelected}  />
+                     {showGrid && services && services?.length > 0 && 
+                        <GridView services={services} unSelected={unSelected} getSelected={getSelected}  />
                         }
-                    {showTable && codes && codes?.length > 0 && 
-                    <TableView codes={codes} unSelected={unSelected} getSelected={getSelected}  />
+                     {/* {showTable && locations && locations?.length > 0 && 
+                    <TableView locations={locations} unSelected={unSelected} getSelected={getSelected}  />
                     } 
-                    {showGridCols && codes && codes?.length > 0 && 
-                    <GridColsView codes={codes} unSelected={unSelected} getSelected={getSelected}  />
-                    } 
+                    
+                    {showGridCols && locations && locations?.length > 0 && 
+                    <GridColsView locations={locations} unSelected={unSelected} getSelected={getSelected}  />
+                    }  */}
                 </div>
             </div>
 

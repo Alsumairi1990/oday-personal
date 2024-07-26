@@ -1,19 +1,20 @@
-import { Category, ServiceCode, Tag, Tool } from '@prisma/client';
+import { Category, Location, ServiceCode, Tag, Tool } from '@prisma/client';
 import React, { useEffect } from 'react';
 import {useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import FormEdit from '../_components/FormEdit';
-import DeleteTag from '../_components/DeleteTag';
+import DeleteLocation from '../_components/DeleteLocation';
+
 interface Props{
-    codes:ServiceCode[],
+    locations:Location[],
     getSelected :(value: string) => void
     unSelected :(value: string) => void
 
 }
 
 
-const TableTag = ({codes,getSelected,unSelected}:Props) => {
+const TableLocation = ({locations,getSelected,unSelected}:Props) => {
     const [baseUrl, setBaseUrl] = useState<string>('');
     let [selectedValues, setSelectedValues] = useState<string[]>([]);
     const [catName, setCatName] = useState<string>('');
@@ -44,7 +45,7 @@ const addSelected= (selected:string)=>{
   
   return (
     <div>
-    {codes.map((option:any) => (
+    {locations.map((option:any) => (
     <tr className="bg-white font-medium capitalize flex items-center border-b dark:bg-gray-800 dark:border-gray-700">
 
 
@@ -108,7 +109,7 @@ const addSelected= (selected:string)=>{
         <path className="fill-sky-500"   d="M5 20C4.44772 20 4 20.4477 4 21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20H5Z" fill="#777"/>
         </svg>
     </button>
-    <Link href={`/admin/tag/show/${option.id}`} className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md flex-23">
+    <Link href={`/admin/location/show/${option.id}`} className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md flex-23">
         <svg className="w-4 h-4 fill-blue-500"  viewBox="0 0 48 48" >
         <path d="M0 0h48v48H0z" fill="none"/>
         <g id="Shopicon">
@@ -136,7 +137,7 @@ const addSelected= (selected:string)=>{
 ))
 }
 {editShow && <FormEdit name={catName} closeModel={closeModel}  /> }
-{showDelete && <DeleteTag ids={selectedValues} closeModel={closeDelet}  /> }
+{showDelete && <DeleteLocation ids={selectedValues} closeModel={closeDelet}  /> }
 
 
 </div>  
@@ -144,4 +145,4 @@ const addSelected= (selected:string)=>{
 };
 
 
-export default TableTag; 
+export default TableLocation; 
