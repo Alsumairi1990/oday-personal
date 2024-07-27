@@ -152,6 +152,6 @@
 
 .animate-modalEnter {
   /* animation: modalEnter 0.3s ease-out forwards; */
-  animation: modalEnterZoomOut 0.3s ease-in-out;
+  animation: modalEnterZoomOut 0.2s ease-in-out;
 
 }

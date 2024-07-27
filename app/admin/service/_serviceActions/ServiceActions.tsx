@@ -33,7 +33,7 @@ import { ServiceWCategory } from "../utils/ServiceWCategory";
 // })
 
 
-
+// Adding Servcie category
 export async function addServiceCategory(serviceId: number, ids: number[]): Promise<string[]> {
   try {
     const existingCats = await prisma.serviceCategory.findMany({
@@ -414,12 +414,6 @@ export async function getTools(): Promise<Tool[]> {
   return tools;
 }
 
-// Get All Tags
-// export async function getTags(): Promise<Tag[]> {
-//   const tags = await prisma.tag.findMany({
-//   });
-//   return tags;
-// }
 
 
 export async function getServices(): Promise<Service[]> {
@@ -441,7 +435,6 @@ export async function getServices(): Promise<Service[]> {
    console.log("service ---- "+JSON.stringify(data, null, 2)
   );
     const result = BasicSchema.safeParse(Object.fromEntries(data.entries()))
-    
     const session = await getServerSession(authOptions);
     if (!session) {
       throw new Error('User not authenticated');

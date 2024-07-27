@@ -37,6 +37,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "clsx-tailwind-merge": "^1.0.4",
+    "formidable": "^3.5.1",
     "handlebars": "^4.7.8",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.408.0",

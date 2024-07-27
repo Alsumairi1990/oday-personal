@@ -2,7 +2,7 @@
 import { Category, Tag } from "@prisma/client";
 import prisma from "../../../../utils/prisma";
 import { slugify } from "@/utils/TextUtils";
-import { getCategoryNamesByIds, getToolsNamesByIds } from "../../service/_serviceActions/ServiceActions";
+import { getCategoryNamesByIds, getTagsNamesByIds, getToolsNamesByIds } from "../../service/_serviceActions/ServiceActions";
 import { getServerSession } from "next-auth";
 import authOptions from "@/utils/AuthOptions";
 
@@ -12,6 +12,79 @@ export async function getTags(): Promise<Tag[]> {
   });
   return tags;
 }
+
+
+// Remove work Tag
+export async function removeWorkTag(workId: number, name: string): Promise<string[]> {
+  try {
+    const nameSlug = slugify(name);
+    const tag = await prisma.tag.findFirst({
+      where: { slug: nameSlug },
+      select: { id: true }
+    });
+    
+    if (!tag) {
+      throw new Error('Tag Not Exist');
+    }
+    
+    const tagId = tag.id;
+    
+    await prisma.workTag.delete({
+      where: { workId_tagId: { workId, tagId } }
+    });
+    
+    const removed = await prisma.work.findUnique({
+      where: { id: workId },
+      include: { tags: true }
+    });
+    
+    const tagIds: number[] = removed ? removed.tags.map(tg => tg.tagId) : [];
+    const names = await getTagsNamesByIds(tagIds);
+    return names;
+  } catch (error) {
+    console.error('Error updating service with categories:', error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+
+// Remove work Category
+export async function removeWorkCategory(workId: number, name: string): Promise<string[]> {
+  try {
+    const nameSlug = slugify(name);
+    const category = await prisma.category.findFirst({
+      where: { slug: nameSlug },
+      select: { id: true }
+    });
+    
+    if (!category) {
+      throw new Error('Category Not Exist');
+    }
+    
+    const categoryId = category.id;
+    
+    await prisma.workCategory.delete({
+      where: { workId_categoryId: { workId, categoryId } }
+    });
+    
+    const removed = await prisma.work.findUnique({
+      where: { id: workId },
+      include: { categories: true }
+    });
+    
+    const categoryIds: number[] = removed ? removed.categories.map(category => category.categoryId) : [];
+    const names = await getCategoryNamesByIds(categoryIds);
+    return names;
+  } catch (error) {
+    console.error('Error updating service with categories:', error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
 
 
 // Remove Service Category
@@ -196,6 +269,46 @@ async function createTag(name: string) : Promise<number> {
   }
 }
 
+// Creating New Tag with 'name,slug' columns for shorway creation 
+async function addTag(name: string) : Promise<number> {
+  let tag:number = 0;
+  try {
+      const session = await getServerSession(authOptions);
+      if (!session) {
+        throw new Error('User not authenticated');
+      }
+      const userId = session.user.id;
+      const nameSlug = slugify(name);
+      const existingTag = await prisma.tag.findFirst({
+    where: {
+      slug: nameSlug,
+    },
+  });
+
+  if (existingTag) {
+    throw new Error('Tag with this name already exists.');
+  }
+  const newTag = await prisma.tag.create({
+    data: {
+      name:name,
+      slug:nameSlug,
+      userId:userId
+    },
+    select:{
+      id: true
+    }
+  });
+  tag = newTag.id;
+  return tag;
+      
+  } catch (error) {
+      console.log(error);
+      throw error;
+  }
+}
+
+
+
 // Creating New Category with 'name,slug' columns for shorway creation 
 async function addCategoy(name: string) : Promise<number> {
   let caregory:number = 0;
@@ -307,6 +420,91 @@ export async function createServiceTag(serviceId: number, name:string): Promise<
   let n:string = '';
   if(elemName){
       n = elemName.name; 
+  }
+  return n;      
+  } catch (error) {
+    console.error('Error updating service with tools:', error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+
+//Adding New Tag and associat it with work
+export async function createWorkTag(workId: number, name:string): Promise<string> {
+  try {     
+  const tagId = await addTag(name); 
+  const updatedService = await prisma.work.update({
+      where: {
+        id: workId,
+      },
+      data: {
+        tags: {
+          create: {
+            tag: { connect: { id: tagId } },
+          },
+        },
+      },
+      include: {
+        tags: true,
+      },
+    });
+    console.log('Tool updated successfully:', updatedService);
+    const tagName = await prisma.tag.findFirst({
+      where: {
+          id: tagId
+      },
+      select: {
+          name: true
+      }
+  });
+  let n:string = '';
+  if(tagName){
+      n = tagName.name; 
+  }
+  return n;      
+  } catch (error) {
+    console.error('Error updating service with tools:', error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+
+
+//Adding New Category and associat it with work
+export async function createWorkCategory(workId: number, name:string): Promise<string> {
+  try {     
+  const toolId = await addCategoy(name); 
+  const updatedService = await prisma.work.update({
+      where: {
+        id: workId,
+      },
+      data: {
+        categories: {
+          create: {
+            category: { connect: { id: toolId } },
+          },
+        },
+      },
+      include: {
+        categories: true,
+      },
+    });
+    console.log('Tool updated successfully:', updatedService);
+    const toolName = await prisma.category.findFirst({
+      where: {
+          id: toolId
+      },
+      select: {
+          name: true
+      }
+  });
+  let n:string = '';
+  if(toolName){
+      n = toolName.name; 
   }
   return n;      
   } catch (error) {
