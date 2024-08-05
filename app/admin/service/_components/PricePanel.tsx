@@ -285,7 +285,7 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                           name='amount'
                           className='border border-gray-100 w-full py-1 px-2 rounded-md outline-none bg-gray-50'
                           value={price.amount.toString() ?? 0}
-                          onChange={(e) =>{ setPrice({ ...price, amount: new Decimal(e.target.value) })}}
+                          // onChange={(e) =>{ setPrice({ ...price, amount: new Decimal(e.target.value) })}}
                           />
                       {/* <span className="text-orange-600 font-medium">{price.amount && price.amount.toString()}</span> */}
                       </div>
