@@ -76,14 +76,14 @@ const GridView = ({services,getSelected,unSelected}:Props) => {
            <ServiceCard   element={element} />
            </div>
             <div className="flex flex-100 sm:flex-20 gap-x-2  justify-center  ">
-                <button onClick={()=>{setEditShow(true); setName(element?.name)  }} className="inline-flex items-center justify-center bg-sky-100 border !border-sky-200 hover:!bg-sky-200 rounded-md py-1.5 flex-23">
-                    <svg className="w-4 h-4"  viewBox="0 0 24 24" fill="none">
+            <Link href={`/admin/service/edit/${element.id}`} className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md py-1 flex-23">
+                <svg className="w-4 h-4"  viewBox="0 0 24 24" fill="none">
                     <path className="fill-sky-500" fill-rule="evenodd" clip-rule="evenodd" d="M19.2071 2.79312C17.9882 1.57417 16.0119 1.57417 14.7929 2.79312L5.68463 11.9014C5.30015 12.2859 5.0274 12.7676 4.89552 13.2951L4.02988 16.7577C3.94468 17.0985 4.04453 17.459 4.29291 17.7073C4.54129 17.9557 4.90178 18.0556 5.24256 17.9704L8.70513 17.1047C9.23263 16.9729 9.71437 16.7001 10.0988 16.3156L19.2071 7.20733C20.4261 5.98838 20.4261 4.01207 19.2071 2.79312ZM16.2071 4.20733C16.645 3.76943 17.355 3.76943 17.7929 4.20733C18.2308 4.64524 18.2308 5.35522 17.7929 5.79312L8.68463 14.9014C8.55647 15.0296 8.39589 15.1205 8.22006 15.1644L6.37439 15.6259L6.83581 13.7802C6.87976 13.6044 6.97068 13.4438 7.09884 13.3156L16.2071 4.20733Z"/>
                     <path className="fill-sky-500"   d="M5 20C4.44772 20 4 20.4477 4 21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20H5Z" fill="#777"/>
                     </svg>
-                </button>
+            </Link>
             {/* {editShow && <FormEdit name={category.name} closeModel={closeModel}  /> } */}
-                <Link href={`/admin/location/show/${element.id}`} className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md flex-23">
+                <Link href={`/admin/service/show/${element.id}`} className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md py-1 flex-23">
                     <svg className="w-4 h-4 fill-blue-500"  viewBox="0 0 48 48" >
                     <path d="M0 0h48v48H0z" fill="none"/>
                     <g id="Shopicon">
@@ -97,7 +97,7 @@ const GridView = ({services,getSelected,unSelected}:Props) => {
                 <button 
                       type='button'
                       onClick={()=>{addSelected(element.id)}}
-                      className="inline-flex items-center justify-center bg-red-100 border !border-red-200 hover:!bg-red-200 rounded-md flex-23">
+                      className="inline-flex items-center justify-center bg-red-100 border !border-red-200 hover:!bg-red-200 rounded-md py-1 flex-23">
                         
                         <svg className="w-4 h-4 p-0.5 fill-red-500"  viewBox="0 0 32 32" >
                             <g fill="none" fill-rule="evenodd">

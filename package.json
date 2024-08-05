@@ -37,6 +37,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "clsx-tailwind-merge": "^1.0.4",
+    "decimal.js": "^10.4.3",
     "formidable": "^3.5.1",
     "handlebars": "^4.7.8",
     "jsonwebtoken": "^9.0.2",
@@ -68,6 +69,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
+    "@types/decimal.js": "^7.4.0",
     "@types/react-svg": "^5.0.0"
   }
 }

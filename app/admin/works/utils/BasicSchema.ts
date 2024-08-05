@@ -5,11 +5,17 @@ export const BasicSchema = z.object({
     title : z.string().min(1),
     highlights : z.string(),
     client : z.string(),
-    additionalImages :  z.custom<FileList>((file) => {
+    image: z.custom<File>((file) => {    
       return true;
     }, {
       message: "Invalid image file. Only JPEG, PNG, and GIF files are allowed, and must be less than 5MB."
     }),
+    icon: z.custom<File>((file) => {    
+      return true;
+    }, {
+      message: "Invalid image file. Only JPEG, PNG, and GIF files are allowed, and must be less than 5MB."
+    }),
+  })
     // imageUrls : z.custom<FileList>((file) => {
     //   return true;
     // }, {
@@ -22,7 +28,7 @@ export const BasicSchema = z.object({
     //   message: "Invalid image file. Only JPEG, PNG, and GIF files are allowed, and must be less than 5MB."
     // }),
 
-  })
+  
 
  
  

@@ -118,7 +118,7 @@ const ShowSingle = ({ id}: FormEditProps) => {
                           <span className="text-base font-semibold pl-2">Added By</span>
                         </div>
                         <div className="flex-75 pl-4 ">
-                          <div className="text-md text-gray-800 capitalize font-medium">{category?.user?.user_name}</div>
+                          <div className="text-md text-gray-800 capitalize font-medium"></div>
                         </div>
                       </div>
                       <div className="px-2 my-2 py-3 flex border-b border-b-gray-200  ">

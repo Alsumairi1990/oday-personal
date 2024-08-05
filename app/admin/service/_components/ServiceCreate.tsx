@@ -16,6 +16,10 @@ import ToolCreate from './ToolCreate';
 import { LuAlertOctagon } from "react-icons/lu";
 import { MdAssignmentAdd } from "react-icons/md";
 import TagCreate from './TagCreate';
+import WorkCreate from './WorkCreate';
+import PhaseCreate from '../phases/_components/PhaseCreate';
+import MediaCreate from './MediaCreate';
+import PriceCreate from './PriceCreate';
 
 
 
@@ -35,7 +39,8 @@ const ServiceCreate = () => {
    const [code,setCode] = useState('/images/basic11.svg');  
    const [testimonials,setTestimonials] = useState('/images/basic6.svg');
    const [works,setWorks] = useState('/images/basic12.svg');
-   const [tags,setTags] = useState('/images/basic13.svg');   
+   const [tags,setTags] = useState('/images/basic13.svg');  
+   const [media,setMedia] = useState('/images/basic14.svg');  
    const [serviceId, setServiceId] = useState<number>(0)
 
    const openDisplay =()=>{
@@ -175,6 +180,39 @@ const close = (v:boolean)=> {
 
              <div className="add-main">
                 <AddingBtn
+                title="Service Media"
+                svgUrl={media}
+                title_name="media"
+                changeMenu={changeBtnMenu}
+                />
+                {isOpen('media') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                           <div className="flex w-full  bg-[hsl(262,83%,58%)] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300" style={{boxShadow:'0 6px 19px -13px #9f9494;'}}>
+                              <div className="flex items-center">
+                                     <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
+                                  <span className="text-base font-semibold text-white">Service Tools</span>
+                              </div>
+                              <div className="ml-auto">
+                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                      </svg>
+                                      <span className="sr-only">Close modal</span>
+                                  </button>
+                              </div>
+                        </div>
+                         <div  className="w-full max-h-[90vh] overflow-y-auto scr-container">
+                         {serviceId ? <MediaCreate serviceId={serviceId}  /> : <span className='text-orange-500 text-base px-4 inline-flex py-4'>No Service added </span>}
+                      </div>
+                     </div>
+                 </div>
+                )}
+             </div>
+
+
+
+             <div className="add-main">
+                <AddingBtn
                 title="Tags Details"
                 svgUrl={tags}
                 title_name="tags"
@@ -196,7 +234,7 @@ const close = (v:boolean)=> {
                                   </button>
                               </div>
                               </div>
-                         <div  className="w-full max-h-[100vh] overflow-y-auto">
+                         <div  className="w-full max-h-[90vh] overflow-y-auto scr-container">
                          {serviceId ? <TagCreate serviceId={serviceId}  /> : <span className='text-orange-500 text-base px-4 inline-flex py-4'>No Service added </span>}
                       </div>
                      </div>
@@ -228,7 +266,7 @@ const close = (v:boolean)=> {
                                   </button>
                               </div>
                               </div>
-                         <div  className="w-full max-h-[100vh] overflow-y-auto">
+                         <div  className="w-full max-h-[90vh] overflow-y-auto scr-container">
                          {/* <BasicInfo addBasicForm={addBasicData}   /> */}
                       </div>
                      </div>
@@ -260,8 +298,8 @@ const close = (v:boolean)=> {
                                   </button>
                               </div>
                               </div>
-                         <div  className="w-full max-h-[100vh] overflow-y-auto">
-                         <CategoryCreate serviceId={serviceId}  />
+                         <div  className="w-full max-h-[90vh] overflow-y-auto scr-container">
+                         <WorkCreate serviceId={serviceId}  />
                       </div>
                      </div>
                  </div>
@@ -292,8 +330,14 @@ const close = (v:boolean)=> {
                                   </button>
                               </div>
                               </div>
-                         <div  className="w-full max-h-[100vh] overflow-y-auto">
-                         {/* <BasicInfo addBasicForm={addBasicData}  /> */}
+                         <div  className="w-full max-h-[90vh] overflow-y-auto scr-container">
+                         {serviceId ? 
+                         <PhaseCreate serviceId={serviceId}  /> : 
+                         <PhaseCreate serviceId={serviceId}  />
+                        //  <span className='text-orange-500 text-base px-4 inline-flex py-4'>
+                        //     No Service added
+                        //  </span>
+                         }
                       </div>
                      </div>
                  </div>
@@ -325,8 +369,10 @@ const close = (v:boolean)=> {
                                   </button>
                               </div>
                               </div>
-                         <div  className="w-full max-h-[100vh] overflow-y-auto">
-                         {/* <BasicInfo addBasicForm={addBasicData}  /> */}
+                         <div  className="w-full  max-h-[90vh] overflow-y-auto scr-container">
+                         {/* <BasicInfo servi={addBasicData}  />  */}
+                         <PriceCreate serviceId={serviceId}  />
+
                       </div>
                      </div>
                  </div>

@@ -11,6 +11,7 @@ import BasicCreate from './BasicCreate';
 import CategoryCreate from './CategoryCreate';
 import TagCreate from './TagCreate';
 import MediaCreate from './MediaCreate';
+import ToolCreate from './ToolCreate';
 
 
 
@@ -161,7 +162,12 @@ const close = (v:boolean)=> {
                               </div>
                             </div>
                          <div  className="w-full max-h-[90vh] overflow-y-auto scr-container">
-                         {/* {serviceId ? <ToolCreate serviceId={serviceId}  /> : <span className='text-orange-500 text-base px-4 inline-flex py-4'>No Service added </span>} */}
+                         {workId ? <ToolCreate workId={workId}  /> :
+                         <div className='flex items-center gap-3 px-4'>
+                            <LuAlertOctagon className='text-gray-500  text-xl' />
+                            <span className='text-orange-500 text-base inline-flex py-4'>No Work added </span>
+
+                         </div>}                  
                       </div>
                      </div>
                  </div>

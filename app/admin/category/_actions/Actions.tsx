@@ -62,9 +62,7 @@ const cid = Number(id);
         },
         services: true
       }
-    });
-
-   
+    });   
     return category;
 }
 
@@ -104,16 +102,16 @@ export async function editCategory(data:FormData,id:number): Promise<string | nu
 
   if (result.success) {
     const data = result.data; 
-    let imagePath = '';
-    let iconPath = '';
-    if(data.image && data.image.name){
-      await fs.mkdir("public/categories/images", { recursive: true })
-      imagePath = `/categories/images/${crypto.randomUUID()}-${data.image.name}`
-      await fs.writeFile(
-        `public${imagePath}`,
-        Buffer.from(await data.image.arrayBuffer())
-        )
-      }
+      let imagePath = '';
+      let iconPath = '';
+      if(data.image && data.image.name){
+        await fs.mkdir("public/categories/images", { recursive: true })
+        imagePath = `/categories/images/${crypto.randomUUID()}-${data.image.name}`
+        await fs.writeFile(
+          `public${imagePath}`,
+          Buffer.from(await data.image.arrayBuffer())
+          )
+        }
 
       if(data.icon && data.icon.name){
         await fs.mkdir("public/categories/icons", { recursive: true })
@@ -195,7 +193,6 @@ export async function editCategory(data:FormData,id:number): Promise<string | nu
 
 export async function deleteCategories(ids:string[]): Promise<number[]> {
   const numberIds = ids.map(id => Number(id));
-
   const catgs = await prisma.category.deleteMany({
     where: {
       id: {

@@ -7,8 +7,9 @@ import { BsTable } from "react-icons/bs";
 import { RiLayoutGridFill } from "react-icons/ri";
 import GridView from './GridView';
 import TableView from './TableView';
-import { getAllServices, getServices } from '../_serviceActions/ServiceActions';
+import { getAllServices, getServices, getServicesWithModels } from '../_serviceActions/ServiceActions';
 import { ServiceWCategory } from '../utils/ServiceWCategory';
+import { ServiceWithModels } from '../utils/ServiceWithModels';
 
 
 
@@ -17,7 +18,7 @@ import { ServiceWCategory } from '../utils/ServiceWCategory';
 
 const CodeDisplay = () => {
   
-   const [services, setServices] = useState<ServiceWCategory[] | null>(null);
+   const [services, setServices] = useState<ServiceWithModels[] | null>(null);
    const [svalues, setSvalues] = useState<string[]>([]);
    const [trigger, setTrigger] = useState(0); 
    const [loading, setLoading] = useState<boolean>(true);
@@ -25,6 +26,8 @@ const CodeDisplay = () => {
    const [showGrid, setShowGrid] = useState(true);
    const [showTable, setShowTable] = useState(false);
    const [showGridCols, setGridCols] = useState(false);
+   const [error, setError] = useState<string>('');
+
    
 
    const openDisplay =()=>{
@@ -54,34 +57,31 @@ const CodeDisplay = () => {
     });
    }
    const getAlServices = async () => {
-    // const catgs = await getServices();
-    const catgs = await getAllServices();
-    setServices(catgs)
+    try {
+        setLoading(true)
+        const catgs = await getServicesWithModels();
+        setServices(catgs);
+        setError('');
+    } catch (error:any) {
+        setLoading(false);
+        setError(error.message)
+    }finally{
+        setLoading(false)
+    }
+   
    }
    useEffect(() => {
-    setLoading(true)
     getAlServices();
-    setLoading(false)
-
 }, []);
 const closeConfirm = (flag:boolean) =>{
     setShowDelete(flag);
     
   }
-
-if (loading) {
-    return (<div className="h-72 mx-auto w-11.8/12 flex justify-center pt-8 bg-white border border-gray-300 rounded-md">
-      <HashLoader />
-      </div>)
-  }
-
   return (
-
-
     <div className="relative sm:w-11.8/12 sm:pb-8 mx-auto flex flex-wrap self-center mt-4  rounded-md w-full  ">
+    <div className="flex-100 relative bg-white sm:rounded-lg shadow-md ">
+    {loading && <div className=' w-full h-full z-50 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
 
-
-    <div className="flex-100  bg-white sm:rounded-lg shadow-md ">
             <div className="flex flex-col p-2  my-3 pb-3 border-b border-gray-300">
                 <div className="px-2 w-full flex pb-3 border-b border-b-gray-300">
                     <div className="flex max-sm:flex-col items-center">

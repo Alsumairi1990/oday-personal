@@ -81,6 +81,19 @@
     background: transparent;
 }
 
+.left-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.left-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.212);
+  border-radius: 5px;
+}
+
+.left-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
 /* HTML: <div class="loader"></div> */
 .loader {
   width: 40px;
@@ -107,6 +120,19 @@
     transform: translateY(0);
   }
 }
+
+@keyframes modalSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
 @keyframes modalEnterZoomOut {
   from {
     opacity: 0;
@@ -153,5 +179,9 @@
 .animate-modalEnter {
   /* animation: modalEnter 0.3s ease-out forwards; */
   animation: modalEnterZoomOut 0.2s ease-in-out;
+
+}
+.animate-modalSlide {
+  animation: modalSlide 0.3s ease-out forwards;
 
 }

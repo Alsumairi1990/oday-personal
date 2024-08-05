@@ -10,6 +10,7 @@ import { getCategoryNamesByIds } from "../../service/_serviceActions/ServiceActi
 import { MediaSchema } from "../utils/MediaSchema";
 import fs from "fs/promises"
 import { NextApiRequest, NextApiResponse } from "next";
+import { getToolsNamesByIds } from "../../common/_actions/Actions";
 
 
 
@@ -25,23 +26,30 @@ export async function  addBasic(data:FormData):Promise<number>{
      const userId = session.user.id;
      if (result.success) {
        const data = result.data;
-       const nameSlug = slugify(data.title);
-       let imagePaths:string[] = [];
-    // if(data.additionalImages.length>9){
-    //   const fileArray = Array.from(data.additionalImages);
-    //   for (const file of fileArray) {
-    //     const f:File | null = file as unknown as File;
-    //     await fs.mkdir("public/works/icons", { recursive: true })
-    //     const imagePath = `/works/icons/${crypto.randomUUID()}-${f.name}`;
-    //     console.log("image path"+imagePath);
-    //     await fs.writeFile(
-    //       `public${imagePath}`,
-    //       Buffer.from(await f.arrayBuffer())
-    //       )
-    //       imagePaths.push(imagePath);
-    //       console.log(imagePaths);
-    //   }
-    // }
+       let imagePath = '';
+       let iconPath = '';
+       console.log("image data : "+ data.image.name);
+       if(data.image && data.image.name){
+        console.log("inside omage");
+         await fs.mkdir("public/works/images", { recursive: true })
+         imagePath = `/works/images/${crypto.randomUUID()}-${data.image.name}`
+         await fs.writeFile(
+           `public${imagePath}`,
+           Buffer.from(await data.image.arrayBuffer())
+           )
+         }
+ 
+       if(data.icon && data.icon.name){
+       console.log("inside icon");
+         await fs.mkdir("public/works/icons", { recursive: true })
+         iconPath = `/works/icons/${crypto.randomUUID()}-${data.icon.name}`
+         await fs.writeFile(
+           `public${iconPath}`,
+           Buffer.from(await data.icon.arrayBuffer())
+           )
+         }
+ 
+       
        try {
          const basic = await prisma.work.create({
            data: {
@@ -50,6 +58,8 @@ export async function  addBasic(data:FormData):Promise<number>{
              highlights : data.highlights,
              client : data.client,
              userId : userId,
+             image : imagePath,
+             icon : iconPath
             //  additionalImages : imagePaths
            },
          });
@@ -62,6 +72,65 @@ export async function  addBasic(data:FormData):Promise<number>{
      }
      return 0;
    }
+
+// Adding Work tool
+export async function addWorkTool(workId: number, ids: number[]): Promise<string[]> {
+  try {
+    const existingCats = await prisma.workTool.findMany({
+      where: {
+        workId: workId
+      },
+      select: {
+        toolId: true
+      }
+    });
+    const existingToolIds = existingCats.map(tag => tag.toolId);
+    const newIds = ids.filter(catlId => !existingToolIds.includes(catlId));
+
+    if (newIds.length === 0) {
+      throw new Error('All provided tool IDs are already associated with the service');
+    }
+    const workExists = await prisma.work.findUnique({
+      where: { id: workId }
+    });
+    if (!workExists) {
+      throw new Error(`Service with ID ${workId} does not exist.`);
+    }
+    const toolsExist = await prisma.tool.findMany({
+      where: {
+        id: { in: ids }
+      }
+    });
+    if (toolsExist.length !== ids.length) {
+      throw new Error(`One or more category do not exist.`);
+    }
+    const updatedService = await prisma.work.update({
+      where: {
+        id: workId
+      },
+      data: {
+        tools: {
+          create: newIds.map(tagId => ({
+            tool: { connect: { id: tagId } }
+          }))
+        }
+      },
+      include: {
+        tools: true
+      }
+    });
+    console.log('Tool updated successfully:', updatedService);
+    const catIds: number[] = updatedService.tools.map(tool => tool.toolId);
+    const names = await getToolsNamesByIds(catIds); // Ensure this function is async if needed
+    return names;
+  } catch (error) {
+    console.error('Error updating service with tools:', error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
 
 
 // Adding Work tag
@@ -303,6 +372,30 @@ export async function addingWorkMedia(data:FormData,workId:number):Promise<numbe
   }
   return 0;
 }
+
+// Get work by id with related tools
+export async function getWorkWToolsById(workId:number):Promise<string[] >{
+  const work = await prisma.work.findUnique({
+    where: {
+      id: workId,
+    },
+    include: {
+      tools: {
+        include: {
+          tool: {
+            select: {
+              name: true,
+            },
+          }
+        },
+      },
+    },
+  });
+  const associatedTools = work?.tools || [];
+  const toolNames: string[] = associatedTools.map(assoc => assoc.tool.name);
+  return toolNames;
+}
+
 
 
 // Get work by id with related tags
