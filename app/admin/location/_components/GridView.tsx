@@ -84,7 +84,6 @@ const GridView = ({locations,getSelected,unSelected}:Props) => {
                     <path className="fill-sky-500"   d="M5 20C4.44772 20 4 20.4477 4 21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20H5Z" fill="#777"/>
                     </svg>
                 </button>
-            {/* {editShow && <FormEdit name={category.name} closeModel={closeModel}  /> } */}
                 <Link href={`/admin/location/show/${element.id}`} className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md flex-23">
                     <svg className="w-4 h-4 fill-blue-500"  viewBox="0 0 48 48" >
                     <path d="M0 0h48v48H0z" fill="none"/>

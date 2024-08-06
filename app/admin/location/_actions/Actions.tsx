@@ -57,18 +57,17 @@ export async function getCodeByName(name:string): Promise<ServiceCode | null> {
   return codes;
 }
 
+// Edit Location 
 export async function editLocation(data:FormData,id:number): Promise<Location | null > {
-  console.log("0-0-0-0-0-0-0-0-0-0-0 tools table");
+  try{
   const result = formSchema.safeParse(Object.fromEntries(data.entries()))
   const session = await getServerSession(authOptions);
   if (!session) {
     throw new Error('User not authenticated');
   }
-
   if (result.success) {
     const data = result.data; 
     let imagePath = '';
-    let iconPath = '';
     if(data.image && data.image.name){
       await fs.mkdir("public/locations/images", { recursive: true })
       imagePath = `/locations/images/${crypto.randomUUID()}-${data.image.name}`
@@ -77,28 +76,14 @@ export async function editLocation(data:FormData,id:number): Promise<Location | 
         Buffer.from(await data.image.arrayBuffer())
         )
       }
-
-      // if(data.icon && data.icon.name){
-      //   await fs.mkdir("public/codes/icons", { recursive: true })
-      //   iconPath = `/codes/icons/${crypto.randomUUID()}-${data.icon.name}`
-      //   await fs.writeFile(
-      //     `public${iconPath}`,
-      //     Buffer.from(await data.icon.arrayBuffer())
-      //     )
-      //   }
-
-        
-
+      const location = await prisma.location.findUnique({
+        where  : {
+          id:id
+        }
+      })
+      if(!location) throw new Error("Location not Exist");
           const nameSlug = slugify(data.country);
-          // const category = await prisma.category.findFirst({
-          // where: { slug: nameSlug },
-          // });
-          // console.log(category?.name)
-          // if (category){
-          console.log("------------------------++id"+id)
-            try {
-              if(imagePath != ''){
-                const codes = await prisma.location.update({
+                const element = await prisma.location.update({
                   where: { id : id},
                   data: {
                     country: data.country,
@@ -106,30 +91,29 @@ export async function editLocation(data:FormData,id:number): Promise<Location | 
                     image: imagePath,
                   },
                 });
-                return codes;
-              }
-
-              if(iconPath == '' ){
-                
-                const codes = await prisma.location.update({
-                  where: { id : id},
-                  data: {
-                    country: data.country,
-                    city: data.city,
-                  },
-                });
-                return codes;
-              }
-
+                return element;
+        }else {
+          throw new Error('not success');
+        }
         
-            } catch (error) {
-              console.error('Error creating service:', error);
-              throw new Error('Error creating service');
-            }
-
-  }
-  return null;
+      }catch(error) {
+        console.log(error);
+        throw error;
+      } 
+      
 }
+
+// get location by Name 
+export async function getLocationByName(name:string): Promise<Location | null> {
+  // const nameSlug = slugify(name);
+  const codes = await prisma.location.findFirst({
+    where: {
+      country: name,
+    },
+  });
+  return codes;
+}
+
 
 
 export async function getLocations(): Promise<Location[]> {

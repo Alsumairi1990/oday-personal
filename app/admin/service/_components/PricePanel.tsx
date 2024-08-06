@@ -1,6 +1,6 @@
 "use client";
 import React, { ChangeEvent, useEffect } from "react";
-import { Category, Price, Service, Tag, Tool, Work } from "@prisma/client";
+import { Category, Location, Price, Service, Tag, Tool, Work } from "@prisma/client";
 import { useState } from "react";
 import { IoIosArrowDown, IoMdCloseCircle } from "react-icons/io";
 import { BiBlanket, BiCategory, BiSolidCommentEdit } from "react-icons/bi";
@@ -18,7 +18,7 @@ import { IoAddCircleSharp } from "react-icons/io5";
 import { AiFillEdit } from "react-icons/ai";
 import { FaTags, FaTools } from "react-icons/fa";
 import { GrSelect, GrWorkshop } from "react-icons/gr";
-import { addServiceCategories, addServiceTags, addServiceTools, addServiceWorks, getServices, getWorks, removeServiceCategory, removeServiceTag, removeServiceTool, removeServiceWork } from "../../service/_serviceActions/ServiceActions";
+import { addServiceCategories, addServiceTags, addServiceTools, addServiceWorks, editLocationPrice, getServices, getWorks, removeServiceCategory, removeServiceTag, removeServiceTool, removeServiceWork } from "../../service/_serviceActions/ServiceActions";
 import { getCategories, getTags} from "../../common/_actions/Actions";
 import { ServiceWithModels } from "../utils/ServiceWithModels";
 import { addTestimonialCategory, getTestimonialWModelsById, removeTesimonialCategory } from "../../testimonials/_actions/Actions";
@@ -30,6 +30,8 @@ import { BsBrowserChrome } from "react-icons/bs";
 import Link from "next/link";
 import Decimal from 'decimal.js';
 import { PriceDTO } from "../../common/utils/PriceDTO";
+import { RiMenuAddLine } from "react-icons/ri";
+import { getLocations } from "../../location/_actions/Actions";
 
 // import { Decimal } from "@prisma/client/runtime/library";
 
@@ -45,48 +47,63 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
   const [menuElements, setMenuElements] = useState<Work[] | null>([]);
   const [showRemoveTool, setShowRemoveTool] = useState<boolean>(false);
   const [elementMenuShow, setElementMenuShow] = useState<boolean>(false);
-  const [selectedMenuElements, setSelectedMenuElements] = useState<string[]>([]);
+  const [selectedMenuElements, setSelectedMenuElements] = useState<string>();
   const [selectedMenuElementsId, setSelectedMenuElementsId] = useState<string[]>([]);
   const [removedTool, setRemovedTool] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>(""); 
-  const [editPrice, setEditPrice] = useState<boolean>(false);
-
+  const [priceAddShow, setPriceAddShow] = useState<boolean>(true);
+  const [locationMenu, SetLocationMenu] = useState<boolean>(true);
+  const [priceLoading, setPriceLoading] = useState<boolean>(true);
   const [removedRows, setRemovedRows] = useState<number>(0);
   const [trigger, setTrigger] = useState(0);
   const [groupedPrices, setGroupedPrices] = useState<Record<string, PriceWithModels[]>>({});
   const [price, setPrice] = useState<Price>();
+  const [locationData, setLocationData] = useState<Location[]>([]);
+  const [imageSrc, setImageSrc] = useState<string>('');
+
 
   const [priceDTO, setPriceDTO] = useState<PriceDTO>();
 
 
-
   const addSelectedService = (id: string, name: string) => {
-    setSelectedMenuElements(prevValues => {
-      const newValues = [...prevValues, name];
-      setTrigger(trigger + 1);
-      return newValues;
-  });
-  setSelectedMenuElementsId(prevValues => {
-    const newValues = [...prevValues, id];
-    setTrigger(trigger + 1);
-    return newValues;
-});
+    setSelectedMenuElements(name);
+//     setSelectedMenuElements(prevValues => {
+//       const newValues = [...prevValues, name];
+//       setTrigger(trigger + 1);
+//       return newValues;
+//   });
+//   setSelectedMenuElementsId(prevValues => {
+//     const newValues = [...prevValues, id];
+//     setTrigger(trigger + 1);
+//     return newValues;
+// });
   
    
   };
   const unSelectedService = (id: string, name: string) => {
-    setSelectedMenuElements(prevValues => {
-      const newValues = prevValues.filter(item => item !== name);
-      setTrigger(trigger + 1); 
-      return newValues;
-  });
+    setSelectedMenuElements('');
+  //   setSelectedMenuElements(prevValues => {
+  //     const newValues = prevValues.filter(item => item !== name);
+  //     setTrigger(trigger + 1); 
+  //     return newValues;
+  // });
 
-  setSelectedMenuElementsId(prevValues => {
-        const newValues = prevValues.filter(item => item !== id);
-        setTrigger(trigger + 1); 
-        return newValues;
-    });
+  // setSelectedMenuElementsId(prevValues => {
+  //       const newValues = prevValues.filter(item => item !== id);
+  //       setTrigger(trigger + 1); 
+  //       return newValues;
+  //   });
   
+  };
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
   const addService = async () => {
     try {
@@ -99,7 +116,7 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
         }
         
         setError('');
-       setSelectedMenuElements([]);
+       setSelectedMenuElements('');
     } catch (error:any) {
         setLoading(false);
         setError(error.message)
@@ -114,7 +131,7 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
         const result = await removeServiceWork(service.id,removedTool);
         setServiceData(result);
         setLoading(false);
-       setSelectedMenuElements([]);
+       setSelectedMenuElements('');
        setShowRemoveTool(false)
       } catch (error: any) {
         setLoading(false);
@@ -134,9 +151,25 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
     }
   };
   const getPriceWmodel = async ()=>{
+    setPriceLoading(true);
     const elements = await getServicePricesById(service.id);
     const cov = await getPriceByLocation(elements);
     setGroupedPrices(cov);
+    setPriceLoading(false);
+  }
+  const getAllLocation = async () => {
+    try {
+      setPriceLoading(true);
+      const locationD = await getLocations();
+      setLocationData(locationD);
+      setError('');
+    } catch (error:any) {
+      setPriceLoading(false);
+      setError(error.message)
+    } finally{
+      setPriceLoading(false);
+    }
+
   }
   useEffect(() => {
     const { protocol, host } = window.location;
@@ -145,9 +178,34 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
   }, []);
   useEffect(() => {
     getAllMenuElements();
+    getAllLocation();
     getPriceWmodel();
 
   }, []);
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault(); 
+    const formData = new FormData(event.currentTarget);
+    console.log(formData.get('amount'));
+    console.log(formData.get('startPrice'));
+    console.log(formData.get('location'));
+    console.log(formData.get('priceId'));
+    const locationId = formData.get('locationId');
+    const priceId = formData.get('priceId');
+    try {
+        setPriceLoading(true)
+        if(service.id && locationId && priceId){
+          const prices = await editLocationPrice(Number(service.id),String(priceId),Number(locationId),formData)
+          const cov = await getPriceByLocation(prices);
+          setGroupedPrices(cov);
+        }
+        setError('');
+    } catch (error:any) {
+      setPriceLoading(false);
+      setError(error.message);
+    } finally{
+      setPriceLoading(false)
+    }
+  };
   return (
     <div className="h-auto flex flex-col items-center relative justify-center w-full m-auto ">
       {loading && (
@@ -175,11 +233,11 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
               <div className="ml-auto flex gap-x-2">
                
                 <button
-                  className={`ml-auto flex items-center px-1.5 py-0.5 rounded-md ${selectedMenuElements.length>0 ? 'bg-gray-800' : 'bg-gray-500'}`}
+                  className={`ml-auto flex items-center px-1.5 py-0.5 rounded-md ${selectedMenuElements ? 'bg-gray-800' : 'bg-gray-500'}`}
                   onClick={() =>  {addService()}}
-                  disabled={selectedMenuElements.length<1}
+                  disabled={selectedMenuElements === ''}
                 >
-                  <span className="text-gray-100 text-md">Save {selectedMenuElements.length}</span>
+                  <span className="text-gray-100 text-md">Save {selectedMenuElements}</span>
                 </button>
               </div>
             </div>
@@ -196,9 +254,16 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
 
 
 
-<div className="grid grid-cols-3  px-4 py-3 gap-6">
+<div className="grid grid-cols-3 relative px-4 py-3 gap-6">
+        {priceLoading && (
+                  <div
+                    className=" w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center"
+                    style={{ backdropFilter: "blur(2px)" }}
+                  >
+                    <div className="loader-2 w-4"></div>
+                  </div>
+                )}
 {Object.keys(groupedPrices).map((location) => (
-    
 
         <div key={location} className='border p-2 bg-white border-gray-200 shadow-md rounded-md'>
           {groupedPrices[location].map((price) => (
@@ -218,76 +283,36 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                     )}
                 </div>
                 
-             {editPrice ? (<div className="space-y-2 mt-2 pt-2">
-                <div className="flex flex-wrap gap-x-2 ">
-                  <div className='flex flex-48 flex-col bg-gray-100 rounded-md gap-y-1.5 items-center py-2'>
-                      <div className="flex gap-x-2 items-center">
-                          <span className=""><LuBadgeDollarSign className='text-base ' /> </span>
-                          <span className=" font-medium text-gray-900 capitalize">main Price </span>
-                      </div>
-                      <div className="flex justify-center">
-                      <span className="text-orange-600 font-medium">{price.amount && price.amount.toString()}</span>
-                      </div>
-                  </div>
-                  <div className='flex flex-48 flex-col gap-y-1.5 items-center py-2'>
-                      <div className="flex gap-x-2 items-center">
-                          <span className=""><BiBlanket className='text-base text-gray-700' /> </span>
-                          <span className="text-gray-600 font-medium">Start Price: </span>
-                      </div>
-                      <div className="flex justify-center">
-                      <span className="text-orange-600 font-medium">{price.startPrice && price.startPrice.toString()}</span>
-                      </div>
-                  </div>
-                  <div className="py-2 mb-1 mt-3 justify-center border-y border-y-gray-200 flex flex-100">
-                    <div className='flex-48 flex justify-center items-center'>
-                          <span className="text-gray-600 font-medium">Median: </span>
-                          <span className="text-gray-600 font-medium text-bxs px-2">|</span>
-                          <span className="text-cyan-500  font-medium"> {price.median && price.median.toString()}</span>
-                      </div>
-                      <div className='flex-48 flex justify-center items-center'>
-                          <span className="text-gray-600 font-medium">Currency: </span>
-                          <span className="text-gray-600 font-medium text-bxs px-2">|</span>
-
-                          <span className="text-cyan-500 font-medium"> {price.currency }</span>
-                      </div>
-                  </div>
-                  <div className=" py-2  pl-3 flex flex-100 bg-gray-50 border border-gray-100 my-3 rounded-md items-center gap-x-2">
-                      <span className=""><BsBrowserChrome className='text-cyan-700 text-base' /></span>
-                      <span className="text-orange-600 font-medium">Discount: </span>
-                          <span className="text-gray-600 font-medium text-bxs px-2">|</span>
-
-                          <span className="text-cyan-500 font-medium"> {price.discount && price.discount.toString()}%</span>
-                      
-                  </div>
-                  <div className="justify-cente  border-t-gray-200 flex border-b pb-3 border-b-gray-200 flex-100">
-                    <div className='flex-48 pl-3 flex flex-col gap-y-2 justcenter items-center'>
-                          <span className="text-gray-600 font-medium capitalize">Effective Date</span>
-                          <span className="text-orange-500  font-medium">{price.effectiveDate && price.effectiveDate.toLocaleDateString()}</span>
-                      </div>
-                      <div className='flex-48 flex flex-col gap-y-2 pl-3 justcenter items-center'>
-                          <span className="text-gray-600 font-medium capitalize">expiry Date</span>
-                          <span className="text-orange-500  font-medium"> {price.expiryDate && price.expiryDate.toLocaleDateString()}</span>
-                      </div>
-                  </div>
-                 
-                </div>
-            </div>
-            ):(
+            
               <div className="space-y-2 mt-2 pt-2">
+               <form onSubmit={handleSubmit}  className="">
                 <div className="flex flex-wrap gap-x-2 ">
-                  <div className='flex flex-48 flex-col rounded-md gap-y-1.5 items-center py-2'>
+                  <div className='flex flex-48 flex-col rounded-md bor-gray-200 gap-y-1.5 items-center py-2'>
                       <div className="flex gap-x-2 items-center">
                           <span className=""><LuBadgeDollarSign className='text-base ' /> </span>
                           <span className=" font-medium text-gray-900 capitalize">main Price </span>
                       </div>
-                      <div className="flex justify-center">
-                      <input type="number" 
-                          name='amount'
-                          className='border border-gray-100 w-full py-1 px-2 rounded-md outline-none bg-gray-50'
-                          value={price.amount.toString() ?? 0}
-                          // onChange={(e) =>{ setPrice({ ...price, amount: new Decimal(e.target.value) })}}
+                      <input type="hidden" 
+                          name='locationId'
+                          className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
+                          value={price.locationId}
                           />
-                      {/* <span className="text-orange-600 font-medium">{price.amount && price.amount.toString()}</span> */}
+                      <input type="hidden" 
+                          name='location'
+                          className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
+                          value={location}
+                          />
+                      <input type="hidden" 
+                      name='priceId'
+                      className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
+                      value={price.id}
+                      />
+                      <div className="flex px-3 justify-center">
+                        <input type="string" 
+                          name='amount'
+                          className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
+                          defaultValue={price.amount.toString()}
+                          />
                       </div>
                   </div>
                   <div className='flex flex-48 flex-col gap-y-1.5 items-center py-2'>
@@ -295,71 +320,85 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                           <span className=""><BiBlanket className='text-base text-gray-700' /> </span>
                           <span className="text-gray-600 font-medium">Start Price: </span>
                       </div>
-                      <div className="flex justify-center">
-                      <span className="text-orange-600 font-medium">{price.startPrice && price.startPrice.toString()}</span>
+                      <div className="flex px-3 justify-center">
+                        <input type="number" 
+                          name='startPrice'
+                          className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
+                          defaultValue={price.startPrice ? price.startPrice.toString() : 0}
+                          />
                       </div>
                   </div>
-                  <div className="py-2 mb-1 mt-3 justify-center border-y border-y-gray-200 flex flex-100">
+                  <div className="py-2 mb-1 gap-x-1 mt-3 justify-center border-y border-y-gray-200 flex flex-100">
                     <div className='flex-48 flex justify-center items-center'>
-                          <span className="text-gray-600 font-medium">Median: </span>
-                          <span className="text-gray-600 font-medium text-bxs px-2">|</span>
-                          <span className="text-cyan-500  font-medium"> {price.median && price.median.toString()}</span>
+                          <span className="text-gray-600 text-md font-medium">Median: </span>
+                          <span className="text-gray-600 font-medium text-bxs px-1">|</span>
+                          <span className="text-cyan-500  font-medium">
+                               <input type="number" 
+                                  name='median'
+                                  className='border text-center border-gray-100 w-full py-0.5 px-1 rounded-md outline-none text-md bg-gray-50'
+                                  defaultValue={price.median ? price.median.toString() : 0}
+                                  />
+                              </span>
                       </div>
-                      <div className='flex-48 flex justify-center items-center'>
-                          <span className="text-gray-600 font-medium">Currency: </span>
+                      <div className='flex-48 pl-1 flex justify-center items-center'>
+                          <span className="text-gray-600 text-md font-medium">Currency: </span>
                           <span className="text-gray-600 font-medium text-bxs px-2">|</span>
-
-                          <span className="text-cyan-500 font-medium"> {price.currency }</span>
+                          <input type="text" 
+                                  name='currency'
+                                  className='border text-center border-gray-100 w-full py-0.5 px-1 rounded-md outline-none text-md bg-gray-50'
+                                  defaultValue={price.currency ? price.currency : ''}
+                                  />
                       </div>
                   </div>
                   <div className=" py-2  pl-3 flex flex-100 bg-gray-50 border border-gray-100 my-3 rounded-md items-center gap-x-2">
                       <span className=""><BsBrowserChrome className='text-cyan-700 text-base' /></span>
                       <span className="text-orange-600 font-medium">Discount: </span>
                           <span className="text-gray-600 font-medium text-bxs px-2">|</span>
-
-                          <span className="text-cyan-500 font-medium"> {price.discount && price.discount.toString()}%</span>
-                      
+                          <span className="pr-2 ">
+                          <input type="number" 
+                                  name='discount'
+                                  className='border text-center border-gray-200 w-full py-0.5 px-1 rounded-md outline-none text-md bg-gray-100'
+                                  defaultValue={price.discount ? price.discount.toString() : 0}
+                                  />
+                          </span>                      
                   </div>
                   <div className="justify-cente  border-t-gray-200 flex border-b pb-3 border-b-gray-200 flex-100">
                     <div className='flex-48 pl-3 flex flex-col gap-y-2 justcenter items-center'>
-                          <span className="text-gray-600 font-medium capitalize">Effective Date</span>
-                          <span className="text-orange-500  font-medium">{price.effectiveDate && price.effectiveDate.toLocaleDateString()}</span>
+                          <span className="text-gray-600 text-md font-medium capitalize">Effective Date</span>
+                          <span className="text-orange-500 text-md font-medium">{price.effectiveDate && price.effectiveDate.toLocaleDateString()}</span>
+                          <input type="date" 
+                            name='expiryDate'
+                            className='border text-center border-gray-100 w-full py-0.5 rounded-md outline-none text-gray-700 text-md bg-gray-50'
+                            defaultValue={price.effectiveDate ? price.effectiveDate.toLocaleDateString() : ''}
+                            />
                       </div>
                       <div className='flex-48 flex flex-col gap-y-2 pl-3 justcenter items-center'>
-                          <span className="text-gray-600 font-medium capitalize">expiry Date</span>
-                          <span className="text-orange-500  font-medium"> {price.expiryDate && price.expiryDate.toLocaleDateString()}</span>
+                          <span className="text-gray-600 font-medium text-md capitalize">expiry Date</span>
+                          <span className="text-orange-500 text-md font-medium"> {price.expiryDate && price.expiryDate.toLocaleDateString()}</span>
+                          <input type="date" 
+                            name='effectiveDate'
+                            className='border text-center border-gray-100 w-full text-gray-700 py-0.5 rounded-md outline-none text-md bg-gray-50'
+                            defaultValue={price.effectiveDate ? price.effectiveDate.toLocaleDateString() : ''}
+                            />
                       </div>
                   </div>
                  
                 </div>
-            </div>
-            )}
-
-            <div className="flex gap-x-2 flex-100 my-7  justify-center  ">
-                  <button className="inline-flex items-center justify-center bg-sky-100 border !border-sky-200 hover:!bg-sky-200 rounded-md py-1.5 flex-23">
-                      <svg className="w-4 h-4"  viewBox="0 0 24 24" fill="none">
-                      <path className="fill-sky-500" fill-rule="evenodd" clip-rule="evenodd" d="M19.2071 2.79312C17.9882 1.57417 16.0119 1.57417 14.7929 2.79312L5.68463 11.9014C5.30015 12.2859 5.0274 12.7676 4.89552 13.2951L4.02988 16.7577C3.94468 17.0985 4.04453 17.459 4.29291 17.7073C4.54129 17.9557 4.90178 18.0556 5.24256 17.9704L8.70513 17.1047C9.23263 16.9729 9.71437 16.7001 10.0988 16.3156L19.2071 7.20733C20.4261 5.98838 20.4261 4.01207 19.2071 2.79312ZM16.2071 4.20733C16.645 3.76943 17.355 3.76943 17.7929 4.20733C18.2308 4.64524 18.2308 5.35522 17.7929 5.79312L8.68463 14.9014C8.55647 15.0296 8.39589 15.1205 8.22006 15.1644L6.37439 15.6259L6.83581 13.7802C6.87976 13.6044 6.97068 13.4438 7.09884 13.3156L16.2071 4.20733Z"/>
-                      <path className="fill-sky-500"   d="M5 20C4.44772 20 4 20.4477 4 21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20H5Z" fill="#777"/>
+                <div className="flex gap-x-2 px-2 flex-100 my-6  justify-center  ">
+                  <button
+                  type="submit"
+                   
+                   className="inline-flex items-center justify-center bg-gray-500 border font-medium !border-gray-600 hover:!bg-sky-200 text-white rounded-md py-1 flex-70">
+                      <svg className="w-4 h-4 mr-2"  viewBox="0 0 24 24" fill="none">
+                      <path className="fill-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M19.2071 2.79312C17.9882 1.57417 16.0119 1.57417 14.7929 2.79312L5.68463 11.9014C5.30015 12.2859 5.0274 12.7676 4.89552 13.2951L4.02988 16.7577C3.94468 17.0985 4.04453 17.459 4.29291 17.7073C4.54129 17.9557 4.90178 18.0556 5.24256 17.9704L8.70513 17.1047C9.23263 16.9729 9.71437 16.7001 10.0988 16.3156L19.2071 7.20733C20.4261 5.98838 20.4261 4.01207 19.2071 2.79312ZM16.2071 4.20733C16.645 3.76943 17.355 3.76943 17.7929 4.20733C18.2308 4.64524 18.2308 5.35522 17.7929 5.79312L8.68463 14.9014C8.55647 15.0296 8.39589 15.1205 8.22006 15.1644L6.37439 15.6259L6.83581 13.7802C6.87976 13.6044 6.97068 13.4438 7.09884 13.3156L16.2071 4.20733Z"/>
+                      <path className="fill-gray-100"   d="M5 20C4.44772 20 4 20.4477 4 21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20H5Z" fill="#777"/>
                       </svg>
+                      save
                   </button>
-                  <button 
-                   onClick={()=>{setEditPrice(false)}}
-                   className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md flex-23">
-                      <svg className="w-4 h-4 fill-blue-500"  viewBox="0 0 48 48" >
-                      <path d="M0 0h48v48H0z" fill="none"/>
-                      <g id="Shopicon">
-                          <path d="M24,38c12,0,20-14,20-14s-8-14-20-14S4,24,4,24S12,38,24,38z M24,14c7.072,0,12.741,6.584,15.201,9.992
-                              C36.728,27.396,31.024,34,24,34c-7.072,0-12.741-6.584-15.201-9.992C11.272,20.604,16.976,14,24,14z"/>
-                          <path d="M24,32c4.418,0,8-3.582,8-8s-3.582-8-8-8s-8,3.582-8,8S19.582,32,24,32z M24,20c2.206,0,4,1.794,4,4c0,2.206-1.794,4-4,4
-                              s-4-1.794-4-4C20,21.794,21.794,20,24,20z"/>
-                      </g>
-                      </svg>
-                  </button>
+          
                   <button 
                       type='button'
-                      // onClick={()=>{addSelected(price.id)}}
-                      className="inline-flex items-center justify-center bg-red-100 border !border-red-200 hover:!bg-red-200 rounded-md flex-23">
-                          
+                      className="inline-flex items-center justify-center bg-red-100 border !border-red-200 hover:!bg-red-200 rounded-md flex-30">
                           <svg className="w-4 h-4 p-0.5 fill-red-500"  viewBox="0 0 32 32" >
                               <g fill="none" fill-rule="evenodd">
                               <path d="m0 0h32v32h-32z"/>
@@ -368,13 +407,308 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                               </svg>
                   </button>
               </div>
-
+                </form>
             </div>
+          </div>
+            
+            
+
           ))}
+          
         </div>
+
+        // adding new Price with Location
+        
+        
         
       ))}
+
+      
+
+        {priceAddShow && 
+        <div className='border p-2 bg-white border-gray-200 shadow-md rounded-md'>
+                
+                  
+                  <div>
+                      <div className="flex items-center p-1 pb-2 gap-x-2 border-b border-b-gray-100 bg-ugray-100">
+                          <div className="relative flex-70">
+                            <button
+                                type="button"
+                                onClick={() => {
+                                  SetLocationMenu((prevState) => {
+                                    return !prevState;
+                                  });
+                                }}
+                                className="flex w-full bg-white  items-center border gap-x-3 py-1.5 border-gray-300  px-2 rounded-md"
+                              >
+                      
+                                <div className="text-md inline-flex text-gray-600 font-medium capitalize">
+                                  {!selectedMenuElements ?( <span className="px-1">Adding Location</span>)
+                                  : (
+                                    <span className="text-md text-gray-600">{selectedMenuElements}</span>
+                                  )}
+                                </div>
+                                <span className="ml-auto">
+                                  <MdPlaylistAdd className="text-2xl text-gray-700" /> 
+                                </span>
+                              </button>
+                              {locationMenu && locationData.length > 0 &&
+                         <div className="p relative ">
+                           <div className="absolute top-0.5 px-1 w-full shadow-md bg-white border border-gray-300 rounded">
+                         {locationData.map(element => 
+                          <div className=" relative border flex bg-white flex-wrap my-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 ">
+                                <div className="sm:flex-10 flex-100 h-8  rounded-l-md border-r border-r-gray-300">
+                                  {element.image ? (
+                                    <img
+                                      className="  sm:h-full rounded-l-md"
+                                      src={`${baseUrl}/${element?.image}`}
+                                      alt=""
+                                    />
+                                  ) : (
+                                    <span className="h-full  w-full text-sm text-gray-400 rounded-l-md inline-flex justify-center items-center">
+                                      Ime
+                                    </span>
+                                  )}
+                                </div>
+                                <div className=" flex-100 sm:flex-70  sm:flex sm:mx-auto items-center bg-white border-r border-r-gray-300 rounded-l-md">
+                                  <div className="pl-4  w-full">
+                                    <div className="w-full flex items-center">
+                                      <span className="text-md  text-black  font-medium">
+                                        {element?.country}
+                                        {/* {element?.image} */}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="flex flex-100 gap-x-2 sm:flex-20  justify-center items-center  ">
+                                  <div className="inline-flex  z-20 bg-white  justify-center rounded-md">
+                                    <label
+                                      className="relative bg-whit justify-center flex items-center  rounded-full cursor-pointer"
+                                      htmlFor="checkbox"
+                                    >
+                                      <input
+                                        type="radio"
+                                        className="before:content[''] peer relative h-[16px] w-[16px] cursor-pointer appearance-none rounded-md border !border-[#ccc] transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-indigo-600 checked:bg-indigo-600 checked:before:bg-indigo-600 hover:before:opacity-10"
+                                        id={String(element.id)}
+                                        name="service"
+                                        onChange={(e) => {
+                                          const isChecked = e.target.checked;
+                                          if (isChecked) {
+                                            addSelectedService(
+                                              String(element?.id),
+                                              String(element.country)
+                                            );
+                                          } else {
+                                            unSelectedService(
+                                              String(element?.id),
+                                              String(element.country)
+                                            );
+                                          }
+                                        }}
+                                      />
+                                      <span className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="h-3 w-3"
+                                          viewBox="0 0 20 20"
+                                          fill="currentColor"
+                                          stroke="currentColor"
+                                          stroke-width="1"
+                                        >
+                                          <path
+                                            fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                            clip-rule="evenodd"
+                                          ></path>
+                                        </svg>
+                                      </span>
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                             ) }
+                             </div>
+                             </div>
+                             }
+                             </div>
+                             <div className="flex-30">
+                             <label htmlFor="image" className="flex flex-col items-center justify-center w-full h-full border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
+                                            <div className="flex flex-col items-center h-7 justify-center px-2 pt-2 pb-0">
+                                            {imageSrc ? (
+                                            <Image className='rounded-md border w-full h-full border-gray-300 bg-white p-1'
+                                                src={imageSrc}
+                                                height={100}
+                                                width={100}
+                                                alt="Product Image"
+                                                
+                                            />
+                                        ):(
+                                              <div className="flex flex-col items-center">
+                                              <svg width="30px" height="30px" viewBox="0 0 1024 1024" className="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M768 810.7c-23.6 0-42.7-19.1-42.7-42.7s19.1-42.7 42.7-42.7c94.1 0 170.7-76.6 170.7-170.7 0-89.6-70.1-164.3-159.5-170.1L754 383l-10.7-22.7c-42.2-89.3-133-147-231.3-147s-189.1 57.7-231.3 147L270 383l-25.1 1.6c-89.5 5.8-159.5 80.5-159.5 170.1 0 94.1 76.6 170.7 170.7 170.7 23.6 0 42.7 19.1 42.7 42.7s-19.1 42.7-42.7 42.7c-141.2 0-256-114.8-256-256 0-126.1 92.5-232.5 214.7-252.4C274.8 195.7 388.9 128 512 128s237.2 67.7 297.3 174.2C931.5 322.1 1024 428.6 1024 554.7c0 141.1-114.8 256-256 256z" fill="#3688FF" /><path d="M640 789.3c-10.9 0-21.8-4.2-30.2-12.5L512 679l-97.8 97.8c-16.6 16.7-43.7 16.7-60.3 0-16.7-16.7-16.7-43.7 0-60.3l128-128c16.6-16.7 43.7-16.7 60.3 0l128 128c16.7 16.7 16.7 43.7 0 60.3-8.4 8.4-19.3 12.5-30.2 12.5z" fill="#5F6379" /><path d="M512 960c-23.6 0-42.7-19.1-42.7-42.7V618.7c0-23.6 19.1-42.7 42.7-42.7s42.7 19.1 42.7 42.7v298.7c0 23.5-19.1 42.6-42.7 42.6z" fill="#5F6379" /></svg>
+                                              {/* <p className=" text-sm text-gray-500 dark:text-gray-400 tex-sm"><span className="font-medium">Upload </span> </p> */}
+                                              {/* <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
+                                              </div>
+                                        )} 
+                                            </div>
+                                            {/* {imageSrc  && <span className='text-gray-600 text-md'>Change </span>} */}
+                                            <input id="image" type="file" name="image" className="opacity-0 w-4 h-2" onChange={handleFileChange} />
+                                        </label>
+                        
+                             </div>
+                          </div>
+                         
+
+                      
+
+                      
+                
+                  
+                    <div className="space-y-2 mt-2 pt-2">
+                    <form onSubmit={handleSubmit}  className="">
+                      <div className="flex flex-wrap gap-x-2 ">
+                        <div className='flex flex-48 flex-col rounded-md bor-gray-200 gap-y-1.5 items-center py-2'>
+                            <div className="flex gap-x-2 items-center">
+                                <span className=""><LuBadgeDollarSign className='text-base ' /> </span>
+                                <span className=" font-medium text-gray-900 capitalize">main Price </span>
+                            </div>
+                            <input type="hidden" 
+                                name='locationId'
+                                className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
+                                
+                                />
+                            <input type="hidden" 
+                                name='location'
+                                className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
+                                
+                                />
+                            <input type="hidden" 
+                            name='priceId'
+                            className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
+                            
+                            />
+                            <div className="flex px-3 justify-center">
+                              <input type="string" 
+                                name='amount'
+                                className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
+                                
+                                />
+                            </div>
+                        </div>
+                        <div className='flex flex-48 flex-col gap-y-1.5 items-center py-2'>
+                            <div className="flex gap-x-2 items-center">
+                                <span className=""><BiBlanket className='text-base text-gray-700' /> </span>
+                                <span className="text-gray-600 font-medium">Start Price: </span>
+                            </div>
+                            <div className="flex px-3 justify-center">
+                              <input type="number" 
+                                name='startPrice'
+                                className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
+                               
+                                />
+                            </div>
+                        </div>
+                        <div className="py-2 mb-1 gap-x-1 mt-3 justify-center border-y border-y-gray-200 flex flex-100">
+                          <div className='flex-48 flex justify-center items-center'>
+                                <span className="text-gray-600 text-md font-medium">Median: </span>
+                                <span className="text-gray-600 font-medium text-bxs px-1">|</span>
+                                <span className="text-cyan-500  font-medium">
+                                    <input type="number" 
+                                        name='median'
+                                        className='border text-center border-gray-100 w-full py-0.5 px-1 rounded-md outline-none text-md bg-gray-50'
+                                        
+                                        />
+                                    </span>
+                            </div>
+                            <div className='flex-48 pl-1 flex justify-center items-center'>
+                                <span className="text-gray-600 text-md font-medium">Currency: </span>
+                                <span className="text-gray-600 font-medium text-bxs px-2">|</span>
+                                <input type="text" 
+                                        name='currency'
+                                        className='border text-center border-gray-100 w-full py-0.5 px-1 rounded-md outline-none text-md bg-gray-50'
+                                        
+                                        />
+                            </div>
+                        </div>
+                        <div className=" py-2  pl-3 flex flex-100 bg-gray-50 border border-gray-100 my-3 rounded-md items-center gap-x-2">
+                            <span className=""><BsBrowserChrome className='text-cyan-700 text-base' /></span>
+                            <span className="text-orange-600 font-medium">Discount: </span>
+                                <span className="text-gray-600 font-medium text-bxs px-2">|</span>
+                                <span className="pr-2 ">
+                                <input type="number" 
+                                        name='discount'
+                                        className='border text-center border-gray-200 w-full py-0.5 px-1 rounded-md outline-none text-md bg-gray-100'
+                                        />
+                                </span>                      
+                        </div>
+                        <div className="justify-cente  border-t-gray-200 flex border-b pb-3 border-b-gray-200 flex-100">
+                          <div className='flex-48 pl-3 flex flex-col gap-y-2 justcenter items-center'>
+                                <span className="text-gray-600 text-md font-medium capitalize">Effective Date</span>
+                                <input type="date" 
+                                  name='expiryDate'
+                                  className='border text-center border-gray-100 w-full py-0.5 rounded-md outline-none text-gray-700 text-md bg-gray-50'
+                                  />
+                            </div>
+                            <div className='flex-48 flex flex-col gap-y-2 pl-3 justcenter items-center'>
+                                <span className="text-gray-600 font-medium text-md capitalize">expiry Date</span>
+                                <input type="date" 
+                                  name='effectiveDate'
+                                  className='border text-center border-gray-100 w-full text-gray-700 py-0.5 rounded-md outline-none text-md bg-gray-50'
+                                  />
+                            </div>
+                        </div>
+                      
+                      </div>
+                      <div className="flex gap-x-2 px-2 flex-100 my-6  justify-center  ">
+                        <button
+                        type="submit"
+                        
+                        className="inline-flex items-center justify-center bg-gray-500 border font-medium !border-gray-600 hover:!bg-sky-200 text-white rounded-md py-1 flex-70">
+                            <svg className="w-4 h-4 mr-2"  viewBox="0 0 24 24" fill="none">
+                            <path className="fill-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M19.2071 2.79312C17.9882 1.57417 16.0119 1.57417 14.7929 2.79312L5.68463 11.9014C5.30015 12.2859 5.0274 12.7676 4.89552 13.2951L4.02988 16.7577C3.94468 17.0985 4.04453 17.459 4.29291 17.7073C4.54129 17.9557 4.90178 18.0556 5.24256 17.9704L8.70513 17.1047C9.23263 16.9729 9.71437 16.7001 10.0988 16.3156L19.2071 7.20733C20.4261 5.98838 20.4261 4.01207 19.2071 2.79312ZM16.2071 4.20733C16.645 3.76943 17.355 3.76943 17.7929 4.20733C18.2308 4.64524 18.2308 5.35522 17.7929 5.79312L8.68463 14.9014C8.55647 15.0296 8.39589 15.1205 8.22006 15.1644L6.37439 15.6259L6.83581 13.7802C6.87976 13.6044 6.97068 13.4438 7.09884 13.3156L16.2071 4.20733Z"/>
+                            <path className="fill-gray-100"   d="M5 20C4.44772 20 4 20.4477 4 21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20H5Z" fill="#777"/>
+                            </svg>
+                            save
+                        </button>
+                
+                        <button 
+                            type='button'
+                            className="inline-flex gap-x-1 text-md items-center justify-center bg-red-100 border !border-red-200 hover:!bg-red-200 rounded-md flex-30">
+                              <span className="text-md">Cancel</span>
+                              <span className="">
+                              <svg className="w-4 h-4 p-0.5 fill-red-500"  viewBox="0 0 32 32" >
+                              <g fill="none" fill-rule="evenodd">
+                              <path d="m0 0h32v32h-32z"/>
+                              <path className="fill-red-500 " d="m31 6c.5522847 0 1 .44771525 1 1s-.4477153 1-1 1l-3-.001v18.001c0 3.3137085-2.6862915 6-6 6h-12c-3.3137085 0-6-2.6862915-6-6v-18h-3c-.55228475 0-1-.44771525-1-1s.44771525-1 1-1zm-18 8c-.5522847 0-1 .4477153-1 1v7c0 .5522847.4477153 1 1 1s1-.4477153 1-1v-7c0-.5522847-.4477153-1-1-1zm6 0c-.5522847 0-1 .4477153-1 1v7c0 .5522847.4477153 1 1 1s1-.4477153 1-1v-7c0-.5522847-.4477153-1-1-1zm4.5-13c.8284271 0 1.5.67157288 1.5 1.5s-.6715729 1.5-1.5 1.5h-15c-.82842712 0-1.5-.67157288-1.5-1.5s.67157288-1.5 1.5-1.5z" />
+                              </g>
+                              </svg>
+                              </span>    
+                        </button>
+                    </div>
+                      </form>
+                  </div>
+                </div>
+                </div>
+                }
+
+
+                <div className='flex items-center justify-center bg-white shadow-md border rounded-md bor-gray-200 gap-y-1.5  py-2'>
+                  <button 
+                          type='button'
+                          className="inline-flex items-center flex-col gap-y-2 border shadow-md !border-gray-200 p-2  justify-center rounded-md ">
+                              <span className="">
+                              <svg width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3.5 11C3.5 9.10025 3.50106 7.72573 3.64199 6.67754C3.78098 5.64373 4.04772 5.00253 4.52513 4.52513C5.00253 4.04772 5.64373 3.78098 6.67754 3.64199C7.72573 3.50106 9.10025 3.5 11 3.5H13C14.8998 3.5 16.2743 3.50106 17.3225 3.64199C18.3563 3.78098 18.9975 4.04772 19.4749 4.52513C19.9523 5.00253 20.219 5.64373 20.358 6.67754C20.4989 7.72573 20.5 9.10025 20.5 11V13C20.5 14.8998 20.4989 16.2743 20.358 17.3225C20.219 18.3563 19.9523 18.9975 19.4749 19.4749C18.9975 19.9523 18.3563 20.219 17.3225 20.358C16.2743 20.4989 14.8998 20.5 13 20.5H11C9.10025 20.5 7.72573 20.4989 6.67754 20.358C5.64373 20.219 5.00253 19.9523 4.52513 19.4749C4.04772 18.9975 3.78098 18.3563 3.64199 17.3225C3.50106 16.2743 3.5 14.8998 3.5 13V11Z" stroke="#2A4157" stroke-opacity="0.24"/>
+                            <path d="M12 8L12 16" stroke="#222222" stroke-linejoin="round"/>
+                            <path d="M16 12L8 12" stroke="#222222" stroke-linejoin="round"/>
+                            </svg>
+                              </span>
+                                  <span className="bg-redd-100 p-1.5 rounded-md hover:!bg-red-200 ">Add New</span>
+                      </button>
+                  </div>
+               
+
       </div>
+
                     
       
 

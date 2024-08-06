@@ -16,6 +16,72 @@ import { Icons } from "react-toastify";
 import { MediaSchema } from "../utils/MediaSchema";
 import { ServiceWithModels } from "../utils/ServiceWithModels";
 import { PriceSchema } from "../utils/PriceSchema";
+import { PriceWithModels } from "../prices/utils/PriceWithModels";
+
+// Editing Service Price Details based on location
+export async function editLocationPrice(serviceId:number, priceId:string ,locationId:number, formData:FormData):Promise<PriceWithModels[]>{
+  const amount:string = formData.get('amount') as string;
+  const startPrice:string = formData.get('startPrice') as string; 
+  const median:string = formData.get('median') as string;
+  const currency:string = formData.get('currency') as string;  
+  const discount:string = formData.get('discount') as string;  
+  const effective:string = formData.get('effectiveDate') as string;
+  const effectiveDate: Date = effective !== null ? new Date(effective.toString()) : new Date();
+  const expiry:string = formData.get('effectiveDate') as string;
+  const expiryDate: Date = expiry !== null ? new Date(expiry.toString()) : new Date();
+
+
+  const location = await prisma.location.findUnique({
+    where : {
+      id:locationId
+    }
+  })
+  if (!location){throw new Error("Location Not Exist")}
+
+  const price = await prisma.price.findUnique({
+    where : {
+      id:priceId
+    }
+  })
+  if (!price){throw new Error("Price Not Exist")}
+  const service = await prisma.service.findUnique({
+    where : {
+      id:serviceId
+    }
+  })
+  if (!service){throw new Error("Service Not Exist")}
+
+
+  const update = await prisma.price.update({
+    where : {
+      id: priceId,
+      serviceId :serviceId,
+      locationId : locationId
+    },
+    data: {
+      amount : Number(amount),
+      startPrice : Number(startPrice),
+      median : Number(median),
+      currency : currency,
+      discount : Number(discount),
+      effectiveDate : effectiveDate,
+      expiryDate : expiryDate
+
+    }
+  })
+  const prices = await prisma.price.findMany({
+    where: {
+      serviceId: Number(serviceId),
+    },
+    include: {
+      service: true,
+      location: true,
+    },
+  });
+  return prices as PriceWithModels[];
+}
+
+
 
 // addding work to service with 'ServiceWithModel' return object
 export async function addServiceWorks(serviceId:number , ids:number[]):Promise<ServiceWithModels>{
