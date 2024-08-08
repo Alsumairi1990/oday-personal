@@ -334,7 +334,6 @@ const getSelected= (selected:string)=>{
               
                )}
            </div>
-           {/* {showEdit &&  <FormEdit name={selectedTag} closeModel={closeModel} /> } */}
        </div>
        <div className=' my-3 border border-gray-200 py-2 items-center rounded-md flex justify-center'>
             <div className="flex items-center">

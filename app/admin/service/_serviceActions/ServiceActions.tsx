@@ -18,6 +18,109 @@ import { ServiceWithModels } from "../utils/ServiceWithModels";
 import { PriceSchema } from "../utils/PriceSchema";
 import { PriceWithModels } from "../prices/utils/PriceWithModels";
 
+
+// Remove Service testimonial  with return 'ServiceWithModel' object
+export async function removeServiceTestimonial(serviceId: number, name: string): Promise<ServiceWithModels> {
+  try {
+    const testimonial = await prisma.testimonial.findFirst({
+      where: { title: name },
+      select: { id: true }
+    });
+    if (!testimonial) {
+      throw new Error('Work Not Exist');
+    }
+    const updatedWork = await prisma.testimonial.update({
+      where: { id: testimonial.id }, 
+      data: { serviceId: null },
+    });
+
+    const removed = await prisma.service.findUnique({
+      where: { id: serviceId },
+      include: {
+        categories: {
+          include: {
+            category: true,
+          },
+        },
+        tags: {
+          include: {
+            tag: true,
+          },
+        },
+        tools: {
+          include: {
+            tool: true,
+          },
+        },
+        works: true,
+        phases: true,
+        testimonials : true,
+        user : true
+      },
+     
+    });
+    // const names = await getToolsNamesByIds(toolIds);
+    return removed as ServiceWithModels;
+    
+  } catch (error) {
+    console.error('Error updating service with categories:', error);
+    throw error;
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+
+
+// addding testimonial to service with 'ServiceWithModel' return object
+export async function addServiceTestimonial(serviceId:number , ids:number[]):Promise<ServiceWithModels>{
+  try {
+    console.log("add service wotk -- Start")
+      const updatePromises = ids.map( id => 
+       prisma.testimonial.update({
+          where: { id: id },
+          data: { serviceId: serviceId },
+        })
+        
+      );
+      const updatedWorks = await Promise.all(updatePromises);
+      const updated = await prisma.service.findUnique({
+        where: { id: serviceId },
+        include: {
+          categories: {
+            include: {
+              category: true,
+            },
+          },
+          tags: {
+            include: {
+              tag: true,
+            },
+          },
+          tools: {
+            include: {
+              tool: true,
+            },
+          },
+          works: true,
+          phases: true,
+          testimonials : true,
+          user : true
+        },
+       
+      });
+      
+      return updated as ServiceWithModels;
+    } catch (error) {
+      console.error('Error adding testimonial to service:', error);
+      throw error;
+    } finally {
+      await prisma.$disconnect();
+    }
+}
+
+
+
 // Editing Service Price Details based on location
 export async function editLocationPrice(serviceId:number, priceId:string ,locationId:number, formData:FormData):Promise<PriceWithModels[]>{
   const amount:string = formData.get('amount') as string;
@@ -29,7 +132,6 @@ export async function editLocationPrice(serviceId:number, priceId:string ,locati
   const effectiveDate: Date = effective !== null ? new Date(effective.toString()) : new Date();
   const expiry:string = formData.get('effectiveDate') as string;
   const expiryDate: Date = expiry !== null ? new Date(expiry.toString()) : new Date();
-
 
   const location = await prisma.location.findUnique({
     where : {
@@ -714,10 +816,7 @@ export async function editServiceImage(testimonialId:number,formData:FormData):P
 export async function editServiceBasicData(id:number, data:FormData):Promise<ServiceWithModels>{
   const title:string= data.get('title') as string;
   const name:string= data.get('name') as string;
-
-
   const ratingValue:string = data.get('price') as string;
-
   const result = await prisma.service.update({
     where : {
       id :id
@@ -1360,6 +1459,7 @@ export async function getServiceWModelsById(serviceId:number):Promise<ServiceWit
         },
       },
       works: true,
+      testimonials : true,
       phases: true,
       user : true
     },

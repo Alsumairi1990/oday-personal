@@ -27,7 +27,6 @@ const GridView = ({prices,getSelected,unSelected}:Props) => {
    const [groupedPrices, setGroupedPrices] = useState<Record<string, PriceWithModels[]>>({});
 
    const convert = (convertedData:PriceWithModels[]) => {
-    
     const groupedByLocation = convertedData.reduce((acc, price) => {
         setService(price.service.name);
         const locationName = price.location.country;
@@ -37,7 +36,6 @@ const GridView = ({prices,getSelected,unSelected}:Props) => {
         acc[locationName].push(price);
         return acc;
       }, {} as Record<string, PriceWithModels[]>);
-
       setGroupedPrices(groupedByLocation);
    }
     useEffect(() => {

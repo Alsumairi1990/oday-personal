@@ -7,24 +7,24 @@ import { LuAlertOctagon } from 'react-icons/lu';
 // import { editTestimonialBasicData, editTestimonialContent, editTestimonialImage, getTestimonialWModelsById } from '../_actions/Actions';
 import { FiEdit } from 'react-icons/fi';
 import { AiFillEdit } from 'react-icons/ai';
-import ServicePanel from './ServicePanel';
 import { MdOutlineContentPasteGo } from 'react-icons/md';
-import { editServiceBasicData, editServiceContent, editServiceIcon, editServiceImage, getServiceWModelsById } from '../_serviceActions/ServiceActions';
-import { ServiceWithModels } from '../utils/ServiceWithModels';
-import CategoryPanel from './CategoryPanel';
+
 import { editTestimonialBasicData, editTestimonialContent, editTestimonialImage } from '../../testimonials/_actions/Actions';
+import { WorkWithModels } from '../utils/WorkWithModels';
+import { editServiceBasicData, editServiceContent, editServiceIcon, getServiceWModelsById } from '../../service/_serviceActions/ServiceActions';
+import { editWorkBasicData, editWorkDescription, editWorkIcon, editWorkImage, getWorkWModelsById } from '../_actions/Actions';
+import CategoryPanel from './CategoryPanel';
 import TagPanel from './TagPanel';
-import ToolsPanel from './ToolsPanel';
-import WorksPanel from './WorksPanel';
-import PricePanel from './PricePanel';
-import TestimonialPanel from './TestimonialPanel';
+import ToolPanel from './ToolPanel';
+import LocationPanel from './LocationPanel';
+
 
 interface FormEditProps {
   id : string;
   
 }
 const EditTestimonial = ({ id}: FormEditProps) => {
-  const [service, setService] = useState<ServiceWithModels | null>(null); 
+  const [work, setWork] = useState<WorkWithModels | null>(null); 
   const [baseUrl, setBaseUrl] = useState<string>('');
   const [contentEdit, setContentEdit] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false); 
@@ -49,16 +49,17 @@ const EditTestimonial = ({ id}: FormEditProps) => {
   }, [tagsEdit]);
 
 
-  const getTestimoinal = async () => {
+  const getWorks = async () => {
     try {
         setLoadingPage(true)
-        const serviceId = Number(id);
-        const data = await getServiceWModelsById(serviceId);
-        setService(data);
+        const workId = Number(id);
+        const data = await getWorkWModelsById(workId);
+        setWork(data);
+
         setLoadingPage(false)
     } catch (error:any) {
       setLoadingPage(false);
-        setError(error.message)
+      setError(error.message)
     }
   };
 
@@ -86,8 +87,8 @@ const EditTestimonial = ({ id}: FormEditProps) => {
   };
   const add = async (dataForm:FormData) => {
     try {
-     const data = await editServiceBasicData(Number(id),dataForm);
-     if(data) setService(data);
+     const data = await editWorkBasicData(Number(id),dataForm);
+     if(data) setWork(data);
      console.log("after  added");
      setError('');
  } catch (error:any) {
@@ -122,8 +123,8 @@ const EditTestimonial = ({ id}: FormEditProps) => {
       } 
     });
     try {
-         const data = await editServiceIcon(Number(id),formData);
-         if(data) setService(data);
+         const data = await editWorkIcon(Number(id),formData);
+         if(data) setWork(data);
          setError('');
          setIconEdit(false);
      } catch (error:any) {
@@ -143,11 +144,14 @@ const EditTestimonial = ({ id}: FormEditProps) => {
        } 
      });
      try {
-          const data = await editServiceImage(Number(id),formData);
-          if(data) setService(data);
+          setLoading(true);
+          const data = await editWorkImage(Number(id),formData);
+          if(data) setWork(data);
           setError('');
           setImageEdit(false);
+          setLoading(false);
       } catch (error:any) {
+        setLoading(false);
           setError(error.message)
       }
   }
@@ -159,7 +163,7 @@ const EditTestimonial = ({ id}: FormEditProps) => {
   }, []);
 
   useEffect(() => {
-    getTestimoinal();
+    getWorks();
   }, []);
 const closeCategory = (flag:boolean) => {
 
@@ -175,8 +179,8 @@ const handleTextArea = (content:string) => {
 const editContent = async () => {
   try {
     setLoadingContent(true);
-    const data = await editServiceContent(Number(id),content);
-    setService(data);
+    const data = await editWorkDescription(Number(id),content);
+    setWork(data);
     setError('')
   } catch (error:any) {
     setLoadingContent(false)
@@ -195,7 +199,7 @@ const editContent = async () => {
                     <span className="text-red-400 text-md">{error}</span>
                     </div>
                 }
-           {service && 
+           {work && 
              <div className="w-full">
 
                 <div className="flex items-center flex-col">
@@ -203,7 +207,7 @@ const editContent = async () => {
                     {loading && <div className=' w-full h-full z-50 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
 
                       <div className="p2 bg-black relative rounded-md border-[.3rem] border-white">
-                            <img className=' h-full opacity-70  rounded-md' src={`${baseUrl}/${service?.image}`} alt="" />
+                            <img className=' h-full opacity-70  rounded-md' src={`${baseUrl}/${work?.image}`} alt="" />
                             {!imageEdit ? (<div className="absolute flex space-x-2 top-3 right-3">         
                               <button
                                 className="ml-auto flex items-center px-1.5 gap-x-1 py-0.5 rounded-md border border-gray-500 text-white bg-slate-800"
@@ -263,16 +267,16 @@ const editContent = async () => {
                                 <div className="p-1.5 capitalize text-md flex items-center rounded-md">
                                  <div className="flex-20 flex items-center border py-1 rounded-md pl-1">
                                    <span className='w-6 h-6 mr-2 items-center  justify-center rounded-md  inline-flex' ><FcEditImage className='text-3xl '/></span>
-                                   <span className='text-gray-800 font-medium mr-1'>Name </span> 
+                                   <span className='text-gray-800 font-medium mr-1'>Title </span> 
                                    <span className='text-gray-600 text-bxs mx-1 ml-auto'>|</span> 
                                  </div>
                                  <div className="flex flex-70 pl-4 items-center">
                                   <input type="text" 
-                                  name='name'
+                                  name='title'
                                   onFocus={() => setTouched(true)}
                                   className='border border-gray-100 w-full py-1 px-2 rounded-md outline-none bg-gray-50'
-                                  value={service.name ?? ''}
-                                  onChange={(e) => { setService({ ...service, name: e.target.value }); setTouched(true)}}
+                                  value={work.title  ?? ''}
+                                  onChange={(e) => { setWork({ ...work, title: e.target.value }); setTouched(true)}}
                                   />
                                  </div>
                                </div>
@@ -280,16 +284,16 @@ const editContent = async () => {
                                <div className="p-1.5 capitalize text-md flex items-center rounded-md">
                                   <div className="flex-20 flex items-center border py-1 rounded-md pl-1">
                                     <span className='w-6 h-6 mr-2 items-center  justify-center rounded-md  inline-flex' ><FcShop className='text-3xl '/></span>
-                                    <span className='text-gray-800 font-medium mr-1'>Title </span> 
+                                    <span className='text-gray-800 font-medium mr-1 capitalize'>highlights </span> 
                                     <span className='text-gray-600 text-bxs mx-1 ml-auto'>|</span> 
                                     </div>
                                     <div className="flex flex-70 pl-4 items-center">
                                     <input type="text" 
-                                    name='title'
+                                    name='highlights'
                                     onFocus={() => setTouched(true)}
                                     className='border border-gray-100 w-full py-1 px-2 rounded-md outline-none bg-gray-50'
-                                    value={service.title ?? 0}
-                                    onChange={(e) =>{ setService({ ...service, title: e.target.value }); setTouched(true)}}
+                                    value={work.highlights ?? 0}
+                                    onChange={(e) =>{ setWork({ ...work, highlights: e.target.value }); setTouched(true)}}
                                     />
                                     </div>
                                </div>
@@ -297,16 +301,16 @@ const editContent = async () => {
                                <div className="p-1.5 capitalize text-md flex items-center rounded-md ">
                                   <div className="flex-20 flex items-center border py-1 rounded-md pl-1">
                                     <span className='w-6 h-6 mr-2 items-center  justify-center rounded-md  inline-flex' ><FcAnswers className='text-3xl '/></span>
-                                    <span className='text-gray-800 font-medium mr-1'>Price </span> 
+                                    <span className='text-gray-800 font-medium mr-1'>Client </span> 
                                     <span className='text-gray-600 text-bxs mx-1 ml-auto'>|</span> 
                                     </div>
                                     <div className="flex flex-70 pl-4 items-center">
-                                    <input type="number" 
-                                    name='price'
+                                    <input type="text" 
+                                    name='client'
                                     onFocus={() => setTouched(true)}
                                     className='border border-gray-100 w-full py-1 px-2 rounded-md outline-none bg-gray-50'
-                                    value={service.price ?? 0}
-                                    onChange={(e) =>{ setService({ ...service, price: Number(e.target.value) }); setTouched(true)}}
+                                    value={work.client ?? 0}
+                                    onChange={(e) =>{ setWork({ ...work, client: e.target.value }); setTouched(true)}}
                                     />
                                     </div>
                                </div>
@@ -323,7 +327,7 @@ const editContent = async () => {
                              </form>
                              <div className="flex-20 p-2 pl-0 mb-5">
                                 <div className="p-2 border shadow-md border-gray-300  relative rounded-md">
-                                    <img className=' h-full w-full opacity-70  rounded-md' src={`${baseUrl}/${service?.icon}`} alt="" />
+                                    <img className=' h-full w-full opacity-70  rounded-md' src={`${baseUrl}/${work?.icon}`} alt="" />
                                     {!iconEdit ? (<div className="absolute flex space-x-2 top-3 right-3">         
                                     <button
                                         className="ml-auto flex items-center px-1.5 gap-x-1 py-0.5 rounded-md border border-gray-500 text-white bg-slate-800"
@@ -393,7 +397,7 @@ const editContent = async () => {
                           </div>
                           <div className="p-2">
                             <p className="text-gray-600 py-2 line-clamp-4">
-                              {service.description}
+                              {work.description}
                             </p>
                           </div>
                       </div>
@@ -423,7 +427,7 @@ const editContent = async () => {
                               onChange={(e) => handleTextArea(e.target.value)}
                               className="text-gray-600 focus:border  outline-indigo-300 line-clamp-5 w-full"
                               id="">
-                              {service.description}
+                              {work.description}
                               </textarea>
                             </div>
                         </div>
@@ -431,29 +435,29 @@ const editContent = async () => {
                     </div>
 
 
-                   <div className="w-full">
-                      <CategoryPanel service={service} colseModel={closeCategory}  />
+                  <div className="w-full">
+                      <CategoryPanel work={work} colseModel={closeCategory}  />
                     </div> 
-
+                      
                      <div className="w-full">
-                     <TagPanel service={service} colseModel={closeCategory}  />
+                     <TagPanel work={work} colseModel={closeCategory}  />
                     </div> 
+                    
                     <div className="w-full">
-                     <ToolsPanel service={service} colseModel={closeCategory}  />
+                     <ToolPanel work={work} colseModel={closeCategory}  />
                     </div> 
+                   
                     <div className="w-full">
-                     <WorksPanel service={service} colseModel={closeCategory}  />
+                     <LocationPanel work={work} colseModel={closeCategory}  />
                     </div> 
+                     {/* 
                     <div className="w-full">
                      <PricePanel service={service} colseModel={closeCategory}  />
                     </div> 
                     <div className="w-full">
                      <TestimonialPanel service={service} colseModel={closeCategory}  />
-                    </div>
-                   {/*
-                    <div className="w-full">
-                     <ServicePanel testimonial={testimonial} colseModel={closeCategory}  />
-                    </div>  */}
+                    </div> */}
+               
                 </div>
              </div>
               }

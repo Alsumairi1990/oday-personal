@@ -15,10 +15,10 @@ import { LuAlertOctagon, LuBadgeDollarSign } from "react-icons/lu";
 
 import { FiEdit } from "react-icons/fi";
 import { IoAddCircleSharp } from "react-icons/io5";
-import { AiFillEdit } from "react-icons/ai";
+import { AiFillEdit, AiOutlineSend } from "react-icons/ai";
 import { FaTags, FaTools } from "react-icons/fa";
 import { GrSelect, GrWorkshop } from "react-icons/gr";
-import { addServiceCategories, addServiceTags, addServiceTools, addServiceWorks, editLocationPrice, getServices, getWorks, removeServiceCategory, removeServiceTag, removeServiceTool, removeServiceWork } from "../../service/_serviceActions/ServiceActions";
+import { addServiceCategories, addServicePrice, addServiceTags, addServiceTools, addServiceWorks, editLocationPrice, getServices, getWorks, removeServiceCategory, removeServiceTag, removeServiceTool, removeServiceWork } from "../../service/_serviceActions/ServiceActions";
 import { getCategories, getTags} from "../../common/_actions/Actions";
 import { ServiceWithModels } from "../utils/ServiceWithModels";
 import { addTestimonialCategory, getTestimonialWModelsById, removeTesimonialCategory } from "../../testimonials/_actions/Actions";
@@ -32,7 +32,10 @@ import Decimal from 'decimal.js';
 import { PriceDTO } from "../../common/utils/PriceDTO";
 import { RiMenuAddLine } from "react-icons/ri";
 import { getLocations } from "../../location/_actions/Actions";
-
+import { z } from 'zod';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { PriceSchema } from "../utils/PriceSchema";
 // import { Decimal } from "@prisma/client/runtime/library";
 
 interface FormEditProps {
@@ -48,11 +51,11 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
   const [showRemoveTool, setShowRemoveTool] = useState<boolean>(false);
   const [elementMenuShow, setElementMenuShow] = useState<boolean>(false);
   const [selectedMenuElements, setSelectedMenuElements] = useState<string>();
-  const [selectedMenuElementsId, setSelectedMenuElementsId] = useState<string[]>([]);
+  const [selectedMenuElementId, setSelectedMenuElementId] = useState<string>();
   const [removedTool, setRemovedTool] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>(""); 
-  const [priceAddShow, setPriceAddShow] = useState<boolean>(true);
-  const [locationMenu, SetLocationMenu] = useState<boolean>(true);
+  const [priceAddShow, setPriceAddShow] = useState<boolean>(false);
+  const [locationMenu, SetLocationMenu] = useState<boolean>(false);
   const [priceLoading, setPriceLoading] = useState<boolean>(true);
   const [removedRows, setRemovedRows] = useState<number>(0);
   const [trigger, setTrigger] = useState(0);
@@ -63,37 +66,69 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
 
 
   const [priceDTO, setPriceDTO] = useState<PriceDTO>();
+  type inputType = z.infer<typeof PriceSchema>;
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    watch,
+    formState: { errors },
+  } = useForm<inputType>({
+    resolver: zodResolver(PriceSchema),
+  });
+
+  const saveUser: SubmitHandler<inputType> = async (data)=>{
+    alert("called");
+    const formData = new FormData();
+    for (const key in data) {
+      formData.append(key, data[key as keyof inputType].toString());
+    }
+    const fileInputs = document.querySelectorAll('input[type="file"]') as NodeListOf<HTMLInputElement>;
+    fileInputs.forEach((fileInput) => {
+      if (fileInput.files?.length) {
+        formData.append(fileInput.name, fileInput.files[0]);
+      } 
+    });
+
+    const plainData: any = {};
+    formData.forEach((value, key) => {
+      if (key === 'amount' || key === 'startPrice' || key === 'median' || key === 'discount') {
+        plainData[key] = parseFloat(value as string);
+      } else if (key === 'effectiveDate' || key === 'expiryDate') {
+        plainData[key] = new Date(value as string);
+      } else {
+        plainData[key] = value;
+      }
+    });
+
+    try {
+      setLoading(true);
+      const locationId = formData.get('locationId');
+      if(service.id && selectedMenuElements) {
+        const categ =  await addServicePrice(formData,service.id,Number(selectedMenuElementId));
+        getPriceWmodel();
+      }
+      setLoading(false);
+      setPriceAddShow(false);
+
+    } catch (error:any) {
+      setLoading(false);
+      setError(error.message)
+    }
+  }
+
+  
+
 
 
   const addSelectedService = (id: string, name: string) => {
     setSelectedMenuElements(name);
-//     setSelectedMenuElements(prevValues => {
-//       const newValues = [...prevValues, name];
-//       setTrigger(trigger + 1);
-//       return newValues;
-//   });
-//   setSelectedMenuElementsId(prevValues => {
-//     const newValues = [...prevValues, id];
-//     setTrigger(trigger + 1);
-//     return newValues;
-// });
-  
-   
+    setSelectedMenuElementId(id);
   };
   const unSelectedService = (id: string, name: string) => {
     setSelectedMenuElements('');
-  //   setSelectedMenuElements(prevValues => {
-  //     const newValues = prevValues.filter(item => item !== name);
-  //     setTrigger(trigger + 1); 
-  //     return newValues;
-  // });
-
-  // setSelectedMenuElementsId(prevValues => {
-  //       const newValues = prevValues.filter(item => item !== id);
-  //       setTrigger(trigger + 1); 
-  //       return newValues;
-  //   });
-  
+    setSelectedMenuElementId('');
   };
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -108,11 +143,11 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
   const addService = async () => {
     try {
         setLoading(true);
-        if(selectedMenuElementsId.length>0){
-          const numberArray = selectedMenuElementsId.map(value => Number(value));
-        const result = await addServiceWorks(Number(service.id), numberArray);
-        if(result) service = result;
-        if(result) setServiceData(result);
+        if(selectedMenuElementId){
+          // const numberArray = selectedMenuElementId.map(value => Number(value));
+        // const result = await addServiceWorks(Number(service.id), selectedMenuElementId);
+        // if(result) service = result;
+        // if(result) setServiceData(result);
         }
         
         setError('');
@@ -126,13 +161,13 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
   }
   const removeElem = async ()=> {
     try {
-        setLoading(true);
-        const numberArray = selectedMenuElementsId.map(value => Number(value));
-        const result = await removeServiceWork(service.id,removedTool);
-        setServiceData(result);
-        setLoading(false);
-       setSelectedMenuElements('');
-       setShowRemoveTool(false)
+      //   setLoading(true);
+      //   const numberArray = selectedMenuElementsId.map(value => Number(value));
+      //   const result = await removeServiceWork(service.id,removedTool);
+      //   setServiceData(result);
+      //   setLoading(false);
+      //  setSelectedMenuElements('');
+      //  setShowRemoveTool(false)
       } catch (error: any) {
         setLoading(false);
         setError(error.message);
@@ -182,7 +217,7 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
     getPriceWmodel();
 
   }, []);
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit2 = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); 
     const formData = new FormData(event.currentTarget);
     console.log(formData.get('amount'));
@@ -216,6 +251,11 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
           <div className="loader-2 w-4"></div>
         </div>
       )}
+        {error && <div className="py-3 my-1 flex items-center">
+                    <LuAlertOctagon className='text-gray-500 mr-2 text-xl' />
+                    <span className="text-red-400 text-md">{error}</span>
+                    </div>
+                }
       
       <div className="p-2 w-full rounded-md my-6 bg-white border border-gray-300">
         
@@ -234,7 +274,7 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                
                 <button
                   className={`ml-auto flex items-center px-1.5 py-0.5 rounded-md ${selectedMenuElements ? 'bg-gray-800' : 'bg-gray-500'}`}
-                  onClick={() =>  {addService()}}
+                  // onClick={() =>  {addService()}}
                   disabled={selectedMenuElements === ''}
                 >
                   <span className="text-gray-100 text-md">Save {selectedMenuElements}</span>
@@ -285,7 +325,7 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                 
             
               <div className="space-y-2 mt-2 pt-2">
-               <form onSubmit={handleSubmit}  className="">
+               <form onSubmit={handleSubmit2}  className="">
                 <div className="flex flex-wrap gap-x-2 ">
                   <div className='flex flex-48 flex-col rounded-md bor-gray-200 gap-y-1.5 items-center py-2'>
                       <div className="flex gap-x-2 items-center">
@@ -385,16 +425,13 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                  
                 </div>
                 <div className="flex gap-x-2 px-2 flex-100 my-6  justify-center  ">
+                
                   <button
-                  type="submit"
-                   
-                   className="inline-flex items-center justify-center bg-gray-500 border font-medium !border-gray-600 hover:!bg-sky-200 text-white rounded-md py-1 flex-70">
-                      <svg className="w-4 h-4 mr-2"  viewBox="0 0 24 24" fill="none">
-                      <path className="fill-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M19.2071 2.79312C17.9882 1.57417 16.0119 1.57417 14.7929 2.79312L5.68463 11.9014C5.30015 12.2859 5.0274 12.7676 4.89552 13.2951L4.02988 16.7577C3.94468 17.0985 4.04453 17.459 4.29291 17.7073C4.54129 17.9557 4.90178 18.0556 5.24256 17.9704L8.70513 17.1047C9.23263 16.9729 9.71437 16.7001 10.0988 16.3156L19.2071 7.20733C20.4261 5.98838 20.4261 4.01207 19.2071 2.79312ZM16.2071 4.20733C16.645 3.76943 17.355 3.76943 17.7929 4.20733C18.2308 4.64524 18.2308 5.35522 17.7929 5.79312L8.68463 14.9014C8.55647 15.0296 8.39589 15.1205 8.22006 15.1644L6.37439 15.6259L6.83581 13.7802C6.87976 13.6044 6.97068 13.4438 7.09884 13.3156L16.2071 4.20733Z"/>
-                      <path className="fill-gray-100"   d="M5 20C4.44772 20 4 20.4477 4 21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20H5Z" fill="#777"/>
-                      </svg>
-                      save
-                  </button>
+                    type="submit"
+                    className="inline-flex items-center justify-center bg-violet-600 border font-medium border-violet-600 hover:!bg-violet-800 text-white rounded-md py-1 flex-70">
+                        <span className="">Edit Details</span>
+                        <span className="pl-1"><AiOutlineSend className="text-base font-semibold text-white" /></span>
+                    </button>
           
                   <button 
                       type='button'
@@ -417,20 +454,21 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
           
         </div>
 
-        // adding new Price with Location
-        
-        
         
       ))}
 
       
-
+        {/* adding new Price with Location Form     */}
         {priceAddShow && 
-        <div className='border p-2 bg-white border-gray-200 shadow-md rounded-md'>
-                
-                  
+        <div className='border p-2 bg-white border-gray-200 shadow-md animate-modalSlide rounded-md'>
                   <div>
-                      <div className="flex items-center p-1 pb-2 gap-x-2 border-b border-b-gray-100 bg-ugray-100">
+                  {/* <div className="px-2 pt-1  pb-1 mb-1 border-b border-b-gray-200">
+                            <span className="text-md font-medium text-gray-600 ">
+                              Creating new Locatiion with Price Details
+                            </span>
+                          </div> */}
+                      <div className="flex items-center max-sm:flex-wrap p-1 pb-2 gap-x-2 border-b border-b-gray-100 bg-ugray-100">
+                          
                           <div className="relative flex-70">
                             <button
                                 type="button"
@@ -439,9 +477,8 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                                     return !prevState;
                                   });
                                 }}
-                                className="flex w-full bg-white  items-center border gap-x-3 py-1.5 border-gray-300  px-2 rounded-md"
+                                className="flex w-full bg-gray-50  items-center border gap-x-3 py-1.5 border-gray-300  px-2 rounded-md"
                               >
-                      
                                 <div className="text-md inline-flex text-gray-600 font-medium capitalize">
                                   {!selectedMenuElements ?( <span className="px-1">Adding Location</span>)
                                   : (
@@ -454,10 +491,10 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                               </button>
                               {locationMenu && locationData.length > 0 &&
                          <div className="p relative ">
-                           <div className="absolute top-0.5 px-1 w-full shadow-md bg-white border border-gray-300 rounded">
+                           <div className="absolute top-0.5 z-40 px-1 w-full shadow-md bg-white border border-gray-300 rounded">
                          {locationData.map(element => 
                           <div className=" relative border flex bg-white flex-wrap my-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 ">
-                                <div className="sm:flex-10 flex-100 h-8  rounded-l-md border-r border-r-gray-300">
+                                <div className="sm:flex-15 flex-100 h-8  rounded-l-md border-r border-r-gray-300">
                                   {element.image ? (
                                     <img
                                       className="  sm:h-full rounded-l-md"
@@ -470,12 +507,11 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                                     </span>
                                   )}
                                 </div>
-                                <div className=" flex-100 sm:flex-70  sm:flex sm:mx-auto items-center bg-white border-r border-r-gray-300 rounded-l-md">
+                                <div className=" flex-100 sm:flex-65  sm:flex sm:mx-auto items-center bg-white border-r border-r-gray-300 rounded-l-md">
                                   <div className="pl-4  w-full">
                                     <div className="w-full flex items-center">
                                       <span className="text-md  text-black  font-medium">
                                         {element?.country}
-                                        {/* {element?.image} */}
                                       </span>
                                     </div>
                                   </div>
@@ -545,12 +581,9 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                                         ):(
                                               <div className="flex flex-col items-center">
                                               <svg width="30px" height="30px" viewBox="0 0 1024 1024" className="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M768 810.7c-23.6 0-42.7-19.1-42.7-42.7s19.1-42.7 42.7-42.7c94.1 0 170.7-76.6 170.7-170.7 0-89.6-70.1-164.3-159.5-170.1L754 383l-10.7-22.7c-42.2-89.3-133-147-231.3-147s-189.1 57.7-231.3 147L270 383l-25.1 1.6c-89.5 5.8-159.5 80.5-159.5 170.1 0 94.1 76.6 170.7 170.7 170.7 23.6 0 42.7 19.1 42.7 42.7s-19.1 42.7-42.7 42.7c-141.2 0-256-114.8-256-256 0-126.1 92.5-232.5 214.7-252.4C274.8 195.7 388.9 128 512 128s237.2 67.7 297.3 174.2C931.5 322.1 1024 428.6 1024 554.7c0 141.1-114.8 256-256 256z" fill="#3688FF" /><path d="M640 789.3c-10.9 0-21.8-4.2-30.2-12.5L512 679l-97.8 97.8c-16.6 16.7-43.7 16.7-60.3 0-16.7-16.7-16.7-43.7 0-60.3l128-128c16.6-16.7 43.7-16.7 60.3 0l128 128c16.7 16.7 16.7 43.7 0 60.3-8.4 8.4-19.3 12.5-30.2 12.5z" fill="#5F6379" /><path d="M512 960c-23.6 0-42.7-19.1-42.7-42.7V618.7c0-23.6 19.1-42.7 42.7-42.7s42.7 19.1 42.7 42.7v298.7c0 23.5-19.1 42.6-42.7 42.6z" fill="#5F6379" /></svg>
-                                              {/* <p className=" text-sm text-gray-500 dark:text-gray-400 tex-sm"><span className="font-medium">Upload </span> </p> */}
-                                              {/* <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p> */}
                                               </div>
                                         )} 
                                             </div>
-                                            {/* {imageSrc  && <span className='text-gray-600 text-md'>Change </span>} */}
                                             <input id="image" type="file" name="image" className="opacity-0 w-4 h-2" onChange={handleFileChange} />
                                         </label>
                         
@@ -563,8 +596,8 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                       
                 
                   
-                    <div className="space-y-2 mt-2 pt-2">
-                    <form onSubmit={handleSubmit}  className="">
+                    <div className="space-y-2 pt-2">
+                    <form  onSubmit={handleSubmit(saveUser)} className="">
                       <div className="flex flex-wrap gap-x-2 ">
                         <div className='flex flex-48 flex-col rounded-md bor-gray-200 gap-y-1.5 items-center py-2'>
                             <div className="flex gap-x-2 items-center">
@@ -587,11 +620,14 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                             
                             />
                             <div className="flex px-3 justify-center">
-                              <input type="string" 
+                              <input
+                                {...register('amount')}
+                                type="string" 
                                 name='amount'
                                 className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
                                 
                                 />
+                              <span className="text-red-400 text-xs mt-2">{errors.amount?.message} </span>
                             </div>
                         </div>
                         <div className='flex flex-48 flex-col gap-y-1.5 items-center py-2'>
@@ -601,10 +637,12 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                             </div>
                             <div className="flex px-3 justify-center">
                               <input type="number" 
+                                {...register('startPrice')}
                                 name='startPrice'
                                 className='border text-center border-gray-100 w-full py-1 px-2 rounded-md outline-none text-md bg-gray-50'
                                
                                 />
+                                <span className="text-red-400 text-xs mt-2">{errors.startPrice?.message} </span>
                             </div>
                         </div>
                         <div className="py-2 mb-1 gap-x-1 mt-3 justify-center border-y border-y-gray-200 flex flex-100">
@@ -613,47 +651,62 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                                 <span className="text-gray-600 font-medium text-bxs px-1">|</span>
                                 <span className="text-cyan-500  font-medium">
                                     <input type="number" 
+                                        {...register('median')}
                                         name='median'
                                         className='border text-center border-gray-100 w-full py-0.5 px-1 rounded-md outline-none text-md bg-gray-50'
-                                        
                                         />
+                                        <span className="text-red-400 text-xs mt-2">{errors.median?.message} </span>
                                     </span>
                             </div>
+                          
                             <div className='flex-48 pl-1 flex justify-center items-center'>
                                 <span className="text-gray-600 text-md font-medium">Currency: </span>
                                 <span className="text-gray-600 font-medium text-bxs px-2">|</span>
                                 <input type="text" 
+                                      {...register('currency')}
                                         name='currency'
                                         className='border text-center border-gray-100 w-full py-0.5 px-1 rounded-md outline-none text-md bg-gray-50'
                                         
                                         />
+                                        <span className="text-red-400 text-xs mt-2">{errors.currency?.message} </span>
                             </div>
                         </div>
+                        <div className="  items-center w-full">
+                              <div className="relative flex w-full">
+                              <textarea {...register('description')}   name="description" id="description" className="block pl-2 pt-3 px-0 z-0 w-full text-sm text-gray-900 bg-gray-50 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Price Description ..." required />
+                              </div>
+                          </div> 
                         <div className=" py-2  pl-3 flex flex-100 bg-gray-50 border border-gray-100 my-3 rounded-md items-center gap-x-2">
                             <span className=""><BsBrowserChrome className='text-cyan-700 text-base' /></span>
                             <span className="text-orange-600 font-medium">Discount: </span>
                                 <span className="text-gray-600 font-medium text-bxs px-2">|</span>
                                 <span className="pr-2 ">
                                 <input type="number" 
+                                    {...register('discount')}
                                         name='discount'
                                         className='border text-center border-gray-200 w-full py-0.5 px-1 rounded-md outline-none text-md bg-gray-100'
                                         />
-                                </span>                      
+                                </span>  
+                                <span className="text-red-400 text-xs mt-2">{errors.discount?.message} </span>                    
                         </div>
                         <div className="justify-cente  border-t-gray-200 flex border-b pb-3 border-b-gray-200 flex-100">
                           <div className='flex-48 pl-3 flex flex-col gap-y-2 justcenter items-center'>
                                 <span className="text-gray-600 text-md font-medium capitalize">Effective Date</span>
                                 <input type="date" 
+                                {...register('expiryDate')}
                                   name='expiryDate'
                                   className='border text-center border-gray-100 w-full py-0.5 rounded-md outline-none text-gray-700 text-md bg-gray-50'
                                   />
+                                  <span className="text-red-400 text-xs mt-2">{errors.expiryDate?.message} </span>
                             </div>
                             <div className='flex-48 flex flex-col gap-y-2 pl-3 justcenter items-center'>
                                 <span className="text-gray-600 font-medium text-md capitalize">expiry Date</span>
                                 <input type="date" 
+                                {...register('effectiveDate')}
                                   name='effectiveDate'
                                   className='border text-center border-gray-100 w-full text-gray-700 py-0.5 rounded-md outline-none text-md bg-gray-50'
                                   />
+                                  <span className="text-red-400 text-xs mt-2">{errors.effectiveDate?.message} </span>
                             </div>
                         </div>
                       
@@ -661,17 +714,14 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                       <div className="flex gap-x-2 px-2 flex-100 my-6  justify-center  ">
                         <button
                         type="submit"
-                        
-                        className="inline-flex items-center justify-center bg-gray-500 border font-medium !border-gray-600 hover:!bg-sky-200 text-white rounded-md py-1 flex-70">
-                            <svg className="w-4 h-4 mr-2"  viewBox="0 0 24 24" fill="none">
-                            <path className="fill-gray-100" fill-rule="evenodd" clip-rule="evenodd" d="M19.2071 2.79312C17.9882 1.57417 16.0119 1.57417 14.7929 2.79312L5.68463 11.9014C5.30015 12.2859 5.0274 12.7676 4.89552 13.2951L4.02988 16.7577C3.94468 17.0985 4.04453 17.459 4.29291 17.7073C4.54129 17.9557 4.90178 18.0556 5.24256 17.9704L8.70513 17.1047C9.23263 16.9729 9.71437 16.7001 10.0988 16.3156L19.2071 7.20733C20.4261 5.98838 20.4261 4.01207 19.2071 2.79312ZM16.2071 4.20733C16.645 3.76943 17.355 3.76943 17.7929 4.20733C18.2308 4.64524 18.2308 5.35522 17.7929 5.79312L8.68463 14.9014C8.55647 15.0296 8.39589 15.1205 8.22006 15.1644L6.37439 15.6259L6.83581 13.7802C6.87976 13.6044 6.97068 13.4438 7.09884 13.3156L16.2071 4.20733Z"/>
-                            <path className="fill-gray-100"   d="M5 20C4.44772 20 4 20.4477 4 21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20H5Z" fill="#777"/>
-                            </svg>
-                            save
+                        className="inline-flex items-center justify-center bg-violet-600 border font-medium border-violet-600 hover:!bg-violet-800 text-white rounded-md py-1 flex-70">
+                            <span className="">Create</span>
+                            <span className="pl-1"><AiOutlineSend className="text-base font-semibold text-white" /></span>
                         </button>
                 
                         <button 
                             type='button'
+                            onClick={() => setPriceAddShow(false)}
                             className="inline-flex gap-x-1 text-md items-center justify-center bg-red-100 border !border-red-200 hover:!bg-red-200 rounded-md flex-30">
                               <span className="text-md">Cancel</span>
                               <span className="">
@@ -689,11 +739,14 @@ const PricePanel = ({ service, colseModel }: FormEditProps) => {
                 </div>
                 </div>
                 }
+                {/* end of adding new location with peicw details */}
+
 
 
                 <div className='flex items-center justify-center bg-white shadow-md border rounded-md bor-gray-200 gap-y-1.5  py-2'>
                   <button 
                           type='button'
+                          onClick={() => setPriceAddShow(true)}
                           className="inline-flex items-center flex-col gap-y-2 border shadow-md !border-gray-200 p-2  justify-center rounded-md ">
                               <span className="">
                               <svg width="60px" height="60px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
