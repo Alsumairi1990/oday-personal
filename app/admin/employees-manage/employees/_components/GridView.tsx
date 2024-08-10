@@ -85,7 +85,7 @@ const GridView = ({elements,getSelected,unSelected}:Props) => {
                     </svg>
                 </Link>
             {/* {editShow && <FormEdit name={category.name} closeModel={closeModel}  /> } */}
-                <Link href={`/admin/testimonials/show/${element.id}`} className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md flex-23">
+                <Link href={`/admin/employees-manage/employees/edit/${element.id}`} className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md flex-23">
                     <svg className="w-4 h-4 fill-blue-500"  viewBox="0 0 48 48" >
                     <path d="M0 0h48v48H0z" fill="none"/>
                     <g id="Shopicon">
