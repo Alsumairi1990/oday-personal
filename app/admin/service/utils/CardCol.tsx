@@ -2,7 +2,6 @@
 import React, { useEffect } from 'react';
 import { Location, ServiceCode, Tag} from '@prisma/client';
 import { useState } from 'react';
-import { ToolWithUser } from './ToolWithUser';
 interface Props {
     element: Location;
   }

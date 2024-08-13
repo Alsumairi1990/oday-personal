@@ -14,6 +14,9 @@ import { BasicInfoSchema } from '../_utils/BasicInfoScheam';
 import { EditProfilBasicInfo, getUsersWithModels } from '../_actions/Actions';
 import { LuAlertOctagon } from 'react-icons/lu';
 import { IoAddSharp } from 'react-icons/io5';
+import { EducationSchema } from '../_utils/EducationSchema';
+import MenuPanel from '@/app/admin/common/utils/MenuPanel';
+import { MdOutlineAddCircle } from 'react-icons/md';
 
 
 interface FormEditProps {
@@ -24,13 +27,47 @@ interface FormEditProps {
 const EditEducationInfo = ({ employee}: FormEditProps) => {
   const [employeeData, setEmployeeData] = useState<EmployeeWithModels>(); 
   const [loading, setLoading] = useState<boolean>(false); 
+  const [menuShow, setMenuShow] = useState<boolean>(false); 
   const [error, setError] = useState<string>(''); 
   const [dateOfBirth, setDateOfBirth] = useState('');
+  const [selectedMenuElements, setSelectedMenuElements] = useState<string[]>([]);
+  const [menuElements, setMenuElements] = useState<string[]>(['menu1', 'menu2']); 
+
+
 
 
 const rows = 5;
 const cols = 5;
-  type inputType = z.infer<typeof BasicInfoSchema>;
+  type inputType = z.infer<typeof EducationSchema>;
+
+//   const addSelectedService = (name: string) => {
+//     setSelectedMenuElements(prevValues => {
+//       const newValues = [...prevValues, name];
+//       // setTrigger(trigger + 1);
+//       return newValues;
+//   });
+// }
+ 
+//   const unSelectedService = (name: string) => {
+//     setSelectedMenuElements(prevValues => {
+//       const newValues = prevValues.filter(item => item !== name);
+//       // setTrigger(trigger + 1); 
+//       return newValues;
+//   });
+// }
+const setSelect = (value:string) => {
+  setSelectedMenuElements(prevValues => {
+    const newValues = [...prevValues, value];
+    return newValues;
+});
+  
+}
+const unSelect = (value:string) => {
+  setSelectedMenuElements(prevValues => {
+    const newValues = prevValues.filter(item => item !== value);
+    return newValues;
+});
+}
 
   const {
     register,
@@ -38,7 +75,7 @@ const cols = 5;
     reset,
     formState: { errors },
   } = useForm<inputType>({
-    resolver: zodResolver(BasicInfoSchema),
+    resolver: zodResolver(EducationSchema),
   });
 
   const saveUser: SubmitHandler<inputType> = async (data) => {
@@ -47,7 +84,6 @@ const cols = 5;
     for (const key in data) {
       formData.append(key, data[key as keyof inputType].toString());
     }
-    console.log("name at form"+data.first_name);
     const fileInputs = document.querySelectorAll('input[type="file"]') as NodeListOf<HTMLInputElement>;
     fileInputs.forEach((fileInput) => {
       if (fileInput.files?.length) {
@@ -88,7 +124,7 @@ const cols = 5;
 
   useEffect(() => {
     getEmployee();
-    if(employee.employeeProfile.dateOfBirth){
+    if(employee.employeeProfile && employee.employeeProfile.dateOfBirth){
       const formattedDate = new Date(employee.employeeProfile.dateOfBirth).toISOString().split('T')[0];
       setDateOfBirth(formattedDate);
     }
@@ -99,7 +135,7 @@ const cols = 5;
             {loading && <div className=' w-full h-full mt-6 z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
            {employeeData && <form onSubmit={handleSubmit(saveUser)} className=' bg-white border border-gray-300 rounded-md shadow-xl w-full' >
                 <div className="flex w-full pb-2 pt-2  pl-2 border-b border-b-gray-200">
-                 <span className="text-lg  font-semibold text-gray-600">Employment Information </span> 
+                 <span className="text-lg  font-semibold text-gray-600">Education Information </span> 
                </div>
                <div className="p-5 w-full flex flex-wrap justify-between gap-x-5">
                {error && <div className="py-3 my-1 w-full flex items-center">
@@ -107,137 +143,86 @@ const cols = 5;
                 <span className="text-red-400 text-md">{error}</span>
                 </div>
                 }
-                <div className=" sm:flex-48 flex flex-col z-0 w-full mb-5 ">
-                        <label htmlFor="category_name" className="font-medium mb-2 pl-0.5 text-sm text-gray-500 duration-300 capitalize">First Name</label>
-                        <div className="flex items-center w-full ">
-                            <div className="relative flex w-full ">
-                            <input {...register('first_name')} 
-                            defaultValue={employeeData?.employeeProfile?.firstName}
-                            type="text" name="first_name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border border-gray-200 bg-gray-100 rounded-xl  appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Given Name ...." required />
-                            </div>
-                        </div> 
-                        <span className="text-red-400 text-xs mt-2">{errors.first_name?.message} </span>
-                </div>
-                <div className=" sm:flex-48 flex flex-col z-0 w-full mb-5 ">
-                        <label htmlFor="category_name" className="font-medium mb-2 pl-0.5 text-sm text-gray-500 duration-300 capitalize">Last Name</label>
-                        <div className="flex items-center w-full ">
-                            <div className="relative flex w-full ">
-                            <input {...register('last_name')} 
-                            defaultValue={employeeData?.employeeProfile?.lastName ?? ''}
-                            type="text" name="last_name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border border-gray-200 bg-gray-100 rounded-xl  appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Last Name ...." required />
-                            </div>
-                        </div> 
-                        <span className="text-red-400 text-xs mt-2">{errors.last_name?.message} </span>
-                </div>
-
-             
-
-                <div className="sm:flex-48 flex flex-col z-0 w-full mb-5 ">
-                  <h3 className="mb-2 text-sm font-medium text-gray-500 dark:text-white">Employee Sex</h3>
-                  <ul className="grid w-full gap-6 md:grid-cols-2">
-                      <li>
-                          <input type="radio" {...register('sex')}  id="sex-1" 
-                          defaultChecked={employeeData.employeeProfile?.sex === 'm'}  
-                          name="sex" value="m" className="hidden peer" required />
-                          <label htmlFor="sex-1" className="inline-flex items-center justify-between w-full p-2 py-[7px] text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300  peer-cheucked:border-orange-400 peer-checked:bg-gray-50 peer-checked:text-orange-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700" >                           
-                              <div className="block">
-                                  <div className="w-full text-md font-medium">Male</div>
-                              </div>
-                              <svg className="w-4 h-4 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                              </svg>
-                          </label>
-                      </li>
-                      <li>
-                          <input type="radio" {...register('sex')} id="sex-2" 
-                          defaultChecked={employeeData.employeeProfile?.sex === 'f'} 
-                          name="sex" value="f" className="hidden peer" />
-                          <label htmlFor="sex-2" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer   peer-checkevd:border-orange-600 peer-checked:text-orange-400 peer-checked:bg-gray-50 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700" >
-                              <div className="block">
-                                  <div className="w-full text-md font-medium">Femele</div>
-                              </div>
-                              <svg className="w-4 h-4 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                              </svg>
-                          </label>
-                      </li>
-                  </ul>
-                  <span className="text-red-400 text-xs mt-2">{errors.sex?.message} </span>
-              </div>
-
-
-              <div className="sm:flex-48 flex flex-col z-0 w-full mb-5 ">
-                  <h3 className="mb-2 text-sm font-medium text-gray-500 dark:text-white">Marital Status</h3>
-                  <ul className="grid w-full gap-6 md:grid-cols-2">
-                      <li>
-                          <input type="radio" {...register('maritalStatus')}  id="maritalStatus1" 
-                          // defaultChecked name="maritalStatus" 
-                          defaultChecked={employeeData.employeeProfile?.maritalStatus === 'married'} 
-                          value="married" className="hidden peer" required />
-                          <label htmlFor="maritalStatus1" className="inline-flex items-center justify-between w-full p-2 py-[7px] text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300  peer-cheucked:border-orange-400 peer-checked:bg-gray-50 peer-checked:text-orange-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700" >                           
-                              <div className="block">
-                                  <div className="w-full text-md font-medium">Married</div>
-                              </div>
-                              <svg className="w-4 h-4 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                              </svg>
-                          </label>
-                      </li>
-                      <li>
-                          <input type="radio" {...register('maritalStatus')} id="maritalStatus2" 
-                          defaultChecked={employeeData.employeeProfile?.maritalStatus === 'single'} 
-                          name="maritalStatus" value="single" className="hidden peer" />
-                          <label htmlFor="maritalStatus2" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer   peer-checkevd:border-orange-600 peer-checked:text-orange-400 peer-checked:bg-gray-50 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700" >
-                              <div className="block">
-                                  <div className="w-full text-md font-medium">Single</div>
-                              </div>
-                              <svg className="w-4 h-4 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                              </svg>
-                          </label>
-                      </li>
-                  </ul>
-                  <span className="text-red-400 text-xs mt-2">{errors.maritalStatus?.message} </span>
-              </div>
-
-              <div className="sm:flex-100 flex flex-col z-0 w-full mb-5 ">
-                        <label htmlFor="dateOfBirth" className="font-medium mb-2 pl-0.5 text-sm text-gray-500 duration-300 capitalize">Date Of Birth</label>
-                        {employeeData.employeeProfile ? ( <div className="flex items-center w-full ">
-                            <div className="relative flex w-full ">
-                            <input {...register('dateOfBirth')} 
-                            defaultValue={dateOfBirth}
-                            type="date" name="dateOfBirth" id="dateOfBirth" className="block px-2 h-10 z-0 w-full text-sm text-gray-500 border border-gray-200 bg-gray-100 rounded-xl  appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Last Name ...." required />
-                            </div>
-                        </div> ):
-                        (
-                          <div className="flex items-center w-full ">
-                            <div className="relative flex w-full ">
-    
-                     {employeeData.employeeProfile && <input {...register('dateOfBirth')} 
-                            type="date" name="dateOfBirth"
-                            
-                             id="dateOfBirth" className="block h-10 px-2 z-0 w-full text-sm text-gray-500 border border-gray-200 bg-gray-100 rounded-xl  appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Last Name ...." required />
-                        }
-                             </div>
+                <div className=" sm:flex-48  flex  flex-col z-10 w-full mb-5 ">
+                        <label htmlFor="degree" className="font-medium mb-2 pl-0.5 text-sm text-gray-500 duration-300 capitalize">Degree</label>
+                        <div className="flex flex-col  w-full ">
+                        <button
+                      type="button"
+                      onClick={() => {
+                        setMenuShow((prevState) => {
+                          if (prevState == false) {
+                            setSelectedMenuElements([]);
+                          }
+                          return !prevState;
+                        });
+                      }}
+                      className="flex w-full bg-gray-100   items-center border gap-x-3 py-2 border-gray-300  px-2 rounded-2xl"
+                    >
+                      {/* <GrSelect className="text-base text-gray-600" /> */}
+                      {selectedMenuElements.length>0 ? (
+                        <span className="text-md inline-flex text-gray-600 font-medium">
+                         {selectedMenuElements.map(element => (
+                              <span className="px-2 first:pl-0 border-r border-r-gray-300 last:border-none">{element}</span>
+                          ))}
+                        </span>
+                      ) : (
+                        <div className="text-md inline-flex text-gray-500 font-medium capitalize">
+                          <span className="px-1 capitalize text-sm">last Degree</span>
                         </div>
-                        )
-                        }
-                        <span className="text-red-400 text-xs mt-2">{errors.dateOfBirth?.message} </span>
+                      )}
+                      <span className="ml-auto">
+                        <MdOutlineAddCircle className="text-2xl border-2 border-violet-800 rounded-full text-violet-800" />
+                      </span>
+                    </button> 
+                      {menuShow &&
+                      <div className="relative z-50">
+                        <MenuPanel menuElements={menuElements} setSelect={setSelect} unSelect={unSelect} />
+                      </div>
+                          }
+                        </div> 
+                        <span className="text-red-400 text-xs mt-2">{errors.degree?.message} </span>
                 </div>
 
-              <div className=" sm:flex-100 flex flex-col z-0 w-full mb-5 ">
-                    <label htmlFor="category_name" className="font-medium mb-2 pl-0.5 text-sm text-gray-500 duration-300 capitalize">Bio</label>
-                    <div className="flex items-center w-full ">
-                        <div className="relative flex w-full ">
-                        <textarea {...register('bio')}  rows={rows} cols={cols} 
-                         name="bio" id="bio" className="block  pl-2 pt-3 px-0 z-0 w-full text-sm text-gray-900 bg-gray-50 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Employee Bio..." required >
-                          {employeeData.employeeProfile?.bio}
-                          </textarea>
-                       </div> 
-                    </div> 
-                    <span className="text-red-400 text-xs mt-2">{errors.bio?.message} </span>
 
-              </div> 
+
+                <div className=" sm:flex-48 flex flex-col z-0 w-full mb-5 ">
+                        <label htmlFor="institution" className="font-medium mb-2 pl-0.5 text-sm text-gray-500 duration-300 capitalize">Institution</label>
+                        <div className="flex items-center w-full ">
+                            <div className="relative flex w-full ">
+                            <input {...register('institution')} 
+                            defaultValue={employeeData?.employeeProfile?.institution ?? ''}
+                            type="text" name="institution" id="institution" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border border-gray-200 bg-gray-100 rounded-xl  appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Name ...." required />
+                            </div>
+                        </div> 
+                        <span className="text-red-400 text-xs mt-2">{errors.institution?.message} </span>
+                </div>
+
+                <div className=" sm:flex-48 flex flex-col z-0 w-full mb-5 ">
+                        <label htmlFor="yearOfPassing" className="font-medium mb-2 pl-0.5 text-sm text-gray-500 duration-300 capitalize">Year Of Passing</label>
+                        <div className="flex items-center w-full ">
+                            <div className="relative flex w-full ">
+                            <input {...register('yearOfPassing')} 
+                            defaultValue={employeeData?.employeeProfile?.yearOfPassing ?? 0}
+                            type="text" name="yearOfPassing" id="yearOfPassing" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border border-gray-200 bg-gray-100 rounded-xl  appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Last Name ...." required />
+                            </div>
+                        </div> 
+                        <span className="text-red-400 text-xs mt-2">{errors.yearOfPassing?.message} </span>
+                </div>
+
+                <div className=" sm:flex-48 flex flex-col z-0 w-full mb-5 ">
+                        <label htmlFor="specialization" className="font-medium mb-2 pl-0.5 text-sm text-gray-500 duration-300 capitalize">specialization</label>
+                        <div className="flex items-center w-full ">
+                            <div className="relative flex w-full ">
+                            <input {...register('specialization')} 
+                            defaultValue={employeeData?.employeeProfile?.specialization?.toString() }
+                            type="text" name="specialization" id="specialization" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border border-gray-200 bg-gray-100 rounded-xl  appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Engineering ...." required />
+                            </div>
+                        </div> 
+                        <span className="text-red-400 text-xs mt-2">{errors.specialization?.message} </span>
+                </div>
+
+
+
 
                  
                 

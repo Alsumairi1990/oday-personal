@@ -1,37 +1,24 @@
 'use client'
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import Link from 'next/link'
-import { MdEditSquare } from "react-icons/md";
 import { EmployeeWithModels } from '../_utils/EmployeeWithModels';
 import { getUsersWithModels } from '../_actions/Actions';
 import { Span } from 'next/dist/trace';
 import Image from 'next/image';
-
 import { AiFillEdit } from 'react-icons/ai';
 import { editWorkImage } from '@/app/admin/works/_actions/Actions';
-import EditBasicInfo from './EditBasicInfo';
-import EditContactInfo from './EditContactInfo';
-import EditEmploymentInfo from './EditEmploymentInfo';
-import EditEducationInfo from './EditEducationInfo';
-import EditSocialsInfo from './EditSocialsInfo';
 
 interface FormEditProps {
-    id : string;
+    id: string;
   }
-const EmployeeManage = ({ id}: FormEditProps) => {
+const ProfileHeader = ({ id}: FormEditProps) => {
    const imagePath2 = 'https://angular-material.fusetheme.com/images/avatars/male-04.jpg';
    const imgBg = 'https://angular-material.fusetheme.com/images/pages/profile/cover.jpg';
-   const postImag = 'https://tixia.dexignzone.com/xhtml/images/profile/8.jpg';
-   const postImag1 = 'https://tixia.dexignzone.com/xhtml/images/profile/9.jpg';
-   const postHight = 'https://tixia.dexignzone.com/xhtml/images/profile/1.jpg';
-   const [employee, setEmployee] = useState<EmployeeWithModels>(); 
+   const [employeeData, setEmployeeData] = useState<EmployeeWithModels>(); 
    const [loading, setLoading] = useState<boolean>(false); 
    const [error, setError] = useState<string>(); 
    const [imageEdit,setImageEdit] = useState<boolean>(false);
-
    const [imageSrc, setImageSrc] = useState<string>('');
-
-
    const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
       if (file) {
@@ -73,7 +60,7 @@ const EmployeeManage = ({ id}: FormEditProps) => {
         setLoading(true)
         const workId = Number(id);
         const data = await getUsersWithModels(id);
-        setEmployee(data);
+        setEmployeeData(data);
 
         setLoading(false)
     } catch (error:any) {
@@ -86,14 +73,9 @@ const EmployeeManage = ({ id}: FormEditProps) => {
 getEmployee()
   }, []);
 
-
-
-  
   return (
-    <div className="p-2">
-   
+    <div className="py-2">
     <div className="bg-white flex flex-col shadow" >
-     
      <img src={imgBg} alt="Cover image" className="h-40 object-cover lg:h-80" />
         {!imageEdit ? (<div className="absolute flex space-x-2 top-3 right-3">         
             <button
@@ -155,41 +137,16 @@ getEmployee()
                 <a className="text-secondary" href="/pages/profile"> Followers </a>
                 <a className="text-secondary" href="/pages/profile"> Gallery </a>
               </div>
-              {employee &&  <span  className='text-violet-700 text-base'>employy --- {employee.phone}</span>
-              }
+              
           </div>
       </div>
           
   </div>
 
 
-  <div  className="pt-4 grid  grid-cols max-sm:gap-y-3 sm:gap-x-5 sm:grid-cols-3">
-  <div className="">
-     {employee && <EditContactInfo employee={employee} /> }
-    </div>
-    <div className="sm:col-span-2   sm:cols-start-2 space-y-6">
-     {employee && <EditBasicInfo employee={employee} /> }
-    </div>
-  </div>
-  <div className="">
-  <div className="my-6">
-     {employee && <EditEmploymentInfo employee={employee} /> }
-    </div>
-  </div>
-  <div className="">
-    <div className="my-6">
-     {employee && <EditEducationInfo employee={employee} /> }
-    </div>
-  </div>
-
-  <div className="">
-    <div className="my-6">
-     {employee && <EditSocialsInfo employee={employee} /> }
-    </div>
-  </div>
 </div>  
   )
 };
 
 
-export default EmployeeManage;
+export default ProfileHeader;

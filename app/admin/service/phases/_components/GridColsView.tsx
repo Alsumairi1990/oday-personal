@@ -1,11 +1,8 @@
 import { Category } from '@prisma/client';
+import Link from 'next/link';
 import React, { useEffect } from 'react';
 import {useState} from 'react';
-import CategoryCard from '../util/CategoryCard';
-import FormEdit from './FormEdit';
-import Link from 'next/link';
-import CardCol from '../util/CardCol';
-import DeleteCategory from './DeleteCategory';
+
 interface Props{
     categories:Category[],
     getSelected :(value: string) => void
@@ -73,7 +70,7 @@ const GridColsView = ({categories,getSelected,unSelected}:Props) => {
                 </label>
             </div> 
            <div className="">
-           <CardCol  key={category.id} category={category} />
+           {/* <CardCol  key={category.id} category={category} /> */}
            </div>
            <div className="flex gap-x-2 my-2 justify-center px-3 ">
                 <button onClick={()=>{setEditShow(true); setCatName(category?.name)  }} className="inline-flex items-center justify-center bg-sky-100 border !border-sky-200 hover:!bg-sky-200 px-1.5 rounded-md py-1.5 flex-30">
@@ -113,8 +110,8 @@ const GridColsView = ({categories,getSelected,unSelected}:Props) => {
     ))
 
 }
-{editShow && <FormEdit name={catName} closeModel={closeModel}  /> }
-{showDelete && <DeleteCategory categoryIds={selectedValues} closeModel={closeDelet}  /> }
+{/* {editShow && <FormEdit name={catName} closeModel={closeModel}  /> }
+{showDelete && <DeleteCategory categoryIds={selectedValues} closeModel={closeDelet}  /> } */}
 
 </div>  
   )

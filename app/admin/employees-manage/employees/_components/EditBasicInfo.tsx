@@ -87,7 +87,7 @@ const cols = 5;
 
   useEffect(() => {
     getEmployee();
-    if(employee.employeeProfile.dateOfBirth){
+    if(employee.employeeProfile && employee.employeeProfile.dateOfBirth){
       const formattedDate = new Date(employee.employeeProfile.dateOfBirth).toISOString().split('T')[0];
       setDateOfBirth(formattedDate);
     }
@@ -226,11 +226,12 @@ const cols = 5;
                           <div className="flex items-center w-full ">
                             <div className="relative flex w-full ">
     
-                     {employeeData.employeeProfile && <input {...register('dateOfBirth')} 
+                     
+                      <input {...register('dateOfBirth')} 
                             type="date" name="dateOfBirth"
                             
                              id="dateOfBirth" className="block h-10 px-2 z-0 w-full text-sm text-gray-500 border border-gray-200 bg-gray-100 rounded-xl  appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Last Name ...." required />
-                        }
+                        
                              </div>
                         </div>
                         )

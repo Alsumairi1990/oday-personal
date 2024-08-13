@@ -3,8 +3,7 @@ import React, { useEffect } from 'react';
 import {useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import FormEdit from '../_components/FormEdit';
-import DeleteLocation from '../_components/DeleteLocation';
+
 
 interface Props{
     locations:Location[],
@@ -136,8 +135,8 @@ const addSelected= (selected:string)=>{
 </tr>
 ))
 }
-{editShow && <FormEdit name={catName} closeModel={closeModel}  /> }
-{showDelete && <DeleteLocation ids={selectedValues} closeModel={closeDelet}  /> }
+{/* {editShow && <FormEdit name={catName} closeModel={closeModel}  /> }
+{showDelete && <DeleteLocation ids={selectedValues} closeModel={closeDelet}  /> } */}
 
 
 </div>  

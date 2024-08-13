@@ -38,7 +38,7 @@ const CategoryCard = ({category}:Props) => {
                     <span className="text-base  text-black  font-semibold">{category?.name}</span>
                     <div className="ml-auto">
                       <span className="text-sm text-gray-700">Added By : </span>
-                      <span className="text-sm text-red-700 ml-1 capitalize">{ category?.user?.user_name}</span>
+                      {/* <span className="text-sm text-red-700 ml-1 capitalize">{ category?.user?.user_name}</span> */}
                     </div>
                 </div>
                 <div className="">

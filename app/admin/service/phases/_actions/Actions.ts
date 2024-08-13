@@ -5,6 +5,7 @@ import { z } from "zod"
 import fs from "fs/promises"
 import { getServerSession } from 'next-auth/next';
 import authOptions from "@/utils/AuthOptions";
+import { ToolWithUser } from "../../codes/utils/ToolWithUser";
 
 
 
@@ -20,5 +21,5 @@ export async function getTools(): Promise<ToolWithUser[]> {
       },
     });
     
-    return tools as ToolWithUser[];
+    return tools as unknown as ToolWithUser[];
   }

@@ -88,7 +88,7 @@ const cols = 5;
 
   useEffect(() => {
     getEmployee();
-    if(employee.employeeProfile.dateOfBirth){
+    if(employee.employeeProfile && employee.employeeProfile.dateOfBirth){
       const formattedDate = new Date(employee.employeeProfile.dateOfBirth).toISOString().split('T')[0];
       setDateOfBirth(formattedDate);
     }
@@ -100,7 +100,7 @@ const cols = 5;
     <div className="bg-white flex flex-col  p-6 border border-gray-300 shadow-md rounded-lg "> 
         <span className="text-xl  font-semibold text-gray-600">Contact Info </span>
          <div className="mt-3 text-md text-gray-700">
-            <p className="text-md leading-6">
+            <p className="text-md leading-6 line-clamp-4">
                 {employeeData?.employeeProfile?.bio}
             </p>
          </div>

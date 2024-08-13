@@ -1,8 +1,7 @@
 import { Category } from '@prisma/client';
 import React, { useEffect } from 'react';
 import {useState} from 'react';
-import CategoryCard from '../util/CategoryCard';
-import CategoryTable from '../util/CategoryTable';
+
 interface Props{
     categories:Category[],
     getSelected :(value: string) => void
@@ -66,10 +65,10 @@ const getSelected2 = (id:string) => {
                         </tr>
                     </thead>
                     <tbody className=''>
-                     {categories && categories?.length > 0 && 
+                     {/* {categories && categories?.length > 0 && 
                        
                         <CategoryTable categories={categories} unSelected={unSelected1} getSelected={getSelected2} />
-                        }
+                        } */}
                     </tbody>
                 </table>
 

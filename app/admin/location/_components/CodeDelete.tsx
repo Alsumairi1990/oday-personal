@@ -4,8 +4,7 @@ import { useState } from 'react';
 import { ServiceCode, Tool } from '@prisma/client';
 import FormEdit from './FormEdit';
 import HashLoader from "react-spinners/HashLoader";
-import DeleteTag from './DeleteTag';
-import { getCodes } from '../_actions/Actions';
+
 
 
 
@@ -49,8 +48,8 @@ const ToolDelete = () => {
     const getAllCodes = async () => {
       try {
         setLoading(true);
-        const catgs = await getCodes();
-        setCodes(catgs)
+        // const catgs = await getCodes();
+        // setCodes(catgs)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching categories:', error);
@@ -89,7 +88,7 @@ const ToolDelete = () => {
               </button>
           </div>
         }
-      {showDelete && <DeleteTag closeModel={closeConfirm} ids={svalues}  />}  
+      {/* {showDelete && <DeleteTag closeModel={closeConfirm} ids={svalues}  />}   */}
         <div className="grid grid-cols-1">
             <div className="border-b border-b-gray-200 w-full mb-2">
                 <div className="bg-gray-100 border border-gray-200 rounded-3xl py-1.5 mb-2 w-full h-11 ">

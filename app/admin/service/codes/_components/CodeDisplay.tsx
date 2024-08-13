@@ -92,7 +92,7 @@ if (loading) {
                             </button>
                        </div>
                       }
-                      {showDelete && <DeleteTag toolIds={svalues} closeModel={closeConfirm}  />}  
+                      {/* {showDelete && <DeleteTag ids={svalues} closeModel={closeConfirm}  />}   */}
                      {/* <span>  -{svalues.length}</span> */}
                       <div className="ml-auto">
                         <div className="flex items-center max-sm:flex-wrap space-x-2 ">

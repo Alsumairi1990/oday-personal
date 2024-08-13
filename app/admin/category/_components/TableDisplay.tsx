@@ -41,6 +41,9 @@ const TableDisplay = () => {
         return newValues;
     });
    }
+   const closeModel = (val:boolean)=>{
+
+   }
    const getAllCategories = async () => {
     const catgs = await getCategories();
     setCategories(catgs)
@@ -76,7 +79,7 @@ useEffect(() => {
                             </button>
                        </div>
                       }
-                      {showDelete && <DeleteCategory categoryIds={svalues}  />}  
+                      {showDelete && <DeleteCategory categoryIds={svalues} closeModel={closeModel}  />}  
                      {/* <span>  -{svalues.length}</span> */}
                       <div className="ml-auto">
                         <div className="flex items-center max-sm:flex-wrap space-x-2 ">

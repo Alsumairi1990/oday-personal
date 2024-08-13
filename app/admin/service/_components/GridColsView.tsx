@@ -1,10 +1,8 @@
 import { Location, ServiceCode, Tag, Tool } from '@prisma/client';
 import React, { useEffect } from 'react';
 import {useState} from 'react';
-import FormEdit from './FormEdit';
 import Link from 'next/link';
 import CardCol from '../utils/CardCol';
-import DeleteLocation from './DeleteLocation';
 
 interface Props{
     locations:Location[],
@@ -110,8 +108,8 @@ const GridColsView = ({locations,getSelected,unSelected}:Props) => {
         </div>
     ))
 }
-{editShow && <FormEdit name={name} closeModel={closeModel}  /> }
-{showDelete && <DeleteLocation ids={selectedValues} closeModel={closeDelet}  /> }
+{/* {editShow && <FormEdit name={name} closeModel={closeModel}  /> }
+{showDelete && <DeleteLocation ids={selectedValues} closeModel={closeDelet}  /> } */}
 </div>  
   )
 };

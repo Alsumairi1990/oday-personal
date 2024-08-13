@@ -3,11 +3,11 @@ import React, { useEffect } from 'react';
 import { GrCheckmark } from "react-icons/gr";
 import { Category} from '@prisma/client';
 import { useState } from 'react';
-import { CategoryDTO } from '../util/CategoryDTO';
+// import { CategoryDTO } from '../util/CategoryDTO';
 import Link from 'next/link';
 import router from 'next/router';
 import { useRouter } from 'next/navigation';
-import { deleteCategories } from '../_actions/Actions';
+// import { deleteCategories } from '../_actions/Actions';
 type CategoryInput = Omit<Category, 'id' | 'slug' | 'userId' | 'image' | 'icon' | 'createdAt' | 'updatedAt'>;
 
 interface Props {
@@ -38,7 +38,7 @@ const CategoryCard = ({category}:Props) => {
                     <span className="text-base  text-black  font-semibold">{category?.name}</span>
                     <div className="ml-auto">
                       <span className="text-sm text-gray-700">Added By : </span>
-                      <span className="text-sm text-red-700 ml-1 capitalize">{ category?.user?.user_name}</span>
+                      {/* <span className="text-sm text-red-700 ml-1 capitalize">{ category?.user?.user_name}</span> */}
                     </div>
                 </div>
                 <div className="">

@@ -8,7 +8,7 @@ import { BasicServiceInfo } from "../utils/BasicServiceInfo";
 import { getServerSession } from 'next-auth/next';
 import authOptions from "@/utils/AuthOptions";
 import { slugify } from "@/utils/TextUtils";
-import { BasicInfo } from "../utils/BasicInfo";
+
 import { BasicSchema } from "../utils/BasicSchema";
 import { Category, Phase, Service, Tag, Tool, Work } from "@prisma/client";
 import { ServiceWCategory } from "../utils/ServiceWCategory";
@@ -1215,7 +1215,7 @@ export async function getAllServices(): Promise<ServiceWCategory[]> {
     },
   });
   console.log("Fetched Services:", services);
-  return services as ServiceWCategory[];
+  return services as unknown as ServiceWCategory[];
 }
 
 // Get serivce by id with related catefories
