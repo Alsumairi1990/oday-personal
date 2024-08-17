@@ -47,6 +47,7 @@ model Service {
   tags         ServiceTag[]
   tools        ServiceTool[]
   testimonials Testimonial[]
+  invoices     Invoice[]
   prices       Price[]
   phases       Phase[]
   works        Work[]
@@ -56,6 +57,8 @@ model Service {
   code         ServiceCode?      @relation(fields: [codeId], references: [id])
   createdAt    DateTime          @default(now())
   updatedAt    DateTime          @updatedAt
+
+  Order Order[]
 }
 
 model Tool {
@@ -71,6 +74,7 @@ model Tool {
   updatedAt   DateTime      @updatedAt
   services    ServiceTool[]
   works       WorkTool[]
+  projects    Project[]
 }
 
 model ServiceTool {
@@ -92,6 +96,7 @@ model Category {
   services     ServiceCategory[]
   works        WorkCategory[]
   testimonials TestimonialCategory[]
+  projects     Project[]
   userId       String // References one specific user (modified)
   user         User?                 @relation(fields: [userId], references: [id]) // Relation to User
   createdAt    DateTime              @default(now())
@@ -216,8 +221,11 @@ model Phase {
   steps       Step[]
   userId      String // References one specific user (modified)
   user        User     @relation(fields: [userId], references: [id]) // Relation to User
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+
+  projectId Int
+  project   Project  @relation(fields: [projectId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Step {
@@ -264,6 +272,7 @@ model Location {
   image     String?
   works     Work[]
   prices    Price[]
+  teams     Team[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -356,24 +365,27 @@ model User {
   image              String?
   role               String?
   employeeProfile    EmployeeProfile? @relation
-  roles          Role[]    
-  posts       Post[]
-  services    Service[]
-  categories  Category[]
-  tags        Tag[]
-  tools       Tool[]
-  phases      Phase[]
-  works       Work[]
-  partner     Partner[]
-  accounts    Account[]
-  sessions    Session[]
-  testimonial Testimonial[]
-
+  roles              Role[]
+  posts              Post[]
+  services           Service[]
+  categories         Category[]
+  tags               Tag[]
+  tools              Tool[]
+  phases             Phase[]
+  works              Work[]
+  partner            Partner[]
+  accounts           Account[]
+  sessions           Session[]
+  testimonial        Testimonial[]
+  adminMenu          AdminMenu[]
+  projects           Project[]
+  tasks              Task[]
+  orders             Order[]
   @@map(name: "users")
 }
 
 model EmployeeProfile {
-  id                Int       @id @default(autoincrement())
+  id                Int             @id @default(autoincrement())
   firstName         String
   firstNameSlug     String?
   lastName          String?
@@ -401,27 +413,27 @@ model EmployeeProfile {
   languages         String[]
   maritalStatus     String?
   socialNetwork     SocialNetwork?  @relation(fields: [socialNetworkId], references: [id], onDelete: Cascade)
-  socialNetworkId   Int?             @unique
+  socialNetworkId   Int?            @unique
   userId            String          @unique
   user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   skills            EmployeeSkill[]
-  team              Team?            @relation(fields: [teamId], references: [id],onDelete: Cascade)
-  teamId          Int?
+  teams             TeamEmployee[]
+  teamId            Int?
   departmentHeadOf  Department[]
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 }
 
 model Role {
-  id          Int      @id @default(autoincrement())
-  name        String   @unique
-  slug        String   @unique
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  slug        String       @unique
   image       String?
   description String?
-  users       User[]  
+  users       User[]
   permissions Permission[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
 }
 
 model Permission {
@@ -444,43 +456,44 @@ model Permission {
 //   @@id([roleId, permissionId])
 // }
 
-
 model Department {
-  id          Int       @id @default(autoincrement())
-  name        String    @unique
-  description String?
-  image       String?
-  icon        String?
-  teams       Team[]  
-  departmentHead EmployeeProfile?  @relation( fields: [departmentHeadId], references: [id])
-  departmentHeadId Int?  
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  id               Int              @id @default(autoincrement())
+  name             String           @unique
+  description      String?
+  image            String?
+  icon             String?
+  teams            Team[]
+  departmentHead   EmployeeProfile? @relation(fields: [departmentHeadId], references: [id])
+  departmentHeadId Int?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
 }
-
 
 model Team {
-  id          Int               @id @default(autoincrement())
-  name        String            @unique
-  icon        String?
-  image       String?
-  description String?
-  location    String?
-  status      String?
-  departmentId    Int?              // References the department the team belongs to
-  department      Department?       @relation(fields: [departmentId], references: [id])
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  members     EmployeeProfile[] 
+  id           Int            @id @default(autoincrement())
+  name         String         @unique
+  icon         String?
+  image        String?
+  description  String?
+  status       String?
+  locationId   Int?
+  location     Location?      @relation(fields: [locationId], references: [id])
+  departmentId Int?
+  department   Department?    @relation(fields: [departmentId], references: [id])
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  employees    TeamEmployee[]
+  projects     Project[]
 }
 
-// model UserRole {
-//   userId String
-//   roleId Int
-//   user   User @relation(fields: [userId], references: [id],onDelete: Cascade)
-//   role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
-//   @@id([userId, roleId])
-// }
+model TeamEmployee {
+  employeeId Int
+  teamId     Int
+  employee   EmployeeProfile @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  team       Team            @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@id([employeeId, teamId])
+}
 
 model EmployeeSkill {
   employeeProfileId Int
@@ -526,3 +539,199 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+//Setting Models
+model AdminMenu {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  icon        String?
+  elements    Element[]
+  userId      String // References one specific user (modified)
+  user        User      @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Element {
+  id          Int       @id @default(autoincrement())
+  title       String
+  link        String
+  description String?
+  icon        String?
+  menuId      Int
+  menu        AdminMenu @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Task {
+  id             Int       @id @default(autoincrement())
+  name           String
+  description    String?
+  status         String // e.g., 'to do', 'in progress', 'completed'
+  priority       String? // e.g., 'low', 'medium', 'high'
+  dueDate        DateTime?
+  estimatedHours Float? // Estimated time to complete in hours
+  actualHours    Float? // Actual time spent in hours
+  startDate      DateTime?
+  endDate        DateTime?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  completedAt    DateTime?
+  projectId      Int
+  project        Project   @relation(fields: [projectId], references: [id],onDelete: Cascade)
+  users          User[]
+}
+
+model Project {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  status      String // e.g., 'planned', 'in progress', 'completed', etc.
+  startDate   DateTime?
+  endDate     DateTime?
+  budget      Decimal? // Using Prisma.Decimal for monetary values
+  priority    String? // e.g., 'low', 'medium', 'high'
+  progress    Int? // Percentage of project completion
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  tasks       Task[]
+  userId      String // User who created the project
+  user        User      @relation(fields: [userId], references: [id],onDelete: Cascade)
+
+  tools      Tool[]
+  categories Category[]
+  teamId     Int
+  team       Team?      @relation(fields: [teamId], references: [id],onDelete: Cascade)
+  phases     Phase[]
+  clientId   Int? // Reference to a Client model
+  client     Client?    @relation(fields: [clientId], references: [id],onDelete: Cascade)
+}
+
+model Client {
+  id             Int     @id @default(autoincrement())
+  name           String
+  contactPerson  String
+  email          String  @unique
+  phone          String?
+  address        String?
+  companyName    String?
+  website        String?
+  industry       String?
+  notes          String?
+  billingAddress String?
+  billingEmail   String?
+  taxId          String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  projects Project[] // Relationship with projects
+  invoices Invoice[] // Relationship with invoices, if applicable
+
+  Order Order[]
+}
+
+model Invoice {
+  id            Int       @id @default(autoincrement())
+  invoiceNumber String    @unique
+  issueDate     DateTime  @default(now())
+  dueDate       DateTime?
+  invoiceType   String? // e.g., 'pro forma', 'final', 'credit note'
+
+  initialPayment   Float?    // 20% of totalPrice
+  paymentStatus    String  @default("pedning")   // e.g., 'initial payment pending', 'initial payment received', 'fully paid'
+
+  clientId      Int
+  client        Client  @relation(fields: [clientId], references: [id],onDelete: Cascade)
+  clientName    String
+  clientAddress String?
+  clientContact String?
+  clientEmail   String?
+  clientPhone   String?
+
+
+  serviceId          Int
+  service            Service @relation(fields: [serviceId], references: [id],onDelete: Cascade)
+  serviceDescription String
+  quantity           Int?
+  unitPrice          Float?
+  discount           Float?
+  taxRate            Float?
+
+  subtotal       Float?
+  taxAmount      Float?
+  discountAmount Float?
+  totalAmount    Float
+  currency       String
+
+  paymentTerms  String
+  paidAt        DateTime?
+  paymentMethod String?
+
+  notes              String?
+  referenceNumber    String?
+  termsAndConditions String?
+  attachments        String[] // Paths or URLs to attachments
+
+  companyName    String?
+  companyAddress String?
+  companyEmail   String?
+  companyPhone   String?
+
+  taxId      String?
+  taxDetails String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id               Int       @id @default(autoincrement())
+  orderNumber      String    @unique
+  orderDate        DateTime  @default(now())
+  status           String    // e.g., 'pending', 'in progress', 'completed', 'cancelled'
+  description      String?
+  
+  clientId         Int?
+  client           Client?    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+   clientName    String
+  clientAddress String?
+  clientContact String?
+  clientEmail   String?
+  clientPhone   String?
+  
+  serviceId        Int
+  service          Service   @relation(fields: [serviceId], references: [id],onDelete: Cascade)
+  quantity         Int?
+  unitPrice        Float?
+  estimatedCost    Float?
+
+  
+  subtotal         Float?
+  discount         Float?
+  taxRate          Float?
+  taxAmount        Float?
+  totalAmount      Float
+  currency         String
+  
+  paymentTerms     String
+  paymentStatus    String  // e.g., 'paid', 'pending', 'overdue'
+  paidAt           DateTime?
+  paymentMethod    String?
+  
+  startDate        DateTime?
+  completionDate   DateTime?
+  
+  notes            String?
+  referenceNumber  String?
+  termsAndConditions String?
+  
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  
+  projectManagerId String?
+  projectManager   User?    @relation(fields: [projectManagerId], references: [id],onDelete: Cascade)
+}
+

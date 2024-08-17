@@ -14,7 +14,7 @@ export default function EmployeeProfileLayout({ children, params }: { children: 
 
   return (
     <PageTitleProvider>
-     <div className="w-11.7/12 mx-auto">
+     <div className="w-11.5/12 mt-2 mx-auto">
       
          <Breadcrumb id={params.id}  />
          

@@ -1,8 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
-import HashLoader from "react-spinners/HashLoader";
 import Link from "next/link";
-import EmployeeProfile from "../../_components/EmployeeProfile";
 
 interface Props {
     params: {
@@ -21,7 +18,7 @@ const ShowTagPage = ({params}:Props) => {
            <span className="text-gtay-700 mx-2 inline-flex h-3 bg-gray-600 w-[1px]"></span>
            <span className="text-gray-600 text-md capitalize">{params.id}</span>
         </div>
-        <div className="w-11.8/12 mx-auto"></div>
+        <div className="mx-auto"></div>
         {/* <EmployeeProfile id={params.id} />  */}
         </div>
 )

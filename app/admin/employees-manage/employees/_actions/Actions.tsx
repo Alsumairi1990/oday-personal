@@ -112,6 +112,33 @@ export async function EditProfilBasicInfo(id:string , formData:FormData):Promise
 //    }
 
 
+// Get Emloyee by 'id' with 'EmployeeWithModels' return object
+export async function getAllUsersWithModels(): Promise<EmployeeWithModels[]> {
+    try {
+        const result = await prisma.user.findMany({
+            include: {
+                employeeProfile: {
+                    include: {
+                        socialNetwork: true, // Include the SocialNetwork associated with EmployeeProfile
+                        teams: true,
+                    },
+                },
+                roles: {
+                    include: {
+                        permissions: true, // Directly include permissions
+                    },
+                },
+            },
+        });
+   console.log("result"+result);
+        return result as unknown as  EmployeeWithModels[]; // Cast result to UserWithModels[]
+    } catch (error) {
+        console.log("error", error); // Log the error for debugging
+        throw error;
+    } finally {
+        await prisma.$disconnect();
+    }
+}
 
 // Get Emloyee by 'id' with 'EmployeeWithModels' return object
 export async function getUsersWithModels(id:string): Promise<EmployeeWithModels> {
@@ -124,7 +151,7 @@ export async function getUsersWithModels(id:string): Promise<EmployeeWithModels>
                 employeeProfile: {
                     include: {
                         socialNetwork: true, // Include the SocialNetwork associated with EmployeeProfile
-                        team: true,
+                        teams: true,
                     },
                 },
                 roles: {

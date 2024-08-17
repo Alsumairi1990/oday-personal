@@ -1,59 +1,68 @@
-'use client'
-import React, { ChangeEvent, useEffect, useState } from 'react';
-import Link from 'next/link'
-import { EmployeeWithModels } from '../_utils/EmployeeWithModels';
-import { getUsersWithModels } from '../_actions/Actions';
-import { Span } from 'next/dist/trace';
-import Image from 'next/image';
-import { AiFillEdit } from 'react-icons/ai';
-import { editWorkImage } from '@/app/admin/works/_actions/Actions';
+'use client';
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation'; // Import usePathname hook
 import { LuUsers } from 'react-icons/lu';
-import { IoMdSettings } from 'react-icons/io';
 import { GiTeamIdea } from 'react-icons/gi';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 
 interface FormEditProps {
-    id : string;
-  }
-const ProfileHeader = ({ id}: FormEditProps) => {
-   const imagePath2 = 'https://angular-material.fusetheme.com/images/avatars/male-04.jpg';
-   const imgBg = 'https://angular-material.fusetheme.com/images/pages/profile/cover.jpg';
-   const [employeeData, setEmployeeData] = useState<EmployeeWithModels>(); 
-   const [loading, setLoading] = useState<boolean>(false); 
-   const [error, setError] = useState<string>(); 
-   const [imageEdit,setImageEdit] = useState<boolean>(false);
-   const [imageSrc, setImageSrc] = useState<string>('');
+  id: string;
+}
+
+const ProfileHeader = ({ id }: FormEditProps) => {
+  const pathname = usePathname(); // Get the current pathname
+
+  // Helper function to check if a link is active
+  const isActive = (linkPath: string) => pathname === linkPath;
+
   return (
     <div className="">
-    <div className="py-2 px-2 flex border border-gray-300 bg-white mx-auto rounded  gap-x-2 items-center">
-        <Link href={`/admin/employees-manage/employees/show/${id}/details`}  className="px-2 py-1 flex items-center gap-x-1">
-            <span className="">
-            <LuUsers className="text-xl text-gray-600 capitalize" />
-            </span>
-            <span className="text-md text-gray-600 capitalize">
-                Details
-            </span>
+      <div className="py-2 px-2 flex  border border-gray-300 bg-white mx-auto rounded gap-x-2 items-center">
+        <Link
+          href={`/admin/employees-manage/employees/show/${id}/details`}
+          className={`px-2 py-1 flex items-center gap-x-1 rounded text-gray-600  ${
+            isActive(`/admin/employees-manage/employees/show/${id}/details`)
+              ? 'bg-indigo-600 text-white' // Apply background color if the link is active
+              : ''
+          }`}
+        >
+          <span className="">
+            <LuUsers className="text-xl capitalize" />
+          </span>
+          <span className="text-md capitalize">Details</span>
         </Link>
-        <Link href={`/admin/employees-manage/employees/show/${id}/account`} className="px-2 py-1 flex items-center gap-x-1">
-            <span className="">
-            <MdOutlineAccountBalanceWallet className="text-2xl text-gray-600 capitalize" />
-            </span>
-            <span className="text-md text-gray-600 capitalize">
-                Account
-            </span>
-        </Link>
-        <button className="px-2 py-1 flex items-center gap-x-1">
-            <span className="">
-            <GiTeamIdea className="text-xl text-gray-600 capitalize" />
-            </span>
-            <span className="text-md text-gray-600 capitalize">
-                Team
-            </span>
-        </button>
-    </div>
-</div>
-  )
-};
 
+        <Link
+          href={`/admin/employees-manage/employees/show/${id}/account`}
+          className={`px-2 py-1 flex items-center gap-x-1 rounded text-gray-600 ${
+            isActive(`/admin/employees-manage/employees/show/${id}/account`)
+              ? 'bg-indigo-600 text-white' // Apply background color if the link is active
+              : ''
+          }`}
+        >
+          <span className="">
+            <MdOutlineAccountBalanceWallet className="text-2xl capitalize" />
+          </span>
+          <span className="text-md capitalize">Account</span>
+        </Link>
+
+        <Link
+          href={`/admin/employees-manage/employees/show/${id}/team`}
+          className={`px-2 py-1 flex items-center gap-x-1 rounded text-gray-600  ${
+            isActive(`/admin/employees-manage/employees/show/${id}/team`)
+              ? 'bg-indigo-600 text-white' // Apply background color if the link is active
+              : ''
+          }`}
+        >
+          <span className="">
+            <GiTeamIdea className="text-xl capitalize" />
+          </span>
+          <span className="text-md capitalize">Team</span>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default ProfileHeader;

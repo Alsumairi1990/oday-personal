@@ -1,33 +1,84 @@
 
-import React from 'react';
-import { BiChip } from "react-icons/bi";
-import { BiLayer } from "react-icons/bi";
-import { BiLogoCodepen } from "react-icons/bi";
-import { BiLogoGit } from "react-icons/bi";
-import { BiLogoFirefox } from "react-icons/bi";
-import { BiLogoSpringBoot } from "react-icons/bi";
-import { HiAcademicCap } from "react-icons/hi2";
-import { HiBoltSlash } from "react-icons/hi2";
-import { HiCurrencyBangladeshi } from "react-icons/hi2";
-import { MdOutlineCastForEducation } from "react-icons/md";
-import { BsBrowserChrome } from "react-icons/bs";
-import { RiMoneyDollarCircleFill } from "react-icons/ri";
-import { LiaCertificateSolid } from "react-icons/lia";
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import styles from './LeftNav.module.css';
-
-
-
-
-
-
 import { BiBasketball } from "react-icons/bi";
-
+import { NavsElement } from './NavsElement';
+import NavElement from './NavElement';
+import { getAdminLeftMenuElements } from '../common/Actions';
+import { MenuWithModels } from '@/app/admin/setting/left-nav/_utils/MenuWithModels';
 
 
 const LeftNav = () => {
    const imagePath = '/images/navbg.webp';
    const imagePath2 = '/images/manager2.png';
+   const [visibleContent, setVisibleContent] = useState<boolean>(false);
+   const [navElement, setNavElement] = useState<MenuWithModels[]>([]);
+   const [loading, setLoading] = useState<boolean>(false);
+   const [error, setError] = useState<string>('');
+   const getElements = async () =>{
+    try {
+        setLoading(true);
+        const elements = await getAdminLeftMenuElements();
+        setNavElement(elements);
+        setLoading(false);
+        setError('');
+    } catch (error:any) {
+        setLoading(false);
+        setError(error.message);
+    }
+}
+
+useEffect(() => {
+    getElements();
+}, []);
+
+//    const [navElement, setNavElement] = useState<NavsElement>(
+//     {
+//       id: '1',
+//       title: 'Service Manage',
+//       icon: '/images/svg/20.svg',
+//       nav: [
+//         {
+//           id: '1',
+//           title: 'Manage',
+//           link: '/admin/service' 
+//         },
+//         {
+//             id: '2',
+//             title: 'Create',
+//             link: '/admin/service/create' 
+//         },
+//         {
+//             id: '3',
+//             title: 'Display',
+//             link: '/admin/service/display' 
+//         },
+//         {
+//               id: '4',
+//               title: 'Edit',
+//               link: '/admin/service/edit' 
+//         },
+//         {
+//             id: '5',
+//             title: 'Deleye',
+//             link: '/admin/service/delete' 
+//         },
+
+//       ]
+//     }
+//   );
+  
+const [activeLink, setActiveLink] = useState<string | null>(null); 
+
+   const handleClick = (e:any) => {
+    const nearestContent = e.currentTarget.closest('li').querySelector('.side-sub');
+
+    if (nearestContent) {
+      setVisibleContent(prevContent => prevContent === nearestContent ? false : nearestContent);
+    }}
+     const handleLinkClick = (link: string) => {
+    setActiveLink(link);
+  };
   return (
     <div className="relative">
 <div id="adminLeft" className="fixed top-14 z-50  h-full left-0  sm:w-[240px] " style={{transition: 'width 0.5s ease-in-out' }}>
@@ -56,12 +107,20 @@ const LeftNav = () => {
             <div className="pl-1">
                 <span className="text-md text-gray-300 font-normal capitalize">Services :</span>
             </div>
+            {navElement && 
+              navElement.map(element => 
+                <NavElement element={element}  />
+              )
+            }
+            
             <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
-                 <Link href="/admin/service" className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded" >
+                 <div  
+                 onClick={handleClick}
+                  className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded" >
                     <span className=" bg-[#206681] border border-[#878787] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
                     <BiBasketball className="text-xl text-white" />
                     </span>
-                        Mange Services
+                        Settings
                         <div className="ml-auto">
                            <svg className="mr-2 fill-white sv-plus" width="13px" height="13px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
                                 <title>plus</title>
@@ -72,21 +131,58 @@ const LeftNav = () => {
                             </svg>
                         </div>
 
-                </Link>
-                <ul className="side-sub font-normal text-[.9rem]  pt-1 ml-[1.8rem] hidden border-l border-gray-400 mb-2">
-                    <li className="pl-6 py-[3px] relative after:content-[''] after:absolute after:h-px after:w-5 after:bg-gray-400 after:left-0 after:top-4">
-                        <a href="/admin/university-manage" className="pl-3 relative after:content-[''] after:absolute after:h-1.5 after:w-1.5 after:bg-gray-400 after:left-[-2px] hover:text-orange-400 after:top-[9px] after:rounded">Manage  </a>
-                    </li>
-                    <li className="pl-6 py-[3px] relative after:content-[''] after:absolute after:h-px after:w-5 after:bg-gray-400 after:left-0 after:top-4">
-                        <a href="/admin/university-create" className="pl-3 relative after:content-[''] after:absolute after:h-1.5 after:w-1.5 after:bg-gray-400 after:left-[-2px] hover:text-orange-400 after:top-[9px] after:rounded">Create New </a>
-                    </li>
-                    <li className="pl-6  py-[3px] relative after:content-[''] after:absolute after:h-px after:w-5 after:bg-gray-400 after:left-0 after:top-4">
-                        <a href="" className="pl-3 relative after:content-[''] after:absolute after:h-1.5 after:w-1.5 after:bg-gray-400 after:left-[-2px] hover:text-orange-400 after:top-[9px] after:rounded">Rankings </a>
-                    </li>
+                </div>
+                <ul className={`side-sub mb-3 font-normal flex flex-col text-[.9rem] pt-1 ml-[1.5rem] ${visibleContent ? '' : 'hidden'} border-l border-gray-400 mb-2`}>
+                     <li>
+                        <Link href="/admin/setting/left-nav">
+                            <div
+                            onClick={() => handleLinkClick('/admin/setting/left-nav')}
+                            className={`pl-6 py-[2px] relative after:content-[''] after:absolute after:h-px after:w-5 after:border-b after:border-dotted after:border-b-gray-400 after:bg-transparent  after:left-0 after:top-[14px] ${activeLink === '/admin/setting/left-nav' ? 'text-orange-400' : ''}`}
+                            >
+                            <span className="pl-3 relative after:content-[''] after:absolute after:h-1 after:w-1 after:bg-gray-400 after:left-[-2px] hover:text-orange-400 after:top-[7px] after:rounded">Menu Manage</span>
+                            </div>
+                        </Link>
+                        </li>
+                        <li>
+                        <Link href="/admin/service/create">
+                            <div
+                            onClick={() => handleLinkClick('/admin/service/create')}
+                            className={`pl-6 py-[2px] relative after:content-[''] after:absolute after:h-px after:w-5 after:border-b after:border-dotted after:border-b-gray-400 after:bg-transparent after:left-0 after:top-[14px] ${activeLink === '/admin/service/create' ? 'text-orange-400' : ''}`}
+                            >
+                            <span className="pl-3 relative after:content-[''] after:absolute after:h-1 after:w-1 after:bg-gray-400 after:left-[-2px] hover:text-orange-400 after:top-[7px] after:rounded">Create New</span>
+                            </div>
+                        </Link>
+                        </li>
+                         <li>
+                        <Link href="/admin/service/display">
+                            <div
+                            onClick={() => handleLinkClick('/admin/service/display')}
+                            className={`pl-6 py-[2px] relative after:content-[''] after:absolute after:h-px after:w-5 after:border-b after:border-dotted after:border-b-gray-400 after:bg-transparent after:left-0 after:top-[14px] ${activeLink === '/admin/service/display' ? 'text-orange-400' : ''}`}
+                            >
+                            <span className="pl-3 relative after:content-[''] after:absolute after:h-1 after:w-1 after:bg-gray-400 after:left-[-2px] hover:text-orange-400 after:top-[7px] after:rounded">Display</span>
+                            </div>
+                        </Link>
+                        <Link href="/admin/service/edit">
+                            <div
+                            onClick={() => handleLinkClick('/admin/service/edit')}
+                            className={`pl-6 py-[2px] relative after:content-[''] after:absolute after:h-px after:w-5 after:border-b after:border-dotted after:border-b-gray-400 after:bg-transparent  after:left-0 after:top-[14px] ${activeLink === '/admin/service/edit' ? 'text-orange-400' : ''}`}
+                            >
+                            <span className="pl-3 relative after:content-[''] after:absolute after:h-1 after:w-1 after:bg-gray-400 after:left-[-2px] hover:text-orange-400 after:top-[7px] after:rounded">Edit</span>
+                            </div>
+                        </Link>
+                         <Link href="/admin/service/delete">
+                            <div
+                            onClick={() => handleLinkClick('/admin/service/delete')}
+                            className={`pl-6 py-[2px] relative after:content-[''] after:absolute after:h-px after:w-5 after:border-b after:border-dotted after:border-b-gray-400 after:bg-transparent  after:left-0 after:top-[14px] ${activeLink === '/admin/service/delete' ? 'text-orange-400' : ''}`}
+                            >
+                            <span className="pl-3 relative after:content-[''] after:absolute after:h-1 after:w-1 after:bg-gray-400 after:left-[-2px] hover:text-orange-400 after:top-[7px] after:rounded">Delete</span>
+                            </div>
+                        </Link>
+                        </li>
                 </ul>
             </li>
 
-            <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
+            {/* <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <Link href="/admin/blogs" className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
                 <span className=" bg-[#206681] border border-[#878787] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
                     <BiChip className="text-xl text-white" />
@@ -554,7 +650,7 @@ const LeftNav = () => {
                         <a href="/admin/exam/display" className="pl-2 relative after:content-[''] after:absolute after:h-1.5 after:w-1.5 after:bg-[#355476] after:left-[-2px] after:top-1.7 after:rounded">Display All </a>
                     </li>
                 </ul>
-            </li>
+            </li> */}
 
 
 

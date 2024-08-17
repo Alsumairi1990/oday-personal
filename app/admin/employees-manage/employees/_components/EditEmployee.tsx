@@ -1,12 +1,7 @@
 'use client'
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import Link from 'next/link'
-import { MdEditSquare } from "react-icons/md";
 import { EmployeeWithModels } from '../_utils/EmployeeWithModels';
 import { getUsersWithModels } from '../_actions/Actions';
-import { Span } from 'next/dist/trace';
-import Image from 'next/image';
-
 import { AiFillEdit } from 'react-icons/ai';
 import { editWorkImage } from '@/app/admin/works/_actions/Actions';
 import EditBasicInfo from './EditBasicInfo';
@@ -14,6 +9,8 @@ import EditContactInfo from './EditContactInfo';
 import EditEmploymentInfo from './EditEmploymentInfo';
 import EditEducationInfo from './EditEducationInfo';
 import EditSocialsInfo from './EditSocialsInfo';
+import Image from 'next/image';
+
 
 interface FormEditProps {
     id : string;
@@ -21,9 +18,7 @@ interface FormEditProps {
 const EmployeeManage = ({ id}: FormEditProps) => {
    const imagePath2 = 'https://angular-material.fusetheme.com/images/avatars/male-04.jpg';
    const imgBg = 'https://angular-material.fusetheme.com/images/pages/profile/cover.jpg';
-   const postImag = 'https://tixia.dexignzone.com/xhtml/images/profile/8.jpg';
-   const postImag1 = 'https://tixia.dexignzone.com/xhtml/images/profile/9.jpg';
-   const postHight = 'https://tixia.dexignzone.com/xhtml/images/profile/1.jpg';
+  
    const [employee, setEmployee] = useState<EmployeeWithModels>(); 
    const [loading, setLoading] = useState<boolean>(false); 
    const [error, setError] = useState<string>(); 

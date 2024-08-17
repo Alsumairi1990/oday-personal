@@ -1,32 +1,12 @@
 "use client";
 import React, { ChangeEvent, useEffect } from 'react';
 import { useState } from 'react';
-import { FaUserTie } from "react-icons/fa";
-import { MdMarkEmailUnread } from "react-icons/md";
-import { RiLockPasswordFill } from "react-icons/ri";
-import { FaEye } from "react-icons/fa";
-import { FaRegEyeSlash } from "react-icons/fa6";
-import { FaPhoneAlt } from "react-icons/fa";
-import validator from 'validator';
-import { GrCheckmark } from "react-icons/gr";
-
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { error } from 'console';
-import { passwordStrength } from 'check-password-strength';
-import { MdDone } from "react-icons/md";
 import { LuAlertOctagon } from "react-icons/lu";
-
-
-import { registerUser } from '@/utils/authActions';
-import { toast } from 'react-toastify';
-import { Category, Phase, Service } from '@prisma/client';
 import Image from 'next/image';
 import { MdAssignmentAdd } from "react-icons/md";
-import { IoMdCloseCircle } from "react-icons/io";
-
-import { createServicePhase, removeServicePhase, removeServiceWork } from '@/app/admin/common/_actions/Actions';
 import { MdKeyboardDoubleArrowDown } from "react-icons/md";
 import { PriceSchema } from '../utils/PriceSchema';
 import { addServicePrice } from '../_serviceActions/ServiceActions';
@@ -126,7 +106,7 @@ const AddPrice = ({serviceId,locationId,closeModel}:Props) => {
         <LuAlertOctagon className='text-gray-500 mr-2 text-xl' />
         <span className="text-red-400 text-md">{error}</span>
         </div>
-      }
+        }
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  p-5 rounded-md">
         <div className="flex flex-wrap justify-between">
           <div className=" flex flex-100  flex-col z-0 w-full mb-5 group">

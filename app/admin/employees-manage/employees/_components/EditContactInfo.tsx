@@ -1,26 +1,17 @@
 "use client";
-import React, { ChangeEvent, useEffect } from 'react';
-import { Tool } from '@prisma/client';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'react-toastify';
-import { IoMdCloseCircle } from "react-icons/io";
-import { BiSolidCommentEdit } from "react-icons/bi";
-import Image from 'next/image';
 import { EmployeeWithModels } from '../_utils/EmployeeWithModels';
-import { BasicInfoSchema } from '../_utils/BasicInfoScheam';
 import { EditProfilBasicInfo, getUsersWithModels } from '../_actions/Actions';
 import { LuAlertOctagon } from 'react-icons/lu';
 import { ContactInfoSchema } from '../_utils/ContactInfoSchema';
-
-
 interface FormEditProps {
     employee: EmployeeWithModels;
   
 }
-
 const EditContactInfo = ({ employee}: FormEditProps) => {
   const [employeeData, setEmployeeData] = useState<EmployeeWithModels>(); 
   const [loading, setLoading] = useState<boolean>(false); 
@@ -96,7 +87,7 @@ const cols = 5;
 
   return (
     <div className="flex h-fit relative flex-col gap-y-6 w-full ">
-    {loading && <div className=' w-full h-full mt-6 z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
+    {loading && <div className=' w-full h-full mt-3 z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
     <div className="bg-white flex flex-col  p-6 border border-gray-300 shadow-md rounded-lg "> 
         <span className="text-xl  font-semibold text-gray-600">Contact Info </span>
          <div className="mt-3 text-md text-gray-700">

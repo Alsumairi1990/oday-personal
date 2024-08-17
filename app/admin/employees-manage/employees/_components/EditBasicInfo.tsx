@@ -1,14 +1,9 @@
 "use client";
-import React, { ChangeEvent, useEffect } from 'react';
-import { Tool } from '@prisma/client';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { toast } from 'react-toastify';
-import { IoMdCloseCircle } from "react-icons/io";
-import { BiSolidCommentEdit } from "react-icons/bi";
-import Image from 'next/image';
 import { EmployeeWithModels } from '../_utils/EmployeeWithModels';
 import { BasicInfoSchema } from '../_utils/BasicInfoScheam';
 import { EditProfilBasicInfo, getUsersWithModels } from '../_actions/Actions';
@@ -93,19 +88,6 @@ const cols = 5;
     }
   }, []);
 
-//   useEffect(() => {
-//     if (tool) {
-//       reset({
-//         description: tool.description ?? '',
-//         name: tool.name ?? '',
-//         image: undefined,
-//         icon: undefined,
-//       });
-//     }
-//     if(tool?.image){setImageSrc(tool?.image);}
-//     if(tool?.icon){setIconSrc(tool?.icon);}
-    
-//   }, [tool, reset]);
 
   return (
    <div className="flex items-center relative justify-center w-full ">

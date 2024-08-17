@@ -132,7 +132,7 @@ const unSelect = (value:string) => {
 
   return (
    <div className="flex items-center relative justify-center w-full ">
-            {loading && <div className=' w-full h-full mt-6 z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
+            {loading && <div className=' w-full h-full mt-3 z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
            {employeeData && <form onSubmit={handleSubmit(saveUser)} className=' bg-white border border-gray-300 rounded-md shadow-xl w-full' >
                 <div className="flex w-full pb-2 pt-2  pl-2 border-b border-b-gray-200">
                  <span className="text-lg  font-semibold text-gray-600">Education Information </span> 

@@ -1,9 +1,7 @@
 'use client'
 import React, { ChangeEvent, useEffect, useState } from 'react';
-import Link from 'next/link'
 import { EmployeeWithModels } from '../_utils/EmployeeWithModels';
 import { getUsersWithModels } from '../_actions/Actions';
-import { Span } from 'next/dist/trace';
 import Image from 'next/image';
 import { AiFillEdit } from 'react-icons/ai';
 import { editWorkImage } from '@/app/admin/works/_actions/Actions';
@@ -76,7 +74,7 @@ getEmployee()
   return (
     <div className="py-2">
     <div className="bg-white flex flex-col shadow" >
-     <img src={imgBg} alt="Cover image" className="h-40 object-cover lg:h-80" />
+     <img src={imgBg} alt="Cover image" className="h-52 object-cover sm:max-h-[16rem]" />
         {!imageEdit ? (<div className="absolute flex space-x-2 top-3 right-3">         
             <button
                className="ml-auto flex items-center px-1.5 gap-x-1 py-0.5 rounded-md border border-gray-500 text-white bg-slate-800"

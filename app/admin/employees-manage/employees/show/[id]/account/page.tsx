@@ -36,18 +36,14 @@ const AccountPage = ({ params }: Props) => {
             setError(error.message);
         }
     };
-
     useEffect(() => {
         getEmployee();
     }, [params.id]);
 
     return (
         <div className="py-2">
-           {params.id}
                 {employee && <ProfileAccount employee={employee} />} 
-            
         </div>
     );
 };
-
 export default AccountPage;

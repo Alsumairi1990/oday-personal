@@ -1,9 +1,6 @@
 "use client";
-import React, { ChangeEvent, useEffect } from 'react';
-import { Tool } from '@prisma/client';
+import React from 'react';
 import { useState } from 'react';
-
-
 
 interface FormEditProps {
     menuElements: string[],
@@ -15,19 +12,13 @@ interface FormEditProps {
 const MenuPanel = ({ menuElements,setSelect,unSelect}: FormEditProps) => {
   const [loading, setLoading] = useState<boolean>(false); 
   const [error, setError] = useState<string>(''); 
-  const [dateOfBirth, setDateOfBirth] = useState('');
-
   const [selectedMenuElements, setSelectedMenuElements] = useState<string[]>([]);
-
   const addSelectedService = (name: string) => {
     setSelect(name);
 }
- 
   const unSelectedService = (name: string) => {
     unSelect(name);
 }
-
-
   return (
     <div className="p-3 absolute top-2 w-full z-50 border mb-5 shadow-md bg-white border-gray-200 animate-modalEnter rounded-md">
 
