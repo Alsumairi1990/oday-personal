@@ -16,11 +16,13 @@ import BarCgart1 from '../../common/utils/BarChart1';
 import BarChart1 from '../../common/utils/BarChart1';
 import BarChart2 from '../../common/utils/BarChart2';
 import CardPie from '../../common/utils/CardPie';
+import CardElement2 from '../../common/utils/CardElement2';
+import ComposedChart1 from '../../common/utils/ComposedChart1';
 
 
 // import ServicesPanel from './ServicePanel';
 
-const OrderManage = () => {
+const ProjectManage = () => {
    const imagePath2 = '/images/basic11.svg';
    const imagePath3 = '/images/basic12.svg';
    const imagePath4 = '/images/basic13.svg';
@@ -32,10 +34,10 @@ const OrderManage = () => {
     <>
     <div className="mb-3">
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 ">
-        <CardElement1 title="Success" subTitle='8987' icon={imagePath2} btnBgColor='bg-green-200' />
-        <CardElement1 title="Appending" subTitle='998' icon={imagePath3} btnBgColor='bg-indigo-200'/>
-        <CardElement1 title="Unsucceded" subTitle='23' icon={imagePath4} btnBgColor='bg-gray-200'/>
-        <CardElement1 title="Approved" subTitle='198' icon={imagePath5}  btnBgColor='bg-sky-200' />
+        <CardElement2 title="Success" subTitle='8987' icon={imagePath2} btnBgColor='bg-green-200' />
+        <CardElement2 title="Appending" subTitle='998' icon={imagePath3} btnBgColor='bg-indigo-200'/>
+        <CardElement2 title="Unsucceded" subTitle='23' icon={imagePath4} btnBgColor='bg-gray-200'/>
+        <CardElement2 title="Approved" subTitle='198' icon={imagePath5}  btnBgColor='bg-sky-200' />
 
     </div>
     </div>
@@ -44,7 +46,10 @@ const OrderManage = () => {
             <div className="py-2 mb-10 border-b ">
                 <h1 className="text-xl px-3 text-gray-600 font-medium">Order Last week data</h1>
             </div>
-            <LineCh   />
+            <div className="h-80">
+            <ComposedChart1   />
+            </div>
+            
         </div>
         <div className="bg-white rounded-md shadow-md border border-gray-200">
            <div className="px-3 py-2 my-2 border-b flex">
@@ -272,4 +277,4 @@ const OrderManage = () => {
 };
 
 
-export default OrderManage;
+export default ProjectManage;
