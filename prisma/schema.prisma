@@ -222,8 +222,8 @@ model Phase {
   userId      String // References one specific user (modified)
   user        User     @relation(fields: [userId], references: [id]) // Relation to User
 
-  projectId Int
-  project   Project  @relation(fields: [projectId], references: [id])
+  projectId String?
+  project   Project?  @relation(fields: [projectId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -579,13 +579,13 @@ model Task {
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
   completedAt    DateTime?
-  projectId      Int
+  projectId      String
   project        Project   @relation(fields: [projectId], references: [id],onDelete: Cascade)
   users          User[]
 }
 
 model Project {
-  id          Int       @id @default(autoincrement())
+  id          String           @id @default(cuid())
   name        String
   description String?
   status      String // e.g., 'planned', 'in progress', 'completed', etc.
@@ -605,12 +605,12 @@ model Project {
   teamId     Int
   team       Team?      @relation(fields: [teamId], references: [id],onDelete: Cascade)
   phases     Phase[]
-  clientId   Int? // Reference to a Client model
+  clientId   String? // Reference to a Client model
   client     Client?    @relation(fields: [clientId], references: [id],onDelete: Cascade)
 }
 
 model Client {
-  id             Int     @id @default(autoincrement())
+  id             String           @id @default(cuid())
   name           String
   contactPerson  String
   email          String  @unique
@@ -634,7 +634,7 @@ model Client {
 }
 
 model Invoice {
-  id            Int       @id @default(autoincrement())
+  id            String           @id @default(cuid())
   invoiceNumber String    @unique
   issueDate     DateTime  @default(now())
   dueDate       DateTime?
@@ -643,9 +643,9 @@ model Invoice {
   initialPayment   Float?    // 20% of totalPrice
   paymentStatus    String  @default("pedning")   // e.g., 'initial payment pending', 'initial payment received', 'fully paid'
 
-  clientId      Int
+  clientId      String
   client        Client  @relation(fields: [clientId], references: [id],onDelete: Cascade)
-  clientName    String
+  clientName    String?
   clientAddress String?
   clientContact String?
   clientEmail   String?
@@ -666,7 +666,7 @@ model Invoice {
   totalAmount    Float
   currency       String
 
-  paymentTerms  String
+  paymentTerms  String?
   paidAt        DateTime?
   paymentMethod String?
 
@@ -688,13 +688,13 @@ model Invoice {
 }
 
 model Order {
-  id               Int       @id @default(autoincrement())
+  id               String           @id @default(cuid())
   orderNumber      String    @unique
   orderDate        DateTime  @default(now())
   status           String    // e.g., 'pending', 'in progress', 'completed', 'cancelled'
   description      String?
   
-  clientId         Int?
+  clientId         String?
   client           Client?    @relation(fields: [clientId], references: [id], onDelete: Cascade)
    clientName    String
   clientAddress String?
@@ -716,8 +716,7 @@ model Order {
   totalAmount      Float
   currency         String
   
-  paymentTerms     String
-  paymentStatus    String  // e.g., 'paid', 'pending', 'overdue'
+  paymentTerms     String?
   paidAt           DateTime?
   paymentMethod    String?
   
@@ -733,5 +732,16 @@ model Order {
   
   projectManagerId String?
   projectManager   User?    @relation(fields: [projectManagerId], references: [id],onDelete: Cascade)
+
+  BillingInfo BillingInfo[]
 }
 
+model BillingInfo {
+  id        String           @id @default(cuid())
+  address   String
+  city      String
+  country   String
+  postalCode String
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id])
+}

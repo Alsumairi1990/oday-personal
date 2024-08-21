@@ -14,7 +14,7 @@ const ProcessPhase = ({ phase,index } : PhaseIntProps ) => {
   
   return (
    
-        <div className="rounded-md flex flex-col max-sm:mb-8 shadow-md  items-center relative sm:flex-18 border border-gray-300 dark:border-gray-600 dark:bg-black-150">
+        <div className="rounded-md flex flex-col max-sm:mb-8 shadow-md  items-center relative sm:flex-23 sm:justify-between border border-gray-300 dark:border-gray-600 dark:bg-black-150">
           {!isLastIndex && (
             <span className="flex absolute -bottom-6 sm:top-4 sm:-right-6 "><RiArrowRightFill className='text-xl max-sm:rotate-90 text-blue-500' /></span>
           )}

@@ -161,46 +161,46 @@ export const phases:PhaseInt[] = [
         }
        ],
      },
-     {
-       id: "5",
-       name: "Grow",
-       desc: "Awarded as the Best Website Development Company by GESIA category region",
-       image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1704443071_itdp-logo.jpg",
-       steps: [  
-         {
-           id: "1",
-           name: "White Label SEO Services ",
-           desc: "Awarded as the Best Website Development Company by GESIA category region",
-           image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
-         },
-         {
-           id: "2",
-           name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
-           desc: "Awarded as the Best Website Development Company by GESIA category region",
-           image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
-         },
+    //  {
+    //    id: "5",
+    //    name: "Grow",
+    //    desc: "Awarded as the Best Website Development Company by GESIA category region",
+    //    image: "https://d3q8mqotzsvo6s.cloudfront.net/k_portfolio/logo/1704443071_itdp-logo.jpg",
+    //    steps: [  
+    //      {
+    //        id: "1",
+    //        name: "White Label SEO Services ",
+    //        desc: "Awarded as the Best Website Development Company by GESIA category region",
+    //        image: "https://dcstatic.com/images/icons/design-categories/design-categories-billboard-design-e07f14f1a9.svg",
+    //      },
+    //      {
+    //        id: "2",
+    //        name: "UI / UX Design",  // Corrected typo "Dign" to "Design"
+    //        desc: "Awarded as the Best Website Development Company by GESIA category region",
+    //        image: "https://dcstatic.com/images/icons/design-categories/design-categories-advertisement-design-3bf09fad61.svg",
+    //      },
          
-         {
-           id: "2",
-           name: "Content Marketing",  // Corrected typo "Dign" to "Design"
-           desc: "Awarded as the Best Website Development Company by GESIA category region",
-           image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
-         },
+    //      {
+    //        id: "2",
+    //        name: "Content Marketing",  // Corrected typo "Dign" to "Design"
+    //        desc: "Awarded as the Best Website Development Company by GESIA category region",
+    //        image: "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg",
+    //      },
          
-         {
-           id: "2",
-           name: "Social Media Management",  // Corrected typo "Dign" to "Design"
-           desc: "Awarded as the Best Website Development Company by GESIA category region",
-           image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
-         },
-         {
-          id: "2",
-          name: "Video Marketing",  // Corrected typo "Dign" to "Design"
-          desc: "Awarded as the Best Website Development Company by GESIA category region",
-          image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
-        }
-       ],
-     },
+    //      {
+    //        id: "2",
+    //        name: "Social Media Management",  // Corrected typo "Dign" to "Design"
+    //        desc: "Awarded as the Best Website Development Company by GESIA category region",
+    //        image: "https://dcstatic.com/images/icons/design-categories/design-categories-merchandise-design-93020934ee.svg",
+    //      },
+    //      {
+    //       id: "2",
+    //       name: "Video Marketing",  // Corrected typo "Dign" to "Design"
+    //       desc: "Awarded as the Best Website Development Company by GESIA category region",
+    //       image: "https://dcstatic.com/images/icons/design-categories/design-categories-t-shirt-design-0337015c20.svg",
+    //     }
+    //    ],
+    //  },
 
      
   ];

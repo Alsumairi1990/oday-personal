@@ -109,6 +109,21 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        '25/75': '25% 75%',
+        '20/80' : '20% 80%',
+        '80/20' : '80% 20%',
+        '60/40' : '60% 40%',
+        '75/25' : '75% 25%',
+        '22/56/22' : 'minmax(auto, 22%) minmax(auto, 56%) minmax(auto, 22%)',
+        '25/60/15' : 'minmax(auto, 25%) minmax(auto, 60%) minmax(auto, 15%)',
+        '25/25/40/10' : 'minmax(auto, 25%) minmax(auto, 25%) minmax(auto, 40%) minmax(auto, 10%)',
+      },
+        gridTemplateRows: {
+        // Simple 8 row grid
+        'auto-fill': 'repeat(auto-fill, minmax(120px, 1fr))',
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",

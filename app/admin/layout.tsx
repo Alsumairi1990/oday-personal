@@ -1,13 +1,5 @@
-
-
-
-
-
 'use client'
-
-
 import React, { useState , useEffect} from 'react';
-
 import LeftNav from "../_components/admin/nav/LeftNav"
 import TopNav from "../_components/admin/nav/TopNav"
 import Footerk from "../_components/Footer"
@@ -49,7 +41,7 @@ export default function signupLayout({
     return (
 
 
-            <div className="h-full bg-gray-100">
+            <div className=" bg-gray-100">
 
                 <TopNav handleClick={handleChildClick} />
 

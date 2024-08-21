@@ -6,6 +6,7 @@ import { NavsElement } from './NavsElement';
 import NavElement from './NavElement';
 import { getAdminLeftMenuElements } from '../common/Actions';
 import { MenuWithModels } from '@/app/admin/setting/left-nav/_utils/MenuWithModels';
+import { IoMdSettings } from 'react-icons/io';
 
 
 const LeftNav = () => {
@@ -118,7 +119,7 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
                  onClick={handleClick}
                   className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded" >
                     <span className=" bg-[#206681] border border-[#878787] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <BiBasketball className="text-xl text-white" />
+                    <IoMdSettings className="text-xl text-gray-50" />
                     </span>
                         Settings
                         <div className="ml-auto">

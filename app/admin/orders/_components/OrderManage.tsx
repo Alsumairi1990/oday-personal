@@ -1,20 +1,139 @@
 'use client'
 import React from 'react';
 import Link from 'next/link'
-import { payAmount } from '@/app/admin/common/_actions/Payments';
+import CardElement1 from '../../common/utils/CardElement1';
+import LineCh from '../../common/utils/LineCh';
+import { CiLogout } from "react-icons/ci";
+import LatestOrders from '../../common/utils/LatestOrders';
+import { FiPlus } from 'react-icons/fi';
+import SalesOverview from '../../common/utils/SalesOverview';
+import CardResult1 from '../../common/utils/CardResult1';
+import CardResult2 from '../../common/utils/CardResult2';
+import SelseCard from '../../common/utils/SalseCard';
+import CardCompare1 from '../../common/utils/CardCompare1';
+import CardResult3 from '../../common/utils/CardResult3';
+import BarCgart1 from '../../common/utils/BarChart1';
+import BarChart1 from '../../common/utils/BarChart1';
+import BarChart2 from '../../common/utils/BarChart2';
 
 
 // import ServicesPanel from './ServicePanel';
 
-const TeamManage = () => {
-   const imagePath2 = '/images/buttonsBg.svg';
-
-   const checkOut = async ()=>{
-    await payAmount(57);
-   }
+const OrderManage = () => {
+   const imagePath2 = '/images/basic11.svg';
+   const imagePath3 = '/images/basic12.svg';
+   const imagePath4 = '/images/basic13.svg';
+   const imagePath5 = '/images/basic14.svg';
+   const imagePath6 = '/images/basic10.svg';
+   const imagePath7 = '/images/CardResult.png';
 
   return (
-    <div className='w-11.8/12 mx-auto p-2'>
+    <>
+    <div className="mb-3">
+    <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 ">
+        <CardElement1 title="Success" subTitle='8987' icon={imagePath2} btnBgColor='bg-green-200' />
+        <CardElement1 title="Appending" subTitle='998' icon={imagePath3} btnBgColor='bg-indigo-200'/>
+        <CardElement1 title="Unsucceded" subTitle='23' icon={imagePath4} btnBgColor='bg-gray-200'/>
+        <CardElement1 title="Approved" subTitle='198' icon={imagePath5}  btnBgColor='bg-sky-200' />
+
+    </div>
+    </div>
+    <div className="py-8 grid grid-cols-3 gap-4">
+        <div className="p-1 rounded-md shadow-md border border-gray-200 col-span-2 bg-white pt-3  ">
+            <div className="py-2 mb-10 border-b ">
+                <h1 className="text-xl px-3 text-gray-600 font-medium">Order Last week data</h1>
+            </div>
+            <LineCh   />
+        </div>
+        <div className="bg-white rounded-md shadow-md border border-gray-200">
+           <div className="px-3 py-2 my-2 border-b flex">
+            <span className="text-gray-600 text-base  font-semibold capitalize">
+                Latest Orders |
+            </span>
+    
+
+
+           
+            <span className="text-green-500 text-sm ml-2">This week</span>
+            <span className="ml-auto flex items-center justify-center rounded-full h-6 w-6 border-2 border-white bg-[#666cff]"  style={{boxShadow: '0 0 3px rgba(38, 43, 67, .8)'}}>
+            <FiPlus  className="text-white text-md rotate-2"  />
+            </span>
+            
+           </div>
+            <LatestOrders order={{name:'order-1',icon:imagePath2,email:'email-2@gmail.com',status:'success'}} />
+            <LatestOrders order={{name:'order-1',icon:imagePath3,email:'email-2@gmail.com',status:'pending'}} />
+            <LatestOrders order={{name:'order-1',icon:imagePath4,email:'email-2@gmail.com',status:'canceled'}} />
+            <LatestOrders order={{name:'order-1',icon:imagePath5,email:'email-2@gmail.com',status:'paid'}} />
+            <LatestOrders order={{name:'order-1',icon:imagePath6,email:'email-2@gmail.com',status:'success'}} />
+
+        </div>
+
+    </div>
+
+    <div className="grid my-8 sm:grid-cols-4 gap-6">
+        <div className="col-span-2 bg-white p-4 shadow-md border border-gray-200 rounded-md">
+            <SalesOverview   />
+        </div>
+        <div className=" bg-white p-4 shadow-md border border-gray-200 rounded-md">
+            <CardResult1   />
+        </div>
+        <div className=" bg-white p-4 shadow-md border border-gray-200 rounded-md">
+            <CardResult2   />
+        </div>
+
+    </div>
+    <div className="grid my-8 sm:grid-cols-4 gap-6">
+        <div  className="col-span-2 rounded-md">
+         <SelseCard  />
+        </div>
+        <div className=" bg-white py-4 px-3 shadow-md border border-gray-200 rounded-md">
+           <CardCompare1 />
+        </div> 
+        <div className=" bg-white py-4 px-3 shadow-md border border-gray-200 rounded-md">
+           <CardResult3 />
+        </div>   
+        
+    </div>
+    <div className="grid my-8 sm:grid-cols-3 gap-6">
+        <div className="p-2 pb-0 col-span-2 bg-white py-4 px-3 shadow-md border border-gray-200 rounded-md">
+             <div className="p-2 mb-4 border-b flex  border-b-gray-100">
+                <h1 className="text-lg text-gray-700 capitalize">
+                    Profile Details
+                </h1>
+                <span className="text-gray-800 text-sm rounded bg-gray-100 px-2 py-1.5 ml-auto">
+                    Monthly
+                </span>
+            </div>
+            <div className="h-60">
+            <BarChart2  />
+            </div>
+            <div className="grid grid-cols-4 border-t border-t-gray-300">
+                <div className="p-1 pb-3 pt-3 flex flex-col items-center border-r border-r-gray-300">
+                    <span className="text-gray-800 font-medium mb-1">123</span>
+                    <span className="text-gray-600 text-sm ">Project fininshed</span>
+                </div>
+                <div className="p-1 pb-3 pt-3 flex flex-col items-center border-r border-r-gray-300">
+                    <span className="text-gray-800 font-medium mb-1">76</span>
+                    <span className="text-gray-600 text-sm ">Revenue</span>
+                </div>
+                <div className="p-1 pb-3 pt-3 flex flex-col items-center border-r border-r-gray-300">
+                    <span className="text-gray-800 font-medium mb-1">456</span>
+                    <span className="text-gray-600 text-sm ">Active Projects</span>
+                </div>
+                <div className="p-1 pb-3 pt-3 flex flex-col items-center ">
+                    <span className="text-gray-800 font-medium mb-1">$9,876</span>
+                    <span className="text-gray-600 text-sm ">Totla profit</span>
+                </div>
+            </div>
+           
+        </div>
+        <div className=" bg-white py-4 px-3 shadow-md border border-gray-200 rounded-md">
+           <CardResult3 />
+        </div> 
+       
+    </div>
+{/* 
+    <div className='w-full  mx-auto py-2'>
        <div className="grid grid-cols-2 sm:grid-cols-4 gap-8">
          <div className="bg-pink-800 px-2 py-2 rounded-2xl shadow-xl bg-right bg-no-repeat bg-blend-overlay" style={{ backgroundImage: `url(${imagePath2})`}}>
             <div className="flex border-b mb-2 pt-2 pb-3 border-b-gray-400 ">
@@ -32,7 +151,7 @@ const TeamManage = () => {
                     <p className="text-white font-bold text-base">765</p>
                 </div>
             </div>
-              <Link href="/admin/employees-manage/teams/create" className="flex-70 border bg-pink-900 !border-[#9d3861] w-6/12 mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer">
+              <Link href="/admin/setting/left-nav/create" className="flex-70 border bg-pink-900 !border-[#9d3861] w-6/12 mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer">
                 <div className="flex items-center  rounded-2xl py-[2px] px-[5px] " >
                     <span className=" text-gray-50 font-semibold text-md capitalize pr-2.5 pl-1" >New</span>
                     <div className="px-1 flex py-0.5 " >
@@ -133,32 +252,23 @@ const TeamManage = () => {
                         </div>
                     </div>
                     <div  className="w-6/12 bg-green-800 border !border-[#41a165] mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer">
-                        <Link href="/admin/employees-manage/teams/delete" className="flex items-center rounded-2xl py-[2px]  " >
+                        <Link href="/admin/setting/left-nav/delete" className="flex items-center rounded-2xl py-[2px]  " >
                             <span className=" text-gray-50 font-semibold capitalize pr-2.5 pl-1" >Delete </span>
                             <div className="px-1 py-0.5 flex" >
                                 <span className=" bg-white h-6 w-6 p-1 rounded-full flex items-center justify-center" data-v-a1c57ce8="">
-                                    {/* <!-- <svg className="h-full w-full fill-slate-700 " viewBox="0 0 1024 1024"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M512 897.6c-108 0-209.6-42.4-285.6-118.4-76-76-118.4-177.6-118.4-285.6 0-108 42.4-209.6 118.4-285.6 76-76 177.6-118.4 285.6-118.4 108 0 209.6 42.4 285.6 118.4 157.6 157.6 157.6 413.6 0 571.2-76 76-177.6 118.4-285.6 118.4z m0-760c-95.2 0-184.8 36.8-252 104-67.2 67.2-104 156.8-104 252s36.8 184.8 104 252c67.2 67.2 156.8 104 252 104 95.2 0 184.8-36.8 252-104 139.2-139.2 139.2-364.8 0-504-67.2-67.2-156.8-104-252-104z" fill="" /><path d="M707.872 329.392L348.096 689.16l-31.68-31.68 359.776-359.768z" fill="" /><path d="M328 340.8l32-31.2 348 348-32 32z" fill="" /></svg> --> */}
                                   <svg className="h-full w-full fill-slate-700 " viewBox="-3.5 0 19 19" xmlns="http://www.w3.org/2000/svg"><path d="M11.383 13.644A1.03 1.03 0 0 1 9.928 15.1L6 11.172 2.072 15.1a1.03 1.03 0 1 1-1.455-1.456l3.928-3.928L.617 5.79a1.03 1.03 0 1 1 1.455-1.456L6 8.261l3.928-3.928a1.03 1.03 0 0 1 1.455 1.456L7.455 9.716z"/></svg>
-                                  {/* <!-- <svg className="h-full w-full fill-slate-700 "  viewBox="-1.7 0 20.4 20.4" xmlns="http://www.w3.org/2000/svg" ><path d="M16.417 10.283A7.917 7.917 0 1 1 8.5 2.366a7.916 7.916 0 0 1 7.917 7.917zm-6.804.01 3.032-3.033a.792.792 0 0 0-1.12-1.12L8.494 9.173 5.46 6.14a.792.792 0 0 0-1.12 1.12l3.034 3.033-3.033 3.033a.792.792 0 0 0 1.12 1.119l3.032-3.033 3.033 3.033a.792.792 0 0 0 1.12-1.12z"/></svg> --> */}
                                 </span>
                             </div>
                         </Link>
                     </div>
                 </div>
-                <div className="p-4">
-                    <button 
-                    onClick={checkOut}
-                    className='px-2 py-1.5 rounded bg-indigo-600 text-white font-medium text-md'
-                    >
-                        Checkout
-
-                    </button>
-                </div>
 
     </div>
-</div>
+</div> */}
+    </>
+    
   )
 };
 
 
-export default TeamManage;
+export default OrderManage;

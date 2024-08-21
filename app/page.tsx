@@ -53,7 +53,7 @@ export default function Home() {
                <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">How it works</h2>
                <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
             </div>
-            <div className="flex flex-wrap gap-6 max-sm:p-4">
+            <div className="flex flex-wrap gap-8 max-sm:p-4 sm:justify-between">
             {phases.map((phase, index:number) => (
                <ProcessPhase key={phase.id} phase={phase} index={index} />
             ))}
