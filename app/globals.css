@@ -144,6 +144,11 @@
   }
 }
 
+.paginationPreviousText,
+.paginationNextText {
+  display: none;
+}
+
 /* HTML: <div class="loader"></div> */
 .loader-2 {
   width: 50px;
