@@ -69,7 +69,6 @@ const getSelected2 = (id:string) => {
         <CardElement2 title="Appending" subTitle='998' icon={imagePath3} btnBgColor='bg-indigo-200'/>
         <CardElement2 title="Unsucceded" subTitle='23' icon={imagePath4} btnBgColor='bg-gray-200'/>
         <CardElement2 title="Approved" subTitle='198' icon={imagePath5}  btnBgColor='bg-sky-200' />
-
     </div>
     </div>
 
@@ -132,23 +131,15 @@ const getSelected2 = (id:string) => {
                         </tr>
                     </thead>
                     <tbody>
-                  
-
-                  
                     <ProjectsTable categories={currentPosts} searchParam={searchTerm} unSelected={unSelected1} getSelected={getSelected2} />
-                   
-                  
-
                     </tbody>
                 </table>
                 {/* <PaginationTable  /> */}
                 <PaginationTable
-                
                     totalPosts={options.length}
                     postsPerPage={postsPerPage}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
-                    
                     />
                 {/* <div className="my-3">
                     <DropDown1  />
