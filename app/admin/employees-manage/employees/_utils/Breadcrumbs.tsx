@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { usePageTitle } from './PageTitleContext';
 
 interface FormEditProps {
-    id : string;
+    id? : string;
   }
 const Breadcrumb = ({ id}: FormEditProps) => {
     const { title, setTitle } = usePageTitle();

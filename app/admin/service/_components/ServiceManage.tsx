@@ -1,10 +1,10 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link'
-import { MdEditSquare } from "react-icons/md";
+import { MdEditSquare, MdOutlineDisplaySettings } from "react-icons/md";
 import CardMainElement1 from '../../common/utils/CardMainElement1';
 import { Service } from '@prisma/client';
-import { getAllServices, getServices } from '../_serviceActions/ServiceActions';
+import { getAllServices, getCategoriesWServices, getServices, getServicesWithAnalytics, getServicesWWorks } from '../_serviceActions/ServiceActions';
 import { ServiceWCategory } from '../utils/ServiceWCategory';
 import { GoPlus } from 'react-icons/go';
 import ProjectsTable from '../../projects/_utils/ProjectsTable';
@@ -16,7 +16,17 @@ import ComposedChart1 from '../../common/utils/ComposedChart1';
 import SalesOverview from '../../common/utils/SalesOverview';
 import CardResult1 from '../../common/utils/CardResult1';
 import CardResult2 from '../../common/utils/CardResult2';
+import { LuAlertOctagon } from "react-icons/lu";
+
 import CardMainElement2 from '../../common/utils/CardMainElement2';
+import { CategoryWithService } from '../utils/CategoryWithService';
+import ServiceCategoryPanel1 from '@/app/utils/ServiceCategoryPanel';
+import NavMngElement1 from '../utils/NavMngElement1';
+import { ServiceWithWorks } from '../utils/ServiceWithWorks';
+import ServiceWorksArea from '../utils/ServicesWorksArea';
+import { ServicesWWorks } from '../utils/ServicesWWorks';
+import { ServiceWithModels } from '../utils/ServiceWithModels';
+import { ServiceAnalticsModel } from '../utils/ServiceAanlyticsModel';
 
 
 // import ServicesPanel from './ServicePanel';
@@ -28,14 +38,33 @@ const LocationManage = () => {
    const imagePath4 = '/images/basic13.svg';
    const imagePath5 = '/images/basic14.svg';
    const imagePath6 = '/images/basic10.svg';
-   const MainCard1 = '/images/svg/s1.svg';
-   const MainCard2 = '/images/svg/23.svg';
+   const MainCard1 = '/images/svg/25.svg';
+   const MainCard2 = '/images/svg/26.svg';
    const MainCard3 = '/images/svg/27.svg';
    const MainCard4 = '/images/svg/28.svg';
+   const [loading, setLoading] = useState<boolean>(false); 
+   const [error, setError] = useState<string>(); 
+   const [categoryWservices, setCategoryWservices] = useState<CategoryWithService[]>()
+   const [servicesWWorks, setServicesWWorks] = useState<ServicesWWorks[]>()
+   const [services, setServices] = useState<ServiceAnalticsModel[]>([])
 
    const [options, setOptions] = useState<ServiceWCategory[]>([]);
    const [searchTerm, setSearchTerm] = useState<string>('');
 
+
+
+  const getServiceAnlytics = async () => {
+    try {
+      setLoading(true);
+      const catg = await getServicesWithAnalytics();
+      
+      if(catg) setServices(catg);
+      setLoading(false);
+    } catch (error: any) {
+      setLoading(false);
+      setError(error.message);
+    }
+  };
    const getAllCatgs = async () => {
     const catgs = await getAllServices();
     setOptions(catgs);
@@ -46,23 +75,63 @@ const LocationManage = () => {
 const getSelected2 = (id:string) => {
 }
 
+const getAllCategoriesWServices = async () =>{
+    try {
+        setLoading(true);
+        const catg = await getCategoriesWServices();
+       if(catg) setCategoryWservices(catg);
+       setLoading(false)
+    } catch (error:any) {
+        setLoading(false);
+        setError(error);
+    }
+}
+
+const getAllServicesWWorks = async () =>{
+    try {
+        setLoading(true);
+        const catg = await getServicesWWorks();
+       if(catg) setServicesWWorks(catg);
+       setLoading(false)
+    } catch (error:any) {
+        setLoading(false);
+        setError(error);
+    }
+}
    useEffect(() =>{
     getAllCatgs();
+    getAllServicesWWorks();
+    getAllCategoriesWServices();
+    getServiceAnlytics();
    },[])
    const [currentPage, setCurrentPage] = useState(1);
    const [postsPerPage, setPostsPerPage] = useState(5);
    const lastPostIndex = currentPage * postsPerPage;
    const firstPostIndex = lastPostIndex - postsPerPage;
-   const currentPosts = options.slice(firstPostIndex, lastPostIndex);
+   const currentPosts = services.slice(firstPostIndex, lastPostIndex);
   return (
-    <div className='w-11.8/12 mx-auto p-2 '>
-        <div className="grid grid-cols-2 mb-6 sm:grid-cols-4 gap-8 ">
+    <div className='w-11.8/12 mx-auto p-2 relative'>
+    {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
+        {error && <div className="py-3 my-1 flex items-center">
+            <LuAlertOctagon className='text-gray-500 mr-2 text-xl' />
+            <span className="text-red-400 text-md">{error}</span>
+            </div>
+        } 
+   
+    <div className="grid grid-cols-2 mb-6 sm:grid-cols-4 gap-8 ">
         <CardMainElement1 title="777" subTitle='Total Services' icon={imagePath1} btnBgColor='bg-green-200' />
         <CardMainElement1 title="1,807" subTitle='Service Orders' icon={imagePath3} btnBgColor='bg-indigo-200'/>
         <CardMainElement1 title="900" subTitle='Deleiverd ' icon={imagePath4} btnBgColor='bg-gray-200'/>
         <CardMainElement1 title="394" subTitle='Canceld service' icon={imagePath5}  btnBgColor='bg-sky-200' />
     </div>
-    <div className="py-1 my-10 border border-gray-200 bg-white rounded-md">
+    <div className="grid grid-cols-2 mb-6 sm:grid-cols-4 gap-4 ">
+        {categoryWservices && 
+          categoryWservices.map(element => 
+            <ServiceCategoryPanel1 category={element} />
+          )
+        }
+    </div>
+    <div className="py-1 my-10 border border-gray-300 bg-white rounded-md">
        <div className="border-b flex items-center px-3 p-4 border-b-gray-200 my-2 w-full ">
           <div className="bg-gra-100 flex-40 border border-gray-200 rounded-3xl py-1.5 w-full h-10 ">
                 <input
@@ -85,6 +154,9 @@ const getSelected2 = (id:string) => {
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700  uppercase bg-gray-100 ">
                         <tr className="w-full flex">
+                            <th scope="col" className="text-center  flex-5 py-3">
+                                 
+                            </th>
                               <th scope="col" className="text-center  flex-5 py-3">
                                       <div className="inline-flex items-center">
                                     <label className="relative flex items-center  rounded-full cursor-pointer" htmlFor="checkbox">
@@ -103,17 +175,26 @@ const getSelected2 = (id:string) => {
                                     </label>
                                 </div>
                             </th>
-                            <th scope="col" className="text-center  flex-20 py-3">
-                                 name
+                            <th scope="col" className="text-center  flex-10 py-3">
+                                 icon
                             </th>
-                            <th scope="col" className="text-center flex-20 py-3">
-                                Color
+                            <th scope="col" className="text-center flex-15 py-3">
+                                name
                             </th>
-                            <th scope="col" className="text-center flex-20 py-3">
-                                Category
+                            <th scope="col" className="text-center flex-10 py-3">
+                                ID
                             </th>
-                            <th scope="col" className="text-center flex-20 py-3">
-                                Price
+                            <th scope="col" className="text-center flex-15 py-3">
+                                Created
+                            </th>
+                            <th scope="col" className="text-center flex-10 py-3">
+                                Works
+                            </th>
+                            <th scope="col" className="text-center flex-10 py-3">
+                                Prices
+                            </th>
+                            <th scope="col" className="text-center flex-10 py-3">
+                                Testimonials
                             </th>
                             <th scope="col" className="text-center flex-10 py-3">
                                 Action
@@ -126,7 +207,7 @@ const getSelected2 = (id:string) => {
                 </table>
                
                 <PaginationTable
-                    totalPosts={options.length}
+                    totalPosts={services.length}
                     postsPerPage={postsPerPage}
                     currentPage={currentPage}
                     setCurrentPage={setCurrentPage}
@@ -135,6 +216,14 @@ const getSelected2 = (id:string) => {
                     <DropDown1  />
                    </div> */}
       </div>
+
+      <div className="grid grid-cols-2 mb-6 sm:grid-cols-4 gap-4 ">
+        {servicesWWorks && 
+          servicesWWorks.map(element => 
+            <ServiceWorksArea service={element} />
+          )
+        }
+    </div>
 
       <div className="py-8 grid sm:grid-cols-3 gap-4">
         <div className="p-1 rounded-md shadow-md border border-gray-200 sm:col-span-2 bg-white pt-3  ">
@@ -176,12 +265,21 @@ const getSelected2 = (id:string) => {
         </div>
 
     </div>
-
-    <div className="grid grid-cols-2 mb-6 sm:grid-cols-4 gap-8 ">
-        <CardMainElement2 title="777" subTitle='Total Services' icon={MainCard1} btnBgColor='bg-green-200' />
-        <CardMainElement2 title="1,807" subTitle='Service Orders' icon={MainCard2} btnBgColor='bg-indigo-200'/>
-        <CardMainElement2 title="900" subTitle='Deleiverd ' icon={MainCard3} btnBgColor='bg-gray-200'/>
-        <CardMainElement2 title="394" subTitle='Canceld service' icon={MainCard4}  btnBgColor='bg-sky-200' />
+    <div className="py-2 px-3 bg-white border border-gray-300/50 my-4 rounded-md">
+       <div className="px-2 border-b flex items-center border-b-gray-200 mb-2 py-2.5">
+        <span className=""><MdOutlineDisplaySettings className='text-xl mr-2 text-violet-600' /></span>
+        <span className="text-base text-gray-600">Easy Access </span>
+       </div>
+        <div className="grid grid-cols-2 mb-6 sm:grid-cols-4 gap-8 ">
+            <NavMngElement1 title="777" subTitle='Total Services' icon={MainCard1} btnBgColor='bg-green-200' />
+            <NavMngElement1 title="1,807" subTitle='Service Orders' icon={MainCard2} btnBgColor='bg-indigo-200'/>
+            <NavMngElement1 title="900" subTitle='Categories ' icon={MainCard3} btnBgColor='bg-gray-200' link="service/pages/categories" />
+            <NavMngElement1 title="394" subTitle='Canceld service' icon={MainCard4}  btnBgColor='bg-sky-200' />
+            <NavMngElement1 title="56" subTitle='Total Works' icon={MainCard1} btnBgColor='bg-green-200' link='service/pages/works' />
+            <NavMngElement1 title="345" subTitle='Total Projets' icon={MainCard2} btnBgColor='bg-indigo-200'/>
+            <NavMngElement1 title="667" subTitle='Service Codes' icon={MainCard3} btnBgColor='bg-gray-200'/>
+            <NavMngElement1 title="1234" subTitle='Categories' icon={MainCard4}  btnBgColor='bg-sky-200' />
+        </div>
     </div>
     
 

@@ -17,7 +17,175 @@ import { MediaSchema } from "../utils/MediaSchema";
 import { ServiceWithModels } from "../utils/ServiceWithModels";
 import { PriceSchema } from "../utils/PriceSchema";
 import { PriceWithModels } from "../prices/utils/PriceWithModels";
+import { CategoryWithService } from "../utils/CategoryWithService";
+import { ServicesWWorks } from "../utils/ServicesWWorks";
+import { ServiceWithWorks } from "../utils/ServiceWithWorks";
+import { CategoryWService } from "../utils/CategoryWService";
+import { ServiceAnalticsModel } from "../utils/ServiceAanlyticsModel";
 
+// Get All Service ordered by  number of works
+export async function getServiceWithWorksById(id:number):Promise<ServiceWithWorks>{
+  try {
+    const serviceWwork = await prisma.service.findUnique({
+      where : {
+        id : id
+      },
+      include: {
+        works: true
+      },
+    });
+return serviceWwork  as ServiceWithWorks;
+  } catch (error) {
+    console.log("[getCategoriesWServices]"+ error);
+    throw error;
+    
+  }
+}
+
+
+// Get All Service ordered by  number of works
+export async function getAllServicesWWorks():Promise<ServicesWWorks[]>{
+  try {
+    const serviceWworks = await prisma.service.findMany({
+      include: {
+        works: true, // Include the related works
+        _count: {
+          select: {
+            works: true, // Include the count of works for each service
+          },
+        },
+      },
+      orderBy: {
+        works: {
+          _count: 'desc', // Order services by the number of works in descending order
+        },
+      },
+    });
+return serviceWworks  as ServicesWWorks[];
+  } catch (error) {
+    console.log("[getCategoriesWServices]"+ error);
+    throw error;
+    
+  }
+}
+
+// get Serices with anayltics
+export async function getServicesWithAnalytics():Promise<ServiceAnalticsModel[]>{
+  try {
+    const servicesWithCounts = await prisma.service.findMany({
+      select: {
+        id: true, // Select the service ID
+        name: true, // Select the service name
+        createdAt : true,
+        image : true,
+        icon : true,
+        _count: {
+          select: {
+            works: true, // Include the count of works for each service
+            testimonials: true, // Include the count of testimonials for each service
+            prices: true, // Include the count of prices for each service
+            phases: true, // Include the count of phases for each service
+          },
+        },
+      },
+    });
+return servicesWithCounts  as ServiceAnalticsModel[];
+  } catch (error) {
+    console.log("[getCategoriesWServices]"+ error);
+    throw error;
+    
+  }
+}
+
+// get top 4 Services with highest works
+export async function getServicesWWorks():Promise<ServicesWWorks[]>{
+  try {
+    const serviceWworks = await prisma.service.findMany({
+      include: {
+        works: true, // Include the related works
+        _count: {
+          select: {
+            works: true, // Include the count of works for each service
+          },
+        },
+      },
+      orderBy: {
+        works: {
+          _count: 'desc', // Order services by the number of works in descending order
+        },
+      },
+      take: 4, // Take the top 4 services with the most works
+    });
+return serviceWworks  as ServicesWWorks[];
+  } catch (error) {
+    console.log("[getCategoriesWServices]"+ error);
+    throw error;
+    
+  }
+}
+
+// get Categories with services 
+export async function getCategoryWithServicesById(id:number):Promise<CategoryWService>{
+  try {
+const categoriesWithServices = await prisma.category.findUnique({
+  where: {
+      id : id
+  },
+  include: {
+    services: {
+      include: {
+        service: true,
+      },
+    },
+    
+  },
+});
+
+return categoriesWithServices as CategoryWService;
+  } catch (error) {
+    console.log("[getCategoriesWServices]"+ error);
+    throw error;
+    
+  }
+}
+
+// get Categories with services 
+export async function getCategoriesWServices():Promise<CategoryWithService[]>{
+  try {
+const categoriesWithServices: CategoryWithService[] = await prisma.category.findMany({
+  where: {
+    services: {
+      some: {}, // Ensures only categories with at least one service are returned
+    },
+  },
+  include: {
+    services: {
+      include: {
+        service: true,
+      },
+    },
+    _count: {
+      select: {
+        services: true, // Adds a service count to each category
+      },
+    },
+  },
+  orderBy: {
+    services: {
+      _count: 'desc', // Orders categories by the number of associated services, in descending order
+    },
+  },
+  take: 4, // Takes the top 4 categories with the most services
+});
+
+
+return categoriesWithServices as CategoryWithService[];
+  } catch (error) {
+    console.log("[getCategoriesWServices]"+ error);
+    throw error;
+    
+  }
+}
 
 // Remove Service testimonial  with return 'ServiceWithModel' object
 export async function removeServiceTestimonial(serviceId: number, name: string): Promise<ServiceWithModels> {
@@ -1610,23 +1778,5 @@ export async function addBasicInfo(data:BasicServiceInfo) {
       console.error('Error creating service:', error);
       throw new Error('Error creating service');
     }
-
-//   const result = addSchema.safeParse(Object.fromEntries(formData.entries()))
-//   if (result.success === false) {
-//     return result.error.formErrors.fieldErrors
-//   }
-
-//   const data = result.data
-
-//   await fs.mkdir("services", { recursive: true })
-//   const filePath = `services/${crypto.randomUUID()}-${data.file.name}`
-//   await fs.writeFile(filePath, Buffer.from(await data.file.arrayBuffer()))
-
-//   await fs.mkdir("public/services", { recursive: true })
-//   const imagePath = `/services/${crypto.randomUUID()}-${data.image.name}`
-//   await fs.writeFile(
-//     `public${imagePath}`,
-//     Buffer.from(await data.image.arrayBuffer())
-//   )
 
 }

@@ -25,6 +25,7 @@ import { getCategories } from '../../service/_serviceActions/ServiceActions';
 import { GoPlus } from 'react-icons/go';
 import PaginationTable from '../_utils/PaginationTable';
 import DropDown1 from '../_utils/DropDown1';
+import CardMainElement2 from '../../common/utils/CardMainElement2';
 
 
 // import ServicesPanel from './ServicePanel';
@@ -65,10 +66,10 @@ const getSelected2 = (id:string) => {
     
     <div className="mb-3">
     <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 ">
-        <CardElement2 title="Success" subTitle='8987' icon={imagePath2} btnBgColor='bg-green-200' />
-        <CardElement2 title="Appending" subTitle='998' icon={imagePath3} btnBgColor='bg-indigo-200'/>
-        <CardElement2 title="Unsucceded" subTitle='23' icon={imagePath4} btnBgColor='bg-gray-200'/>
-        <CardElement2 title="Approved" subTitle='198' icon={imagePath5}  btnBgColor='bg-sky-200' />
+        <CardMainElement2 title="1423" subTitle='Toal Projects' icon={imagePath2} btnBgColor='bg-green-200' />
+        <CardMainElement2 title="847" subTitle='Progress projects' icon={imagePath3} btnBgColor='bg-indigo-200'/>
+        <CardMainElement2 title="809" subTitle='in Peddning' icon={imagePath4} btnBgColor='bg-gray-200'/>
+        <CardMainElement2 title="443" subTitle='Completed ' icon={imagePath5}  btnBgColor='bg-sky-200' />
     </div>
     </div>
 
@@ -153,31 +154,23 @@ const getSelected2 = (id:string) => {
             <div className="h-80">
             <ComposedChart1   />
             </div>
-            
         </div>
         <div className="bg-white rounded-md shadow-md border border-gray-200">
            <div className="px-3 py-2 my-2 border-b flex">
             <span className="text-gray-600 text-base  font-semibold capitalize">
                 Latest Orders |
             </span>
-    
-
-
-           
             <span className="text-green-500 text-sm ml-2">This week</span>
             <span className="ml-auto flex items-center justify-center rounded-full h-6 w-6 border-2 border-white bg-[#666cff]"  style={{boxShadow: '0 0 3px rgba(38, 43, 67, .8)'}}>
             <FiPlus  className="text-white text-md rotate-2"  />
             </span>
-            
            </div>
             <LatestOrders order={{name:'order-1',icon:imagePath2,email:'email-2@gmail.com',status:'success'}} />
             <LatestOrders order={{name:'order-1',icon:imagePath3,email:'email-2@gmail.com',status:'pending'}} />
             <LatestOrders order={{name:'order-1',icon:imagePath4,email:'email-2@gmail.com',status:'canceled'}} />
             <LatestOrders order={{name:'order-1',icon:imagePath5,email:'email-2@gmail.com',status:'paid'}} />
             <LatestOrders order={{name:'order-1',icon:imagePath6,email:'email-2@gmail.com',status:'success'}} />
-
         </div>
-
     </div>
 
     <div className="grid my-8 sm:grid-cols-4 gap-6">
