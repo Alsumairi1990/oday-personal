@@ -20,18 +20,18 @@ const MenuPanel = ({ menuElements,setSelect,unSelect}: FormEditProps) => {
     unSelect(name);
 }
   return (
-    <div className="p-3 absolute top-2 w-full z-50 border mb-5 shadow-md bg-white border-gray-200 animate-modalEnter rounded-md">
+    <div className="py-1 px-2 absolute top-2 w-full z-50 border mb-5 shadow-md bg-white border-gray-200 animate-modalEnter rounded-md">
 
         <div className="grid sm:grid-cols max-sm:gap-4  max-sm:gap-y-8 sm:gap-x-2 sm:max-h-72 mt-2 overflow-y-auto">
         {menuElements && menuElements.length > 0 ? (
             menuElements
             .map((element, index) => (
-                <div className=" relative border flex bg-white flex-wrap my-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 ">
+                <div className=" relative border flex  flex-wrap my-2 py-2 w-11.8/12 mx-auto items-center bg-gray-100/70 border-gray-200 rounded-md max-sm:pb-3 ">
                 
-                <div className=" flex-100 sm:flex-70  sm:flex sm:mx-auto items-center bg-white border-r border-r-gray-300 rounded-l-md">
+                <div className=" flex-100 sm:flex-70  sm:flex sm:mx-auto items-center  border-r border-r-gray-300 rounded-l-md">
                     <div className="pl-4  w-full">
                     <div className="w-full flex items-center">
-                        <span className="text-base  text-black  font-medium">
+                        <span className="text-md  text-gray-800  font-medium capitalize">
                         {element}
                         </span>
                     </div>

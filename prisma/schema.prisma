@@ -223,7 +223,7 @@ model Phase {
   user        User     @relation(fields: [userId], references: [id]) // Relation to User
 
   projectId String?
-  project   Project?  @relation(fields: [projectId], references: [id])
+  project   Project? @relation(fields: [projectId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -381,6 +381,7 @@ model User {
   projects           Project[]
   tasks              Task[]
   orders             Order[]
+
   @@map(name: "users")
 }
 
@@ -565,52 +566,91 @@ model Element {
   updatedAt   DateTime  @updatedAt
 }
 
+enum TaskStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+}
+
 model Task {
-  id             Int       @id @default(autoincrement())
+  id             Int         @id @default(autoincrement())
   name           String
   description    String?
-  status         String // e.g., 'to do', 'in progress', 'completed'
+  image          String?
+  icon           String?
+  status         TaskStatus? // e.g., 'to do', 'in progress', 'completed'
   priority       String? // e.g., 'low', 'medium', 'high'
   dueDate        DateTime?
+  progress       Int?
   estimatedHours Float? // Estimated time to complete in hours
   actualHours    Float? // Actual time spent in hours
   startDate      DateTime?
   endDate        DateTime?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @updatedAt
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
   completedAt    DateTime?
   projectId      String
-  project        Project   @relation(fields: [projectId], references: [id],onDelete: Cascade)
+  project        Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
   users          User[]
+  media          Media[]
+}
+
+enum ProjectStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+}
+
+enum MediaType {
+  IMAGE
+  FILE
+  VIDEO
+}
+
+model Media {
+  id        String    @id @default(cuid())
+  url       String // URL or path to the file
+  type      MediaType // Enum for file type (image, document, etc.)
+  projectId String
+  project   Project   @relation(fields: [projectId], references: [id])
+
+  tasktId Int
+  task    Task @relation(fields: [tasktId], references: [id])
 }
 
 model Project {
-  id          String           @id @default(cuid())
+  id          String         @id @default(cuid())
   name        String
   description String?
-  status      String // e.g., 'planned', 'in progress', 'completed', etc.
+  status      ProjectStatus? // e.g., 'planned', 'in progress', 'completed', etc.
   startDate   DateTime?
   endDate     DateTime?
   budget      Decimal? // Using Prisma.Decimal for monetary values
   priority    String? // e.g., 'low', 'medium', 'high'
   progress    Int? // Percentage of project completion
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
   tasks       Task[]
   userId      String // User who created the project
-  user        User      @relation(fields: [userId], references: [id],onDelete: Cascade)
-
-  tools      Tool[]
-  categories Category[]
-  teamId     Int
-  team       Team?      @relation(fields: [teamId], references: [id],onDelete: Cascade)
-  phases     Phase[]
-  clientId   String? // Reference to a Client model
-  client     Client?    @relation(fields: [clientId], references: [id],onDelete: Cascade)
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  image       String?
+  icon        String?
+  tools       Tool[]
+  categories  Category[]
+  teamId      Int?
+  team        Team?          @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  phases      Phase[]
+  clientId    String? // Reference to a Client model
+  client      Client?        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  Media       Media[]
 }
 
 model Client {
-  id             String           @id @default(cuid())
+  id             String  @id @default(cuid())
   name           String
   contactPerson  String
   email          String  @unique
@@ -634,114 +674,94 @@ model Client {
 }
 
 model Invoice {
-  id            String           @id @default(cuid())
-  invoiceNumber String    @unique
-  issueDate     DateTime  @default(now())
-  dueDate       DateTime?
-  invoiceType   String? // e.g., 'pro forma', 'final', 'credit note'
-
-  initialPayment   Float?    // 20% of totalPrice
-  paymentStatus    String  @default("pedning")   // e.g., 'initial payment pending', 'initial payment received', 'fully paid'
-
-  clientId      String
-  client        Client  @relation(fields: [clientId], references: [id],onDelete: Cascade)
-  clientName    String?
-  clientAddress String?
-  clientContact String?
-  clientEmail   String?
-  clientPhone   String?
-
-
+  id                 String    @id @default(cuid())
+  invoiceNumber      String    @unique
+  issueDate          DateTime  @default(now())
+  dueDate            DateTime?
+  invoiceType        String? // e.g., 'pro forma', 'final', 'credit note'
+  initialPayment     Float? // 20% of totalPrice
+  paymentStatus      String    @default("pedning") // e.g., 'initial payment pending', 'initial payment received', 'fully paid'
+  clientId           String
+  client             Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  clientName         String?
+  clientAddress      String?
+  clientContact      String?
+  clientEmail        String?
+  clientPhone        String?
   serviceId          Int
-  service            Service @relation(fields: [serviceId], references: [id],onDelete: Cascade)
+  service            Service   @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   serviceDescription String
   quantity           Int?
   unitPrice          Float?
   discount           Float?
   taxRate            Float?
-
-  subtotal       Float?
-  taxAmount      Float?
-  discountAmount Float?
-  totalAmount    Float
-  currency       String
-
-  paymentTerms  String?
-  paidAt        DateTime?
-  paymentMethod String?
-
+  subtotal           Float?
+  taxAmount          Float?
+  discountAmount     Float?
+  totalAmount        Float
+  currency           String
+  paymentTerms       String?
+  paidAt             DateTime?
+  paymentMethod      String?
   notes              String?
   referenceNumber    String?
   termsAndConditions String?
   attachments        String[] // Paths or URLs to attachments
-
-  companyName    String?
-  companyAddress String?
-  companyEmail   String?
-  companyPhone   String?
-
-  taxId      String?
-  taxDetails String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  companyName        String?
+  companyAddress     String?
+  companyEmail       String?
+  companyPhone       String?
+  taxId              String?
+  taxDetails         String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
 }
 
 model Order {
-  id               String           @id @default(cuid())
-  orderNumber      String    @unique
-  orderDate        DateTime  @default(now())
-  status           String    // e.g., 'pending', 'in progress', 'completed', 'cancelled'
-  description      String?
-  
-  clientId         String?
-  client           Client?    @relation(fields: [clientId], references: [id], onDelete: Cascade)
-   clientName    String
-  clientAddress String?
-  clientContact String?
-  clientEmail   String?
-  clientPhone   String?
-  
-  serviceId        Int
-  service          Service   @relation(fields: [serviceId], references: [id],onDelete: Cascade)
-  quantity         Int?
-  unitPrice        Float?
-  estimatedCost    Float?
-
-  
-  subtotal         Float?
-  discount         Float?
-  taxRate          Float?
-  taxAmount        Float?
-  totalAmount      Float
-  currency         String
-  
-  paymentTerms     String?
-  paidAt           DateTime?
-  paymentMethod    String?
-  
-  startDate        DateTime?
-  completionDate   DateTime?
-  
-  notes            String?
-  referenceNumber  String?
+  id                 String        @id @default(cuid())
+  orderNumber        String        @unique
+  orderDate          DateTime      @default(now())
+  status             String // e.g., 'pending', 'in progress', 'completed', 'cancelled'
+  description        String?
+  clientId           String?
+  client             Client?       @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  clientName         String
+  clientAddress      String?
+  clientContact      String?
+  clientEmail        String?
+  clientPhone        String?
+  serviceId          Int
+  service            Service       @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  quantity           Int?
+  unitPrice          Float?
+  estimatedCost      Float?
+  subtotal           Float?
+  discount           Float?
+  taxRate            Float?
+  taxAmount          Float?
+  totalAmount        Float
+  currency           String
+  paymentTerms       String?
+  paidAt             DateTime?
+  paymentMethod      String?
+  startDate          DateTime?
+  completionDate     DateTime?
+  notes              String?
+  referenceNumber    String?
   termsAndConditions String?
-  
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  
-  projectManagerId String?
-  projectManager   User?    @relation(fields: [projectManagerId], references: [id],onDelete: Cascade)
-
-  BillingInfo BillingInfo[]
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  projectManagerId   String?
+  projectManager     User?         @relation(fields: [projectManagerId], references: [id], onDelete: Cascade)
+  BillingInfo        BillingInfo[]
 }
 
 model BillingInfo {
-  id        String           @id @default(cuid())
-  address   String
-  city      String
-  country   String
+  id         String @id @default(cuid())
+  address    String
+  city       String
+  country    String
   postalCode String
-  orderId   String
-  order     Order   @relation(fields: [orderId], references: [id])
+  orderId    String
+  order      Order  @relation(fields: [orderId], references: [id])
 }
