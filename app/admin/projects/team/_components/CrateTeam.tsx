@@ -116,9 +116,9 @@ const CreateTeam = ({projectId,closeModel}:Props) => {
 
     
   return (
-   <div className="w-full sm:w-6/12 m-auto relative p-4 bg-white rounded-md border border-gray-200">
+   <div className="w-full sm:w-6/12 bg-white flex flex-wrap justify-between max-h-full sm:rounded ">
         {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
-        <div className="px-2 py-2.5 w-full flex items-center rounded-md bg-indigo-600 mb-3">
+        <div className="px-2 py-2.5 w-full flex items-center sm:rounded-t bg-indigo-600 mb-3">
                 <div className="flex items-center">
                 <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
                 <span className="text-base text-white">
@@ -147,8 +147,8 @@ const CreateTeam = ({projectId,closeModel}:Props) => {
             </div>
         }
        
-     <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  border border-gray-200 p-5 rounded-md">
-        <div className="flex flex-wrap justify-between">
+     <form onSubmit={handleSubmit(saveUser)} className="text-start z-40 relative overflow-y-auto scr-container pt-6   border border-gray-200 p-5 rounded-md">
+        <div className="flex flex-wrap justify-between ">
         
             <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Title</label>

@@ -77,7 +77,7 @@ const close = (v:boolean)=> {
                 changeMenu={changeBtnMenu}
                 />
                 {isOpen('basic') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
-                        <div   className="flex flex-col w-full sm:w-[55%] animate-modalEnter max-sm:h-full add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                        <div   className="flex flex-col w-full sm:w-5/12 animate-modalEnter max-sm:h-full add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                         <div className="flex w-full bg-gray-100 rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
                         <div className="flex items-center">
                               <span className=""><MdAssignmentAdd className="text-gray-600 text-2xl mr-2" /> </span>
@@ -92,7 +92,7 @@ const close = (v:boolean)=> {
                                   </button>
                               </div>
                               </div>
-                         <div  className="w-full max-h-[90vh] relative overflow-y-auto scr-container">
+                         <div  className="w-full ">
                          <BasicCreate  addBasicId={addBasicData} closeModel={close} />
                       </div>
                      </div>
@@ -111,7 +111,7 @@ const close = (v:boolean)=> {
                 changeMenu={changeBtnMenu}
                 />
                 {isOpen('category') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
-                        <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-5/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                           <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
                               <div className="flex items-center">
                                   <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
@@ -150,7 +150,7 @@ const close = (v:boolean)=> {
                 changeMenu={changeBtnMenu}
                 />
                 {isOpen('tool') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
-                        <div   className="flex flex-col w-full max-sm:h-full sm:w-6/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-5/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                            <div className="flex w-full  bg-[hsl(262,83%,58%)] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300" style={{boxShadow:'0 6px 19px -13px #9f9494;'}}>
                               <div className="flex items-center">
                                      <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
@@ -185,7 +185,7 @@ const close = (v:boolean)=> {
                 changeMenu={changeBtnMenu}
                 />
                 {isOpen('code') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
-                        <div   className="flex flex-col w-full max-sm:h-full sm:w-[55%] add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                        <div   className="flex flex-col w-full max-sm:h-full sm:w-5/12 add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                           <div className="flex w-full bg-gray-100 rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
                               <div className="flex items-center">
                                   <span className=""><MdAssignmentAdd className='text-gray-600 text-2xl mr-2' /> </span>
@@ -200,7 +200,7 @@ const close = (v:boolean)=> {
                                   </button>
                               </div>
                               </div>
-                         <div  className="w-full max-h-[90vh] scr-container overflow-y-auto">
+                         <div  className="w-full">
                          <TaskCreate projectId={projectId ?? ''}   />
                       </div>
                      </div>
