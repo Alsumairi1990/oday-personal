@@ -1,11 +1,10 @@
 import React from 'react';
-import Link from "next/link";
-import ProjectCreate from '../_components/ProjectCreate';
+import ProjectDisplay from '../_components/ProjectDisplay';
 
 const CreatePage = () => {
     return (
       <div className="">
-        
+        <ProjectDisplay />
       </div>
 )
 };

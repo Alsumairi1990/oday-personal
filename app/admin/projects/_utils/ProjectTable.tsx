@@ -4,10 +4,10 @@ import {useState} from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FiPlus } from 'react-icons/fi';
-import { ServiceAnalticsModel } from '../../service/utils/ServiceAanlyticsModel';
+import { ProjectAnalyticsModel } from './ProjectAanlyticsModel';
 
 interface Props{
-    categories:ServiceAnalticsModel[],
+    projects:ProjectAnalyticsModel[],
     searchParam:string,
     getSelected :(value: string) => void
     unSelected :(value: string) => void
@@ -15,14 +15,14 @@ interface Props{
 }
 
 
-const ServiceTable = ({categories,searchParam,getSelected,unSelected}:Props) => {
+const ServiceTable = ({projects,searchParam,getSelected,unSelected}:Props) => {
     const [baseUrl, setBaseUrl] = useState<string>('');
     let [selectedValues, setSelectedValues] = useState<string[]>([]);
     const [catName, setCatName] = useState<string>('');
     const [editShow, setEditShow] = useState<boolean>(false);
     const [trigger, setTrigger] = useState(0);
     const [showDelete ,setShowDelete] =useState<boolean>(false);
-    const [service,setService] = useState<ServiceAnalticsModel>();
+    const [project,setProject] = useState<ProjectAnalyticsModel>();
 
     const [showDisplayModel,setShowDisplayModel] = useState<boolean>(false);
     const removeItem = (array:string[], item:string) => {
@@ -55,16 +55,16 @@ const addSelected= (selected:string)=>{
   return (
     <>
    
-      {categories.filter((element) =>
+      {projects.filter((element) =>
                     element.name.toLowerCase().includes(searchParam.toLowerCase())
                 )
-                .map((option:ServiceAnalticsModel, index) => (
+                .map((option:ProjectAnalyticsModel, index) => (
     // {categories.map((option:any) => (
     
     <tr className="bg-white font-medium capitalize flex items-center border-b dark:bg-gray-800 dark:border-gray-700">
     <td className="flex-5 flex items-center justify-center ">
        <button 
-            onClick={()=> {setService(option),setShowDisplayModel(true)}}
+            onClick={()=> {setProject(option),setShowDisplayModel(true)}}
             className="flex items-center justify-center rounded-full h-5 w-5 border-2 border-white bg-[#666cff]"  style={{boxShadow: '0 0 3px rgba(38, 43, 67, .8)'}}>
             <FiPlus  className="text-white text-md rotate-2"  />
        </button>
@@ -110,7 +110,7 @@ const addSelected= (selected:string)=>{
         {option.name}
     </td>
     <td className="flex-10  flex justify-center py-4">
-        {option.id}
+        {option.progress ?? '-'}
     </td>
     
     <td className="flex-15 flex justify-center line-clamp-2 py-4">
@@ -120,27 +120,27 @@ const addSelected= (selected:string)=>{
     </td>
     <td className="flex-10 flex justify-center line-clamp-2 py-4">
            <span className=" font-normal ">
-            {option._count.works}
+            {option._count.phases}
         </span> 
     </td>
     <td className="flex-10 flex justify-center line-clamp-2 py-4">
            <span className=" font-normal ">
-            {option._count.prices}
+            {option._count.tasks}
         </span> 
     </td>
     <td className="flex-10 flex justify-center line-clamp-2 py-4">
            <span className=" font-normal ">
-            {option._count.testimonials}
+            {option.priority ?? '-'}
         </span> 
     </td>
     <td className="flex-10 flex  text-center py-4 justify-around">
-    <button onClick={()=>{setEditShow(true); setCatName(option?.name)  }} className="inline-flex items-center justify-center bg-sky-100 border !border-sky-200 hover:!bg-sky-200 rounded-md py-1.5 flex-23">
+    <Link href={`/admin/projects/edit/${option.id}`} className="inline-flex items-center justify-center bg-sky-100 border !border-sky-200 hover:!bg-sky-200 rounded-md py-1.5 flex-23">
         <svg className="w-4 h-4"  viewBox="0 0 24 24" fill="none">
         <path className="fill-sky-500" fill-rule="evenodd" clip-rule="evenodd" d="M19.2071 2.79312C17.9882 1.57417 16.0119 1.57417 14.7929 2.79312L5.68463 11.9014C5.30015 12.2859 5.0274 12.7676 4.89552 13.2951L4.02988 16.7577C3.94468 17.0985 4.04453 17.459 4.29291 17.7073C4.54129 17.9557 4.90178 18.0556 5.24256 17.9704L8.70513 17.1047C9.23263 16.9729 9.71437 16.7001 10.0988 16.3156L19.2071 7.20733C20.4261 5.98838 20.4261 4.01207 19.2071 2.79312ZM16.2071 4.20733C16.645 3.76943 17.355 3.76943 17.7929 4.20733C18.2308 4.64524 18.2308 5.35522 17.7929 5.79312L8.68463 14.9014C8.55647 15.0296 8.39589 15.1205 8.22006 15.1644L6.37439 15.6259L6.83581 13.7802C6.87976 13.6044 6.97068 13.4438 7.09884 13.3156L16.2071 4.20733Z"/>
         <path className="fill-sky-500"   d="M5 20C4.44772 20 4 20.4477 4 21C4 21.5523 4.44772 22 5 22H19C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20H5Z" fill="#777"/>
         </svg>
-    </button>
-    <Link href={`/admin/category/show/${option.id}`} className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md flex-23">
+    </Link>
+    <Link href={`/admin/projects/show/${option.id}`} className="inline-flex items-center justify-center bg-blue-100 border !border-blue-200 hover:!bg-blue-200 rounded-md flex-23">
         <svg className="w-4 h-4 fill-blue-500"  viewBox="0 0 48 48" >
         <path d="M0 0h48v48H0z" fill="none"/>
         <g id="Shopicon">

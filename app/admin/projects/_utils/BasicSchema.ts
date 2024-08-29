@@ -1,5 +1,5 @@
 import { z } from "zod";
-const TaskStatusEnum = z.enum([
+const ProjectStatusEnum = z.enum([
     'PLANNED',
     'IN_PROGRESS',
     'COMPLETED',
@@ -10,7 +10,7 @@ const TaskStatusEnum = z.enum([
 export const BasicSchema = z.object({
     name: z.string().min(1),
     description: z.string().optional(),
-    status : TaskStatusEnum.optional(),
+    status : ProjectStatusEnum.optional(),
     startDate : z.coerce.date().optional(),  
     endDate : z.coerce.date().optional(), 
     budget : z.coerce.number().int().optional(),

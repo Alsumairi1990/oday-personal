@@ -6,7 +6,6 @@ export type ProjectWithModels = Project & {
     user : User
     team  : Team
     phases : Phase[]
-    location : Location
     tasks   : Task[]
-    media   : Media[]
+    Media   : Media[]
   };

@@ -4,18 +4,15 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { FcAnswers, FcApprove, FcEditImage, FcShop } from "react-icons/fc";
 import { LuAlertOctagon } from 'react-icons/lu';
-// import { editTestimonialBasicData, editTestimonialContent, editTestimonialImage, getTestimonialWModelsById } from '../_actions/Actions';
 import { FiEdit } from 'react-icons/fi';
 import { AiFillEdit } from 'react-icons/ai';
 import { MdOutlineContentPasteGo } from 'react-icons/md';
-
-import { editTestimonialBasicData, editTestimonialContent, editTestimonialImage } from '../../testimonials/_actions/Actions';
-import { editServiceBasicData, editServiceContent, editServiceIcon, getServiceWModelsById } from '../../service/_serviceActions/ServiceActions';
-
 import { ProjectWithModels } from '../_utils/ProjectWithModels';
-import LocationPanel from '../../works/_components/LocationPanel';
 import { editWorkBasicData, editWorkDescription, editWorkIcon, editWorkImage, getWorkWModelsById } from '../../works/_actions/Actions';
 import { ProjectStatus } from '@prisma/client';
+import { getProjectWModelsById } from '../_actions/Actions';
+import { CiImageOn } from 'react-icons/ci';
+import EditProjectDetails from './EditProjectDetails';
 
 
 interface FormEditProps {
@@ -47,13 +44,11 @@ const EditTestimonial = ({ id}: FormEditProps) => {
   }, [tagsEdit]);
 
 
-  const getWorks = async () => {
+  const getProjects = async () => {
     try {
         setLoadingPage(true)
-        const workId = Number(id);
-        const data = await getWorkWModelsById(workId);
-        // setWork(data);
-
+        const data = await getProjectWModelsById(id);
+         setProject(data);
         setLoadingPage(false)
     } catch (error:any) {
       setLoadingPage(false);
@@ -161,7 +156,7 @@ const EditTestimonial = ({ id}: FormEditProps) => {
   }, []);
 
   useEffect(() => {
-    getWorks();
+    getProjects();
   }, []);
 const closeCategory = (flag:boolean) => {
 
@@ -190,7 +185,7 @@ const editContent = async () => {
 }
 
   return (
-   <div className="h-auto flex items-center relative justify-center w-full m-auto p-6 ">
+   <div className="h-auto flex items-center relative justify-center w-full m-auto py-4 ">
         {loadingPage && <div className=' w-full h-full z-50 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
         {error && <div className="py-3 my-1 flex items-center">
                     <LuAlertOctagon className='text-gray-500 mr-2 text-xl' />
@@ -201,17 +196,24 @@ const editContent = async () => {
              <div className="w-full">
 
                 <div className="flex items-center flex-col">
-                    <div className="w-full relative grid rel sm:grid-cols-3 bg-white p-2 rounded-md border border-gray-300">
+                  <div className='bg-white p-2 rounded-md border border-gray-300 w-full'>
+                    <div className="w-full relative grid rel sm:grid-cols-3 ">
                     {loading && <div className=' w-full h-full z-50 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
 
-                      <div className="p2 bg-black relative rounded-md border-[.3rem] border-white">
-                            <img className=' h-full opacity-70  rounded-md' src={`${baseUrl}/${project?.image}`} alt="" />
+                      <div className="p2  relative rounded-md border border-gray-300">
+                            {project.image  ? (<img className=' h-full opacity-70  rounded-md' src={`${baseUrl}/${project?.image}`} alt="" />)
+                            :(
+                              <div className="h-full w-full flex items-center justify-center border border-gray-300">
+                                <CiImageOn className="text-[3rem] text-gray-500"  />
+                              </div>
+                             )
+                             }
                             {!imageEdit ? (<div className="absolute flex space-x-2 top-3 right-3">         
                               <button
                                 className="ml-auto flex items-center px-1.5 gap-x-1 py-0.5 rounded-md border border-gray-500 text-white bg-slate-800"
                                 onClick={() =>  setImageEdit(true)}
                               >
-                                <span className="text-gray-100 text-md">Edit</span>
+                                <span className="text-gray-100 text-sm">Edit</span>
                                 <span className=""><AiFillEdit className='text-gray-200 text-base'/> </span>
                               </button>
                           </div>):(
@@ -260,15 +262,14 @@ const editContent = async () => {
                           
                          </div>
                          <div className="flex">
-                         
                            <form onSubmit={handleSubmit} className="flex-80 px-2 pt-1.5  rounded-md justify-center">
                                 <div className="p-1.5 capitalize text-md flex items-center rounded-md">
-                                 <div className="flex-20 flex items-center border py-1 rounded-md pl-1">
+                                 <div className="flex-25 flex items-center border py-1 rounded-md pl-1">
                                    <span className='w-6 h-6 mr-2 items-center  justify-center rounded-md  inline-flex' ><FcEditImage className='text-3xl '/></span>
-                                   <span className='text-gray-800 font-medium mr-1'>Title </span> 
-                                   <span className='text-gray-600 text-bxs mx-1 ml-auto'>|</span> 
+                                   <span className='text-gray-700 text-sm font-medium mr-1'>Title </span> 
+                                   <span className='text-gray-500 text-bxs mx-1 ml-auto'>|</span> 
                                  </div>
-                                 <div className="flex flex-70 pl-4 items-center">
+                                 <div className="flex flex-75 pl-4 items-center">
                                   <input type="text" 
                                   name='title'
                                   onFocus={() => setTouched(true)}
@@ -280,31 +281,32 @@ const editContent = async () => {
                                </div>
 
                                <div className="p-1.5 capitalize text-md flex items-center rounded-md">
-                                  <div className="flex-20 flex items-center border py-1 rounded-md pl-1">
-                                    <span className='w-6 h-6 mr-2 items-center  justify-center rounded-md  inline-flex' ><FcShop className='text-3xl '/></span>
-                                    <span className='text-gray-800 font-medium mr-1 capitalize'>highlights </span> 
-                                    <span className='text-gray-600 text-bxs mx-1 ml-auto'>|</span> 
+                                     <div className="flex-25 flex items-center border border-gray-200 py-1 rounded-md pl-1">
+                                        <span className='w-6 h-6 mr-2 items-center  justify-center rounded-md  inline-flex' ><FcShop className='text-3xl '/></span>
+                                        <span className='text-gray-700 text-sm font-medium mr-1 capitalize'>priority </span> 
+                                        <span className='text-gray-500 text-bxs mx-1 ml-auto'>|</span> 
                                     </div>
-                                    <div className="flex flex-70 pl-4 items-center">
+                                    <div className="flex flex-75 pl-4 items-center">
                                     <input type="text" 
-                                    name='highlights'
+                                    name='priority'
+                                    placeholder='-'
                                     onFocus={() => setTouched(true)}
                                     className='border border-gray-100 w-full py-1 px-2 rounded-md outline-none bg-gray-50'
-                                    value={project.status ?? 0}
-                                    onChange={(e) =>{ setProject({ ...project, status: e.target.value as ProjectStatus }); setTouched(true)}}
+                                    value={project.priority ?? ''}
+                                    onChange={(e) =>{ setProject({ ...project, priority: e.target.value }); setTouched(true)}}
                                     />
                                     </div>
                                </div>
 
                                <div className="p-1.5 capitalize text-md flex items-center rounded-md ">
-                                  <div className="flex-20 flex items-center border py-1 rounded-md pl-1">
+                                  <div className="flex-25 flex items-center border py-1 rounded-md pl-1">
                                     <span className='w-6 h-6 mr-2 items-center  justify-center rounded-md  inline-flex' ><FcAnswers className='text-3xl '/></span>
-                                    <span className='text-gray-800 font-medium mr-1'>Client </span> 
-                                    <span className='text-gray-600 text-bxs mx-1 ml-auto'>|</span> 
+                                    <span className='text-gray-700 text-sm font-medium mr-1'>progress </span> 
+                                    <span className='text-gray-500 text-bxs mx-1 ml-auto'>|</span> 
                                     </div>
-                                    <div className="flex flex-70 pl-4 items-center">
+                                    <div className="flex flex-75 pl-4 items-center">
                                     <input type="number" 
-                                    name='client'
+                                    name='progress'
                                     onFocus={() => setTouched(true)}
                                     className='border border-gray-100 w-full py-1 px-2 rounded-md outline-none bg-gray-50'
                                     value={project.progress ?? 0}
@@ -319,19 +321,26 @@ const editContent = async () => {
                                 className={`ml-auto flex items-center absolute right-2 bottom-0 px-1.5 py-0.5 rounded-md ${touched === true ? 'bg-gray-800' : 'bg-gray-500'}`}
                                 disabled={touched === false}
                               >
-                                <span className="text-gray-100 text-md">Save</span>
+                                <span className="text-gray-100 text-sm">Save</span>
                               </button>
 
                              </form>
                              <div className="flex-20 p-2 pl-0 mb-5">
-                                <div className="p-2 border shadow-md border-gray-300  relative rounded-md">
-                                    <img className=' h-full w-full opacity-70  rounded-md' src={`${baseUrl}/${project?.icon}`} alt="" />
+                                <div className="p-2 border shadow-md border-gray-300 h-full  relative rounded-md">
+                                    {project.icon ?(  <img className=' h-full w-full opacity-70  rounded-md' src={`${baseUrl}/${project?.icon}`} alt="" />)
+                                      :(
+                                        <div className="h-full w-full flex items-center justify-center border border-gray-300">
+                                          <CiImageOn className="text-[3rem] text-gray-500"  />
+                                        </div>
+                                      )
+                                    }
+                                    
                                     {!iconEdit ? (<div className="absolute flex space-x-2 top-3 right-3">         
                                     <button
                                         className="ml-auto flex items-center px-1.5 gap-x-1 py-0.5 rounded-md border border-gray-500 text-white bg-slate-800"
                                         onClick={() =>  setIconEdit(true)}
                                     >
-                                        <span className="text-gray-100 text-md">Edit</span>
+                                        <span className="text-gray-100 text-xs">Edit</span>
                                         <span className=""><AiFillEdit className='text-gray-200 text-base'/> </span>
                                     </button>
                                 </div>):(
@@ -372,10 +381,15 @@ const editContent = async () => {
                             </div>
 
                              </div>
-                           </div>
+                          </div>
                        </div>
+                       
 
                       
+                    </div>
+                    <div className="bg-white w-full px-3 pt-2 mt-3">
+                      <EditProjectDetails id={id}  />
+                    </div>
                     </div>
 
                     <div className="p-2 w-full relative rounded-md my-6 bg-white border border-gray-200">

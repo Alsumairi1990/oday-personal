@@ -6,8 +6,121 @@ import authOptions from "@/utils/AuthOptions";
 import fs from "fs/promises"
 import { BasicSchema } from "../_utils/BasicSchema";
 import { slugify } from "@/utils/TextUtils";
-import { Category, Team, Tool } from "@prisma/client";
-import Project from "@/app/_components/user/Project";
+import { Category, Project, Team, Tool } from "@prisma/client";
+import { ProjectAnalyticsModel } from "../_utils/ProjectAanlyticsModel";
+import { ProjectWithModels } from "../_utils/ProjectWithModels";
+import { DetailsSchema } from "../_utils/Details.Schema";
+
+
+// Editing  Project details info
+export async function  editProjectDetails(data:FormData,id:string):Promise<Project | null>{
+  try {
+   const result = DetailsSchema.safeParse(Object.fromEntries(data.entries()))
+   const session = await getServerSession(authOptions);
+   if (!session) {
+     throw new Error('User not authenticated');
+   }
+   const userId = session.user.id;
+   
+   if (result.success) {
+    const data = result.data;
+       const basic = await prisma.project.update({
+        where : {
+          id:id
+        },
+         data: {
+           status : data.status,
+           startDate : data.startDate,
+           endDate : data.endDate,
+           budget : data.budget,
+         },
+       });
+       const project = await prisma.project.findUnique({
+        where : {
+          id:id
+        }
+       })
+       return project!;
+   }else {
+      throw new Error ('Schema not converted ')
+   }
+  } catch (error) {
+      console.log("[Creating project basic info ]" + error)
+      throw error;
+   }
+ }
+
+
+// get work data By ID
+export async function getProjectWModelsById(projectId:string):Promise<ProjectWithModels >{
+  try {
+    const elements = await prisma.project.findUnique({
+      where: {
+        id: projectId,
+      },
+      include: {
+        categories: true,
+        tools: true,
+        phases : true,
+        tasks : true,
+        Media : true,
+        user : true
+      },
+    });
+    return elements as ProjectWithModels;
+  } catch (error) {
+    console.log("error in get work by id" + error);
+    throw error;
+  }
+}
+
+// get project data By ID
+export async function getProjectById(projectId:string):Promise<Project>{
+  try {
+    const element = await prisma.project.findUnique({
+      where: {
+        id: projectId,
+      },
+     
+    });
+    return element! ;
+  } catch (error) {
+    console.log("error in get work by id" + error);
+    throw error;
+  }
+}
+
+// get project with anayltics
+export async function getProjectWithAnalytics():Promise<ProjectAnalyticsModel[]>{
+  try {
+    const elements = await prisma.project.findMany({
+      select: {
+        id: true, // Select the service ID
+        name: true, // Select the service name
+        createdAt : true,
+        image : true,
+        priority : true,
+        icon : true,
+        _count: {
+          select: {
+            tasks: true, // Include the count of prices for each service
+            phases: true, // Include the count of phases for each service
+          },
+        },
+      },
+      orderBy: {
+        createdAt: 'desc', // Order by the creation date in descending order
+      },
+    });
+return elements  as ProjectAnalyticsModel[];
+  } catch (error) {
+    console.log("[getProjectWithAnalytics]"+ error);
+    throw error;
+    
+  }
+}
+
+
 
 
 //get teams 
@@ -562,5 +675,4 @@ export async function  addBasic(data:FormData):Promise<string>{
         console.log("[Creating project basic info ]" + error)
         throw error;
      }
-     
    }

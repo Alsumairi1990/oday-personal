@@ -31,7 +31,6 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
       'ON_HOLD',
       'CANCELLED']); 
     const [menuShow, setMenuShow] = useState<boolean>(false); 
-
      const {
     register,
     handleSubmit,
@@ -42,17 +41,12 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
   } = useForm<inputType>({
     resolver: zodResolver(BasicSchema),
   });
-
   const rows = 5;
   const cols = 5;
   const closeMenu = (v:boolean)=> {
     closeModel(v);
-    
   }
-
   const [numberValue, setNumberValue] = useState<number>(0);
-  
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const valueAsString = event.target.value;
     const valueAsNumber = Number(valueAsString);
@@ -287,8 +281,13 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.endDate?.message} </span>
             </div>
-            <div className="mb-4 flex-100 flex justify-center">
-                <input type="submit" className="btn py-2 px-2 bg-indigo-600   border-indigo-600 hover:bg-indigo-800 hover:border-indigo-800 cursor-pointer text-white rounded-md" value="Create Basic Data" />
+            <div className="py-2 w-full flex sticky z-30 border-t border-t-gray-300 left-0 bottom-0 bg-white">
+                <div className="ml-auto">
+                  <button type='button' className='px-2 py-1.5 mr-2 bg-gray-200 rounded text-gray-800 capitalize text-md'>
+                    clear
+                  </button>
+                  <input type="submit" className="btn py-1.5 pr-3  text-md px-2 bg-indigo-600   border-indigo-600 hover:bg-indigo-800 hover:border-indigo-800 cursor-pointer text-white rounded-md" value="save data" />
+                </div>
             </div>
            
         </div>
