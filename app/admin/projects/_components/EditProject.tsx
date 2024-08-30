@@ -13,6 +13,7 @@ import { ProjectStatus } from '@prisma/client';
 import { getProjectWModelsById } from '../_actions/Actions';
 import { CiImageOn } from 'react-icons/ci';
 import EditProjectDetails from './EditProjectDetails';
+import CategoryEditPanel from './panels/CategoryEditPanel';
 
 
 interface FormEditProps {
@@ -448,7 +449,7 @@ const editContent = async () => {
 
 
                   <div className="w-full">
-                      {/* <CategoryPanel work={work} colseModel={closeCategory}  /> */}
+                     <CategoryEditPanel project={project} colseModel={closeCategory}  />
                     </div> 
                       
                      <div className="w-full">
