@@ -1,9 +1,9 @@
 "use client";
-import React, { ChangeEvent, useEffect } from "react";
-import { Category, Service, Tag } from "@prisma/client";
+import React, { useEffect } from "react";
+import { Category, } from "@prisma/client";
 import { useState } from "react";
-import { IoIosArrowDown, IoMdCloseCircle } from "react-icons/io";
-import { BiCategory, BiSolidCommentEdit } from "react-icons/bi";
+import { IoMdCloseCircle } from "react-icons/io";
+import { BiCategory } from "react-icons/bi";
 import Image from "next/image";
 import {
   MdAssignmentAdd,
@@ -13,17 +13,10 @@ import {
 
 import { LuAlertOctagon } from "react-icons/lu";
 
-import { FiEdit } from "react-icons/fi";
-import { IoAddCircleSharp } from "react-icons/io5";
-import { AiFillEdit } from "react-icons/ai";
-import { FaTags } from "react-icons/fa";
-import { GrSelect } from "react-icons/gr";
-import { getCategories } from "../../common/_actions/Actions";
 
-import { addTestimonialCategory, getTestimonialWModelsById, removeTesimonialCategory } from "../../testimonials/_actions/Actions";
 import { WorkWithModels } from "../utils/WorkWithModels";
-import { addServiceCategories, getTools, removeServiceCategory } from "../../service/_serviceActions/ServiceActions";
-import { addWorkCategories, addWorkTools, removeWorkCategory, removeWorkTool } from "../_actions/Actions";
+import { getTools } from "../../service/_serviceActions/ServiceActions";
+import {  addWorkTools, removeWorkTool } from "../_actions/Actions";
 
 interface FormEditProps {
   work: WorkWithModels;

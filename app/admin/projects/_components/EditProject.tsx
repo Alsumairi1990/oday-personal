@@ -2,18 +2,19 @@
 import React, { ChangeEvent, useEffect } from 'react';
 import { useState } from 'react';
 import Image from 'next/image';
-import { FcAnswers, FcApprove, FcEditImage, FcShop } from "react-icons/fc";
+import { FcAnswers, FcEditImage, FcShop } from "react-icons/fc";
 import { LuAlertOctagon } from 'react-icons/lu';
 import { FiEdit } from 'react-icons/fi';
 import { AiFillEdit } from 'react-icons/ai';
 import { MdOutlineContentPasteGo } from 'react-icons/md';
 import { ProjectWithModels } from '../_utils/ProjectWithModels';
 import { editWorkBasicData, editWorkDescription, editWorkIcon, editWorkImage, getWorkWModelsById } from '../../works/_actions/Actions';
-import { ProjectStatus } from '@prisma/client';
 import { getProjectWModelsById } from '../_actions/Actions';
 import { CiImageOn } from 'react-icons/ci';
 import EditProjectDetails from './EditProjectDetails';
 import CategoryEditPanel from './panels/CategoryEditPanel';
+import ToolEditPanel from './panels/ToolEditPanel';
+import TaskEditPanel from './panels/TaskEditPanel';
 
 
 interface FormEditProps {
@@ -187,7 +188,7 @@ const editContent = async () => {
 
   return (
    <div className="h-auto flex items-center relative justify-center w-full m-auto py-4 ">
-        {loadingPage && <div className=' w-full h-full z-50 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
+        {loadingPage && <div className=' w-full h-full z-50 bg-[#00000012] absolute top-0 left-0 flex-col flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
         {error && <div className="py-3 my-1 flex items-center">
                     <LuAlertOctagon className='text-gray-500 mr-2 text-xl' />
                     <span className="text-red-400 text-md">{error}</span>
@@ -198,7 +199,7 @@ const editContent = async () => {
 
                 <div className="flex items-center flex-col">
                   <div className='bg-white p-2 rounded-md border border-gray-300 w-full'>
-                    <div className="w-full relative grid rel sm:grid-cols-3 ">
+                    <div className="w-full relative grid grid-cols-1 sm:grid-cols-3 ">
                     {loading && <div className=' w-full h-full z-50 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
 
                       <div className="p2  relative rounded-md border border-gray-300">
@@ -253,7 +254,7 @@ const editContent = async () => {
                           )}
                       </div>
                       
-                      <div className="col-span-2 relative col-start-2 pl-5  ">
+                      <div className="col-span-2 relative sm:col-start-2 pl-5  ">
                          <div className="p-2 border-b flex items-center border-b-gray-200 pb-2">
                            <span className="text-gray-800 font-medium">
                              Edit Basic Data
@@ -262,8 +263,8 @@ const editContent = async () => {
                            </div>
                           
                          </div>
-                         <div className="flex">
-                           <form onSubmit={handleSubmit} className="flex-80 px-2 pt-1.5  rounded-md justify-center">
+                         <div className="flex flex-wrap">
+                           <form onSubmit={handleSubmit} className="sm:flex-80 px-2 pt-1.5  rounded-md justify-center">
                                 <div className="p-1.5 capitalize text-md flex items-center rounded-md">
                                  <div className="flex-25 flex items-center border py-1 rounded-md pl-1">
                                    <span className='w-6 h-6 mr-2 items-center  justify-center rounded-md  inline-flex' ><FcEditImage className='text-3xl '/></span>
@@ -326,7 +327,7 @@ const editContent = async () => {
                               </button>
 
                              </form>
-                             <div className="flex-20 p-2 pl-0 mb-5">
+                             <div className="flex-100 max-sm:my-4 sm:flex-20 p-2 pl-0 mb-5">
                                 <div className="p-2 border shadow-md border-gray-300 h-full  relative rounded-md">
                                     {project.icon ?(  <img className=' h-full w-full opacity-70  rounded-md' src={`${baseUrl}/${project?.icon}`} alt="" />)
                                       :(
@@ -453,11 +454,12 @@ const editContent = async () => {
                     </div> 
                       
                      <div className="w-full">
-                     {/* <TagPanel work={work} colseModel={closeCategory}  /> */}
+                     <ToolEditPanel project={project} colseModel={closeCategory}  />
                     </div> 
                     
+                    
                     <div className="w-full">
-                     {/* <ToolPanel work={work} colseModel={closeCategory}  /> */}
+                    <TaskEditPanel project={project} colseModel={closeCategory}  />
                     </div> 
                    
                     <div className="w-full">

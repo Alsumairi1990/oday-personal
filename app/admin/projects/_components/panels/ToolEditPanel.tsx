@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { Category} from "@prisma/client";
+import { Category, Tool} from "@prisma/client";
 import { useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { BiCategory} from "react-icons/bi";
@@ -8,32 +8,32 @@ import Image from 'next/image'
 import {
   MdAssignmentAdd,
   MdOutlineAddCircle,
- 
 } from "react-icons/md";
 
 import { LuAlertOctagon } from "react-icons/lu";
 import { getCategories } from "@/app/admin/common/_actions/Actions";
 import { ProjectWithModels } from "../../_utils/ProjectWithModels";
-import { addProjectCategory, removeProjectCategory } from "../../_actions/panels/Actions";
+import { addProjectTool, removeProjectTool,  } from "../../_actions/panels/Actions";
+import { getTools } from "../../_actions/Actions";
+import { IoImageOutline } from "react-icons/io5";
 import { PiImageThin } from "react-icons/pi";
 
 interface FormEditProps {
   project: ProjectWithModels;
   colseModel: (value: boolean) => void;
 }
-const CategoryPanel = ({ project , colseModel }: FormEditProps) => {
+const ToolEditPanel = ({ project , colseModel }: FormEditProps) => {
   const [baseUrl, setBaseUrl] = useState<string>("");
   const [projectData, setProjectData] = useState<ProjectWithModels>();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [menuElements, setMenuElements] = useState<Category[] | null>([]);
+  const [menuElements, setMenuElements] = useState<Tool[] | null>([]);
   const [showRemoveTool, setShowRemoveTool] = useState<boolean>(false);
   const [elementMenuShow, setElementMenuShow] = useState<boolean>(false);
   const [selectedMenuElements, setSelectedMenuElements] = useState<string[]>([]);
   const [selectedMenuElementsId, setSelectedMenuElementsId] = useState<string[]>([]);
   const [removedTool, setRemovedTool] = useState<string>('');
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [removedRows, setRemovedRows] = useState<number>(0);
   const [trigger, setTrigger] = useState(0);
 
 
@@ -70,7 +70,7 @@ const CategoryPanel = ({ project , colseModel }: FormEditProps) => {
         setLoading(true);
         if(selectedMenuElementsId.length>0){
           const numberArray = selectedMenuElementsId.map(value => Number(value));
-        const result = await addProjectCategory(project.id, numberArray);
+        const result = await addProjectTool(project.id, numberArray);
         if(result) project = result;
         if(result) setProjectData(result);
         }
@@ -87,7 +87,7 @@ const CategoryPanel = ({ project , colseModel }: FormEditProps) => {
     try {
         setLoading(true);
         const numberArray = selectedMenuElementsId.map(value => Number(value));
-        const result = await removeProjectCategory(project.id,removedTool);
+        const result = await removeProjectTool(project.id,removedTool);
         setProjectData(result);
         setLoading(false);
        setSelectedMenuElements([]);
@@ -100,7 +100,7 @@ const CategoryPanel = ({ project , colseModel }: FormEditProps) => {
   const getAllMenuElements = async () => {
     try {
       setLoading(true);
-      const elements = await getCategories();
+      const elements = await getTools();
       setMenuElements(elements);
       setLoading(false);
     } catch (error: any) {
@@ -136,7 +136,7 @@ const CategoryPanel = ({ project , colseModel }: FormEditProps) => {
                   <BiCategory className="text-gray-700 text-xl" />{" "}
                 </span>
                 <span className="text-gray-700 text-base font-medium">
-                  Edit Category
+                  Edit Tool
                 </span>
               </div>
              
@@ -164,9 +164,9 @@ const CategoryPanel = ({ project , colseModel }: FormEditProps) => {
                 <span className="text-gray-600 text-md">List of added categories : </span>
                   <div className="flex items-center rounded-md w-full gap-2 max-h-26 flex-wrap overflow-y-auto">
                   
-                   {projectData.categories && projectData.categories.length>0 ?  (
+                   {projectData.tools && projectData.tools.length>0 ?  (
                           <div className="py-2 grid sm:grid-cols-4 gap-2 items-center w-full">
-                          {projectData.categories.map(element => (
+                          {projectData.tools.map(element => (
                             <div className="flex items-center  rounded-md pl-2 pr-1 bg-white border border-gray-200">
                                 {element.image ? (
                                   <div className="p1 h-14 py-2 flex-25 pr-1 ">
@@ -181,7 +181,7 @@ const CategoryPanel = ({ project , colseModel }: FormEditProps) => {
                                   </div>
                                 )
                                 :(
-                                  <div className="flex h-14 py-2 pr-1 flex-25 items-center justify-center "><PiImageThin className="text-xl text-gray-500 rounded border border-gray-300 items-center justify-center bg-gray-50 inline-flex w-full h-full " /></div>
+                                    <div className="flex h-14 py-2 pr-1 flex-25 items-center justify-center "><PiImageThin className="text-xl text-gray-500 rounded border border-gray-300 items-center justify-center bg-gray-50 inline-flex w-full h-full " /></div>
                                 )}
                                 {element.name && <div className="flex-50 flex h-14 items-center border-l border-l-gray-300 pl-2"><span className='text-sm  pl-2 text-gray-600  mr-2 font-medium'>{element.name}</span></div>}
                                 <button
@@ -198,7 +198,7 @@ const CategoryPanel = ({ project , colseModel }: FormEditProps) => {
                           </div> 
                       ):(
                         <div className="pb-1">
-                        <span className="text-sm text-orange-600 px-4 inline-flex capitalize">No Categories  </span>
+                        <span className="text-sm text-orange-600 px-4 inline-flex capitalize">No Services  </span>
                     </div>                                   
                       )
                       }
@@ -229,7 +229,7 @@ const CategoryPanel = ({ project , colseModel }: FormEditProps) => {
                         </span>
                       ) : (
                         <div className="text-md inline-flex text-gray-800 font-medium capitalize">
-                          <span className="px-1 capitalize">Adding category to work</span>
+                          <span className="px-1 capitalize">Adding tools to project</span>
                         </div>
                       )}
                       <span className="ml-auto">
@@ -378,4 +378,4 @@ const CategoryPanel = ({ project , colseModel }: FormEditProps) => {
   );
 };
 
-export default CategoryPanel;
+export default ToolEditPanel;
