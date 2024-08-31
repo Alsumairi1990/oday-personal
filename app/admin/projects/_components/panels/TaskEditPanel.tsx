@@ -1,24 +1,21 @@
 "use client";
 import React, { useEffect } from "react";
-import { Category, Task, Tool} from "@prisma/client";
+import { Task} from "@prisma/client";
 import { useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
-import { BiCategory} from "react-icons/bi";
+import { TbSubtask } from "react-icons/tb";
 import Image from 'next/image'
 import {
   MdAssignmentAdd,
-  MdModeEditOutline,
   MdOutlineAddCircle,
 } from "react-icons/md";
-
-import { LuAlertOctagon, LuFolderEdit } from "react-icons/lu";
-import { getCategories } from "@/app/admin/common/_actions/Actions";
+import { LuAlertOctagon } from "react-icons/lu";
 import { ProjectWithModels } from "../../_utils/ProjectWithModels";
-import { addProjectTool, getTasks, removeProjectTask, removeProjectTool,  } from "../../_actions/panels/Actions";
-import { getProjectById, getProjectWModelsById, getTools } from "../../_actions/Actions";
-import { IoImageOutline } from "react-icons/io5";
-import { PiImageThin } from "react-icons/pi";
+import { removeProjectTask} from "../../_actions/panels/Actions";
+import { getProjectWModelsById} from "../../_actions/Actions";
 import { RiEdit2Fill } from "react-icons/ri";
+import { PiImageThin } from "react-icons/pi";
+import TaskCreatePanel from "./TaskCreatePanel";
 
 interface FormEditProps {
   project: ProjectWithModels;
@@ -68,6 +65,11 @@ const TaskEditPanel = ({ project , colseModel }: FormEditProps) => {
   
   };
  
+
+  const closePanel = (flag:boolean) => {
+    setElementMenuShow(flag);
+    getAllMenuElements();
+  }
   const removeElem = async ()=> {
     try {
         setLoading(true);
@@ -117,7 +119,7 @@ const TaskEditPanel = ({ project , colseModel }: FormEditProps) => {
             <div className="flex  pt-1.5 pb-1.5 bg-white rounded px-2 border border-gray-300 mb-1.5">
               <div className="flex gap-x-2 items-center">
                 <span className="">
-                  <BiCategory className="text-gray-700 text-xl" />{" "}
+                  <TbSubtask className="text-gray-700 text-xl" />{" "}
                 </span>
                 <span className="text-gray-700 text-base font-medium">
                   Edit Task
@@ -149,8 +151,9 @@ const TaskEditPanel = ({ project , colseModel }: FormEditProps) => {
                   <div className="flex items-center rounded-md w-full gap-2 max-h-26 flex-wrap overflow-y-auto">
                   
                    {projectData.tasks && projectData.tasks.length>0 ?  (
-                          <div className="py-2 grid sm:grid-cols-4 gap-2 items-center w-full">
+                          <div className="py-2 grid sm:grid-cols-3 gap-2 items-center w-full">
                           {projectData.tasks.map(element => (
+                            <div className="flex flex-col">
                             <div className="flex items-center  rounded-md pl-2 pr-1 bg-white border border-gray-200">
                                 {element.image ? (
                                   <div className="p1 h-16 py-2 flex-25 pr-1 ">
@@ -161,14 +164,13 @@ const TaskEditPanel = ({ project , colseModel }: FormEditProps) => {
                                     src={element.image}
                                     className=" w-full h-full rounded border border-gray-300"
                                     />
-
                                   </div>
                                 )
                                 :(
                                     <div className="flex h-16 py-2 pr-1 flex-25 items-center justify-center "><PiImageThin className="text-xl text-gray-500 rounded border border-gray-300 items-center justify-center bg-gray-50 inline-flex w-full h-full " /></div>
                                 )}
-                                {element.name && <div className="flex-60 flex h-14 items-center border-l border-l-gray-300 pl-2"><span className='text-sm  pl-2 text-gray-600  mr-2 font-medium'>{element.name}</span></div>}
-                                <div className="flex-15 gap-y-1 flex flex-col  items-center justify-center ">
+                                {element.name && <div className="flex-60 flex h-14 items-center border-x border-gray-300 pl-2"><span className='text-sm  pl-2 text-gray-600  mr-2 font-medium'>{element.name}</span></div>}
+                                <div className="flex-15 gap-y-1 flex flex-col items-center justify-center ">
                                     <button
                                     onClick={() => {
                                         if(projectData.categories.length>0) setRemovedTool(element.name);
@@ -188,6 +190,13 @@ const TaskEditPanel = ({ project , colseModel }: FormEditProps) => {
                                     <RiEdit2Fill className="text-sm text-gray-600" />
                                     </button>
                                 </div>
+                            </div>
+                            <div className="flex justify-between w-full items-center">
+                                <div className="h-2.5 flex-90 flex bg-gray-200 mt-1 rounded">
+                                  <span className="bg-green-600 inline-flex h-2.5 rounded " style={{ width: `${element.progress}%` }}></span>
+                                </div>
+                                <span className="text-gray-500 text-sm flex-10 flex justify-end">{element.progress}%</span>
+                            </div>
                             </div>
                           ))}
                           </div> 
@@ -232,37 +241,9 @@ const TaskEditPanel = ({ project , colseModel }: FormEditProps) => {
                       </span>
                     </button>
                   </div>
-                  {elementMenuShow && (
-                    <div className="p-3 border mb-5 shadow-md bg-white border-gray-200 animate-modalEnter rounded-md">
-                      <div className="border-b border-b-gray-200 w-full mb-2">
-                        <div className="bg-gray-100 border border-gray-200 rounded-3xl py-1.5 mb-2 w-full h-11 ">
-                          <input
-                            type="text"
-                            placeholder="Search categories"
-                            value={searchTerm}
-                            className="w-full h-full bg-transparent px-3 placeholder:text-md outline-none"
-                            onChange={(e) => setSearchTerm(e.target.value)}
-                          />
-                        </div>
-                      </div>
-                      <div className="grid grid-cols-2 sm:grid-cols max-sm:gap-4  max-sm:gap-y-8 sm:gap-x-2 sm:max-h-72 mt-2 overflow-y-auto">
-                        {menuElements && menuElements.length > 0 ? (
-                          menuElements
-                            .map((element, index) => (
-                              <div className=" relative border flex bg-white flex-wrap my-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 ">
-                               
-                               
-                              </div>
-                            ))
-                        ) : (
-                          <div className=" relative h-16  w-11.8/12 mx-auto items-center bg-white border border-gray-300 rounded-md flex justify-center">
-                            <p className="text-gray-700 text-md">No Data</p>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  )}
+                
                 </div>
+              
                 {showRemoveTool && <div className='fixed top-0 left-0 z-30 bg-[#00000018]  flex items-center justify-center h-full w-full '>
                         <div className="w-5/12 bg-white animate-modalEnter rounded-md shadow-lg p-4">
                               <div className="flex w-full border border-gray-300 bg-gray-200 rounded-md py-2.5 items-center px-3 border-b border-b-gray-300" style={{boxShadow:'0 6px 19px -13px #9f9494;'}}>
@@ -297,7 +278,11 @@ const TaskEditPanel = ({ project , colseModel }: FormEditProps) => {
               }
             </div>
           </div>
-        
+          {elementMenuShow && (
+                    <div className="fixed top-0 left-0 z-50 bg-[#00000044]  flex items-center justify-center h-full w-full">
+                      <TaskCreatePanel  projectId={project.id} closeModel={closePanel}   />
+                    </div>
+                  )}
       </div>
     </div>
   );

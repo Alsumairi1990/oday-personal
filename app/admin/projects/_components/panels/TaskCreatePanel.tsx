@@ -3,18 +3,16 @@ import React, { ChangeEvent, useEffect } from 'react';
 import { useState } from 'react';
 import { Task, Tool} from '@prisma/client';
 import { LuAlertOctagon } from "react-icons/lu";
-import { MdDone } from "react-icons/md";
 import { MdAssignmentAdd } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
-import {  getProjectToolslById, removeProjectTool } from '../_actions/Actions';
 import Image from 'next/image'
-import { TaskSchema } from '../tasks/_utils/TaskSchema';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MdOutlineAddCircle } from "react-icons/md";
-import MenuPanel from '../../common/utils/MenuPanel';
-import { CreateTask, getProjectTasks } from '../tasks/_actions/Actions';
+import { TaskSchema } from '../../tasks/_utils/TaskSchema';
+import { CreateTask } from '../../tasks/_actions/Actions';
+import MenuPanel from '@/app/admin/common/utils/MenuPanel';
 
 
 
@@ -24,11 +22,11 @@ interface Props {
     closeModel? : (value:boolean) => void
   }
   
-const TaskCreate = ({projectId}:Props) => {
+const TaskCreatePanel = ({projectId,closeModel}:Props) => {
   const [toolName , setToolName ] = useState<string>('');
   const [tasks , setTasks ] = useState<Task[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const [svalues, setSvalues] = useState<string[]>([]);
     const [trigger, setTrigger] = useState(0);
     const [showDelete, setShowDelete] = useState(false);
@@ -118,26 +116,14 @@ const unSelect = (value:string) => {
 }
    
   
-  const getToolNames = async ()=> {
-    try {
-        setLoading(true);
-        const names = await getProjectToolslById(projectId);
-        setLoading(false);
-        setToolNames(names);
-        setError(null); 
-        
-    } catch (error:any) {
-        setError(error.message || 'An unexpected error occurred');
-        setLoading(false);
-    }
-  }
+ 
   const removeCategory  = async () => {
     
     try {
-      setLoading(true);
-      const tools = await removeProjectTool(projectId,removedTool);
-      setLoading(false);
-     setToolNames(tools);
+    //   setLoading(true);
+    //   const tools = await removeProjectTool(projectId,removedTool);
+    //   setLoading(false);
+    //  setToolNames(tools);
      setError(null);
      setShowRemoveTool(false);
     } catch (error:any) {
@@ -147,129 +133,56 @@ const unSelect = (value:string) => {
     
   }  
   
-    const getAllElements = async ()=> {
-      try {
-        setLoading(true);
-        if (projectId) {const catgs = await getProjectTasks(projectId);
-          setTasks(catgs);
-       }
-        setError(null);
-        setLoading(false);
-        
-      } catch (error:any) {
-        setError(error.message);
-        setLoading(false);
-      }
-     
-    }
+   
     useEffect(() => {
-        getAllElements();
-         getToolNames();
 
     }, []);
 
    
   return (
-    <div className="w-full sm:w-full max-sm:border relative max-sm:border-gray-300 mx-auto pb-0 bg-white  rounded-md">
+    <div className="w-full sm:w-5/12 max-sm:border relative max-sm:border-gray-300 mx-auto pb-0 bg-white  rounded-md">
     {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
-    <div className=" flex flex-wrap justify-between max-h-[95vh] sm:max-h-[80vh] relative overflow-y-auto scr-container pt-6 ">
-       <div className=" mb-3 w-full border border-gray-200 rounded-md">
-            
-          {tasks.length>0 ?  (
-            <>
-            <div className="px-2 w-full border-b flex gap-2 items-center border-b-gray-200 py-1.5 ">
-            <span className="bg-green-600 size-5 flex items-center justify-center rounded-md">
-            <MdDone  className='text-lg text-white  '  />
-            </span>
-            <span className="text-gray-600 font-medium text-md">Categories added </span>
-        </div>
-            <div className="p-2 grid sm:grid-cols-3 gap-x-3 items-center gap-2 max-h-28 flex-wrap overflow-y-auto">
-            {tasks.map(name => (
-              <div className="flex items-center rounded-md pl-1 pr-1 bg-gray-50 border border-gray-200">
-                 <div className="flex-30 h-14 p-1 pl-0">
-                 {name && name.image ?( <Image className='rounded-md w-full h-full'
-                            src={name.image}
-                            height={100}
-                            width={100}
-                            alt="Image"
-                        />):(
-                            <span className="text-gray-400">no image</span>
-                        )}
-                 </div>
-                  <span className='text-sm flex-55 pl-2 text-gray-600 py-1 '>{name.name}</span>
-                  <button 
-                  onClick={()=> { setRemovedTool(name.name);setShowRemoveTool(true) }}
-                className="flex flex-15 items-center border justify-center py-3 border-sky-500 bg-sky-500 rounded-md">
-                  <IoMdCloseCircle className='text-base text-white' />
-                  
-                </button>
-               </div>
-             ))}
-            </div> 
-            </>
-        ):(
-          <span className="text-sm text-orange-600 px-4 py-2 inline-flex capitalize">No Categories Added </span>
-        )
-        }
-        </div>
+    <div className=" flex flex-wrap justify-between ">
+          <div className="flex w-full bg-gray-100 rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
+                <div className="flex items-center">
+                    <span className=""><MdAssignmentAdd className='text-gray-600 text-2xl mr-2' /> </span>
+                    <span className="text-[.96rem] font-medium text-gray-600">Project Tasks</span>
+                </div>
+                <div className="ml-auto">
+                    <button type="button" onClick={() => {if(closeModel) closeModel(false)}}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                        <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span className="sr-only">Close modal</span>
+                    </button>
+                </div>
+            </div>  
       {error && <div className="py-3 my-1 flex items-center">
         <LuAlertOctagon className='text-gray-500 mr-2 text-xl' />
         <span className="text-red-400 text-md">{error}</span>
         </div>
       }
-      
-      {showRemoveTool && <div className='fixed top-0 left-0 z-30 bg-[#00000018]  flex items-center justify-center h-full w-full '>
-          <div className="w-5/12 bg-white animate-modalEnter rounded-md shadow-lg p-4">
-                 <div className="flex w-full border border-gray-300 bg-gray-200 rounded-md py-2.5 items-center px-3 border-b border-b-gray-300" style={{boxShadow:'0 6px 19px -13px #9f9494;'}}>
-                      <div className="flex items-center">
-                              <span className=""><MdAssignmentAdd className='text-gray-600 text-2xl mr-2' /> </span>
-                          <span className="text-base font-semibold text-gray-600">Remove Serice Tool</span>
-                      </div>
-                      <div className="ml-auto">
-                          <button type="button" onClick={() => setShowRemoveTool(false)}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-                              <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                              </svg>
-                              <span className="sr-only">Close modal</span>
-                          </button>
-                      </div>
-                  </div>
-                  <div className=" flex flex-col z-0 w-full mt-2 mb-5 group pt-2">
-                      <span className='text-red-500'>You are going to remove tool from service</span>
-                  </div>
-                  <div className="mt-2 p-2 flex justify-center">
-                  <button 
-                  onClick={ removeCategory }
-                  className='inline-flex py-1.5  items-center px-2 rounded-md bg-violet-600 ml-4 text-white text-[14px] capitalize'>
-                    Remove Service Tool
-                    </button>
-                    </div>
-          </div> 
-      </div>
-      }
-     
-       <div className="">
-          <form onSubmit={handleSubmit(saveTask)} className="text-start z-40  border-t  rounded-md ">
+  
+       <div className="max-h-[95vh] sm:max-h-[80vh] relative overflow-y-auto scr-container">
+          <form onSubmit={handleSubmit(saveTask)} className="text-start z-40  rounded-md ">
               <div className="flex flex-wrap py-0 pt-6 px-6 justify-between">
-              {/* {basic !='' &&
-              <div className=''><span className='text-green-500'>Sucessfully added | {basic} </span></div>
-              } */}
+           
 
                   <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
-                          <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Name</label>
+                          <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 "> Name</label>
                           <div className="flex items-center w-full">
                               <div className="relative flex w-full">
-                              <input {...register('name')}  type="text" name="name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Poeject Name  ..." required />
+                              <input {...register('name')}  type="text" name="name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-100 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Poeject Name  ..." required />
                               </div>
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.name?.message} </span>
                   </div>
 
                   <div className=" flex flex-48 flex-col z-0 w-full mb-5 group">
-                          <label htmlFor="priority" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Priority</label>
+                          <label htmlFor="priority" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 "> Priority</label>
                           <div className="flex items-center w-full">
                               <div className="relative flex w-full">
-                              <input {...register('priority')}  type="text" name="priority" id="priority" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="'Low', 'Medium', 'High' ...." required />
+                              <input {...register('priority')}  type="text" name="priority" id="priority" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-100 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="'Low', 'Medium', 'High' ...." required />
                               </div>
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.priority?.message} </span>
@@ -279,7 +192,7 @@ const unSelect = (value:string) => {
                           <label htmlFor="estimatedHours" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 capitalize "> estimated Hours</label>
                           <div className="flex items-center w-full">
                               <div className="relative flex w-full">
-                              <input {...register('estimatedHours')}  type="number" name="estimatedHours" id="estimatedHours" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="'Low', 'Medium', 'High' ...." required />
+                              <input {...register('estimatedHours')}  type="number" name="estimatedHours" id="estimatedHours" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-100 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="'Low', 'Medium', 'High' ...." required />
                               </div>
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.estimatedHours?.message} </span>
@@ -288,7 +201,7 @@ const unSelect = (value:string) => {
                           <label htmlFor="actualHours" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 capitalize "> actual Hours</label>
                           <div className="flex items-center w-full">
                               <div className="relative flex w-full">
-                              <input {...register('actualHours')}  type="number" name="actualHours" id="actualHours" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="'Low', 'Medium', 'High' ...." required />
+                              <input {...register('actualHours')}  type="number" name="actualHours" id="actualHours" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-100 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="'Low', 'Medium', 'High' ...." required />
                               </div>
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.estimatedHours?.message} </span>
@@ -300,7 +213,7 @@ const unSelect = (value:string) => {
                               <input 
                                 type="number"
                                 {...register('progress')}
-                                name="progress" id="progress" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-gray-50 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="30% 40% 80%  ..." required />
+                                name="progress" id="progress" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-gray-100 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="30% 40% 80%  ..." required />
                               </div>
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.progress?.message} </span>
@@ -319,7 +232,7 @@ const unSelect = (value:string) => {
                                 return !prevState;
                               });
                             }}
-                            className="flex w-full bg-gray-50   items-center border gap-x-3 h-10 border-gray-200  px-2 rounded-2xl"
+                            className="flex w-full bg-gray-100   items-center border gap-x-3 h-10 border-gray-200  px-2 rounded-2xl"
                           >
                             {selectedMenuElements != '' ? (
                               <span className="text-md inline-flex text-gray-600 font-medium">
@@ -348,7 +261,7 @@ const unSelect = (value:string) => {
                           <label htmlFor="description" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 ">Project Description</label>
                           <div className="flex items-center w-full">
                               <div className="relative flex w-full">
-                              <textarea {...register('description')} cols={cols} rows={rows}   name="description" id="description" className="block bg-gray-50 pl-2 pt-2 px-0 z-0 w-full text-sm text-gray-900  border rounded-xl border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Project Desctiption ...." required />
+                              <textarea {...register('description')} cols={cols} rows={rows}   name="description" id="description" className="block bg-gray-100 pl-2 pt-2 px-0 z-0 w-full text-sm text-gray-900  border rounded-xl border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Project Desctiption ...." required />
                               </div>
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
@@ -360,7 +273,7 @@ const unSelect = (value:string) => {
                               <div className="relative flex w-full">
                               <input 
                                 {...register('dueDate')}
-                              type="date" name="dueDate" id="dueDate" className="block pl-2 h-10 px-2 z-0 w-full text-sm text-gray-500 bg-gray-50 border rounded-xl border-gray-300 after:focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Start Date  ..." required />
+                              type="date" name="dueDate" id="dueDate" className="block pl-2 h-10 px-2 z-0 w-full text-sm text-gray-500 bg-gray-100 border rounded-xl border-gray-300 after:focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Start Date  ..." required />
                               </div>
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.dueDate?.message} </span>
@@ -371,14 +284,14 @@ const unSelect = (value:string) => {
                               <div className="relative flex w-full">
                               <input 
                                 {...register('completedAt')}
-                              type="date" name="completedAt" id="completedAt" className="block pl-2 h-10 px-2 z-0 w-full text-sm text-gray-500 bg-gray-50 border rounded-xl border-gray-300 after:focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="end Date  ..." required />
+                              type="date" name="completedAt" id="completedAt" className="block pl-2 h-10 px-2 z-0 w-full text-sm text-gray-500 bg-gray-100 border rounded-xl border-gray-300 after:focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="end Date  ..." required />
                               </div>
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.endDate?.message} </span>
                   </div>
 
                   <div className="flex flex-48 items-center mb-4 justify-center w-full">
-                          <label htmlFor="image" className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
+                          <label htmlFor="image" className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100  hover:bg-gray-100">
                               <div className="flex flex-col items-center justify-center pt-2 pb-3">
                               {imageSrc ? (
                               <Image className='rounded-md'
@@ -403,7 +316,7 @@ const unSelect = (value:string) => {
                   </div> 
 
                   <div className="flex flex-48 items-center mb-4 justify-center w-full">
-                        <label htmlFor="icon" className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
+                        <label htmlFor="icon" className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100  hover:bg-gray-100">
                             <div className="flex flex-col items-center justify-center pt-2 pb-3">
                             {iconSrc ? (
                             <Image className='rounded-md'
@@ -431,7 +344,7 @@ const unSelect = (value:string) => {
                               <div className="relative flex w-full">
                               <input 
                                 {...register('startDate')}
-                              type="date" name="startDate" id="startDate" className="block pl-2 h-10 px-2 z-0 w-full text-sm text-gray-500 bg-gray-50 border rounded-xl border-gray-300 after:focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Start Date  ..." required />
+                              type="date" name="startDate" id="startDate" className="block pl-2 h-10 px-2 z-0 w-full text-sm text-gray-500 bg-gray-100 border rounded-xl border-gray-300 after:focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Start Date  ..." required />
                               </div>
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.startDate?.message} </span>
@@ -442,7 +355,7 @@ const unSelect = (value:string) => {
                               <div className="relative flex w-full">
                               <input 
                                 {...register('endDate')}
-                              type="date" name="endDate" id="endDate" className="block pl-2 h-10 px-2 z-0 w-full text-sm text-gray-500 bg-gray-50 border rounded-xl border-gray-300 after:focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="end Date  ..." required />
+                              type="date" name="endDate" id="endDate" className="block pl-2 h-10 px-2 z-0 w-full text-sm text-gray-500 bg-gray-100 border rounded-xl border-gray-300 after:focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="end Date  ..." required />
                               </div>
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.endDate?.message} </span>
@@ -462,5 +375,5 @@ const unSelect = (value:string) => {
 };
 
 
-export default TaskCreate;
+export default TaskCreatePanel;
 

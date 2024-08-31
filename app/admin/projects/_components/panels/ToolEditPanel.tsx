@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { Category, Tool} from "@prisma/client";
+import { Tool} from "@prisma/client";
 import { useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { BiCategory} from "react-icons/bi";
@@ -11,11 +11,9 @@ import {
 } from "react-icons/md";
 
 import { LuAlertOctagon } from "react-icons/lu";
-import { getCategories } from "@/app/admin/common/_actions/Actions";
 import { ProjectWithModels } from "../../_utils/ProjectWithModels";
 import { addProjectTool, removeProjectTool,  } from "../../_actions/panels/Actions";
 import { getTools } from "../../_actions/Actions";
-import { IoImageOutline } from "react-icons/io5";
 import { PiImageThin } from "react-icons/pi";
 
 interface FormEditProps {

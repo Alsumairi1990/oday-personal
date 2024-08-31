@@ -8,7 +8,7 @@ import { FiEdit } from 'react-icons/fi';
 import { AiFillEdit } from 'react-icons/ai';
 import { MdOutlineContentPasteGo } from 'react-icons/md';
 import { ProjectWithModels } from '../_utils/ProjectWithModels';
-import { editWorkBasicData, editWorkDescription, editWorkIcon, editWorkImage, getWorkWModelsById } from '../../works/_actions/Actions';
+import { editWorkBasicData, editWorkDescription, editWorkIcon, editWorkImage } from '../../works/_actions/Actions';
 import { getProjectWModelsById } from '../_actions/Actions';
 import { CiImageOn } from 'react-icons/ci';
 import EditProjectDetails from './EditProjectDetails';
@@ -390,7 +390,7 @@ const editContent = async () => {
                       
                     </div>
                     <div className="bg-white w-full px-3 pt-2 mt-3">
-                      <EditProjectDetails id={id}  />
+                      {/* <EditProjectDetails id={id}  /> */}
                     </div>
                     </div>
 
@@ -450,11 +450,11 @@ const editContent = async () => {
 
 
                   <div className="w-full">
-                     <CategoryEditPanel project={project} colseModel={closeCategory}  />
+                     {/* <CategoryEditPanel project={project} colseModel={closeCategory}  /> */}
                     </div> 
                       
                      <div className="w-full">
-                     <ToolEditPanel project={project} colseModel={closeCategory}  />
+                     {/* <ToolEditPanel project={project} colseModel={closeCategory}  /> */}
                     </div> 
                     
                     
