@@ -12,6 +12,9 @@ import { MenuElementsSchema } from '../_utils/MenuElementsSchema';
 import InnerElementCreate from './InnerElementCreate';
 import { MenuWithModels } from '../_utils/MenuWithModels';
 import { addingMenuElement } from '../_actions/Action';
+import MenuParentCreate from './MenuParentCreate';
+import { Flag } from 'lucide-react';
+import ParentPanel from './ParentPanel';
 
 
 
@@ -24,7 +27,10 @@ const MenuCreate = () => {
    const [loading, setLoading] = useState<boolean>(false);
    const [elementMenuShow, setElementMenuShow] = useState<boolean>(false);
    const [error, setError] = useState<string | null>(null);
-   const [baseUrl,setBaseUrl] = useState<string>('');
+   const [baseUrl,setBaseUrl] = useState<string>('');  
+   const [selectedParent, setSelectedParent] = useState<string>('')
+   const [menuParentShow, setMenuParentShow] = useState<boolean>(false);
+
    
 
    const rows = 5;
@@ -80,10 +86,17 @@ const MenuCreate = () => {
     }
     const closePanel = (flag:boolean) => {
       setElementMenuShow(flag);
+      setMenuParentShow(flag);
+      document.body.classList.remove('modal-open');
     }
       useEffect(() => {
       }, []);
-     
+     const selectElement = (value:string,value2:string)=> {
+      setSelectedParent(value2);
+     }
+     const deSelectElement = (value:string,value2:string)=> {
+      setSelectedParent('')
+     }
   return (
    <div className="w-full sm:w-11.8/12 m-auto relative p-4 bg-white rounded-md border border-gray-200">
         {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
@@ -100,10 +113,31 @@ const MenuCreate = () => {
         <span className="text-red-400 text-md">{error}</span>
         </div>
       }
-       
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  border border-gray-200 p-5 rounded-md">
         <div className="flex flex-wrap justify-between">
-        
+        <div className="py-2 flex-100 mb-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenuParentShow((prevState) => {
+                      if (prevState == false) {
+                      }
+                      return !prevState;
+                    });
+                    document.body.classList.add('modal-open');
+                  }}
+                  className="flex w-full bg-gray-100 items-center border gap-x-3 py-2 border-gray-300  px-2 rounded-2xl"
+                >
+                    <div className="text-md inline-flex text-gray-800 font-medium capitalize">
+                      {selectedParent === '' ? <span className="px-1 capitalize">Add Parent </span>
+                      : <span className="px-1 capitalize">{selectedParent}</span>}
+                      
+                    </div>
+                  <span className="ml-auto">
+                    <MdOutlineAddCircle className="text-3xl border-2 border-violet-800 rounded-full text-violet-800" />
+                  </span>
+                </button>
+            </div>
             <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="title" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Title</label>
                     <div className="flex items-center w-full">
@@ -113,9 +147,8 @@ const MenuCreate = () => {
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.title?.message} </span>
             </div>
-
             <div className=" flex flex-48 flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="content" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 ">Meny Element description</label>
+                    <label htmlFor="content" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 ">Menu Element description</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
                         <textarea {...register('description')}  rows={rows} cols={cols}  name="description" id="description" className="block pl-2 pt-3 px-0 z-0 w-full text-sm text-gray-900 bg-gray-100 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="MEnu Element description ..." required />
@@ -123,7 +156,6 @@ const MenuCreate = () => {
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
             </div>
-
             <div className="flex flex-48 items-center  justify-center w-full">
                     <label htmlFor="icon" className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100  hover:bg-gray-100">
                         <div className="flex flex-col items-center justify-center pt-2 pb-3">
@@ -148,24 +180,25 @@ const MenuCreate = () => {
             </div> 
 
             <div className="py-2 flex-100">
-            <button
-                      type="button"
-                      onClick={() => {
-                        setElementMenuShow((prevState) => {
-                          if (prevState == false) {
-                          }
-                          return !prevState;
-                        });
-                      }}
-                      className="flex w-full bg-gray-100 items-center border gap-x-3 py-2 border-gray-300  px-2 rounded-2xl"
-                    >
-                        <div className="text-md inline-flex text-gray-800 font-medium capitalize">
-                          <span className="px-1 capitalize">Adding Inner Element</span>
-                        </div>
-                      <span className="ml-auto">
-                        <MdOutlineAddCircle className="text-3xl border-2 border-violet-800 rounded-full text-violet-800" />
-                      </span>
-                    </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setElementMenuShow((prevState) => {
+                      if (prevState == false) {
+                      }
+                      return !prevState;
+                    });
+                      document.body.classList.add('modal-open');
+                  }}
+                  className="flex w-full bg-gray-100 items-center border gap-x-3 py-2 border-gray-300  px-2 rounded-2xl"
+                >
+                    <div className="text-md inline-flex text-gray-800 font-medium capitalize">
+                      <span className="px-1 capitalize">Adding Inner Element</span>
+                    </div>
+                  <span className="ml-auto">
+                    <MdOutlineAddCircle className="text-3xl border-2 border-violet-800 rounded-full text-violet-800" />
+                  </span>
+                </button>
             </div>
             <div className="mb-4 mt-4 flex w-full">
                 <input type="submit" className="btn px-3 ml-auto py-1.5  bg-indigo-600  hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded " value="Register" />
@@ -173,6 +206,7 @@ const MenuCreate = () => {
         </div>
     </form>
     {elementMenuShow && <InnerElementCreate closeModel={closePanel} id={String(element?.id)}  /> }
+    {menuParentShow && <ParentPanel closePanel={closePanel} selectElement={selectElement} deSelectElement={deSelectElement} /> }
 
    </div>
   );

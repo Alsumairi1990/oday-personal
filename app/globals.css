@@ -190,3 +190,6 @@
   animation: modalSlide 0.3s ease-out forwards;
 
 }
+body.modal-open {
+  overflow: hidden;
+}

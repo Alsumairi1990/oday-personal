@@ -8,6 +8,8 @@ import { MenuWithModels } from "../_utils/MenuWithModels";
 import prisma from "../../../../../utils/prisma";
 import { MenuElementsSchema } from "../_utils/MenuElementsSchema";
 import { MenuElementSchema } from "../_utils/MenuElementSchema";
+import { MenuParentSchema } from "../_utils/MenuParentSchema";
+import { MenuParent } from "@prisma/client";
 
 
 //Delete Meny Element Parent by 'ids'
@@ -43,8 +45,6 @@ export async function  addingInnerElement(id:number,data:FormData):Promise<MenuW
       if (!session) {
         throw new Error('User not authenticated');
       }
-      
-    
       if (result.success) {
         const data = result.data; 
         let iconPath = '';
@@ -88,6 +88,64 @@ export async function  addingInnerElement(id:number,data:FormData):Promise<MenuW
               throw error;
       }
       } 
+
+
+ // get menu parent elements
+export async function getMenuParent():Promise<MenuParent[]>{
+  try {
+     const elements = await prisma.menuParent.findMany({
+     })
+  return elements;
+  } catch (error) {
+      console.log("error while getting Menu Element " + error);
+      throw error;
+      
+  } finally{
+
+  }
+}
+
+
+
+
+// Creating Menu Parent  
+export async function  addingMenuParent(data:FormData):Promise<MenuParent>{
+  try {
+    const result = MenuParentSchema.safeParse(Object.fromEntries(data.entries()))
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      throw new Error('User not authenticated');
+    }
+    const userId = session.user.id;
+    if (result.success) {
+      const data = result.data; 
+      let iconPath = '';
+      if(data.icon && data.icon.name){
+        await fs.mkdir("public/setting/leftnav/images", { recursive: true })
+        iconPath = `/setting/leftnav/images/${crypto.randomUUID()}-${data.icon.name}`
+        await fs.writeFile(
+          `public${iconPath}`,
+          Buffer.from(await data.icon.arrayBuffer())
+          )
+        }
+          const menu = await prisma.menuParent.create({
+                  data: {
+                  title: data.title,
+                  userId: userId,
+                  priority:data.priority,
+                  icon : iconPath,
+              },
+                });  
+                     
+       return menu;
+    }else {
+      throw new Error("Data converion on suucced")
+    }
+  } catch (error) {
+    console.log('[addingMenuParent]'+ error)
+            throw error;
+    }
+    } 
 
 
 

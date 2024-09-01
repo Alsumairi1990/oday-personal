@@ -383,6 +383,7 @@ model User {
   orders             Order[]
 
   @@map(name: "users")
+  MenuParent MenuParent[]
 }
 
 model EmployeeProfile {
@@ -545,8 +546,11 @@ model MenuParent {
   title       String
   description String?
   icon        String?
+  priority    Int @default(0)
   adminMenu   AdminMenu?
   createdAt   DateTime  @default(now())
+  userId      String 
+  user        User      @relation(fields: [userId], references: [id]) 
   updatedAt   DateTime  @updatedAt
 }
 //Setting Models
@@ -558,8 +562,8 @@ model AdminMenu {
   menuParent  MenuParent @relation(fields: [menuParentId], references: [id], onDelete: Cascade)
   menuParentId Int       @unique
   elements    Element[]
-  userId      String // References one specific user (modified)
-  user        User      @relation(fields: [userId], references: [id]) // Relation to User
+  userId      String 
+  user        User      @relation(fields: [userId], references: [id]) 
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }
