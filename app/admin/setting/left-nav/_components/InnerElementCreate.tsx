@@ -110,25 +110,25 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
       }, []);
      
   return (
-   <div className="w-full h-full bg-[#0003]  m-auto fixed left-0 top-0 flex items-center justify-center p-4 z-50 ">
-        <div className="w-6/12 bg-white p-2 relative rounded-md shadow-xl">
+   <div className="w-full h-full bg-[#0003]  m-auto fixed left-0 top-0 flex items-center justify-center p-4 pb-0 z-50 ">
+        <div className="w-5/12 bg-white p-2 pb-8 relative rounded-md shadow-xl sm:max-h-[90vh]">
         
         {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
         <div className="px-2 py-2.5 w-full flex items-center rounded-md bg-indigo-600 mb-3">
-                <div className="flex items-center">
-                <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
-                <span className="text-base text-white">
-                  Adding Menu inner Elements </span> {id}
-                </div>
-                <div className="ml-auto">
-                    <button type="button" onClick={() => closeModel(false)}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-                        <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                        </svg>
-                        <span className="sr-only">Close modal</span>
-                    </button>
-                </div>
-               </div>
+            <div className="flex items-center">
+            <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
+            <span className="text-base text-white">
+              Adding Menu inner Elements </span> {id}
+            </div>
+            <div className="ml-auto">
+                <button type="button" onClick={() => closeModel(false)}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                    <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span className="sr-only">Close modal</span>
+                </button>
+            </div>
+          </div>
         
         {error && <div className="py-3 my-1 flex items-center">
         <LuAlertOctagon className='text-gray-500 mr-2 text-xl' />
@@ -142,7 +142,7 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
        {element?.elements && element.elements.length>0 ?  (
             <div className="py-2 flex gap-2 items-center ">
             {element.elements.map(element => (
-              <div className="flex items-center  rounded-md pl-2 pr-1 bg-gray-50 border border-gray-200">
+              <div className="flex items-center  rounded-md pl-2 pr-1 bg-gray-100 border border-gray-200">
                   <span className='text-sm text-orange-600 py-1 mr-2 font-medium'>{element.title}</span>
                   <button
                     onClick={() => {
@@ -158,18 +158,18 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
             </div> 
         ):(
           <div className="pb-1">
-          <span className="text-sm text-orange-600 px-4 inline-flex capitalize">No Services  </span>
-      </div>                                   
+            <span className="text-sm text-orange-600 px-4 inline-flex capitalize">No Services  </span>
+          </div>                                   
         )
         }
        
-     <form onSubmit={handleSubmit(saveUser2)} className="text-start z-40  border border-gray-200 p-5 rounded-md">
-        <div className="flex flex-wrap justify-between">
+     <form onSubmit={handleSubmit(saveUser2)} className="text-start  z-40 overflow-y-auto max-h-[60vh] border border-gray-200 p-5 rounded-md">
+        <div className="flex flex-wrap justify-between ">
             <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="title" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Title</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
-                        <input {...register('title')}  type="text" name="title" id="title" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Phase title  ..." required />
+                        <input {...register('title')}  type="text" name="title" id="title" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-100 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Phase title  ..." required />
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.title?.message} </span>
@@ -178,23 +178,23 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
                     <label htmlFor="link" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Linke</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
-                        <input {...register('link')}  type="text" name="link" id="link" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Phase title  ..." required />
+                        <input {...register('link')}  type="text" name="link" id="link" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-100 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Phase title  ..." required />
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.title?.message} </span>
             </div>
-            <div className=" flex flex-48 flex-col z-0 w-full mb-5 group">
+            <div className=" flex sm:flex-100 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="content" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 ">Meny Element description</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
-                        <textarea {...register('description')}  rows={rows} cols={cols}  name="description" id="description" className="block pl-2 pt-3 px-0 z-0 w-full text-sm text-gray-900 bg-gray-50 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="MEnu Element description ..." required />
+                        <textarea {...register('description')}  rows={rows} cols={cols}  name="description" id="description" className="block pl-2 pt-3 px-0 z-0 w-full text-sm text-gray-900 bg-gray-100 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="MEnu Element description ..." required />
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
             </div>
            
-            <div className="flex flex-48 items-center  justify-center w-full">
-                    <label htmlFor="icon" className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
+            <div className="flex flex-100 items-center  justify-center w-full">
+                    <label htmlFor="icon" className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100  hover:bg-gray-100">
                         <div className="flex flex-col items-center justify-center pt-2 pb-3">
                         {imageSrc ? (
                         <Image className='rounded-md'
@@ -219,8 +219,8 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
             </div> 
 
             
-            <div className="mb-4 mt-4 flex w-full">
-                <input type="submit" className="btn px-3 ml-auto py-1.5  bg-indigo-600  hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded " value="Register" />
+            <div className="mt-4 flex w-full absolute bottom-0 pr-3 z-40 left-0 bg-white border-t border-t-gray-300 py-1.5 ">
+                <input type="submit" className="btn px-3 ml-auto py-0.5  bg-indigo-600  hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded " value="Register" />
             </div>
         </div>
     </form>

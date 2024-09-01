@@ -1,6 +1,8 @@
-import { AdminMenu, Element, User } from "@prisma/client";
+
+import { AdminMenu, Element, MenuParent, User } from "@prisma/client";
 export type MenuWithModels = AdminMenu & {
     elements  : Element[] 
     user : User,
+    parent : MenuParent
   };
 

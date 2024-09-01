@@ -162,7 +162,6 @@ const unSelect = (value:string) => {
         <span className="text-red-400 text-md">{error}</span>
         </div>
       }
-  
        <div className="max-h-[95vh] sm:max-h-[80vh] relative overflow-y-auto scr-container">
           <form onSubmit={handleSubmit(saveTask)} className="text-start z-40  rounded-md ">
               <div className="flex flex-wrap py-0 pt-6 px-6 justify-between">
@@ -360,8 +359,6 @@ const unSelect = (value:string) => {
                           </div> 
                           <span className="text-red-400 text-xs mt-2">{errors.endDate?.message} </span>
                   </div>
-                 
-                
               </div>
               <div className="flex-100 flex justify-center sticky bottom-0 w-full left-0 bg-white py-2 border-t border-t-gray-300">
                       <input type="submit" className="btn py-1.5 text-sm px-2 bg-indigo-600   border-indigo-600 hover:bg-indigo-800 hover:border-indigo-800 cursor-pointer text-white rounded-md" value="Create Basic Data" />

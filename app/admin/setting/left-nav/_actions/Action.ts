@@ -116,7 +116,8 @@ export async function  addingMenuElement(data:FormData):Promise<MenuWithModels>{
                     data: {
                     title: data.title,
                     userId: userId,
-                    icon : iconPath
+                    icon : iconPath,
+                    menuParentId :3
                 },
                     
                   });  

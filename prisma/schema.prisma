@@ -540,13 +540,23 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
-
+model MenuParent {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  icon        String?
+  adminMenu   AdminMenu?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
 //Setting Models
 model AdminMenu {
   id          Int       @id @default(autoincrement())
   title       String
   description String?
   icon        String?
+  menuParent  MenuParent @relation(fields: [menuParentId], references: [id], onDelete: Cascade)
+  menuParentId Int       @unique
   elements    Element[]
   userId      String // References one specific user (modified)
   user        User      @relation(fields: [userId], references: [id]) // Relation to User
@@ -562,6 +572,9 @@ model Element {
   icon        String?
   menuId      Int
   menu        AdminMenu @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  parentId    Int?      // Self-referencing field
+  parent      Element?  @relation("ElementToSubElements", fields: [parentId], references: [id], onDelete: Cascade)
+  subElements Element[] @relation("ElementToSubElements") // Relation to child elements
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 }

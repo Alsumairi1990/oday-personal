@@ -148,10 +148,10 @@ const TaskEditPanel = ({ project , colseModel }: FormEditProps) => {
               <div>
                 <div className="py-2 flex items-center border rounded-md px-2 border-gray-300 bg-white flex-wrap overflow-y-auto">
                 <span className="text-gray-600 text-md">List of added categories : </span>
-                  <div className="flex items-center rounded-md w-full gap-2 max-h-26 flex-wrap overflow-y-auto">
+                  <div className="flex items-center rounded-md w-full gap-2 max-h-32 sm:max-h-44 flex-wrap overflow-y-auto">
                   
                    {projectData.tasks && projectData.tasks.length>0 ?  (
-                          <div className="py-2 grid sm:grid-cols-3 gap-2 items-center w-full">
+                          <div className="py-2 grid sm:grid-cols-3 gap-x-2 gap-y-4 items-center w-full ">
                           {projectData.tasks.map(element => (
                             <div className="flex flex-col">
                             <div className="flex items-center  rounded-md pl-2 pr-1 bg-white border border-gray-200">
@@ -274,7 +274,6 @@ const TaskEditPanel = ({ project , colseModel }: FormEditProps) => {
                     </div>
                     }
                 </div>
-
               }
             </div>
           </div>
