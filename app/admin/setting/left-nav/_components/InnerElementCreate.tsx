@@ -111,14 +111,15 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
      
   return (
    <div className="w-full h-full bg-[#0003]  m-auto fixed left-0 top-0 flex items-center justify-center p-4 pb-0 z-50 ">
-        <div className="w-5/12 bg-white p-2 pb-8 relative rounded-md shadow-xl sm:max-h-[90vh]">
+         <div   className="flex flex-col w-full  sm:w-5/12 animate-modalEnter max-sm:h-full add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
         
-        {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
-        <div className="px-2 py-2.5 w-full flex items-center rounded-md bg-indigo-600 mb-3">
+        {loading && <div className=' w-full h-full z-50 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
+         
+        <div className="px-2 py-2.5 w-full flex items-center rounded-t-md bg-gray-100 mb-3 border-b border-b-gray-300">
             <div className="flex items-center">
-            <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
-            <span className="text-base text-white">
-              Adding Menu inner Elements </span> {id}
+            <span className=""><MdAssignmentAdd className='text-cyan-600 text-2xl mr-2' /> </span>
+            <span className="text-base text-gray-700">
+              Adding Menu inner Elements </span> |   {id}
             </div>
             <div className="ml-auto">
                 <button type="button" onClick={() => closeModel(false)}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
@@ -129,10 +130,11 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
                 </button>
             </div>
           </div>
+          <div className=" flex flex-wrap justify-between px-5 max-h-[100vh] sm:max-h-[80vh] relative overflow-y-auto scr-container pt-6 ">
         
-        {error && <div className="py-3 my-1 flex items-center">
-        <LuAlertOctagon className='text-gray-500 mr-2 text-xl' />
-        <span className="text-red-400 text-md">{error}</span>
+        {error && <div className="py-1 my-1 flex items-center">
+        <LuAlertOctagon className='text-gray-500 text-2xl' />
+        <span className="text-red-400 ml-2 text-md">{error}</span>
         </div>
       }
       {element && <span>00{element.title}</span>
@@ -158,13 +160,13 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
             </div> 
         ):(
           <div className="pb-1">
-            <span className="text-sm text-orange-600 px-4 inline-flex capitalize">No Services  </span>
+            <span className="text-sm text-orange-600 px-4 inline-flex capitalize"> </span>
           </div>                                   
         )
         }
        
-     <form onSubmit={handleSubmit(saveUser2)} className="text-start  z-40 overflow-y-auto max-h-[60vh] border border-gray-200 p-5 rounded-md">
-        <div className="flex flex-wrap justify-between ">
+     <form onSubmit={handleSubmit(saveUser2)} className="text-start  z-40 rounded-md">
+        <div className="flex flex-wrap justify-between p-5 ">
             <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="title" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Title</label>
                     <div className="flex items-center w-full">
@@ -217,13 +219,12 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
                     {errors.icon?.message && <p>{errors.icon.message as string}</p>}
 
             </div> 
-
-            
-            <div className="mt-4 flex w-full absolute bottom-0 pr-3 z-40 left-0 bg-white border-t border-t-gray-300 py-1.5 ">
+        </div>
+          <div className="mt-4 flex w-full sticky bottom-0 pr-3 z-40 left-0 bg-white border-t border-t-gray-300 py-1.5 ">
                 <input type="submit" className="btn px-3 ml-auto py-0.5  bg-indigo-600  hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded " value="Register" />
             </div>
-        </div>
     </form>
+    </div>
     </div>
    </div>
   );
