@@ -43,6 +43,7 @@ const WorkCreate = () => {
     alert("vrvtrv")
    }
    const  isOpen = (menuName:any) => {
+    
     return openMenu === menuName; 
   }
    const openEdit = ()=>{
@@ -57,6 +58,8 @@ const WorkCreate = () => {
    const changeBtnMenu = (value:string)=> {
     
     setOpenMenu(value);
+    document.body.classList.add('modal-open');
+
    }
    const addBasicData = (value:string)=> {
          setProjectId(value);
@@ -64,6 +67,8 @@ const WorkCreate = () => {
    }
 const close = (v:boolean)=> {
     setOpenMenu('');
+    document.body.classList.remove('modal-open');
+
 }
   return (
     <div  className="flex flex-wrap min-h-[100vh] h-auto" >
@@ -76,15 +81,15 @@ const close = (v:boolean)=> {
                 title_name="basic"
                 changeMenu={changeBtnMenu}
                 />
-                {isOpen('basic') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
+                {isOpen('basic') && (<div className="fixed flex add-form bg-[rgba(0,0,0,0.38)]  items-center justify-center top-0 left-0 h-full w-full z-50">
                         <div   className="flex flex-col w-full sm:w-5/12 animate-modalEnter max-sm:h-full add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                         <div className="flex w-full bg-gray-100 rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
-                        <div className="flex items-center">
+                            <div className="flex items-center">
                               <span className=""><MdAssignmentAdd className="text-gray-600 text-2xl mr-2" /> </span>
                                   <span className="text-[.96rem] font-medium text-gray-600">Basic Data {projectId}</span>
                               </div>
                               <div className="ml-auto">
-                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                  <button type="button" onClick={() => {setOpenMenu(''); document.body.classList.remove('modal-open')}}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
                                       <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                       </svg>
@@ -118,8 +123,8 @@ const close = (v:boolean)=> {
                                   <span className="text-base font-semibold text-white">Categories</span>
                               </div>
                               <div className="ml-auto">
-                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                              <button type="button" onClick={() => {setOpenMenu(''); document.body.classList.remove('modal-open')}}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                              <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                       </svg>
                                       <span className="sr-only">Close modal</span>
@@ -157,8 +162,8 @@ const close = (v:boolean)=> {
                                   <span className="text-base font-semibold text-white">Service Tools</span>
                               </div>
                               <div className="ml-auto">
-                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                              <button type="button" onClick={() => {setOpenMenu(''); document.body.classList.remove('modal-open')}}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                              <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                       </svg>
                                       <span className="sr-only">Close modal</span>
@@ -192,14 +197,14 @@ const close = (v:boolean)=> {
                                   <span className="text-[.96rem] font-medium text-gray-600">Project Tasks</span>
                               </div>
                               <div className="ml-auto">
-                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                              <button type="button" onClick={() => {setOpenMenu(''); document.body.classList.remove('modal-open')}}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                              <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                       </svg>
                                       <span className="sr-only">Close modal</span>
                                   </button>
                               </div>
-                              </div>
+                          </div>
                          <div  className="w-full">
                          <TaskCreate projectId={projectId ?? ''}   />
                       </div>
@@ -224,8 +229,8 @@ const close = (v:boolean)=> {
                                   <span className="text-[.96rem] font-medium text-gray-600">Project Team</span>
                               </div>
                               <div className="ml-auto">
-                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
-                                      <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                              <button type="button" onClick={() => {setOpenMenu(''); document.body.classList.remove('modal-open')}}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                              <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                       </svg>
                                       <span className="sr-only">Close modal</span>
@@ -255,14 +260,14 @@ const close = (v:boolean)=> {
                                   <span className="text-[.96rem] font-medium text-gray-600">Project phases</span>
                               </div>
                               <div className="ml-auto">
-                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                    <button type="button" onClick={() => {setOpenMenu(''); document.body.classList.remove('modal-open')}}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
                                       <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                       </svg>
                                       <span className="sr-only">Close modal</span>
                                   </button>
                               </div>
-                              </div>
+                         </div>
                          <div  className="w-full max-h-[90vh] scr-container overflow-y-auto">
                          <CreatePhase projectId={projectId ?? ''}   />
                       </div>
@@ -286,7 +291,7 @@ const close = (v:boolean)=> {
                                   <span className="text-base font-semibold text-white">Client Data</span>
                               </div>
                               <div className="ml-auto">
-                                  <button type="button" onClick={() => setOpenMenu('')}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                   <button type="button" onClick={() => {setOpenMenu(''); document.body.classList.remove('modal-open')}}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
                                       <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                       </svg>
