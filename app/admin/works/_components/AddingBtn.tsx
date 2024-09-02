@@ -11,7 +11,6 @@ interface Props {
   }
 
 const AddingBtn =({title,svgUrl,title_name,changeMenu}:Props)=> {
-    console.log("----------------------->"+title)
     const toggleBtn =  () => {
         document.body.classList.add('modal-open');
          changeMenu(title_name); 

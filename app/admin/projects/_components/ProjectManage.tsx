@@ -1,9 +1,5 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link'
-import CardElement1 from '../../common/utils/CardElement1';
-import LineCh from '../../common/utils/LineCh';
-import { CiLogout } from "react-icons/ci";
 import LatestOrders from '../../common/utils/LatestOrders';
 import { FiPlus } from 'react-icons/fi';
 import SalesOverview from '../../common/utils/SalesOverview';
@@ -12,20 +8,16 @@ import CardResult2 from '../../common/utils/CardResult2';
 import SelseCard from '../../common/utils/SalseCard';
 import CardCompare1 from '../../common/utils/CardCompare1';
 import CardResult3 from '../../common/utils/CardResult3';
-import BarCgart1 from '../../common/utils/BarChart1';
-import BarChart1 from '../../common/utils/BarChart1';
-import BarChart2 from '../../common/utils/BarChart2';
-import CardPie from '../../common/utils/CardPie';
-import CardElement2 from '../../common/utils/CardElement2';
 import ComposedChart1 from '../../common/utils/ComposedChart1';
-import DataTable1 from '../../common/utils/DataTable1';
 import ProjectsTable from '../_utils/ProjectsTable';
 import { Category } from '@prisma/client';
 import { getCategories } from '../../service/_serviceActions/ServiceActions';
 import { GoPlus } from 'react-icons/go';
 import PaginationTable from '../_utils/PaginationTable';
-import DropDown1 from '../_utils/DropDown1';
 import CardMainElement2 from '../../common/utils/CardMainElement2';
+import BarChart2 from '../../common/utils/BarChart2';
+import CardPie from '../../common/utils/CardPie';
+import ProjectPhases from './ProjectPhases';
 
 
 // import ServicesPanel from './ServicePanel';
@@ -73,6 +65,11 @@ const getSelected2 = (id:string) => {
     </div>
     </div>
 
+    <div className='mt-6 '>
+            <ProjectPhases  />
+        </div>
+
+
     <div className="py-1 my-10 border border-gray-200 bg-white rounded-md">
        <div className="border-b flex items-center px-3 p-4 border-b-gray-200 my-2 w-full ">
           <div className="bg-gra-100 flex-40 border border-gray-200 rounded-3xl py-1.5 w-full h-10 ">
@@ -93,6 +90,7 @@ const getSelected2 = (id:string) => {
                 </div>
             </div>
         </div>
+       
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <thead className="text-xs text-gray-700  uppercase bg-gray-100 ">
                         <tr className="w-full flex">

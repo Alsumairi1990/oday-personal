@@ -6,6 +6,9 @@ import NavElement from './NavElement';
 import { getAdminLeftMenuElements } from '../common/Actions';
 import { MenuWithModels } from '@/app/admin/setting/left-nav/_utils/MenuWithModels';
 import { IoMdSettings } from 'react-icons/io';
+import { getMenusElements } from '@/app/admin/setting/left-nav/_actions/Action';
+import { MenuWithAllModels } from '@/app/admin/setting/left-nav/_utils/MenuWithAllModels';
+import NavMenuElement from './NavMenuElement';
 
 
 const LeftNav = () => {
@@ -15,6 +18,8 @@ const LeftNav = () => {
    const [navElement, setNavElement] = useState<MenuWithModels[]>([]);
    const [loading, setLoading] = useState<boolean>(false);
    const [error, setError] = useState<string>('');
+   const[menusData , setMenusData] = useState<MenuWithAllModels[]>();
+
    const getElements = async () =>{
     try {
         setLoading(true);
@@ -28,8 +33,24 @@ const LeftNav = () => {
     }
 }
 
+const getAllElements = async () =>{
+    try {
+        setLoading(true);
+        
+            const result = await getMenusElements();
+            if(result) setMenusData(result);
+       
+        setLoading(false);
+        setError('');
+    } catch (error:any) {
+        setLoading(false);
+        setError(error.message);
+    }
+}
+
 useEffect(() => {
     getElements();
+    getAllElements();
 }, []);
 
 //    const [navElement, setNavElement] = useState<NavsElement>(
@@ -104,14 +125,33 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
 
     <div className="side-content pt-2  h-[calc(100%_-_10rem)] overflow-y-auto left-container overflow-x-hidden">
         <ul className="p-1 pl-0 whitespace-nowrap" style={{direction:'ltr'}}>
-            <div className="pl-1">
+
+        <div className="pl-1">
+              {menusData?.map(element => 
+                <>
+                <span className="text-md text-gray-300 font-normal capitalize">{element.menuParent.title}</span>
+                
+                 <NavMenuElement element={element}  />
+                 
+                </>
+              )}
+            </div>
+            {/* {navElement && 
+              navElement.map(element => 
+                <NavElement element={element}  />
+              )
+            } */}
+           
+
+
+            {/* <div className="pl-1">
                 <span className="text-md text-gray-300 font-normal capitalize">Services :</span>
             </div>
             {navElement && 
               navElement.map(element => 
                 <NavElement element={element}  />
               )
-            }
+            } */}
             
             <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                  <div  

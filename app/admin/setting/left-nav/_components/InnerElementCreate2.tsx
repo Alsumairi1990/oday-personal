@@ -6,29 +6,28 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { LuAlertOctagon } from "react-icons/lu";
 import Image from 'next/image';
-import { MdAssignmentAdd, MdOutlineAddCircle} from "react-icons/md";
-import { addingInnerElement, getElelemntWModelsById } from '../_actions/Action';
+import { MdAssignmentAdd} from "react-icons/md";
+import { addingInnerElement, addingNestedElement, getElelemntWModelsById } from '../_actions/Action';
 import { MenuWithModels } from '../_utils/MenuWithModels';
 import { IoMdCloseCircle } from 'react-icons/io';
 import { MenuElementSchema } from '../_utils/MenuElementSchema';
-import InnerElementCreate2 from './InnerElementCreate2';
+import { Element } from '@prisma/client';
 
 interface Props {
     id : string
-    closeModel : (value:boolean) => void
+    closeInnerModel : (value:boolean) => void,
+    addElement : (value:string,value2:number) => void
 }
 type inputType = z.infer<typeof MenuElementSchema>;
-const InnerElementCreate = ({id,closeModel}:Props) => {
+const InnerElementCreate2 = ({id,closeInnerModel,addElement}:Props) => {
     const [element, setElement ]= useState<MenuWithModels>(); 
+    const [nestedElement, setNestedElement ]= useState<Element>(); 
     const [imageSrc, setImageSrc] = useState<string | null>(null);
    const [loading, setLoading] = useState<boolean>(false);
    const [error, setError] = useState<string | null>(null);
    const [baseUrl,setBaseUrl] = useState<string>('');
    const [removedTool, setRemovedTool] = useState<string>('');
    const [showRemoveTool, setShowRemoveTool] = useState<boolean>(false);
-   const [elementMenuShow,setElementMenuShow] = useState<boolean>(false);
-   const [selectedElements, setSelectedElements] = useState<string[]>([])
-   const [selectedElementIds, setSelectedElementIds] = useState<number[]>([])
    const rows = 5;
    const cols = 30;
      const {
@@ -54,7 +53,7 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
   };
 
   const closePanel = (flag:boolean) => {
-    closeModel(false);
+    closeInnerModel(false);
   }
 
   useEffect(() => {
@@ -77,8 +76,10 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
       try {
         setLoading(true);
         if (id){
-        const result =  await addingInnerElement(Number(id),formData,selectedElementIds);
-        setElement(result)
+        const result =  await addingNestedElement(Number(id),formData);
+        if(result) setNestedElement(result)
+        addElement(result.title,result.id)
+        // closeModel(false);
         }
         setLoading(false);
       } catch (error:any) {
@@ -106,15 +107,7 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
       useEffect(() => {
         getMenuInner();
       }, []);
-     const addElement = (value:string,value2:number)=> {
-      setSelectedElements((prevValues) => [...prevValues, value]);
-      setSelectedElementIds((prevValues) => [...prevValues, value2]);
-
-     }
-     const closeInnerPanel = (flag:boolean)=>{
-      setElementMenuShow(flag);
-
-     }
+     
   return (
    <div className="w-full h-full bg-[#0003]  m-auto fixed left-0 top-0 flex items-center justify-center sm:p-4 pb-0 z-50 ">
          <div   className="flex flex-col w-full  sm:w-5/12 animate-modalEnter max-sm:h-full add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
@@ -123,10 +116,10 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
             <div className="flex items-center">
             <span className=""><MdAssignmentAdd className='text-cyan-600 text-2xl mr-2' /> </span>
             <span className="text-base text-gray-700">
-              Adding Menu inner Elements </span> |   {id}
+              Adding neasted Elements </span> |   {id}
             </div>
             <div className="ml-auto">
-                <button type="button" onClick={() => closeModel(false)}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                <button type="button" onClick={() => closeInnerModel(false)}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
                     <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                     </svg>
@@ -221,31 +214,6 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
                     </label>
                     {errors.icon?.message && <p>{errors.icon.message as string}</p>}
             </div> 
-            <div className="py-2 flex-100">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setElementMenuShow((prevState) => {
-                      if (prevState == false) {
-                      }
-                      return !prevState;
-                    });
-                      document.body.classList.add('modal-open');
-                  }}
-                  className="flex w-full bg-gray-100 items-center border gap-x-3 py-2 border-gray-300  px-2 rounded-2xl"
-                >
-                    <div className="text-md inline-flex text-gray-800 font-medium capitalize">
-                      {selectedElements.length > 0 ? (selectedElements.map(element =>
-                      <span className="px-1 capitalize">{element}</span>)
-                    )
-                      : <span className="px-1 capitalize">Adding Inner Element{selectedElements.length}</span>
-                      }
-                    </div>
-                  <span className="ml-auto">
-                    <MdOutlineAddCircle className="text-3xl border-2 border-violet-800 rounded-full text-violet-800" />
-                  </span>
-                </button>
-            </div>
         </div>
           <div className="mt-4 flex w-full sticky bottom-0 pr-3 z-40 left-0 bg-white border-t border-t-gray-300 py-1.5 ">
                 <input type="submit" className="btn px-3 ml-auto py-0.5  bg-indigo-600  hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded " value="Register" />
@@ -253,9 +221,7 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
     </form>
     </div>
     </div>
-    {elementMenuShow && <InnerElementCreate2 closeInnerModel={closeInnerPanel} id={String(element?.id)} addElement={addElement}  /> }
-
    </div>
   );
 };
-export default InnerElementCreate;
+export default InnerElementCreate2;

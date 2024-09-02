@@ -571,7 +571,7 @@ model AdminMenu {
 model Element {
   id          Int       @id @default(autoincrement())
   title       String
-  link        String
+  link        String?
   description String?
   icon        String?
   menuId      Int

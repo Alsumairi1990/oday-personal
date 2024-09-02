@@ -70,27 +70,6 @@ const NavElement = ({element}:Props) => {
                        </li>
 
                      )}
-                       
-                        {/* <li>
-                        <Link href="/admin/service/edit">
-                            <div
-                            onClick={() => handleLinkClick('/admin/service/edit')}
-                            className={`pl-6 py-[2px] relative after:content-[''] after:absolute after:h-px after:w-5 after:border-b after:border-dotted after:border-b-gray-400 after:bg-transparent  after:left-0 after:top-[14px] ${activeLink === '/admin/service/edit' ? 'text-orange-400' : ''}`}
-                            >
-                            <span className="pl-3 relative after:content-[''] after:absolute after:h-1 after:w-1 after:bg-gray-400 after:left-[-2px] hover:text-orange-400 after:top-[7px] after:rounded">Edit</span>
-                            </div>
-                        </Link>
-                        </li>
-                        <li>
-                         <Link href="/admin/service/delete">
-                            <div
-                            onClick={() => handleLinkClick('/admin/service/delete')}
-                            className={`pl-6 py-[2px] relative after:content-[''] after:absolute after:h-px after:w-5 after:border-b after:border-dotted after:border-b-gray-400 after:bg-transparent  after:left-0 after:top-[14px] ${activeLink === '/admin/service/delete' ? 'text-orange-400' : ''}`}
-                            >
-                            <span className="pl-3 relative after:content-[''] after:absolute after:h-1 after:w-1 after:bg-gray-400 after:left-[-2px] hover:text-orange-400 after:top-[7px] after:rounded">Delete</span>
-                            </div>
-                        </Link>
-                        </li> */}
                 </ul>
                 }
             </li>

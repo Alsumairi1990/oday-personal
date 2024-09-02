@@ -30,6 +30,8 @@ const MenuCreate = () => {
    const [baseUrl,setBaseUrl] = useState<string>('');  
    const [selectedParent, setSelectedParent] = useState<string>('')
    const [menuParentShow, setMenuParentShow] = useState<boolean>(false);
+   const [parentId, setParentId] = useState<number>(0);
+
 
    
 
@@ -75,8 +77,11 @@ const MenuCreate = () => {
   
       try {
         setLoading(true);
-        const result =  await addingMenuElement(formData);
+        if(parentId != 0){
+          const result =  await addingMenuElement(formData,parentId);
         setElement(result)
+        }
+        
         setLoading(false);
 
       } catch (error:any) {
@@ -93,9 +98,11 @@ const MenuCreate = () => {
       }, []);
      const selectElement = (value:string,value2:string)=> {
       setSelectedParent(value2);
+      setParentId(Number(value));
      }
      const deSelectElement = (value:string,value2:string)=> {
       setSelectedParent('')
+      setParentId(0);
      }
   return (
    <div className="w-full sm:w-11.8/12 m-auto relative p-4 bg-white rounded-md border border-gray-200">

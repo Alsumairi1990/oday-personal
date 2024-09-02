@@ -61,7 +61,7 @@ const MenuManage = () => {
                             <p className="text-white font-bold text-base">456</p>
                         </div>
                     </div>
-                    <Link href="/admin/testimonials/display" className="flex-70 w-6/12 border !border-[#9386d5] mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer" style={{background: 'linear-gradient(to top, rgb(100 76 218), rgb(98 74 213) )'}}>
+                    <Link href="/admin/setting/left-nav/display" className="flex-70 w-6/12 border !border-[#9386d5] mt-1 mx-auto max-sm:flex-100 flex items-center justify-center sm:py-1.5 rounded-[20px] cursor-pointer" style={{background: 'linear-gradient(to top, rgb(100 76 218), rgb(98 74 213) )'}}>
                         <div  className="flex items-center rounded-2xl py-[2px] px-[5px] " >
                             <span className=" text-gray-50 font-semibold text-md capitalize pr-2.5 pl-1 text-base" data-v-a1c57ce8=""> Display</span>
                             <div className="px-1 py-0.5 flex" >
