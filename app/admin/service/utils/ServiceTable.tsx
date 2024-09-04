@@ -1,9 +1,6 @@
-import { Category } from '@prisma/client';
 import React, { useEffect } from 'react';
 import {useState} from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { ServiceWCategory } from './ServiceWCategory';
 import { FiPlus } from 'react-icons/fi';
 import { ServiceAnalticsModel } from './ServiceAanlyticsModel';
 import ShowServiceModel from '../_components/ShowServiceModel';

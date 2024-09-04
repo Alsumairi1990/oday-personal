@@ -18,6 +18,9 @@ import CardMainElement2 from '../../common/utils/CardMainElement2';
 import BarChart2 from '../../common/utils/BarChart2';
 import CardPie from '../../common/utils/CardPie';
 import ProjectPhases from './ProjectPhases';
+import { ProjectAnalyticsModel } from '../_utils/ProjectAanlyticsModel';
+import { getProjectWithAnalytics } from '../_actions/Actions';
+import ProjectTable from '../_utils/ProjectTable';
 
 
 // import ServicesPanel from './ServicePanel';
@@ -29,12 +32,12 @@ const ProjectManage = () => {
    const imagePath5 = '/images/basic14.svg';
    const imagePath6 = '/images/basic10.svg';
    const imagePath7 = '/images/CardResult.png';
-   const [options, setOptions] = useState<Category[]>([]);
+   const [options, setOptions] = useState<ProjectAnalyticsModel[]>([]);
    const [searchTerm, setSearchTerm] = useState<string>('');
 
    const getAllCatgs = async () => {
-    const catgs = await getCategories();
-    setOptions(catgs);
+    const projects = await getProjectWithAnalytics();
+    setOptions(projects);
    }
    const unSelected1 = (id:string) => {
 }
@@ -48,7 +51,7 @@ const getSelected2 = (id:string) => {
 
    
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(3);
+  const [postsPerPage, setPostsPerPage] = useState(5);
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts = options.slice(firstPostIndex, lastPostIndex);
@@ -92,8 +95,11 @@ const getSelected2 = (id:string) => {
         </div>
        
     <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                    <thead className="text-xs text-gray-700  uppercase bg-gray-100 ">
+    <thead className="text-xs text-gray-700  uppercase bg-gray-100 ">
                         <tr className="w-full flex">
+                            <th scope="col" className="text-center  flex-5 py-3">
+                                 
+                            </th>
                               <th scope="col" className="text-center  flex-5 py-3">
                                       <div className="inline-flex items-center">
                                     <label className="relative flex items-center  rounded-full cursor-pointer" htmlFor="checkbox">
@@ -112,17 +118,26 @@ const getSelected2 = (id:string) => {
                                     </label>
                                 </div>
                             </th>
-                            <th scope="col" className="text-center  flex-20 py-3">
-                                 name
+                            <th scope="col" className="text-center  flex-10 py-3">
+                                 icon
                             </th>
-                            <th scope="col" className="text-center flex-20 py-3">
-                                Color
+                            <th scope="col" className="text-center flex-15 py-3">
+                                name
                             </th>
-                            <th scope="col" className="text-center flex-20 py-3">
-                                Category
+                            <th scope="col" className="text-center flex-10 py-3">
+                                progress
                             </th>
-                            <th scope="col" className="text-center flex-20 py-3">
-                                Price
+                            <th scope="col" className="text-center flex-15 py-3">
+                                Created
+                            </th>
+                            <th scope="col" className="text-center flex-10 py-3">
+                                Phases
+                            </th>
+                            <th scope="col" className="text-center flex-10 py-3">
+                                Tasks
+                            </th>
+                            <th scope="col" className="text-center flex-10 py-3">
+                            priority
                             </th>
                             <th scope="col" className="text-center flex-10 py-3">
                                 Action
@@ -130,7 +145,7 @@ const getSelected2 = (id:string) => {
                         </tr>
                     </thead>
                     <tbody>
-                    <ProjectsTable categories={currentPosts} searchParam={searchTerm} unSelected={unSelected1} getSelected={getSelected2} />
+                    <ProjectTable projects={currentPosts} searchParam={searchTerm} unSelected={unSelected1} getSelected={getSelected2} />
                     </tbody>
                 </table>
                 {/* <PaginationTable  /> */}

@@ -84,8 +84,8 @@ const close = (v:boolean)=> {
                 {isOpen('basic') && (<div className="fixed flex add-form bg-[rgba(0,0,0,0.38)]  items-center justify-center top-0 left-0 h-full w-full z-50">
                         <div   className="flex flex-col w-full sm:w-5/12 animate-modalEnter max-sm:h-full add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                         <div className="flex w-full bg-gray-100 rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
-                            <div className="flex items-center">
-                              <span className=""><MdAssignmentAdd className="text-gray-600 text-2xl mr-2" /> </span>
+                              <div className="flex items-center">
+                                 <span className=""><MdAssignmentAdd className="text-gray-600 text-2xl mr-2" /> </span>
                                   <span className="text-[.96rem] font-medium text-gray-600">Basic Data {projectId}</span>
                               </div>
                               <div className="ml-auto">
@@ -291,7 +291,9 @@ const close = (v:boolean)=> {
                                   <span className="text-base font-semibold text-white">Client Data</span>
                               </div>
                               <div className="ml-auto">
-                                   <button type="button" onClick={() => {setOpenMenu(''); document.body.classList.remove('modal-open')}}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
+                                   <button type="button" 
+                                   onClick={() => {setOpenMenu(''); document.body.classList.remove('modal-open')}}  
+                                   className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
                                       <svg className="w-2.5 h-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                                       </svg>

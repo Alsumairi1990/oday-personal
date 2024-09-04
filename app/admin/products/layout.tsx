@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { PageTitleProvider } from '../employees-manage/employees/_utils/PageTitleContext';
 import Breadcrumb from '../employees-manage/employees/_utils/Breadcrumbs';
 
-export default function EmployeeProfileLayout({ children}: { children: React.ReactNode}) {
+export default function EmployeeProfileLayout({ children }: { children: React.ReactNode}) {
   const [activePageTitle, setActivePageTitle] = useState('');
 
  

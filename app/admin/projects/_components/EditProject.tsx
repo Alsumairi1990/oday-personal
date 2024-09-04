@@ -11,9 +11,9 @@ import { ProjectWithModels } from '../_utils/ProjectWithModels';
 import { editWorkBasicData, editWorkDescription, editWorkIcon, editWorkImage } from '../../works/_actions/Actions';
 import { getProjectWModelsById } from '../_actions/Actions';
 import { CiImageOn } from 'react-icons/ci';
-import EditProjectDetails from './EditProjectDetails';
-import CategoryEditPanel from './panels/CategoryEditPanel';
-import ToolEditPanel from './panels/ToolEditPanel';
+// import EditProjectDetails from './EditProjectDetails';
+// import CategoryEditPanel from './panels/CategoryEditPanel';
+// import ToolEditPanel from './panels/ToolEditPanel';
 import TaskEditPanel from './panels/TaskEditPanel';
 
 

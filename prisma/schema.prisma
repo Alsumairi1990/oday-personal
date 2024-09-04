@@ -97,6 +97,7 @@ model Category {
   works        WorkCategory[]
   testimonials TestimonialCategory[]
   projects     Project[]
+  products     Product[]
   userId       String // References one specific user (modified)
   user         User?                 @relation(fields: [userId], references: [id]) // Relation to User
   createdAt    DateTime              @default(now())
@@ -110,6 +111,7 @@ model Tag {
   image        String?
   icon         String?
   description  String?
+  products     Product[]
   services     ServiceTag[]
   works        WorkTag[]
   testimonials TestimonialTag[]
@@ -162,6 +164,8 @@ model Price {
   serviceId     Int
   service       Service?  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   locationId    Int
+  productId     String?
+  product       Product?  @relation(fields: [productId], references: [id], onDelete: Cascade)
   location      Location  @relation(fields: [locationId], references: [id], onDelete: Cascade)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -381,6 +385,7 @@ model User {
   projects           Project[]
   tasks              Task[]
   orders             Order[]
+  products           Product[]
 
   @@map(name: "users")
   MenuParent MenuParent[]
@@ -614,6 +619,50 @@ model Task {
   media          Media[]
 }
 
+model Vendor {
+  id            String      @id @default(uuid())
+  name          String
+  slug          String      @unique
+  description   String?
+  logo          String?
+  website       String?
+  email         String?
+  phone         String?
+  address       String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  products      Product[]   // One-to-many relation with the Product model
+  @@index([slug])
+}
+
+
+model Product {
+  id             String     @id @default(uuid())
+  name           String
+  slug           String     @unique
+  image          String?
+  description    String?
+  stockQuantity  Int       @default(0)
+  isActive       Boolean    @default(true)
+  isPublished    Boolean    @default(false)
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+  prices         Price[]    // One-to-many relation with the Price model
+  categories     Category[]  // Many-to-many relation with Category model
+  tags           Tag[]     // Many-to-many relation with Tag model
+  media          Media[]    // One-to-many relation with the Media model
+  vendorId       String?    // Foreign key to Vendor model
+  vendor         Vendor?    @relation(fields: [vendorId], references: [id])
+  rating         Decimal?   
+  sku            String?    @unique
+  dimensions     String?
+  weight         Decimal?
+   userId      String 
+  user        User      @relation(fields: [userId], references: [id])    
+  @@index([slug])
+}
+
+
 enum ProjectStatus {
   PLANNED
   IN_PROGRESS
@@ -634,6 +683,10 @@ model Media {
   type      MediaType // Enum for file type (image, document, etc.)
   projectId String
   project   Project   @relation(fields: [projectId], references: [id])
+  
+  productId String
+  product   Product   @relation(fields: [productId], references: [id])
+
 
   tasktId Int
   task    Task @relation(fields: [tasktId], references: [id])
