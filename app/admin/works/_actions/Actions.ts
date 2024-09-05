@@ -732,6 +732,8 @@ export async function addMed(data:FormData,workId:number):Promise<number>{
           imagePaths.push(imagePath);
           console.log(imagePaths);
       }
+    } else {
+      throw new Error('No images ')
     }
     try {
       if(imagePaths.length >0 ){
@@ -742,13 +744,15 @@ export async function addMed(data:FormData,workId:number):Promise<number>{
         },
       });
         return updatedWork.imageUrls.length;
+      }else {
+        throw new Error('no images')
       }
+
     } catch (error) {
       console.error('Error creating service:', error);
       throw error;
     }
-
-    return 0;
+    
 }
 
 
@@ -1129,7 +1133,6 @@ export async function getWorkWModelsById(workId:number):Promise<WorkWithModels >
     console.log("error in get work by id" + error);
     throw error;
   }
-
 }
 
 // Get All Works with all models 

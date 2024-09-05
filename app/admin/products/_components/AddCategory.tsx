@@ -143,13 +143,15 @@ const getSelected= (selected:string)=>{
     {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
     <div className="text-start z-40  ">
        <div className=" mb-3 border border-gray-200 rounded-md">
+            
+          {categoryNames.length>0 ?  (
+            <>
             <div className="px-2 border-b flex gap-2 items-center border-b-gray-200 py-1.5 ">
                 <span className="bg-green-600 size-5 flex items-center justify-center rounded-md">
                 <MdDone  className='text-lg text-white  '  />
                 </span>
                 <span className="text-gray-600 font-medium text-md">Categories added {productId}</span>
             </div>
-          {categoryNames.length>0 ?  (
             <div className="p-2 grid sm:grid-cols-3 gap-x-3 items-center gap-2 max-h-28 flex-wrap overflow-y-auto">
             {categoryNames.map(name => (
               <div className="flex items-center rounded-md pl-1 pr-1 bg-gray-50 border border-gray-200">
@@ -173,6 +175,7 @@ const getSelected= (selected:string)=>{
                </div>
              ))}
             </div> 
+            </>
         ):(
           <span className="text-sm text-orange-600 px-4 py-2 inline-flex capitalize">No Categories Added </span>
         )
@@ -183,7 +186,7 @@ const getSelected= (selected:string)=>{
         <span className="text-red-400 text-md">{error}</span>
         </div>
       }
-      <div className="border-t my-1.5 mb-3 flex items-center justify-center pt-3 border-t-gray-200 ">
+      <div className="border-t my-2.5 mb-3 flex items-center justify-center pt-3 border-t-gray-200 ">
         <div className="flex items-center border gap-x-3 py-1 border-gray-200  px-2 bg-gray-100 rounded-md">
           <GrSelect className='text-base text-gray-600' />
           <span className="text-md inline-flex text-indigo-600">Slecet Categorues</span>

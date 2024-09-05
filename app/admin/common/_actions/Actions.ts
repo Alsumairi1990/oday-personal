@@ -378,7 +378,7 @@ export async function removeServiceTool(serviceId: number, name: string): Promis
 
 
 // Creating New Tag with 'name,slug' columns for shortway creation 
-async function createTag(name: string) : Promise<number> {
+export async function createTag(name: string) : Promise<number> {
   let tag:number = 0;
   try {
       const session = await getServerSession(authOptions);

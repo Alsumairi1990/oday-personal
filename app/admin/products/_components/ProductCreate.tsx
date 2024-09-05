@@ -10,6 +10,7 @@ import AddingBtn from './AddingBtn';
 import BasicCreate from './BasicCreate';
 import AddCategory from './AddCategory';
 import AddTag from './AddTag';
+import AddMedia from './AddMedia';
 
 
 const WorkCreate = () => {
@@ -20,7 +21,7 @@ const WorkCreate = () => {
    const [basic,setBasic] = useState('/images/43.svg');
    const [category,setCategoty] = useState('/images/40.svg');
    const [tag,setTool] = useState('/images/41.svg');
-   const [phases,setPhases] = useState('/images/42.svg');
+   const [media,setPhases] = useState('/images/42.svg');
    const [pricing,setPricing] = useState('/images/basic5.svg');  
    const [code,setCode] = useState('/images/basic11.svg');  
    const [testimonials,setTestimonials] = useState('/images/basic6.svg');
@@ -52,7 +53,7 @@ const close = (v:boolean)=> {
         <div className="p-1 border-b border-b-gray-300 border-dashed flex py-3 items-center w-full">
            <div className="flex items-center pl-2">
                 <span className=""><MdAssignmentAdd className="text-gray-600 text-2xl mr-2" /> </span>
-                <span className="text-[.96rem] font-medium text-gray-600">Product Form</span>
+                <span className="text-[.96rem] font-medium text-gray-600">Product Form</span>{productId}
             </div>
             {/* <div className="pl-1">
                 <span className="text-gray-600 text-md font-medium">Product Form</span>
@@ -86,7 +87,7 @@ const close = (v:boolean)=> {
 
              <div className="add-main">
                 <AddingBtn
-                title="Project Tasks"
+                title="Product Tags"
                 svgUrl={tag}
                 title_name="tag"
                 changeMenu={changeBtnMenu}
@@ -97,9 +98,9 @@ const close = (v:boolean)=> {
 
              <div className="add-main">
                 <AddingBtn
-                title="Advanced Data"
-                svgUrl={phases}
-                title_name="phases"
+                title="Media Attatchment"
+                svgUrl={media}
+                title_name="media"
                 last="last"
                 changeMenu={changeBtnMenu}
                 isOpen={isOpen}
@@ -133,10 +134,21 @@ const close = (v:boolean)=> {
              </div>
 
              <div className="">
-             {isOpen('tag') && (<div className="flex add-form items-center justify-center pt-3  w-full ">
-                        <div   className="flex flex-col w-full sm:w-11.8/12 animate-modalEnter  add-menu  bg-white items-center rounded-md  border border-gray-200 " >
+             {isOpen('tag') && (<div className="flex add-form items-center justify-center  w-full ">
+                        <div   className="flex flex-col w-full sm:w-11.8/12 animate-modalEnter  add-menu  bg-white items-center  border-l border-dashed border-l-gray-200 " >
                          <div  className="w-full ">
-                         {productId && <AddTag  productId={productId} />}
+                         <AddTag  productId={productId ? productId : ''} />
+                         </div>
+                     </div>
+                 </div>
+                )}
+             </div>
+
+             <div className="">
+             {isOpen('media') && (<div className="flex add-form items-center justify-center  w-full ">
+                        <div   className="flex flex-col w-full sm:w-11.8/12 animate-modalEnter  add-menu  bg-white items-center  border-l border-dashed border-l-gray-200 " >
+                         <div  className="w-full ">
+                         <AddMedia  productId={productId ? productId : ''} />
                          </div>
                      </div>
                  </div>

@@ -1,8 +1,7 @@
 "use client";
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { getCategories } from '../../service/_serviceActions/ServiceActions';
-import { Category} from '@prisma/client';
+import { Tag} from '@prisma/client';
 import { LuAlertOctagon } from "react-icons/lu";
 import { MdDone } from "react-icons/md";
 import { GrSelect } from "react-icons/gr";
@@ -10,15 +9,15 @@ import { MdAssignmentAdd } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
 import Image from 'next/image'
 import { FiPlusCircle } from "react-icons/fi";
-import { addProjectCategory, createProjectCategory, getProjectWCategorylById, removeProjectCategory } from '../../projects/_actions/Actions';
-import { addProductCategory, createProductCategory, getProductWCategorylById, removeProductCategory } from '../_actions/Actions';
+import { addProductCategory, addProductTag, createProductCategory, createProductTag, getProductWCategorylById, getProductWTaglById, removeProductCategory, removeProductTag } from '../_actions/Actions';
+import { getTags } from '../../common/_actions/Actions';
 
 interface Props {
     productId : string,
   }
 const AddTag = ({productId}:Props) => {
   const [categoryName , setCategoryName ] = useState<string>('');
-  const [categories , setCategories ] = useState<Category[]>([]);
+  const [tags , setTags ] = useState<Tag[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [svalues, setSvalues] = useState<string[]>([]);
@@ -26,7 +25,7 @@ const AddTag = ({productId}:Props) => {
     const [showDelete, setShowDelete] = useState(false);
     const [baseUrl, setBaseUrl] = useState<string>('');
     const [toolNames, setToolNames] = useState<string[]>([]);
-    const [categoryNames, setCategoryNames] = useState<Category[]>([]);
+    const [tagNames, settagNames] = useState<Tag[]>([]);
 
     const [error, setError] = useState<string | null>(null);
     const [showAddTool , setShowAddTool ] = useState<boolean>(false);
@@ -55,30 +54,29 @@ const getSelected= (selected:string)=>{
         return newValues;
     });
    }
-   const addCategoryName = (name:string)=>{
+   const addTagName = (name:string)=>{
     setCategoryName(name);
    }
    
-   const addCategory = async () => {
+   const addTag = async () => {
     try {
       const numberArray = svalues.map(value => Number(value));
       setLoading(true);
-      const names = await addProductCategory(productId, numberArray);
+      const names = await addProductTag(productId, numberArray);
       setLoading(false);
-      setCategoryNames(names);
-      setError(null); // Clear previous errors
+      settagNames(names);
+      setError(null); 
     } catch (error: any) {
-      console.error('Error in addTool:', error);
       setError(error.message || 'An unexpected error occurred');
       setLoading(false);
     }
   };
-  const getCategoryNames = async ()=> {
+  const gettagNames = async ()=> {
     try {
         setLoading(true);
-        const names = await getProductWCategorylById(productId);
+        const names = await getProductWTaglById(productId);
         setLoading(false);
-        setCategoryNames(names);
+        settagNames(names);
         setError(null); 
         
     } catch (error:any) {
@@ -86,13 +84,13 @@ const getSelected= (selected:string)=>{
         setLoading(false);
     }
   }
-  const removeCategory  = async () => {
+  const removeTag  = async () => {
     
     try {
       setLoading(true);
-      const tools = await removeProductCategory(productId,removedTool);
+      const tools = await removeProductTag(productId,removedTool);
       setLoading(false);
-     setCategoryNames(tools);
+     settagNames(tools);
      setError(null);
      setShowRemoveTool(false);
     } catch (error:any) {
@@ -102,12 +100,12 @@ const getSelected= (selected:string)=>{
     
   }  
   
-    const getAllCategories = async ()=> {
+    const getAlltags = async ()=> {
       try {
         setLoading(true);
-        const catgs = await getCategories();
+        const catgs = await getTags();
         setLoading(false);
-        setCategories(catgs);
+        setTags(catgs);
         setError(null)
         
       } catch (error:any) {
@@ -117,19 +115,19 @@ const getSelected= (selected:string)=>{
      
     }
     useEffect(() => {
-      getAllCategories();
-      getCategoryNames();
+      getAlltags();
+      gettagNames();
 
     }, []);
 
-    const createCategory = async () => {
+    const createTag = async () => {
       try {
         if(productId != '' && categoryName != ''){
           setLoading(true);
-          const catname = await createProductCategory(productId , categoryName);
+          const catname = await createProductTag(productId , categoryName);
           setLoading(false);
           setError(null)
-          setCategoryNames((prevToolNames) => [...prevToolNames, catname]);
+          settagNames((prevToolNames) => [...prevToolNames, catname]);
         }
         setShowAddTool(false);
       } catch (error:any) {
@@ -143,15 +141,17 @@ const getSelected= (selected:string)=>{
     {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
     <div className="text-start z-40  ">
        <div className=" mb-3 border border-gray-200 rounded-md">
+            
+          {tagNames.length>0 ?  (
+            <>
             <div className="px-2 border-b flex gap-2 items-center border-b-gray-200 py-1.5 ">
                 <span className="bg-green-600 size-5 flex items-center justify-center rounded-md">
                 <MdDone  className='text-lg text-white  '  />
                 </span>
-                <span className="text-gray-600 font-medium text-md">Categories added {productId}</span>
+                <span className="text-gray-600 font-medium text-md">Tags added {productId}</span>
             </div>
-          {categoryNames.length>0 ?  (
             <div className="p-2 grid sm:grid-cols-3 gap-x-3 items-center gap-2 max-h-28 flex-wrap overflow-y-auto">
-            {categoryNames.map(name => (
+            {tagNames.map(name => (
               <div className="flex items-center rounded-md pl-1 pr-1 bg-gray-50 border border-gray-200">
                  <div className="flex-30 h-14 p-1 pl-0">
                  {name && name.image ?( <Image className='rounded-md w-full h-full'
@@ -160,7 +160,7 @@ const getSelected= (selected:string)=>{
                             width={100}
                             alt="Image"
                         />):(
-                            <span className="text-gray-400">no image</span>
+                            <span className="text-gray-400">image</span>
                         )}
                  </div>
                   <span className='text-sm flex-55 pl-2 text-gray-600 py-1 '>{name.name}</span>
@@ -173,20 +173,21 @@ const getSelected= (selected:string)=>{
                </div>
              ))}
             </div> 
+            </>
         ):(
-          <span className="text-sm text-orange-600 px-4 py-2 inline-flex capitalize">No Categories Added </span>
+          <span className="text-sm text-orange-600 px-4 py-2 inline-flex capitalize">No Tags Added </span>
         )
         }
         </div>
       {error && <div className="py-3 my-1 flex items-center">
         <LuAlertOctagon className='text-gray-500 mr-2 text-xl' />
-        <span className="text-red-400 text-md">{error}</span>
+        <span className="text-red-400 text-md line-clamp-3">{error}</span>
         </div>
       }
-      <div className="border-t my-1.5 mb-3 flex items-center justify-center pt-3 border-t-gray-200 ">
+      <div className="border-t my-2.5 mb-3 flex items-center justify-center pt-3 border-t-gray-200 ">
         <div className="flex items-center border gap-x-3 py-1 border-gray-200  px-2 bg-gray-100 rounded-md">
           <GrSelect className='text-base text-gray-600' />
-          <span className="text-md inline-flex text-indigo-600">Slecet Categorues</span>
+          <span className="text-md inline-flex text-indigo-600">Slecet Tags</span>
         </div>
         <span className="inline-flex text-sm text-red-500 mx-2">OR</span>
         <button 
@@ -199,11 +200,11 @@ const getSelected= (selected:string)=>{
         
       </div>
       {showRemoveTool && <div className='fixed top-0 left-0 z-30 bg-[#00000018]  flex items-center justify-center h-full w-full '>
-          <div className="w-5/12 bg-white animate-modalEnter rounded-md shadow-lg p-4">
+          <div className="w-10/12 sm:w-5/12 bg-white animate-modalEnter rounded-md shadow-lg p-4">
                  <div className="flex w-full border border-gray-300 bg-gray-200 rounded-md py-2.5 items-center px-3 border-b border-b-gray-300" style={{boxShadow:'0 6px 19px -13px #9f9494;'}}>
                       <div className="flex items-center">
                               <span className=""><MdAssignmentAdd className='text-gray-600 text-2xl mr-2' /> </span>
-                          <span className="text-base font-semibold text-gray-600">Remove Serice Tool</span>
+                          <span className="text-base font-semibold text-gray-600">Remove tag </span>
                       </div>
                       <div className="ml-auto">
                           <button type="button" onClick={() => setShowRemoveTool(false)}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
@@ -215,13 +216,13 @@ const getSelected= (selected:string)=>{
                       </div>
                   </div>
                   <div className=" flex flex-col z-0 w-full mt-2 mb-5 group pt-2">
-                      <span className='text-red-500'>You are going to remove tool from service</span>
+                      <span className='text-red-500'>You are going to remove tag from product</span>
                   </div>
                   <div className="mt-2 p-2 flex justify-center">
                   <button 
-                  onClick={ removeCategory }
+                  onClick={ removeTag }
                   className='inline-flex py-1.5  items-center px-2 rounded-md bg-violet-600 ml-4 text-white text-[14px] capitalize'>
-                    Remove Service Tool
+                    Remove Tag
                     </button>
                     </div>
           </div> 
@@ -232,7 +233,7 @@ const getSelected= (selected:string)=>{
                  <div className="flex w-full border border-gray-300 bg-gray-200 rounded-md py-2.5 items-center px-3 border-b border-b-gray-300" style={{boxShadow:'0 6px 19px -13px #9f9494;'}}>
                       <div className="flex items-center">
                               <span className=""><MdAssignmentAdd className='text-gray-600 text-2xl mr-2' /> </span>
-                          <span className="text-base font-semibold text-gray-600">Add New Tool</span>
+                          <span className="text-base font-semibold text-gray-600">Add New Tag</span>
                       </div>
                       <div className="ml-auto">
                           <button type="button" onClick={() => setShowAddTool(false)}  className="text-gray-800 close-icon bg-gray-200 hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-6 h-6 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" >
@@ -248,17 +249,17 @@ const getSelected= (selected:string)=>{
                       <div className="flex items-center w-full">
                         <div className="relative flex w-full">
                         <input  
-                        onChange={(e) => addCategoryName(e.target.value)}
+                        onChange={(e) => addTagName(e.target.value)}
                         type="text" name="name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Web Designing ..." required />
                         </div>
                       </div> 
                   </div>
                   <div className="mt-2 p-2 flex justify-center">
-                    <button onClick = {createCategory}
+                    <button onClick = {createTag}
                         type='button' 
                         disabled={categoryName=== ''}
                         className='inline-flex py-1.5  items-center px-2 rounded-md bg-violet-600 ml-4 text-white text-[14px] capitalize'>
-                        Create & Add to Service 
+                        Create & Add to Product 
                           <span className="text-white ml-2 text-md"  >
                           <svg width="20px" height="20px" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path fill-rule="evenodd" clip-rule="evenodd" d="M1 14L1 1H2L2 14H1ZM9.85355 3.14645L14.2071 7.5L9.85355 11.8536L9.14645 11.1464L12.2929 8H3V7H12.2929L9.14645 3.85355L9.85355 3.14645Z" fill="#ffffff"/>
@@ -284,8 +285,8 @@ const getSelected= (selected:string)=>{
            
            <div className="grid grid-cols-2 sm:grid-cols max-sm:gap-4  max-sm:gap-y-8 sm:gap-x-2 sm:max-h-72 mt-2 overflow-y-auto">
                
-              {categories && categories.length > 0 ? (
-               categories.filter((element) =>
+              {tags && tags.length > 0 ? (
+               tags.filter((element) =>
                    element.name.toLowerCase().includes(searchTerm.toLowerCase())
                )
                .map((element, index) => (
@@ -349,7 +350,7 @@ const getSelected= (selected:string)=>{
                has been selected</span>
 
             </div>
-             <button onClick = {addCategory}
+             <button onClick = {addTag}
                type='button' 
                disabled={svalues.length === 0}
                className={`inline-flex py-1 items-center px-2 rounded-md ml-4 text-white text-[14px] capitalize ${
