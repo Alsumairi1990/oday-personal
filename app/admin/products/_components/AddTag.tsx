@@ -16,7 +16,7 @@ import { addProductCategory, createProductCategory, getProductWCategorylById, re
 interface Props {
     productId : string,
   }
-const AddCategory = ({productId}:Props) => {
+const AddTag = ({productId}:Props) => {
   const [categoryName , setCategoryName ] = useState<string>('');
   const [categories , setCategories ] = useState<Category[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -370,7 +370,7 @@ const getSelected= (selected:string)=>{
   );
 };
 
-export default AddCategory;
+export default AddTag;
 
 
 

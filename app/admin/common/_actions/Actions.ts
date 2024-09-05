@@ -9,6 +9,7 @@ import { PhaseSchema } from "../../service/phases/utils/PhaseSchema";
 import { z } from "zod"
 import fs from "fs/promises"
 
+
 //Get All Tags
 export async function getTags(): Promise<Tag[]> {
   const tags = await prisma.tag.findMany({
@@ -455,7 +456,7 @@ async function addTag(name: string) : Promise<number> {
 
 
 // Creating New Category with 'name,slug' columns for shorway creation 
-async function addCategoy(name: string) : Promise<number> {
+export async function addCategoy(name: string) : Promise<number> {
   let caregory:number = 0;
   try {
       const session = await getServerSession(authOptions);
