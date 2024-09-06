@@ -137,7 +137,7 @@ const MenuCreate = () => {
                 >
                     <div className="text-md inline-flex text-gray-800 font-medium capitalize">
                       {selectedParent === '' ? <span className="px-1 capitalize">Add Parent </span>
-                      : <span className="px-1 capitalize">{selectedParent}</span>}
+                      : <span className="px-1 capitalize">{selectedParent}{parentId}</span>}
                       
                     </div>
                   <span className="ml-auto">

@@ -11,6 +11,102 @@ import { MenuElementSchema } from "../_utils/MenuElementSchema";
 import { MenuParentSchema } from "../_utils/MenuParentSchema";
 import { Element, MenuParent } from "@prisma/client";
 import { MenuWithAllModels } from "../_utils/MenuWithAllModels";
+import { getCachedData, setCachedData } from "@/app/admin/common/cache/MenuCache";
+
+export async function getMenusElementse(): Promise<Record<number, MenuWithAllModels[]>> {
+  // Check cache first
+  let cachedData = getCachedData();
+  if (cachedData) {
+    return cachedData;
+  }
+
+  try {
+    // Fetch data from the database
+    const menuWithElements = await prisma.adminMenu.findMany({
+      include: {
+        menuParent: true,
+        elements: {
+          include: {
+            parent: true,
+            subElements: {
+              include: {
+                parent: true,
+                subElements: true,
+              },
+            },
+          },
+        },
+        user: true,
+      },
+    });
+
+    // Group data by parent ID
+    const groupedByParentId = menuWithElements.reduce((acc, menu) => {
+      const parentId = menu.menuParent?.id;
+
+      if (parentId !== null && parentId !== undefined) {
+        if (!acc[parentId]) {
+          acc[parentId] = [];
+        }
+        acc[parentId].push(menu as MenuWithAllModels);
+      }
+
+      return acc;
+    }, {} as Record<number, MenuWithAllModels[]>);
+
+    // Cache the result
+    setCachedData(groupedByParentId);
+
+    return groupedByParentId;
+  } catch (error) {
+    console.log('Exception while fetching menu elements: ' + error);
+    throw error;
+  }
+}
+
+
+// export async function getMenusElementse(): Promise<Record<number, MenuWithAllModels[]>> {
+
+//   let cachedData = getCachedData();
+//   if (cachedData) {
+//     return cachedData;
+//   }
+//   try {
+//     const menuWithElements = await prisma.adminMenu.findMany({
+//       include: {
+//         menuParent: true,
+//         elements: {
+//           include: {
+//             parent: true,
+//             subElements: {
+//               include: {
+//                 parent: true,
+//                 subElements: true,
+//               },
+//             },
+//           },
+//         },
+//         user: true,
+//       },
+//     });
+//     const groupedByParentId = menuWithElements.reduce((acc, menu) => {
+//       const parentId = menu.menuParent?.id; 
+
+//       if (parentId !== null && parentId !== undefined) {
+//         if (!acc[parentId]) {
+//           acc[parentId] = [];
+//         }
+//         acc[parentId].push(menu as MenuWithAllModels);
+//       }
+//       return acc;
+//     }, {} as Record<number, MenuWithAllModels[]>);
+//     setCachedData(groupedByParentId);
+//     return groupedByParentId as MenuWithAllModels;
+//   } catch (error) {
+//     console.log('Exception while fetching menu elements: ' + error);
+//     throw error;
+//   }
+// }
 
 
 //Delete Meny Element Parent by 'ids'
@@ -267,6 +363,7 @@ export async function  addingMenuElement(data:FormData,id:number):Promise<MenuWi
               id : id
             }
           })
+          console.log('parent id ===='+parent?.id);
           if (!parent) throw new Error ("Menu parent not exist");
 
             const code = await prisma.adminMenu.create({

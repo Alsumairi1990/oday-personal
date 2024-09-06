@@ -553,7 +553,7 @@ model MenuParent {
   description String?
   icon        String?
   priority    Int        @default(0)
-  adminMenu   AdminMenu?
+  adminMenu   AdminMenu[]
   createdAt   DateTime   @default(now())
   userId      String
   user        User       @relation(fields: [userId], references: [id])
@@ -566,8 +566,8 @@ model AdminMenu {
   title        String
   description  String?
   icon         String?
-  menuParent   MenuParent @relation(fields: [menuParentId], references: [id], onDelete: Cascade)
-  menuParentId Int        @unique
+  menuParent   MenuParent? @relation(fields: [menuParentId], references: [id], onDelete: Cascade)
+  menuParentId Int?        
   elements     Element[]
   userId       String
   user         User       @relation(fields: [userId], references: [id])

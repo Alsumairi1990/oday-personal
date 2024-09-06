@@ -1,14 +1,14 @@
 'use client'
 import React, { useEffect, useState } from 'react';
 import { ElementWithSubElements, MenuWithAllModels } from '../_utils/MenuWithAllModels';
-import { getMenusElements } from '../_actions/Action';
+import { getMenusElements, getMenusElementse } from '../_actions/Action';
 
 
 const MenusDisplay = () => {
-    const[menusData , setMenusData] = useState<MenuWithAllModels[]>();
+  const [menusData, setMenusData] = useState<Record<number, MenuWithAllModels[]> | undefined>(undefined);
     const getMenuElements = async ()=> {
         try {
-            const result = await getMenusElements();
+            const result = await getMenusElementse();
             if(result) setMenusData(result);
         } catch (error) {
             
@@ -17,15 +17,55 @@ const MenusDisplay = () => {
     useEffect(()=> {
         getMenuElements();
     },[])
-  return (
-  
-        <div className='w-11/12 mx-auto'>
-          {menusData && menusData.map((menuData) => (
-            
-            <MenuDisplay key={menuData.id} menuData={menuData} />
-          ))}
+ 
+    return (
+      <div>
+  {menusData ? (
+    Object.entries(menusData).map(([parentId, menus]) => {
+      // Find the parent menu for the current parentId
+      const parentMenu = menus.length > 0 ? menus[0].menuParent : null;
+
+      return (
+        <div key={parentId}>
+          <h2 className='text-sm font-semibold'>{parentMenu?.title || 'Unknown Parent'}</h2>
+          <ul className='pl-3'>
+            {menus.map(menu => (
+              <li key={menu.id}>
+                <div>
+                  <span className='text-gray-800 text-sm'>{menu.title}</span>
+                  <ul className='pl-4'>
+                    {menu.elements.map(element => (
+                      <li key={element.id}>
+                        <div>
+                          <span className='text-gray-800 text-sm'>{element.title}</span>
+                          <ul className='pl-4'>
+                            {element.subElements && element.subElements.map(subElement => (
+                              <li key={subElement.id}>
+                                <div>
+                                  <span className='text-gray-800 text-sm'>{subElement.title}</span>
+                                  {/* You can add more details if needed */}
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       );
+    })
+  ) : (
+    <p>Loading...</p>
+  )}
+</div>
+
+    )
+    
     };
     
     type MenuProps = {
