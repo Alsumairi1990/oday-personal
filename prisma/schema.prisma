@@ -686,13 +686,17 @@ model Media {
   description String?
   altText     String?
   size        Int? // File size in bytes
-  order       Int?
+  media_order       Int?
   externalUrl String?
   mimeType    String? // MIME type (e.g., 'image/png', 'video/mp4')
   projectId   String?
   project     Project?   @relation(fields: [projectId], references: [id])
   productId   String?
   product     Product?   @relation(fields: [productId], references: [id])
+
+  orderId   String?
+  order      Order?   @relation(fields: [orderId], references: [id])
+
   tasktId     Int?
   task        Task ?     @relation(fields: [tasktId], references: [id])
   createdAt   DateTime  @default(now())
@@ -794,21 +798,43 @@ model Invoice {
   updatedAt          DateTime  @updatedAt
 }
 
+
+enum OrderStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+}
+enum PaymentStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+}
+enum OrderType {
+  Product
+  Service
+}
+
 model Order {
   id                 String        @id @default(cuid())
   orderNumber        String        @unique
   orderDate          DateTime      @default(now())
-  status             String // e.g., 'pending', 'in progress', 'completed', 'cancelled'
+  status             OrderStatus?
+  orderType          OrderType?
+  image              String?
   description        String?
   clientId           String?
   client             Client?       @relation(fields: [clientId], references: [id], onDelete: Cascade)
-  clientName         String
+  clientName         String?
   clientAddress      String?
   clientContact      String?
   clientEmail        String?
   clientPhone        String?
-  serviceId          Int
-  service            Service       @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  serviceId          Int?
+  service            Service ?      @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   quantity           Int?
   unitPrice          Float?
   estimatedCost      Float?
@@ -817,7 +843,7 @@ model Order {
   taxRate            Float?
   taxAmount          Float?
   totalAmount        Float
-  currency           String
+  currency           String @default("USD")
   paymentTerms       String?
   paidAt             DateTime?
   paymentMethod      String?
@@ -828,9 +854,10 @@ model Order {
   termsAndConditions String?
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
-  projectManagerId   String?
-  projectManager     User?         @relation(fields: [projectManagerId], references: [id], onDelete: Cascade)
+  orderManagerId   String?
+  orderManager     User?         @relation(fields: [orderManagerId], references: [id], onDelete: Cascade)
   BillingInfo        BillingInfo[]
+  media            Media[]
 }
 
 model BillingInfo {

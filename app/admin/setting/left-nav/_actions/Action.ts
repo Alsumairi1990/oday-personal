@@ -15,13 +15,17 @@ import { getCachedData, setCachedData } from "@/app/admin/common/cache/MenuCache
 
 export async function getMenusElementse(): Promise<Record<number, MenuWithAllModels[]>> {
   // Check cache first
+  console.time('Total Menu Fetch');
   let cachedData = getCachedData();
   if (cachedData) {
     return cachedData;
   }
+  console.timeEnd('Cache Check');
+
 
   try {
     // Fetch data from the database
+    console.log("hit server");
     const menuWithElements = await prisma.adminMenu.findMany({
       include: {
         menuParent: true,

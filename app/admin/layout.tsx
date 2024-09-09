@@ -1,40 +1,20 @@
-'use client'
+
 import React, { useState , useEffect} from 'react';
 import LeftNav from "../_components/admin/nav/LeftNav"
 import TopNav from "../_components/admin/nav/TopNav"
-import Footerk from "../_components/Footer"
 import NextTopLoader from 'nextjs-toploader';
+import { getMenusElementse } from './setting/left-nav/_actions/Action';
+import { MenuWithAllModels } from './setting/left-nav/_utils/MenuWithAllModels';
+import LeftNavServ from '../_components/admin/nav/LefNavServ';
+import AdminNav from '../_components/admin/nav/AdminNav';
+import TopNavAdmin from '../_components/admin/nav/TopNavAdmin';
 
-
-
-export default function signupLayout({
+export default async function signupLayout({
     children,
   }: {
     children: React.ReactNode
   }) {
-    const [parentValue, setParentValue] = useState(true);
-
-    const handleChildClick = (newValue:boolean) => {
-    setParentValue(newValue);
-  };
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     const isMobile = window.innerWidth <= 768; 
-  //     setParentValue(!isMobile);
-  //   };
-  //   window.addEventListener('resize', handleResize);
-  //   return () => window.removeEventListener('resize', handleResize);
-  // }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const isMobile = window.innerWidth <= 768;
-      setParentValue(!isMobile);
-    };
-    window.addEventListener('resize', handleResize);
-    handleResize(); 
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    const menusData: Record<number, MenuWithAllModels[]> = await getMenusElementse();
 
 
 
@@ -42,24 +22,19 @@ export default function signupLayout({
 
 
             <div className=" bg-gray-100">
-
-                <TopNav handleClick={handleChildClick} />
-
-                <div className="flex">
-                  {parentValue && (<div id="leftAdmin" className="p-1 m  sm:min-w-[240px] left-admin">
-                     <LeftNav />
-                  </div> )
-                }
-
+               <TopNavAdmin  />
+               <div className='flex'>
+               <AdminNav menusData={menusData} />;
 
                 <div className="w-full  h-full">
                 <NextTopLoader />
                 {children}
                 </div>
+                </div>
             </div>
 
 
-            </div>
+           
 
 
     )

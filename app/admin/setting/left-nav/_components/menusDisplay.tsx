@@ -5,6 +5,7 @@ import { getMenusElements, getMenusElementse } from '../_actions/Action';
 
 
 const MenusDisplay = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const [menusData, setMenusData] = useState<Record<number, MenuWithAllModels[]> | undefined>(undefined);
     const getMenuElements = async ()=> {
         try {
@@ -19,7 +20,8 @@ const MenusDisplay = () => {
     },[])
  
     return (
-      <div>
+      <div className='relative'>
+
   {menusData ? (
     Object.entries(menusData).map(([parentId, menus]) => {
       // Find the parent menu for the current parentId
@@ -27,7 +29,7 @@ const MenusDisplay = () => {
 
       return (
         <div key={parentId}>
-          <h2 className='text-sm font-semibold'>{parentMenu?.title || 'Unknown Parent'}</h2>
+          <h2 className='text-sm font-semibold text-gray-800'>{parentMenu?.title || 'Unknown Parent'}</h2>
           <ul className='pl-3'>
             {menus.map(menu => (
               <li key={menu.id}>
@@ -60,7 +62,8 @@ const MenusDisplay = () => {
       );
     })
   ) : (
-    <p>Loading...</p>
+    <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>
+
   )}
 </div>
 

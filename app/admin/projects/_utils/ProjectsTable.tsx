@@ -60,7 +60,7 @@ const addSelected= (selected:string)=>{
                 .map((option:ProjectAnalyticsModel, index) => (
     // {categories.map((option:any) => (
     
-    <tr className="bg-white font-medium capitalize flex items-center border-b dark:bg-gray-800 dark:border-gray-700">
+    <tr className="bg-white font-medium capitalize flex items-center border-b border-b-gray-200">
     <td className="flex-5 flex items-center justify-center ">
        <button 
             onClick={()=> {setProject(option),setShowDisplayModel(true)}}

@@ -164,7 +164,7 @@ const closeConfirm = (flag:boolean) =>{
                                     <svg className="w-2.5 h-2.5 fill-slate-500 " viewBox="0 0 74.652 42.552" ><path d="M37.326 42.553a5.217 5.217 0 0 1-3.696-1.528L1.531 8.924a5.227 5.227 0 1 1 7.393-7.393l28.402 28.403L65.728 1.532a5.228 5.228 0 1 1 7.394 7.394l-32.101 32.1a5.208 5.208 0 0 1-3.695 1.527z"></path></svg>
                                 </span>
                             </button>
-                            <div  className="filter-menu hidden z-40 option-menu absolute top-12 w-80  bg-white rounded-md border !border-gray-300 shadow mt-2 dark:bg-gray-700" style={{boxShadow: 'rgb(0 0 0 / 3%) 0px 12.5px 10px, rgb(0 0 0 / 6%) 0px 100px 80px'}}>
+                            <div  className="filter-menu hidden z-40 option-menu absolute top-12 w-80  bg-white rounded-md border !border-gray-300 shadow mt-2 " style={{boxShadow: 'rgb(0 0 0 / 3%) 0px 12.5px 10px, rgb(0 0 0 / 6%) 0px 100px 80px'}}>
                                   {/* <FilterPanel
                                     v-model="discipline"
                                     placeholder="Enter Year"
@@ -186,7 +186,7 @@ const closeConfirm = (flag:boolean) =>{
                             </span>
                         </button>
 
-                        <div className="filter-menu hidden z-40 option-menu absolute top-12 w-80  bg-white rounded-md border !border-gray-300 shadow mt-2 dark:bg-gray-700" style={{boxShadow: 'rgb(0 0 0 / 3%) 0px 12.5px 10px, rgb(0 0 0 / 6%) 0px 100px 80px'}}>
+                        <div className="filter-menu hidden z-40 option-menu absolute top-12 w-80  bg-white rounded-md border !border-gray-300 shadow mt-2 " style={{boxShadow: 'rgb(0 0 0 / 3%) 0px 12.5px 10px, rgb(0 0 0 / 6%) 0px 100px 80px'}}>
                             {/* <FilterPanel
                                 v-model="type"
                                 :options="programs"
@@ -204,7 +204,7 @@ const closeConfirm = (flag:boolean) =>{
                                  <svg className="w-2.5 h-2.5 fill-slate-500 " viewBox="0 0 74.652 42.552"><path d="M37.326 42.553a5.217 5.217 0 0 1-3.696-1.528L1.531 8.924a5.227 5.227 0 1 1 7.393-7.393l28.402 28.403L65.728 1.532a5.228 5.228 0 1 1 7.394 7.394l-32.101 32.1a5.208 5.208 0 0 1-3.695 1.527z"></path></svg>
                             </span>
                         </button>
-                        <div className="filter-menu hidden z-40 option-menu absolute top-12 w-80  bg-white rounded-md border !border-gray-300 shadow mt-2 dark:bg-gray-700" >
+                        <div className="filter-menu hidden z-40 option-menu absolute top-12 w-80  bg-white rounded-md border !border-gray-300 shadow mt-2 " >
                             {/* <FilterPanel
                                 v-model="programType"
                                 :options="programs"
@@ -224,7 +224,7 @@ const closeConfirm = (flag:boolean) =>{
             </div>
 
             <div className="relative overflow-x-auto  scr-container overflow-y-autحo">
-                <div className="w-full text-sm text-left  rtl:text-right text-gray-500 dark:text-gray-400">
+                <div className="w-full text-sm text-left  rtl:text-right text-gray-500 ">
                      {showGrid && products && products?.length > 0 && 
                         <GridView products={products} unSelected={unSelected} getSelected={getSelected}  />
                         }

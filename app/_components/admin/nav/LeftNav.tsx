@@ -9,16 +9,19 @@ import { IoMdSettings } from 'react-icons/io';
 import { getMenusElements } from '@/app/admin/setting/left-nav/_actions/Action';
 import { MenuWithAllModels } from '@/app/admin/setting/left-nav/_utils/MenuWithAllModels';
 import NavMenuElement from './NavMenuElement';
+import NavMenuElem from './NavMenuElem';
+interface MenusDisplayProps {
+    menusData: Record<number, MenuWithAllModels[]>;
+  }
 
-
-const LeftNav = () => {
+const LeftNav: React.FC<MenusDisplayProps> = ({ menusData }) => {
    const imagePath = '/images/navbg.webp';
    const imagePath2 = '/images/manager2.png';
    const [visibleContent, setVisibleContent] = useState<boolean>(false);
    const [navElement, setNavElement] = useState<MenuWithModels[]>([]);
    const [loading, setLoading] = useState<boolean>(false);
    const [error, setError] = useState<string>('');
-   const[menusData , setMenusData] = useState<MenuWithAllModels[]>();
+//    const[menusData , setMenusData] = useState<MenuWithAllModels[]>();
 
    const getElements = async () =>{
     try {
@@ -38,7 +41,7 @@ const getAllElements = async () =>{
         setLoading(true);
         
             const result = await getMenusElements();
-            if(result) setMenusData(result);
+            // if(result) setMenusData(result);
        
         setLoading(false);
         setError('');
@@ -127,6 +130,28 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
         <ul className="p-1 pl-0 whitespace-nowrap" style={{direction:'ltr'}}>
 
         <div className="pl-1">
+            {Object.entries(menusData).map(([parentId, menus]) => {
+            // Find the parent menu for the current parentId
+            const parentMenu = menus.length > 0 ? menus[0].menuParent : null;
+
+            return (
+            <div key={parentId}>
+                <h2 className='text-sm font-semibold text-gray-200'>{parentMenu?.title || 'Unknown Parent'}</h2>
+                <ul className='pl-3'>
+                        {menus.map(menu => (
+                             <NavMenuElem menu={menu}  />
+                       
+                        ))}
+                        </ul>
+                    </div>
+                    );
+                })}
+            </div>
+
+
+
+
+        {/* <div className="pl-1">
               {menusData?.map(element => 
                 <>
                 <span className="text-md text-gray-300 font-normal capitalize">{element.menuParent.title}</span>
@@ -135,7 +160,12 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
                  
                 </>
               )}
-            </div>
+            </div> */}
+
+
+
+
+
             {/* {navElement && 
               navElement.map(element => 
                 <NavElement element={element}  />

@@ -10,9 +10,16 @@ const TopNav = (props:ChildProps) => {
    const evetAct = ()=> {
 }
       const [openNav, setOpenNav] = useState(true);
+      // const leftAdminElement = document.getElementById('leftAdmin');
+     
       const changeParentValue = () => {
-       setOpenNav((prevState) => !prevState); 
-       props.handleClick(!openNav); 
+        // if (leftAdminElement?.classList.contains('hidden')) {
+        //   leftAdminElement.classList.remove('hidden'); // Remove 'hidden' class if it exists
+        // }else {
+        //   leftAdminElement?.classList.add('hidden'); // Remove 'hidden' class if it exists
+
+        // }
+  
       };
     // document.addEventListener("click", function(event) {
 

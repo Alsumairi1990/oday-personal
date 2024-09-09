@@ -50,7 +50,7 @@ function productsDisplay({products,getSelected,unSelected}:Props) {
                 </div>
             </div>
         </div>
-    <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
                     <thead className="text-xs text-gray-700  uppercase bg-gray-100 ">
                         <tr className="w-full flex">
                             <th scope="col" className="text-center  flex-5 py-3">

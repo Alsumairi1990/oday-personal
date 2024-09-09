@@ -28,7 +28,7 @@ const AddingBtn =({title,svgUrl,title_name,changeMenu}:Props)=> {
                 </span>
 
 
-                <span className="text-md font-medium !tex-red-500 capitalize add-btn-ctn mb-2"> {title} </span>
+                <span className="text-md font-medium !tex-red-500 capitalize text-gray-600 add-btn-ctn mb-2"> {title} </span>
                 <span className="inline-flex  justify-center items-center border border-white bg-indigo-600 rounded-full h-8 w-8 ">
                     <svg width="22px" height="22px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
                     <g stroke="#ffffff" stroke-linecap="round" stroke-width="2">

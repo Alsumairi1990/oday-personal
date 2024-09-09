@@ -120,7 +120,7 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
         }
 
              <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Name</label>
+                    <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 "> Name</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
                         <input {...register('name')}  type="text" name="name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Poeject Name  ..." required />
@@ -132,11 +132,11 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
                  
             <div className="flex flex-48  justify-between">
               <div className=" flex-100 ">
-                <h3 className="mb-1.5 text-md font-medium text-gray-600 dark:text-white">Is Active ? </h3>
+                <h3 className="mb-1.5 text-md font-medium text-gray-600">Is Active ? </h3>
                 <ul className="grid w-full gap-6 md:grid-cols-2 bord ">
                     <li>
                         <input type="radio" {...register('isActive')}  id="status-1" defaultChecked name="status" value="yes" className="hidden peer" required />
-                        <label htmlFor="status-1" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300  peer-checked:border-orange-400 peer-checked:bg-gray-50 peer-checked:text-orange-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700" >                           
+                        <label htmlFor="status-1" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-orange-400 peer-checked:bg-gray-50 peer-checked:text-orange-600 hover:text-gray-600 hover:bg-gray-100 " >                           
                             <div className="block">
                                 <div className="w-full text-sm font-medium">Deactive</div>
                             </div>
@@ -147,7 +147,7 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
                     </li>
                     <li>
                         <input type="radio" {...register('isActive')} id="status-2" name="status" value="no" className="hidden peer" />
-                        <label htmlFor="status-2" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer   peer-checked:border-orange-600 peer-checked:text-orange-400 peer-checked:bg-gray-50 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700" >
+                        <label htmlFor="status-2" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer   peer-checked:border-orange-600 peer-checked:text-orange-400 peer-checked:bg-gray-50 hover:text-gray-600 hover:bg-gray-100 " >
                             <div className="block">
                                 <div className="w-full text-sm font-medium">Active</div>
                             </div>
@@ -164,13 +164,13 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
                   
             <div className="flex flex-48 mb-6 justify-between">
               <div className=" flex-100 ">
-                <h3 className="mb-1.5 text-md font-medium text-gray-600 dark:text-white">Publish status ? </h3>
+                <h3 className="mb-1.5 text-md font-medium text-gray-600 ">Publish status ? </h3>
                 <ul className="grid w-full gap-6 md:grid-cols-2 bord ">
                     <li>
                         <input type="radio" 
                         {...register('isPublished')} 
                         id="publish-1" defaultChecked name="publish" value="yes" className="hidden peer" required />
-                        <label htmlFor="publish-1" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300  peer-checked:border-orange-400 peer-checked:bg-gray-50 peer-checked:text-orange-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700" >                           
+                        <label htmlFor="publish-1" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-orange-400 peer-checked:bg-gray-50 peer-checked:text-orange-600 hover:text-gray-600 hover:bg-gray-100 " >                           
                             <div className="block">
                                 <div className="w-full text-sm font-medium">Unpublished</div>
                             </div>
@@ -183,7 +183,7 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
                         <input type="radio" 
                           {...register('isPublished')}
                         id="publish-2" name="publish" value="no" className="hidden peer" />
-                        <label htmlFor="publish-2" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer   peer-checked:border-orange-600 peer-checked:text-orange-400 peer-checked:bg-gray-50 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700" >
+                        <label htmlFor="publish-2" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer   peer-checked:border-orange-600 peer-checked:text-orange-400 peer-checked:bg-gray-50 hover:text-gray-600 hover:bg-gray-100 " >
                             <div className="block">
                                 <div className="w-full text-sm font-medium">Published</div>
                             </div>
@@ -200,7 +200,7 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
 
 
             <div className=" flex flex-48 flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="stockQuantity" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 capitalize"> stock Quantity</label>
+                    <label htmlFor="stockQuantity" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> stock Quantity</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
                         <input {...register('stockQuantity')}  type="number" name="stockQuantity" id="stockQuantity" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="'Low', 'Medium', 'High' ...." required />
@@ -217,7 +217,7 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
                         <input 
                           type="string"
                           {...register('rating')}
-                          name="rating" id="rating" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-gray-50 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="30% 40% 80%  ..." required />
+                          name="rating" id="rating" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-gray-50 border rounded-xl border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="30% 40% 80%  ..." required />
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.rating?.message} </span>
@@ -230,7 +230,7 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
                     <input 
                         type="string"
                         {...register('dimensions')}
-                        name="dimensions" id="dimensions" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-gray-50 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="30% 40% 80%  ..." required />
+                        name="dimensions" id="dimensions" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-gray-50 border rounded-xl border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="30% 40% 80%  ..." required />
                     </div>
                 </div> 
                 <span className="text-red-400 text-xs mt-2">{errors.dimensions?.message} </span>
@@ -243,7 +243,7 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
                     <input 
                         type="string"
                         {...register('weight')}
-                        name="weight" id="weight" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-gray-50 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="30% 40% 80%  ..." required />
+                        name="weight" id="weight" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-gray-50 border rounded-xl border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="30% 40% 80%  ..." required />
                     </div>
                 </div> 
                 <span className="text-red-400 text-xs mt-2">{errors.weight?.message} </span>
@@ -290,7 +290,7 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
             </div> */}
 
             <div className=" flex flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="description" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 ">Project Description</label>
+                    <label htmlFor="description" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 ">Project Description</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
                         <textarea {...register('description')} cols={cols} rows={rows}   name="description" id="description" className="block bg-gray-50 pl-2 pt-2 px-0 z-0 w-full text-sm text-gray-900  border rounded-xl border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Project Desctiption ...." required />
@@ -312,8 +312,8 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
                     ):(
                           <div className="flex flex-col items-center">
                           <svg width="40px" height="40px" viewBox="0 0 1024 1024" className="icon"  version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M768 810.7c-23.6 0-42.7-19.1-42.7-42.7s19.1-42.7 42.7-42.7c94.1 0 170.7-76.6 170.7-170.7 0-89.6-70.1-164.3-159.5-170.1L754 383l-10.7-22.7c-42.2-89.3-133-147-231.3-147s-189.1 57.7-231.3 147L270 383l-25.1 1.6c-89.5 5.8-159.5 80.5-159.5 170.1 0 94.1 76.6 170.7 170.7 170.7 23.6 0 42.7 19.1 42.7 42.7s-19.1 42.7-42.7 42.7c-141.2 0-256-114.8-256-256 0-126.1 92.5-232.5 214.7-252.4C274.8 195.7 388.9 128 512 128s237.2 67.7 297.3 174.2C931.5 322.1 1024 428.6 1024 554.7c0 141.1-114.8 256-256 256z" fill="#3688FF" /><path d="M640 789.3c-10.9 0-21.8-4.2-30.2-12.5L512 679l-97.8 97.8c-16.6 16.7-43.7 16.7-60.3 0-16.7-16.7-16.7-43.7 0-60.3l128-128c16.6-16.7 43.7-16.7 60.3 0l128 128c16.7 16.7 16.7 43.7 0 60.3-8.4 8.4-19.3 12.5-30.2 12.5z" fill="#5F6379" /><path d="M512 960c-23.6 0-42.7-19.1-42.7-42.7V618.7c0-23.6 19.1-42.7 42.7-42.7s42.7 19.1 42.7 42.7v298.7c0 23.5-19.1 42.6-42.7 42.6z" fill="#5F6379" /></svg>
-                          <p className="mb-2 text-sm text-gray-500 dark:text-gray-400"><span className="font-semibold">Upload Image</span> From System</p>
-                          <p className="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF </p>
+                          <p className="mb-2 text-sm text-gray-500 "><span className="font-semibold">Upload Image</span> From System</p>
+                          <p className="text-xs text-gray-500 ">SVG, PNG, JPG or GIF </p>
                           </div>
                     )} 
                         </div>
