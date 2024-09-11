@@ -12,6 +12,7 @@ import Image from 'next/image'
 import { FiPlusCircle } from "react-icons/fi";
 import { addOrderCategory, createOrderCategory, getOrderWCategorylById, removeOrderCategory } from '../_actions/Actions';
 import { PiImageLight } from "react-icons/pi";
+import { TbCategory } from 'react-icons/tb';
 
 interface Props {
     productId : string,
@@ -304,20 +305,21 @@ const getSelected= (selected:string)=>{
                    element.name.toLowerCase().includes(searchTerm.toLowerCase())
                )
                .map((element, index) => (
-                   <div className=" relative border bg-gray-50 flex flex-col my-2 px-2 pt-2 gap-y-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 " >
-                    <div className="  flex-55 w-full overflow-hidden rounded-md bg-white border border-gray-200">
-                        {element.image ?(<img className=' sm:h-full w-full rounded-md' src={`${baseUrl}/${element?.image}`} alt="" />)
+                   <div className=" relative border bg-gray-50 flex flex-col my-2 pb-2 px-2 pt-2 gap-y-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 " >
+                    <div className="  flex-55 w-full overflow-hidden rounded-md bg-white p-0.5 border border-gray-200">
+                        {element.image ?(<img className=' sm:h-full w-full  rounded-md' src={`${baseUrl}/${element?.image}`} alt="" />)
                         :
                         (<span className='h-full bg-white  w-full text-gray-100 rounded-md inline-flex justify-center items-center'>
                              <PiImageLight className="text-[3rem] text-gray-500" />
                           </span>)
                         }
                     </div>
-                    <div className="sm:h-7 flex-20 sm:flex sm:mx-auto items-center border border-gray-200 bg-white rounded-md">
+                    <div className=" flex-20 sm:flex sm:mx-auto items-center w-full border border-gray-200 bg-white rounded-md">
                           
                            <div className="px-2  w-full">
-                               <div className="w-full flex items-center">
-                                   <span className="text-md  text-gray-800 ">{element?.name}</span>
+                               <div className="w-full flex items-center gap-x-1">
+                                <span className=""><TbCategory className="text-base text-gray-500" />                                </span>
+                                   <span className="text-sm leading-5  text-gray-800 capitalize">{element?.name}</span>
                                </div>
                            </div>
                    </div>
