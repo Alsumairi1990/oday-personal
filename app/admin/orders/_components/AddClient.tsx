@@ -1,32 +1,33 @@
 "use client";
 import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
-import { getCategories } from '../../service/_serviceActions/ServiceActions';
-import { Category} from '@prisma/client';
+import { Category, Client} from '@prisma/client';
 import { LuAlertOctagon } from "react-icons/lu";
 import { MdDone } from "react-icons/md";
 import { GrSelect } from "react-icons/gr";
 import { MdAssignmentAdd } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
 import Image from 'next/image'
+import { ImUserTie } from "react-icons/im";
 import { FiPlusCircle } from "react-icons/fi";
-import { addOrderCategory, createOrderCategory, getOrderWCategorylById, removeOrderCategory } from '../_actions/Actions';
-import { PiImageLight } from "react-icons/pi";
+import { addOrderCategory, addOrderClient, createOrderCategory, getOrderClientById, getOrderWCategorylById, removeOrderCategory } from '../_actions/Actions';
+import { getclients } from '../../clients/_actions/Actions';
+import { LiaUserTieSolid } from 'react-icons/lia';
 
 interface Props {
-    productId : string,
+    orderId : string,
   }
-const AddCategory = ({productId}:Props) => {
+const AddClient = ({orderId}:Props) => {
   const [categoryName , setCategoryName ] = useState<string>('');
-  const [categories , setCategories ] = useState<Category[]>([]);
+  const [clients , setClients ] = useState<Client[]>([]);
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
-    const [svalues, setSvalues] = useState<string[]>([]);
+    const [svalues, setSvalues] = useState<string>();
     const [trigger, setTrigger] = useState(0);
     const [showDelete, setShowDelete] = useState(false);
     const [baseUrl, setBaseUrl] = useState<string>('');
     const [toolNames, setToolNames] = useState<string[]>([]);
-    const [categoryNames, setCategoryNames] = useState<Category[]>([]);
+    const [clientNames, setClientNames] = useState<Client[]>([]);
 
     const [error, setError] = useState<string | null>(null);
     const [showAddTool , setShowAddTool ] = useState<boolean>(false);
@@ -41,18 +42,10 @@ const AddCategory = ({productId}:Props) => {
 }, []);
 
 const getSelected= (selected:string)=>{
-    setSvalues(prevValues => {
-        const newValues = [...prevValues, selected];
-        setTrigger(trigger + 1);
-        return newValues;
-    });
+    setSvalues(selected);
    }
    const unSelected = (id:string) => {
-    setSvalues(prevValues => {
-        const newValues = prevValues.filter(item => item !== id);
-        setTrigger(trigger + 1); 
-        return newValues;
-    });
+    setSvalues('');
    }
    const addCategoryName = (name:string)=>{
     setCategoryName(name);
@@ -60,11 +53,12 @@ const getSelected= (selected:string)=>{
    
    const addCategory = async () => {
     try {
-      const numberArray = svalues.map(value => Number(value));
       setLoading(true);
-      const names = await addOrderCategory(productId, numberArray);
-      setLoading(false);
-      setCategoryNames(names);
+      if(svalues) {const names = await addOrderClient(orderId, svalues)
+        setLoading(false);
+      setClientNames(names);
+      }
+      
       setError(null); // Clear previous errors
     } catch (error: any) {
       console.error('Error in addTool:', error);
@@ -72,12 +66,12 @@ const getSelected= (selected:string)=>{
       setLoading(false);
     }
   };
-  const getCategoryNames = async ()=> {
+  const getOrderClients = async ()=> {
     try {
         setLoading(true);
-        const names = await getOrderWCategorylById(productId);
+        const names = await getOrderClientById(orderId);
         setLoading(false);
-        setCategoryNames(names);
+        setClientNames(names);
         setError(null); 
         
     } catch (error:any) {
@@ -89,9 +83,9 @@ const getSelected= (selected:string)=>{
     
     try {
       setLoading(true);
-      const tools = await removeOrderCategory(productId,removedTool);
-      setLoading(false);
-     setCategoryNames(tools);
+    //   const tools = await removeOrderCategory(orderId,removedTool);
+    //   setLoading(false);
+    //  setClientNames(tools);
      setError(null);
      setShowRemoveTool(false);
     } catch (error:any) {
@@ -101,12 +95,12 @@ const getSelected= (selected:string)=>{
     
   }  
   
-    const getAllCategories = async ()=> {
+    const getAllclients = async ()=> {
       try {
         setLoading(true);
-        const catgs = await getCategories();
+        const catgs = await getclients();
         setLoading(false);
-        setCategories(catgs);
+        setClients(catgs);
         setError(null)
         
       } catch (error:any) {
@@ -116,19 +110,19 @@ const getSelected= (selected:string)=>{
      
     }
     useEffect(() => {
-      getAllCategories();
-      getCategoryNames();
+      getAllclients();
+      getOrderClients();
 
     }, []);
 
     const createCategory = async () => {
       try {
-        if(productId != '' && categoryName != ''){
+        if(orderId != '' && categoryName != ''){
           setLoading(true);
-          const catname = await createOrderCategory(productId , categoryName);
-          setLoading(false);
-          setError(null)
-          setCategoryNames((prevToolNames) => [...prevToolNames, catname]);
+          // const catname = await createOrderCategory(orderId , categoryName);
+          // setLoading(false);
+          // setError(null)
+          // setClientNames((prevToolNames) => [...prevToolNames, catname]);
         }
         setShowAddTool(false);
       } catch (error:any) {
@@ -143,16 +137,16 @@ const getSelected= (selected:string)=>{
     <div className="text-start z-40  ">
        <div className=" mb-3 border border-gray-200 rounded-md">
             
-          {categoryNames.length>0 ?  (
+          {clientNames.length>0 ?  (
             <>
             <div className="px-2 border-b flex gap-2 items-center border-b-gray-200 py-1.5 ">
                 <span className="bg-green-600 size-5 flex items-center justify-center rounded-md">
                 <MdDone  className='text-lg text-white  '  />
                 </span>
-                <span className="text-gray-600 font-medium text-md">Categories added {productId}</span>
+                <span className="text-gray-600 font-medium text-md">clients added {orderId}</span>
             </div>
             <div className="p-2 grid sm:grid-cols-3 gap-x-3 items-center gap-2 max-h-28 flex-wrap overflow-y-auto">
-            {categoryNames.map(name => (
+            {clientNames.map(name => (
               <div className="flex items-center rounded-md pl-1 pr-1 bg-gray-50 border border-gray-200">
                  <div className="flex-30 h-14 p-1 pl-0">
                  {name && name.image ?( <Image className='rounded-md w-full h-full'
@@ -176,7 +170,7 @@ const getSelected= (selected:string)=>{
             </div> 
             </>
         ):(
-          <span className="text-sm text-orange-600 px-4 py-2 inline-flex capitalize">No Categories Added </span>
+          <span className="text-sm text-orange-600 px-4 py-2 inline-flex capitalize">No clients Added </span>
         )
         }
         </div>
@@ -289,7 +283,7 @@ const getSelected= (selected:string)=>{
                <div className="bg-gray-100 border border-gray-200 rounded-3xl py-1.5 mb-2 w-full h-11 ">
                <input
                type="text"
-               placeholder="Search categories"
+               placeholder="Search clients"
                value={searchTerm}
                className='w-full h-full bg-transparent px-3 placeholder:text-md outline-none'
                onChange={(e) => setSearchTerm(e.target.value)}
@@ -297,36 +291,36 @@ const getSelected= (selected:string)=>{
                </div>
            </div>
            
-           <div className="grid grid-cols-2 sm:grid-cols-4 max-sm:gap-4  max-sm:gap-y-8 sm:gap-x-2 sm:max-h-72 mt-2 overflow-y-auto">
+           <div className="grid sm:grid-cols-4 sm:grid-cols max-sm:gap-4  max-sm:gap-y-8 sm:gap-x-2 sm:max-h-72 mt-2 overflow-y-auto">
                
-              {categories && categories.length > 0 ? (
-               categories.filter((element) =>
+              {clients && clients.length > 0 ? (
+               clients.filter((element) =>
                    element.name.toLowerCase().includes(searchTerm.toLowerCase())
                )
                .map((element, index) => (
-                   <div className=" relative border bg-gray-50 flex flex-col my-2 px-2 pt-2 gap-y-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 " >
-                    <div className="  flex-55 w-full overflow-hidden rounded-md bg-white border border-gray-200">
-                        {element.image ?(<img className=' sm:h-full w-full rounded-md' src={`${baseUrl}/${element?.image}`} alt="" />)
+                   <div className=" relative border bg-gray-50 flex flex-col gap-y-3 py-2 my-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 " >
+                    <div className="  rounded-md  border border-gray-200">
+                        {element.image ?(<img className=' sm:h-full rounded-md' src={`${baseUrl}/${element?.image}`} alt="" />)
                         :
-                        (<span className='h-full bg-white  w-full text-gray-100 rounded-md inline-flex justify-center items-center'>
-                             <PiImageLight className="text-[3rem] text-gray-500" />
-                          </span>)
+                        (<span className='h-full bg-gray-300 w-full text-gray-100 rounded-l-md inline-flex justify-center items-center'>Ima</span>)
                         }
                     </div>
-                    <div className="sm:h-7 flex-20 sm:flex sm:mx-auto items-center border border-gray-200 bg-white rounded-md">
+                    <div className=" sm:h-8 sm:flex sm:mx-auto items-center bg-white border border-gray-200 rounded-md">
                           
                            <div className="px-2  w-full">
-                               <div className="w-full flex items-center">
+                               <div className="w-full flex items-center gap-x-1">
+                                <span className=""><LiaUserTieSolid className='text-gray-500 text-base ' /></span>
                                    <span className="text-md  text-gray-800 ">{element?.name}</span>
                                </div>
                            </div>
                    </div>
-                    <div className="gap-x-2 flex-20 sm:flex-15  justify-center items-center  ">
+                    <div className="flex gap-x-2  justify-center items-center  ">
                     <div className="inline-flex  z-20 bg-white  justify-center rounded-md">
-                        <label className="relative bg-whit justify-center flex items-center  rounded-full cursor-pointer" htmlFor="checkbox">
-                            <input type="checkbox"
+                        <label className="relative bg-whit justify-center flex items-center  rounded-full cursor-pointer" htmlFor="client">
+                            <input type="radio"
                                 className="before:content[''] peer relative h-[18px] w-[18px] cursor-pointer appearance-none rounded-md border !border-[#ccc] transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-indigo-600 checked:bg-indigo-600 checked:before:bg-indigo-600 hover:before:opacity-10"
-                                id="checkbox"  
+                                id="client"  
+                                name='client'
                                 onChange={(e) => {
                                     const isChecked = e.target.checked;
                                     if (isChecked) {
@@ -361,16 +355,16 @@ const getSelected= (selected:string)=>{
        </div>
        <div className=' my-3 border border-gray-200 py-2 items-center rounded-md flex justify-center'>
             <div className="flex items-center">
-            <span className='text-violet-600 flex items-center font-medium border-b-2 text-md border-b-gray-400 mr-1 px-1'>{svalues.length}</span> 
+            <span className='text-violet-600 flex items-center font-medium border-b-2 text-md border-b-gray-400 mr-1 px-1'>{svalues}</span> 
             <span className='text-md text-orange-500 font-medium'>
                has been selected</span>
 
             </div>
              <button onClick = {addCategory}
                type='button' 
-               disabled={svalues.length === 0}
+               disabled={svalues === ''}
                className={`inline-flex py-1 items-center px-2 rounded-md ml-4 text-white text-[14px] capitalize ${
-                svalues.length === 0 ? 'bg-violet-400' : 'bg-violet-600'
+                svalues === '' ? 'bg-violet-400' : 'bg-violet-600'
               }`}
                >Add Category 
                 <span className="text-white ml-2 text-md"  >
@@ -387,7 +381,7 @@ const getSelected= (selected:string)=>{
   );
 };
 
-export default AddCategory;
+export default AddClient;
 
 
 

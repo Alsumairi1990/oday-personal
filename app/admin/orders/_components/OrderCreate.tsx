@@ -10,6 +10,7 @@ import AddingBtn from './AddingBtn';
 import BasicCreate from './BasicCreate';
 import AddCategory from './AddCategory';
 import AddMedia from './AddMedia';
+import AddClient from './AddClient';
 
 
 const OrderCreate = () => {
@@ -25,7 +26,7 @@ const OrderCreate = () => {
    const [code,setCode] = useState('/images/basic11.svg');  
    const [testimonials,setTestimonials] = useState('/images/basic6.svg');
    const [works,setWorks] = useState('/images/basic12.svg');
-   const [tags,setTags] = useState('/images/basic13.svg');   
+   const [client,setTags] = useState('/images/basic13.svg');   
    const [productId, setProductId] = useState<string>()
 
    const openDisplay =()=>{
@@ -88,7 +89,7 @@ const close = (v:boolean)=> {
                 <AddingBtn
                 title="Product Tags"
                 svgUrl={tag}
-                title_name="tag"
+                title_name="client"
                 changeMenu={changeBtnMenu}
                 isOpen={isOpen}
                 
@@ -133,10 +134,10 @@ const close = (v:boolean)=> {
              </div>
 
              <div className="">
-             {isOpen('tag') && (<div className="flex add-form items-center justify-center  w-full ">
+             {isOpen('client') && (<div className="flex add-form items-center justify-center  w-full ">
                         <div   className="flex flex-col w-full sm:w-11.8/12 animate-modalEnter  add-menu  bg-white items-center  border-l border-dashed border-l-gray-200 " >
                          <div  className="w-full ">
-                         {/* <AddTag  productId={productId ? productId : ''} /> */}
+                         <AddClient  orderId={productId ? productId : ''} />
                          </div>
                      </div>
                  </div>

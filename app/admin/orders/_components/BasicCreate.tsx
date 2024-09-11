@@ -1,15 +1,16 @@
 "use client";
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent, useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { addBasic } from '../../products/_actions/Actions';
 import { BasicSchema } from '../_utils/BasicSchema';
-import { MdOutlineAddCircle } from 'react-icons/md';
+import { MdDone, MdOutlineAddCircle } from 'react-icons/md';
 import MenuPanel from '../../common/utils/MenuPanel';
 import DropDown1 from '../../projects/_utils/DropDown1';
+import { LuAlertOctagon } from 'react-icons/lu';
+import { addBasic } from '../_actions/Actions';
 
 
 
@@ -27,16 +28,24 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
     const [iconSrc, setIconSrc] = useState<string | null>(null);
     const [selectedMenuElement, setSelectedMenuElement] = useState<string>('');
     const [selectedTypeElement, setSelectedTypeElement] = useState<string>('');
+    const [selectedMethod, setSelectedMethod] = useState<string>('');
 
-    const [menuElements, setMenuElements] = useState<string[]>([ 'PLANNED',
-      'IN_PROGRESS',
-      'COMPLETED',
-      'ON_HOLD',
-      'CANCELLED']); 
+    const [menuElements, setMenuElements] = useState<string[]>([ 
+      "PENDING",
+      "IN_PROGRESS",
+      "COMPLETED",
+      "ON_HOLD",
+      "CANCELLED",]); 
 
     const [typeElements, setTypeElements] = useState<string[]>([ 'Service', 'Product']); 
+    const [paymentElements, setPaymentElements] = useState<string[]>([ 'Visa', 'Bank Transfer','Cash']); 
+    const [loading, setLoading] = useState<boolean>(false);
+
     const [typeMenu, setTypeMEnu] = useState<boolean>(false); 
+    const [paymentMenu, setPaymentMenu] = useState<boolean>(false); 
     const [menuShow, setMenuShow] = useState<boolean>(false); 
+    const messageRef = useRef<HTMLDivElement>(null);
+
      const {
     register,
     handleSubmit,
@@ -84,6 +93,12 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
   const unTypeSelect = (value:string) => {
     setSelectedTypeElement('')
   }
+  const paymentSelect = (value:string) => {
+    setSelectedMethod(value)
+  }
+  const unPaymentSelect = (value:string) => {
+    setSelectedMethod('')
+  }
   const handleIconChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -107,34 +122,70 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
           formData.append(fileInput.name, fileInput.files[0]);
         } 
       });
+      if(selectedMenuElement !== ''){
+        formData.append('status', selectedMenuElement)
+      }
+      if(selectedMethod !== ''){
+        formData.append('paymentMethod', selectedMethod)
+      }
+      if(selectedTypeElement !== ''){
+        formData.append('orderType', selectedTypeElement)
+      }
       console.log(JSON.stringify(formData, null, 2));
       try {
+        setLoading(true);
         const codeData =  await addBasic(formData);
         setBasic(codeData);
         addBasicId(codeData);
+        setLoading(false);
+        messageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } catch (error:any) {
+        setLoading(false);
          setError(error.message);
+         messageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
       }
     }
     
+    
   return (
      <form onSubmit={handleSubmit(saveUser)} className=" text-start z-40  ">
-        <div className=" flex flex-wrap justify-between px-5 relative  pt-6 ">
-        {basic !='' &&
-        <div className=''><span className='text-green-500'>Sucessfully added | {basic} </span></div>
-          // <SuccessMessage status={basic}   closeMode={closeMenu}/>
-        }
-
-             <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 "> Title</label>
-                    <div className="flex items-center w-full">
-                        <div className="relative flex w-full">
-                        <input {...register('name')}  type="text" name="name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Poeject Name  ..." required />
-                        </div>
-                    </div> 
-                    <span className="text-red-400 text-xs mt-2">{errors.name?.message} </span>
+          {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
+          
+          <div className='px-4' ref={messageRef}>
+            {error && 
+            <div className="border-red-600 mt-4 flex w-full rounded-lg border-l-[6px] bg-red-200/30 px-7 py-4  sm:py-6">
+                <div className="bg-red-700 mr-5 flex h-8 w-9 items-center justify-center rounded-md">
+                      <LuAlertOctagon  className='text-xl rounded-full border border-gray-50 p-0.5 text-white'  />
+                </div>
+                <div className="w-full">
+                    <h5 className="mb-2 text-base font-semibold text-[#004434]">
+                      Error While Creating 
+                    </h5>
+                    <p className="text-gray-600 text-sm font-medium leading-relaxed">
+                      Error Alert : {error}
+                    </p>
+                </div>
             </div>
+            }
+             {basic !=='' &&
+              <div className="border-green-600 mt-4 flex w-full rounded-lg border-l-[6px] bg-green-200/30 px-7 py-4  sm:py-6">
+                  <div className="bg-green-700 mr-5 flex h-8 w-9 items-center justify-center rounded-md">
+                        <MdDone  className='text-xl rounded-full border border-gray-50 p-0.5 text-white'  />
+                  </div>
+                  <div className="w-full">
+                      <h5 className="mb-2 text-base font-semibold text-[#004434]">
+                        Order Created Successfully
+                      </h5>
+                      <p className="text-gray-600 text-sm font-medium leading-relaxed">
+                        Order Basic Data has been added with order id : ( {basic} )
+                      </p>
+                  </div>
+              </div>
+              }
+          </div>
 
+        <div className=" flex flex-wrap justify-between px-5 relative  pt-6 ">
             <div className=" flex flex-48 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="quantity" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> Quantity</label>
                     <div className="flex items-center w-full">
@@ -157,40 +208,40 @@ const BasicCreate = ({addBasicId,closeModel}:Props) => {
 
 
             <div className=" sm:flex-100  flex  flex-col z-10 w-full mb-5 ">
-                        <label htmlFor="degree" className="font-medium mb-1.5 pl-0.5 text-sm text-gray-700 duration-300 capitalize">Project Status</label>
+                        <label htmlFor="degree" className="font-medium mb-1.5 pl-0.5 text-sm text-gray-700 duration-300 capitalize">Payment Method</label>
                         <div className="flex flex-col  w-full ">
                     <button
                       type="button"
                       onClick={() => {
-                        setTypeMEnu((prevState) => {
+                        setPaymentMenu((prevState) => {
                           if (prevState == false) {
-                            setSelectedTypeElement('');
+                            setSelectedMethod('');
                           }
                           return !prevState;
                         });
                       }}
                       className="flex w-full bg-gray-50   items-center border gap-x-3 h-10 border-gray-200  px-2 rounded-2xl"
                     >
-                      {selectedTypeElement != '' ? (
+                      {selectedMethod != '' ? (
                         <span className="text-md inline-flex text-gray-600 font-medium">
-                              <span className="px-2 first:pl-0 border-r border-r-gray-300 last:border-none">{selectedTypeElement}</span>
+                              <span className="px-2 first:pl-0 border-r border-r-gray-300 last:border-none">{selectedMethod}</span>
                         </span>
                       ) : (
                         <div className="text-md inline-flex text-gray-500 font-medium capitalize">
-                          <span className="px-1 capitalize text-sm">Order Type</span>
+                          <span className="px-1 capitalize text-sm">Payment Method</span>
                         </div>
                       )}
                       <span className="ml-auto">
                         <MdOutlineAddCircle className="text-2xl border-2 border-violet-800 rounded-full text-violet-800" />
                       </span>
                     </button> 
-                      {typeMenu &&
+                      {paymentMenu &&
                       <div className="relative z-50">
-                        <MenuPanel menuElements={typeElements} setSelect={typeSelect} unSelect={unTypeSelect} />
+                        <MenuPanel menuElements={paymentElements} setSelect={paymentSelect} unSelect={unPaymentSelect} />
                       </div>
                           }
                     </div> 
-                    <span className="text-red-400 text-xs mt-2">{errors.status?.message} </span>
+                    <span className="text-red-400 text-xs mt-2">{errors.paymentMethod?.message} </span>
             </div>
 
 

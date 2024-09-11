@@ -98,6 +98,7 @@ model Category {
   testimonials TestimonialCategory[]
   projects     Project[]
   products     Product[]
+  orders       Order[]
   userId       String // References one specific user (modified)
   user         User?                 @relation(fields: [userId], references: [id]) // Relation to User
   createdAt    DateTime              @default(now())
@@ -369,6 +370,13 @@ model User {
   image              String?
   role               String?
   employeeProfile    EmployeeProfile? @relation
+
+  client             Client?          @relation(fields: [clientId], references: [id])
+  clientId           String?          @unique
+
+  // Admin-client relationship (one admin can create many clients)
+  createdClients Client[] @relation("AdminCreatedClients")
+
   roles              Role[]
   posts              Post[]
   services           Service[]
@@ -548,31 +556,31 @@ model VerificationToken {
 }
 
 model MenuParent {
-  id          Int        @id @default(autoincrement())
+  id          Int         @id @default(autoincrement())
   title       String
   description String?
   icon        String?
-  priority    Int        @default(0)
+  priority    Int         @default(0)
   adminMenu   AdminMenu[]
-  createdAt   DateTime   @default(now())
+  createdAt   DateTime    @default(now())
   userId      String
-  user        User       @relation(fields: [userId], references: [id])
-  updatedAt   DateTime   @updatedAt
+  user        User        @relation(fields: [userId], references: [id])
+  updatedAt   DateTime    @updatedAt
 }
 
 //Setting Models
 model AdminMenu {
-  id           Int        @id @default(autoincrement())
+  id           Int         @id @default(autoincrement())
   title        String
   description  String?
   icon         String?
   menuParent   MenuParent? @relation(fields: [menuParentId], references: [id], onDelete: Cascade)
-  menuParentId Int?        
+  menuParentId Int?
   elements     Element[]
   userId       String
-  user         User       @relation(fields: [userId], references: [id])
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
+  user         User        @relation(fields: [userId], references: [id])
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 model Element {
@@ -680,13 +688,13 @@ enum MediaType {
 }
 
 model Media {
-  id          String    @id @default(cuid())
+  id          String     @id @default(cuid())
   url         String
   type        MediaType?
   description String?
   altText     String?
   size        Int? // File size in bytes
-  media_order       Int?
+  media_order Int?
   externalUrl String?
   mimeType    String? // MIME type (e.g., 'image/png', 'video/mp4')
   projectId   String?
@@ -694,13 +702,16 @@ model Media {
   productId   String?
   product     Product?   @relation(fields: [productId], references: [id])
 
-  orderId   String?
-  order      Order?   @relation(fields: [orderId], references: [id])
+  clientId String?
+  client   Client? @relation(fields: [clientId], references: [id])
 
-  tasktId     Int?
-  task        Task ?     @relation(fields: [tasktId], references: [id])
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  orderId String?
+  order   Order?  @relation(fields: [orderId], references: [id])
+
+  tasktId   Int?
+  task      Task?    @relation(fields: [tasktId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Project {
@@ -728,6 +739,8 @@ model Project {
   clientId    String? // Reference to a Client model
   client      Client?        @relation(fields: [clientId], references: [id], onDelete: Cascade)
   Media       Media[]
+
+  
 }
 
 model Client {
@@ -735,6 +748,7 @@ model Client {
   name           String
   contactPerson  String
   email          String  @unique
+  image          String?
   phone          String?
   address        String?
   companyName    String?
@@ -745,13 +759,22 @@ model Client {
   billingEmail   String?
   taxId          String?
 
+  media Media[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+   user        User?    @relation
 
   projects Project[] // Relationship with projects
   invoices Invoice[] // Relationship with invoices, if applicable
 
-  Order Order[]
+    // Many-to-one relationship to User (for tracking admin who created the client)
+  createdBy   User     @relation("AdminCreatedClients", fields: [createdById], references: [id])
+  createdById String    
+
+  Orders Order[]
+  // User  User[]
 }
 
 model Invoice {
@@ -798,7 +821,6 @@ model Invoice {
   updatedAt          DateTime  @updatedAt
 }
 
-
 enum OrderStatus {
   PENDING
   IN_PROGRESS
@@ -806,6 +828,7 @@ enum OrderStatus {
   ON_HOLD
   CANCELLED
 }
+
 enum PaymentStatus {
   PENDING
   IN_PROGRESS
@@ -813,6 +836,7 @@ enum PaymentStatus {
   ON_HOLD
   CANCELLED
 }
+
 enum OrderType {
   Product
   Service
@@ -834,7 +858,7 @@ model Order {
   clientEmail        String?
   clientPhone        String?
   serviceId          Int?
-  service            Service ?      @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  service            Service?      @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   quantity           Int?
   unitPrice          Float?
   estimatedCost      Float?
@@ -843,7 +867,7 @@ model Order {
   taxRate            Float?
   taxAmount          Float?
   totalAmount        Float
-  currency           String @default("USD")
+  currency           String        @default("USD")
   paymentTerms       String?
   paidAt             DateTime?
   paymentMethod      String?
@@ -854,10 +878,11 @@ model Order {
   termsAndConditions String?
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
-  orderManagerId   String?
-  orderManager     User?         @relation(fields: [orderManagerId], references: [id], onDelete: Cascade)
+  orderManagerId     String?
+  orderManager       User?         @relation(fields: [orderManagerId], references: [id], onDelete: Cascade)
   BillingInfo        BillingInfo[]
-  media            Media[]
+  media              Media[]
+  categories         Category[]
 }
 
 model BillingInfo {

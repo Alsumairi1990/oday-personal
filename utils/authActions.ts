@@ -9,7 +9,7 @@ import { signJwt, verifyJwt } from "./jwt";
 
 console.log("before  refister");
 
-export async function registerUser(user: Omit<User,"id" | "emailVerified" | "image" | "createdAt" | "updatedAt">){ 
+export async function registerUser(user: Omit<User,"id" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "clientId">){ 
     const result = await prisma.user.create({
         data :{
             ...user,

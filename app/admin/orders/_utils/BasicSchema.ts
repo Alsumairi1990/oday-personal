@@ -10,14 +10,13 @@ const StatusEnum = z.enum([
 const OrderType = z.enum(["Product", "Service"]);
 
 export const BasicSchema = z.object({
-  name: z.string().min(3),
   description: z.string().optional(),
   orderType: OrderType.optional(),
   status: StatusEnum.optional(),
   quantity: z.coerce.number().int().min(1).optional(),
-  clientName: z.string().min(3).optional(),
-  clientEmail: z.string().email().optional(),
-  clientPhone: z.string().optional(),
+  // clientName: z.string().min(3).optional(),
+  // clientEmail: z.string().email().optional(),
+  // clientPhone: z.string().optional(),
   unitPrice: z.coerce.number().int().min(1).optional(),
   estimatedCost: z.coerce.number().int().min(1).optional(),
   subtotal: z.coerce.number().int().min(1).optional(),
