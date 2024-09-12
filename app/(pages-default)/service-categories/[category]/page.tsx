@@ -9,6 +9,7 @@ const MobileCat = () => {
    return (
       <div className="w-full">
        <div className=" max-sm:min-h-lvh  h-[28rem] pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath})`}}>
+
           <div className="flex w-11/12 mx-auto">
              <div className="flex-60">
              <span className="text-md text-white mb-6 inline-block">Home / mobile development </span>

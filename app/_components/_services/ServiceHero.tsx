@@ -10,7 +10,9 @@ const ServiceHero = ({ service }: ServiceProps) => {
         <div className="w-full " >  
            <div className=" m-h-lvh sm:min-h-[28rem] sm:h-[28rem] pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${service.image})`}}>
             {/* <div className="w-full h-full absolute left-0 top-0 bg-black z-10 opacity-60"></div> */}
-            <div className="absolute top-0 h-full w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
+            <div className="absolute sm:top-[75px] h-[calc(100%-64px)] sm:h-[calc(100%-75px)] top-16 bottom-0 border-t border-t-gray-800  w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
+
+            {/* <div className="absolute top-0 h-full w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div> */}
 
             <div className="flex flex-wrap w-11/12 mx-auto z-20">
             <div className="flex w-full flex-col items-center justify-center ">
