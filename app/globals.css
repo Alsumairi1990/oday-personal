@@ -193,3 +193,6 @@
 body.modal-open {
   overflow: hidden;
 }
+.nav-bg {
+  background-color: #060606fc;
+}

@@ -6,7 +6,6 @@ import ThemeToggle from './_components/theme-toggle'
 import ServicePanel from './_components/_navbar/ServicesPanel'
 import AboutUs from'./_components/_navbar/AboutUs'
 import WorksPanel from './_components/_navbar/WorksPanel'
-import { GoPlus } from "react-icons/go";
 import IndustriesPanel from './_components/_navbar/IndustriesPanel'
 import SigninButton from './_components/SigninButton'
 
@@ -16,6 +15,8 @@ import SigninButton from './_components/SigninButton'
 
 const NavBar = ({ textColor }) => {
   const imagePath = '/images/logo.png';
+  const [isSticky, setIsSticky] = useState(false);
+  const [background, setBackground] = useState('transparent');
   function switchTheme(e){
     document.documentElement.classList.remove('dark')
     alert(e)
@@ -31,6 +32,28 @@ const NavBar = ({ textColor }) => {
     // }
   
   }
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      
+      // Check if the scroll position has passed the threshold
+      if (scrollPosition > 100) {  // Adjust this value as needed
+        setIsSticky(true);
+        setBackground('rgba(0, 0, 0, 0.8)');  // New background color when sticky
+      } else {
+        setIsSticky(false);
+        setBackground('transparent');  // Reset to initial background when not sticky
+      }
+    };
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   useEffect(() => {
     const handleClickOutside = (event) => {
       
@@ -89,7 +112,8 @@ const NavBar = ({ textColor }) => {
   
   return (
     <nav 
-    className={` flex main-nav absolute max-sm:border-b max-sm:border-b-gray-700 w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b botrder-b-[#484848] bg-[${textColor}] font-bold`}
+    className={` flex main-nav fixed top-0 max-sm:border-b max-sm:border-b-gray-700  w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b  botrder-b-[#484848] nav-bg font-bold`}
+    // style={{ backgroundColor: background }} 
     // className='flex main-nav absolute max-sm:border-b max-sm:border-b-gray-700 w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b botrder-b-[#484848]'
     >
         <div className='sm:hidden main-menu-btn flex items-center pl-1'>
