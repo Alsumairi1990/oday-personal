@@ -6,5 +6,7 @@ export const config = {
 
   // matcher: ['/','/admin/:path*','/services/:path*'],
   // matcher: ['/','/services/:path*'],
+  matcher: ['/services/:path*'],
+
 
 };
