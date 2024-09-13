@@ -7,26 +7,25 @@ import { MdOutlineManageSearch } from "react-icons/md";
 import {useEffect} from 'react'
 
 
-
-
-
 const PanelSearch = () => {
 
     useEffect(() => {
         const handleClickOutsidr = (event:any) => {
          const menus = document.getElementsByClassName('log-menu1');
+         if (event.target.closest('.log-menu1') !== null) return;
           if (event.target.closest('.menu-btn ') !== null) {
             const prnt = event.target.closest('.menu-pr');
             const menu = prnt.querySelector('.log-menu1');
-            if(menu.classList.contains('hidden')){
+            if(menu !== null && menu.classList.contains('hidden')){
+                
               for (let i = 0; i < menus.length; i++) {
                 menus[i].classList.add('hidden');
               }
               
-            //   menu.classList.remove('hidden');
-            }
-            else if(!menu.classList.contains('hidden')){
               menu.classList.remove('hidden');
+            }
+            else if(menu && !menu.classList.contains('hidden')){
+              menu.classList.add('hidden');
             }
         }
         else if (event.target.closest('.login-menu ') !== null) return;

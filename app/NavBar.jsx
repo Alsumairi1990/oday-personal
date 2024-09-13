@@ -61,7 +61,7 @@ const NavBar = ({ textColor }) => {
       if (event.target.closest('.menu-btn ') !== null) {
         const prnt = event.target.closest('.menu-pr');
         const menu = prnt.querySelector('.log-menu');
-        if(menu.classList.contains('hidden')){
+        if(menu && menu.classList.contains('hidden')){
           for (let i = 0; i < menus.length; i++) {
             
             menus[i].classList.add('hidden');
@@ -69,7 +69,7 @@ const NavBar = ({ textColor }) => {
           
           menu.classList.remove('hidden');
         }
-        else if(!menu.classList.contains('hidden')){
+        else if(menu && !menu.classList.contains('hidden')){
           
           menu.classList.add('hidden');
         }
@@ -81,9 +81,13 @@ const NavBar = ({ textColor }) => {
         if(menu.classList.contains('hidden')){
           
           menu.classList.remove('hidden');
+          document.body.style.overflow = 'hidden'; // Disable scroll
+
+
         }
-        else if(!menu.classList.contains('hidden')){
-          
+        else if(menu && !menu.classList.contains('hidden')){
+          document.body.style.overflow = ''; // Enable scroll
+
           menu.classList.add('hidden');
         }
 
@@ -112,10 +116,11 @@ const NavBar = ({ textColor }) => {
   
   return (
     <nav 
-    className={` flex main-nav fixed top-0 max-sm:border-b max-sm:border-b-gray-700  w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b  botrder-b-[#484848] nav-bg font-bold`}
+    className={` flex main-nav fixed max-sm:flex-col top-0 max-sm:border-b max-sm:border-b-gray-700  w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b  botrder-b-[#484848] nav-bg font-bold`}
     // style={{ backgroundColor: background }} 
     // className='flex main-nav absolute max-sm:border-b max-sm:border-b-gray-700 w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b botrder-b-[#484848]'
     >
+        <div className="flex sm:hidden items-center w-full">
         <div className='sm:hidden main-menu-btn flex items-center pl-1'>
            <span className="w-8 inline-block fill-gray-200 ml-1">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M89.006 490.013h845.978v62.269h-845.978v-62.269zM89.006 226.835h845.978v62.269h-845.978v-62.269zM89.006 753.181h845.978v62.259h-845.978v-62.259z"></path></svg>
@@ -123,7 +128,6 @@ const NavBar = ({ textColor }) => {
         </div>
         <div className="p-2">
             <Link href="/" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2 text-${textColor} font-bold`} > 
-            
             <span className='w-10 sm:w-[2.7rem] mr-1.5 inline-block'>
               <img src={`${imagePath}`}  alt="" />
             </span>
@@ -135,7 +139,17 @@ const NavBar = ({ textColor }) => {
           </span>
           
         </div>
-        <div className={`main-drop-menu text-sm max-sm:hnav-calc max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `} > 
+        </div>
+       
+        <div className="p-2 max-sm:hidden">
+            <Link href="/" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2 text-${textColor} font-bold`} > 
+            <span className='w-10 sm:w-[2.7rem] mr-1.5 inline-block'>
+              <img src={`${imagePath}`}  alt="" />
+            </span>
+              Design Web</Link>
+        </div>
+       
+        <div className={`main-drop-menu text-sm max-sm:h-lvh max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `} > 
           <div className=" px-4 py-4 flex flex-col bg-[#ffebce] sm:hidden">
             <div className="flex pt-3">
                 <div className="flex-15">
@@ -197,7 +211,7 @@ const NavBar = ({ textColor }) => {
             <div className="menu-pr ">
               <div className="menu-btn  cursor-pointer">
                 <div className="flex items-center px-2  pointer ">
-                <span className="text-base sm:text-md tracking-wide font-medium capitalize">About Us</span>
+                <span className="text-base sm:text-md tracking-wide font-medium text-gray-800 sm:text-white  capitalize">About Us</span>
                   <span className=" max-sm:ml-auto">
                    <svg className="w-6 h-6 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path d="M7 10L12 15L17 10" className='stroke-slate-500 sm:stroke-white' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -218,7 +232,7 @@ const NavBar = ({ textColor }) => {
             <div className="menu-pr ">
               <div className="menu-btn  cursor-pointer">
                 <div className="flex items-center px-2  pointer ">
-                <span className="text-base sm:text-md  tracking-wide font-medium  capitalize">Services</span>
+                <span className="text-base sm:text-md text-gray-800 sm:text-white tracking-wide font-medium  capitalize">Services</span>
                 <span className=" max-sm:ml-auto">
                    <svg className="w-6 h-6 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path d="M7 10L12 15L17 10" className='stroke-slate-500 sm:stroke-white' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -237,7 +251,7 @@ const NavBar = ({ textColor }) => {
             <div className="menu-pr ">
               <div className="menu-btn  cursor-pointer">
                 <div className="flex items-center px-2  pointer ">
-                <span className="text-base sm:text-md tracking-wide font-medium  capitalize">Our Works</span>
+                <span className="text-base sm:text-md tracking-wide font-medium text-gray-800 sm:text-white  capitalize">Our Works</span>
                 <span className=" max-sm:ml-auto">
                    <svg className="w-6 h-6 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path d="M7 10L12 15L17 10" className='stroke-slate-500 sm:stroke-white' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -257,7 +271,7 @@ const NavBar = ({ textColor }) => {
               <div className="menu-pr ">
                 <div className="menu-btn  cursor-pointer">
                   <div className="flex items-center px-2  pointer ">
-                  <span className="text-base sm:text-md tracking-wide font-medium  capitalize">Industries</span>
+                  <span className="text-base sm:text-md tracking-wide font-medium text-gray-800 sm:text-white  capitalize">Industries</span>
                   <span className=" max-sm:ml-auto">
                    <svg className="w-6 h-6 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path d="M7 10L12 15L17 10" className='stroke-slate-500 sm:stroke-white' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -274,7 +288,7 @@ const NavBar = ({ textColor }) => {
                 <div className="menu-pr ">
                   <div className="menu-btn  cursor-pointer">
                     <div className="flex items-center px-2  pointer ">
-                    <span className="text-base sm:text-md tracking-wide font-medium capitalize">Blog</span>
+                    <span className="text-base sm:text-md tracking-wide font-medium text-gray-800 sm:text-white  capitalize">Blog</span>
                       <span className=" max-sm:ml-auto">
                       <svg className="w-6 h-6 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 10L12 15L17 10" className='stroke-slate-500 sm:stroke-white' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -295,7 +309,7 @@ const NavBar = ({ textColor }) => {
               <div className="menu-pr ">
                 <div className="menu-btn  cursor-pointer">
                   <div className="flex items-center px-2  pointer ">
-                  <span className="text-md  tracking-wide font-medium  capitalize">Technologies</span>
+                  <span className="text-md  tracking-wide font-medium text-gray-800 sm:text-white  capitalize">Technologies</span>
                   <span className=" max-sm:ml-auto">
                    <svg className="w-6 h-6 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path d="M7 10L12 15L17 10" className='stroke-slate-500 sm:stroke-white' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
