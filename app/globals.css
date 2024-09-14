@@ -196,3 +196,6 @@ body.modal-open {
 .nav-bg {
   background-color: #060606fc;
 }
+.nav-h {
+  height: 75px;
+}

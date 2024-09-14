@@ -14,7 +14,7 @@ import SigninButton from './_components/SigninButton'
 
 
 const NavBar = ({ textColor }) => {
-  const imagePath = '/images/logo.png';
+  const imagePath = '/images/logo-01.svg';
   const [isSticky, setIsSticky] = useState(false);
   const [background, setBackground] = useState('transparent');
   function switchTheme(e){
@@ -116,7 +116,7 @@ const NavBar = ({ textColor }) => {
   
   return (
     <nav 
-    className={` flex main-nav fixed max-sm:flex-col top-0 max-sm:border-b max-sm:border-b-gray-700  w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b  botrder-b-[#484848] nav-bg font-bold`}
+    className={` flex main-nav fixed max-sm:flex-col sm:h-[75px] h-[64px] top-0 max-sm:border-b max-sm:border-b-gray-700   w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b  botrder-b-[#484848] nav-bg font-bold`}
     // style={{ backgroundColor: background }} 
     // className='flex main-nav absolute max-sm:border-b max-sm:border-b-gray-700 w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b botrder-b-[#484848]'
     >
@@ -126,12 +126,12 @@ const NavBar = ({ textColor }) => {
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M89.006 490.013h845.978v62.269h-845.978v-62.269zM89.006 226.835h845.978v62.269h-845.978v-62.269zM89.006 753.181h845.978v62.259h-845.978v-62.259z"></path></svg>
             </span>    
         </div>
-        <div className="p-2">
+        <div className="p-2 ">
             <Link href="/" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2 text-${textColor} font-bold`} > 
             <span className='w-10 sm:w-[2.7rem] mr-1.5 inline-block'>
-              <img src={`${imagePath}`}  alt="" />
+              <img className='w-full max-w-full' src={`${imagePath}`}  alt="" />
             </span>
-              Design Web</Link>
+              </Link>
         </div>
         <div className='sm:hidden flex items-center pr-2'>
           <span className="w-9 inline-block mr-1 fill-white">
@@ -141,15 +141,15 @@ const NavBar = ({ textColor }) => {
         </div>
         </div>
        
-        <div className="p-2 max-sm:hidden">
+        <div className="p-2 max-sm:hidden text-[#333]">
             <Link href="/" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2 text-${textColor} font-bold`} > 
-            <span className='w-10 sm:w-[2.7rem] mr-1.5 inline-block'>
-              <img src={`${imagePath}`}  alt="" />
-            </span>
-              Design Web</Link>
+            <div className='sm:w-36 mr-1.5 inline-block'>
+              <img className='w-full max-w-full' src={`${imagePath}`}  alt="" />
+            </div>
+              </Link>
         </div>
        
-        <div className={`main-drop-menu text-sm max-sm:h-lvh max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `} > 
+        <div className={`main-drop-menu text-sm max-sm:h-lvh  max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base text-${textColor} `} > 
           <div className=" px-4 py-4 flex flex-col bg-[#ffebce] sm:hidden">
             <div className="flex pt-3">
                 <div className="flex-15">
