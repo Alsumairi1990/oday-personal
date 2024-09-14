@@ -1,6 +1,6 @@
 import { Element } from "./Element";
 
-export interface NavElement {
+export interface NavsElement {
     id: string;
     title: string;
     icon: string;

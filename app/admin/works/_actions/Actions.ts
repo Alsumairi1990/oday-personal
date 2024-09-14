@@ -769,7 +769,6 @@ if(images){
   imageUrls = images?.imageUrls;
 }
 return imageUrls;
- 
 }
 
 

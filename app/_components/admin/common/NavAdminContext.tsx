@@ -10,7 +10,7 @@ export interface NavAdminContextType {
 }
 
 const defaultContextValue: NavAdminContextType = {
-    parentValue: { parentValue: false },
+    parentValue: { parentValue: true },
     setParentValue: () => {}  // Placeholder function
 };
 
@@ -23,7 +23,7 @@ type NavAdminProviderProps = {
 
 export const NavAdminProvider: React.FC<NavAdminProviderProps> = ({ children }) => {
     // State should only manage the Page type, not PageparentValue
-    const [parentValue, setParentValue] = useState<Page>({ parentValue: false });
+    const [parentValue, setParentValue] = useState<Page>({ parentValue: true });
 
     return (
         <NavAdminContext.Provider value={{ parentValue, setParentValue }}>

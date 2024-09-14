@@ -108,7 +108,7 @@ type ElementProps = {
         setActiveLink(link);
       };
     return (
-      <li>
+           <li>
                        <Link href={baseUrl+element.link}>
                             <div
                             onClick={() => handleLinkClick(baseUrl+element.link)}

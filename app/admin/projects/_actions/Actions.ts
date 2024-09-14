@@ -581,6 +581,8 @@ export async function addProjectCategory(projectId: string, ids: number[]): Prom
       await prisma.$disconnect();
     }
   }
+
+  
 // Get Tools by project id 
 export async function getProjectToolslById(projectId:string):Promise<Tool[] >{
   const project = await prisma.project.findUnique({
@@ -669,7 +671,9 @@ export async function  addBasic(data:FormData):Promise<string>{
          return basic.id;
       
      }else {
+      
         throw new Error ('Schema not converted ')
+        
      }
     } catch (error) {
         console.log("[Creating project basic info ]" + error)

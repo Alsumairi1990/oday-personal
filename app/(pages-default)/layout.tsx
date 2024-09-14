@@ -12,7 +12,7 @@ export default function signupLayout({
             
 
             <div className="h-full">
-                <NavBar  textColor="white" />
+                <NavBar  textColor="white"  />
             {children}
             <div className="">
              <Footerk />

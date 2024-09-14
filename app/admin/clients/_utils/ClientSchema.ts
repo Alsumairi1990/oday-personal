@@ -9,7 +9,6 @@ export const ClientSchema = z.object({
         message: "Invalid phone number format",
       }),
     address : z.string().optional(),
-    budget : z.coerce.number().int().optional(),
     companyName : z.string().optional(),
     website : z.string().optional(),
     industry :z.string().optional(),

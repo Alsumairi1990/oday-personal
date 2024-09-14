@@ -57,7 +57,6 @@ const LocationManage = () => {
     try {
       setLoading(true);
       const catg = await getServicesWithAnalytics();
-      
       if(catg) setServices(catg);
       setLoading(false);
     } catch (error: any) {

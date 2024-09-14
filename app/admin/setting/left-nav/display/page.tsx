@@ -7,7 +7,6 @@ import MenusDisplay from '../_components/MenuComp';
 
 const MenuPage = async () => {
   const menusData: Record<number, MenuWithAllModels[]> = await getMenusElementse();
-
   return <MenusDisplay menusData={menusData} />;
 };
 

@@ -8,7 +8,7 @@ import LeftNav from './LeftNav';
 
 const LeftNavServ = async () => {
   const menusData: Record<number, MenuWithAllModels[]> = await getMenusElementse();
-  return <LeftNav menusData={menusData} />;
+return <LeftNav menusData={menusData} />;
 };
 
 export default LeftNavServ;

@@ -197,7 +197,6 @@ const AddPrice = ({serviceId,locationId,closeModel}:Props) => {
                         <input id="image" {...register('image')}  type="file" name="image" className="opacity-0" onChange={handleFileChange} />
                     </label>
                     {errors.image?.message && <p>{errors.image.message as string}</p>}
-
             </div> 
 
             <div className=" flex flex-col flex-48 z-0 mt-2 w-full mb-5 group">

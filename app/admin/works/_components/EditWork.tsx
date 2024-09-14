@@ -21,7 +21,6 @@ import LocationPanel from './LocationPanel';
 
 interface FormEditProps {
   id : string;
-  
 }
 const EditTestimonial = ({ id}: FormEditProps) => {
   const [work, setWork] = useState<WorkWithModels | null>(null); 
