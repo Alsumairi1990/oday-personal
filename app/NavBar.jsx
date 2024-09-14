@@ -128,7 +128,7 @@ const NavBar = ({ textColor }) => {
         </div>
         <div className=" flex-70 flex justify-center">
             <Link href="/" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2 text-${textColor} font-bold`} > 
-            <span className='w-28 sm:w-[2.7rem] mr-1.5 inline-block'>
+            <span className='w-32 sm:w-[2.7rem] mr-1.5 inline-block'>
               <img className='w-full max-w-full' src={`${imagePath}`}  alt="" />
             </span>
               </Link>
