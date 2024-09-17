@@ -1,5 +1,5 @@
-import NavBar from "../NavBar.jsx"
-import Footerk from "../_components/Footer"
+import Footerk from "@/app/_components/Footer"
+import NavBar from "@/app/NavBar.jsx"
 
 
 
