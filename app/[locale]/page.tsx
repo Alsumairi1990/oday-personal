@@ -12,13 +12,17 @@ import Testimonials from '../_components/Testimonials'
 import Subscribe from '../_components/Subscribe'
 import ServiceApp from '../_components/ServiceApp'
 import Footerk from '../_components/Footer'
-import { getLocale, getMessages } from 'next-intl/server'
+import { getLocale, getMessages } from 'next-intl/server';
+import { getServices } from './_actions/Actions'
+
 
 
 
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
+  const services = await getServices();
+
   return (
     <main className="flex flex-col dark:bg-[#111]">
        <div className="flex flex-col">
@@ -35,11 +39,11 @@ export default async function Home() {
      <div className="p-6 text-gray-900 text-2xl font-bold">{locale}</div>
      <div className="clear"></div>
      <div className='gray:bg-[#111]"'>
-     <Services  />
+     <Services services={services} />
      </div>
 
      <div className='gray:bg-[#111]"'>
-     <ServicesFull  />
+     <ServicesFull services={services} />
      </div>
 
      <div className="gray:bg-[#111]">

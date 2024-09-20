@@ -1,14 +1,17 @@
 
 import React from 'react';
 import Link from 'next/link'
-
-const Services = () => {
+import { Service } from '@prisma/client';
+interface Props {
+  services : Service[]
+}
+const Services = ({services}:Props) => {
   const imagePath = '/images/01.png';
   const imagePath2 = '/images/02.png';
   const imagePath3 = '/images/03.png';
   const imagePath4 = '/images/04.png';
 
-  const services = [
+  const servicesw = [
     {
       id:'1',
       name : 'Web Deveoplment ',
@@ -47,10 +50,10 @@ const Services = () => {
        
         <div className="grid grid-cols sm:grid-cols-4 gap-8 mt-8">
 
-         {services.map((service) => (
+         {services && services.map((service) => (
                <div className="p-2 flex flex-col justify-center pt-4 sm:pt-6 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#474747]">
                <div className="dark:pb-2 pb-2 pt-2 dark:pt-0 dark:sm:pb-5 w-24 bg-gray-300 dark:bg-[#080808]  sm:w-[6.5rem] dark:sm:w-[6.5rem] rounded-xl  px-3 dark:px-0 flex items-center mx-auto ">
-                 <img className='w-full mx-auto' src={service.image} alt="" />
+                {service.image && <img className='w-full mx-auto' src={service.image} alt="" /> }
                </div>
                <div className="sm:p2 mt-4 text-center">
                  <h2 className="text-base sm:text-xl capitalize sm:uppercase font-semibold text-orange-500 dark:text-[#ca82ef]">{service.name}</h2>

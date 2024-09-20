@@ -1,7 +1,12 @@
 
+import { Service } from '@prisma/client';
+import { getLocale, getMessages } from 'next-intl/server';
+import Link from 'next/link';
 import React from 'react';
-
-const ServicesFull = () => {
+interface Props {
+  services:Service[]
+}
+const ServicesFull = async ({services}:Props) => {
   const imagePath = '/images/01.png';
   const imagePath2 = '/images/02.png';
   const imagePath3 = '/images/03.png';
@@ -18,6 +23,8 @@ const ServicesFull = () => {
   const imagePath_10 = "https://dcstatic.com/images/icons/design-categories/design-categories-ebook-cover-design-32401d2b4f.svg"
   const imagePath_11 = "https://dcstatic.com/images/icons/design-categories/design-categories-resume-design-b1aa5b01e6.svg"
   const imagePath_12 = "https://dcstatic.com/images/icons/design-categories/design-categories-magazine-design-f15d13134d.svg"
+  const locale = await getLocale();
+  const messages = await getMessages({ locale });
   return (
 
       <div className="flex flex-col sm:py-8  dark:bg-[#080808]">
@@ -27,24 +34,31 @@ const ServicesFull = () => {
        
         <div className="grid grid-cols-2 sm:grid-cols-6 gap-x-5 gap-y-8 mt-8">
 
+        
+     
+          {services && services.map((service) => (
 
-        <a href='/services/servi-1' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
-            <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7rem] dark:sm:w-[7rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
-              <img className='w-full mx-auto' src={`${imagePath_1}`} alt="" />
-            </div>
-            <div className="sm:p2 mt-1 text-center">
-              <h2 className="text-base sm:text-base capitalize sm:capitalize font-semibold ">Web Deveopment</h2>             
-            </div>
-          </a>
+              <Link  href={`/${locale}/services/servi-1`} className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
+              <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7rem] dark:sm:w-[7rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
+              {service.image && <img className='w-full mx-auto' src={service.image} alt="" />}
+              </div>
+              <div className="sm:p2 mt-1 text-center">
+                <h2 className="text-base sm:text-base capitalize sm:capitalize font-semibold ">{service.name}</h2>             
+              </div>
+              </Link>
 
-          <a href='/services/servi-1' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
+
+
+         ))}
+
+          <Link href='/services/servi-1' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
             <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7rem] dark:sm:w-[7rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">
               <img className='w-full mx-auto' src={`${imagePath_2}`} alt="" />
             </div>
             <div className="sm:p2 mt-1 text-center">
               <h2 className="text-base sm:text-base capitalize sm:capitalize font-semibold ">banner ads design</h2>             
             </div>
-          </a>
+          </Link>
 
           <a href='/services/servi-1' className="p-2 flex flex-col justify-center py-4 sm:pt-2 hover:bg-orange-500 hover:text-white text-orange-500 dark:text-[#ca82ef] border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#8849a9]">
             <div className="dark:pb-2 pb-3 pt-2 dark:pt-0 dark:sm:pb-2 w-16  dark:bg-[#080808]  sm:w-[7rem] dark:sm:w-[7rem] rounded-xl  px-4 dark:px-0 flex items-center mx-auto ">

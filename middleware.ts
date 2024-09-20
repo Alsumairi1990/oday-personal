@@ -10,16 +10,24 @@ const intlMiddleware = createIntlMiddleware({
   locales: ['en', 'ar'],
   defaultLocale: 'en',
 });
+const locales = ['en', 'ar'];
 
 export default async function middleware(req: NextRequest) {
   // Apply next-auth middleware for authentication
   const token = await getToken({ req });
   const pathname = req.nextUrl.pathname;
+ 
+  const match = pathname.match(/^\/(en|ar)\/(.+)/);
+  const locale = match ? match[1] : 'en';
+ console.log('locale-------'+locale);
+ 
+    if ((pathname.startsWith(`/${locale}/services`) || pathname.startsWith(`/${locale}/admin`))) {
 
-  // Protect /services and /admin routes
-  if (pathname.startsWith('/services') || pathname.startsWith('/admin')) {
     if (!token) {
-      return NextResponse.redirect(new URL('/login', req.url));
+      console.log('locale'+locale);
+       const redirectUrl = new URL(`/${locale}/auth/signin`, req.url);
+      redirectUrl.pathname = `/${locale}/auth/signin`;
+      return NextResponse.redirect(redirectUrl);
     }
   }
 
