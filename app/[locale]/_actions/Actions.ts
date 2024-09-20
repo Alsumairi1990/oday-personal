@@ -5,7 +5,7 @@ import prisma from "../../../utils/prisma";
 import authOptions from "@/utils/AuthOptions";
 import fs from "fs/promises"
 import { Service, Task } from "@prisma/client";
-import { ServiceWithModels } from "@/app/admin/service/utils/ServiceWithModels";
+import { ServiceWithModels } from "@/app/[locale]/admin/service/utils/ServiceWithModels";
 
 export async function getServices():Promise<Service[]>{
     try {       

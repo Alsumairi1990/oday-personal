@@ -9,7 +9,7 @@ const Works = () => {
   const imagePath5 = '/images/w05.jpg';
   const imagePath6 = '/images/w06.jpg';
   return (
-   <div className="my-8 w-full bg-gray-100 dark:bg-black-100">
+   <div className="my-8 w-full bg-gray-100 dark:bg-[#161616] dark:border darke:border-gray-800">
     <div className="flex items-center justify-center">
         <span className="w-8">
         <svg  width="100%" height="100%" viewBox="0 0 24 24" id="right-arrow" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" className="icon flat-color fill-orange-500"><path id="primary" d="M21.71,11.29l-3-3a1,1,0,0,0-1.42,1.42L18.59,11H3a1,1,0,0,0,0,2H18.59l-1.3,1.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l3-3A1,1,0,0,0,21.71,11.29Z" className='fill-fuchsia-500'></path></svg>

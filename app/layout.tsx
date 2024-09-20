@@ -25,7 +25,7 @@ export default function RootLayout({
           <div className="flex flex-col h-full">
             {children}
           </div>
-          <Footer />
+          {/* <Footer /> */}
           <ToastContainer />
         </Providers>
       </body>

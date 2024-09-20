@@ -1,5 +1,5 @@
 'use client'
-import { MenuWithAllModels } from '@/app/admin/setting/left-nav/_utils/MenuWithAllModels'
+import { MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels'
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 interface Props {

@@ -4,8 +4,8 @@ import { Element } from "./Element";
 
 // import React from 'react';
 import React, { useEffect, useState } from 'react';
-import { ElementWithSubElements, MenuWithAllModels } from '@/app/admin/setting/left-nav/_utils/MenuWithAllModels';
-import { MenuWithModels } from '@/app/admin/setting/left-nav/_utils/MenuWithModels';
+import { ElementWithSubElements, MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
+import { MenuWithModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithModels';
 interface Props {
   element : MenuWithAllModels
 }

@@ -9,14 +9,14 @@ const Subscribe = () => {
 return(
 
 
-     <div className="h-[25rem] w-[93%] mx-auto bg-black-200   rounded overflow-hidden" style={{backgroundImage: `url(${imagePath})`}}>
+     <div className="sm:h-[25rem] w-[93%] mx-auto bg-black-200   rounded overflow-hidden" style={{backgroundImage: `url(${imagePath})`}}>
       
-      <div className="grid grid-cols-3 pl-4 py-4 ">
+      <div className="grid sm:grid-cols-3 pl-4 py-4 ">
          <div className="h-[22.5rem] w-[21rem]" style={{clipPath: 'polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)'}}>
             <img className='w-full' src={imagePath2} alt="" />
             
          </div>
-         <div className="col-span-2 relative flex flex-col justify-center" >
+         <div className="sm:col-span-2 relative flex flex-col justify-center" >
          <div className="absolute  top-0 h-14 w-14 right-0" style={{backgroundImage: `url(${imagePath})`}} ></div>
             <div className=" pr-4">
                <p className="text-base text-green-500 font-semibold mb-2">Contact US</p>

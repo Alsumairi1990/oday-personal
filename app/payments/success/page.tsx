@@ -1,4 +1,4 @@
-import { stripe } from "@/app/admin/common/utils/Stripe";
+import { stripe } from "@/app/[locale]/admin/common/utils/Stripe";
 import { MdDownloadDone } from "react-icons/md";
 
 export default async function SuccessPage({

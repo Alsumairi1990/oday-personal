@@ -9,9 +9,9 @@ const Testimonials = () => {
     const imagePath5 = '/images/user.png';
     const imagePath6 = '/images/manager3.png';
   return (
-    <div className=" w-full">
-        <div className="w-11/12 relative bg-gray-100 dark:bg-black-150 mx-auto py-8 grid sm:grid-cols-4 ">
-            <div className="p-4  flex flex-col justify-center">
+    <div className=" w-full bg-gray-100 dark:bg-[#111]">
+        <div className="w-11/12 relative bg-gray-100 sm:dark:bg-[#161616] dark:bg-[#111] sm:dark:border sm:dark:border-gray-800 mx-auto py-8 grid sm:grid-cols-4 ">
+            <div className="p-4  flex flex-col justify-center max-sm:bg-white max-sm:dark:bg-[#111] max-sm:border max-sm:border-gray-300 max-sm:dark:border-gray-800  max-sm:rounded">
                 <span className="-top-8 absolute bg-violet-600 left-2 p-5 rounded-full">
                    <svg fill="#fff" width="28px" height="28px" viewBox="0 0 32 32" id="icon" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -50,11 +50,11 @@ const Testimonials = () => {
                     </span>
                 </div>
             </div>
-            <div className="pl-6 pr-2 col-span-3 ">
+            <div className="sm:pl-6 max-sm:mt-4 sm:pr-2 sm:col-span-3 ">
               <div className="grid sm:grid-cols-3 gap-6">
 
                 <div className="flex flex-col rounded-md border border-gray-300 shadow-xl dark:shadow-0 dark:border-gray-800">
-                    <div className="py-4 px-2 rounded-t-md bg-white dark:bg-black-100">
+                    <div className="py-4 px-2 rounded-t-md bg-white dark:bg-[#161616]">
                         <div className=""></div>
                         <div className="mb-6 relative">
                            <span className="inline-block border border-orange-500 bg-orange-500 dark:bg-transparent dark:border-violet-600 bg-violet-6080 left-2 p-1.5 mb-2 rounded-full">
@@ -83,7 +83,7 @@ const Testimonials = () => {
                 </div>
 
                 <div className="flex flex-col rounded-md border border-gray-300 shadow-xl dark:shadow-0 dark:border-gray-800">
-                    <div className="py-4 px-2 rounded-t-md bg-white dark:bg-black-100">
+                    <div className="py-4 px-2 rounded-t-md bg-white dark:bg-[#161616]">
                         <div className=""></div>
                         <div className="mb-6 relative">
                            <span className="inline-block border border-orange-500 bg-orange-500 dark:bg-transparent dark:border-violet-600 bg-violet-6080 left-2 p-1.5 mb-2 rounded-full">
@@ -112,7 +112,7 @@ const Testimonials = () => {
                 </div>
 
                 <div className="flex flex-col rounded-md border border-gray-300 shadow-xl dark:shadow-0 dark:border-gray-800">
-                    <div className="py-4 px-2 rounded-t-md bg-white dark:bg-black-100">
+                    <div className="py-4 px-2 rounded-t-md bg-white dark:bg-[#161616]">
                         <div className=""></div>
                         <div className="mb-6 relative">
                            <span className="inline-block border border-orange-500 bg-orange-500 dark:bg-transparent dark:border-violet-600 bg-violet-6080 left-2 p-1.5 mb-2 rounded-full">

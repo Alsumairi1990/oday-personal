@@ -4,12 +4,13 @@ import Link from 'next/link';
 
 import NavElement from './NavElement';
 import { getAdminLeftMenuElements } from '../common/Actions';
-import { MenuWithModels } from '@/app/admin/setting/left-nav/_utils/MenuWithModels';
 import { IoMdSettings } from 'react-icons/io';
-import { getMenusElements } from '@/app/admin/setting/left-nav/_actions/Action';
-import { MenuWithAllModels } from '@/app/admin/setting/left-nav/_utils/MenuWithAllModels';
+
 import NavMenuElement from './NavMenuElement';
 import NavMenuElem from './NavMenuElem';
+import { MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
+import { getMenusElements } from '@/app/[locale]/admin/setting/left-nav/_actions/Action';
+import { MenuWithModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithModels';
 interface MenusDisplayProps {
     menusData: Record<number, MenuWithAllModels[]>;
   }

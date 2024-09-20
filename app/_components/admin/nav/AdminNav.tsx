@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { MenuWithAllModels } from '@/app/admin/setting/left-nav/_utils/MenuWithAllModels';
+import { MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 import LeftNav from './LeftNav';
 import { useNavAdmin } from '../common/NavAdminContext';
 interface MenusDisplayProps {

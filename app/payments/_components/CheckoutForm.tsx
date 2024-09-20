@@ -14,7 +14,7 @@ import {
     useStripe,
   } from "@stripe/react-stripe-js"
   import { loadStripe } from "@stripe/stripe-js"
-import { getServiceById } from '@/app/admin/service/_serviceActions/ServiceActions';
+import { getServiceById } from '@/app/[locale]/admin/service/_serviceActions/ServiceActions';
 import { Service } from '@prisma/client';
 import { formatCurrency } from '@/lib/Formatter';
 const stripePromise = loadStripe(

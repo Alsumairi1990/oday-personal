@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { CategoryWithService } from '../admin/service/utils/CategoryWithService';
+import { CategoryWithService } from '../[locale]/admin/service/utils/CategoryWithService';
 import { MdOutlineUpdate } from 'react-icons/md';
 import Link from 'next/link';
 

@@ -4,7 +4,7 @@ import fs from "fs/promises"
 import { getServerSession } from 'next-auth/next';
 import authOptions from "@/utils/AuthOptions";
 import prisma from "../../../../utils/prisma";
-import { MenuWithModels } from "@/app/admin/setting/left-nav/_utils/MenuWithModels";
+import { MenuWithModels } from "@/app/[locale]/admin/setting/left-nav/_utils/MenuWithModels";
 
 
 //get all menus for left admin nav

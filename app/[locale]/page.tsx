@@ -65,10 +65,28 @@ export default async function Home() {
             ))}
             </div>
            </div>
-         </div>
+      </div>
 
      </div>
-   
+
+     <div className="">
+      <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">
+      <Works />
+      </div>
+      </div>
+      <div className="w-full my-24 ]">
+      <Testimonials />
+      </div>
+      <div className="w-full bg-gray-800 my-10 sm:my-24 dark:bg-black-100">
+      <Subscribe />
+      </div>
+
+      <div className="w-full my-10 sm:my-24 dark:bg-black-100">
+      <ServiceApp />
+      </div>
+      <div className='w-full pt-8 bg-[#111]'>
+          <Footerk />
+          </div>
     </main>
   )
 }

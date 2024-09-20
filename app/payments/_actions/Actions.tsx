@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/utils/AuthOptions";
 import Stripe from "stripe";
 import { redirect } from "next/navigation";
-import { stripe } from "@/app/admin/common/utils/Stripe";
+import { stripe } from "@/app/[locale]/admin/common/utils/Stripe";
 import CheckoutForm from "../_components/CheckoutForm";
 
 // Create Payment Session 

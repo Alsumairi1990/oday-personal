@@ -894,3 +894,78 @@ model BillingInfo {
   orderId    String
   order      Order  @relation(fields: [orderId], references: [id])
 }
+
+
+model MainPage {
+  id                     Int     @id @default(autoincrement())
+  
+  // Hero Section
+  HeroTitle              String
+  HeroTitleAr            String
+  HeroSubTitle           String
+  HeroSubTitleAr         String
+  HeroImage              String
+  
+  // Service Category Section
+  ServiceCatSectTitle    String
+  ServiceCatSectTitleAr  String
+  ServiceCatSectDesc     String
+  ServiceCatSectDescAr   String
+  ServiceCatSectMore     String
+  ServiceCatSectMoreAr   String
+  ServiceCatSectNo       Int
+  ServiceCatSectActive   Boolean
+  
+  // Service Section
+  ServiceSectTitle       String
+  ServiceSectTitleAr     String
+  ServiceSectNo          Int
+  ServiceSectDesc        String
+  ServiceSectDescAr      String
+  ServiceSectMore        String
+  ServiceSectMoreAr      String
+  ServiceSectActive      Boolean
+  
+  // Blog Section
+  BlogSectTitle          String
+  BlogSectTitleAr        String
+  BlogSectNo             Int
+  BlogSectDesc           String
+  BlogSectDescAr         String
+  BlogSectMore           String
+  BlogSectMoreAr         String
+  BlogSectActive         Boolean
+  
+  // Work Method Section
+  WorkMethSectTitle      String
+  WorkMethSectTitleAr    String
+  WorksMethoSectNo       Int
+  WorkMethSectDesc       String
+  WorkMethSectDescAr     String
+  WorkMethSectMore       String
+  WorkMethSectMoreAr     String
+  WorkMethSectActive     Boolean
+  
+  // Work Section
+  WorkSectTitle          String
+  WorkSectTitleAr        String
+  WorkSectNo             Int
+  WorkSectDesc           String
+  WorkSectDescAr         String
+  WorkSectMore           String
+  WorkSectMoreAr         String
+  WorkSectActive         Boolean
+  
+  // Testimonial Section
+  TestimonialSectTitle   String
+  TestimonialSectTitleAr String
+  TestimonialSectNo      Int
+  TestimonialSectDesc    String
+  TestimonialSectDescAr  String
+  TestimonialSectMore    String
+  TestimonialSectMoreAr  String
+  TestimonialSectActive  Boolean
+  
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+}
