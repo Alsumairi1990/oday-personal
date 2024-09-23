@@ -2,9 +2,11 @@ import { z } from "zod";
 
 export const formSchema = z.object({
   
-    category_name : z.string().min(4, "Service Name Must be at least 4 chars")
-                          .max(45, "Service Name Must less than 45 chars"),
+    category_name : z.string().min(4, "Category Name Must be at least 4 chars"),
+    nameAr : z.string().min(4, "الاسم يجب ان يكون اكثؤ من 4 احرف"),
+                          
 description : z.string().max(1000, "Service Title Must less than 1000 chars"),
+descriptionAr : z.string().max(1000, "يجب ان لايتعدى 1000 حرف"),
 // image: imageSchema.refine(file => file.size > 0, "Required"),
 // icon: imageSchema.refine(file => file.size > 0, "Required"),
 // image: z.instanceof(File, { message: "Required" })

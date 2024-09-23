@@ -33,48 +33,53 @@ model ServiceCode {
 }
 
 model Service {
-  id           Int               @id @default(autoincrement())
-  name         String
-  name_slug    String?
-  title        String?
-  price        Float?
-  description  String?
-  discount     Float?
-  image        String?
-  icon         String?
-  location     String?
-  categories   ServiceCategory[]
-  tags         ServiceTag[]
-  tools        ServiceTool[]
-  testimonials Testimonial[]
-  invoices     Invoice[]
-  prices       Price[]
-  phases       Phase[]
-  works        Work[]
-  userId       String
-  user         User?             @relation(fields: [userId], references: [id])
-  codeId       Int?
-  code         ServiceCode?      @relation(fields: [codeId], references: [id])
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
+  id            Int               @id @default(autoincrement())
+  name          String?
+  nameAr        String?
+  name_slug     String?
+  title         String?
+  titleAr       String?
+  price         Float?
+  description   String?
+  descriptionAr String?
+  discount      Float?
+  image         String?
+  icon          String?
+  location      String?
+  categories    ServiceCategory[]
+  tags          ServiceTag[]
+  tools         ServiceTool[]
+  testimonials  Testimonial[]
+  invoices      Invoice[]
+  prices        Price[]
+  phases        Phase[]
+  works         Work[]
+  userId        String
+  user          User?             @relation(fields: [userId], references: [id])
+  codeId        Int?
+  code          ServiceCode?      @relation(fields: [codeId], references: [id])
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
 
   Order Order[]
 }
 
 model Tool {
-  id          Int           @id @default(autoincrement())
-  name        String
-  slug        String        @unique
-  description String?
-  image       String?
-  icon        String?
-  userId      String
-  user        User?         @relation(fields: [userId], references: [id])
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-  services    ServiceTool[]
-  works       WorkTool[]
-  projects    Project[]
+  id            Int           @id @default(autoincrement())
+  name          String?
+  nameAr        String?
+  slug          String        @unique
+  description   String?
+  descriptionAr String?
+  image         String?
+  icon          String?
+  userId        String
+  user          User?         @relation(fields: [userId], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  services      ServiceTool[]
+  works         WorkTool[]
+  projects      Project[]
 }
 
 model ServiceTool {
@@ -87,39 +92,43 @@ model ServiceTool {
 }
 
 model Category {
-  id           Int                   @id @default(autoincrement())
-  name         String
-  slug         String                @unique
-  image        String?
-  icon         String?
-  description  String?
-  services     ServiceCategory[]
-  works        WorkCategory[]
-  testimonials TestimonialCategory[]
-  projects     Project[]
-  products     Product[]
-  orders       Order[]
-  userId       String // References one specific user (modified)
-  user         User?                 @relation(fields: [userId], references: [id]) // Relation to User
-  createdAt    DateTime              @default(now())
-  updatedAt    DateTime              @default(now()) @updatedAt
+  id            Int                   @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  slug          String                @unique
+  image         String?
+  icon          String?
+  description   String?
+  descriptionAr String?
+  services      ServiceCategory[]
+  works         WorkCategory[]
+  testimonials  TestimonialCategory[]
+  projects      Project[]
+  products      Product[]
+  orders        Order[]
+  userId        String // References one specific user (modified)
+  user          User?                 @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @default(now()) @updatedAt
 }
 
 model Tag {
-  id           Int              @id @default(autoincrement())
-  name         String
-  slug         String           @unique
-  image        String?
-  icon         String?
-  description  String?
-  products     Product[]
-  services     ServiceTag[]
-  works        WorkTag[]
-  testimonials TestimonialTag[]
-  userId       String // References one specific user (modified)
-  user         User?            @relation(fields: [userId], references: [id]) // Relation to User
-  createdAt    DateTime         @default(now())
-  updatedAt    DateTime         @default(now()) @updatedAt
+  id            Int              @id @default(autoincrement())
+  name          String?
+  nameAr        String?
+  slug          String           @unique
+  image         String?
+  icon          String?
+  description   String?
+  descriptionAr String?
+  products      Product[]
+  services      ServiceTag[]
+  works         WorkTag[]
+  testimonials  TestimonialTag[]
+  userId        String // References one specific user (modified)
+  user          User?            @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now()) @updatedAt
 }
 
 model ServiceCategory {
@@ -177,7 +186,9 @@ model Price {
 model Testimonial {
   id           Int                   @id @default(autoincrement())
   title        String?
+  titleAr      String?
   content      String?
+  contentAr    String?
   image        String?
   rating       Float?                @default(0)
   videoContent String?
@@ -215,17 +226,19 @@ model TestimonialTag {
 }
 
 model Phase {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String?
-  image       String?
-  icon        String?
-  sequence    Int
-  serviceId   Int?
-  service     Service? @relation(fields: [serviceId], references: [id], onDelete: Cascade)
-  steps       Step[]
-  userId      String // References one specific user (modified)
-  user        User     @relation(fields: [userId], references: [id]) // Relation to User
+  id            Int      @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  description   String?
+  descriptionAr String?
+  image         String?
+  icon          String?
+  sequence      Int
+  serviceId     Int?
+  service       Service? @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  steps         Step[]
+  userId        String // References one specific user (modified)
+  user          User     @relation(fields: [userId], references: [id]) // Relation to User
 
   projectId String?
   project   Project? @relation(fields: [projectId], references: [id])
@@ -234,22 +247,26 @@ model Phase {
 }
 
 model Step {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String?
-  sequence    Int?
-  image       String?
-  icon        String?
-  phaseId     Int
-  phase       Phase    @relation(fields: [phaseId], references: [id], onDelete: Cascade)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            Int      @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  description   String?
+  descriptionAr String?
+  sequence      Int?
+  image         String?
+  icon          String?
+  phaseId       Int
+  phase         Phase    @relation(fields: [phaseId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model Work {
   id          Int            @id @default(autoincrement())
   title       String
+  titleAr       String?
   description String?
+  descriptionAr String?
   imageUrls   String[]       @default([])
   serviceId   Int?
   service     Service?       @relation(fields: [serviceId], references: [id], onDelete: Cascade)
@@ -258,11 +275,13 @@ model Work {
   locationId  Int?
   location    Location?      @relation(fields: [locationId], references: [id], onDelete: Cascade)
   client      String? // Client name or organization
+  clientAr      String? 
   workUrl     String? // URL or link to more details
   tools       WorkTool[]
   icon        String? // Array of additional image URLs
   image       String?
   highlights  String? // Key highlights of the project
+  highlightsAr  String?
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
   userId      String // References one specific user (modified)
@@ -272,8 +291,10 @@ model Work {
 model Location {
   id        Int      @id @default(autoincrement())
   country   String
+  countryAr   String?
   slug      String   @default("default-slug")
   city      String?
+  cityAr      String?
   image     String?
   works     Work[]
   prices    Price[]
@@ -377,26 +398,26 @@ model User {
   // Admin-client relationship (one admin can create many clients)
   createdClients Client[] @relation("AdminCreatedClients")
 
-  roles       Role[]
-  posts       Post[]
-  services    Service[]
-  categories  Category[]
-  tags        Tag[]
-  tools       Tool[]
-  phases      Phase[]
-  works       Work[]
-  partner     Partner[]
-  accounts    Account[]
-  sessions    Session[]
-  testimonial Testimonial[]
-  adminMenu   AdminMenu[]
-  projects    Project[]
-  tasks       Task[]
-  orders      Order[]
-  products    Product[]
-  MenuParent  MenuParent[]
-  heroSections  HeroSection[]
-  pageSections  PageSection[]
+  roles        Role[]
+  posts        Post[]
+  services     Service[]
+  categories   Category[]
+  tags         Tag[]
+  tools        Tool[]
+  phases       Phase[]
+  works        Work[]
+  partner      Partner[]
+  accounts     Account[]
+  sessions     Session[]
+  testimonial  Testimonial[]
+  adminMenu    AdminMenu[]
+  projects     Project[]
+  tasks        Task[]
+  orders       Order[]
+  products     Product[]
+  MenuParent   MenuParent[]
+  heroSections HeroSection[]
+  pageSections PageSection[]
 
   @@map(name: "users")
 }
@@ -913,25 +934,25 @@ model HeroSection {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-   userId        String
-  user          User       @relation(fields: [userId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model PageSection {
   id Int @id @default(autoincrement())
 
-  name          String
-  title         String
-  titleAr       String
-  desc          String
-  descAr        String
-  more          String
-  moreAr        String
-  isActive      String
-  url           String
-  itemsNo       Int  
+  name      String
+  title     String
+  titleAr   String
+  desc      String
+  descAr    String
+  more      String
+  moreAr    String
+  isActive  String
+  url       String
+  itemsNo   Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-   userId        String
-  user          User       @relation(fields: [userId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
 }

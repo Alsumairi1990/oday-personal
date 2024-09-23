@@ -26,6 +26,8 @@ const BasicInfo = () => {
     const [category, setCategory] = useState<Category| null>(null); // Use Category type
     const [imageSrc, setImageSrc] = useState<string | null>(null);
    const [iconSrc, setIconSrc] = useState<string | null>(null);
+   const rows = 4;
+  const cols = 4;
      const {
     register,
     handleSubmit,
@@ -61,13 +63,7 @@ const BasicInfo = () => {
     }
   };
 
-  const transformToCategoryInput = (data: inputType): CategoryInput => {
-    return {
-      name: data.category_name,
-      description: data.description,
-     };
-  };
-    
+ 
     
     const saveUser: SubmitHandler<inputType> = async (data)=>{
       alert("called");
@@ -92,7 +88,7 @@ const BasicInfo = () => {
   return (
    <div className="w-full sm:w-11.8/12 max-sm:border max-sm:border-gray-300  m-auto p-4 bg-white border border-gray-300 rounded-md">
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  ">
-        <div className="grid grid-cols-1">
+        <div className="flex flex-wrap justify-between">
         {category &&
           <SuccessMessage categoryP={category}/>
         }
@@ -107,7 +103,7 @@ const BasicInfo = () => {
                 {/* <button type="button" onClick={()=> closeModel(false)} className="ml-auto"><IoMdCloseCircle className='text-3xl cursor-pointer text-white' /></button> */}
                </div>
 
-            <div className=" flex flex-col z-0 w-full mt-2 mb-5 group">
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mt-2 mb-5 group">
                     <label htmlFor="category_name" className="font-medium mb-3 text-sm  text-gray-500 duration-300 ">Category Name</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
@@ -117,7 +113,37 @@ const BasicInfo = () => {
                     <span className="text-red-400 text-xs mt-2">{errors.category_name?.message} </span>
             </div>
 
-            <div className=" flex flex-col z-0 w-full mb-5 group">
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mt-2 mb-5 group">
+                    <label htmlFor="nameAr" className="font-medium mb-3 text-sm  text-gray-500 duration-300 ">Name Arabic</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('nameAr')}  type="text" name="nameAr" id="nameAr" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none   focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Name in arabic ..."  />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.nameAr?.message} </span>
+            </div>
+
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="description" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 "> Decription </label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <textarea {...register('description')} cols={cols} rows={rows}   name="description" id="description" className="block bg-gray-50 pl-2 pt-2 px-0 z-0 w-full text-sm text-gray-900  border rounded-xl border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="  Decription ...."  />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
+            </div>
+
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="descriptionAr" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 "> Decription Arabic </label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <textarea {...register('descriptionAr')} cols={cols} rows={rows}   name="descriptionAr" id="descriptionAr" className="block bg-gray-50 pl-2 pt-2 px-0 z-0 w-full text-sm text-gray-900  border rounded-xl border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="  Decription arabic...."  />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.descriptionAr?.message} </span>
+            </div>
+
+            {/* <div className=" flex flex-col z-0 w-full mb-5 group">
                     <label htmlFor="description" className="font-medium mb-3 text-sm  text-gray-500 duration-300 ">Categoty Description</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
@@ -125,10 +151,10 @@ const BasicInfo = () => {
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
-            </div>
+            </div> */}
 
-            <div className="flex items-center mb-4 justify-center w-full">
-                    <label htmlFor="image" className="flex flex-col items-center justify-center w-full h-56 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
+            <div className="flex sm:flex-48 items-center mb-4 justify-center w-full">
+                    <label htmlFor="image" className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
                         <div className="flex flex-col items-center justify-center pt-2 pb-3">
                         {imageSrc ? (
                         <Image className='rounded-md'
@@ -151,7 +177,7 @@ const BasicInfo = () => {
                     {errors.image?.message && <p>{errors.image.message as string}</p>}
             </div> 
 
-            <div className="flex items-center mb-4 justify-center w-full">
+            <div className="flex sm:flex-48 items-center mb-4 justify-center w-full">
                   <label htmlFor="icon" className="flex flex-col items-center justify-center w-full h-44 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
                       <div className="flex flex-col items-center justify-center pt-2 pb-3">
                       {iconSrc ? (
@@ -181,8 +207,8 @@ const BasicInfo = () => {
 
 
  
-            <div className="mb-4">
-                <input type="submit" className="btn py-2.5 bg-violet-600  hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full w-full" value="Register" />
+            <div className="mb-4 sm:flex-30 ml-auto">
+                <input type="submit" className="btn py-2.5 bg-violet-600  hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-md w-full" value="Register" />
             </div>
            
         </div>

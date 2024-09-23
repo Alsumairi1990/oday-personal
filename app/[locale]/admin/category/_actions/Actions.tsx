@@ -37,7 +37,11 @@ type CategoryInput = Omit<Category, 'id' | 'slug' | 'userId' | 'image' | 'icon' 
 
 const addSchema = z.object({
   category_name: z.string().min(3),
+  nameAr : z.string().min(4, "الاسم يجب ان يكون اكثؤ من 4 احرف"),
+
   description: z.string().min(1),
+  descriptionAr : z.string().max(1000, "يجب ان لايتعدى 1000 حرف"),
+
   image: z.custom<File>((file) => {    
     return true;
   }, {
@@ -211,6 +215,7 @@ export async function getCategoriesNames(): Promise<string[]> {
       name: true,
     },
   });
+ 
   return categories.map(category => category.name);
 }
 
@@ -291,8 +296,10 @@ export async function  addingCategory(data:FormData):Promise<Category | null>{
                 const category = await prisma.category.create({
                   data: {
                   name: data.category_name,
+                  nameAr : data.nameAr,
                   slug: nameSlug,
                   description: data.description,
+                  descriptionAr : data.descriptionAr,
                   userId: userId,
                   image: imagePath,
                 },
