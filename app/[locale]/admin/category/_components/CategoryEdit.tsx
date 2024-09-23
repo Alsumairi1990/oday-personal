@@ -161,8 +161,9 @@ type inputType = z.infer<typeof formSchema>;
         return {
           name: data.category_name,
           description: data.description,
+          nameAr: data.category_name,
+          descriptionAr: data.description,
     
-          // Include other fields here if needed, or set default values
         };
       };
     const {
@@ -184,7 +185,7 @@ type inputType = z.infer<typeof formSchema>;
             // console.log(data);
            const categoryDa = await addCategory(categoryData);
            
-           setCategory(categoryDa);
+          //  setCategory(categoryDa);
             
         }catch(error){
             toast.error("sothing went wrong");
