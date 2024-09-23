@@ -26,7 +26,7 @@ export default function Home() {
           
       <div className="hed">
       {/* <NavBar /> */}
-       <Hero />
+       {/* <Hero /> */}
        
       </div>
       
