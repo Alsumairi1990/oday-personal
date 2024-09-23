@@ -61,14 +61,19 @@ const Services = async ({categories,meta}:Props) => {
 
          {categories && categories.map((service) => (
                <div className="p-2 flex flex-col justify-center pt-4 sm:pt-6 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 dark:sm:border-[#474747]">
-               <div className="dark:pb-2 pb-2 pt-2 dark:pt-0 dark:sm:pb-5 w-24 bg-gray-300 dark:bg-[#080808]  sm:w-[6.5rem] dark:sm:w-[6.5rem] rounded-xl  px-3 dark:px-0 flex items-center mx-auto ">
-                {service.image && <img className='w-full mx-auto' src={service.image} alt="" /> }
+               <div className="dark:pb-2 pb-1 pt-1 dark:pt-0 h-20 dark:sm:pb-5 w-24 bg-gray-300 dark:bg-[#080808]  sm:w-[6.5rem] dark:sm:w-[6.5rem] rounded-xl  px-1 dark:px-0 flex items-center mx-auto ">
+                {service.image && <img className='w-full h-full mx-auto rounded-md' src={service.image} alt="" /> }
                </div>
                <div className="sm:p2 mt-4 text-center">
-                 <h2 className="text-base sm:text-xl capitalize sm:uppercase font-semibold text-orange-500 dark:text-[#ca82ef]">{service.name}</h2>
+                 {/* <h2 className="text-base sm:text-xl capitalize sm:uppercase font-semibold text-orange-500 dark:text-[#ca82ef]">{service.name}</h2> */}
     
-                 <h2 className="text-sm sm:text-md max-sm:hidden text-gray-700 dark:text-[#00ba35]  sm:mt-3">{service.name} </h2>
-                 <p className="text-sm leading-[22px] text-gray-500 dark:text-gray-300 text-center sm:leading-6 mt-1.5 sm:mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p>
+                 {locale == 'en' ? <h2 className="text-base sm:text-xl capitalize sm:uppercase font-semibold text-orange-500 dark:text-[#ca82ef]">{service.name} </h2>
+                 :  <h2 className="text-xl font-arabic rtl:font-bold rtl:mb-3 text-center px-3 mb-6 text-blue-700 dark:text-white font-normal">{service.nameAr}</h2>
+                  }
+                   {locale == 'en' ? <p className="text-sm leading-[22px] text-gray-500 dark:text-gray-300 text-center sm:leading-6 line-clamp-4 mt-1.5 sm:mt-3 sm:px-3">{service.description}</p>
+                    :<p className="text-md font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center leading-7 line-clamp-5 px-3">{service.descriptionAr}</p>
+                    }
+                 {/* <p className="text-sm leading-[22px] text-gray-500 dark:text-gray-300 text-center sm:leading-6 mt-1.5 sm:mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p> */}
                  <div className="p-1 flex flex-col sm:flex-row justify-around mt-6 mb-4">
                    <Link href={'/services/request'} className='px-4 py-1.5 border dark:border-[0.13rem] max-sm:mb-4 border-gray-300 dark:border-[#4a235e] rounded text-gray-700 dark:text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request 
                   
@@ -93,8 +98,11 @@ const Services = async ({categories,meta}:Props) => {
 
         </div>
         <div className="mt-8 flex justify-center">
-        <Link href={'/services/categories'} className="capitalize text-gray-700  px-2.5 rounded py-1.5 font-semibold bg-gray-100 ">Show More </Link>
-
+        
+        {locale == 'en' ? <Link href={'/services/categories'} className="capitalize text-gray-700  px-2.5 rounded py-1.5 font-semibold bg-gray-100 ">{meta.more} </Link>
+                  : <Link href={'/services/categories'} className="capitalize font-arabic text-gray-700  px-2.5 rounded py-1.5 font-semibold bg-gray-100 "> {meta.moreAr} </Link> 
+                  // <h2 className="text-xl  rtl:font-bold rtl:mb-3 text-center px-3 mb-6 text-blue-700 dark:text-white font-normal">{service.nameAr}</h2>
+                  }
         </div>
         
         </div>

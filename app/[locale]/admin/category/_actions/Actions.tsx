@@ -280,10 +280,11 @@ export async function  addingCategory(data:FormData):Promise<Category | null>{
               if(imagePath != '' && iconPath != ''){
                 const category = await prisma.category.create({
                   data: {
-                  name: data.category_name,
-                  slug: nameSlug,
-                  description: data.description,
-                  userId: userId,
+                    name: data.category_name,
+                    nameAr : data.nameAr,
+                    slug: nameSlug,
+                    description: data.description,
+                    descriptionAr : data.descriptionAr,
                   image: imagePath,
                   icon : iconPath
                 },
@@ -311,9 +312,11 @@ export async function  addingCategory(data:FormData):Promise<Category | null>{
               if(iconPath != '' && imagePath =='' ){
                 const category = await prisma.category.create({
                   data: {
-                  name: data.category_name,
-                  slug: nameSlug,
-                  description: data.description,
+                    name: data.category_name,
+                    nameAr : data.nameAr,
+                    slug: nameSlug,
+                    description: data.description,
+                    descriptionAr : data.descriptionAr,
                   userId: userId,
                   icon : iconPath
                 },
@@ -323,9 +326,11 @@ export async function  addingCategory(data:FormData):Promise<Category | null>{
               if(iconPath == '' && imagePath =='' ){
                 const category = await prisma.category.create({
                   data: {
-                  name: data.category_name,
-                  slug: nameSlug,
-                  description: data.description,
+                    name: data.category_name,
+                    nameAr : data.nameAr,
+                    slug: nameSlug,
+                    description: data.description,
+                    descriptionAr : data.descriptionAr,
                   userId: userId,
                 },
               });

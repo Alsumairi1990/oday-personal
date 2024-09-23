@@ -1,6 +1,6 @@
 
 "use server"
-import { Category, PageSection, Tag } from "@prisma/client";
+import { Category, HeroSection, PageSection, Tag } from "@prisma/client";
 import prisma from "../../../../../utils/prisma";
 import { slugify } from "@/utils/TextUtils";
 import { getCategoryNamesByIds, getTagsNamesByIds } from "../../service/_serviceActions/ServiceActions";
@@ -26,9 +26,22 @@ export async function getServiceMeta():Promise<PageSection>{
     }
   }
 
+  export async function getHeroData():Promise<HeroSection>{
+    try {
+      const meta = await prisma.heroSection.findFirst({
+        where : {
+          pageName : 'mainPage'
+        }
+      })
+      
+      return meta!;
+    } catch (error) {
+      console.log("[getHeroData]"+ error)
+      throw error;
+    }
+  }
 
   export async function getServiceCatMeta():Promise<PageSection>{
-
     try {
       const meta = await prisma.pageSection.findFirst({
         where : {

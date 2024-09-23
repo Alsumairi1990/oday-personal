@@ -14,7 +14,7 @@ import ServiceApp from '../_components/ServiceApp'
 import Footerk from '../_components/Footer'
 import { getLocale, getMessages } from 'next-intl/server';
 import { getServices } from './_actions/Actions'
-import { getServiceCategory, getServiceMeta } from './admin/common/_actions/FrontActions';
+import { getHeroData, getServiceCategory, getServiceMeta } from './admin/common/_actions/FrontActions';
 import { getServiceCatMeta } from './admin/common/_actions/FrontActions'
 
 
@@ -27,10 +27,12 @@ export default async function Home() {
   let servicesMeta ;
   let serviceCatMeta;
   let categories;
+  let heroData;
   try {
     services = await getServices();
     serviceCatMeta = await getServiceCatMeta();
     categories = await getServiceCategory();
+    heroData = await getHeroData();
   } catch (error) {
     console.error("Failed to fetch service meta:", error);
     // Return or render an error message when an error occurs
@@ -65,7 +67,7 @@ export default async function Home() {
           
       <div className="hed">
       
-       <Hero />
+       {heroData && <Hero heroData={heroData} /> }
        
       </div>
       
