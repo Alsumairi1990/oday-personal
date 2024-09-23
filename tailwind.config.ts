@@ -1,9 +1,10 @@
 import type { Config } from "tailwindcss"
+import rtl from 'tailwindcss-rtl'; // Import `rtl` plugin correctly
 
 const config = {
   darkMode: ["class"],
   content: [
-    // './pages/**/*.{ts,tsx}',
+    // './pages/**/*.{ts,tsx}',p
     // './components/**/*.{ts,tsx}',
     // './app/**/*.{ts,tsx}',
     // './src/**/*.{ts,tsx}',
@@ -133,6 +134,11 @@ const config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      fontFamily: {
+        // Add custom font families
+        arabic: ['Kufi Arabic', 'sans-serif'], // Custom name for Arabic font
+      },
+     
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -149,7 +155,7 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"), rtl],
 } satisfies Config
 
 export default config

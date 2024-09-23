@@ -47,7 +47,7 @@ const WorkCategories = () => {
          </div> */}
          </div>
          <div className="w-full">
-                <ServicesFull />
+                {/* <ServicesFull /> */}
              </div>
  
          <div className="py-4 px-8 pt-0 w-full">

@@ -1,7 +1,7 @@
 
 import { MdDownloadDone, MdSmsFailed } from "react-icons/md";
 import { payAmount } from "./_actions/Actions";
-import prisma from "../../utils/prisma";
+import prisma from "../../../utils/prisma";
 import { getServerSession } from "next-auth";
 import authOptions from "@/utils/AuthOptions";
 import Stripe from "stripe";

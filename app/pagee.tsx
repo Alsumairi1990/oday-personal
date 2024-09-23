@@ -33,11 +33,11 @@ export default function Home() {
      
      <div className="clear"></div>
      <div className='gray:bg-[#111]"'>
-     <Services  />
+     {/* <Services  /> */}
      </div>
 
      <div className='gray:bg-[#111]"'>
-     <ServicesFull  />
+     {/* <ServicesFull  /> */}
      </div>
 
      <div className="gray:bg-[#111]">

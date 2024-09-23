@@ -1,5 +1,5 @@
 "use server"
-import prisma from "../../../utils/prisma";
+import prisma from "../../../../utils/prisma";
 import { getServerSession } from "next-auth";
 import authOptions from "@/utils/AuthOptions";
 import Stripe from "stripe";

@@ -1,4 +1,4 @@
-import Footerk from "../_components/Footer.jsx"
+import Footerk from "../../_components/Footer.jsx"
 // import Nav from "./Nav"
 
 

@@ -5,6 +5,7 @@ import Footer from './Footer';
 import { Providers } from './providers';
 import { ToastContainer } from 'react-toastify';
 import "react-toastify/ReactToastify.css";
+import Head from 'next/head';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth h-full" suppressHydrationWarning>
+     
       <body className="min-h-full">
         <Providers>
           <div className="flex flex-col h-full">

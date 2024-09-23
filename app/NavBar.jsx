@@ -3,6 +3,8 @@ import Link from 'next/link'
 import React from 'react'
 import {useEffect, useState} from 'react';
 import ThemeToggle from './_components/theme-toggle'
+import LocaleSwitcher from './_components/LangToggle'
+
 import ServicePanel from './_components/_navbar/ServicesPanel'
 import AboutUs from'./_components/_navbar/AboutUs'
 import WorksPanel from './_components/_navbar/WorksPanel'
@@ -332,103 +334,17 @@ const NavBar = ({ textColor }) => {
               </div>
             </div>
 
-
-             <div className="menu-pr ">
-              <div className="pl-3 menu-btn  pr-2 cursor-pointer">
+            <div className="px-2">
+              <div className=" pr-0.5 cursor-pointer">
                 <div className="flex items-center border border-gray-600 px-1.5 py-1.5 bg-[#00000059] rounded-full pointer relative">
-                  <span className="icon dark-icon relative">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M5 18.865a.725.725 0 0 1-.534-.215.726.726 0 0 1-.216-.535c0-.213.072-.39.216-.534A.726.726 0 0 1 5 17.365h1.25v-7.25A5.63 5.63 0 0 1 7.5 6.534c.833-1.056 1.917-1.732 3.25-2.026v-.7c0-.353.12-.65.36-.89s.537-.36.89-.36c.352 0 .649.12.89.36.24.24.36.537.36.89v.7c1.333.294 2.417.97 3.25 2.026a5.63 5.63 0 0 1 1.25 3.581v7.25H19c.212 0 .39.072.534.216a.726.726 0 0 1 .216.535c0 .212-.072.39-.216.534a.726.726 0 0 1-.534.215H5Zm7 2.943c-.492 0-.917-.175-1.273-.525A1.73 1.73 0 0 1 10.192 20h3.616c0 .505-.175.933-.525 1.283-.35.35-.778.525-1.283.525Zm-4.25-4.443h8.5v-7.25c0-1.168-.416-2.169-1.249-3.001-.833-.833-1.834-1.249-3.003-1.249-1.17 0-2.17.416-3 1.249-.832.832-1.248 1.833-1.248 3.001v7.25Z" fill="#fff"></path>
-                      </svg>
-                      <span className="absolute bg-orange-500 dark:bg-fuchsia-500 right-1 rounded-full h-2.5 w-2.5 top-0 z-20"></span>
-                  </span>
+                  <LocaleSwitcher />
                 </div>
               </div>
+            </div>
 
-              <div id="log-menu" className=" log-menu hidden w-full fixed h-full top-0 z-[18] bg-black left-0 menu-overlay " style={{background:'#00000052'}}>
-                  <div className="absolute login-menu top-[4.78rem] z-10 right-16 bg-white w-80   flex flex-col  rounded-tl-xl rounded-bl-sm " style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}>
-                      <span className="absolute inline-block w-4 h-4 bg-[#ffebce] top-[-.5rem] sm:right-8 sm:mr-4 sm:rotate-45"></span>
 
-                      <div className="pb-2 overflow-y-scroll rounded-tl-xl  h-[31rem]">
-                          <div className="flex flex-col">
-                            <div className="flex flex-col  pt-4 rounded-tl-xl bg-[#ffebce]">
-                                  <div className=" px-4 flex">
-                                    <div className="flex-100 pl-3">
-                                        <div className="">
-                                        <span className="text-sm font-semibold text-gray-700">Hello, Welcome To Collegedunia</span>
-                                        </div>
-                                        
-                                    </div>
-                                  </div>
-                                  <div className="px-4 py-3">
-                                    <div className="flex items-center  rounded py-2 px-2 bg-white border border-[#f7b065]">
-                                      <span className="pl-1 text-sm text-gray-500  capitalize">Get Collage Rank</span>
-                                      <span className="ml-auto">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                          <path d="M4.295 15.833h1.03l7.717-7.716-1.03-1.03-7.717 7.716v1.03Zm11.42-8.62-2.813-2.787 1.095-1.094c.24-.24.534-.36.884-.36s.646.12.885.36l1.03 1.03c.24.24.364.53.372.872.009.342-.107.633-.346.872l-1.107 1.107Zm-11.917 9.87a.73.73 0 0 1-.538-.215.73.73 0 0 1-.215-.538v-1.745c0-.1.018-.196.054-.287a.755.755 0 0 1 .172-.253l8.727-8.728 2.813 2.813-8.728 8.727a.754.754 0 0 1-.253.172.766.766 0 0 1-.287.054H3.798Z" fill="#1C1B1F"></path>
-                                        </svg>
-                                      </span>
-                                    </div>
-                                  </div>
-
-                                
-                              </div>    
-
-                              <div className="px-4 py-2">
-                                <div className="flex items-center justify-center rounded py-3 bg-[#e7f8ff]  px-2 ">
-                                  <span className="pl-1 text-base text-gray-700 font-semibold  capitalize">Find the the best Colleges  </span>
-                                  <div className="ml-auto w-20">
-                                    <img src="" alt="" />
-                                  </div>
-                                </div>
-                              </div>
-
-                              <div className="px-4 py-1.5">
-                                <div className="flex  items-center justify-center rounded py-2 pl-2 bg-[#ffebce]  pr-0.5">
-                                  <div className="flex-col flex-75">
-                                  <span className="pl-1 text-base text-gray-700 font-semibold  capitalize">Eduycation Ranking  </span>
-                                  <div className="flex flex-wrap gap-2 mt-2">
-                                    <span className="text-sm bg-white px-2 py-1 border border-[#f7b065] rounded text-gray-600">HTE </span>
-                                    <span className="text-sm bg-white px-2 py-1 border border-[#f7b065] rounded text-gray-600">QS </span>
-                                    <span className="text-sm bg-white px-2 py-1 border border-[#f7b065] rounded text-gray-600">US News  </span>
-                                  </div>
-                                  </div>
-                                  <div className="ml-auto flex-25">
-                                    <img src="" alt="" />
-                                  </div>
-                                </div>
-                                <div className="px-4 flex justify-center py-1 bg-[#ffebce] border-t border-t-[#f7b065] text-center">
-                                  <span className="text-gray-600 pt-0.5 text-sm font-semibold">Explore </span>
-                                  <span className="w-[18px] h-[18px] inline-block rotate-90 ml-1">
-                                  <svg height="100%" width="100%" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
-                                      viewBox="0 0 512 512" >
-                                    <path fill='#25B6D2' d="M485.216,421.564L485.216,421.564l-70.4-70.336l-15.448-15.432c-17.552-17.528-46-17.512-63.528,0.04
-                                      c-17.528,17.552-17.512,46,0.04,63.528l0,0l26.664,26.64l0.104,0.128l27.016,26.992l58.832,58.776L512,448.316L485.216,421.564z"/>
-                                    <ellipse fill='415E72' cx="216.96" cy="216.98" rx="216.96" ry="216.88"/>
-                                    <ellipse fill='#FFFFFF' cx="216.96" cy="216.98" rx="180.632" ry="180.512"/>
-                                    <path fill='#E81241' d="M216.992,378.092c-88.976-0.056-161.056-72.232-161-161.2c0.056-88.976,72.232-161.064,161.208-161
-                                      c88.936,0.056,161,72.168,161,161.104C378.064,305.956,305.952,378.02,216.992,378.092z M216.992,59.892
-                                      c-86.768,0.064-157.056,70.448-157,157.208c0.056,86.768,70.44,157.064,157.208,157c86.728-0.056,157.008-70.384,157-157.112
-                                      C374.072,130.236,303.744,59.956,216.992,59.892L216.992,59.892z"/>
-                                    </svg>
-                                  </span>
-                                </div>
-                              </div>
-
-                              <div className="px-4 py-2">
-                                <div className="flex items-center justify-center rounded py-3 bg-[#e7f8ff]  px-2 ">
-                                  <span className="pl-1 text-base text-gray-700 font-semibold  capitalize">Find the the best Colleges  </span>
-                                  <div className="ml-auto w-20">
-                                    <img src="" alt="" />
-                                  </div>
-                                </div>
-                              </div>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
             
-              </div>
+
                   
 
 

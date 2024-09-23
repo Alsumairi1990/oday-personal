@@ -14,6 +14,8 @@ import ServiceApp from '../_components/ServiceApp'
 import Footerk from '../_components/Footer'
 import { getLocale, getMessages } from 'next-intl/server';
 import { getServices } from './_actions/Actions'
+import { getServiceCategory, getServiceMeta } from './admin/common/_actions/FrontActions';
+import { getServiceCatMeta } from './admin/common/_actions/FrontActions'
 
 
 
@@ -21,7 +23,38 @@ import { getServices } from './_actions/Actions'
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
-  const services = await getServices();
+  let services ;
+  let servicesMeta ;
+  let serviceCatMeta;
+  let categories;
+  try {
+    services = await getServices();
+    serviceCatMeta = await getServiceCatMeta();
+    categories = await getServiceCategory();
+  } catch (error) {
+    console.error("Failed to fetch service meta:", error);
+    // Return or render an error message when an error occurs
+    return (
+      <div className="error-message">
+        <h2>Failed to load services</h2>
+        <p>There was an issue loading the services. Please try again later.</p>
+      </div>
+    );
+  }
+
+
+  try {
+    servicesMeta = await getServiceMeta();
+  } catch (error) {
+    console.error("Failed to fetch service meta:", error);
+    // Return or render an error message when an error occurs
+    return (
+      <div className="error-message">
+        <h2>Failed to load services</h2>
+        <p>There was an issue loading the services. Please try again later.</p>
+      </div>
+    );
+  }
 
   return (
     <main className="flex flex-col dark:bg-[#111]">
@@ -31,19 +64,19 @@ export default async function Home() {
           </div>
           
       <div className="hed">
-      {/* <NavBar /> */}
+      
        <Hero />
        
       </div>
       
-     <div className="p-6 text-gray-900 text-2xl font-bold">{locale}</div>
+     {/* <div className="p-6 text-gray-900 text-2xl font-bold">{locale}</div> */}
      <div className="clear"></div>
      <div className='gray:bg-[#111]"'>
-     <Services services={services} />
+     <Services categories={categories} meta={serviceCatMeta}  />
      </div>
 
      <div className='gray:bg-[#111]"'>
-     <ServicesFull services={services} />
+     {services && servicesMeta && <ServicesFull services={services} meta={servicesMeta} />}
      </div>
 
      <div className="gray:bg-[#111]">

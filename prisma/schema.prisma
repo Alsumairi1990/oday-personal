@@ -371,30 +371,32 @@ model User {
   role               String?
   employeeProfile    EmployeeProfile? @relation
 
-  client             Client?          @relation(fields: [clientId], references: [id])
-  clientId           String?          @unique
+  client   Client? @relation(fields: [clientId], references: [id])
+  clientId String? @unique
 
   // Admin-client relationship (one admin can create many clients)
   createdClients Client[] @relation("AdminCreatedClients")
 
-  roles              Role[]
-  posts              Post[]
-  services           Service[]
-  categories         Category[]
-  tags               Tag[]
-  tools              Tool[]
-  phases             Phase[]
-  works              Work[]
-  partner            Partner[]
-  accounts           Account[]
-  sessions           Session[]
-  testimonial        Testimonial[]
-  adminMenu          AdminMenu[]
-  projects           Project[]
-  tasks              Task[]
-  orders             Order[]
-  products           Product[]
-  MenuParent         MenuParent[]
+  roles       Role[]
+  posts       Post[]
+  services    Service[]
+  categories  Category[]
+  tags        Tag[]
+  tools       Tool[]
+  phases      Phase[]
+  works       Work[]
+  partner     Partner[]
+  accounts    Account[]
+  sessions    Session[]
+  testimonial Testimonial[]
+  adminMenu   AdminMenu[]
+  projects    Project[]
+  tasks       Task[]
+  orders      Order[]
+  products    Product[]
+  MenuParent  MenuParent[]
+  heroSections  HeroSection[]
+  pageSections  PageSection[]
 
   @@map(name: "users")
 }
@@ -739,8 +741,6 @@ model Project {
   clientId    String? // Reference to a Client model
   client      Client?        @relation(fields: [clientId], references: [id], onDelete: Cascade)
   Media       Media[]
-
-  
 }
 
 model Client {
@@ -764,14 +764,14 @@ model Client {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-   user        User?    @relation
+  user User? @relation
 
   projects Project[] // Relationship with projects
   invoices Invoice[] // Relationship with invoices, if applicable
 
-    // Many-to-one relationship to User (for tracking admin who created the client)
-  createdBy   User     @relation("AdminCreatedClients", fields: [createdById], references: [id])
-  createdById String    
+  // Many-to-one relationship to User (for tracking admin who created the client)
+  createdBy   User   @relation("AdminCreatedClients", fields: [createdById], references: [id])
+  createdById String
 
   Orders Order[]
   // User  User[]
@@ -895,77 +895,43 @@ model BillingInfo {
   order      Order  @relation(fields: [orderId], references: [id])
 }
 
+model HeroSection {
+  id Int @id @default(autoincrement())
 
-model MainPage {
-  id                     Int     @id @default(autoincrement())
-  
-  // Hero Section
-  HeroTitle              String
-  HeroTitleAr            String
-  HeroSubTitle           String
-  HeroSubTitleAr         String
-  HeroImage              String
-  
-  // Service Category Section
-  ServiceCatSectTitle    String
-  ServiceCatSectTitleAr  String
-  ServiceCatSectDesc     String
-  ServiceCatSectDescAr   String
-  ServiceCatSectMore     String
-  ServiceCatSectMoreAr   String
-  ServiceCatSectNo       Int
-  ServiceCatSectActive   Boolean
-  
-  // Service Section
-  ServiceSectTitle       String
-  ServiceSectTitleAr     String
-  ServiceSectNo          Int
-  ServiceSectDesc        String
-  ServiceSectDescAr      String
-  ServiceSectMore        String
-  ServiceSectMoreAr      String
-  ServiceSectActive      Boolean
-  
-  // Blog Section
-  BlogSectTitle          String
-  BlogSectTitleAr        String
-  BlogSectNo             Int
-  BlogSectDesc           String
-  BlogSectDescAr         String
-  BlogSectMore           String
-  BlogSectMoreAr         String
-  BlogSectActive         Boolean
-  
-  // Work Method Section
-  WorkMethSectTitle      String
-  WorkMethSectTitleAr    String
-  WorksMethoSectNo       Int
-  WorkMethSectDesc       String
-  WorkMethSectDescAr     String
-  WorkMethSectMore       String
-  WorkMethSectMoreAr     String
-  WorkMethSectActive     Boolean
-  
-  // Work Section
-  WorkSectTitle          String
-  WorkSectTitleAr        String
-  WorkSectNo             Int
-  WorkSectDesc           String
-  WorkSectDescAr         String
-  WorkSectMore           String
-  WorkSectMoreAr         String
-  WorkSectActive         Boolean
-  
-  // Testimonial Section
-  TestimonialSectTitle   String
-  TestimonialSectTitleAr String
-  TestimonialSectNo      Int
-  TestimonialSectDesc    String
-  TestimonialSectDescAr  String
-  TestimonialSectMore    String
-  TestimonialSectMoreAr  String
-  TestimonialSectActive  Boolean
-  
-  createdAt              DateTime @default(now())
-  updatedAt              DateTime @updatedAt
+  title         String
+  titleAr       String
+  subTitl       String
+  subTitlAr     String
+  more          String
+  moreAr        String
+  isActive      String
+  url           String
+  pageName      String
+  footerTitle   String
+  footerTitleAr String
+  image         String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+   userId        String
+  user          User       @relation(fields: [userId], references: [id])
+}
+
+model PageSection {
+  id Int @id @default(autoincrement())
+
+  name          String
+  title         String
+  titleAr       String
+  desc          String
+  descAr        String
+  more          String
+  moreAr        String
+  isActive      String
+  url           String
+  itemsNo       Int  
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+   userId        String
+  user          User       @relation(fields: [userId], references: [id])
 }
