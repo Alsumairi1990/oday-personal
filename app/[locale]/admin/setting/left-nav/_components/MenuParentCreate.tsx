@@ -7,10 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { LuAlertOctagon } from "react-icons/lu";
 import Image from 'next/image';
 import { MdAssignmentAdd} from "react-icons/md";
-import { addingInnerElement, addingMenuParent, getElelemntWModelsById, getMenuParent } from '../_actions/Action';
-import { MenuWithModels } from '../_utils/MenuWithModels';
-import { IoMdCloseCircle } from 'react-icons/io';
-import { MenuElementSchema } from '../_utils/MenuElementSchema';
+import { addingMenuParent, getMenuParent } from '../_actions/Action';
 import { MenuParentSchema } from '../_utils/MenuParentSchema';
 import { MenuParent } from '@prisma/client';
 
@@ -150,6 +147,15 @@ const MenuParentCreate = ({id,closeModel}:Props) => {
                     <span className="text-red-400 text-xs mt-2">{errors.title?.message} </span>
             </div>
             <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="titleAr" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Title Arabic</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('titleAr')}  type="text" name="titleAr" id="titleAr" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-100 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder=" title arabic  ..." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.titleAr?.message} </span>
+            </div>
+            <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="priority" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 capitalize "> priority</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
@@ -167,6 +173,16 @@ const MenuParentCreate = ({id,closeModel}:Props) => {
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
+            </div>
+
+            <div className=" flex sm:flex-100 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="descriptionAr" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 ">description arabic</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <textarea {...register('descriptionAr')}  rows={rows} cols={cols}  name="descriptionAr" id="descriptionAr" className="block pl-2 pt-3 px-0 z-0 w-full text-sm text-gray-900 bg-gray-100 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="description arabic ..." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.descriptionAr?.message} </span>
             </div>
            
             <div className="flex flex-100 items-center  justify-center w-full">

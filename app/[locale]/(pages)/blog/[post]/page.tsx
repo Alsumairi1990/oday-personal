@@ -156,7 +156,7 @@ export default function Post() {
         
       <div >
         <div className=" shadow-sm border-b border-b-gray-200 h-20 ">
-        <NavBar textColor="gray-700" />
+        <NavBar/>
         </div>
         
 

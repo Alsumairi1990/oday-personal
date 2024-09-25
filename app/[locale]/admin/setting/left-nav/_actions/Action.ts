@@ -13,6 +13,70 @@ import { MenuWithAllModels } from "../_utils/MenuWithAllModels";
 import { getCachedData, setCachedData } from "../../../common/cache/MenuCache";
 import prisma from "@/utils/prisma";
 
+
+export async function getMenusElementse2(): Promise<Record<number, MenuWithAllModels[]>> {
+  // Check cache first
+  console.time('Total Menu Fetch');
+  let cachedData = getCachedData();
+  if (cachedData) {
+    return cachedData;
+  }
+  console.timeEnd('Cache Check');
+
+
+  try {
+    // Fetch data from the database
+    console.log("hit server");
+    const menuWithElements = await prisma.adminMenu.findMany({
+      where: {
+        menuType: 'front',
+      },
+      include: {
+        menuParent: true,
+        elements: {
+          include: {
+            parent: true,
+            subElements: {
+              include: {
+                parent: true,
+                subElements: true,
+              },
+            },
+          },
+        },
+        user: true,
+      },
+      orderBy: {
+        id: 'desc', // Assuming 'id' is the primary key or a field that defines the order
+      },
+      
+    });
+    
+    // Group data by parent ID
+    const groupedByParentId = menuWithElements.reduce((acc, menu) => {
+      const parentId = menu.menuParent?.id;
+
+      if (parentId !== null && parentId !== undefined) {
+        if (!acc[parentId]) {
+          acc[parentId] = [];
+        }
+        acc[parentId].push(menu as MenuWithAllModels);
+      }
+
+      return acc;
+    }, {} as Record<number, MenuWithAllModels[]>);
+
+    // Cache the result
+    setCachedData(groupedByParentId);
+
+    return groupedByParentId;
+  } catch (error) {
+    console.log('Exception while fetching menu elements: ' + error);
+    throw error;
+  }
+}
+
+
 export async function getMenusElementse(): Promise<Record<number, MenuWithAllModels[]>> {
   // Check cache first
   console.time('Total Menu Fetch');
@@ -241,6 +305,9 @@ export async function  addingInnerElement(id:number,data:FormData,ids:number[]):
               const inner = await prisma.element.create({
                 data : {
                     title: data.title,
+                    titleAr : data.titleAr,
+                    description : data.description,
+                    descriptionAr : data.descriptionAr,
                     link : data.link,
                     menuId : id,
                     icon : iconPath,
@@ -254,6 +321,8 @@ export async function  addingInnerElement(id:number,data:FormData,ids:number[]):
               const inner = await prisma.element.create({
                 data : {
                     title: data.title,
+                    titleAr : data.titleAr,
+                    descriptionAr : data.descriptionAr,
                     link : data.link,
                     menuId : id,
                     icon : iconPath
@@ -323,6 +392,9 @@ export async function  addingMenuParent(data:FormData):Promise<MenuParent>{
           const menu = await prisma.menuParent.create({
                   data: {
                   title: data.title,
+                  titleAr : data.titleAr,
+                  description : data.description,
+                  descriptionAr : data.descriptionAr,
                   userId: userId,
                   priority:data.priority,
                   icon : iconPath,
@@ -373,6 +445,9 @@ export async function  addingMenuElement(data:FormData,id:number):Promise<MenuWi
             const code = await prisma.adminMenu.create({
                     data: {
                     title: data.title,
+                    titleAr : data.titleAr,
+                    descriptionAr : data.descriptionAr,
+                    menuType : data.menuType,
                     userId: userId,
                     icon : iconPath,
                     menuParentId :parent.id

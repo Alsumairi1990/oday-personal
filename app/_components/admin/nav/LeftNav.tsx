@@ -141,7 +141,6 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
                 <ul className='pl-3'>
                         {menus.map(menu => (
                              <NavMenuElem menu={menu}  />
-                       
                         ))}
                         </ul>
                     </div>

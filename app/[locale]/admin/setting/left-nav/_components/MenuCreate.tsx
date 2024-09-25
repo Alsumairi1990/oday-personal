@@ -66,7 +66,7 @@ const MenuCreate = () => {
       alert("called");
       const formData = new FormData();
       for (const key in data) {
-        formData.append(key, data[key as keyof inputType].toString());
+        formData.append(key, data[key as keyof inputType]!.toString());
       }
       const fileInputs = document.querySelectorAll('input[type="file"]') as NodeListOf<HTMLInputElement>;
       fileInputs.forEach((fileInput) => {
@@ -145,7 +145,7 @@ const MenuCreate = () => {
                   </span>
                 </button>
             </div>
-            <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
+            <div className=" flex sm:flex-30 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="title" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Title</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
@@ -154,16 +154,43 @@ const MenuCreate = () => {
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.title?.message} </span>
             </div>
-            <div className=" flex flex-48 flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="content" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 ">Menu Element description</label>
+            <div className=" flex sm:flex-30 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="titleAr" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Title Arabic</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
-                        <textarea {...register('description')}  rows={rows} cols={cols}  name="description" id="description" className="block pl-2 pt-3 px-0 z-0 w-full text-sm text-gray-900 bg-gray-100 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="MEnu Element description ..." required />
+                        <input {...register('titleAr')}  type="text" name="titleAr" id="titleAr" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-100 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder=" title arabic  ..." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.titleAr?.message} </span>
+            </div>
+            <div className=" flex sm:flex-30 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="menuType" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> menu Type</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('menuType')}  type="text" name="menuType" id="menuType" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-100 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder=" menu type  ..." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.titleAr?.message} </span>
+            </div>
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="description" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 ">description</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <textarea {...register('description')}  rows={rows} cols={cols}  name="description" id="description" className="block pl-2 pt-3 px-0 z-0 w-full text-sm text-gray-900 bg-gray-100 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="description ..." required />
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
             </div>
-            <div className="flex flex-48 items-center  justify-center w-full">
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="descriptionAr" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 ">description arabic</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <textarea {...register('descriptionAr')}  rows={rows} cols={cols}  name="descriptionAr" id="descriptionAr" className="block pl-2 pt-3 px-0 z-0 w-full text-sm text-gray-900 bg-gray-100 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="description arabic ..." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.descriptionAr?.message} </span>
+            </div>
+            <div className="flex flex-100 items-center  justify-center w-full">
                     <label htmlFor="icon" className="flex flex-col items-center justify-center w-full h-28 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-100  hover:bg-gray-100">
                         <div className="flex flex-col items-center justify-center pt-2 pb-3">
                         {imageSrc ? (

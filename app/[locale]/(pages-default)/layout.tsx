@@ -1,5 +1,5 @@
 import Footerk from "@/app/_components/Footer"
-import NavBar from "@/app/NavBar.jsx"
+// import NavBar from "@/app/NavBar.jsx"
 
 
 
@@ -12,7 +12,7 @@ export default function signupLayout({
             
 
             <div className="h-full">
-                <NavBar  textColor="white"  />
+                {/* <NavBar  /> */}
             {children}
             <div className="">
              <Footerk />

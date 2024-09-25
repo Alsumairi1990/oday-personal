@@ -65,7 +65,7 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
       alert("called");
       const formData = new FormData();
       for (const key in data) {
-        formData.append(key, data[key as keyof inputType].toString());
+        formData.append(key, data[key as keyof inputType]!.toString());
       }
       const fileInputs = document.querySelectorAll('input[type="file"]') as NodeListOf<HTMLInputElement>;
       fileInputs.forEach((fileInput) => {
@@ -180,6 +180,15 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.title?.message} </span>
             </div>
+            <div className=" flex sm:flex-100 flex-col  z-0 w-full mb-5 group">
+                    <label htmlFor="titleAr" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Title Arabic</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('titleAr')}  type="text" name="titleAr" id="titleAr" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-100 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder=" title arabic  ..." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.titleAr?.message} </span>
+            </div>
             <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="link" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 "> Linke</label>
                     <div className="flex items-center w-full">
@@ -197,6 +206,15 @@ const InnerElementCreate = ({id,closeModel}:Props) => {
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
+            </div>
+            <div className=" flex sm:flex-100 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="descriptionAr" className="font-medium mb-1.5 text-sm  text-gray-700 dark:text-gray-400 duration-300 ">description arabic</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <textarea {...register('descriptionAr')}  rows={rows} cols={cols}  name="descriptionAr" id="descriptionAr" className="block pl-2 pt-3 px-0 z-0 w-full text-sm text-gray-900 bg-gray-100 border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="description arabic ..." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.descriptionAr?.message} </span>
             </div>
            
             <div className="flex flex-100 items-center  justify-center w-full">

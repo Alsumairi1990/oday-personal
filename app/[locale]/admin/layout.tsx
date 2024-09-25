@@ -18,7 +18,7 @@ export default async function signupLayout({
     return (
 
 
-            <div className=" bg-gray-100">
+            <div className=" bg-gray-100" dir='ltr'>
                <TopNavAdmin  />
                <div className='flex'>
                <AdminNav menusData={menusData} />

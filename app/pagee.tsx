@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <main className="flex flex-col dark:bg-[#111]">
        <div className="flex flex-col">
-        <NavBar textColor="gray-100"/>
+        {/* <NavBar textColor="gray-100"/> */}
         
           </div>
           

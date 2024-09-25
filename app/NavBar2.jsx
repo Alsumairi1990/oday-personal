@@ -15,30 +15,18 @@ import SigninButton from './_components/SigninButton'
 
 
 
-const NavBar = ({ textColor }) => {
+const NavBar2 = ({ textColor }) => {
   const imagePath = '/images/logo-01.svg';
   const [isSticky, setIsSticky] = useState(false);
   const [background, setBackground] = useState('transparent');
   function switchTheme(e){
     document.documentElement.classList.remove('dark')
-    alert(e)
-    // const moon = document.querySelector('.moon');
-    // const sun = document.querySelector('.moon');
-
-    // const userTheme = localStorage.getItem("theme");
-    // const systemTheme = window.matchMedia("(prefers-color-theme : dark)").matches;
-
-    // const iconToggle = () => {
-    //   moon.classList.toggle('display-none')
-    //   sun.classList.toggle('display-none')
-    // }
+ 
   
   }
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
-      
-      // Check if the scroll position has passed the threshold
       if (scrollPosition > 100) {  // Adjust this value as needed
         setIsSticky(true);
         setBackground('rgba(0, 0, 0, 0.8)');  // New background color when sticky
@@ -95,9 +83,7 @@ const NavBar = ({ textColor }) => {
 
     }
     else if (event.target.closest('.log-menu ') !== null) return;
-  //   else if (event.target.closest('.service-btn ') !== null) {
-  //     alert('clicked')
-  //  }
+  
     
     else {
       
@@ -119,8 +105,6 @@ const NavBar = ({ textColor }) => {
   return (
     <nav 
     className={` flex main-nav fixed max-sm:flex-col sm:h-[75px] h-[64px] top-0 max-sm:border-b max-sm:border-b-gray-700   w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b  botrder-b-[#484848] nav-bg font-bold`}
-    // style={{ backgroundColor: background }} 
-    // className='flex main-nav absolute max-sm:border-b max-sm:border-b-gray-700 w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b botrder-b-[#484848]'
     >
         <div className="flex sm:hidden items-center w-full">
         <div className='main-menu-btn flex-10 flex items-center pl-1'>
@@ -421,8 +405,6 @@ const NavBar = ({ textColor }) => {
 
                               <div className="px-4 pt-2 pb-2">
                                 <div className="flex items-center justify-center rounded py-1.5 px-2 bg-orange-500">
-                                  {/* <a href='/login' className="pl-1 text-sm text-white font-semibold capitalize">Login </a>
-                                  <a href='/signup' className="pl-1 text-sm text-white font-semibold capitalize">/ Subscribe</a> */}
                                   <SigninButton />
                                   
                                 </div>
@@ -497,4 +479,4 @@ const NavBar = ({ textColor }) => {
   )
 }
 
-export default NavBar
+export default NavBar2

@@ -41,7 +41,7 @@ export default function NavBar() {
     className="flex gap-x-1 items-center" >
       <span className="text-md text-gray-100 capitalize ">{locale}</span>
         <span className="p-1">
-          <GrLanguage />
+          <GrLanguage className='text-gray-50' />
         </span>
     </button>
   

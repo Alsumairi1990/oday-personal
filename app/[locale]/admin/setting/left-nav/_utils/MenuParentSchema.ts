@@ -1,8 +1,10 @@
 import { z } from "zod";
 
 export const MenuParentSchema = z.object({
-    title: z.string().min(3),
+    title: z.string().min(1),
     description: z.string().min(1).optional(),
+    titleAr: z.string().min(1).optional(),
+    descriptionAr: z.string().min(1).optional(),
     priority : z.coerce.number().int().min(1),
     icon: z.custom<File>((file) => {    
       return true;

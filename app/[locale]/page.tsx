@@ -16,6 +16,8 @@ import { getLocale, getMessages } from 'next-intl/server';
 import { getServices } from './_actions/Actions'
 import { getHeroData, getServiceCategory, getServiceMeta } from './admin/common/_actions/FrontActions';
 import { getServiceCatMeta } from './admin/common/_actions/FrontActions'
+import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
+import { getMenusElementse2 } from './admin/setting/left-nav/_actions/Action'
 
 
 
@@ -28,11 +30,14 @@ export default async function Home() {
   let serviceCatMeta;
   let categories;
   let heroData;
+  let menusData:Record<number, MenuWithAllModels[]> ;
+
   try {
     services = await getServices();
     serviceCatMeta = await getServiceCatMeta();
     categories = await getServiceCategory();
     heroData = await getHeroData();
+    menusData = await getMenusElementse2();
   } catch (error) {
     console.error("Failed to fetch service meta:", error);
     // Return or render an error message when an error occurs
@@ -61,7 +66,7 @@ export default async function Home() {
   return (
     <main className="flex flex-col dark:bg-[#111]">
        <div className="flex flex-col">
-        <NavBar textColor="gray-100"/>
+        {menusData && <NavBar menusData={menusData} />}
         
           </div>
           
