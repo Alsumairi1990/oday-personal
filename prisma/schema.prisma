@@ -12,13 +12,43 @@ datasource db {
 }
 
 model Post {
-  id        String  @id @default(cuid())
-  title     String
-  slug      String  @unique
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+  id              String         @id @default(cuid())
+  title           String
+  titleAr         String
+  slug            String         @unique
+  content         String?
+  contentAr       String?
+  excerpt         String?
+  excerptAr       String?
+  metaTitle       String?
+  metaDescription String?
+  readingTime     Int?
+  publishedAt     DateTime?      @default(now())
+  viewCount       Int            @default(0)
+  isFeatured      Boolean        @default(false)
+  image           String?
+  published       Boolean        @default(true)
+  language        String? // e.g., 'en', 'ar'
+  categories      PostCategory[]
+  author          User?          @relation(fields: [authorId], references: [id])
+  authorId        String?
+}
+
+model PostCategory {
+  id            Int     @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  slug          String  @unique
+  image         String?
+  icon          String?
+  description   String?
+  descriptionAr String?
+
+  pots      Post[]
+  userId    String // References one specific user (modified)
+  user      User?    @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 }
 
 model ServiceCode {
@@ -399,26 +429,27 @@ model User {
   // Admin-client relationship (one admin can create many clients)
   createdClients Client[] @relation("AdminCreatedClients")
 
-  roles        Role[]
-  posts        Post[]
-  services     Service[]
-  categories   Category[]
-  tags         Tag[]
-  tools        Tool[]
-  phases       Phase[]
-  works        Work[]
-  partner      Partner[]
-  accounts     Account[]
-  sessions     Session[]
-  testimonial  Testimonial[]
-  adminMenu    AdminMenu[]
-  projects     Project[]
-  tasks        Task[]
-  orders       Order[]
-  products     Product[]
-  MenuParent   MenuParent[]
-  heroSections HeroSection[]
-  pageSections PageSection[]
+  roles          Role[]
+  posts          Post[]
+  services       Service[]
+  categories     Category[]
+  tags           Tag[]
+  tools          Tool[]
+  phases         Phase[]
+  works          Work[]
+  partner        Partner[]
+  accounts       Account[]
+  sessions       Session[]
+  testimonial    Testimonial[]
+  adminMenu      AdminMenu[]
+  projects       Project[]
+  tasks          Task[]
+  orders         Order[]
+  products       Product[]
+  MenuParent     MenuParent[]
+  heroSections   HeroSection[]
+  pageSections   PageSection[]
+  postCategories PostCategory[]
 
   @@map(name: "users")
 }

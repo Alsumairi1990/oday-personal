@@ -14,10 +14,11 @@ import ServiceApp from '../_components/ServiceApp'
 import Footerk from '../_components/Footer'
 import { getLocale, getMessages } from 'next-intl/server';
 import { getServices } from './_actions/Actions'
-import { getHeroData, getServiceCategory, getServiceMeta } from './admin/common/_actions/FrontActions';
+import { getBlogMeta, getForntBlogs, gethaseMeta, getHeroData, getPhaseElements, getServiceCategory, getServiceMeta } from './admin/common/_actions/FrontActions';
 import { getServiceCatMeta } from './admin/common/_actions/FrontActions'
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
 import { getMenusElementse2 } from './admin/setting/left-nav/_actions/Action'
+import PhaseCompany from '../_components/PhaseCompany'
 
 
 
@@ -31,6 +32,10 @@ export default async function Home() {
   let categories;
   let heroData;
   let menusData:Record<number, MenuWithAllModels[]> ;
+  let blogsMeta;
+  let blogs;
+  let phases;
+  let phaseMeta;
 
   try {
     services = await getServices();
@@ -38,6 +43,10 @@ export default async function Home() {
     categories = await getServiceCategory();
     heroData = await getHeroData();
     menusData = await getMenusElementse2();
+    blogsMeta = await getBlogMeta();
+    blogs = await getForntBlogs();
+    phases = await getPhaseElements();
+    phaseMeta = await gethaseMeta();
   } catch (error) {
     console.error("Failed to fetch service meta:", error);
     // Return or render an error message when an error occurs
@@ -90,22 +99,13 @@ export default async function Home() {
      <About />
      </div>
      <div className="dark:bg-[#111]">
-     <Blogs />
+     {blogs &&  <Blogs meta={blogsMeta} posts={blogs}  /> }
+     </div>
+     <div className="">
+
      </div>
      <div className="dark:bg-black-100">
-     <div className="w-full my-16 ">
-          <div className="w-11/12 mx-auto">
-            <div className="flex flex-col items-center sm:mb-8">
-               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">How it works</h2>
-               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
-            </div>
-            <div className="flex flex-wrap gap-8 max-sm:p-4 sm:justify-between">
-            {phases.map((phase, index:number) => (
-               <ProcessPhase key={phase.id} phase={phase} index={index} />
-            ))}
-            </div>
-           </div>
-      </div>
+      {phases && <PhaseCompany phases={phases} meta={phaseMeta} />}
 
      </div>
 
