@@ -1736,9 +1736,13 @@ export async function getServices(): Promise<Service[]> {
         const basic = await prisma.service.create({
           data: {
             name: data.name,
+            nameAr : data.nameAr,
             name_slug: nameSlug,
             title : data.title,
             description : data.description,
+            titleAr : data.titleAr,
+            descriptionAr : data.descriptionAr,
+
             userId : userId
           },
         });

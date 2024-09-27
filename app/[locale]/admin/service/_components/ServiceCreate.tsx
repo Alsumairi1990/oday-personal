@@ -81,7 +81,7 @@ const close = (v:boolean)=> {
                 changeMenu={changeBtnMenu}
                 />
                 {isOpen('basic') && (<div className="fixed flex add-form bg-[#00000061]  items-center justify-center top-0 left-0 h-full w-full z-50">
-                        <div   className="flex flex-col w-full sm:w-6/12 max-sm:h-full add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
+                        <div   className="flex flex-col w-full sm:w-5.5/12 max-sm:h-full add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
                           <div className="flex w-full bg-[#7c3aed] rounded-t-md py-2.5 items-center px-3 border-b border-b-gray-300">
                               <div className="flex items-center">
                               <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>

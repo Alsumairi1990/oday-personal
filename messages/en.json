@@ -1,6 +1,24 @@
 {
     "HomePage": {
       "title": "Hello world!",
-      "about": "Go to the about page"
+      "about": "Go to the about page",
+      "workCategoryOption" : "Selecet Category",
+      "filterAdd" : "Added filter",
+      "MarketLocation" : "select Matketplace",
+      "workPreview" : "Preview",
+      "latestWork" : "Latest Work",
+      "categoryDetails" : "Details",
+      "categoryEnq" : "Enquiry",
+      "AboutUs" : {
+        "aboutUS" : "About US",
+        "title" : "Trunning Creativity Thinking into Information",
+        "description" : "Free Download Right Arrow 251 SVG vector file in monocolor and multicolor type for Sketch and Figma from Right Arrow 251 Vectors svg vector collection for Sketch and Figma from Right Arrow 251 Vectors svg vector for Sketch and Figma from Right Arrow 251",
+        "viewDetails" : "View Details"
+
+
+      }
+
+
+
     }
   }

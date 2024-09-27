@@ -14,7 +14,7 @@ import ServiceApp from '../_components/ServiceApp'
 import Footerk from '../_components/Footer'
 import { getLocale, getMessages } from 'next-intl/server';
 import { getServices } from './_actions/Actions'
-import { getBlogMeta, getForntBlogs, gethaseMeta, getHeroData, getPhaseElements, getServiceCategory, getServiceMeta } from './admin/common/_actions/FrontActions';
+import { getAboutUsData, getBlogMeta, getForntBlogs, gethaseMeta, getHeroData, getPhaseElements, getServiceCategory, getServiceMeta, getTesimonialsFront, getTesimonialsMeta, getWorkMeta, getWorksMainPage } from './admin/common/_actions/FrontActions';
 import { getServiceCatMeta } from './admin/common/_actions/FrontActions'
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
 import { getMenusElementse2 } from './admin/setting/left-nav/_actions/Action'
@@ -36,6 +36,11 @@ export default async function Home() {
   let blogs;
   let phases;
   let phaseMeta;
+  let workMeta;
+  let works;
+  let aboutUS;
+  let testimonials;
+  let testimonialMeta;
 
   try {
     services = await getServices();
@@ -47,6 +52,11 @@ export default async function Home() {
     blogs = await getForntBlogs();
     phases = await getPhaseElements();
     phaseMeta = await gethaseMeta();
+    workMeta = await getWorkMeta();
+    works = await getWorksMainPage();
+    aboutUS =  await getAboutUsData();
+    testimonials = await getTesimonialsFront();
+    testimonialMeta = await getTesimonialsMeta();
   } catch (error) {
     console.error("Failed to fetch service meta:", error);
     // Return or render an error message when an error occurs
@@ -96,7 +106,7 @@ export default async function Home() {
      </div>
 
      <div className="gray:bg-[#111]">
-     <About />
+     {aboutUS && <About aboutUS={aboutUS} /> }
      </div>
      <div className="dark:bg-[#111]">
      {blogs &&  <Blogs meta={blogsMeta} posts={blogs}  /> }
@@ -111,11 +121,11 @@ export default async function Home() {
 
      <div className="">
       <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">
-      <Works />
+      {works && <Works  works = {works} meta={workMeta} /> }
       </div>
       </div>
       <div className="w-full my-24 ]">
-      <Testimonials />
+      {testimonials &&  <Testimonials testimonials={testimonials} meta={testimonialMeta} /> }
       </div>
       <div className="w-full bg-gray-800 my-10 sm:my-24 dark:bg-black-100">
       <Subscribe />

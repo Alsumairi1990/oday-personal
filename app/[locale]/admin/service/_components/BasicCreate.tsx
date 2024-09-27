@@ -94,66 +94,85 @@ const ToolCreate = ({addBasicId,closeModel}:Props) => {
     }
     
   return (
-     <form onSubmit={handleSubmit(saveUser)} className="text-start z-40 p-6 ">
-        <div className="grid grid-cols-1">
+     <form onSubmit={handleSubmit(saveUser)} className="text-start z-40 py-4 ">
+        {/* <div className="flex flex-wrap justify-between "> */}
+        <div className=" flex flex-wrap justify-between px-5 max-h-[100vh] sm:max-h-[80vh] relative overflow-y-auto scr-container pt-6 ">
+
         {basic !=0 &&
           <SuccessMessage status={basic}   closeMode={closeMenu}/>
         }
-          {/* <div className="px-2 py-2.5 w-full flex items-center rounded-md bg-[#7648e5] mb-3">
-                <div className="flex items-center">
-                <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
 
-                <span className="text-base text-white">
-                  Adding Tag </span> 
-
-                </div>
-               </div> */}
-
-            <div className=" flex flex-col z-0 w-full mt-2 mb-5 group">
-                    <label htmlFor="name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Tag Name</label>
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize">  name english</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
-                        <input {...register('name')}  type="text" name="name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Web Designing ..." required />
+                        <input {...register('name')}  type="text" name="name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="name ...." required />
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.name?.message} </span>
             </div>
 
-            <div className=" flex flex-col z-0 w-full mt-2 mb-5 group">
-                    <label htmlFor="title" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Tag Name</label>
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="nameAr" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize">  name arabic</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
-                        <input {...register('title')}  type="text" name="title" id="title" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Web Designing ..." required />
+                        <input {...register('nameAr')}  type="text" name="nameAr" id="nameAr" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="name arabic ...." required />
                         </div>
                     </div> 
-                    <span className="text-red-400 text-xs mt-2">{errors.name?.message} </span>
+                    <span className="text-red-400 text-xs mt-2">{errors.nameAr?.message} </span>
             </div>
 
-            <div className=" flex flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="description" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Tag Description</label>
+            <div className=" flex flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="title" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> Title English</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
-                        <textarea {...register('description')}   name="description" id="description" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Web Designing ..." required />
+                        <input {...register('title')}  type="text" name="title" id="title" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Title english ...." required />
                         </div>
                     </div> 
-                    <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
+                    <span className="text-red-400 text-xs mt-2">{errors.title?.message} </span>
             </div>
-
-            <div className=" flex flex-col z-0 w-full mt-2 mb-5 group">
-                    <label htmlFor="price" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Tag Name</label>
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="titleAr" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize">Title Arabic</label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
-                        <input 
-                          type="number"
-                          {...register('price')}
-                          name="price" id="price" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-xl border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Web Designing ..." required />
+                        <input {...register('titleAr')}  type="text" name="titleAr" id="titleAr" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Title Arabic...." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.titleAr?.message} </span>
+            </div>
+
+            <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="price" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize">price</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('price')}  type="price" name="price" id="price" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Service Price for all Locations ...." required />
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.price?.message} </span>
             </div>
 
-            <div className="mb-4">
-                <input type="submit" className="btn py-2.5 bg-violet-600  hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full w-full" value="Register" />
+            <div className=" flex flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="description" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> description English</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('description')}  type="description" name="description" id="description" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="description english ...." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
+            </div>
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="descriptionAr" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize">description Arabic</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('descriptionAr')}  type="descriptionAr" name="descriptionAr" id="descriptionAr" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="description Arabic...." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.descriptionAr?.message} </span>
+            </div>
+
+
+            <div className="mb-4 sm:flex-40 ml-auto">
+                <input type="submit" className="btn py-1.5 bg-violet-600  hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded w-full" value="Register" />
             </div>
            
         </div>

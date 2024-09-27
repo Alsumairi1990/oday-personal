@@ -8,43 +8,12 @@ interface Props {
   meta : PageSection
 }
 const Services = async ({categories,meta}:Props) => {
-  const imagePath = '/images/01.png';
-  const imagePath2 = '/images/02.png';
-  const imagePath3 = '/images/03.png';
-  const imagePath4 = '/images/04.png';
   const locale = await getLocale();
   const messages = await getMessages({ locale });
 
-  const servicesw = [
-    {
-      id:'1',
-      name : 'Web Deveoplment ',
-      title : 'Descelope and design web based ',
-      desc : "Search the world's ,information including webpages, images, videos and more. Google has many special features to help you find exactly what youre looking Search the worlds information, including webpages, images, videos and more. Google has many special features to help you find exactly what youre looking",
-      image : '/images/01.png'
-    },
-    {
-      id:'1',
-      name : 'Grahic Design ',
-      title : 'Grahic Design on  based apps',
-      desc : "Search the world's ,information including webpages, images, videos and more. Google has many special features to help you find exactly what youre looking Search the worlds information, including webpages, images, videos and more. Google has many special features to help you find exactly what youre looking",
-      image : '/images/02.png'
-    },
-    {
-      id:'1',
-      name : 'Cloud Computing  ',
-      title : 'Descelope and design web based ',
-      desc : "Search the world's ,information including webpages, images, videos and more. Google has many special features to help you find exactly what youre looking Search the worlds information, including webpages, images, videos and more. Google has many special features to help you find exactly what youre looking",
-      image : '/images/03.png'
-    },
-    {
-      id:'1',
-      name : 'Indentity Design',
-      title : 'Full Indetity design Plane ',
-      desc : "Search the world's ,information including webpages, images, videos and more. Google has many special features to help you find exactly what youre looking Search the worlds information, including webpages, images, videos and more. Google has many special features to help you find exactly what youre looking",
-      image : '/images/01.png'
-    }
-  ]
+  const categoryDetails = (messages as any).HomePage.categoryDetails;
+  const categoryEnq = (messages as any).HomePage.categoryEnq;
+ 
   return (
 
       <div className="flex flex-col sm:py-8  dark:bg-[#080808]">
@@ -75,11 +44,11 @@ const Services = async ({categories,meta}:Props) => {
                     }
                  {/* <p className="text-sm leading-[22px] text-gray-500 dark:text-gray-300 text-center sm:leading-6 mt-1.5 sm:mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p> */}
                  <div className="p-1 flex flex-col sm:flex-row justify-around mt-6 mb-4">
-                   <Link href={'/services/request'} className='px-4 py-1.5 border dark:border-[0.13rem] max-sm:mb-4 border-gray-300 dark:border-[#4a235e] rounded text-gray-700 dark:text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >Request 
+                   <Link href={'/services/request'} className='px-4 py-1.5 rtl:font-arabic border dark:border-[0.13rem] max-sm:mb-4 border-gray-300 dark:border-[#4a235e] rounded text-gray-700 dark:text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >{categoryEnq} 
                   
                    </Link>
-                   <Link href={'/services/category/k'} className='px-4 py-1.5  flex items-center justify-center border-[0.13rem] bg-orange-500 border-orange-500 dark:bg-[#00ba35] dark:border-[#00ba35] rounded text-white dark:text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >details 
-                   <span className="ml-2">
+                   <Link href={'/services/category/k'} className='px-4 py-1.5 rtl:font-arabic flex items-center justify-center border-[0.13rem] bg-orange-500 border-orange-500 dark:bg-[#00ba35] dark:border-[#00ba35] rounded text-white dark:text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >{categoryDetails} 
+                   <span className="ml-2 rtl:mr-2">
                    <svg height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
                            viewBox="0 0 512 512" >
                          <path fill="#FFFFFF" d="M256,504C119.248,504,8,392.752,8,256S119.248,8,256,8s248,111.248,248,248S392.752,504,256,504z"/>

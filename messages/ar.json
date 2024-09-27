@@ -1,6 +1,20 @@
 {
     "HomePage": {
       "title": "اهلا",
-      "about": "الوصف"
+      "about": "الوصف",
+      "workCategoryOption" : "اختار التصنيف",
+      "filterAdd" : "اضف فلتر",
+      "MarketLocation" : "تحديد المتجر",
+      "workPreview" : "معاينة العمل",
+      "latestWork" : "اخر الاعمال",
+      "categoryDetails" : "أستعراض",
+      "categoryEnq" : "إستعلام",
+      "AboutUs": {
+        "aboutUS": "معلومات عنا",
+        "title": "تحويل التفكير الإبداعي إلى معلومات",
+        "description": "تحميل مجاني لملف SVG السهم الأيمن 251 بتنسيق أحادي اللون ومتعدد الألوان لبرنامج Sketch و Figma من مجموعة السهم الأيمن 251 Vectors بتنسيق SVG لبرنامج Sketch و Figma من مجموعة السهم الأيمن 251 Vectors بتنسيق SVG لبرنامج Sketch و Figma من مجموعة السهم الأيمن 251",
+        "viewDetails": "عرض التفاصيل"
+      }
+
     }
   }

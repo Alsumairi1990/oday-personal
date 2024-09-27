@@ -450,6 +450,7 @@ model User {
   heroSections   HeroSection[]
   pageSections   PageSection[]
   postCategories PostCategory[]
+  aboutUs        AboutUsSection[]
 
   @@map(name: "users")
 }
@@ -978,8 +979,7 @@ model HeroSection {
 }
 
 model PageSection {
-  id Int @id @default(autoincrement())
-
+  id        Int      @id @default(autoincrement())
   name      String
   title     String
   titleAr   String
@@ -990,6 +990,26 @@ model PageSection {
   isActive  String
   url       String
   itemsNo   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model AboutUsSection {
+  id        Int      @id @default(autoincrement())
+  name      String
+  title     String?
+  titleAr   String?
+  topTitle  String?
+  topTitlAr String?
+  image     String?
+  desc      String?
+  descAr    String?
+  more      String?
+  moreAr    String?
+  url       String?
+  isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String
