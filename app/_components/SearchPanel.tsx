@@ -15,7 +15,7 @@ interface Props {
 }
 const PanelSearch = ({services,categories,locale}:Props) => {
 
-    const t = useTranslations('SearchPanel'); 
+    // const t = useTranslations('SearchPanel'); 
 
     useEffect(() => {
         const handleClickOutsidr = (event:any) => {
@@ -66,11 +66,11 @@ const PanelSearch = ({services,categories,locale}:Props) => {
                </div>
                <div  className="menu-btn rnk-opt-btn  pl-[5px] flex flex-col py-1 h-[50px] ltr:border-r ltr:border-r-gray-300 rtl:border-l rtl:border-l-gray-300 w-full">
                   <div  className="flex-22">
-                     <div  className=""><span  className="font-bold text-gray-700 text-xs rtl:font-arabic uppercase">{t('searchType')}</span></div>
+                     {/* <div  className=""><span  className="font-bold text-gray-700 text-xs rtl:font-arabic uppercase">{t('searchType')}</span></div> */}
                      
                  </div>
                   <div  className="btn-trk flex items-end flex-70 pb-[6px]">
-                     <div  className="actv-slc flex flex-nowrap items-center cursor-pointer"><span  className="text-sm text-gray-400 rtl:font-arabic ">{t('typePlaceholder')} ...</span></div>
+                     {/* <div  className="actv-slc flex flex-nowrap items-center cursor-pointer"><span  className="text-sm text-gray-400 rtl:font-arabic ">{t('typePlaceholder')} ...</span></div> */}
                      <span  className="ml-auto mr-[15px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
                </div>
@@ -86,14 +86,14 @@ const PanelSearch = ({services,categories,locale}:Props) => {
                                                 onClick={()=> {}}
                                                 name="helper-radio"
                                                 type="radio"
-                                                value={t('typeProduct')} 
+                                                // value={t('typeProduct')} 
                                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                             />
                                         </div>
                                         <div className="ms-2 text-sm">
-                                            <label htmlFor={t('typeProduct')}  className="font-medium  text-gray-900 dark:text-gray-300">
+                                            {/* <label htmlFor={t('typeProduct')}  className="font-medium  text-gray-900 dark:text-gray-300">
                                                 <div>{t('typeProduct')} </div>
-                                            </label>
+                                            </label> */}
                                         </div>
                                     </div>
                                 </li>
@@ -105,14 +105,14 @@ const PanelSearch = ({services,categories,locale}:Props) => {
                                                 onClick={()=> {}}
                                                 name="helper-radio"
                                                 type="radio"
-                                                value={t('typeService')} 
+                                                // value={t('typeService')} 
                                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                             />
                                         </div>
                                         <div className="ms-2 text-sm">
-                                            <label htmlFor={t('typeService')}  className="font-medium text-gray-900 dark:text-gray-300">
+                                            {/* <label htmlFor={t('typeService')}  className="font-medium text-gray-900 dark:text-gray-300">
                                                 <div>{t('typeService')} </div>
-                                            </label>
+                                            </label> */}
                                         </div>
                                     </div>
                                 </li>
@@ -127,14 +127,14 @@ const PanelSearch = ({services,categories,locale}:Props) => {
                                                 onClick={()=> {}}
                                                 name="helper-radio"
                                                 type="radio"
-                                                value={t('typeProduct')} 
+                                                // value={t('typeProduct')} 
                                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                             />
                                         </div>
                                         <div className="ms-2 text-sm">
-                                            <label htmlFor={t('typeProduct')}  className="font-medium text-gray-900 dark:text-gray-300">
+                                            {/* <label htmlFor={t('typeProduct')}  className="font-medium text-gray-900 dark:text-gray-300">
                                                 <div>{t('typeProduct')} </div>
-                                            </label>
+                                            </label> */}
                                         </div>
                                     </div>
                                 </li>
@@ -146,14 +146,14 @@ const PanelSearch = ({services,categories,locale}:Props) => {
                                                 onClick={()=> {}}
                                                 name="helper-radio"
                                                 type="radio"
-                                                value={t('typeServiceAr')} 
+                                                // value={t('typeServiceAr')} 
                                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                             />
                                         </div>
                                         <div className="ms-2 text-sm">
-                                            <label htmlFor={t('typeServiceAr')}  className="font-medium text-gray-900 dark:text-gray-300">
+                                            {/* <label htmlFor={t('typeServiceAr')}  className="font-medium text-gray-900 dark:text-gray-300">
                                                 <div>{t('typeService')} </div>
-                                            </label>
+                                            </label> */}
                                         </div>
                                     </div>
                                 </li>
@@ -174,11 +174,11 @@ const PanelSearch = ({services,categories,locale}:Props) => {
                </div>
                <div  className="menu-btn rnk-opt-btn pl-[5px] flex flex-col py-1 h-[50px] w-full ltr:border-r ltr:border-r-gray-300 rtl:border-l rtl:border-l-gray-300">
                   <div  className="flex-22">
-                     <div  className="ext-left"><span  className="font-bold text-gray-700 text-xs uppercase rtl:font-arabic">{t('category')} </span></div>
+                     {/* <div  className="ext-left"><span  className="font-bold text-gray-700 text-xs uppercase rtl:font-arabic">{t('category')} </span></div> */}
                   </div>
                   <div  id="" className="btn-rk78 flex items-end flex-70 pb-[7px]">
                      <div  className="actv-slc flex flex-nowrap items-center  cursor-pointer">
-                        <span  className="text-sm font-nav text-gray-400 font-arabic">{t('categoryPlaceholder')}  ...</span>
+                        {/* <span  className="text-sm font-nav text-gray-400 font-arabic">{t('categoryPlaceholder')}  ...</span> */}
                      </div>
                      <span  className="ml-auto mr-[15px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
@@ -232,12 +232,13 @@ const PanelSearch = ({services,categories,locale}:Props) => {
                </div>
                <div  className="menu-btn rnk-opt-btn pl-[5px] flex flex-col py-1 h-[50px] w-full">
                   <div  className="flex-22">
-                     <div  className=""><span  className="font-bold text-gray-700 text-xs uppercase rtl:font-arabic">{t('service')}</span></div>
+                     {/* <div  className=""><span  className="font-bold text-gray-700 text-xs uppercase rtl:font-arabic">{t('service')}</span></div> */}
                   </div>
                   <div  className="btn-uni flex items-end flex-70 pb-[6px]">
                      <div  className="actv-slc flex flex-nowrap items-center overflow-x-auto">
                         <div  className="text-md text-gray-400 font-nav rtl:font-arabic">
-                          <input  type="text" placeholder={t('servicePlacholder')} className="bg-transparent"  /></div>
+                          {/* <input  type="text" placeholder={t('servicePlacholder')} className="bg-transparent"  /> */}
+                          </div>
                         
                      </div>
                      <span  className="ml-auto mr-[5px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
