@@ -29,7 +29,7 @@ import {
 import { getServices } from './_actions/Actions';
 import { getMenusElementse2 } from './admin/setting/left-nav/_actions/Action';
 
-export const revalidate = 60; // Set the ISG revalidation time at the page level
+export const revalidate = 6000; // Set the ISG revalidation time at the page level
 
 export default async function Home() {
   const locale = await getLocale();
