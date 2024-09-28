@@ -177,7 +177,7 @@ const ToolPanel = ({ work, colseModel }: FormEditProps) => {
                                   }}
                                   className="flex items-center border size-[22px] justify-center ml-auto  border-sky-500 bg-sky-500 rounded-md"
                                 >
-                                  <IoMdCloseCircle className="text-base text-white" />
+                                  <IoMdCloseCircle className="text-base p-0 text-white" />
                                 </button>
                             </div>
                           ))}
