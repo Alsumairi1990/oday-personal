@@ -5,11 +5,11 @@ import React from 'react';
 
 const ServiceApp = async () => {
     const imagePath = '/images/service-logo.svg';
-    // const t = useTranslations('HomePage.ContactUs'); // Specify the namespace or root key
+    const t = useTranslations('HomePage.ContactUs'); // Specify the namespace or root key
 
   return (
     <div className="shfadow-lg  bg-white dark:bg-[#161616] border dark:border-gray-600 rounded-md w-11.6/12 sm:w-11/12 mx-auto  " >
-     {/* <div className="grid sm:grid-cols-3 ">
+     <div className="grid sm:grid-cols-3 ">
         <div className="sm:pr-8 sm:rtl:pr-0">
             <div className="bg-[#f8f8f8] dark:bg-[#161616] rounded-l rounded dark:bg-black-100 dark:border-r dark:border-r-gray-800 h-full">
                 <div className="flex mb-4 justify-between py-6 px-4">
@@ -179,7 +179,7 @@ const ServiceApp = async () => {
 
      </div>
     
-      */}
+     
      
 
     

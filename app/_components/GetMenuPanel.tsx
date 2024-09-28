@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { MdOutlineAddCircle, MdOutlineArrowDropDown } from 'react-icons/md';
 import MenuPanel from '../[locale]/admin/common/utils/MenuPanel';
-// import { useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 interface Props {
     elements : string[],
     title : string
@@ -10,7 +10,7 @@ interface Props {
 function GetMenuPanel({elements,title}:Props) {
     const [paymentMenu, setPaymentMenu] = useState<boolean>(false); 
     const [selectedElement, setSelectedElement] = useState<string>('');
-    // const t = useTranslations('HomePage'); 
+    const t = useTranslations('HomePage'); // Specify the namespace or root key
     const paymentSelect = (value:string) => {
         setSelectedElement(value)
       }
