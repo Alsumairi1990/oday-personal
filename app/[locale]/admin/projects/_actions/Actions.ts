@@ -237,7 +237,7 @@ export async function getTools():Promise<Tool[]>{
 }
 
 // Remove PRoject Tools 
-export async function removeProjectTool(projectId: string, name: string): Promise<Category[]> {
+export async function removeProjectTool(projectId: string, name: string): Promise<Tool[]> {
   try {
     const nameSlug = slugify(name);
     const tool = await prisma.tool.findFirst({
@@ -371,7 +371,7 @@ async function addCategoy(name: string) : Promise<number> {
   
 
   //Adding New tool and associat it with project
-export async function createProjectTool(projectId: string, name:string): Promise<Category> {
+export async function createProjectTool(projectId: string, name:string): Promise<Tool> {
   try {     
     const nameSlug = slugify(name);
     const session = await getServerSession(authOptions);
