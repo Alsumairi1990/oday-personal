@@ -102,11 +102,11 @@ export default async function Home() {
      </div>
 
      <div className='gray:bg-[#111]"'>
-     {services && servicesMeta && <ServicesFull services={services} meta={servicesMeta} />}
+     {/* {services && servicesMeta && <ServicesFull services={services} meta={servicesMeta} />} */}
      </div>
 
      <div className="gray:bg-[#111]">
-     {aboutUS && <About aboutUS={aboutUS} /> }
+     {/* {aboutUS && <About aboutUS={aboutUS} /> } */}
      </div>
      <div className="dark:bg-[#111]">
      {blogs &&  <Blogs meta={blogsMeta} posts={blogs}  /> }
