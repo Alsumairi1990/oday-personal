@@ -51,7 +51,7 @@ export default async function Home() {
     blogsMeta = await getBlogMeta();
     blogs = await getForntBlogs();
     phases = await getPhaseElements();
-    phaseMeta = await gethaseMeta();
+    // phaseMeta = await gethaseMeta();
     // workMeta = await getWorkMeta();
     // works = await getWorksMainPage();
     // aboutUS =  await getAboutUsData();
