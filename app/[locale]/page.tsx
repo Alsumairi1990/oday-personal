@@ -132,7 +132,7 @@ export default async function Home() {
       </div> */}
 
       <div className="w-full my-10 sm:my-24 dark:bg-black-100">
-      <ServiceApp />
+      {/* <ServiceApp /> */}
       </div>
       <div className='w-full pt-8 bg-[#111]'>
           <Footerk />
