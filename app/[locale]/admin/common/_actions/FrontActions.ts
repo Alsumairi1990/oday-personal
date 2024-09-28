@@ -87,7 +87,7 @@ export async function getServiceMeta():Promise<PageSection>{
   export async function getPhaseElements():Promise<PhaseWithModels[]>{
     try {
       const elements = await prisma.phase.findMany({
-        take : 4,
+        take : 1,
         where : {
           phaseType : 'company'
         },
