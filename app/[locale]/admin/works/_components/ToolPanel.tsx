@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { Category, } from "@prisma/client";
+import { Category, Tool, } from "@prisma/client";
 import { useState } from "react";
 import { IoMdCloseCircle } from "react-icons/io";
 import { BiCategory } from "react-icons/bi";
@@ -27,7 +27,7 @@ const ToolPanel = ({ work, colseModel }: FormEditProps) => {
   const [workData, setWorkData] = useState<WorkWithModels>();
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
-  const [menuElements, setMenuElements] = useState<Category[] | null>([]);
+  const [menuElements, setMenuElements] = useState<Tool[] | null>([]);
   const [showRemoveTool, setShowRemoveTool] = useState<boolean>(false);
   const [elementMenuShow, setElementMenuShow] = useState<boolean>(false);
   const [selectedMenuElements, setSelectedMenuElements] = useState<string[]>([]);
