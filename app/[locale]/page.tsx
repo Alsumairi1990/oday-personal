@@ -85,7 +85,7 @@ export default async function Home() {
   return (
     <main className="flex flex-col dark:bg-[#111]">
        <div className="flex flex-col">
-        {menusData && <NavBar menusData={menusData} />}
+        {/* {menusData && <NavBar menusData={menusData} />} */}
         
           </div>
           
