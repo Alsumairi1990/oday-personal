@@ -64,7 +64,7 @@ const InnerElementCreate2 = ({id,closeInnerModel,addElement}:Props) => {
       alert("called");
       const formData = new FormData();
       for (const key in data) {
-        formData.append(key, data[key as keyof inputType].toString());
+        formData.append(key, data[key as keyof inputType]!.toString());
       }
       const fileInputs = document.querySelectorAll('input[type="file"]') as NodeListOf<HTMLInputElement>;
       fileInputs.forEach((fileInput) => {
