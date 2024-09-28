@@ -5,9 +5,17 @@ import { CgTikcode } from "react-icons/cg";
 import { CgTwilio } from "react-icons/cg";
 import { MdOutlineManageSearch } from "react-icons/md";
 import {useEffect} from 'react'
+import { Category, Service, ServiceCategory } from '@prisma/client';
+import { useTranslations } from 'next-intl';
 
+interface Props {
+    services : Service[],
+    categories : Category[],
+    locale : String
+}
+const PanelSearch = ({services,categories,locale}:Props) => {
 
-const PanelSearch = () => {
+    const t = useTranslations('SearchPanel'); 
 
     useEffect(() => {
         const handleClickOutsidr = (event:any) => {
@@ -45,111 +53,113 @@ const PanelSearch = () => {
       });
 
 
-  const projectTypes = [
-    {
-        type: 'Logo Design',
-        description: 'Create a unique and memorable logo that represents your brand.',
-    },
-    {
-        type: 'Brand Identity',
-        description: 'Develop a cohesive visual identity, including logos, color schemes, and typography.',
-    },
-    {
-        type: 'Web Design',
-        description: 'Design or redesign websites to ensure a visually appealing and user-friendly online presence.',
-    },
-    {
-        type: 'Print Design',
-        description: 'Create materials for print, such as brochures, business cards, posters, and banners.',
-    },
-    {
-        type: 'Packaging Design',
-        description: 'Design attractive and effective packaging for products.',
-    },
-    {
-        type: 'Social Media Graphics',
-        description: 'Craft graphics optimized for various social media platforms, including posts, banners, and profile images.',
-    },
-    {
-        type: 'Illustration',
-        description: 'Provide custom illustrations for various purposes, such as book covers, marketing materials, or digital assets.',
-    },
-    {
-        type: 'UI/UX Design',
-        description: 'Design user interfaces and experiences for websites, apps, or software.',
-    },
-    {
-        type: 'Infographics',
-        description: 'Create visually engaging and informative infographics to present data or information in a more digestible format.',
-    },
-    {
-        type: 'Merchandise Design',
-        description: 'Design graphics for merchandise such as T-shirts, mugs, and other promotional items.',
-    },
-    {
-        type: 'Email Newsletter Design',
-        description: 'Design visually appealing email templates for newsletters or marketing campaigns.',
-    },
-    {
-        type: 'Event Graphics',
-        description: 'Develop graphics for events, including invitations, posters, and promotional materials.',
-    },
-    {
-        type: 'Corporate Collateral',
-        description: 'Design various corporate materials like letterheads, business cards, and presentations.',
-    },
-    {
-        type: 'E-book or Print Book Cover Design',
-        description: 'Create visually striking covers for digital or print publications.',
-    },
-    {
-        type: 'Environmental Graphics',
-        description: 'Design graphics for physical spaces, such as office interiors or event spaces.',
-    },
-];
   return (
     <div className="w-full sm:bg-white rounded-xl ">
    <div  className="search-top p-0">
       <div  className="grid sm:grid-cols-25/25/40/10 max-sm:gap-4 search-row items-center rounded">
          <div  className="p-1">
             <div  className="menu-pr ran-c flex relative py-[3px] bg-white rounded-lg search-otp-rnk">
-               <div  className="pl-[10px] self-end">
+               <div  className="pl-[10px] rtl:pr-2 self-end">
                  <span className="flex w-5 items-center h-5">
                   <CgDribbble className='text-sky-800 text-lg' />
                  </span>
                </div>
-               <div  className="menu-btn rnk-opt-btn  pl-[5px] flex flex-col py-1 h-[50px] border-r border-r-gray-300 w-full">
+               <div  className="menu-btn rnk-opt-btn  pl-[5px] flex flex-col py-1 h-[50px] ltr:border-r ltr:border-r-gray-300 rtl:border-l rtl:border-l-gray-300 w-full">
                   <div  className="flex-22">
-                     <div  className=""><span  className="font-bold text-gray-700 text-xs uppercase">Level</span></div>
-                  </div>
+                     <div  className=""><span  className="font-bold text-gray-700 text-xs rtl:font-arabic uppercase">{t('searchType')}</span></div>
+                     
+                 </div>
                   <div  className="btn-trk flex items-end flex-70 pb-[6px]">
-                     <div  className="actv-slc flex flex-nowrap items-center overflow-x-auto cursor-pointer"><span  className="text-sm text-gray-400 font-nav">General ...</span></div>
+                     <div  className="actv-slc flex flex-nowrap items-center cursor-pointer"><span  className="text-sm text-gray-400 rtl:font-arabic ">{t('typePlaceholder')} ...</span></div>
                      <span  className="ml-auto mr-[15px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
                </div>
                   <div id="dropdownRadioHelper" className="drop-menu log-menu1 hidden !z-50 max-h-56  overflow-y-auto absolute  top-16 sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
-                            {projectTypes.map((project, index) => (
-                                <li key={index}>
+                                {locale == "en" ? 
+                                <>
+                                <li >
                                     <div className="flex p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <div className="flex items-center h-5">
                                             <input
-                                                id={`helper-radio-${index}`}
+                                                id=""
+                                                onClick={()=> {}}
                                                 name="helper-radio"
                                                 type="radio"
-                                                value={project.type}
+                                                value={t('typeProduct')} 
                                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                             />
                                         </div>
                                         <div className="ms-2 text-sm">
-                                            <label htmlFor={`helper-radio-${index}`} className="font-medium text-gray-900 dark:text-gray-300">
-                                                <div>{project.type}</div>
-                                                <p id={`helper-radio-text-${index}`} className="text-xs font-normal text-gray-500 dark:text-gray-300">{project.description}</p>
+                                            <label htmlFor={t('typeProduct')}  className="font-medium  text-gray-900 dark:text-gray-300">
+                                                <div>{t('typeProduct')} </div>
                                             </label>
                                         </div>
                                     </div>
                                 </li>
-                            ))}
+                                <li >
+                                    <div className="flex p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
+                                        <div className="flex items-center h-5">
+                                            <input
+                                                id=""
+                                                onClick={()=> {}}
+                                                name="helper-radio"
+                                                type="radio"
+                                                value={t('typeService')} 
+                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            />
+                                        </div>
+                                        <div className="ms-2 text-sm">
+                                            <label htmlFor={t('typeService')}  className="font-medium text-gray-900 dark:text-gray-300">
+                                                <div>{t('typeService')} </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </li>
+                                </>
+                                :
+                                <>
+                                <li >
+                                 <div className="flex p-2 rounded hover:bg-gray-100 border-b  font-arabic dark:hover:bg-gray-600">
+                                        <div className="flex items-center h-5">
+                                            <input
+                                                id=""
+                                                onClick={()=> {}}
+                                                name="helper-radio"
+                                                type="radio"
+                                                value={t('typeProduct')} 
+                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            />
+                                        </div>
+                                        <div className="ms-2 text-sm">
+                                            <label htmlFor={t('typeProduct')}  className="font-medium text-gray-900 dark:text-gray-300">
+                                                <div>{t('typeProduct')} </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li >
+                                 <div className="flex p-2 rounded hover:bg-gray-100 font-arabic dark:hover:bg-gray-600">
+                                        <div className="flex items-center h-5">
+                                            <input
+                                                id=""
+                                                onClick={()=> {}}
+                                                name="helper-radio"
+                                                type="radio"
+                                                value={t('typeServiceAr')} 
+                                                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                            />
+                                        </div>
+                                        <div className="ms-2 text-sm">
+                                            <label htmlFor={t('typeServiceAr')}  className="font-medium text-gray-900 dark:text-gray-300">
+                                                <div>{t('typeService')} </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </li>
+                            </>
+                          }
+                            
                         </ul>
                     </div>
                </div>
@@ -162,20 +172,20 @@ const PanelSearch = () => {
                   <CgTikcode className='text-sky-800 text-lg' />
                  </span>
                </div>
-               <div  className="menu-btn rnk-opt-btn pl-[5px] flex flex-col py-1 h-[50px] w-full border-r border-r-gray-300">
+               <div  className="menu-btn rnk-opt-btn pl-[5px] flex flex-col py-1 h-[50px] w-full ltr:border-r ltr:border-r-gray-300 rtl:border-l rtl:border-l-gray-300">
                   <div  className="flex-22">
-                     <div  className="ext-left"><span  className="font-bold text-gray-700 text-xs uppercase">Streams</span></div>
+                     <div  className="ext-left"><span  className="font-bold text-gray-700 text-xs uppercase rtl:font-arabic">{t('category')} </span></div>
                   </div>
                   <div  id="" className="btn-rk78 flex items-end flex-70 pb-[7px]">
-                     <div  className="actv-slc flex flex-nowrap items-center overflow-x-auto cursor-pointer">
-                        <span  className="text-sm font-nav text-gray-400">computer sceince ...</span>
+                     <div  className="actv-slc flex flex-nowrap items-center  cursor-pointer">
+                        <span  className="text-sm font-nav text-gray-400 font-arabic">{t('categoryPlaceholder')}  ...</span>
                      </div>
                      <span  className="ml-auto mr-[15px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
                </div>                 
                <div id="dropdownRadioHelper" className="drop-menu hidden log-menu1 !z-50 max-h-56  overflow-y-auto absolute  top-[4.2rem] sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
-                            {projectTypes.map((project, index) => (
+                            {categories && categories.map((category, index) => (
                                 <li key={index}>
                                     <div className="flex p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <div className="flex items-center h-5">
@@ -183,15 +193,27 @@ const PanelSearch = () => {
                                                 id={`helper-radio-${index}`}
                                                 name="helper-radio"
                                                 type="radio"
-                                                value={project.type}
+                                                value={category.name}
                                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                             />
                                         </div>
                                         <div className="ms-2 text-sm">
-                                            <label htmlFor={`helper-radio-${index}`} className="font-medium text-gray-900 dark:text-gray-300">
-                                                <div>{project.type}</div>
-                                                <p id={`helper-radio-text-${index}`} className="text-xs font-normal text-gray-500 dark:text-gray-300">{project.description}</p>
+                                           {locale == 'en' ? (
+                                            <>
+                                             <label htmlFor={`helper-radio-${index}`} className="font-medium text-gray-900 dark:text-gray-300">
+                                                <div>{category.name}</div>
+                                                <p id={`helper-radio-text-${index}`} className="text-xs font-normal text-gray-500 dark:text-gray-300 line-clamp-3">{category.description}</p>
                                             </label>
+                                            </>):
+                                            (
+                                                <>
+                                                 <label htmlFor={`helper-radio-${index}`} className="font-medium text-gray-900 font-arabic dark:text-gray-300 ">
+                                                <div className='font-semibold text-gray-700'>{category.nameAr}</div>
+                                                <p id={`helper-radio-text-${index}`} className="text-xs font-normal text-gray-500 dark:text-gray-300 line-clamp-3">{category.descriptionAr}</p>
+                                            </label>
+                                                </>
+                                            )
+                                            }
                                         </div>
                                     </div>
                                 </li>
@@ -210,12 +232,12 @@ const PanelSearch = () => {
                </div>
                <div  className="menu-btn rnk-opt-btn pl-[5px] flex flex-col py-1 h-[50px] w-full">
                   <div  className="flex-22">
-                     <div  className=""><span  className="font-bold text-gray-700 text-xs uppercase">Exam</span></div>
+                     <div  className=""><span  className="font-bold text-gray-700 text-xs uppercase rtl:font-arabic">{t('service')}</span></div>
                   </div>
                   <div  className="btn-uni flex items-end flex-70 pb-[6px]">
                      <div  className="actv-slc flex flex-nowrap items-center overflow-x-auto">
-                        <div  className="text-md text-gray-400 font-nav">
-                          <input  type="text" placeholder="University Nameggg" className="bg-transparent" /></div>
+                        <div  className="text-md text-gray-400 font-nav rtl:font-arabic">
+                          <input  type="text" placeholder={t('servicePlacholder')} className="bg-transparent"  /></div>
                         
                      </div>
                      <span  className="ml-auto mr-[5px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
@@ -223,7 +245,7 @@ const PanelSearch = () => {
                </div>
                <div id="dropdownRadioHelper" className="drop-menu hidden log-menu1 !z-50 max-h-56  overflow-y-auto absolute  top-16 sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
-                            {projectTypes.map((project, index) => (
+                            {services && services.map((project, index) => (
                                 <li key={index}>
                                     <div className="flex p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                         <div className="flex items-center h-5">
@@ -231,13 +253,13 @@ const PanelSearch = () => {
                                                 id={`helper-radio-${index}`}
                                                 name="helper-radio"
                                                 type="radio"
-                                                value={project.type}
+                                                value={project.name}
                                                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                             />
                                         </div>
                                         <div className="ms-2 text-sm">
                                             <label htmlFor={`helper-radio-${index}`} className="font-medium text-gray-900 dark:text-gray-300">
-                                                <div>{project.type}</div>
+                                                <div>{project.name}</div>
                                                 <p id={`helper-radio-text-${index}`} className="text-xs font-normal text-gray-500 dark:text-gray-300">{project.description}</p>
                                             </label>
                                         </div>
@@ -248,7 +270,7 @@ const PanelSearch = () => {
                     </div>
             </div>
          </div>
-         <div  className="search-btn max-sm:px-1 text-center sm:border-l sm:border-l-gray-300">
+         <div  className="search-btn max-sm:px-1 text-center sm:ltr:border-l sm:ltr:border-l-gray-300 sm:rtl:border-r sm:rtl:border-r-gray-300 ">
             <div className="inline-block max-sm:bg-white  rounded-xl max-sm:w-full sm:pl-[15px]">
                 <button  className="searchBtn py-[5px] px-[10px] bg-primary-btn border-1 border-white">
                     <span ><MdOutlineManageSearch className='text-2xl' /></span>

@@ -10,14 +10,29 @@ import ServiceFeature from "@/app/_components/_services/ServiceFeature";
 import ServiceClient from "@/app/_components/_services/ServiceClient";
 import { serviceWorks } from '@/app/utils/ServiceWorks';
 import ServiceWork from "@/app/_components/_services/ServiceWork";
+import { getCategoryForFront } from "@/app/[locale]/admin/common/_actions/FrontActions";
 
 
+interface Props {
+  params: {
+      slug: string;
+  };
+}
 
-
-const ServiceCategory = () => {
+const ServiceCategory = async ({params}:Props) => {
    const imagePath = '/images/777.png';
    const imagePath1 = '/images/curve.png';
    const imagePath2 = '/images/service2.png';
+   let category;
+   try {
+    category = await getCategoryForFront(params.slug);
+   } catch (error:any) {
+    console.log(error.message)
+    return (
+      <h2 className="text-gray-700">Error at Server</h2>
+    )
+    
+   }
    const service:ServiceInt1 = 
       {
          id : "1",
@@ -339,7 +354,7 @@ const ServiceCategory = () => {
                <div className="flex flex-wrap  justify-between">
                  <span className="text-black-100 uppercase text-sm mb-2">KNOW US BETTER</span>
                </div>
-               <h2 className="text-3xl font-bold text-gray-">What1 Company Do?</h2>
+               <h2 className="text-3xl font-bold text-gray-">What1 Company Do? {category && category.name}</h2>
                <div className="flex mt-4">
                   <p className="text-sm leading-7 text-gray-900">Webvolty is an Indian  IT Company for Website Development, Web Designing, Mobile App Development, Software Development, Web Hosting, Search Engine Optimization, Mobile Solutions and lot many IT and IT Enabled Services.</p>
                </div>
@@ -391,9 +406,9 @@ const ServiceCategory = () => {
                <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
             </div>
             <div className="flex flex-wrap gap-6 max-sm:p-4">
-            {phases.map((phase, index:number) => (
+            {/* {phases.map((phase, index:number) => (
                <ProcessPhase key={phase.id} phase={phase} index={index} />
-            ))}
+            ))} */}
             </div>
            </div>
          </div>

@@ -2,12 +2,14 @@
 import React from 'react';
 import hero from '@/public/images/hero.jpg';
 import PanelSearch from './SearchPanel';
-import { HeroSection } from '@prisma/client';
+import { Category, HeroSection, Service, ServiceCategory } from '@prisma/client';
 import { getLocale, getMessages } from 'next-intl/server';
 interface Props {
-  heroData : HeroSection
+  heroData : HeroSection,
+  services : Service[],
+  categories : Category[]
 }
-const Hero = async ({heroData}:Props) => {
+const Hero = async ({heroData,services,categories}:Props) => {
     const imagePath = '/images/hero.jpg';
     const locale = await getLocale();
     const messages = await getMessages({ locale });
@@ -26,7 +28,7 @@ const Hero = async ({heroData}:Props) => {
     </h1>
       }
            <div className="py-2 px-2 my-2 rounded-xl max-sm:bg-[#00000021] max-sm:border max-sm:border-[#4c4c4c] w-full">
-             <PanelSearch />
+             <PanelSearch services={services} categories={categories} locale={locale} />
          </div>
          {locale == 'en' ? ( 
           <>

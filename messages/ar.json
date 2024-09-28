@@ -9,12 +9,38 @@
       "latestWork" : "اخر الاعمال",
       "categoryDetails" : "أستعراض",
       "categoryEnq" : "إستعلام",
-      "AboutUs": {
-        "aboutUS": "معلومات عنا",
-        "title": "تحويل التفكير الإبداعي إلى معلومات",
-        "description": "تحميل مجاني لملف SVG السهم الأيمن 251 بتنسيق أحادي اللون ومتعدد الألوان لبرنامج Sketch و Figma من مجموعة السهم الأيمن 251 Vectors بتنسيق SVG لبرنامج Sketch و Figma من مجموعة السهم الأيمن 251 Vectors بتنسيق SVG لبرنامج Sketch و Figma من مجموعة السهم الأيمن 251",
-        "viewDetails": "عرض التفاصيل"
+      "ContactUs": {
+        "title-sec1": "تواصل معنا  ",
+        "innerTitle" : "للحصول",
+        "title-sec2" : "افضل الخدمات",
+        "name": "اسم المستخدم",
+        "email" : "ايميل المرسل",
+        "phonNo" : "الموبايل",
+        "MessageTitle" : "نص الرسالة",
+        "messagePlacholder" : "محتوى الرسالة ",
+        "submit" : " ارسال الطلب",
+        "categoryDetails" : "أستعراض",
+        "categoryEnq" : "إستعلام",
+        "sectionTitle" : "الرجاء يجب اختيار مجال الخدمة",
+        "contact-section1" : "طلب الخدمات",
+        "contact-section2" : "استعراض الباقات",
+        "contact-section3" : "ارسال الاستفسارات",
+        "contact-section4" : "الحصول عل العروض",
+        "contact-section5" : "الاشتراك في النشرة",
+        "contact-section6" : "تفاصيل الاسعار"
       }
+    },
+   "SearchPanel" : {
+      "category" : "التصنيف" ,
+      "categoryPlaceholder" : "اختار التصنيف" ,
+      "service" : "الخدمات" ,
+      "servicePlacholder" : "ابحث عن الخدمة" ,
+      "product" : "المنتجات",
+      "productPlacholder" : "ابحث عن المنتج" ,
+      "searchType" : "مجال البحث",
+      "typePlaceholder" : "حدد المجال",
+      "typeProduct" : "منتجات",
+      "typeService" : "خدمات"
 
     }
   }

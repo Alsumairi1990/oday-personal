@@ -155,17 +155,21 @@ type inputType = z.infer<typeof formSchema>;
         category_name : z.string().min(4, "Service Name Must be at least 4 chars")
                               .max(45, "Service Name Must less than 45 chars"),
     description : z.string().max(1000, "Service Title Must less than 1000 chars"),
+
     
     })
-    const transformToCategoryInput = (data: inputType): CategoryInput => {
-        return {
-          name: data.category_name,
-          description: data.description,
-          nameAr: data.category_name,
-          descriptionAr: data.description,
+    // const transformToCategoryInput = (data: inputType): CategoryInput => {
+    //     return {
+    //       name: data.category_name,
+    //       description: data.description,
+    //       nameAr: data.category_name,
+    //       descriptionAr: data.description,
+    //       title:data.title,
+    //       TitleAr : data.titleAr,
+    //       SubTitle : data.SubTitle,
     
-        };
-      };
+    //     };
+    //   };
     const {
         register,
         handleSubmit,
@@ -179,11 +183,11 @@ type inputType = z.infer<typeof formSchema>;
       const saveUser: SubmitHandler<inputType> = async (data)=>{
         const serviceData = data;
        
-        const categoryData = transformToCategoryInput(data);
+        // const categoryData = transformToCategoryInput(data);
      
         try{
             // console.log(data);
-           const categoryDa = await addCategory(categoryData);
+          //  const categoryDa = await addCategory(categoryData);
            
           //  setCategory(categoryDa);
             

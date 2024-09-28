@@ -91,7 +91,7 @@ export default async function Home() {
           
       <div className="hed">
       
-       {heroData && <Hero heroData={heroData} /> }
+       {heroData && <Hero heroData={heroData} services={services} categories={categories} /> }
        
       </div>
       
@@ -127,9 +127,9 @@ export default async function Home() {
       <div className="w-full my-24 ]">
       {testimonials &&  <Testimonials testimonials={testimonials} meta={testimonialMeta} /> }
       </div>
-      <div className="w-full bg-gray-800 my-10 sm:my-24 dark:bg-black-100">
+      {/* <div className="w-full bg-gray-800 my-10 sm:my-24 dark:bg-black-100">
       <Subscribe />
-      </div>
+      </div> */}
 
       <div className="w-full my-10 sm:my-24 dark:bg-black-100">
       <ServiceApp />

@@ -9,16 +9,38 @@
       "latestWork" : "Latest Work",
       "categoryDetails" : "Details",
       "categoryEnq" : "Enquiry",
-      "AboutUs" : {
-        "aboutUS" : "About US",
-        "title" : "Trunning Creativity Thinking into Information",
-        "description" : "Free Download Right Arrow 251 SVG vector file in monocolor and multicolor type for Sketch and Figma from Right Arrow 251 Vectors svg vector collection for Sketch and Figma from Right Arrow 251 Vectors svg vector for Sketch and Figma from Right Arrow 251",
-        "viewDetails" : "View Details"
-
-
-      }
-
-
-
+      "ContactUs": {
+        "title-sec1": "Contact us to  ",
+        "innerTitle" : "Get",
+        "title-sec2" : "the best services",
+        "name": "User Name",
+        "email" : "Sender's Email",
+        "phonNo" : "Mobile",
+        "MessageTitle" : "Message Title",
+        "messagePlacholder" : "Message Content",
+        "submit" : "Submit Request",
+        "categoryDetails" : "View",
+        "categoryEnq" : "Inquiry",
+        "sectionTitle" : "ٍSelect The Category of Service",
+        "contact-section1" : "Request Services",
+        "contact-section2" : "View Packages",
+        "contact-section3" : "Send Inquiries",
+        "contact-section4" : "Get Offers",
+        "contact-section5" : "Subscribe to Newsletter",
+        "contact-section6" : "Price Details"
+     }
+    },
+    
+    "SearchPanel" : {
+      "category" : "Category" ,
+      "categoryPlaceholder" : "Select Category" ,
+      "service" : "service" ,
+      "servicePlacholder" : "serach for service" ,
+      "product" : "Product",
+      "productPlacholder" : "Select Product" ,
+      "searchType" : "Domain ",
+      "typePlaceholder" : "select domain",
+      "typeProduct" : "product",
+      "typeService" : "service"
     }
   }

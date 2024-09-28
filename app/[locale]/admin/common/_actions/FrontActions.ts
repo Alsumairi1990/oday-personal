@@ -11,6 +11,8 @@ import { z } from "zod"
 import fs from "fs/promises"
 import { PhaseWithModels } from "../../service/phases/utils/PhaseWithModels";
 import { WorksFrontData } from "../../works/utils/WorksFrontData";
+import { CategoryForFront } from "../../category/util/CategoryForFront";
+import { isSlug } from "validator";
 
 export async function getServiceMeta():Promise<PageSection>{
 
@@ -223,3 +225,33 @@ export async function getServiceMeta():Promise<PageSection>{
       throw error;
     }
   }
+
+  export async function getCategoryForFront(slug:string):Promise<CategoryForFront>{
+
+    try {
+      const categoryWithServicesAndWorks = await prisma.category.findUnique({
+        where : {
+          slug : slug
+        },
+        include: {
+          services: {
+            include: {
+              service: true, // Include related Service details
+            },
+          },
+          works: {
+            include: {
+              service: true, // Include related Work details
+            },
+          },
+          products: true, // Include related Product details
+        },
+      });
+      return categoryWithServicesAndWorks as CategoryForFront;
+    } catch (error) {
+      console.log("[getServiceCatMeta]"+ error)
+      throw error;
+    }
+  }
+
+ 

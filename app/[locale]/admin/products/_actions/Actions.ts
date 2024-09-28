@@ -99,7 +99,7 @@ export async function addProductMedia(data: FormData, productId: string): Promis
 
 
 //Adding New Category and associat it with project
-export async function createProductTag(projectId: string, name:string): Promise<Category> {
+export async function createProductTag(projectId: string, name:string): Promise<Tag> {
   try {     
   const tagId = await createTag(name); 
   const updatedProduct = await prisma.product.update({

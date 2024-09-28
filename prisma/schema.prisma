@@ -127,6 +127,10 @@ model Category {
   nameAr        String?
   slug          String                @unique
   image         String?
+  title         String?
+  TitleAr       String?
+  SubTitle      String?
+  SubTitleAr    String?
   icon          String?
   description   String?
   descriptionAr String?

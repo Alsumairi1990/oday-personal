@@ -41,10 +41,10 @@ export default function Home() {
      </div>
 
      <div className="gray:bg-[#111]">
-     <About />
+     {/* <About /> */}
      </div>
      <div className="dark:bg-[#111]">
-     <Blogs />
+     {/* <Blogs /> */}
      </div>
      <div className="dark:bg-black-100">
      <div className="w-full my-16 ">
@@ -54,9 +54,9 @@ export default function Home() {
                <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
             </div>
             <div className="flex flex-wrap gap-8 max-sm:p-4 sm:justify-between">
-            {phases.map((phase, index:number) => (
+            {/* {phases.map((phase, index:number) => (
                <ProcessPhase key={phase.id} phase={phase} index={index} />
-            ))}
+            ))} */}
             </div>
            </div>
          </div>
@@ -64,11 +64,11 @@ export default function Home() {
      </div>
      <div className="daek:bg-[#111]">
       <div className="dark:w-11/12 mx-auto  dark:bg-black-100">
-      <Works />
+      {/* <Works /> */}
       </div>
       </div>
       <div className="w-full my-24 dark:bg-black-100">
-      <Testimonials />
+      {/* <Testimonials /> */}
       </div>
       <div className="w-full my-24 dark:bg-black-100">
       <Subscribe />
@@ -81,7 +81,7 @@ export default function Home() {
       
    
      {/* <div>
-      <Footerk />
+      // <Footerk />
      </div> */}
 
           <div className='w-full pt-8 bg-[#111]'>

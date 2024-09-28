@@ -19,12 +19,12 @@ export default async function middleware(req: NextRequest) {
  
   const match = pathname.match(/^\/(en|ar)\/(.+)/);
   const locale = match ? match[1] : 'en';
- console.log('locale-------'+locale);
+ console.log('locale###########'+locale);
  
     if ((pathname.startsWith(`/${locale}/services`) || pathname.startsWith(`/${locale}/admin`))) {
 
     if (!token) {
-      console.log('locale'+locale);
+      // console.log('locale'+locale);
        const redirectUrl = new URL(`/${locale}/auth/signin`, req.url);
       redirectUrl.pathname = `/${locale}/auth/signin`;
       return NextResponse.redirect(redirectUrl);
