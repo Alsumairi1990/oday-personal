@@ -47,7 +47,7 @@ export default async function Home() {
     serviceCatMeta = await getServiceCatMeta();
     categories = await getServiceCategory();
     heroData = await getHeroData();
-    menusData = await getMenusElementse2();
+    // menusData = await getMenusElementse2();
     // blogsMeta = await getBlogMeta();
     // blogs = await getForntBlogs();
     // phases = await getPhaseElements();
