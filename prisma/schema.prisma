@@ -154,6 +154,10 @@ model Tag {
   image         String?
   icon          String?
   description   String?
+  title         String?
+  TitleAr       String?
+  SubTitle      String?
+  SubTitleAr    String?
   descriptionAr String?
   products      Product[]
   services      ServiceTag[]
