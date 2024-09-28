@@ -49,7 +49,7 @@ export default async function Home() {
     heroData = await getHeroData();
     menusData = await getMenusElementse2();
     blogsMeta = await getBlogMeta();
-    // blogs = await getForntBlogs();
+    blogs = await getForntBlogs();
     // phases = await getPhaseElements();
     // phaseMeta = await gethaseMeta();
     // workMeta = await getWorkMeta();
