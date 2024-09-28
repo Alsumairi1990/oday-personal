@@ -49,8 +49,8 @@ const TagDelete = () => {
     const getAllTags = async () => {
       try {
         setLoading(true);
-        const catgs = await getTags();
-        setTags(catgs)
+        // const catgs = await getTags();
+        // setTags(catgs)
         setLoading(false);
       } catch (error) {
         console.error('Error fetching categories:', error);
