@@ -85,9 +85,9 @@ const TagCreate = () => {
    <div className="w-full sm:w-11.8/12 max-sm:border max-sm:border-gray-300  m-auto p-4 bg-white border border-gray-300 rounded-md">
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  ">
         <div className="grid grid-cols-1">
-        {tag &&
+        {/* {tag &&
           <SuccessMessage tag={tag}/>
-        }
+        } */}
           <div className="px-2 py-2.5 w-full flex items-center rounded-md bg-[#7648e5] mb-3">
                 <div className="flex items-center">
                 <span className=""><MdAssignmentAdd className='text-white text-2xl mr-2' /> </span>
