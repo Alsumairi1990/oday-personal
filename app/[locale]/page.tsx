@@ -49,14 +49,14 @@ export default async function Home() {
     heroData = await getHeroData();
     menusData = await getMenusElementse2();
     blogsMeta = await getBlogMeta();
-    blogs = await getForntBlogs();
-    phases = await getPhaseElements();
-    phaseMeta = await gethaseMeta();
-    workMeta = await getWorkMeta();
-    works = await getWorksMainPage();
-    aboutUS =  await getAboutUsData();
-    testimonials = await getTesimonialsFront();
-    testimonialMeta = await getTesimonialsMeta();
+    // blogs = await getForntBlogs();
+    // phases = await getPhaseElements();
+    // phaseMeta = await gethaseMeta();
+    // workMeta = await getWorkMeta();
+    // works = await getWorksMainPage();
+    // aboutUS =  await getAboutUsData();
+    // testimonials = await getTesimonialsFront();
+    // testimonialMeta = await getTesimonialsMeta();
   } catch (error) {
     console.error("Failed to fetch service meta:", error);
     // Return or render an error message when an error occurs
