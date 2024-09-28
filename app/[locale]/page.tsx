@@ -50,8 +50,8 @@ export default async function Home() {
     menusData = await getMenusElementse2();
     blogsMeta = await getBlogMeta();
     blogs = await getForntBlogs();
-    // phases = await getPhaseElements();
-    // phaseMeta = await gethaseMeta();
+    phases = await getPhaseElements();
+    phaseMeta = await gethaseMeta();
     // workMeta = await getWorkMeta();
     // works = await getWorksMainPage();
     // aboutUS =  await getAboutUsData();
