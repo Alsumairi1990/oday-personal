@@ -91,14 +91,14 @@ export default async function Home() {
           
       <div className="hed">
       
-       {heroData && <Hero heroData={heroData} services={services} categories={categories} /> }
+       {/* {heroData && <Hero heroData={heroData} services={services} categories={categories} /> } */}
        
       </div>
       
      {/* <div className="p-6 text-gray-900 text-2xl font-bold">{locale}</div> */}
      <div className="clear"></div>
      <div className='gray:bg-[#111]"'>
-     <Services categories={categories} meta={serviceCatMeta}  />
+     {/* <Services categories={categories} meta={serviceCatMeta}  /> */}
      </div>
 
      <div className='gray:bg-[#111]"'>
