@@ -1,23 +1,21 @@
 
 import React from 'react';
 
-
-import { ServiceFeatureInt } from '@/app/models/ServiceFeatureInt';
 import { Service } from '@prisma/client';
 interface ServiceProps {
-    servicefeature: Service;
+    service: Service;
   }
-const ServiceFeature = ({ servicefeature } : ServiceProps) => {
+const CardCol = ({ service } : ServiceProps) => {
   return (
-    <div className="flex-100 sm:flex-20 rounded-md p-2 bg-white dark:bg-black-150">
-    <div className=" py-3 text-center rounded-md shadow-xl border h-full border-gray-200">
+    <div className="flex-100 sm:flex-20 p-2">
+    <div className=" py-3 text-center rounded-md shadow-xl border border-gray-200">
      <div className="flex px-2  justify-center">
-        {servicefeature.image && <img src={servicefeature.image} alt={servicefeature.name} /> }
+        {service.image && <img src={service.image} alt={service.name} />}
      </div>
         <div className="mt-1.5 ">
-            <p className="text-gray-800 dark:text-orange-500 text-xl mb-1 font-semibold ">{servicefeature.name}</p>
-            <p className="text-gray-500 text-sm dark:text-gray-200 tracking-8  leading-6 px-1.5 font-medium mb-4">{servicefeature.description}</p>
-            {/* <div className="flex items-center bg-orange-500 px-2 py-1 mx-auto justify-center border  border-orange-500 w-fit rounded-md shadow-md">
+            <p className="text-gray-800 text-xl mb-1 font-semibold ">{service.name}</p>
+            <p className="text-gray-500 text-sm tracking-8  leading-6 px-1.5 font-medium mb-4">{service.description}</p>
+            <div className="flex items-center bg-orange-500 px-2 py-1 mx-auto justify-center border  border-orange-500 w-fit rounded-md shadow-md">
               <a href="" className="text-gray-50   text-sm font-medium   ">Details</a>
               <span className="ml-2 flex items-center h-full w-4 ">
                 <svg height="100%" width="100%" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
@@ -30,11 +28,11 @@ const ServiceFeature = ({ servicefeature } : ServiceProps) => {
                       </svg>
                 </span>
 
-            </div> */}
+            </div>
         </div>
     </div>
     </div>
   );
 };
 
-export default ServiceFeature;
+export default CardCol;

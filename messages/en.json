@@ -9,6 +9,9 @@
       "latestWork" : "Latest Work",
       "categoryDetails" : "Details",
       "categoryEnq" : "Enquiry",
+      "request" : "Request",
+      "requestService" : "Request Service",
+      "details" : "details",
       "ContactUs": {
         "title-sec1": "Contact us to  ",
         "innerTitle" : "Get",
@@ -42,5 +45,8 @@
       "typePlaceholder" : "select domain",
       "typeProduct" : "product",
       "typeService" : "service"
+    },
+    "CategoryPage" : {
+      "talkToConsultant" : "Talk to Consultant"
     }
   }

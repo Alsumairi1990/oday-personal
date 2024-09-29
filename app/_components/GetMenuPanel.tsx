@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import { MdOutlineAddCircle, MdOutlineArrowDropDown } from 'react-icons/md';
+import { MdOutlineArrowDropDown } from 'react-icons/md';
 import MenuPanel from '../[locale]/admin/common/utils/MenuPanel';
 import { useTranslations } from 'next-intl';
 interface Props {

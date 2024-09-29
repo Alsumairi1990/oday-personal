@@ -304,7 +304,7 @@ const SeriviceCategories = () => {
   return (
      <div className="w-full">
        <div className="w-full mb-16">    
-               <CategoryHero category={category} />
+               {/* <CategoryHero category={category} /> */}
          </div>
     
         <div className="py-4 px-8 pt-0 w-full">
@@ -388,9 +388,9 @@ const SeriviceCategories = () => {
                <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
             </div>
             <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
-            {services.map((phase, index:number) => (
+            {/* {services.map((phase, index:number) => (
                <ServiceOffer key={phase.id} serviceOffer={phase}  />
-            ))}
+            ))} */}
             </div>
            </div>
          </div>
@@ -423,9 +423,9 @@ const SeriviceCategories = () => {
                <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">We have an incredibly talented and skilled team of logo designers who ensure quality Logo design services. Let's know some more reasons that make us the top Logo design service company to hire -</p>
             </div>
             <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
-            {fservices.map((service, index:number) => (
+            {/* {fservices.map((service, index:number) => (
                <ServiceFeature key={service.id} servicefeature={service}  />
-            ))}
+            ))} */}
             </div>
            </div>
          </div>

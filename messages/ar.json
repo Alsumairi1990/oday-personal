@@ -9,6 +9,9 @@
       "latestWork" : "اخر الاعمال",
       "categoryDetails" : "أستعراض",
       "categoryEnq" : "إستعلام",
+      "request" : "طلب",
+      "requestService" : "اطلب الخدمة",
+      "details" : "تفاصيل",
       "ContactUs": {
         "title-sec1": "تواصل معنا  ",
         "innerTitle" : "للحصول",
@@ -42,5 +45,9 @@
       "typeProduct" : "منتجات",
       "typeService" : "خدمات"
 
+    },
+    "CategoryPage" : {
+      "talkToConsultant" : "تحدت مع الخبير"
     }
+    
   }
