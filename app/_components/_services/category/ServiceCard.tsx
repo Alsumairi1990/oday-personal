@@ -22,15 +22,15 @@ const ServiceCard = ({service,locale,messages,category}:Props) => {
   return (
     <div className="w-full ">
     {service && 
-         <div className=" w-full flex flex-wrap border border-gray-300 sm:mx-auto items-center bg-white rounded-t-md">
+         <div className=" w-full flex flex-wrap border border-gray-300 sm:mx-auto items-center bg-white dark:bg-[#111] rounded-t-md">
            <div className="sm:flex-15 max-h-44 flex justify-center overflow-hidden">
            {service.image && <img src={service.image} alt={service.name} />}
            </div>
            <div className="p-2 ltr:pl-4 rtl:pr-5 sm:flex-70 mt-1 sm:border-x sm:border-x-gray-300">
               <div className="w-full mb-2 flex items-center">
-                  <img className=' rounded-md w-6  ltr:mr-2 rtl:ml-2' src={service.icon!} alt="" />
-                  {locale == 'en' ? <span className="text-base  text-black  font-semibold">{service?.name}</span>
-                  : <span className="text-base  text-black font-arabic font-semibold">{service?.nameAr}</span>
+                  {/* <img className=' rounded-md w-6  ltr:mr-2 rtl:ml-2' src={service.icon!} alt="" /> */}
+                  {locale == 'en' ? <span className="text-base  text-black dark:text-orange-500 font-semibold">{service?.name}</span>
+                  : <span className="text-base  text-black font-arabic dark:text-orange-500  font-semibold">{service?.nameAr}</span>
                   }
                   <div className="ltr:ml-auto rtl:mr-auto">
                     <span className="text-sm text-gray-700">By : </span>
@@ -41,8 +41,8 @@ const ServiceCard = ({service,locale,messages,category}:Props) => {
                   {/* <span className="text-sm text-gray-800 mr-1">
                     Caregory Name : 
                   </span> */}
-                  {locale === 'en' ?<span className="text-sm text-gray-900 font-medium">{category?.name}</span>
-                  : <span className="text-[13px] text-gray-900 font-arabic font-medium">{category.nameAr}</span>
+                  {locale === 'en' ?<span className="text-sm text-gray-900 dark:text-gray-50 font-medium">{category?.name}</span>
+                  : <span className="text-[13px] text-gray-900 font-arabic dark:text-gray-50 font-medium">{category.nameAr}</span>
                  }
               </div>
               <div className="mt-2.5">

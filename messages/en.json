@@ -48,5 +48,15 @@
     },
     "CategoryPage" : {
       "talkToConsultant" : "Talk to Consultant"
+    },
+
+    "Common" : {
+      "featureTitle1" : "Why Choose Our ",
+      "serviceSecTitle" : "Our comprehensive range of" ,
+      "featureTitle2"  : "Services",
+      "displayMode" : "Display Mode",
+      "listOfServices" : "List Of Services",
+      "categoryWorkTitle" : "Some of our Latest & finest work in "
+
     }
   }

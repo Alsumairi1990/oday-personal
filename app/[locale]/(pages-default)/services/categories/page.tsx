@@ -7,7 +7,7 @@ import ServiceOffer from "@/app/_components/_services/ServiceOffer";
 import { fservices } from '@/app/utils/ServicesData';
 import { clients } from '@/app/utils/Cleints';
 import { serviceCategories } from '@/app/utils/ServiceCategories'
-import ServiceFeature from "@/app/_components/_services/ServiceFeature";
+import ServiceFeature from "@/app/_components/_services/ServicesFeature";
 import ServiceClient from "@/app/_components/_services/ServiceClient";
 import { serviceWorks } from '@/app/utils/ServiceWorks';
 import ServiceWork from "@/app/_components/_services/ServiceWork";

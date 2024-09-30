@@ -48,6 +48,14 @@
     },
     "CategoryPage" : {
       "talkToConsultant" : "تحدت مع الخبير"
+    },
+    "Common" : {
+      "featureTitle1" : "لماذا تختار ",
+      "serviceSecTitle" : "مجموعة خدماتنا الشاملة والمتكاملة في ",
+      "featureTitle2"  : "",
+      "displayMode" : "طريقة العرض",
+      "listOfServices" : "قائمة الخدمات",
+      "categoryWorkTitle" : "أطلع على افضل واخر اعمالنا في "
     }
     
   }

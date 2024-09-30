@@ -2,8 +2,9 @@
 'use client'
 import React, { useState } from 'react';
 import { ServiceWorkInt } from '@/app/models/ServiceWorkInt';
+import { Work } from '@prisma/client';
 interface ServiceProps {
-    serviceWork: ServiceWorkInt;
+    serviceWork: Work;
   }
  
 const ServiceWork = ({ serviceWork } : ServiceProps) => {
@@ -21,7 +22,7 @@ const ServiceWork = ({ serviceWork } : ServiceProps) => {
            <div className={`relative border bg-black  border-gray-300 h-full ${isClicked ? 'bg-black-150 !fixed w-11/12 mx-auto left-1/2 z-50 h-[90%] overflow-y-scroll top-8 rounded-md  -translate-x-1/2'  : ''}`} onClick={handleClick} >
                <button className="absolute btn hidden z-50 bg-orange-500 right-2 top-2 text-white" onClick={close}>close</button>
                <div className="pb-0">
-                  <img src={serviceWork.image} alt="" />
+                  {serviceWork.image && <img src={serviceWork.image} alt="" /> }
                </div>
                <div className="title px-2 absolute bottom-0 w-full flex items-end h-full " style={{background:'-webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.8) 100%)'}}>
                       <div className="">
@@ -32,7 +33,7 @@ const ServiceWork = ({ serviceWork } : ServiceProps) => {
                             </svg>
                             </span>
                             <span className="pl-1">
-                                {serviceWork.name}
+                                {serviceWork.title}
                             </span>
                         </div>
                         <p className="font-semibold text-gray-100 uppercase pt-1 pl-7 text-sm pb-3">

@@ -40,7 +40,7 @@ export default async function signupLayout({
     return (
             
 
-            <div className="h-full">
+            <div className="h-full dark:bg-[#111]" >
                {menusData && <NavBar menusData={menusData} />}
             {children}
             <div className="">

@@ -6,7 +6,7 @@ import { PhaseInt } from "@/app/models/PhaseInt";
 import ServiceOffer from "@/app/_components/_services/ServiceOffer";
 import { fservices } from '@/app/utils/ServicesData';
 import { clients } from '@/app/utils/Cleints';
-import ServiceFeature from "@/app/_components/_services/ServiceFeature";
+import ServiceFeature from "@/app/_components/_services/ServicesFeature";
 import ServiceClient from "@/app/_components/_services/ServiceClient";
 import { serviceWorks } from '@/app/utils/ServiceWorks';
 import ServiceWork from "@/app/_components/_services/ServiceWork";
@@ -15,6 +15,7 @@ import CategoryHero from "@/app/_components/_services/category/CategoryHero";
 import { getLocale, getMessages } from "next-intl/server";
 import { getServices } from "@/app/[locale]/_actions/Actions";
 import CategoryDisplay from "@/app/_components/_services/category/CategoryDisplay";
+import { getServicefeatures } from "@/app/[locale]/admin/front-settings/common/_actions/Actions";
 
 
 interface Props {
@@ -29,12 +30,18 @@ const ServiceCategory = async ({params}:Props) => {
    const imagePath2 = '/images/service2.png';
    const locale = await getLocale();
   const messages = await getMessages({ locale });
+  const feature1 = (messages as any).Common.featureTitle1;
+  const feature2 = (messages as any).Common.featureTitle1;
+  const serviceSecTitle = (messages as any).Common.serviceSecTitle;
+  const categoryWorkTitle = (messages as any).Common.categoryWorkTitle;
 
    let category;
    let services;
+   let features; 
    try {
     category = await getCategoryForFront(params.slug);
     services = await getServices();
+    features = await getServicefeatures(); 
    } catch (error:any) {
     console.log(error.message)
     return (
@@ -99,27 +106,38 @@ const ServiceCategory = async ({params}:Props) => {
         </div> */}
 
 
-        <div className="w-full my-16 ">
+        {/* <div className="w-full my-16 ">
           <div className="w-11/12 mx-auto">
             <div className="flex flex-col items-center sm:mb-8">
                <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">How it works</h2>
                <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
             </div>
             <div className="flex flex-wrap gap-6 max-sm:p-4">
-            {/* {phases.map((phase, index:number) => (
+             {phases.map((phase, index:number) => (
                <ProcessPhase key={phase.id} phase={phase} index={index} />
-            ))} */}
+            ))} 
             </div>
            </div>
-         </div>
+         </div> */}
 
 
          <div className="w-full my-16 ">
           <div className="w-11/12 mx-auto">
-            <div className="flex flex-col items-center sm:mb-8">
-               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">Our Comprehensive Range of Logo Design Services </h2>
-               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
+            { locale === 'en' ? <div className="flex flex-col items-center sm:mb-8">
+               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{serviceSecTitle} <span className="text-orange-600">{category.name} </span> </h2>
+               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">
+               {category.description && category.description.split(' ').slice(0, 35).join(' ') + (category.description.split(' ').length > 35 ? '...' : '')}
+               </p>
             </div>
+            :  <div className="flex flex-col items-center sm:mb-8 font-arabic">
+                  <h2 className="sm:text-3xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{serviceSecTitle} <span className="text-orange-600">{category.nameAr} </span>  </h2>
+                  <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">
+                     {/* {category.descriptionAr} */}
+                     {category.descriptionAr && category.descriptionAr.split(' ').slice(0, 35).join(' ') + (category.descriptionAr.split(' ').length > 35 ? '...' : '')}
+
+                     </p>
+               </div>
+            }
             {/* <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
             {services.map((service, index:number) => (
                <ServiceOffer key={service.id} serviceOffer={service}  />
@@ -132,7 +150,7 @@ const ServiceCategory = async ({params}:Props) => {
 
 
 
-        <div className="w-full mt-8 bg-[#f4f2ff]">
+        <div className="w-full mt-8 bg-[#f4f2ff] dark:bg-[#111]">
          <div className="w-11/12 mx-auto">
          <div className="p-2 grid grid-cols-2">
             <div className="p-2">
@@ -151,44 +169,35 @@ const ServiceCategory = async ({params}:Props) => {
         </div>
 
 
-        <div className="w-full my-16 py-8  bg-gray-100 ">
+        <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-11/12 mx-auto">
             <div className="flex flex-col items-center sm:mb-8">
-               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">Why Choose our Logo Design company Services? </h2>
-               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">We have an incredibly talented and skilled team of logo designers who ensure quality Logo design services. Let's know some more reasons that make us the top Logo design service company to hire -</p>
+               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{feature1}<span className="text-orange-600">{category.name}</span>{feature2}</h2>
+               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">{feature1}<span className="text-orange-600">{category.nameAr}</span></h2>
+            }
             </div>
-            <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
-            {services.map((service, index:number) => (
-               <ServiceFeature key={service.id} servicefeature={service}  />
+            <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4 mt-2">
+            {features.map((service, index:number) => (
+               <ServiceFeature key={service.id} servicefeature={service} locale={locale} messages={messages} />
             ))}
             </div>
            </div>
          </div>
 
 
-         <div className="w-full my-16 py-8 ">
-          <div className="w-11/12 mx-auto">
-            <div className="flex flex-col items-center sm:mb-8">
-               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">Why Choose our Logo Design company Services? </h2>
-               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">We have an incredibly talented and skilled team of logo designers who ensure quality Logo design services. Let's know some more reasons that make us the top Logo design service company to hire -</p>
-            </div>
-            {/* <div className="grid sm:grid-cols-6 gap-6 max-sm:p-4">
-            {clients.map((client, index:number) => (
-               <ServiceClient key={service.id} serviceClient={client}  />
-            ))}
-            </div> */}
-           </div>
-         </div>
+        
 
          <div className="w-full my-16 py-8 ">
           <div className="w-11/12 mx-auto">
-            <div className="flex flex-col items-center sm:mb-8">
-               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">Why Choose our Logo Design company Services? </h2>
-               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">We have an incredibly talented and skilled team of logo designers who ensure quality Logo design services. Let's know some more reasons that make us the top Logo design service company to hire -</p>
-            </div>
+            <div className="flex flex-col items-center sm:mb-8 border-b border-b-gray-300 pb-1.5">
+               <h2 className="sm:text-2xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400 rtl:font-arabic rtl:text-xl">{categoryWorkTitle}</h2>
+               {locale === 'en' ? <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">{category.name}</p>
+                :  <p className="text-2xl  text-center mt-3 mb-2 font-bold text-orange-600 font-arabic dark:text-gray-200">( {category.nameAr} )</p>
+                }
+           </div>
             <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
-            {serviceWorks.map((work) => (
-               <ServiceWork key={work.id} serviceWork={work}  />
+            {category.works.map((work) => (
+               <ServiceWork key={work.workId} serviceWork={work.service} locale={locale} messages={messages} category={category.name} />
             ))}
             </div>
            </div>
