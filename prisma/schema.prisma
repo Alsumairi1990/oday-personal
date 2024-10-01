@@ -140,6 +140,8 @@ model Category {
   projects      Project[]
   products      Product[]
   orders        Order[]
+  clients       Client[]
+  phases         Phase[]
   userId        String // References one specific user (modified)
   user          User?                 @relation(fields: [userId], references: [id]) // Relation to User
   createdAt     DateTime              @default(now())
@@ -274,6 +276,7 @@ model Phase {
   phaseType     String?
   sequence      Int
   serviceId     Int?
+  categories    Category[]
   service       Service? @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   steps         Step[]
   userId        String // References one specific user (modified)
@@ -319,6 +322,7 @@ model Work {
   tools         WorkTool[]
   icon          String? // Array of additional image URLs
   image         String?
+  clients       Client[]
   highlights    String? // Key highlights of the project
   highlightsAr  String?
   createdAt     DateTime       @default(now())
@@ -337,6 +341,7 @@ model Location {
   image     String?
   works     Work[]
   prices    Price[]
+  
   teams     Team[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -722,9 +727,11 @@ model Vendor {
 model Product {
   id            String     @id @default(uuid())
   name          String
+  nameAr        String?
   slug          String     @unique
   image         String?
   description   String?
+  descriptionAr String?
   stockQuantity Int        @default(0)
   isActive      Boolean    @default(true)
   isPublished   Boolean    @default(false)
@@ -816,29 +823,37 @@ model Project {
 
 model Client {
   id             String  @id @default(cuid())
-  name           String
-  contactPerson  String
+  name           String?
+  nameAr           String?
+  contactPerson  String?
   email          String  @unique
   image          String?
   phone          String?
   address        String?
+  addressAr        String?
   companyName    String?
+  companyNameAr    String?
   website        String?
   industry       String?
+  industryAr       String?
   notes          String?
+  notesAr          String?
   billingAddress String?
+  billingAddressAr String?
   billingEmail   String?
   taxId          String?
 
   media Media[]
+  catgories       Category[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   user User? @relation
-
+  works Work[]
   projects Project[] // Relationship with projects
   invoices Invoice[] // Relationship with invoices, if applicable
+  
 
   // Many-to-one relationship to User (for tracking admin who created the client)
   createdBy   User   @relation("AdminCreatedClients", fields: [createdById], references: [id])

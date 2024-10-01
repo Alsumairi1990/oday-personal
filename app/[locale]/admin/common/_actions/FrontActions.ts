@@ -244,7 +244,18 @@ export async function getServiceMeta():Promise<PageSection>{
               service: true, // Include related Work details
             },
           },
-          products: true, // Include related Product details
+          phases : {
+            include : {
+              steps : true
+            }
+          },
+          products: true,
+          clients : {
+            select : {
+              companyName: true,
+              image : true
+            }
+          }
         },
       });
       return categoryWithServicesAndWorks as CategoryForFront;

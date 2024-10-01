@@ -5,12 +5,15 @@ import { RiArrowLeftFill, RiArrowRightFill } from "react-icons/ri";
 import { Phase } from '@prisma/client';
 import { PhaseWithModels } from '@/app/[locale]/admin/service/phases/utils/PhaseWithModels';
 import { getLocale, getMessages } from 'next-intl/server';
+import { AbstractIntlMessages } from 'next-intl';
 
 
 interface PhaseIntProps {
     phase: PhaseWithModels;
     index: number;
-    phaseSize : number
+    phaseSize : number,
+    locale? : string,
+    messages ? : AbstractIntlMessages
   }
 const ProcessPhase = async ({ phase,index,phaseSize } : PhaseIntProps ) => {
   
@@ -45,8 +48,8 @@ const isLastIndex = index === phaseSize - 1;
          }
           
           <div className="flex border-b border-b-gray-200 dark:border-b-gray-600 flex-col justify-center items-center p-1 pl-2.5 pb-2">
-          {locale == 'en' ?  <p className="text-sm leading-6 text-gray-700 dark:text-gray-300">{phase.description}</p>
-          :<p className="text-sm leading-6 text-gray-700 text-center font-arabic dark:text-gray-300">{phase.descriptionAr}</p>
+          {locale == 'en' ?  <p className="text-sm leading-6 text-gray-700 line-clamp-2 dark:text-gray-300">{phase.description}</p>
+          :<p className="text-sm leading-6 text-gray-700 text-center font-arabic line-clamp-2 dark:text-gray-300">{phase.descriptionAr}</p>
           }
           </div>
           <div className="mt-3  p-2">

@@ -16,6 +16,8 @@ import { getLocale, getMessages } from "next-intl/server";
 import { getServices } from "@/app/[locale]/_actions/Actions";
 import CategoryDisplay from "@/app/_components/_services/category/CategoryDisplay";
 import { getServicefeatures } from "@/app/[locale]/admin/front-settings/common/_actions/Actions";
+import ClientCard from "@/app/_components/clinets/ClientCard";
+import ProductCard from "@/app/_components/products/ProductCard";
 
 
 interface Props {
@@ -34,6 +36,8 @@ const ServiceCategory = async ({params}:Props) => {
   const feature2 = (messages as any).Common.featureTitle1;
   const serviceSecTitle = (messages as any).Common.serviceSecTitle;
   const categoryWorkTitle = (messages as any).Common.categoryWorkTitle;
+  const latestWork = (messages as any).HomePage.latestWork;
+
 
    let category;
    let services;
@@ -177,13 +181,76 @@ const ServiceCategory = async ({params}:Props) => {
             }
             </div>
             <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4 mt-2">
-            {features.map((service, index:number) => (
+            {features && features.map((service, index:number) => (
                <ServiceFeature key={service.id} servicefeature={service} locale={locale} messages={messages} />
             ))}
             </div>
            </div>
          </div>
 
+
+         <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
+          <div className="w-11/12 mx-auto">
+            <div className="flex flex-col items-center sm:mb-8">
+               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{feature1}<span className="text-orange-600">{category.name}</span>{feature2}</h2>
+               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">{feature1}<span className="text-orange-600">{category.nameAr}</span></h2>
+            }
+            </div>
+            <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4 mt-2">
+            {features && features.map((service, index:number) => (
+               <ServiceFeature key={service.id} servicefeature={service} locale={locale} messages={messages} />
+            ))}
+            </div>
+           </div>
+         </div>
+
+      
+         <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
+          <div className="w-11/12 mx-auto ">
+            <div className="flex flex-col items-center sm:mb-8">
+               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{feature1}<span className="text-orange-600">{category.name}</span>{feature2}</h2>
+               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">{feature1}<span className="text-orange-600">{category.nameAr}</span></h2>
+            }
+            </div>
+            <div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
+            {category.clients && category.clients.map((client, index:number) => (
+               <ClientCard key={client.id} client={client} locale={locale} messages={messages} />
+            ))}
+            </div>
+           </div>
+         </div>
+
+
+         <div className="w-full my-16 py-8   dark:bg-[#111] ">
+          <div className="w-11/12 mx-auto ">
+            <div className="flex flex-col items-center sm:mb-8">
+               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">Products<span className="text-orange-600">{category.name}</span>{feature2}</h2>
+               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">{feature1}<span className="text-orange-600">{category.nameAr}</span></h2>
+            }
+            </div>
+            <div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
+            {category.products && category.products.map((product, index:number) => (
+               <ProductCard key={product.id} product={product} locale={locale} messages={messages} />
+            ))}
+            </div>
+           </div>
+         </div>
+
+
+
+         <div className="w-full my-16 py-8  dark:bg-[#111] ">
+          <div className="w-11/12 mx-auto ">
+            <div className="flex flex-col items-center sm:mb-8">
+               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{latestWork}<span className="text-orange-600">{category.name}</span>{feature2}</h2>
+            
+            </div>
+            <div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
+            {category.phases.map((phase) => (
+               <ProcessPhase index={phase.id} phase={phase} locale={locale} messages={messages} phaseSize={category.phases.length} />
+               ))}
+            </div>
+           </div>
+         </div>
 
         
 
