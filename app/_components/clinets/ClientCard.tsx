@@ -14,6 +14,7 @@ interface clientProps {
 const ClientCard = ({ client,locale,messages,category } : clientProps) => {
   const request = (messages as any).HomePage.requestclient;
   const details = (messages as any).HomePage.details;
+ 
   return (
     <div className=" max-h-16 flex items-center bg-white text-center p-2 py-3.5 rounded-md shadow-xl border border-gray-200">
         {client.image  && <img src={client.image} className='w-full max-h-full' alt={client.name!} />}

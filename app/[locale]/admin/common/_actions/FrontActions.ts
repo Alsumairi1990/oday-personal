@@ -1,6 +1,6 @@
 
 "use server"
-import { AboutUsSection, Category, HeroSection, PageSection, Post, Tag, Testimonial } from "@prisma/client";
+import { AboutUsSection, Category, HeroSection, Industry, PageSection, Post, Tag, Testimonial } from "@prisma/client";
 import prisma from "../../../../../utils/prisma";
 import { slugify } from "@/utils/TextUtils";
 import { getCategoryNamesByIds, getTagsNamesByIds } from "../../service/_serviceActions/ServiceActions";
@@ -54,6 +54,20 @@ export async function getServiceMeta():Promise<PageSection>{
     }
   }
 
+
+  export async function getIndustries():Promise<Industry[]>{
+    try {
+      
+      const meta = await prisma.industry.findMany({
+      take : 8
+      })
+      return meta;
+    } catch (error) {
+      console.log("[getInsustries]"+ error)
+      throw error;
+    }
+  }
+
   export async function getAboutUsData():Promise<AboutUsSection>{
     try {
       const meta = await prisma.aboutUsSection.findFirst({
@@ -87,7 +101,7 @@ export async function getServiceMeta():Promise<PageSection>{
   export async function getPhaseElements():Promise<PhaseWithModels[]>{
     try {
       const elements = await prisma.phase.findMany({
-        take : 1,
+        
         where : {
           phaseType : 'company'
         },

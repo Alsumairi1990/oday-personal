@@ -56,7 +56,15 @@
       "featureTitle2"  : "Services",
       "displayMode" : "Display Mode",
       "listOfServices" : "List Of Services",
-      "categoryWorkTitle" : "Some of our Latest & finest work in "
+      "categoryWorkTitle" : "Some of our Latest & finest work in ",
+      "ourProducts" : "Our Products in ",
+      "buy" : "Buy",
+      "ourClients": "our Clients",
+      "workProcess": "How it is Work",
+      "startProject" : "Start Your Projcte ",
+      "projectStory" : "Tell us a little bit about your app idea to get a custom quote, and hire best developers today",
+      "projectDescripyion" : "Do you have an innovative idea that needs execution? Share your project details with us for a custom quote tailored to your needs. Our experienced team delivers high-quality solutions to help you achieve your goals efficiently.",
+      "projectContact" : "Taik to our Experts now"
 
     }
   }

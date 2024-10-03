@@ -31,9 +31,9 @@ const PhaseCompany = async ({meta,phases}:Props) => {
           }
             
             <div className="flex flex-wrap gap-8 max-sm:p-4 sm:justify-between">
-            {/* {phases.map((phase, index:number) => (
+            {phases.map((phase, index:number) => (
                <ProcessPhase key={phase.id} phase={phase} index={index} phaseSize={phases.length} />
-            ))} */}
+            ))}
             </div>
            </div>
       </div>

@@ -142,6 +142,7 @@ model Category {
   orders        Order[]
   clients       Client[]
   phases         Phase[]
+  industries      Industry[]
   userId        String // References one specific user (modified)
   user          User?                 @relation(fields: [userId], references: [id]) // Relation to User
   createdAt     DateTime              @default(now())
@@ -464,6 +465,7 @@ model User {
   pageSections   PageSection[]
   postCategories PostCategory[]
   ServiceFeatures   ServiceFeature[]
+  industry        Industry[]
 
   aboutUs        AboutUsSection[]
 
@@ -926,6 +928,24 @@ enum PaymentStatus {
 enum OrderType {
   Product
   Service
+}
+
+model Industry {
+    id        Int      @id @default(autoincrement())
+    name String?
+    nameAr String?
+    slug  String?
+    icon   String?
+    title String?
+    titleAr String?
+    image String?
+    description String?
+    descriptionAr  String?
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    categories  Category[]
+
+
 }
 
 model Order {

@@ -83,7 +83,7 @@ export async function  CreatePageSection(data:FormData):Promise<number>{
    }
  }
 
-// creating Hero Section  info
+// creating About Us Section  info
 export async function  addAboutUs(data:FormData):Promise<number>{
     try {
      const result = AboutUsSchema.safeParse(Object.fromEntries(data.entries()))
