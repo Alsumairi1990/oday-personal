@@ -13,22 +13,76 @@ import { PhaseWithModels } from "../../service/phases/utils/PhaseWithModels";
 import { WorksFrontData } from "../../works/utils/WorksFrontData";
 import { CategoryForFront } from "../../category/util/CategoryForFront";
 import { isSlug } from "validator";
+import { ServiceForFront } from "../../service/utils/ServiceForFront";
+import { CategoryFrontSingle } from "../../category/util/CategoryFrontSingle";
+
+export async function getServiceBySlug(slug:string):Promise<ServiceForFront>{
+
+  try {
+    console.log("slug --------" + slug);
+    const services = await prisma.service.findFirst({
+      where : {
+        name_slug : slug
+      },
+      include: {
+        tools: {
+          include: {
+            tool: true, // Include related Service details
+          },
+        },
+        tags: {
+          include: {
+            tag: true, // Include related Service details
+          },
+        },
+        categories: {
+          include: {
+            category: true, // Include related Service details
+          },
+        },
+        works: true,
+        phases : {
+          include : {
+            steps : true
+          }
+        },
+        products: true,
+        clients : {
+          select : {
+            companyName: true,
+            image : true
+          }
+        },
+        industries : true,
+        testimonials : true,
+      },
+    });
+    console.log("Icoooooooooooon"+services?.icon)
+    return services as ServiceForFront;
+  } catch (error) {
+    console.log("[getServiceBySlug]"+ error)
+    throw error;
+  }
+}
+
+
+
 
 export async function getServiceMeta():Promise<PageSection>{
-
-    try {
-      const meta = await prisma.pageSection.findFirst({
-        where : {
-          name : 'services'
-        }
-      })
-      console.log("Service Meta " + meta?.name)
-      return meta!;
-    } catch (error) {
-      console.log("[getServiceMeta]"+ error)
-      throw error;
-    }
+  try {
+    const meta = await prisma.pageSection.findFirst({
+      where : {
+        name : 'services'
+      }
+    })
+    return meta!;
+  } catch (error) {
+    console.log("[getAboutUsData]"+ error)
+    throw error;
   }
+}
+
+
   export async function getTesimonialsFront():Promise<Testimonial[]>{
     try {
       const result = await prisma.testimonial.findMany({
@@ -223,6 +277,27 @@ export async function getServiceMeta():Promise<PageSection>{
     }
   }
 
+  export async function getServiceCategories():Promise<CategoryFrontSingle[]>{
+
+    try {
+      const categories = await prisma.category.findMany({
+        distinct: ['id'], // Ensure no duplicates based on the category ID
+        include: {
+          services: true, // Include related services
+          _count: {
+            select: {
+              services: true, // Count the number of services for each category
+            },
+          },
+        },
+      });
+      
+      return categories as CategoryFrontSingle[];
+    } catch (error) {
+      console.log("[getServiceCatMeta]"+ error)
+      throw error;
+    }
+  }
   export async function getServiceCategory():Promise<Category[]>{
 
     try {

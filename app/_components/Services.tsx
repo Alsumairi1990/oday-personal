@@ -47,7 +47,7 @@ const Services = async ({categories,meta}:Props) => {
                    <Link href={'/services/category/kj'} className='px-4 py-1.5 rtl:font-arabic border dark:border-[0.13rem] max-sm:mb-4 border-gray-300 dark:border-[#4a235e] rounded text-gray-700 dark:text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >{categoryEnq} 
                   
                    </Link>
-                   <Link href={`/services/category/${service.slug}`} className='px-4 py-1.5 rtl:font-arabic flex items-center justify-center border-[0.13rem] bg-orange-500 border-orange-500 dark:bg-[#00ba35] dark:border-[#00ba35] rounded text-white dark:text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >{categoryDetails} 
+                   <Link href={`/services/categories/${service.slug}`} className='px-4 py-1.5 rtl:font-arabic flex items-center justify-center border-[0.13rem] bg-orange-500 border-orange-500 dark:bg-[#00ba35] dark:border-[#00ba35] rounded text-white dark:text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >{categoryDetails} 
                    <span className="ml-2 rtl:mr-2">
                    <svg height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
                            viewBox="0 0 512 512" >

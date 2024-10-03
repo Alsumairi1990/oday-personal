@@ -80,10 +80,13 @@ model Service {
   tags          ServiceTag[]
   tools         ServiceTool[]
   testimonials  Testimonial[]
+  clients       Client[]
+  products      Product[]
   invoices      Invoice[]
   prices        Price[]
   phases        Phase[]
   works         Work[]
+  industries    Industry[]
   userId        String
   user          User?             @relation(fields: [userId], references: [id])
   codeId        Int?
@@ -278,8 +281,8 @@ model Phase {
   sequence      Int
   serviceId     Int?
   categories    Category[]
-  service       Service? @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   steps         Step[]
+  services      Service[]
   userId        String // References one specific user (modified)
   user          User     @relation(fields: [userId], references: [id]) // Relation to User
 
@@ -743,6 +746,7 @@ model Product {
   categories    Category[] // Many-to-many relation with Category model
   tags          Tag[] // Many-to-many relation with Tag model
   media         Media[] // One-to-many relation with the Media model
+  services      Service[]
   vendorId      String? // Foreign key to Vendor model
   vendor        Vendor?    @relation(fields: [vendorId], references: [id])
   rating        Decimal?
@@ -853,6 +857,7 @@ model Client {
 
   user User? @relation
   works Work[]
+  services  Service[]
   projects Project[] // Relationship with projects
   invoices Invoice[] // Relationship with invoices, if applicable
   
@@ -944,6 +949,7 @@ model Industry {
     userId    String
     user      User     @relation(fields: [userId], references: [id])
     categories  Category[]
+    services    Service[]
 
 
 }
