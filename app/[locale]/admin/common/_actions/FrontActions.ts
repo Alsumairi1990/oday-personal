@@ -135,11 +135,11 @@ export async function getServiceMeta():Promise<PageSection>{
       throw error;
     }
   }
-  export async function getHeroData():Promise<HeroSection>{
+  export async function getHeroData(name:string):Promise<HeroSection>{
     try {
       const meta = await prisma.heroSection.findFirst({
         where : {
-          pageName : 'mainPage'
+          pageName : name
         }
       })
       return meta!;

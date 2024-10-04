@@ -2,6 +2,7 @@ import Footerk from "@/app/_components/Footer"
 import { MenuWithAllModels } from "../admin/setting/left-nav/_utils/MenuWithAllModels";
 import NavBar from "@/app/NavBar";
 import { getMenusElementse2 } from "../admin/setting/left-nav/_actions/Action";
+import WhatsAppLive from "@/app/_components/WhatsAppLive";
 // import NavBar from "@/app/NavBar.jsx"
 
 
@@ -46,6 +47,7 @@ export default async function signupLayout({
             <div className="">
              <Footerk />
              </div>
+             
             </div>
              
           

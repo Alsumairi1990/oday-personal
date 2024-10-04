@@ -1,6 +1,8 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Providers } from '../providers';
+import WhatsAppLive from '../_components/WhatsAppLive';
+import CallOptionPanel from '../_components/CallOptionPanel';
 
 export default async function LocaleLayout({
   children,
@@ -17,6 +19,14 @@ export default async function LocaleLayout({
         <div dir={locale === 'ar' ? 'rtl' : 'ltr'}>
         {children}
         </div>
+        <div className="parent z-[9999999999] ">
+         <CallOptionPanel  />
+         {/* <div className="child">Child (Fixed)</div> */}
+</div>
+        {/* <div className="fixed top-1/2 right-2 transform -translate-y-1/2 z-[9999999999]  animate-rotate-back">
+
+        <CallOptionPanel  />
+             </div> */}
       </Providers>
     </NextIntlClientProvider>
   );

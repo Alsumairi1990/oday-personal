@@ -164,7 +164,7 @@ try {
     getServices(),
     getServiceCatMeta(),
     getServiceCategory(),
-    getHeroData(),
+    getHeroData('mainPage'),
     getMenusElementse2(),
     getBlogMeta(),
     getForntBlogs(),

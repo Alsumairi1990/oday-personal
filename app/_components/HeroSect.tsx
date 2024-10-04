@@ -16,7 +16,7 @@ const Hero = async ({heroData,services,categories}:Props) => {
   return (
 
     <div className="w-full " >  
-    <div className=" m-h-lvh sm:h-[35rem]  pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath})`}}>
+    <div className=" m-h-lvh sm:h-[35rem]  pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${heroData.image})`}}>
       <div className="absolute sm:top-[75px] h-[calc(100%-64px)] sm:h-[calc(100%-75px)] top-16 bottom-0 border-t border-t-gray-800  w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
      <div className="flex flex-wrap w-11/12 mx-auto z-20">
      <div className="flex w-full flex-col items-center justify-center ">

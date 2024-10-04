@@ -1,8 +1,11 @@
 
-import { getServiceCategories } from "@/app/[locale]/admin/common/_actions/FrontActions";
+import { getHeroData, getServiceCategories } from "@/app/[locale]/admin/common/_actions/FrontActions";
 import { getLocale, getMessages } from "next-intl/server";
 
 import CategoryPanel from "@/app/_components/_services/category/CategoryPanel";
+import Hero from "@/app/_components/HeroSect";
+import { getServices } from "@/app/[locale]/_actions/Actions";
+import SidQuery from "@/app/_components/SidQuery";
 
 
 interface Props {
@@ -34,9 +37,13 @@ const Categories = async ({params}:Props) => {
 
 
    let categories;
+   let heroData;
+   let services;
    
    try {
     categories = await getServiceCategories();
+    heroData = await getHeroData('categoriesPage');
+    services = await getServices();
    } catch (error:any) {
     console.log(error.message)
     return (
@@ -48,19 +55,22 @@ const Categories = async ({params}:Props) => {
    
 
   return (
-     <div className="w-full">
+   <>
+   <div className="w-full">
+      {heroData && categories && services  && <Hero heroData={heroData} services={services} categories={categories} /> }
+   </div>
+     <div className="w-11.8/12 mx-auto grid sm:grid-cols-75/25">
         {/* <CategoryHero category={category} locale={locale} messages={messages} /> */}
-        
-         <div className="w-full my-16 ">
-          <div className="w-11/12 mx-auto">
+               
+          <div className="">
             { locale === 'en' ? <div className="flex flex-col items-center sm:mb-8">
-               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{serviceSecTitle} <span className="text-orange-600"> </span> </h2>
+               {/* <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{serviceSecTitle} <span className="text-orange-600"> </span> </h2> */}
                {/* <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">
                {category.description && category.description.split(' ').slice(0, 35).join(' ') + (category.description.split(' ').length > 35 ? '...' : '')}
                </p> */}
             </div>
             :  <div className="flex flex-col items-center sm:mb-8 font-arabic">
-                  <h2 className="sm:text-3xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{serviceSecTitle} <span className="text-orange-600"> </span>  </h2>
+                  {/* <h2 className="sm:text-3xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{serviceSecTitle} <span className="text-orange-600"> </span>  </h2> */}
                   {/* <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">
                      {category.descriptionAr && category.descriptionAr.split(' ').slice(0, 35).join(' ') + (category.descriptionAr.split(' ').length > 35 ? '...' : '')}
 
@@ -75,11 +85,17 @@ const Categories = async ({params}:Props) => {
             </div> */}
             <CategoryPanel categories={categories} locale={locale} messages={messages}  />
            </div>
+         
+
+         <div className="p-2 h-fit">
+            <div className="sm:pt-4">
+            <SidQuery  />
+            </div>
+            
          </div>
 
-
-
      </div>
+     </>
   )
 };
 export default Categories;

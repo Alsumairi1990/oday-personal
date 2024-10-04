@@ -17,23 +17,25 @@ interface Props {
 const CategoryCard = ({category,locale,messages,}:Props) => {
   const request = (messages as any).HomePage.requestService;
   const details = (messages as any).HomePage.details;
+  const totalServices = (messages as any).Common.totalServices;
+
 
   
   return (
     <div className="w-full ">
     {category && 
          <div className=" w-full flex flex-wrap border border-gray-300 sm:mx-auto items-center bg-white dark:bg-[#111] rounded-t-md">
-           <div className="sm:flex-15 max-h-44 flex justify-center overflow-hidden">
-           {category.image && <img src={category.image} alt={category.name} />}
+           <div className="sm:flex-17  h-[8.5rem] flex justify-center overflow-hidden">
+           {category.image && <img src={category.image} className='h-full w-full' alt={category.name} />}
            </div>
-           <div className="p-2 ltr:pl-4 rtl:pr-5 sm:flex-70 mt-1 sm:border-x sm:border-x-gray-300">
+           <div className="p-2 ltr:pl-4 rtl:pr-5 sm:flex-63 mt-1 sm:border-x sm:border-x-gray-300">
               <div className="w-full mb-2 flex items-center">
                   {/* <img className=' rounded-md w-6  ltr:mr-2 rtl:ml-2' src={category.icon!} alt="" /> */}
                   {locale == 'en' ? <span className="text-base  text-black dark:text-orange-500 font-semibold">{category?.name}</span>
                   : <span className="text-base  text-black font-arabic dark:text-orange-500  font-semibold">{category?.nameAr}</span>
                   }
                   <div className="ltr:ml-auto rtl:mr-auto">
-                    <span className="text-sm text-gray-700">By : </span>
+                    <span className="text-sm text-gray-700 rtl:font-arabic">{totalServices} : <span className='font-semibold text-orange-500 text-sm px-2 border rounded-xl'>{category._count.services}</span></span>
                     {/* <span className="text-sm text-red-700 ml-1 capitalize">{ category?.user?.user_name}</span> */}
                   </div>
               </div>
