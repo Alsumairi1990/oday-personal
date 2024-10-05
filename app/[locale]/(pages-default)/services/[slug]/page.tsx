@@ -15,6 +15,8 @@ import { gethaseMeta, getServiceBySlug, getServiceCatMeta, getWorkMeta } from "@
 import IndustryCard from "@/app/_components/IndustryCard";
 import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
+import { ServiceForFront } from "@/app/[locale]/admin/service/utils/ServiceForFront";
+import { PageSection } from "@prisma/client";
 
 interface Props {
   params: {
@@ -44,17 +46,11 @@ const Serivice = async ({params}:Props) => {
    const projectStory = (messages as any).Common.projectStory;
    const projectDescripyion = (messages as any).Common.projectDescripyion;
    // Variable declarations
- let service;
- let servicesMeta;
- let blogsMeta;
- let blogs;
- let phases;
- let phaseMeta;
- let workMeta;
- let works;
- let aboutUS;
- let testimonials;
- let testimonialMeta;
+ let service:ServiceForFront;
+
+ let phaseMeta:PageSection;
+ let workMeta:PageSection;
+ 
  
  try {
    // Execute queries in parallel using Promise.all
