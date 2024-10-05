@@ -3,13 +3,17 @@
 import React, { useState } from 'react';
 import { ServiceWorkInt } from '@/app/models/ServiceWorkInt';
 import { Work } from '@prisma/client';
+import { AbstractIntlMessages } from 'next-intl';
 interface ServiceProps {
     serviceWork: Work;
+    locale : String,
+    messages : AbstractIntlMessages,
+    category : string
   }
  
-const ServiceWork = ({ serviceWork } : ServiceProps) => {
+const ServiceWork = ({ serviceWork ,locale,messages,category} : ServiceProps) => {
     const [isClicked, setIsClicked] = useState(false);
-
+    
     const handleClick = () => {
       setIsClicked(true);
     };
