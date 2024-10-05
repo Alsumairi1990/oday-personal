@@ -20,7 +20,7 @@ import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
 import IndustryCard from "@/app/_components/IndustryCard";
 import { CategoryForFront } from "@/app/[locale]/admin/category/util/CategoryForFront";
-import { Service, ServiceFeature } from "@prisma/client";
+import { Industry, Service, ServiceFeature } from "@prisma/client";
 import ServicesFeature from "@/app/_components/_services/ServicesFeature1";
 
 
@@ -55,7 +55,7 @@ const ServiceCategory = async ({params}:Props) => {
    let category:CategoryForFront;
    let services:Service[];
    let features:ServiceFeature[]; 
-   let industries;
+   let industries:Industry[];
    try {
     category = await getCategoryForFront(params.slug);
     services = await getServices();
