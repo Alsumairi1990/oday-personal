@@ -6,7 +6,7 @@ import { PhaseInt } from "@/app/models/PhaseInt";
 import ServiceOffer from "@/app/_components/_services/ServiceOffer";
 import { fservices } from '@/app/utils/ServicesData';
 import { clients } from '@/app/utils/Cleints';
-import ServiceFeature from "@/app/_components/_services/ServicesFeature";
+import { default as CustomServiceFeature } from "@/app/_components/_services/ServicesFeature1";
 import ServiceClient from "@/app/_components/_services/ServiceClient";
 import { serviceWorks } from '@/app/utils/ServiceWorks';
 import ServiceWork from "@/app/_components/_services/ServiceWork";
@@ -19,6 +19,9 @@ import { getServicefeatures } from "@/app/[locale]/admin/front-settings/common/_
 import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
 import IndustryCard from "@/app/_components/IndustryCard";
+import { CategoryForFront } from "@/app/[locale]/admin/category/util/CategoryForFront";
+import { Service, ServiceFeature } from "@prisma/client";
+import ServicesFeature from "@/app/_components/_services/ServicesFeature1";
 
 
 interface Props {
@@ -49,9 +52,9 @@ const ServiceCategory = async ({params}:Props) => {
   
 
 
-   let category;
-   let services;
-   let features; 
+   let category:CategoryForFront;
+   let services:Service[];
+   let features:ServiceFeature[]; 
    let industries;
    try {
     category = await getCategoryForFront(params.slug);
@@ -129,7 +132,7 @@ const ServiceCategory = async ({params}:Props) => {
             </div>
             <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4 mt-2">
             {features && features.map((service, index:number) => (
-               <ServiceFeature key={service.id} servicefeature={service} locale={locale} messages={messages} />
+               <CustomServiceFeature key={service.id} servicefeature={service} locale={locale} messages={messages} />
             ))}
             </div>
            </div>
