@@ -31,7 +31,7 @@ const Serivice = async ({params}:Props) => {
    const imagePath1 = '/images/curve.png';
    const imagePath2 = '/images/service2.png';
 
-   const locale = await getLocale();
+   const locale= await getLocale();
    const messages = await getMessages({ locale });
    const feature1 = (messages as any).Common.featureTitle1;
    const feature2 = (messages as any).Common.featureTitle1;
@@ -272,7 +272,7 @@ const Serivice = async ({params}:Props) => {
            </div>
             <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
             {service.works && service.works.map((work) => (
-               <ServiceWork key={work.id} serviceWork={work} locale={locale} messages={messages} category={service.name} />
+               <ServiceWork serviceWork={work} locale={locale} messages={messages} category={service.name} />
             ))}
             </div>
            </div>
