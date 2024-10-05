@@ -160,7 +160,7 @@ const getSelected= (selected:string)=>{
                  </div>
                   <span className='text-sm flex-55 pl-2 text-gray-600 py-1 '>{name.name}</span>
                   <button 
-                  onClick={()=> { setRemovedTool(name.name);setShowRemoveTool(true) }}
+                  onClick={()=> {name.name && setRemovedTool(name.name);setShowRemoveTool(true) }}
                 className="flex flex-15 items-center border justify-center py-3 border-sky-500 bg-sky-500 rounded-md">
                   <IoMdCloseCircle className='text-base text-white' />
                   
@@ -295,7 +295,7 @@ const getSelected= (selected:string)=>{
                
               {clients && clients.length > 0 ? (
                clients.filter((element) =>
-                   element.name.toLowerCase().includes(searchTerm.toLowerCase())
+                element.name  && element.name!.toLowerCase().includes(searchTerm.toLowerCase())
                )
                .map((element, index) => (
                    <div className=" relative border bg-gray-50 flex flex-col gap-y-3 py-2 my-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 " >
