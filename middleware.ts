@@ -22,7 +22,7 @@ export default async function middleware(req: NextRequest) {
  console.log('locale###########'+locale);
  
     // if ((pathname.startsWith(`/${locale}/services`) || pathname.startsWith(`/${locale}/admin`))) {
-      if ((pathname.startsWith(`/${locale}/services`))) {
+      if ((pathname.startsWith(`/${locale}/admin`))) {
 
 
     if (!token) {
