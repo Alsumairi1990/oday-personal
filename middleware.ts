@@ -42,7 +42,7 @@ export const config = {
     '/', 
     '/admin/:path*',                             // Home route (unlocalized)
     // '/services/:path*',             // Protect /services and all subpaths (unlocalized)
-    // '/(en|ar)/services/:path*',     // Protect /services and all subpaths with locale (e.g., /en/services/1)
+    '/(en|ar)/services/:path*',     // Protect /services and all subpaths with locale (e.g., /en/services/1)
     '/(en|ar)/:path*',              // Apply i18n middleware for other localized routes
   ],
 };
