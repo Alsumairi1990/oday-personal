@@ -21,9 +21,7 @@ export default async function middleware(req: NextRequest) {
   const locale = match ? match[1] : 'en';
  console.log('locale###########'+locale);
  
-    // if ((pathname.startsWith(`/${locale}/services`) || pathname.startsWith(`/${locale}/admin`))) {
-      if ((pathname.startsWith(`/${locale}/admin`))) {
-
+    if ((pathname.startsWith(`/${locale}/admin`))) {
 
     if (!token) {
       // console.log('locale'+locale);
@@ -41,8 +39,9 @@ export const config = {
   matcher: [
     '/', 
     '/admin/:path*',                             // Home route (unlocalized)
-    // '/services/:path*',             // Protect /services and all subpaths (unlocalized)
+    '/services/:path*',             // Protect /services and all subpaths (unlocalized)
     '/(en|ar)/services/:path*',     // Protect /services and all subpaths with locale (e.g., /en/services/1)
+    
     '/(en|ar)/:path*',              // Apply i18n middleware for other localized routes
   ],
 };

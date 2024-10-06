@@ -3,8 +3,12 @@ import React, { useState } from 'react'
 import WhatsAppLive from './WhatsAppLive'
 import MobilCall from './MobilCall'
 import { LuPhoneCall } from 'react-icons/lu';
-
-function CallOptionPanel() {
+import { AbstractIntlMessages } from 'next-intl';
+interface Props {
+  locale : string,
+  messages : AbstractIntlMessages,
+}
+function CallOptionPanel({locale,messages}:Props) {
   const [whatsappFlag, setWhatsappFlag] = useState(false);
   const [mobileContactFlag, setMobileContactFlag] = useState(false);
   const closePanel = (flag:boolean) => {
@@ -22,7 +26,7 @@ function CallOptionPanel() {
             <LuPhoneCall className='text-gray-700 text-2xl' />
             </span>
           </button>
-            {mobileContactFlag && <MobilCall closePanle={closePanel}  /> }
+            {mobileContactFlag && <MobilCall locale={locale} messages={messages} closePanle={closePanel}  /> }
         </div>
     </div>
   )

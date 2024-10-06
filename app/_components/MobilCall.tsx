@@ -1,12 +1,17 @@
 'use client'
+import { AbstractIntlMessages } from 'next-intl'
+import Link from 'next/link'
 import React, { useState } from 'react'
 import { IoCloseSharp } from 'react-icons/io5'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 interface Props {
+    locale : string,
+  messages : AbstractIntlMessages,
     closePanle : (value :boolean) => void
+
 }
-function MobilCall({closePanle}:Props) {
+function MobilCall({locale,messages,closePanle}:Props) {
     const [phoneNumber, setPhoneNumber] = useState('');
     const handleChange = (e:any)=>{
 
@@ -72,6 +77,9 @@ function MobilCall({closePanle}:Props) {
                 <div className="flex-100">
                     <textarea name="" id="" className='bg-white p-2 rounded-md border w-full mt-6 border-gray-300' placeholder='message' cols={3} rows={3}></textarea>
                 </div>
+                <Link href={`/${locale}/contact-us`}>
+                contact us
+                </Link>
                 <div className="py-1 mt-3 flex-100">
                     <button className='w-full rounded-md bg-orange-600 border border-gray-100 shadow-md text-white text-center py-2 '>submit</button>
                 </div>
