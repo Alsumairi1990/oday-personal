@@ -117,11 +117,13 @@ import ServiceApp from '../_components/ServiceApp'
 import Footerk from '../_components/Footer'
 import { getLocale, getMessages } from 'next-intl/server';
 import { getServices } from './_actions/Actions'
-import { getAboutUsData, getBlogMeta, getForntBlogs, gethaseMeta, getHeroData, getPhaseElements, getServiceCategory, getServiceMeta, getTesimonialsFront, getTesimonialsMeta, getWorkMeta, getWorksMainPage } from './admin/common/_actions/FrontActions';
+import { getAboutUsData, getBlogMeta, getForntBlogs, gethaseMeta, getHeroData, getIndustries, getPhaseElements, getServiceCategory, getServiceMeta, getTesimonialsFront, getTesimonialsMeta, getWorkMeta, getWorksMainPage } from './admin/common/_actions/FrontActions';
 import { getServiceCatMeta } from './admin/common/_actions/FrontActions'
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
 import { getMenusElementse2 } from './admin/setting/left-nav/_actions/Action'
 import PhaseCompany from '../_components/PhaseCompany'
+import IndustryCard from '../_components/IndustryCard'
+import { Industry } from '@prisma/client'
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
@@ -141,6 +143,7 @@ let works;
 let aboutUS;
 let testimonials;
 let testimonialMeta;
+let industries:Industry[];
 
 try {
   // Execute queries in parallel using Promise.all
@@ -160,6 +163,7 @@ try {
     testimonials,
     testimonialMeta,
     servicesMeta,
+    industries,
   ] = await Promise.all([
     getServices(),
     getServiceCatMeta(),
@@ -176,6 +180,7 @@ try {
     getTesimonialsFront(),
     getTesimonialsMeta(),
     getServiceMeta(),
+    getIndustries()
   ]);
 } catch (error) {
   console.error("Failed to fetch service meta:", error);
@@ -237,6 +242,21 @@ try {
           </div>   
       <div className="hed">
        {heroData && <Hero heroData={heroData} services={services} categories={categories} /> }
+      </div>
+
+      <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
+          <div className="w-full mx-auto">
+            {/* <div className="flex flex-col items-center sm:mb-8">
+               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">Our Industries </h2>
+               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">industry<span className="text-orange-600">{category.nameAr}</span></h2>
+            }
+            </div> */}
+            <div className="grid sm:grid-cols-4  max-sm:p-4 mt-2">
+            {industries && industries.map((industry, index:number) => (
+               <IndustryCard key={industry.id} industry={industry} locale={locale} messages={messages} />
+            ))}
+            </div>
+           </div>
       </div>
      <div className="clear"></div>
      <div className='gray:bg-[#111]"'>
