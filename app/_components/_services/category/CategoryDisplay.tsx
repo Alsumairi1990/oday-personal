@@ -48,7 +48,7 @@ const CategoryDisplay = ({services,locale,messages,category}:Props) => {
 
             <div className="relative overflow-x-auto  scr-container overflow-y-autحo">
                 <div className="w-full text-sm text-left  rtl:text-right text-gray-500 dark:text-gray-400">
-                <div className="grid grid-cols-4 gap-6">
+                <div className="grid sm:grid-cols-4 gap-6">
                      {showGrid && services && services?.length > 0 && 
                          services.map((service) => (
                             <CardCol service={service} locale={locale} messages={messages} category={category} />

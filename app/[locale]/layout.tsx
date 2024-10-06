@@ -3,6 +3,7 @@ import { getMessages } from 'next-intl/server';
 import { Providers } from '../providers';
 import WhatsAppLive from '../_components/WhatsAppLive';
 import CallOptionPanel from '../_components/CallOptionPanel';
+import NextTopLoader from 'nextjs-toploader';
 
 export default async function LocaleLayout({
   children,
@@ -16,7 +17,9 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider messages={messages}>
       <Providers>
+      <NextTopLoader />
         <div dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+
         {children}
         </div>
         <div className="parent z-[9999999999] ">
