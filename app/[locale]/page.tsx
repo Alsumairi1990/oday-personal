@@ -244,7 +244,7 @@ try {
        {heroData && <Hero heroData={heroData} services={services} categories={categories} /> }
       </div>
 
-      <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
+      <div className="w-full mt-16 pb-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-full mx-auto">
             {/* <div className="flex flex-col items-center sm:mb-8">
                {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">Our Industries </h2>
