@@ -15,11 +15,21 @@ import { CategoryForFront } from "../../category/util/CategoryForFront";
 import { isSlug } from "validator";
 import { ServiceForFront } from "../../service/utils/ServiceForFront";
 import { CategoryFrontSingle } from "../../category/util/CategoryFrontSingle";
+import { getCategoriesFromCache, setCategoriesToCache } from "../cache/CategoriesCache";
+import { getPhasessFromCache, setPhasesToCache } from "../cache/PhasesCach";
+import { getWorksHomePageCache, setWorksHomePageCache } from "../cache/WorksMainPageCach";
+import { getTestimonialsFromCache, setTestimonialToCache } from "../cache/TestimonialsHomeCach";
+import { getIndustriesFromCache, setIndustriesToCache } from "../cache/IndustriesHomeCach";
+import { getServiceFromCache, setServiceToCache } from "../cache/ServiceFrontCache";
 
 export async function getServiceBySlug(slug:string):Promise<ServiceForFront>{
 
   try {
     console.log("slug --------" + slug);
+    let cachedData = getServiceFromCache();
+    if (cachedData) {
+      return cachedData;
+    }
     const services = await prisma.service.findFirst({
       where : {
         name_slug : slug
@@ -58,6 +68,7 @@ export async function getServiceBySlug(slug:string):Promise<ServiceForFront>{
       },
     });
     console.log("Icoooooooooooon"+services?.icon)
+    setServiceToCache(services as ServiceForFront);
     return services as ServiceForFront;
   } catch (error) {
     console.log("[getServiceBySlug]"+ error)
@@ -85,9 +96,14 @@ export async function getServiceMeta():Promise<PageSection>{
 
   export async function getTesimonialsFront():Promise<Testimonial[]>{
     try {
+      let cachedData = getTestimonialsFromCache();
+      if (cachedData) {
+        return cachedData;
+      }
       const result = await prisma.testimonial.findMany({
         take : 3
       })
+      setTestimonialToCache(result);
       return result!;
     } catch (error) {
       console.log("[getAboutUsData]"+ error)
@@ -111,11 +127,15 @@ export async function getServiceMeta():Promise<PageSection>{
 
   export async function getIndustries():Promise<Industry[]>{
     try {
-      
-      const meta = await prisma.industry.findMany({
+      let cachedData = getIndustriesFromCache();
+      if (cachedData) {
+        return cachedData;
+      }
+      const results = await prisma.industry.findMany({
       take : 8
       })
-      return meta;
+      setIndustriesToCache(results)
+      return results;
     } catch (error) {
       console.log("[getInsustries]"+ error)
       throw error;
@@ -154,6 +174,10 @@ export async function getServiceMeta():Promise<PageSection>{
   // Get All Phases 
   export async function getPhaseElements():Promise<PhaseWithModels[]>{
     try {
+      let cachedData = getPhasessFromCache();
+      if (cachedData) {
+        return cachedData;
+      }
       const elements = await prisma.phase.findMany({
         
         where : {
@@ -165,6 +189,7 @@ export async function getServiceMeta():Promise<PageSection>{
         
       })
         console.log(elements.length)
+        setPhasesToCache(elements);
       return elements as PhaseWithModels[];
     } catch (error) {
       console.log('[getPhaseElements]'+ error);
@@ -189,7 +214,10 @@ export async function getServiceMeta():Promise<PageSection>{
   
   export async function getWorksMainPage():Promise<WorksFrontData[]>{
     try {
-      
+      let cachedData = getWorksHomePageCache();
+      if (cachedData) {
+        return cachedData;
+      }
       const results = await prisma.work.findMany({
         take :6,
         include: {
@@ -211,7 +239,7 @@ export async function getServiceMeta():Promise<PageSection>{
           },
         },
       });
-      
+      setWorksHomePageCache(results as WorksFrontData[]);
       return results as WorksFrontData[];
     } catch (error) {
       console.log('[getPhaseElements]'+ error);
@@ -301,6 +329,10 @@ export async function getServiceMeta():Promise<PageSection>{
   export async function getServiceCategory():Promise<Category[]>{
 
     try {
+      let cachedData = getCategoriesFromCache();
+      if (cachedData) {
+        return cachedData;
+      }
       const categories = await prisma.category.findMany({
         take: 10, // Retrieve the first 10 categories
         distinct: ['id'], // Ensure no duplicates based on the category ID
@@ -308,6 +340,7 @@ export async function getServiceMeta():Promise<PageSection>{
           services: true, // Include related services
         },
       });
+      setCategoriesToCache(categories);
       return categories!;
     } catch (error) {
       console.log("[getServiceCatMeta]"+ error)

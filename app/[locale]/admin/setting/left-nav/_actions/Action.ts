@@ -14,6 +14,7 @@ import { getCachedData, setCachedData } from "../../../common/cache/MenuCache";
 import prisma from "@/utils/prisma";
 
 
+
 export async function getMenusElementse2(): Promise<Record<number, MenuWithAllModels[]>> {
   // Check cache first
   console.time('Total Menu Fetch');
@@ -242,13 +243,16 @@ export async function  addingNestedElement(id:number,data:FormData):Promise<Elem
     if (result.success) {
       const data = result.data; 
       let iconPath = '';
+      
       if(data.icon && data.icon.name){
         await fs.mkdir("public/codes/images", { recursive: true })
         iconPath = `/codes/images/${crypto.randomUUID()}-${data.icon.name}`
-        await fs.writeFile(
-          `public${iconPath}`,
-          Buffer.from(await data.icon.arrayBuffer())
-          )
+        // await fs.writeFile(
+        //   `public${iconPath}`,
+        //   Buffer.from(await data.icon.arrayBuffer())
+        //   )
+        const buffer = Buffer.from(await data.icon.arrayBuffer());
+          await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
         }
           const elem = await prisma.adminMenu.findUnique({
               where : {
@@ -291,11 +295,14 @@ export async function  addingInnerElement(id:number,data:FormData,ids:number[]):
         if(data.icon && data.icon.name){
           await fs.mkdir("public/codes/images", { recursive: true })
           iconPath = `/codes/images/${crypto.randomUUID()}-${data.icon.name}`
-          await fs.writeFile(
-            `public${iconPath}`,
-            Buffer.from(await data.icon.arrayBuffer())
-            )
-          }
+          // await fs.writeFile(
+          //   `public${iconPath}`,
+          //   Buffer.from(await data.icon.arrayBuffer())
+          //   )
+          // }
+          const buffer = Buffer.from(await data.icon.arrayBuffer());
+          await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
+        }
             const elem = await prisma.adminMenu.findUnique({
                 where : {
                     id : id
@@ -384,10 +391,13 @@ export async function  addingMenuParent(data:FormData):Promise<MenuParent>{
       if(data.icon && data.icon.name){
         await fs.mkdir("public/setting/leftnav/images", { recursive: true })
         iconPath = `/setting/leftnav/images/${crypto.randomUUID()}-${data.icon.name}`
-        await fs.writeFile(
-          `public${iconPath}`,
-          Buffer.from(await data.icon.arrayBuffer())
-          )
+        // await fs.writeFile(
+        //   `public${iconPath}`,
+        //   Buffer.from(await data.icon.arrayBuffer())
+        //   )
+        const buffer = Buffer.from(await data.icon.arrayBuffer());
+        await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
+      
         }
           const menu = await prisma.menuParent.create({
                   data: {
@@ -429,10 +439,12 @@ export async function  addingMenuElement(data:FormData,id:number):Promise<MenuWi
         if(data.icon && data.icon.name){
           await fs.mkdir("public/codes/images", { recursive: true })
           iconPath = `/codes/images/${crypto.randomUUID()}-${data.icon.name}`
-          await fs.writeFile(
-            `public${iconPath}`,
-            Buffer.from(await data.icon.arrayBuffer())
-            )
+          // await fs.writeFile(
+          //   `public${iconPath}`,
+          //   Buffer.from(await data.icon.arrayBuffer())
+          //   )
+          const buffer = Buffer.from(await data.icon.arrayBuffer());
+          await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
           }
           const parent = await prisma.menuParent.findUnique({
             where : {

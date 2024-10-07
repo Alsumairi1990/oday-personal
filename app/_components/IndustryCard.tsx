@@ -17,7 +17,7 @@ const IndustryCard = ({ industry,locale,messages } : Props) => {
   const buy = (messages as any).Common.buy;
   return (
     
-    <div className=" relative h-72 border-b border-b-gray-700 ">
+    <div className=" relative h-52 sm:h-72 border-b border-b-gray-700 ">
      <div className="flex h-full  justify-center">
         {industry.image && industry.name && <img className='h-full' src={industry.image} alt={industry.name} />}
      </div>

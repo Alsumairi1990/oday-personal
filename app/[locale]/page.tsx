@@ -259,7 +259,7 @@ try {
                :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">industry<span className="text-orange-600">{category.nameAr}</span></h2>
             }
             </div> */}
-            <div className="grid sm:grid-cols-4  max-sm:p-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4  max-sm:p-4">
             {industries && industries.map((industry, index:number) => (
                <IndustryCard key={industry.id} industry={industry} locale={locale} messages={messages} />
             ))}
