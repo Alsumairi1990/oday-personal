@@ -7,18 +7,18 @@ import { NextRequest } from 'next/server';
 
 // Create the i18n middleware
 const intlMiddleware = createIntlMiddleware({
-  locales: ['en', 'ar'],
+  locales: ['ar', 'en'],
   defaultLocale: 'ar',
 });
-const locales = ['en', 'ar'];
+const locales = ['ar', 'en'];
 
 export default async function middleware(req: NextRequest) {
   // Apply next-auth middleware for authentication
   const token = await getToken({ req });
   const pathname = req.nextUrl.pathname;
  
-  const match = pathname.match(/^\/(en|ar)\/(.+)/);
-  const locale = match ? match[1] : 'en';
+  const match = pathname.match(/^\/(ar|en)\/(.+)/);
+  const locale = match ? match[1] : 'ar';
  console.log('locale###########'+locale);
  
     if ((pathname.startsWith(`/${locale}/admin`))) {
