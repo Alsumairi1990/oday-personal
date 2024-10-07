@@ -1,6 +1,7 @@
 import React from 'react'
 import { WorksFrontData } from '../[locale]/admin/works/utils/WorksFrontData'
 import { getLocale, getMessages } from 'next-intl/server';
+import Link from 'next/link';
 interface Props {
     work : WorksFrontData
 }
@@ -12,7 +13,8 @@ async function WorkElement({work}:Props) {
     
     <div className="rounded-md bg-white  dark:bg-[#181818] p-1.5 border border-gray-200 dark:border-gray-700 relative"> 
     <div className="">
-      <img className='w-full rounded-md border border-gray-400 h-full' src={`${work.image}`} alt="" />
+      {work.image && <img className='w-full rounded-md border border-gray-400 h-full' src={work.image} alt={work.title} />}
+
     </div>
    
     
@@ -34,9 +36,9 @@ async function WorkElement({work}:Props) {
         <div className=''>
             <span className="text-md font-semibold text-red-800 dark:text-green-500">10$</span>
         </div>
-        <div className="">
+        <Link href={`/works/${work.title}`}  className="">
             <span className="text-sm bg-orange-500 dark:bg-violet-600 rtl:font-arabic  rounded text-white inline-block px-2 py-1">{preview}</span>
-        </div>
+        </Link>
     </div>
 </div>
   )

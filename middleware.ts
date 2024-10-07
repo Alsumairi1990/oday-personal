@@ -7,18 +7,18 @@ import { NextRequest } from 'next/server';
 
 // Create the i18n middleware
 const intlMiddleware = createIntlMiddleware({
-  locales: ['ar', 'en'],
-  defaultLocale: 'ar',
+  locales: ['en', 'ar'],
+  defaultLocale: 'en',
 });
-const locales = ['ar', 'en'];
+const locales = ['en', 'ar'];
 
 export default async function middleware(req: NextRequest) {
   // Apply next-auth middleware for authentication
   const token = await getToken({ req });
   const pathname = req.nextUrl.pathname;
  
-  const match = pathname.match(/^\/(ar|en)\/(.+)/);
-  const locale = match ? match[1] : 'ar';
+  const match = pathname.match(/^\/(en|ar)\/(.+)/);
+  const locale = match ? match[1] : 'en';
  console.log('locale###########'+locale);
  
     if ((pathname.startsWith(`/${locale}/admin`))) {
@@ -38,11 +38,12 @@ export default async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     '/', 
-    '/admin/:path*',                             // Home route (unlocalized)
-    '/services/:path*',             // Protect /services and all subpaths (unlocalized)
-    '/(en|ar)/services/:path*',     // Protect /services and all subpaths with locale (e.g., /en/services/1)
-    
-    '/(en|ar)/:path*',              // Apply i18n middleware for other localized routes
+    '/admin/:path*',                             
+    '/services/:path*',             
+    '/(en|ar)/services/:path*',  
+    '/works/:path*',             
+    '/(en|ar)/works/:path*',      
+    '/(en|ar)/:path*',             
   ],
 };
 

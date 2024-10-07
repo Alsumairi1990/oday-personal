@@ -496,20 +496,20 @@ export async function  addBasic(data:FormData):Promise<number>{
         console.log("inside omage");
          await fs.mkdir("public/works/images", { recursive: true })
          imagePath = `/works/images/${crypto.randomUUID()}-${data.image.name}`
-         await fs.writeFile(
-           `public${imagePath}`,
-           Buffer.from(await data.image.arrayBuffer())
-           )
+        //  await fs.writeFile(
+        //    `public${imagePath}`,
+        //    Buffer.from(await data.image.arrayBuffer())
+        //    )
          }
  
        if(data.icon && data.icon.name){
        console.log("inside icon");
          await fs.mkdir("public/works/icons", { recursive: true })
          iconPath = `/works/icons/${crypto.randomUUID()}-${data.icon.name}`
-         await fs.writeFile(
-           `public${iconPath}`,
-           Buffer.from(await data.icon.arrayBuffer())
-           )
+        //  await fs.writeFile(
+        //    `public${iconPath}`,
+        //    Buffer.from(await data.icon.arrayBuffer())
+        //    )
          }
  
        
@@ -725,10 +725,10 @@ export async function addMed(data:FormData,workId:number):Promise<number>{
         await fs.mkdir("public/works/images", { recursive: true })
         const imagePath = `/works/images/${crypto.randomUUID()}-${f.name}`;
         console.log("image path"+imagePath);
-        await fs.writeFile(
-          `public${imagePath}`,
-          Buffer.from(await f.arrayBuffer())
-          )
+        // await fs.writeFile(
+        //   `public${imagePath}`,
+        //   Buffer.from(await f.arrayBuffer())
+        //   )
           imagePaths.push(imagePath);
           console.log(imagePaths);
       }
@@ -800,10 +800,10 @@ export async function addingWorkMedia(data:FormData,workId:number):Promise<numbe
         await fs.mkdir("public/works/images", { recursive: true })
         const imagePath = `/works/images/${crypto.randomUUID()}-${file}`;
         console.log("image path"+imagePath);
-        await fs.writeFile(
-          `public${imagePath}`,
-          Buffer.from(await file.arrayBuffer())
-          )
+        // await fs.writeFile(
+        //   `public${imagePath}`,
+        //   Buffer.from(await file.arrayBuffer())
+        //   )
           imagePaths.push(imagePath);
       }
       
@@ -960,10 +960,10 @@ export async function editWorkImage(id:number,formData:FormData):Promise<WorkWit
      await fs.mkdir("public/works/images", { recursive: true })
      imagePath = `/works/images/${crypto.randomUUID()}-${iconFile.name}`;
      console.log("image path"+imagePath);
-     await fs.writeFile(
-       `public${imagePath}`,
-       Buffer.from(await iconFile.arrayBuffer())
-       )
+    //  await fs.writeFile(
+    //    `public${imagePath}`,
+    //    Buffer.from(await iconFile.arrayBuffer())
+    //    )
        const updated = await prisma.work.update({
          where : {
            id : id
@@ -1013,10 +1013,10 @@ export async function editWorkIcon(id:number,formData:FormData):Promise<WorkWith
       await fs.mkdir("public/works/icons", { recursive: true })
       iconPath = `/works/icons/${crypto.randomUUID()}-${iconFile.name}`;
       console.log("image path"+iconPath);
-      await fs.writeFile(
-        `public${iconPath}`,
-        Buffer.from(await iconFile.arrayBuffer())
-        )
+      // await fs.writeFile(
+      //   `public${iconPath}`,
+      //   Buffer.from(await iconFile.arrayBuffer())
+      //   )
         const updated = await prisma.work.update({
           where : {
             id : id
