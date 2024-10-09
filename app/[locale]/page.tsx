@@ -129,10 +129,11 @@ import { WorksFrontData } from './admin/works/utils/WorksFrontData'
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
-  const res = await fetch(`http://localhost:3000/api/front/service`, {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, {
     method: 'GET',
     next: { revalidate: 60 }, // Revalidate for ISR if needed
   });
+  
   const Categories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/categories`, {
     method: 'GET',
     next: { revalidate: 60 }, // Revalidate for ISR if needed
