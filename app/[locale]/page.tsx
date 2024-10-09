@@ -123,64 +123,117 @@ import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllMo
 import { getMenusElementse2 } from './admin/setting/left-nav/_actions/Action'
 import PhaseCompany from '../_components/PhaseCompany'
 import IndustryCard from '../_components/IndustryCard'
-import { Industry } from '@prisma/client'
+import { Category, Industry, Post, Service, Testimonial } from '@prisma/client'
+import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
+import { WorksFrontData } from './admin/works/utils/WorksFrontData'
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
+  const res = await fetch(`http://localhost:3000/api/front/service`, {
+    method: 'GET',
+    next: { revalidate: 60 }, // Revalidate for ISR if needed
+  });
+  const Categories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/categories`, {
+    method: 'GET',
+    next: { revalidate: 60 }, // Revalidate for ISR if needed
+  });
+
+  const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
+    method: 'GET',
+    next: { revalidate: 60 }, // Revalidate for ISR if needed
+  });
+  const latestPosts = await fetch(`${process.env.NEXTAUTH_URL}/api/front/posts/latest`, {
+    method: 'GET',
+    next: { revalidate: 60 }, // Revalidate for ISR if needed
+  });
+
+  const pagePhases = await fetch(`${process.env.NEXTAUTH_URL}/api/front/phases`, {
+    method: 'GET',
+    next: { revalidate: 60 }, // Revalidate for ISR if needed
+  });
+  const pageWorks = await fetch(`${process.env.NEXTAUTH_URL}/api/front/works/home`, {
+    method: 'GET',
+    next: { revalidate: 60 }, // Revalidate for ISR if needed
+  });
+
+  const pageTestimonials = await fetch(`${process.env.NEXTAUTH_URL}/api/front/testimonials/home`, {
+    method: 'GET',
+    next: { revalidate: 60 }, // Revalidate for ISR if needed
+  });
+
+  const pageIdustries = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industries/home`, {
+    method: 'GET',
+    next: { revalidate: 60 }, // Revalidate for ISR if needed
+  });
+
+
+
+  if (!Categories.ok || !elements || !Categories) {
+    throw new Error('Failed to fetch categories');
+  }
+ 
+    const servicesR:Service[] = await res.json();
+    const categoriesResult:Category[] = await Categories.json();
+    const menuElements:Record<number, MenuWithAllModels[]> = await elements.json();
+    const posts:Post[] = await latestPosts.json();
+    const phases:PhaseWithModels[] = await pagePhases.json();
+    const works:WorksFrontData[] = await pageWorks.json();
+    const testimonials:Testimonial[] = await pageTestimonials.json();
+    const industries:Industry[] = await pageIdustries.json();
+
   // Variable declarations
-let services;
+// let services;
 let servicesMeta;
 let serviceCatMeta;
-let categories;
+// let categories;
 let heroData;
 let menusData: Record<number, MenuWithAllModels[]>;
 let blogsMeta;
 let blogs;
-let phases;
+// let phases;
 let phaseMeta;
 let workMeta;
-let works;
+// let works;
 let aboutUS;
-let testimonials;
+// let testimonials;
 let testimonialMeta;
-let industries:Industry[];
+// let industries:Industry[];
 
 try {
-  // Execute queries in parallel using Promise.all
   [
-    services,
+    // services,
     serviceCatMeta,
-    categories,
+    // categories,
     heroData,
     menusData,
     blogsMeta,
-    blogs,
-    phases,
+    // blogs,
+    // phases,
     phaseMeta,
     workMeta,
-    works,
+    // works,
     aboutUS,
-    testimonials,
+    // testimonials,
     testimonialMeta,
     servicesMeta,
-    industries,
+    // industries,
   ] = await Promise.all([
-    getServices(),
+    // getServices(),
     getServiceCatMeta(),
-    getServiceCategory(),
+    // getServiceCategory(),
     getHeroData('mainPage'),
     getMenusElementse2(),
     getBlogMeta(),
-    getForntBlogs(),
-    getPhaseElements(),
+    // getForntBlogs(),
+    // getPhaseElements(),
     gethaseMeta(),
     getWorkMeta(),
-    getWorksMainPage(),
+    // getWorksMainPage(),
     getAboutUsData(),
-    getTesimonialsFront(),
+    // getTesimonialsFront(),
     getTesimonialsMeta(),
     getServiceMeta(),
-    getIndustries()
+    // getIndustries()
   ]);
 } catch (error) {
   console.error("Failed to fetch service meta:", error);
@@ -238,19 +291,19 @@ try {
   return (
     <main className="flex flex-col dark:bg-[#111]">
        <div className="flex flex-col">
-        {menusData && <NavBar menusData={menusData} />}
+        {menusData && <NavBar menusData={menuElements} />}
           </div>   
       <div className="hed">
-       {heroData && <Hero heroData={heroData} services={services} categories={categories} /> }
+       {heroData && <Hero heroData={heroData} services={servicesR} categories={categoriesResult} /> }
       </div>
 
-     
+     {servicesR.length}
      <div className="clear"></div>
      <div className='gray:bg-[#111]"'>
-     <Services categories={categories} meta={serviceCatMeta}  />
+     {categoriesResult && <Services categories={categoriesResult} meta={serviceCatMeta}  />}
      </div>
      <div className='gray:bg-[#111]"'>
-     {services && servicesMeta && <ServicesFull services={services} meta={servicesMeta} />}
+     {servicesR && servicesMeta && <ServicesFull services={servicesR} meta={servicesMeta} />}
      </div>
      <div className="w-full my-8 pb-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-full mx-auto">
@@ -270,7 +323,7 @@ try {
      {aboutUS && <About aboutUS={aboutUS} /> }
      </div>
      <div className="dark:bg-[#111]">
-     {blogs &&  <Blogs meta={blogsMeta} posts={blogs}  /> }
+     {blogs &&  <Blogs meta={blogsMeta} posts={posts}  /> }
      </div>
      <div className="">
      </div>
