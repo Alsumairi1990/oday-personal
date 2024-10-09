@@ -21,17 +21,10 @@ export async function GET() {
 // Refactored getServices function to use in the API route
 async function getServices(): Promise<Service[]> {
   try {
-    // Check if cached data exists and is still valid
-    let cachedData = getServicesFromCache();
-    if (cachedData) {
-      console.log('Returning services from cache');
-      return cachedData;
-    }
+    
 
     // Fetch services from the database using Prisma
     const services = await prisma.service.findMany();
-
-    // Store fetched services in cache
     setServicesToCache(services);
     console.log('Setting services to cache');
 
