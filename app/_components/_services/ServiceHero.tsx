@@ -18,7 +18,7 @@ const ServiceHero = ({ service }: ServiceProps) => {
                 <span className="text-sm text-white mb-6 inline-block">Home / mobile development </span>
              
                 
-                <h2 className="text-4xl text-white font-extrabold font-arabic mb-4">{service.nameAr}</h2>
+                <h2 className="text-xl sm:text-4xl text-white font-extrabold font-arabic mb-4">{service.nameAr}</h2>
                 <h2 className="text-base sm:text-2xl sm:leading-10 text-white font-bold font-arabic mb-4">{service.nameAr}</h2>
                 
                 

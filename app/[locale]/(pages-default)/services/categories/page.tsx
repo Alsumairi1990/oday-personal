@@ -6,6 +6,8 @@ import CategoryPanel from "@/app/_components/_services/category/CategoryPanel";
 import Hero from "@/app/_components/HeroSect";
 import { getServices } from "@/app/[locale]/_actions/Actions";
 import SidQuery from "@/app/_components/SidQuery";
+import { Category, Service } from "@prisma/client";
+import { CategoryFrontSingle } from "@/app/[locale]/admin/category/util/CategoryFrontSingle";
 
 
 interface Props {
@@ -34,23 +36,26 @@ const Categories = async ({params}:Props) => {
   const projectDescripyion = (messages as any).Common.projectDescripyion;
 
   
+  const categoryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/categories`, {
+   method: 'GET',
+   next: { revalidate: 3600 }, 
+ });
+ const page = 'categoriesPage';
+ const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
+   method: 'GET',
+   next: { revalidate: 1800 }, // Optional revalidation for ISR (30 minutes)
+ });
+ const servicesData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, {
+   method: 'GET',
+   next: { revalidate: 3600 }, // Revalidate for ISR if needed
+ });
+ const categories:CategoryFrontSingle[] = await categoryData.json();
+ const heroData = await hero.json();
+ const services:Service[] = await servicesData.json();
 
 
-   let categories;
-   let heroData;
-   let services;
-   
-   try {
-    categories = await getServiceCategories();
-    heroData = await getHeroData('categoriesPage');
-    services = await getServices();
-   } catch (error:any) {
-    console.log(error.message)
-    return (
-      <h2 className="text-gray-700">Error at Server</h2>
-    )
-    
-   }
+
+  
    
    
 

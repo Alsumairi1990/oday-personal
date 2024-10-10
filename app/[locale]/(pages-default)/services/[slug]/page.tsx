@@ -24,12 +24,8 @@ interface Props {
   };
 }
 
-
-
 const Serivice = async ({params}:Props) => {
-   const imagePath = '/images/777.png';
-   const imagePath1 = '/images/curve.png';
-   const imagePath2 = '/images/service2.png';
+  
 
    const locale= await getLocale();
    const messages = await getMessages({ locale });
@@ -45,33 +41,25 @@ const Serivice = async ({params}:Props) => {
    const projectContact = (messages as any).Common.projectContact;
    const projectStory = (messages as any).Common.projectStory;
    const projectDescripyion = (messages as any).Common.projectDescripyion;
-   // Variable declarations
- let service:ServiceForFront;
 
- let phaseMeta:PageSection;
- let workMeta:PageSection;
  
  
- try {
-   // Execute queries in parallel using Promise.all
-   [
-     service,
-     phaseMeta,
-     workMeta,
-   ] = await Promise.all([
-     getServiceBySlug(params.slug),
-     gethaseMeta(),
-     getWorkMeta(),
-   ]);
- } catch (error) {
-   console.error("Failed to fetch service meta:", error);
-   return (
-     <div className="error-message">
-       <h2>Failed to load services</h2>
-       <p>There was an issue loading the services. Please try again later.</p>
-     </div>
-   );
- }
+ const serviceData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/${params.slug}`, {
+   method: 'GET',
+   next: { revalidate: 1800 }, // Optional revalidation for ISR (30 minutes)
+ });
+ const sections = await fetch(`${process.env.NEXTAUTH_URL}/api/front/meta/sections`, {
+   method: 'GET',
+   next: { revalidate: 1800 }, // Revalidate for ISR if needed
+ });
+ const service:ServiceForFront = await serviceData.json();
+ const sectionMeta:PageSection[] = await sections.json();
+ const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
+ const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
+
+
+
+
 
  
 
@@ -214,7 +202,7 @@ const Serivice = async ({params}:Props) => {
          </div>
          {service &&
           <div className="w-full my-16 py-8   dark:bg-[#111] ">
-          <div className="w-11/12 mx-auto ">
+          <div className="w-full mx-auto ">
             <div className="flex flex-col items-center sm:mb-8">
                {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400 rtl:text-3xl rtl:font-arabic">{ourProducts}<span className="text-orange-600">{service.name}</span>{feature2}</h2>
                :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic rtl:text-3xl dark:text-orange-400">{ourProducts}<span className="text-orange-600">{service.nameAr}</span></h2>

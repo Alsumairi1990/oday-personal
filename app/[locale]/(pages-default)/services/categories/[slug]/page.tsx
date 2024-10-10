@@ -50,24 +50,33 @@ const ServiceCategory = async ({params}:Props) => {
   const projectDescripyion = (messages as any).Common.projectDescripyion;
 
   
+  const categoryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/categories/${params.slug}`, {
+   method: 'GET',
+   next: { revalidate: 3600 }, 
+ });
+ const pageIdustries = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industries/home`, {
+   method: 'GET',
+   next: { revalidate: 3600 }, // Revalidate for ISR if needed
+ });
+ const ServiceFeatures = await fetch(`${process.env.NEXTAUTH_URL}/api/front/features`, {
+   method: 'GET',
+   next: { revalidate: 3600 }, // Revalidate for ISR if needed
+ });
+ const servicesData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, {
+   method: 'GET',
+   next: { revalidate: 3600 }, // Revalidate for ISR if needed
+ });
+ 
+ const category:CategoryForFront = await categoryData.json();
+ const industries:Industry[] = await pageIdustries.json();
+ const features:ServiceFeature[] = await ServiceFeatures.json();
+ const services:Service[] = await servicesData.json();
 
 
-   let category:CategoryForFront;
-   let services:Service[];
-   let features:ServiceFeature[]; 
-   let industries:Industry[];
-   try {
-    category = await getCategoryForFront(params.slug);
-    services = await getServices();
-    features = await getServicefeatures(); 
-    industries = await getIndustries();
-   } catch (error:any) {
-    console.log(error.message)
-    return (
-      <h2 className="text-gray-700">Error at Server</h2>
-    )
+
+
     
-   }
+   
    
    
 
