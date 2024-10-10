@@ -1,4 +1,4 @@
-
+'use client'
 import React, { useState } from 'react';
 
 import { MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
