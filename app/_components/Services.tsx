@@ -3,6 +3,7 @@ import React from 'react';
 import Link from 'next/link'
 import { Category, PageSection, Service } from '@prisma/client';
 import { getLocale, getMessages } from 'next-intl/server';
+import Image from 'next/image';
 interface Props {
   categories : Category[],
   meta : PageSection
@@ -31,7 +32,16 @@ const Services = async ({categories,meta}:Props) => {
          {categories && categories.map((service) => (
                <div className=" sm:p-2 flex flex-col justify-center  sm:pt-6 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 ">
                <div className=" pb-1 pt-1 w-full h-28 sm:h-20  overflow-hidden sm:bg-gray-300 dark:bg-[#080808]  sm:w-[6.5rem]  rounded-xl  px-1  flex items-center mx-auto ">
-                {service.image && <img className='w-full h-full mx-auto rounded-t-md sm:rounded-md' src={service.image} alt="" /> }
+                {service.image && 
+                  //  <img className='w-full h-full mx-auto rounded-t-md sm:rounded-md' src={service.image} alt="" />
+                   <Image 
+                   src={service.image}
+                   height={200}
+                   width={200}
+                   alt="Product Image"
+                   className='w-full h-full mx-auto rounded-t-md sm:rounded-md'
+                   />
+                    }
                </div>
                <div className="sm:p2 mt-2 sm:mt-4 text-center">
                  {/* <h2 className="text-base sm:text-xl capitalize sm:uppercase font-semibold text-orange-500 dark:text-[#ca82ef]">{service.name}</h2> */}
