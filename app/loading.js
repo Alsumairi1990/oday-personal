@@ -1,4 +1,3 @@
-import HashLoader from "react-spinners/HashLoader";
 
 export default function Loading() {
     return null;

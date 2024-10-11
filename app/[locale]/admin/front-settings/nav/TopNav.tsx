@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 import { MenuWithModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithModels';
@@ -20,7 +20,38 @@ const TopNav: React.FC<MenusDisplayProps> = ({ menusData }) => {
    const [error, setError] = useState<string>('');
 //    const[menusData , setMenusData] = useState<MenuWithAllModels[]>();
 
- 
+useEffect(() => {
+  const handleClickOutside = (event:any) => {
+   const menus = document.getElementsByClassName('log-menu');
+    if (event.target.closest('.menu-btn ') !== null) {
+      const prnt = event.target.closest('.menu-pr');
+      const menu = prnt.querySelector('.log-menu');
+      if(menu && menu.classList.contains('sm:hidden')){
+        for (let i = 0; i < menus.length; i++) {
+          menus[i].classList.add('sm:hidden');
+        }
+        menu.classList.remove('sm:hidden');
+      }
+      else if(menu && !menu.classList.contains('sm:hidden')){
+        menu.classList.add('sm:hidden');
+      }
+  }
+  else if (event.target.closest('.log-menu ') !== null) return;
+  else {
+  for(let menu of  Array.from(menus)){
+    menu.classList.add('sm:hidden');
+    
+     };
+  }
+    
+  };
+
+  document.addEventListener('click', handleClickOutside);
+
+  return () => {
+    document.removeEventListener('click', handleClickOutside);
+  };
+});
 
 
 
@@ -40,19 +71,15 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
         <div className='flex justify-end rtl:pl-5 r w-full'>
             {Object.entries(menusData).map(([parentId, menus]) => {
             const parentMenu = menus.length > 0 ? menus[0].menuParent : null;
-
             return (
-            <div key={parentId} className='flex '>
+            <div key={parentId} className='flex menu-pr'>
                 <div className='text-sm flex items-center gap-x-2 px-2 rtl:font-arabic font-semibold text-gray-200'>
-                  <span className="">
-                  {parentMenu?.titleAr || ''}
+                  <span className="menu-btn cursor-pointer">
+                     {parentMenu?.titleAr || ''}
                   </span> 
-                  
-                  {/* <MdOutlineArrowDropDown /> */}
                   <MdOutlineArrowDropDown className='text-xl text-gray-50' />
-                  
                 </div>
-                     <div className='pl-3 w-full sm:hidden grid grid-cols-4 bg-white absolute top-20 left-0 z-50'>
+                     <div className='pl-3 w-full log-menu sm:hidden grid grid-cols-4 bg-white absolute top-20 left-0 z-50'>
                         {menus.map(menu => (
                              <NavPanel menu={menu}  />
                         ))}
