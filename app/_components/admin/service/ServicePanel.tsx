@@ -211,10 +211,7 @@ const ServicePanel = () => {
                         </tr>
                     </thead>
                     <tbody>
-                    {/* <UniversitiesTable
-                        :universities="universities"
-                        @update-select="updateDeletSelect"
-                        /> */}
+                   
                         <ServiceTable />
 
                     </tbody>

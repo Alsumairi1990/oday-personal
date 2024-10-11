@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.543" cy="0.13" r="1.109" gradientTransform="matrix(0.999, 0.039, -0.039, 0.999, 0.005, -0.021)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#7eaecf"/>
+      <stop offset="0.254" stop-color="#3e759b"/>
+      <stop offset="0.647" stop-color="#609dc6"/>
+      <stop offset="1" stop-color="#23475b"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient-2" cx="0.631" cy="0.123" r="1.188" gradientTransform="matrix(0.967, 0.254, -0.254, 0.967, 0.037, -0.131)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="0.221" stop-color="#fff8f7"/>
+      <stop offset="0.563" stop-color="#f6ffff"/>
+      <stop offset="0.983" stop-color="#7eaecf"/>
+      <stop offset="1" stop-color="#ffc6bc"/>
+    </radialGradient>
+  </defs>
+  <g id="Skilled_Team" data-name="Skilled Team" transform="translate(-1274.821 -1692)">
+    <g id="Work_On_All_The_Major_Platforms" data-name="Work On All The Major Platforms" transform="translate(652 154.321)">
+      <path id="Path_760" data-name="Path 760" d="M342.824,166.116l-50.642,28.273a10.54,10.54,0,0,1-14.341-4.065l-28.273-50.642a10.54,10.54,0,0,1,4.065-14.341l50.642-28.273a10.54,10.54,0,0,1,14.341,4.065l28.273,50.642A10.54,10.54,0,0,1,342.824,166.116Z" transform="translate(374.593 1441.951)" fill="url(#radial-gradient)"/>
+      <path id="Path_761" data-name="Path 761" d="M344.338,182.183,288.8,198.894a10.54,10.54,0,0,1-13.13-7.057L258.956,136.3a10.54,10.54,0,0,1,7.056-13.13l55.541-16.711a10.54,10.54,0,0,1,13.13,7.057l16.711,55.541A10.54,10.54,0,0,1,344.338,182.183Z" transform="translate(367.646 1435.004)" fill="url(#radial-gradient-2)"/>
+    </g>
+    <g id="skills-svgrepo-com" transform="translate(1288.563 1720.294)">
+      <path id="Path_1108" data-name="Path 1108" d="M22.346,132.3V121.03h-6.4v18.29h1.631v14.508H24.1V132.3Z" transform="translate(0 -110.415)" fill="#6e76e5"/>
+      <path id="Path_1109" data-name="Path 1109" d="M110.623,132.3h-1.754v21.524h6.518V139.32h1.631V121.03h-6.4Z" transform="translate(-84.769 -110.415)" fill="#515be0"/>
+      <rect id="Rectangle_46" data-name="Rectangle 46" width="3.508" height="11.273" transform="translate(22.346 10.615)" fill="#00eed1"/>
+      <path id="Path_1110" data-name="Path 1110" d="M58.242,9.734V0a4.867,4.867,0,0,0,0,9.734Z" transform="translate(-34.142 0)" fill="#6e76e5"/>
+      <path id="Path_1111" data-name="Path 1111" d="M113.736,4.867A4.872,4.872,0,0,0,108.869,0V9.734A4.872,4.872,0,0,0,113.736,4.867Z" transform="translate(-84.769 0)" fill="#515be0"/>
+      <path id="Path_1112" data-name="Path 1112" d="M374.061,9.63V0a4.815,4.815,0,0,0,0,9.63Z" transform="translate(-322.31 0)" fill="#6e76e5"/>
+      <path id="Path_1113" data-name="Path 1113" d="M369.246,390.012a4.82,4.82,0,0,0,4.815,4.815V385.2A4.82,4.82,0,0,0,369.246,390.012Z" transform="translate(-322.31 -351.414)" fill="#6e76e5"/>
+      <path id="Path_1114" data-name="Path 1114" d="M369.246,261.613a4.82,4.82,0,0,0,4.815,4.815V256.8A4.82,4.82,0,0,0,369.246,261.613Z" transform="translate(-322.31 -234.276)" fill="#6e76e5"/>
+      <path id="Path_1115" data-name="Path 1115" d="M424.147,256.8v9.63a4.815,4.815,0,0,0,0-9.63Z" transform="translate(-372.396 -234.276)" fill="#515be0"/>
+      <path id="Path_1116" data-name="Path 1116" d="M369.246,133.214a4.82,4.82,0,0,0,4.815,4.815V128.4A4.82,4.82,0,0,0,369.246,133.214Z" transform="translate(-322.31 -117.138)" fill="#6e76e5"/>
+      <path id="Path_1117" data-name="Path 1117" d="M424.147,128.4v9.63a4.815,4.815,0,0,0,0-9.63Z" transform="translate(-372.396 -117.138)" fill="#515be0"/>
+      <path id="Path_1118" data-name="Path 1118" d="M428.962,4.815A4.82,4.82,0,0,0,424.147,0V9.63A4.82,4.82,0,0,0,428.962,4.815Z" transform="translate(-372.396 0)" fill="#515be0"/>
+      <path id="Path_1119" data-name="Path 1119" d="M234.833,51.793h-3.046V55.3h3.046V72.193h6.554V68.685h-3.046V60.932h3.046V57.424h-3.046V49.671h3.046V46.163h-3.046V38.41h3.046V34.9h-6.554Z" transform="translate(-196.907 -31.841)" fill="#00eed1"/>
+      <path id="Path_1120" data-name="Path 1120" d="M424.147,385.2v9.63a4.815,4.815,0,0,0,0-9.63Z" transform="translate(-372.396 -351.414)" fill="#515be0"/>
+    </g>
+  </g>
+</svg>

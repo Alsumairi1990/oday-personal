@@ -65,7 +65,6 @@ const SignUpForm = () => {
         const user = {
             ...data,
             role : 'user'
-
         }
         try{
             const result = await registerUser(user)

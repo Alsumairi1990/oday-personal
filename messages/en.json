@@ -1,0 +1,71 @@
+{
+    "HomePage": {
+      "title": "Hello world!",
+      "about": "Go to the about page",
+      "workCategoryOption" : "Selecet Category",
+      "filterAdd" : "Added filter",
+      "MarketLocation" : "select Matketplace",
+      "workPreview" : "Preview",
+      "latestWork" : "Latest Work",
+      "categoryDetails" : "Details",
+      "categoryEnq" : "Enquiry",
+      "request" : "Request",
+      "requestService" : "Request Service",
+      "details" : "details",
+      "ContactUs": {
+        "title-sec1": "Contact us to  ",
+        "innerTitle" : "Get",
+        "title-sec2" : "the best services",
+        "name": "User Name",
+        "email" : "Sender's Email",
+        "phonNo" : "Mobile",
+        "MessageTitle" : "Message Title",
+        "messagePlacholder" : "Message Content",
+        "submit" : "Submit Request",
+        "categoryDetails" : "View",
+        "categoryEnq" : "Inquiry",
+        "sectionTitle" : "ٍSelect The Category of Service",
+        "contact-section1" : "Request Services",
+        "contact-section2" : "View Packages",
+        "contact-section3" : "Send Inquiries",
+        "contact-section4" : "Get Offers",
+        "contact-section5" : "Subscribe to Newsletter",
+        "contact-section6" : "Price Details"
+     }
+    },
+    
+    "SearchPanel" : {
+      "category" : "Category" ,
+      "categoryPlaceholder" : "Select Category" ,
+      "service" : "service" ,
+      "servicePlacholder" : "serach for service" ,
+      "product" : "Product",
+      "productPlacholder" : "Select Product" ,
+      "searchType" : "Domain ",
+      "typePlaceholder" : "select domain",
+      "typeProduct" : "product",
+      "typeService" : "service"
+    },
+    "CategoryPage" : {
+      "talkToConsultant" : "Talk to Consultant"
+    },
+
+    "Common" : {
+      "featureTitle1" : "Why Choose Our ",
+      "serviceSecTitle" : "Our comprehensive range of" ,
+      "featureTitle2"  : "Services",
+      "displayMode" : "Display Mode",
+      "listOfServices" : "List Of Services",
+      "categoryWorkTitle" : "Some of our Latest & finest work in ",
+      "ourProducts" : "Our Products in ",
+      "buy" : "Buy",
+      "ourClients": "our Clients",
+      "workProcess": "How it is Work",
+      "startProject" : "Start Your Projcte ",
+      "projectStory" : "Tell us a little bit about your app idea to get a custom quote, and hire best developers today",
+      "projectDescripyion" : "Do you have an innovative idea that needs execution? Share your project details with us for a custom quote tailored to your needs. Our experienced team delivers high-quality solutions to help you achieve your goals efficiently.",
+      "projectContact" : "Taik to our Experts now",
+      "totalServices" : "Totla Services"
+
+    }
+  }

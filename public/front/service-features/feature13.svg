@@ -1,0 +1,47 @@
+<svg id="Professional_iOS_Developers" data-name="Professional iOS Developers" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <radialGradient id="radial-gradient" cx="0.543" cy="0.13" r="1.109" gradientTransform="matrix(0.999, 0.039, -0.039, 0.999, 0.005, -0.021)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#f9d0d0"/>
+      <stop offset="0.254" stop-color="#fabdbd"/>
+      <stop offset="0.647" stop-color="#ff6464"/>
+      <stop offset="1" stop-color="#ff6464"/>
+    </radialGradient>
+    <radialGradient id="radial-gradient-2" cx="0.631" cy="0.123" r="1.188" gradientTransform="matrix(0.967, 0.254, -0.254, 0.967, 0.037, -0.131)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="0.221" stop-color="#fff8f7"/>
+      <stop offset="0.563" stop-color="#f6ffff"/>
+      <stop offset="0.983" stop-color="#ff6464"/>
+      <stop offset="1" stop-color="#ffc6bc"/>
+    </radialGradient>
+  </defs>
+  <g id="Group_132" data-name="Group 132">
+    <path id="Path_626" data-name="Path 626" d="M342.824,166.116l-50.642,28.273a10.54,10.54,0,0,1-14.341-4.065l-28.273-50.642a10.54,10.54,0,0,1,4.065-14.341l50.642-28.273a10.54,10.54,0,0,1,14.341,4.065l28.273,50.642A10.54,10.54,0,0,1,342.824,166.116Z" transform="translate(-248.228 -95.728)" fill="url(#radial-gradient)"/>
+    <path id="Path_627" data-name="Path 627" d="M344.338,182.183,288.8,198.894a10.54,10.54,0,0,1-13.13-7.057L258.956,136.3a10.54,10.54,0,0,1,7.056-13.13l55.541-16.711a10.54,10.54,0,0,1,13.13,7.057l16.711,55.541A10.54,10.54,0,0,1,344.338,182.183Z" transform="translate(-255.175 -102.675)" fill="url(#radial-gradient-2)"/>
+  </g>
+  <g id="teamwork-svgrepo-com" transform="translate(18.411 19.411)">
+    <circle id="Ellipse_78" data-name="Ellipse 78" cx="4.102" cy="4.102" r="4.102" transform="translate(27.487 0)" fill="#ff6464"/>
+    <g id="Group_362" data-name="Group 362" transform="translate(23.386 9.439)">
+      <path id="Path_2004" data-name="Path 2004" d="M197.541,85.063,193.622,76.5s-4.1.091-4.1,3.828v4.738Z" transform="translate(-189.52 -76.496)" fill="#333"/>
+      <path id="Path_2005" data-name="Path 2005" d="M257.48,85.063,261.4,76.5s4.1.091,4.1,3.828v4.738Z" transform="translate(-249.094 -76.496)" fill="#333"/>
+    </g>
+    <path id="Path_2006" data-name="Path 2006" d="M232.768,76.488l2.867,6.381,2.867-6.381Z" transform="translate(-204.046 -67.05)" fill="#e21b1b"/>
+    <circle id="Ellipse_79" data-name="Ellipse 79" cx="4.102" cy="4.102" r="4.102" transform="translate(50.873 22.581)" fill="#ff6464"/>
+    <g id="Group_363" data-name="Group 363" transform="translate(46.771 32.024)">
+      <path id="Path_2007" data-name="Path 2007" d="M387.061,268.1l-3.919-8.567s-4.1.091-4.1,3.828v4.738Z" transform="translate(-379.04 -259.528)" fill="#333"/>
+      <path id="Path_2008" data-name="Path 2008" d="M447,268.1l3.919-8.567s4.1.091,4.1,3.828v4.738Z" transform="translate(-438.614 -259.528)" fill="#333"/>
+    </g>
+    <path id="Path_2009" data-name="Path 2009" d="M422.288,259.528l2.867,6.38,2.867-6.38Z" transform="translate(-370.18 -227.504)" fill="#e21b1b"/>
+    <circle id="Ellipse_80" data-name="Ellipse 80" cx="4.102" cy="4.102" r="4.102" transform="translate(4.102 22.581)" fill="#ff6464"/>
+    <g id="Group_364" data-name="Group 364" transform="translate(0 32.024)">
+      <path id="Path_2010" data-name="Path 2010" d="M8.021,268.1,4.1,259.528s-4.1.091-4.1,3.828v4.738Z" transform="translate(0 -259.528)" fill="#333"/>
+      <path id="Path_2011" data-name="Path 2011" d="M67.96,268.1l3.919-8.567s4.1.091,4.1,3.828v4.738Z" transform="translate(-59.574 -259.528)" fill="#333"/>
+    </g>
+    <path id="Path_2012" data-name="Path 2012" d="M43.248,259.528l2.867,6.38,2.867-6.38Z" transform="translate(-37.911 -227.504)" fill="#e21b1b"/>
+    <circle id="Ellipse_81" data-name="Ellipse 81" cx="4.102" cy="4.102" r="4.102" transform="translate(27.487 45.171)" fill="#ff6464"/>
+    <g id="Group_365" data-name="Group 365" transform="translate(23.386 54.61)">
+      <path id="Path_2013" data-name="Path 2013" d="M197.541,451.135l-3.919-8.567s-4.1.091-4.1,3.828v4.738Z" transform="translate(-189.52 -442.568)" fill="#333"/>
+      <path id="Path_2014" data-name="Path 2014" d="M257.48,451.135l3.919-8.567s4.1.091,4.1,3.828v4.738Z" transform="translate(-249.094 -442.568)" fill="#333"/>
+    </g>
+    <path id="Path_2015" data-name="Path 2015" d="M232.768,442.56l2.867,6.381,2.867-6.381Z" transform="translate(-204.046 -387.951)" fill="#e21b1b"/>
+  </g>
+</svg>

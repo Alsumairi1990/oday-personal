@@ -5,7 +5,7 @@ import { ServiceInt } from '@/app/models/Service'
 const ServiceSingle = ({ service } : ServiceInt) => {
   return (
     <div className="flex-100 sm:flex-20 p-2">
-    <div className="bg-[#f9f9f9] py-3 text-center rounded-md  border border-gray-200">
+    <div className="bg-[rgb(249,249,249)] py-3 text-center rounded-md  border border-gray-200">
      <div className="flex px-2  justify-center">
         <img src={service.image} alt="" />
      </div>

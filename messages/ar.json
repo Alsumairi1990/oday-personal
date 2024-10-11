@@ -1,0 +1,71 @@
+{
+    "HomePage": {
+      "title": "اهلا",
+      "about": "الوصف",
+      "workCategoryOption" : "اختار التصنيف",
+      "filterAdd" : "اضف فلتر",
+      "MarketLocation" : "تحديد المتجر",
+      "workPreview" : "معاينة العمل",
+      "latestWork" : "اخر الاعمال",
+      "categoryDetails" : "أستعراض",
+      "categoryEnq" : "إستعلام",
+      "request" : "طلب",
+      "requestService" : "اطلب الخدمة",
+      "details" : "تفاصيل",
+      "ContactUs": {
+        "title-sec1": "تواصل معنا  ",
+        "innerTitle" : "للحصول",
+        "title-sec2" : "افضل الخدمات",
+        "name": "اسم المستخدم",
+        "email" : "ايميل المرسل",
+        "phonNo" : "الموبايل",
+        "MessageTitle" : "نص الرسالة",
+        "messagePlacholder" : "محتوى الرسالة ",
+        "submit" : " ارسال الطلب",
+        "categoryDetails" : "أستعراض",
+        "categoryEnq" : "إستعلام",
+        "sectionTitle" : "الرجاء يجب اختيار مجال الخدمة",
+        "contact-section1" : "طلب الخدمات",
+        "contact-section2" : "استعراض الباقات",
+        "contact-section3" : "ارسال الاستفسارات",
+        "contact-section4" : "الحصول عل العروض",
+        "contact-section5" : "الاشتراك في النشرة",
+        "contact-section6" : "تفاصيل الاسعار"
+      }
+    },
+   "SearchPanel" : {
+      "category" : "التصنيف" ,
+      "categoryPlaceholder" : "اختار التصنيف" ,
+      "service" : "الخدمات" ,
+      "servicePlacholder" : "ابحث عن الخدمة" ,
+      "product" : "المنتجات",
+      "productPlacholder" : "ابحث عن المنتج" ,
+      "searchType" : "مجال البحث",
+      "typePlaceholder" : "حدد المجال",
+      "typeProduct" : "منتجات",
+      "typeService" : "خدمات"
+
+    },
+    "CategoryPage" : {
+      "talkToConsultant" : "تحدت مع الخبير"
+    },
+    "Common" : {
+      "featureTitle1" : "لماذا تختار ",
+      "serviceSecTitle" : "مجموعة خدماتنا الشاملة والمتكاملة في ",
+      "featureTitle2"  : "",
+      "displayMode" : "طريقة العرض",
+      "listOfServices" : "قائمة الخدمات",
+      "categoryWorkTitle" : "أطلع على افضل واخر اعمالنا في ",
+      "ourProducts" : "اطلع على منتجاتنا في ",
+       "buy" : "شراء",
+       "ourClients": "قائمة عملاءنا",
+       "workProcess": "طريقتنا في  عملية التنفيذ",
+       "startProject" : "ابدأ مشروعك معنا",
+       "projectStory" : "أخبرنا قليلاً عن فكرتك للحصول على عرض سعر مخصص، وقم بتوظيف أفضل المتخصصين اليوم.",
+       "projectContact" : "تواصل مع خبراءنا الان",
+       "projectDescripyion" : "هل لديك فكرة مبتكرة تحتاج إلى تنفيذ؟ نحن هنا لنساعدك في تحويل رؤيتك إلى واقع! شاركنا قليلاً عن مشروعك وسنقدم لك عرض سعر مخصص يناسب احتياجاتك. يمتلك فريقنا خبرة واسعة في تقديم حلول عالية الجودة تتناسب مع متطلباتك. ابدأ رحلتك اليوم ودعنا نساعدك في تحقيق أهدافك بنجاح وسرعة.",
+       "totalServices" : "مجموع الخدمات"
+
+    }
+    
+  }

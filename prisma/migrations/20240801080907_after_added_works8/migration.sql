@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE "Testimonial" ALTER COLUMN "customerId" DROP NOT NULL,
+ALTER COLUMN "serviceId" DROP NOT NULL,
+ALTER COLUMN "userId" DROP NOT NULL;

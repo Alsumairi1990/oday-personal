@@ -10,9 +10,16 @@ const TopNav = (props:ChildProps) => {
    const evetAct = ()=> {
 }
       const [openNav, setOpenNav] = useState(true);
+      // const leftAdminElement = document.getElementById('leftAdmin');
+     
       const changeParentValue = () => {
-       setOpenNav((prevState) => !prevState); 
-       props.handleClick(!openNav); 
+        // if (leftAdminElement?.classList.contains('hidden')) {
+        //   leftAdminElement.classList.remove('hidden'); // Remove 'hidden' class if it exists
+        // }else {
+        //   leftAdminElement?.classList.add('hidden'); // Remove 'hidden' class if it exists
+
+        // }
+  
       };
     // document.addEventListener("click", function(event) {
 
@@ -46,7 +53,7 @@ const TopNav = (props:ChildProps) => {
         // })
    // }
   return (
-    <div className="flex h-14 items-centre justify-center sticky top-0">
+    <div className="flex h-14 items-centre justify-center sticky top-0 z-40">
         <div id='logoMenu' style={{transition: 'width 0.9s ease-in-out' }} className=" flex h-full bg-[#020910] items-center max-sm:min-w-0 max-sm:w-0 sm:min-w-[240px] border-b border-b-gray-800">
             <div className="w-10">
                 <img className="w-full" src={imagePath2} alt="" />

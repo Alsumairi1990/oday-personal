@@ -6,51 +6,417 @@ generator client {
 }
 
 datasource db {
-provider = "postgresql"
-//provider = "mysql"
+  provider = "postgresql"
+  //provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
 model Post {
-  id        String     @default(cuid()) @id
-  title     String
-  content   String?
-  published Boolean @default(false)
-  author    User?   @relation(fields: [authorId], references: [id])
-  authorId  String?
+  id              String         @id @default(cuid())
+  title           String
+  titleAr         String
+  slug            String         @unique
+  content         String?
+  contentAr       String?
+  excerpt         String?
+  excerptAr       String?
+  metaTitle       String?
+  metaDescription String?
+  readingTime     Int?
+  publishedAt     DateTime?      @default(now())
+  viewCount       Int            @default(0)
+  isFeatured      Boolean        @default(false)
+  image           String?
+  published       Boolean        @default(true)
+  language        String? // e.g., 'en', 'ar'
+  categories      PostCategory[]
+  author          User?          @relation(fields: [authorId], references: [id])
+  authorId        String?
+}
+
+model PostCategory {
+  id            Int     @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  slug          String  @unique
+  image         String?
+  icon          String?
+  description   String?
+  descriptionAr String?
+
+  pots      Post[]
+  userId    String // References one specific user (modified)
+  user      User?    @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+model ServiceCode {
+  id          Int       @id @default(autoincrement())
+  code        String    @unique
+  description String?
+  icon        String?
+  image       String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  services    Service[]
 }
 
 model Service {
-  id        Int      @id @default(autoincrement())
-  name      String
-  title String?
-  des String?
-  image String?
-  icon String?
-  userId    String     // References one specific user (modified)
-  user      User?   @relation(fields: [userId], references: [id]) // Relation to User
+  id            Int               @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  name_slug     String?
+  title         String?
+  titleAr       String?
+  price         Float?
+  description   String?
+  descriptionAr String?
+  discount      Float?
+  image         String?
+  icon          String?
+  location      String?
+  categories    ServiceCategory[]
+  tags          ServiceTag[]
+  tools         ServiceTool[]
+  testimonials  Testimonial[]
+  clients       Client[]
+  products      Product[]
+  invoices      Invoice[]
+  prices        Price[]
+  phases        Phase[]
+  works         Work[]
+  industries    Industry[]
+  userId        String
+  user          User?             @relation(fields: [userId], references: [id])
+  codeId        Int?
+  code          ServiceCode?      @relation(fields: [codeId], references: [id])
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  Order Order[]
+}
+
+model Tool {
+  id            Int           @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  slug          String        @unique
+  description   String?
+  descriptionAr String?
+  image         String?
+  icon          String?
+  userId        String
+  user          User?         @relation(fields: [userId], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  services      ServiceTool[]
+  works         WorkTool[]
+  projects      Project[]
+}
+
+model ServiceTool {
+  serviceId Int
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  toolId    Int
+  tool      Tool    @relation(fields: [toolId], references: [id], onDelete: Cascade)
+
+  @@id([serviceId, toolId])
+}
+
+model Category {
+  id            Int                   @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  slug          String                @unique
+  image         String?
+  title         String?
+  TitleAr       String?
+  SubTitle      String?
+  SubTitleAr    String?
+  icon          String?
+  description   String?
+  descriptionAr String?
+  services      ServiceCategory[]
+  works         WorkCategory[]
+  testimonials  TestimonialCategory[]
+  projects      Project[]
+  products      Product[]
+  orders        Order[]
+  clients       Client[]
+  phases         Phase[]
+  industries      Industry[]
+  userId        String // References one specific user (modified)
+  user          User?                 @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @default(now()) @updatedAt
+}
+
+model Tag {
+  id            Int              @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  slug          String           @unique
+  image         String?
+  icon          String?
+  description   String?
+  title         String?
+  TitleAr       String?
+  SubTitle      String?
+  SubTitleAr    String?
+  descriptionAr String?
+  products      Product[]
+  services      ServiceTag[]
+  works         WorkTag[]
+  testimonials  TestimonialTag[]
+  userId        String // References one specific user (modified)
+  user          User?            @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @default(now()) @updatedAt
+}
+
+model ServiceCategory {
+  serviceId  Int
+  service    Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([serviceId, categoryId])
+}
+
+model ServiceTag {
+  serviceId Int
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  tagId     Int
+  tag       Tag     @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([serviceId, tagId])
+}
+
+model Customer {
+  id           String        @id @default(cuid())
+  name         String        @unique
+  slug         String
+  email        String?       @unique
+  image        String?
+  testimonials Testimonial[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Price {
+  id            String    @id @default(cuid())
+  amount        Decimal
+  startPrice    Decimal?
+  median        Decimal?
+  currency      String?
+  discount      Decimal?
+  effectiveDate DateTime?
+  expiryDate    DateTime?
+  description   String?
+  image         String?
+  serviceId     Int
+  service       Service?  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  locationId    Int
+  productId     String?
+  product       Product?  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  location      Location  @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([serviceId, locationId])
+}
+
+model Testimonial {
+  id           Int                   @id @default(autoincrement())
+  title        String?
+  titleAr      String?
+  content      String?
+  contentAr    String?
+  image        String?
+  rating       Float?                @default(0)
+  videoContent String?
+  customerId   String?
+  customer     Customer?             @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  serviceId    Int?
+  service      Service?              @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  userId       String?
+  user         User?                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  verified     Boolean?              @default(false)
+  published    Boolean?              @default(false)
+  tags         TestimonialTag[]
+  categories   TestimonialCategory[]
+  response     String?
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+}
+
+model TestimonialCategory {
+  testimonialId Int
+  testimonial   Testimonial @relation(fields: [testimonialId], references: [id], onDelete: Cascade)
+  categoryId    Int
+  category      Category    @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([testimonialId, categoryId])
+}
+
+model TestimonialTag {
+  testimonialId Int
+  testimonial   Testimonial @relation(fields: [testimonialId], references: [id], onDelete: Cascade)
+  tagId         Int
+  tag           Tag         @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([testimonialId, tagId])
+}
+
+model Phase {
+  id            Int      @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  description   String?
+  descriptionAr String?
+  image         String?
+  icon          String?
+  phaseType     String?
+  sequence      Int
+  serviceId     Int?
+  categories    Category[]
+  steps         Step[]
+  services      Service[]
+  userId        String // References one specific user (modified)
+  user          User     @relation(fields: [userId], references: [id]) // Relation to User
+
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
+model Step {
+  id            Int      @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  description   String?
+  descriptionAr String?
+  sequence      Int?
+  image         String?
+  icon          String?
+  phaseId       Int
+  phase         Phase    @relation(fields: [phaseId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Work {
+  id            Int            @id @default(autoincrement())
+  title         String
+  titleAr       String?
+  description   String?
+  descriptionAr String?
+  imageUrls     String[]       @default([])
+  serviceId     Int?
+  service       Service?       @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  categories    WorkCategory[]
+  tags          WorkTag[]
+  locationId    Int?
+  location      Location?      @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  client        String? // Client name or organization
+  clientAr      String?
+  workUrl       String? // URL or link to more details
+  tools         WorkTool[]
+  icon          String? // Array of additional image URLs
+  image         String?
+  clients       Client[]
+  highlights    String? // Key highlights of the project
+  highlightsAr  String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  userId        String // References one specific user (modified)
+  user          User           @relation(fields: [userId], references: [id]) // Relation to User
+}
+
+model Location {
+  id        Int      @id @default(autoincrement())
+  country   String
+  countryAr String?
+  slug      String   @default("default-slug")
+  city      String?
+  cityAr    String?
+  image     String?
+  works     Work[]
+  prices    Price[]
+  
+  teams     Team[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model WorkCategory {
+  workId     Int
+  service    Work     @relation(fields: [workId], references: [id], onDelete: Cascade)
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([workId, categoryId])
+}
+
+model WorkTool {
+  workId Int
+  work   Work @relation(fields: [workId], references: [id], onDelete: Cascade)
+  toolId Int
+  tool   Tool @relation(fields: [toolId], references: [id], onDelete: Cascade)
+
+  @@id([workId, toolId])
+}
+
+model WorkTag {
+  workId Int
+  work   Work @relation(fields: [workId], references: [id], onDelete: Cascade)
+  tagId  Int
+  tag    Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([workId, tagId])
+}
+
+model Partner {
+  id            Int      @id @default(autoincrement())
+  name          String
+  slug          String   @unique
+  type          String?
+  image         String?
+  icon          String?
+  contactPerson String?
+  email         String?  @unique
+  phone         String?
+  address       String?
+  city          String?
+  country       String?
+  website       String?
+  notes         String?
+  userId        String // References one specific user (modified)
+  user          User     @relation(fields: [userId], references: [id]) // Relation to User
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
-
 
 model Session {
   id           String   @id @default(cuid())
@@ -61,23 +427,200 @@ model Session {
 }
 
 model User {
-  id            String       @default(cuid()) @id
-  user_name     String?
-  email         String?   @unique
-  password      String
-  phone         String
-  confirmed_password      String
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
-  emailVerified DateTime?
-  image         String?
-  role          String?
-  posts         Post[]
-  services  Service[]
-  @@map(name: "users")
-   accounts      Account[]
-  sessions      Session[]
+  id                 String           @id @default(cuid())
+  user_name          String?
+  email              String?          @unique
+  password           String
+  phone              String
+  confirmed_password String
+  createdAt          DateTime         @default(now()) @map(name: "created_at")
+  updatedAt          DateTime         @updatedAt @map(name: "updated_at")
+  emailVerified      DateTime?
+  image              String?
+  role               String?
+  employeeProfile    EmployeeProfile? @relation
 
+  client   Client? @relation(fields: [clientId], references: [id])
+  clientId String? @unique
+
+  // Admin-client relationship (one admin can create many clients)
+  createdClients Client[] @relation("AdminCreatedClients")
+
+  roles          Role[]
+  posts          Post[]
+  services       Service[]
+  categories     Category[]
+  tags           Tag[]
+  tools          Tool[]
+  phases         Phase[]
+  works          Work[]
+  partner        Partner[]
+  accounts       Account[]
+  sessions       Session[]
+  testimonial    Testimonial[]
+  adminMenu      AdminMenu[]
+  projects       Project[]
+  tasks          Task[]
+  orders         Order[]
+  products       Product[]
+  MenuParent     MenuParent[]
+  heroSections   HeroSection[]
+  pageSections   PageSection[]
+  postCategories PostCategory[]
+  ServiceFeatures   ServiceFeature[]
+  industry        Industry[]
+
+  aboutUs        AboutUsSection[]
+
+  @@map(name: "users")
+}
+
+model EmployeeProfile {
+  id                Int             @id @default(autoincrement())
+  firstName         String
+  firstNameSlug     String?
+  lastName          String?
+  mobile            String?
+  dateOfBirth       DateTime?
+  bio               String?
+  sex               String?
+  image             String?
+  avatar            String?
+  jobTitle          String?
+  dateOfJoining     String?
+  employmentType    String?
+  reportsTo         String?
+  salary            Decimal?
+  address           String?
+  country           String?
+  city              String?
+  postalCode        String?
+  degree            String?
+  institution       String?
+  yearOfPassing     String?
+  specialization    String?
+  yearsOfExperience Int?
+  nationality       String?
+  languages         String[]
+  maritalStatus     String?
+  socialNetwork     SocialNetwork?  @relation(fields: [socialNetworkId], references: [id], onDelete: Cascade)
+  socialNetworkId   Int?            @unique
+  userId            String          @unique
+  user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skills            EmployeeSkill[]
+  teams             TeamEmployee[]
+  teamId            Int?
+  departmentHeadOf  Department[]
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+}
+
+model Role {
+  id          Int          @id @default(autoincrement())
+  name        String       @unique
+  slug        String       @unique
+  image       String?
+  description String?
+  users       User[]
+  permissions Permission[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Permission {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  slug        String   @unique
+  image       String?
+  description String?
+  roles       Role[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// model RolePermission {
+//   roleId       Int
+//   permissionId Int
+//   role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade)
+//   permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+//   @@id([roleId, permissionId])
+// }
+
+model Department {
+  id               Int              @id @default(autoincrement())
+  name             String           @unique
+  description      String?
+  image            String?
+  icon             String?
+  teams            Team[]
+  departmentHead   EmployeeProfile? @relation(fields: [departmentHeadId], references: [id])
+  departmentHeadId Int?
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+}
+
+model Team {
+  id           Int            @id @default(autoincrement())
+  name         String         @unique
+  icon         String?
+  image        String?
+  description  String?
+  status       String?
+  locationId   Int?
+  location     Location?      @relation(fields: [locationId], references: [id])
+  departmentId Int?
+  department   Department?    @relation(fields: [departmentId], references: [id])
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  employees    TeamEmployee[]
+  projects     Project[]
+}
+
+model TeamEmployee {
+  employeeId Int
+  teamId     Int
+  employee   EmployeeProfile @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  team       Team            @relation(fields: [teamId], references: [id], onDelete: Cascade)
+
+  @@id([employeeId, teamId])
+}
+
+model EmployeeSkill {
+  employeeProfileId Int
+  skillId           Int
+  employeeProfile   EmployeeProfile @relation(fields: [employeeProfileId], references: [id], onDelete: Cascade)
+  skill             Skill           @relation(fields: [skillId], references: [id])
+
+  @@id([employeeProfileId, skillId])
+}
+
+model Skill {
+  id          Int             @id @default(autoincrement())
+  name        String          @unique
+  slug        String          @unique
+  description String?
+  image       String?
+  icon        String?
+  employees   EmployeeSkill[]
+}
+
+model SocialNetwork {
+  id              Int              @id @default(autoincrement())
+  linkedin        String? // LinkedIn profile URL
+  github          String? // GitHub profile URL
+  x               String? // Twitter profile URL
+  facebook        String? // Facebook profile URL
+  youtube         String?
+  website         String?
+  instgram        String?
+  pinterest       String?
+  reddit          String?
+  tikTok          String?
+  snapchat        String?
+  employeeProfile EmployeeProfile? @relation
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
 }
 
 model VerificationToken {
@@ -86,4 +629,458 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model MenuParent {
+  id            Int         @id @default(autoincrement())
+  title         String
+  titleAr       String?
+  description   String?
+  descriptionAr String?
+  icon          String?
+  priority      Int         @default(0)
+  adminMenu     AdminMenu[]
+  createdAt     DateTime    @default(now())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
+  updatedAt     DateTime    @updatedAt
+}
+
+//Setting Models
+model AdminMenu {
+  id            Int         @id @default(autoincrement())
+  title         String
+  titleAr       String?
+  description   String?
+  menuType      String?
+  descriptionAr String?
+  icon          String?
+  menuParent    MenuParent? @relation(fields: [menuParentId], references: [id], onDelete: Cascade)
+  menuParentId  Int?
+  elements      Element[]
+  userId        String
+  user          User        @relation(fields: [userId], references: [id])
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+model Element {
+  id            Int       @id @default(autoincrement())
+  title         String
+  titleAr       String?
+  link          String?
+  description   String?
+  descriptionAr String?
+  icon          String?
+  menuId        Int
+  menu          AdminMenu @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  parentId      Int? // Self-referencing field
+  parent        Element?  @relation("ElementToSubElements", fields: [parentId], references: [id], onDelete: Cascade)
+  subElements   Element[] @relation("ElementToSubElements") // Relation to child elements
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+enum TaskStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+}
+
+model Task {
+  id             Int         @id @default(autoincrement())
+  name           String
+  description    String?
+  image          String?
+  icon           String?
+  status         TaskStatus? // e.g., 'to do', 'in progress', 'completed'
+  priority       String? // e.g., 'low', 'medium', 'high'
+  dueDate        DateTime?
+  progress       Int?
+  estimatedHours Float? // Estimated time to complete in hours
+  actualHours    Float? // Actual time spent in hours
+  startDate      DateTime?
+  endDate        DateTime?
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+  completedAt    DateTime?
+  projectId      String
+  project        Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  users          User[]
+  media          Media[]
+}
+
+model Vendor {
+  id          String    @id @default(uuid())
+  name        String
+  slug        String    @unique
+  description String?
+  logo        String?
+  website     String?
+  email       String?
+  phone       String?
+  address     String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  products    Product[] // One-to-many relation with the Product model
+
+  @@index([slug])
+}
+
+model Product {
+  id            String     @id @default(uuid())
+  name          String
+  nameAr        String?
+  slug          String     @unique
+  image         String?
+  description   String?
+  descriptionAr String?
+  stockQuantity Int        @default(0)
+  isActive      Boolean    @default(true)
+  isPublished   Boolean    @default(false)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  prices        Price[] // One-to-many relation with the Price model
+  categories    Category[] // Many-to-many relation with Category model
+  tags          Tag[] // Many-to-many relation with Tag model
+  media         Media[] // One-to-many relation with the Media model
+  services      Service[]
+  vendorId      String? // Foreign key to Vendor model
+  vendor        Vendor?    @relation(fields: [vendorId], references: [id])
+  rating        Decimal?
+  sku           String?    @unique
+  dimensions    String?
+  weight        Decimal?
+  userId        String
+  user          User       @relation(fields: [userId], references: [id])
+
+  @@index([slug])
+}
+
+enum ProjectStatus {
+  PLANNED
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+}
+
+enum MediaType {
+  IMAGE
+  FILE
+  VIDEO
+}
+
+model Media {
+  id          String     @id @default(cuid())
+  url         String
+  type        MediaType?
+  description String?
+  altText     String?
+  size        Int? // File size in bytes
+  media_order Int?
+  externalUrl String?
+  mimeType    String? // MIME type (e.g., 'image/png', 'video/mp4')
+  projectId   String?
+  project     Project?   @relation(fields: [projectId], references: [id])
+  productId   String?
+  product     Product?   @relation(fields: [productId], references: [id])
+
+  clientId String?
+  client   Client? @relation(fields: [clientId], references: [id])
+
+  orderId String?
+  order   Order?  @relation(fields: [orderId], references: [id])
+
+  tasktId   Int?
+  task      Task?    @relation(fields: [tasktId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String         @id @default(cuid())
+  name        String
+  description String?
+  status      ProjectStatus? // e.g., 'planned', 'in progress', 'completed', etc.
+  startDate   DateTime?
+  endDate     DateTime?
+  budget      Decimal? // Using Prisma.Decimal for monetary values
+  priority    String? // e.g., 'low', 'medium', 'high'
+  progress    Int? // Percentage of project completion
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  tasks       Task[]
+  userId      String // User who created the project
+  user        User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  image       String?
+  icon        String?
+  tools       Tool[]
+  categories  Category[]
+  teamId      Int?
+  team        Team?          @relation(fields: [teamId], references: [id], onDelete: Cascade)
+  phases      Phase[]
+  clientId    String? // Reference to a Client model
+  client      Client?        @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  Media       Media[]
+}
+
+model Client {
+  id             String  @id @default(cuid())
+  name           String?
+  nameAr           String?
+  contactPerson  String?
+  email          String  @unique
+  image          String?
+  phone          String?
+  address        String?
+  addressAr        String?
+  companyName    String?
+  companyNameAr    String?
+  website        String?
+  industry       String?
+  industryAr       String?
+  notes          String?
+  notesAr          String?
+  billingAddress String?
+  billingAddressAr String?
+  billingEmail   String?
+  taxId          String?
+
+  media Media[]
+  catgories       Category[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User? @relation
+  works Work[]
+  services  Service[]
+  projects Project[] // Relationship with projects
+  invoices Invoice[] // Relationship with invoices, if applicable
+  
+
+  // Many-to-one relationship to User (for tracking admin who created the client)
+  createdBy   User   @relation("AdminCreatedClients", fields: [createdById], references: [id])
+  createdById String
+
+  Orders Order[]
+  // User  User[]
+}
+
+model Invoice {
+  id                 String    @id @default(cuid())
+  invoiceNumber      String    @unique
+  issueDate          DateTime  @default(now())
+  dueDate            DateTime?
+  invoiceType        String? // e.g., 'pro forma', 'final', 'credit note'
+  initialPayment     Float? // 20% of totalPrice
+  paymentStatus      String    @default("pedning") // e.g., 'initial payment pending', 'initial payment received', 'fully paid'
+  clientId           String
+  client             Client    @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  clientName         String?
+  clientAddress      String?
+  clientContact      String?
+  clientEmail        String?
+  clientPhone        String?
+  serviceId          Int
+  service            Service   @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  serviceDescription String
+  quantity           Int?
+  unitPrice          Float?
+  discount           Float?
+  taxRate            Float?
+  subtotal           Float?
+  taxAmount          Float?
+  discountAmount     Float?
+  totalAmount        Float
+  currency           String
+  paymentTerms       String?
+  paidAt             DateTime?
+  paymentMethod      String?
+  notes              String?
+  referenceNumber    String?
+  termsAndConditions String?
+  attachments        String[] // Paths or URLs to attachments
+  companyName        String?
+  companyAddress     String?
+  companyEmail       String?
+  companyPhone       String?
+  taxId              String?
+  taxDetails         String?
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+}
+
+enum OrderStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  ON_HOLD
+  CANCELLED
+}
+
+enum OrderType {
+  Product
+  Service
+}
+
+model Industry {
+    id        Int      @id @default(autoincrement())
+    name String?
+    nameAr String?
+    slug  String?
+    icon   String?
+    title String?
+    titleAr String?
+    image String?
+    description String?
+    descriptionAr  String?
+    userId    String
+    user      User     @relation(fields: [userId], references: [id])
+    categories  Category[]
+    services    Service[]
+
+
+}
+
+model Order {
+  id                 String        @id @default(cuid())
+  orderNumber        String        @unique
+  orderDate          DateTime      @default(now())
+  status             OrderStatus?
+  orderType          OrderType?
+  image              String?
+  description        String?
+  clientId           String?
+  client             Client?       @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  clientName         String?
+  clientAddress      String?
+  clientContact      String?
+  clientEmail        String?
+  clientPhone        String?
+  serviceId          Int?
+  service            Service?      @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  quantity           Int?
+  unitPrice          Float?
+  estimatedCost      Float?
+  subtotal           Float?
+  discount           Float?
+  taxRate            Float?
+  taxAmount          Float?
+  totalAmount        Float
+  currency           String        @default("USD")
+  paymentTerms       String?
+  paidAt             DateTime?
+  paymentMethod      String?
+  startDate          DateTime?
+  completionDate     DateTime?
+  notes              String?
+  referenceNumber    String?
+  termsAndConditions String?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+  orderManagerId     String?
+  orderManager       User?         @relation(fields: [orderManagerId], references: [id], onDelete: Cascade)
+  BillingInfo        BillingInfo[]
+  media              Media[]
+  categories         Category[]
+}
+
+model BillingInfo {
+  id         String @id @default(cuid())
+  address    String
+  city       String
+  country    String
+  postalCode String
+  orderId    String
+  order      Order  @relation(fields: [orderId], references: [id])
+}
+
+model HeroSection {
+  id Int @id @default(autoincrement())
+
+  title         String
+  titleAr       String
+  subTitl       String
+  subTitlAr     String
+  more          String
+  moreAr        String
+  isActive      String
+  url           String
+  pageName      String
+  footerTitle   String
+  footerTitleAr String
+  image         String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model PageSection {
+  id        Int      @id @default(autoincrement())
+  name      String
+  title     String
+  titleAr   String
+  desc      String
+  descAr    String
+  more      String
+  moreAr    String
+  isActive  String
+  url       String
+  itemsNo   Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model ServiceFeature {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  title     String?
+  titleAr   String?
+  desc      String?
+  descAr    String?
+  more      String?
+  image     String?
+  moreAr    String?
+  isActive  String?
+  url       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model AboutUsSection {
+  id        Int      @id @default(autoincrement())
+  name      String
+  title     String?
+  titleAr   String?
+  topTitle  String?
+  topTitlAr String?
+  image     String?
+  desc      String?
+  descAr    String?
+  more      String?
+  moreAr    String?
+  url       String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
 }
