@@ -238,7 +238,15 @@ const TextEditor = () => {
     renderHTML({ HTMLAttributes }) {
       const tocContent = generateTOCContent();
       const tocElement = createDOMElementFromHTMLString(tocContent);
-      return ["div", mergeAttributes(HTMLAttributes), ...tocElement.childNodes];
+      // return ["div", mergeAttributes(HTMLAttributes), ...tocElement.childNodes];
+      // return ["div", mergeAttributes(HTMLAttributes), ...Array.from(tocElement.childNodes)];
+      if (tocElement) {
+        return ["div", mergeAttributes(HTMLAttributes), ...Array.from(tocElement.childNodes)];
+      } else {
+        // Handle the case when tocElement is null (if necessary)
+        return ["div", mergeAttributes(HTMLAttributes)];
+      }
+      
     },
   });
 
