@@ -65,7 +65,14 @@
       "projectStory" : "Tell us a little bit about your app idea to get a custom quote, and hire best developers today",
       "projectDescripyion" : "Do you have an innovative idea that needs execution? Share your project details with us for a custom quote tailored to your needs. Our experienced team delivers high-quality solutions to help you achieve your goals efficiently.",
       "projectContact" : "Taik to our Experts now",
-      "totalServices" : "Totla Services"
+      "totalServices" : "Totla Services",
+      "home" : "Home",
+      "category" : "Category",
+      "buildingTools" : "Tools",
+      "location" : "Market Place ",
+      "loctaionTitle" : "Our Matketplaces",
+      "locationSubTitle" : "Our List of markets for services and products where main offices exist in these countries for services and products"
+
 
     }
   }

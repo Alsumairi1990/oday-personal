@@ -15,6 +15,7 @@ import IndustryCard from '../_components/IndustryCard'
 import { AboutUsSection, Category, Industry, PageSection, Post, Service, Testimonial } from '@prisma/client'
 import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 import { WorksFrontData } from './admin/works/utils/WorksFrontData'
+import Markets from '../_components/Markets'
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
@@ -132,6 +133,9 @@ export default async function Home() {
      </div>
      <div className="dark:bg-black-100">
       {phases && phaseMeta && <PhaseCompany phases={phases} meta={phaseMeta} />}
+     </div>
+     <div className="">
+      <Markets locale={locale} messages={messages}/>
      </div>
      <div className="">
       <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">

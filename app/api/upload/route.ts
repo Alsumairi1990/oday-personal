@@ -17,7 +17,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
         { status: 400 },
       );
     }
-    const filePath = `./public/images/${file.name}`;
+    const filePath = `./public/blog-images/${file.name}`;
     // await pump(file.stream(), fs.createWriteStream(filePath));
     await pump(
       file.stream() as unknown as NodeJS.ReadableStream,
