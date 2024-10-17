@@ -12,8 +12,8 @@ const HeroSection = ({ market, locale,messages }: ServiceProps) => {
     const home = (messages as any).Common.home;
   return (
         <div className="w-full " >  
-        <div className=" max-sm:min-h-lvh pt-[100px] sm:pb-8 flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${market.image})`}}>
-        <div className="absolute sm:top-[75px] h-[calc(100%-164px)] sm:h-[calc(100%-175px)] top-16 bottom-0 border-t border-t-gray-800  w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
+        <div className=" sm:h-[calc(100%-350px)]pt-[100px] sm:pb-8 flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${market.image})`}}>
+        <div className="absolute sm:top-[75px] h-[calc(100%-350px)] sm:h-[calc(100%-350px)] top-16 bottom-0 border-t border-t-gray-800  w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
 
           <div className="flex w-11/12 mx-auto relative">
              <div className="flex-60">
