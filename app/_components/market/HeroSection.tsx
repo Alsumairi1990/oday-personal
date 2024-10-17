@@ -1,32 +1,32 @@
 
 import React from 'react';
 import { AbstractIntlMessages } from 'next-intl';
-import { WorkSingleData } from '@/app/[locale]/admin/works/utils/WorkSingleData';
+import { Market } from '@prisma/client';
 interface ServiceProps {
-    work: WorkSingleData;
+    market: Market;
     locale : string,
     messages : AbstractIntlMessages
   }
-const WorkHero = ({ work, locale,messages }: ServiceProps) => {
+const HeroSection = ({ market, locale,messages }: ServiceProps) => {
     const talkToConsultant = (messages as any).CategoryPage.talkToConsultant;
     const home = (messages as any).Common.home;
   return (
         <div className="w-full " >  
-        <div className=" max-sm:min-h-lvh pt-[100px] sm:pb-8 flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${work.image})`}}>
-        <div className="absolute sm:top-[75px] h-[calc(100%-64px)] sm:h-[calc(100%-75px)] top-16 bottom-0 border-t border-t-gray-800  w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
+        <div className=" max-sm:min-h-lvh pt-[100px] sm:pb-8 flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${market.image})`}}>
+        <div className="absolute sm:top-[75px] h-[calc(100%-164px)] sm:h-[calc(100%-175px)] top-16 bottom-0 border-t border-t-gray-800  w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
 
           <div className="flex w-11/12 mx-auto relative">
              <div className="flex-60">
                {locale == 'en' ? 
                <>
-                <span className="text-sm text-white mb-6 inline-block">{home} / {work.title} </span>
-                <h2 className="text-4xl text-white font-extrabold mb-4">{work.title}</h2>
+                <span className="text-sm text-white mb-6 inline-block">{home} / {market.title} </span>
+                <h2 className="text-4xl text-white font-extrabold mb-4">{market.title}</h2>
                 </>
                 :
                 <>
-                <span className="text-sm text-white mb-6 inline-block">{home} / {work.titleAr} </span>
-                <h2 className="text-4xl text-white font-extrabold font-arabic mb-4">{work.titleAr}</h2>
-                <h2 className="text-base sm:text-2xl sm:leading-10 text-white font-bold line-clamp-3 font-arabic mb-4">{work.descriptionAr}</h2>
+                <span className="text-sm text-white mb-6 inline-block">{home} / {market.titleAr} </span>
+                <h2 className="text-4xl text-white font-extrabold font-arabic mb-4">{market.titleAr}</h2>
+                <h2 className="text-base sm:text-2xl sm:leading-10 text-white font-bold line-clamp-3 font-arabic mb-4">{market.descriptionAr}</h2>
                 </>
                 }
                 {/* <p className="text-sm text-gray-100 font-medium leading-8">{category.description}</p> */}
@@ -53,4 +53,4 @@ const WorkHero = ({ work, locale,messages }: ServiceProps) => {
   );
 };
 
-export default WorkHero;
+export default HeroSection;

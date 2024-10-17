@@ -889,11 +889,12 @@ export async function editServiceIcon(testimonialId:number,formData:FormData):Pr
     await fs.mkdir("public/services/icons", { recursive: true })
     iconPath = `/services/icons/${crypto.randomUUID()}-${iconFile.name}`;
     console.log("image path"+iconPath);
-    await fs.writeFile(
-      `public${iconPath}`,
-      Buffer.from(await iconFile.arrayBuffer())
-      )
-  
+    // await fs.writeFile(
+    //   `public${iconPath}`,
+    //   Buffer.from(await iconFile.arrayBuffer())
+    //   )
+    const buffer = Buffer.from(await iconFile.arrayBuffer());
+         await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
       const updated = await prisma.service.update({
         where : {
           id : testimonialId
@@ -938,11 +939,12 @@ export async function editServiceImage(testimonialId:number,formData:FormData):P
     await fs.mkdir("public/services/images", { recursive: true })
     imagePath = `/services/images/${crypto.randomUUID()}-${imageFile.name}`;
     console.log("image path"+imagePath);
-    await fs.writeFile(
-      `public${imagePath}`,
-      Buffer.from(await imageFile.arrayBuffer())
-      )
-  
+    // await fs.writeFile(
+    //   `public${imagePath}`,
+    //   Buffer.from(await imageFile.arrayBuffer())
+    //   )
+    const buffer = Buffer.from(await imageFile.arrayBuffer());
+    await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
       const updated = await prisma.service.update({
         where : {
           id : testimonialId
@@ -1501,19 +1503,23 @@ export async function addingServiceImages(data:FormData, serviceId: number): Pro
       if(data.image && data.image.name){
         await fs.mkdir("public/service/images", { recursive: true })
         imagePath = `/service/images/${crypto.randomUUID()}-${data.image.name}`
-        await fs.writeFile(
-          `public${imagePath}`,
-          Buffer.from(await data.image.arrayBuffer())
-          )
-        }
-  
+        const buffer = Buffer.from(await data.image.arrayBuffer());
+         await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+        // await fs.writeFile(
+        //   `public${imagePath}`,
+        //   Buffer.from(await data.image.arrayBuffer())
+        //   )
+        // }
+         }
         if(data.icon && data.icon.name){
           await fs.mkdir("public/service/icons", { recursive: true })
           iconPath = `/service/icons/${crypto.randomUUID()}-${data.icon.name}`
-          await fs.writeFile(
-            `public${iconPath}`,
-            Buffer.from(await data.icon.arrayBuffer())
-            )
+          const buffer = Buffer.from(await data.icon.arrayBuffer());
+         await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
+          // await fs.writeFile(
+          //   `public${iconPath}`,
+          //   Buffer.from(await data.icon.arrayBuffer())
+          //   )
           }
           const updatedService = await prisma.service.update({
             where: {
@@ -1576,10 +1582,12 @@ export async function addServicePrice(data:FormData,serviceId:number,locationId:
       if(data.image && data.image.name){
         await fs.mkdir("public/service/images", { recursive: true })
         imagePath = `/service/images/${crypto.randomUUID()}-${data.image.name}`
-        await fs.writeFile(
-          `public${imagePath}`,
-          Buffer.from(await data.image.arrayBuffer())
-          )
+        const buffer = Buffer.from(await data.image.arrayBuffer());
+         await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+        // await fs.writeFile(
+        //   `public${imagePath}`,
+        //   Buffer.from(await data.image.arrayBuffer())
+        //   )
         }
   
           const newPrice = await prisma.price.create({

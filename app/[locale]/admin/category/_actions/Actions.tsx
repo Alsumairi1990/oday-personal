@@ -86,10 +86,12 @@ export async function edtCategory(dataForm:FormData): Promise<string | null > {
     await fs.mkdir("public/categories", { recursive: true })
     console.log("----------->>>"+data1.image);
     const imagePath = `/categories/${crypto.randomUUID()}-${data1.image.name}`
-    await fs.writeFile(
-      `public${imagePath}`,
-      Buffer.from(await data1.image.arrayBuffer())
-    )
+    // await fs.writeFile(
+    //   `public${imagePath}`,
+    //   Buffer.from(await data1.image.arrayBuffer())
+    // )
+    const buffer = Buffer.from(await data1.image.arrayBuffer());
+    await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
   } else {
     console.error('Error parsing data:', result.error);
   }
@@ -111,19 +113,23 @@ export async function editCategory(data:FormData,id:number): Promise<string | nu
       if(data.image && data.image.name){
         await fs.mkdir("public/categories/images", { recursive: true })
         imagePath = `/categories/images/${crypto.randomUUID()}-${data.image.name}`
-        await fs.writeFile(
-          `public${imagePath}`,
-          Buffer.from(await data.image.arrayBuffer())
-          )
+        // await fs.writeFile(
+        //   `public${imagePath}`,
+        //   Buffer.from(await data.image.arrayBuffer())
+        //   )
+        const buffer = Buffer.from(await data.image.arrayBuffer());
+        await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
         }
 
       if(data.icon && data.icon.name){
         await fs.mkdir("public/categories/icons", { recursive: true })
         iconPath = `/categories/icons/${crypto.randomUUID()}-${data.icon.name}`
-        await fs.writeFile(
-          `public${iconPath}`,
-          Buffer.from(await data.icon.arrayBuffer())
-          )
+        // await fs.writeFile(
+        //   `public${iconPath}`,
+        //   Buffer.from(await data.icon.arrayBuffer())
+        //   )
+        const buffer = Buffer.from(await data.icon.arrayBuffer());
+        await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
         }
 
         console.log("icon path"+iconPath);
@@ -252,19 +258,23 @@ export async function  addingCategory(data:FormData):Promise<Category | null>{
     if(data.image && data.image.name){
       await fs.mkdir("public/categories/images", { recursive: true })
       imagePath = `/categories/images/${crypto.randomUUID()}-${data.image.name}`
-      await fs.writeFile(
-        `public${imagePath}`,
-        Buffer.from(await data.image.arrayBuffer())
-        )
+      const buffer = Buffer.from(await data.image.arrayBuffer());
+      await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+      // await fs.writeFile(
+      //   `public${imagePath}`,
+      //   Buffer.from(await data.image.arrayBuffer())
+      //   )
       }
 
       if(data.icon && data.icon.name){
         await fs.mkdir("public/categories/icons", { recursive: true })
         iconPath = `/categories/icons/${crypto.randomUUID()}-${data.icon.name}`
-        await fs.writeFile(
-          `public${iconPath}`,
-          Buffer.from(await data.icon.arrayBuffer())
-          )
+        // await fs.writeFile(
+        //   `public${iconPath}`,
+        //   Buffer.from(await data.icon.arrayBuffer())
+        //   )
+        const buffer = Buffer.from(await data.icon.arrayBuffer());
+        await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
         }
 
         console.log("icon path"+iconPath);

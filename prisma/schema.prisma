@@ -76,6 +76,8 @@ model Service {
   image         String?
   icon          String?
   location      String?
+  offres        Offer[]
+  markets       Location[]
   categories    ServiceCategory[]
   tags          ServiceTag[]
   tools         ServiceTool[]
@@ -144,8 +146,8 @@ model Category {
   products      Product[]
   orders        Order[]
   clients       Client[]
-  phases         Phase[]
-  industries      Industry[]
+  phases        Phase[]
+  industries    Industry[]
   userId        String // References one specific user (modified)
   user          User?                 @relation(fields: [userId], references: [id]) // Relation to User
   createdAt     DateTime              @default(now())
@@ -270,7 +272,7 @@ model TestimonialTag {
 }
 
 model Phase {
-  id            Int      @id @default(autoincrement())
+  id            Int        @id @default(autoincrement())
   name          String
   nameAr        String?
   description   String?
@@ -284,7 +286,7 @@ model Phase {
   steps         Step[]
   services      Service[]
   userId        String // References one specific user (modified)
-  user          User     @relation(fields: [userId], references: [id]) // Relation to User
+  user          User       @relation(fields: [userId], references: [id]) // Relation to User
 
   projectId String?
   project   Project? @relation(fields: [projectId], references: [id])
@@ -335,20 +337,59 @@ model Work {
   user          User           @relation(fields: [userId], references: [id]) // Relation to User
 }
 
+model Offer {
+  id            String     @id @default(uuid())
+  title         String
+  titleAr       String
+  description   String?
+  descriptionAr String?
+  discount      Float?
+  startDate     DateTime?
+  endDate       DateTime?
+  isActive      Boolean    @default(true)
+  image         String?
+  icon          String?
+  service       Service[]
+  location      Location[]
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  userId        String // References one specific user (modified)
+  user          User     @relation(fields: [userId], references: [id])
+}
+model Market {
+  id            Int      @id @default(autoincrement())
+  name          String
+  nameAr        String
+  location      String
+  description   String
+  descriptionAr String
+  title         String
+  titleAr       String
+  topTitle      String
+  topTitlAr     String
+  image         String   // Storing file paths or URLs for images
+  icon          String   // Storing file paths or URLs for icons
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+    userId        String // References one specific user (modified)
+  user          User     @relation(fields: [userId], references: [id])
+}
+
 model Location {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   country   String
   countryAr String?
-  slug      String   @default("default-slug")
+  slug      String    @default("default-slug")
   city      String?
   cityAr    String?
   image     String?
+  offers    Offer[]
   works     Work[]
   prices    Price[]
-  
+  services  Service[]
   teams     Team[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model WorkCategory {
@@ -446,31 +487,33 @@ model User {
   // Admin-client relationship (one admin can create many clients)
   createdClients Client[] @relation("AdminCreatedClients")
 
-  roles          Role[]
-  posts          Post[]
-  services       Service[]
-  categories     Category[]
-  tags           Tag[]
-  tools          Tool[]
-  phases         Phase[]
-  works          Work[]
-  partner        Partner[]
-  accounts       Account[]
-  sessions       Session[]
-  testimonial    Testimonial[]
-  adminMenu      AdminMenu[]
-  projects       Project[]
-  tasks          Task[]
-  orders         Order[]
-  products       Product[]
-  MenuParent     MenuParent[]
-  heroSections   HeroSection[]
-  pageSections   PageSection[]
-  postCategories PostCategory[]
-  ServiceFeatures   ServiceFeature[]
+  roles           Role[]
+  posts           Post[]
+  services        Service[]
+  categories      Category[]
+  tags            Tag[]
+  tools           Tool[]
+  phases          Phase[]
+  works           Work[]
+  partner         Partner[]
+  accounts        Account[]
+  sessions        Session[]
+  testimonial     Testimonial[]
+  adminMenu       AdminMenu[]
+  projects        Project[]
+  tasks           Task[]
+  orders          Order[]
+  products        Product[]
+  MenuParent      MenuParent[]
+  heroSections    HeroSection[]
+  pageSections    PageSection[]
+  postCategories  PostCategory[]
+  ServiceFeatures ServiceFeature[]
   industry        Industry[]
+  offers          Offer[]
+  markets         Market[]
 
-  aboutUs        AboutUsSection[]
+  aboutUs AboutUsSection[]
 
   @@map(name: "users")
 }
@@ -559,6 +602,8 @@ model Department {
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
 }
+
+
 
 model Team {
   id           Int            @id @default(autoincrement())
@@ -828,39 +873,38 @@ model Project {
 }
 
 model Client {
-  id             String  @id @default(cuid())
-  name           String?
+  id               String  @id @default(cuid())
+  name             String?
   nameAr           String?
-  contactPerson  String?
-  email          String  @unique
-  image          String?
-  phone          String?
-  address        String?
+  contactPerson    String?
+  email            String  @unique
+  image            String?
+  phone            String?
+  address          String?
   addressAr        String?
-  companyName    String?
+  companyName      String?
   companyNameAr    String?
-  website        String?
-  industry       String?
+  website          String?
+  industry         String?
   industryAr       String?
-  notes          String?
+  notes            String?
   notesAr          String?
-  billingAddress String?
+  billingAddress   String?
   billingAddressAr String?
-  billingEmail   String?
-  taxId          String?
+  billingEmail     String?
+  taxId            String?
 
-  media Media[]
-  catgories       Category[]
+  media     Media[]
+  catgories Category[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  user User? @relation
-  works Work[]
-  services  Service[]
+  user     User?     @relation
+  works    Work[]
+  services Service[]
   projects Project[] // Relationship with projects
   invoices Invoice[] // Relationship with invoices, if applicable
-  
 
   // Many-to-one relationship to User (for tracking admin who created the client)
   createdBy   User   @relation("AdminCreatedClients", fields: [createdById], references: [id])
@@ -936,22 +980,20 @@ enum OrderType {
 }
 
 model Industry {
-    id        Int      @id @default(autoincrement())
-    name String?
-    nameAr String?
-    slug  String?
-    icon   String?
-    title String?
-    titleAr String?
-    image String?
-    description String?
-    descriptionAr  String?
-    userId    String
-    user      User     @relation(fields: [userId], references: [id])
-    categories  Category[]
-    services    Service[]
-
-
+  id            Int        @id @default(autoincrement())
+  name          String?
+  nameAr        String?
+  slug          String?
+  icon          String?
+  title         String?
+  titleAr       String?
+  image         String?
+  description   String?
+  descriptionAr String?
+  userId        String
+  user          User       @relation(fields: [userId], references: [id])
+  categories    Category[]
+  services      Service[]
 }
 
 model Order {

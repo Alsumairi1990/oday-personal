@@ -6,6 +6,7 @@ import { Category, HeroSection, Service, ServiceCategory } from '@prisma/client'
 import { getLocale, getMessages } from 'next-intl/server';
 import { AbstractIntlMessages } from 'next-intl';
 import Image from 'next/image';
+import Link from 'next/link';
 interface Props {
   locale : string,
   messages : AbstractIntlMessages
@@ -39,7 +40,7 @@ const Markets = async ({locale,messages}:Props) => {
                       />
 
                 <div className="absolute">
-                  <h2 className="text-gray-100 text-lg rtl:font-arabic border-2 border-gray-300 px-2 py-1 rounded bg-gray-800">السعودية</h2>
+                  <Link href="/markets/saudi-arabia" className="text-gray-100 text-lg rtl:font-arabic border-2 border-gray-300 px-2 py-1 rounded bg-gray-800">السعودية</Link>
                   </div>      
                         
           </div>

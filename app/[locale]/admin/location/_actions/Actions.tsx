@@ -71,10 +71,12 @@ export async function editLocation(data:FormData,id:number): Promise<Location | 
     if(data.image && data.image.name){
       await fs.mkdir("public/locations/images", { recursive: true })
       imagePath = `/locations/images/${crypto.randomUUID()}-${data.image.name}`
-      await fs.writeFile(
-        `public${imagePath}`,
-        Buffer.from(await data.image.arrayBuffer())
-        )
+      const buffer = Buffer.from(await data.image.arrayBuffer());
+      await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+      // await fs.writeFile(
+      //   `public${imagePath}`,
+      //   Buffer.from(await data.image.arrayBuffer())
+      //   )
       }
       const location = await prisma.location.findUnique({
         where  : {
@@ -149,10 +151,12 @@ export async function  addingLocation(data:FormData):Promise<Location | null>{
       if(data.image && data.image.name){
         await fs.mkdir("public/codes/images", { recursive: true })
         imagePath = `/codes/images/${crypto.randomUUID()}-${data.image.name}`
-        await fs.writeFile(
-          `public${imagePath}`,
-          Buffer.from(await data.image.arrayBuffer())
-          )
+        const buffer = Buffer.from(await data.image.arrayBuffer());
+        await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+        // await fs.writeFile(
+        //   `public${imagePath}`,
+        //   Buffer.from(await data.image.arrayBuffer())
+        //   )
         }
   
         // if(data.icon && data.icon.name){

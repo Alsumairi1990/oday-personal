@@ -1,19 +1,15 @@
 "use client";
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { addBasic, addServiceTool, addServiceWork, getAllServices, getCategories, getServiceWToolById, getServiceWWorksById, getTools, getWorks, updateServiceWithCategories } from '../_serviceActions/ServiceActions';
-import { Category, Location, Tool, Work } from '@prisma/client';
-import { MdOutlinePriceChange, MdPlaylistAddCircle } from "react-icons/md";
+import { getServiceWWorksById, getTools, getWorks, updateServiceWithCategories } from '../_serviceActions/ServiceActions';
+import {  Location, Work } from '@prisma/client';
+import { MdOutlinePriceChange } from "react-icons/md";
 import { LuAlertOctagon } from "react-icons/lu";
-import { MdDone } from "react-icons/md";
 import { GrSelect } from "react-icons/gr";
-import { MdAddToPhotos } from "react-icons/md";
-import { MdAssignmentAdd } from "react-icons/md";
 import { createServiceTool, createServiceWork, removeServiceTool, removeServiceWork } from '../../common/_actions/Actions';
-import { IoIosArrowDown, IoMdCloseCircle } from "react-icons/io";
 import AddPrice from './AddPrice';
 import { getLocations } from '../../location/_actions/Actions';
+import { IoIosArrowDown, IoMdCloseCircle } from 'react-icons/io';
 
 
 interface Props {

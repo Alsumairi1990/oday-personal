@@ -20,15 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth h-full" suppressHydrationWarning>
+    <html lang="en" className="scroll-smooth h-full " suppressHydrationWarning>
      
-      <body className="min-h-full">
+      <body className="min-h-full ">
         <Providers>
           <div className="flex flex-col h-full">
             {children}
           </div>
           {/* <Footer /> */}
-          <ToastContainer />
+          {/* <ToastContainer /> */}
         </Providers>
       </body>
     </html>

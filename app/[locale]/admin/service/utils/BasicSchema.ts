@@ -7,5 +7,5 @@ export const BasicSchema = z.object({
     descriptionAr: z.string(),
     price : z.string(),
     title : z.string().min(1),
-    titleAr : z.string()
+    titleAr : z.string(),
   })

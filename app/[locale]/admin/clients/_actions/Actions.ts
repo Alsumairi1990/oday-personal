@@ -56,10 +56,12 @@ export async function  addBasic(data:FormData):Promise<string>{
        if(data.image && data.image.name){
          await fs.mkdir("public/clients/images", { recursive: true })
          imagePath = `/clients/images/${crypto.randomUUID()}-${data.image.name}`
-         await fs.writeFile(
-           `public${imagePath}`,
-           Buffer.from(await data.image.arrayBuffer())
-           )
+         const buffer = Buffer.from(await data.image.arrayBuffer());
+         await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+        //  await fs.writeFile(
+        //    `public${imagePath}`,
+        //    Buffer.from(await data.image.arrayBuffer())
+        //    )
          }
          const basic = await prisma.client.create({
            data: {
