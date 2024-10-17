@@ -21,7 +21,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth h-full " suppressHydrationWarning>
-     
+      <Head>
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <body className="min-h-full ">
         <Providers>
           <div className="flex flex-col h-full">

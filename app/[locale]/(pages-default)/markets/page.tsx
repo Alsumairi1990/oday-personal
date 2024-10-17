@@ -59,7 +59,6 @@ const marketsPage = async () => {
       {heroData && categories && services  && <Hero heroData={heroData} services={services} categories={categories} /> }
    </div>
      <div className="w-11.8/12 mx-auto grid sm:grid-cols-75/25">
-        {/* <CategoryHero category={category} locale={locale} messages={messages} /> */}
                
           <div className="">
             { locale === 'en' ? <div className="flex flex-col items-center sm:mb-8">
