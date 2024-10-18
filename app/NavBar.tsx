@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useRef } from 'react'
 import {useEffect, useState} from 'react';
 import ThemeToggle from './_components/theme-toggle'
 import LocaleSwitcher from './_components/LangToggle'
@@ -21,15 +21,20 @@ interface Props{
 
 const NavBar = ({menusData}:Props) => {
   const imagePath = '/images/logo-01.svg';
+  const imagePath2 = '/images/logo-03.jpeg';
   const [isSticky, setIsSticky] = useState(false);
   const [background, setBackground] = useState('transparent');
   const [isScrolled, setIsScrolled] = useState(false);
-
+  const [logoSrc, setLogoSrc] = useState(imagePath); 
+  const logoImage = document.querySelector('.light-logo') as HTMLImageElement; 
+  const logoRef1 = useRef<HTMLImageElement | null>(null); // Ref for the first logo
+  const logoRef2 = useRef<HTMLImageElement | null>(null); 
 
   useEffect(() => {
     const themeSwitcher = document.querySelector('.top-nav');
     const htmlElement = document.documentElement;
     const isDarkTheme = () => htmlElement.classList.contains('dark');
+
 
     // Intersection Observer for the hero section
     const observer = new IntersectionObserver(
@@ -38,10 +43,22 @@ const NavBar = ({menusData}:Props) => {
         const isVisible = entry.isIntersecting; // Check if hero section is visible
         if (!isVisible) {
           themeSwitcher?.classList.add('nav-top-l');
+          if (logoRef1.current) {
+            logoRef1.current.src = imagePath2; // Change first logo to dark logo when hero is not visible
+          }
+          if (logoRef2.current) {
+            logoRef2.current.src = imagePath2; // Change second logo to dark logo when hero is not visible
+          }
+          
           // themeSwitcher?.classList.remove('bg-[#00000059]', 'border-gray-600');
         } else {
           themeSwitcher?.classList.remove('nav-top-l');
-          // themeSwitcher?.classList.add('bg-[#00000059]', 'border-gray-600');
+          if (logoRef1.current) {
+            logoRef1.current.src = imagePath; // Change first logo to dark logo when hero is not visible
+          }
+          if (logoRef2.current) {
+            logoRef2.current.src = imagePath; // Change second logo to dark logo when hero is not visible
+          }
         }
       },
       {
@@ -195,7 +212,7 @@ const NavBar = ({menusData}:Props) => {
         <div className=" flex-60 flex justify-center">
             <Link href="/" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2  font-bold`} > 
             <span className='w-32 sm:w-[2.7rem] mr-1.5 inline-block'>
-              <img className='w-full max-w-full' src={`${imagePath}`}  alt="" />
+              <img className='w-full max-w-full light-logo' src={imagePath} ref={logoRef1}  alt="" />
             </span>
               </Link>
         </div>
@@ -217,7 +234,7 @@ const NavBar = ({menusData}:Props) => {
         <div className="p-2 max-sm:hidden text-[#333]">
             <Link href="/" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2  font-bold`} > 
             <div className='sm:w-36 mr-1.5 inline-block'>
-              <img className='w-full max-w-full' src={`${imagePath}`}  alt="" />
+              <img className='w-full max-w-full light-logo' src={imagePath} ref={logoRef2}  alt="" />
             </div>
               </Link>
         </div>
