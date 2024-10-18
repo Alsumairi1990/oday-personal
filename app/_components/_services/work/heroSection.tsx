@@ -12,7 +12,7 @@ const WorkHero = ({ work, locale,messages }: ServiceProps) => {
     const home = (messages as any).Common.home;
   return (
         <div className="w-full " >  
-        <div className=" max-sm:min-h-lvh pt-[100px] sm:pb-8 flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${work.image})`}}>
+        <div className=" max-sm:min-h-lvh hero-section pt-[100px] sm:pb-8 flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${work.image})`}}>
         <div className="absolute sm:top-[75px] h-[calc(100%-64px)] sm:h-[calc(100%-75px)] top-16 bottom-0 border-t border-t-gray-800  w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
 
           <div className="flex w-11/12 mx-auto relative">

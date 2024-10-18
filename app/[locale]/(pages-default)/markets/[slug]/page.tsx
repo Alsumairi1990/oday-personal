@@ -19,6 +19,8 @@ import { ServiceForFront } from "@/app/[locale]/admin/service/utils/ServiceForFr
 import { Market, PageSection } from "@prisma/client";
 import HeroSection from "@/app/_components/market/HeroSection";
 import ServiceSingleCards from "@/app/_components/_services/ServiceSinglCards";
+import { WorksFrontData } from "@/app/[locale]/admin/works/utils/WorksFrontData";
+import Works from "@/app/_components/Works";
 
 interface Props {
   params: {
@@ -50,7 +52,7 @@ const Serivice = async ({params}:Props) => {
       next: { revalidate: 1800 }, // Optional revalidation for ISR (30 minutes)
     });
     
- const serviceData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/location/saudi-arabia`, {
+ const serviceData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/location/${params.slug}`, {
    method: 'GET',
    next: { revalidate: 1800 }, // Optional revalidation for ISR (30 minutes)
  });
@@ -58,17 +60,24 @@ const Serivice = async ({params}:Props) => {
    method: 'GET',
    next: { revalidate: 1800 }, // Revalidate for ISR if needed
  });
+ const pageWorks = await fetch(`${process.env.NEXTAUTH_URL}/api/front/works/home`, {
+   method: 'GET',
+   next: { revalidate: 1800 }, // Revalidate for ISR if needed
+ });
+
 
  
 
  const market:Market = await marketData.json();
 //  const service:ServiceForFront = await serviceData.json();
  const services:ServiceForFront[] = await serviceData.json();
+ const works:WorksFrontData[] = await pageWorks.json();
 
  const sectionMeta:PageSection[] = await sections.json();
  const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
  const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
  const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
+ 
 
 
 
@@ -156,7 +165,11 @@ const Serivice = async ({params}:Props) => {
         <div className='gray:bg-[#111]"'>{services.length}---------------------------
             {services.length> 0 && serviceMeta && <ServiceSingleCards services={services} meta={serviceMeta} />}
         </div>
- 
+
+        <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">
+            {works && workMeta &&  <Works  works = {works} meta={workMeta} /> }
+         </div>
+   
          <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-11/12 mx-auto ">
             <div className="flex flex-col items-center sm:mb-8 ">

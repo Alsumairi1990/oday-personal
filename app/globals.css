@@ -216,9 +216,7 @@
 body.modal-open {
   overflow: hidden;
 }
-.nav-bg {
-  background-color: #060606fc;
-}
+
 .nav-h {
   height: 75px;
 }
@@ -504,4 +502,42 @@ ol li p {
 .tiptap .resize-cursor {
   cursor: ew-resize;
   cursor: col-resize;
+}
+.top-nav {
+  background-color: #060606fc ; 
+}
+.top-nav .theme-switcher{
+
+}
+.nav-top-l{
+  box-shadow: 0 2px 7px rgb(191 187 187 / 10%);
+  background-color: #fff;
+  border-bottom: 1px solid #f3f0f0;
+}
+.nav-top-l .them-switcher, .nav-top-l .locl-toggle {
+  background-color: #f2f2f2 !important;
+  border :  1px solid #ccc !important;
+}
+.nav-top-l .them-switcher .light-swicher-theme{
+  background-color: #f2f2f2 !important;
+}
+.nav-top-l .them-switcher .light-swicher-theme svg{
+  fill: #888 !important;
+}
+.nav-top-l .locl-toggle span{
+  color: #444 !important;
+}
+.nav-top-l .avatar {
+  background-color: #f2f2f2 !important;
+  border :  1px solid #ccc !important;
+}
+.nav-top-l .avatar .icon-profile svg{
+  fill: #333 !important;
+}
+.nav-top-l .parent-elm, .nav-top-l .parent-arr{
+  color: #333 !important;
+}
+
+.nav-top-l .main-menu-btn svg{
+  fill: #333 !important;
 }

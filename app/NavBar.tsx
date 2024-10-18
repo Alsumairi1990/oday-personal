@@ -23,85 +23,171 @@ const NavBar = ({menusData}:Props) => {
   const imagePath = '/images/logo-01.svg';
   const [isSticky, setIsSticky] = useState(false);
   const [background, setBackground] = useState('transparent');
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  
+
   useEffect(() => {
-    const handleClickOutside = (event:any) => {
-      
-     const menus = document.getElementsByClassName('log-menu');
+    const themeSwitcher = document.querySelector('.top-nav');
+    const htmlElement = document.documentElement;
+    const isDarkTheme = () => htmlElement.classList.contains('dark');
+
+    // Intersection Observer for the hero section
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (isDarkTheme()) return;
+        const isVisible = entry.isIntersecting; // Check if hero section is visible
+        if (!isVisible) {
+          themeSwitcher?.classList.add('nav-top-l');
+          // themeSwitcher?.classList.remove('bg-[#00000059]', 'border-gray-600');
+        } else {
+          themeSwitcher?.classList.remove('nav-top-l');
+          // themeSwitcher?.classList.add('bg-[#00000059]', 'border-gray-600');
+        }
+      },
+      {
+        threshold: 0, // Trigger when hero section leaves/enters the viewport
+      }
+    );
+  
+    // Find the hero section on the current page and observe
+    const heroSection = document.querySelector('.hero-section');
+    if (heroSection) {
+      observer.observe(heroSection);
+    }
+  
+    // Function to handle click events for menu interactions
+    const handleClickOutside = (event: any) => {
+      const menus = document.getElementsByClassName('log-menu');
       if (event.target.closest('.menu-btn ') !== null) {
         const prnt = event.target.closest('.menu-pr');
-        const menu = prnt.querySelector('.log-menu');
-        if(menu && menu.classList.contains('hidden')){
+        const menu = prnt?.querySelector('.log-menu');
+        if (menu && menu.classList.contains('hidden')) {
           for (let i = 0; i < menus.length; i++) {
-            
             menus[i].classList.add('hidden');
           }
-          
           menu.classList.remove('hidden');
-        }
-        else if(menu && !menu.classList.contains('hidden')){
-          
+        } else if (menu && !menu.classList.contains('hidden')) {
           menu.classList.add('hidden');
         }
-    }
-    else if (event.target.closest('.login-menu ') !== null) return;  
-    else if (event.target.closest('.main-menu-btn') !== null) {
-      const mainPrnt = event.target.closest('.main-nav');
-        const menu = mainPrnt.querySelector('.main-drop-menu');
-        if(menu.classList.contains('hidden')){
-          
+      } else if (event.target.closest('.login-menu ') !== null) {
+        return;
+      } else if (event.target.closest('.main-menu-btn') !== null) {
+        const mainPrnt = event.target.closest('.main-nav');
+        const menu = mainPrnt?.querySelector('.main-drop-menu');
+        if (menu?.classList.contains('hidden')) {
           menu.classList.remove('hidden');
           document.body.style.overflow = 'hidden'; // Disable scroll
-
-
-        }
-        else if(menu && !menu.classList.contains('hidden')){
+        } else if (menu && !menu.classList.contains('hidden')) {
           document.body.style.overflow = ''; // Enable scroll
-
           menu.classList.add('hidden');
         }
-
-    }
-    else if (event.target.closest('.log-menu ') !== null) return;
-  
-    
-    else {
-      
-    // for(let menu of menus){
-    //   menu.classList.add('hidden');
-      
-    //    };
-       for (let i = 0; i < menus.length; i++) {
-        const menu = menus[i];
-        menu.classList.add('hidden');
-        console.log(menu);
+      } else if (event.target.closest('.log-menu ') !== null) {
+        return;
+      } else {
+        for (let i = 0; i < menus.length; i++) {
+          const menu = menus[i];
+          menu.classList.add('hidden');
+        }
       }
-       
-    }
-      
     };
   
+    // Add event listeners
     document.addEventListener('click', handleClickOutside);
   
+    // Cleanup observer and event listeners
     return () => {
+      if (heroSection) {
+        observer.unobserve(heroSection);
+      }
       document.removeEventListener('click', handleClickOutside);
     };
-  });
+  }, []);
+  
+  // useEffect(() => {
+  //   const themeSwitcher = document.querySelector('.theme-switcher');
+  //   const htmlElement = document.documentElement;
+  //   const observer = new IntersectionObserver(
+  //     ([entry]) => {
+  //       const isVisible = entry.isIntersecting; 
+  //       if (!isVisible) {
+  //         themeSwitcher?.classList.add('bg-gray-800', 'border-gray-400');
+  //         themeSwitcher?.classList.remove('bg-[#00000059]', 'border-gray-600');
+  //       } else {
+  //         themeSwitcher?.classList.remove('bg-gray-800', 'border-gray-400');
+  //         themeSwitcher?.classList.add('bg-[#00000059]', 'border-gray-600');
+  //       }
+  //     },
+  //     {
+  //       threshold: 0, 
+  //     }
+  //   );
+  //   const heroSection = document.querySelector('.hero-section'); 
+  //   if (heroSection) {
+  //     observer.observe(heroSection); 
+  //   }
+  //   return () => {
+  //     if (heroSection) {
+  //       observer.unobserve(heroSection); 
+  //     }
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   const handleClickOutside = (event:any) => {
+  //    const menus = document.getElementsByClassName('log-menu');
+  //     if (event.target.closest('.menu-btn ') !== null) {
+  //       const prnt = event.target.closest('.menu-pr');
+  //       const menu = prnt.querySelector('.log-menu');
+  //       if(menu && menu.classList.contains('hidden')){
+  //         for (let i = 0; i < menus.length; i++) {
+  //           menus[i].classList.add('hidden');
+  //         }
+  //         menu.classList.remove('hidden');
+  //       }
+  //       else if(menu && !menu.classList.contains('hidden')){
+  //         menu.classList.add('hidden');
+  //       }
+  //   }
+  //   else if (event.target.closest('.login-menu ') !== null) return;  
+  //   else if (event.target.closest('.main-menu-btn') !== null) {
+  //     const mainPrnt = event.target.closest('.main-nav');
+  //       const menu = mainPrnt.querySelector('.main-drop-menu');
+  //       if(menu.classList.contains('hidden')){
+  //         menu.classList.remove('hidden');
+  //         document.body.style.overflow = 'hidden'; // Disable scroll
+  //       }
+  //       else if(menu && !menu.classList.contains('hidden')){
+  //         document.body.style.overflow = ''; // Enable scroll
+  //         menu.classList.add('hidden');
+  //       }
+  //   }
+  //   else if (event.target.closest('.log-menu ') !== null) return;
+  //   else {
+  //      for (let i = 0; i < menus.length; i++) {
+  //       const menu = menus[i];
+  //       menu.classList.add('hidden');
+  //     }
+  //   }
+  //   };
+  //   document.addEventListener('click', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   };
+  // });
   
   return (
     <nav 
-    className={` flex main-nav fixed max-sm:flex-col sm:h-[75px] h-[64px] top-0 max-sm:border-b max-sm:border-b-gray-700   w-full pt-2 sm:p-2 z-50 items-center justify-between bordrer-b  botrder-b-[#484848] nav-bg font-bold`}
+    className={`top-nav flex main-nav fixed max-sm:flex-col sm:h-[75px] h-[64px] top-0 dark:max-sm:border-b dark:max-sm:border-b-gray-700   w-full pt-2 sm:p-2 z-50 items-center justify-between font-bold  `}
     >
         <div className="flex sm:hidden items-center pl-1 w-full">
-        <div className='main-menu-btn flex-10 flex items-center pl-1'>
+        <div className='main-menu-btn flex-10 flex items-center pl-1 rtl:pr-1'>
            <span className="w-8 inline-block fill-gray-200 ml-1">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024"><path d="M89.006 490.013h845.978v62.269h-845.978v-62.269zM89.006 226.835h845.978v62.269h-845.978v-62.269zM89.006 753.181h845.978v62.259h-845.978v-62.259z"></path></svg>
             </span>    
         </div>
         <div className="flex-10">
               <div className=" px-1 cursor-pointer">
-                <div className="flex items-center border border-gray-600 px-1 py-1 bg-[#00000059] rounded-full text-gray-50 pointer relative">
+                <div className="flex items-center border them-switcher  border-gray-600 px-1 py-1 bg-[#00000059] rounded-full text-gray-50 pointer relative">
                   <ThemeToggle />
                 </div>
               </div>
@@ -115,7 +201,7 @@ const NavBar = ({menusData}:Props) => {
         </div>
         <div className="px-2 flex-10">
               <div className=" pr-0.5 cursor-pointer">
-                <div className="flex items-center border border-gray-600 px-1 sm:px-1.5 py-1 sm:py-1.5 bg-[#00000059] rounded-full pointer relative">
+                <div className="flex items-center locl-toggle border border-gray-600 px-1 sm:px-1.5 py-1 sm:py-1.5 bg-[#00000059] rounded-full pointer relative">
                   <LocaleSwitcher />
                 </div>
               </div>
@@ -214,7 +300,8 @@ const NavBar = ({menusData}:Props) => {
                       // </div>
                       </div>
                 </div> */}
-                <div className="w-full flex ltr:justify-end "><FrontTopNav  menusData ={menusData} /></div>
+                <div className="w-full flex ltr:justify-end ">
+                  <FrontTopNav  menusData ={menusData} /></div>
                 
           
                 {/* <ServicePanel />     */}
@@ -223,7 +310,7 @@ const NavBar = ({menusData}:Props) => {
             <div className="py-1 px-2 flex ">
             <div className="">
               <div className="pl-3 pr-0.5 cursor-pointer">
-                <div className="flex items-center border border-gray-600 px-1.5 py-1.5 bg-[#00000059] rounded-full text-gray-50 pointer relative">
+                <div className="flex them-switcher  items-center border border-gray-600 px-1.5 py-1.5 bg-[#00000059] rounded-full text-gray-50 pointer relative">
                   <ThemeToggle />
                 </div>
               </div>
@@ -231,7 +318,7 @@ const NavBar = ({menusData}:Props) => {
 
             <div className="px-2">
               <div className=" pr-0.5 cursor-pointer">
-                <div className="flex items-center border border-gray-600 px-1.5 py-1.5 bg-[#00000059] rounded-full pointer relative">
+                <div className="flex locl-toggle  items-center border border-gray-600 px-1.5 py-1.5 bg-[#00000059] rounded-full pointer relative">
                   <LocaleSwitcher />
                 </div>
               </div>
@@ -248,12 +335,12 @@ const NavBar = ({menusData}:Props) => {
                   <div className=" rounded-md  text-white" >
               
                   <div  className="avatar menu-btn flex items-center  border border-gray-600 dark:border-[#71247c] bg-[#00000059] dark:hover:!bg-fuchsia-500 px-1.5 py-1.5 rounded-3xl cursor-pointer relative" >
-                          <span className="icon mr-2 dark-icon">
-                              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 17.625a.728.728 0 0 1-.75-.75c0-.2.071-.375.213-.525A.706.706 0 0 1 4 16.125h16a.71.71 0 0 1 .538.225c.141.15.212.325.212.525 0 .217-.07.396-.212.538a.731.731 0 0 1-.538.212H4Zm0-4.875a.726.726 0 0 1-.75-.75.728.728 0 0 1 .75-.75h16c.217 0 .396.07.538.212a.731.731 0 0 1 .212.538.728.728 0 0 1-.75.75H4Zm0-4.875a.706.706 0 0 1-.537-.225.74.74 0 0 1-.213-.525.726.726 0 0 1 .75-.75h16a.728.728 0 0 1 .75.75c0 .2-.07.375-.212.525a.71.71 0 0 1-.538.225H4Z" fill="#fff"></path>
+                          <span className="icon mr-2 icon-profile">
+                              <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 17.625a.728.728 0 0 1-.75-.75c0-.2.071-.375.213-.525A.706.706 0 0 1 4 16.125h16a.71.71 0 0 1 .538.225c.141.15.212.325.212.525 0 .217-.07.396-.212.538a.731.731 0 0 1-.538.212H4Zm0-4.875a.726.726 0 0 1-.75-.75.728.728 0 0 1 .75-.75h16c.217 0 .396.07.538.212a.731.731 0 0 1 .212.538.728.728 0 0 1-.75.75H4Zm0-4.875a.706.706 0 0 1-.537-.225.74.74 0 0 1-.213-.525.726.726 0 0 1 .75-.75h16a.728.728 0 0 1 .75.75c0 .2-.07.375-.212.525a.71.71 0 0 1-.538.225H4Z" ></path>
                               </svg>
                           </span>
-                          <span className=" icon">
+                          <span className=" ">
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="12" cy="12" r="11.5" fill="#Fafafa" stroke="#ccc"></circle>
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="m12.221 4.5-.084 2.118-.084.105c-.308-.356-1.08-1.087-1.08-1.087l.328 1.067-.132-.088.036.244c-.78-.536-1.879-.296-1.879-.296-.448-.536-.851-.724-.851-.724.203.268.443.864.443.864-.82.424-1.275 1.195-1.275 1.195.116-.064 1.107-.172 1.107-.172-.14.064-.731.76-.731.76a1.81 1.81 0 0 0-.94.272l.68-.04c-.584.332-.728 1.003-.728 1.003-.156 1.056.32 1.444.32 1.444l.116-.636.144.348v1.407c.107 1.195.294 1.693.4 1.888a1.7 1.7 0 0 0-.024.278c-.352-.085-.466.116-.466.116-.212.38-.008.764-.008.764.104.18.763.727.763.727.04.812.944 1.68.944 1.68.096.08.472.355.472.355.066.092.141.178.222.26v.001h.001c.038.038.077.075.117.111h-.002l.004.002.002.001c.022.039.274.453 1.036.657.224.103.379.155.379.155h-.004c.092.028.232.004.232.004v-.009l.002.001.004.004s.851-.04 2.634-1.743c0 0 .712-.64.832-1.375 0 0 .407.052.535-.088 0 0 .508-.208.48-.827l-.1-.612s-.084-.271-.545-.32c.21-.457.36-.942.44-1.439l.002.001.067-.15.005.005.599-1.367.52-1.175-.005-.002.013-.03 2.34-1.207-7.28-4.45Z" className='fill-orange-500 dark:fill-[#d946ef]' fill="#d946ef"></path>
