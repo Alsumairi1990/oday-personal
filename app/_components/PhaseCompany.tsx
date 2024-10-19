@@ -30,7 +30,7 @@ const PhaseCompany = async ({meta,phases}:Props) => {
           )
           }
             
-            <div className="flex flex-wrap gap-8 max-sm:p-4 sm:justify-between">
+            <div className="flex max-sm:overflow-x-auto gap-8 max-sm:p-4 sm:justify-between">
             {phases.map((phase, index:number) => (
                <ProcessPhase key={phase.id} phase={phase} index={index} phaseSize={phases.length} />
             ))}
