@@ -85,7 +85,7 @@ export default function Home() {
      </div> */}
 
           <div className='w-full pt-8 bg-[#111]'>
-          <Footerk />
+          {/* <Footerk /> */}
           </div>
     </main>
   )

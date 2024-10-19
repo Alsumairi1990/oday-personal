@@ -277,7 +277,7 @@ export default function Post() {
       
       
       <div className="">
-         <Footerk />
+         {/* <Footerk /> */}
          </div>
          </div>
          

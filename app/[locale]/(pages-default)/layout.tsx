@@ -45,7 +45,7 @@ export default async function signupLayout({
                {menusData && <NavBar menusData={menusData} />}
             {children}
             <div className="">
-             <Footerk />
+             {/* <Footerk /> */}
              </div>
              
             </div>

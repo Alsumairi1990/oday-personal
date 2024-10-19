@@ -555,7 +555,7 @@ export default function Blog() {
       
       
       <div className="">
-         <Footerk />
+         {/* <Footerk /> */}
          </div>
          </div>
          
