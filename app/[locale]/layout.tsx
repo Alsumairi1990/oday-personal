@@ -4,6 +4,8 @@ import { Providers } from '../providers';
 import WhatsAppLive from '../_components/WhatsAppLive';
 import CallOptionPanel from '../_components/CallOptionPanel';
 import NextTopLoader from 'nextjs-toploader';
+import Footerk from '../_components/Footer';
+import { Category, Service } from '@prisma/client';
 
 export default async function LocaleLayout({
   children,
@@ -12,6 +14,17 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, {
+    method: 'GET',
+    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+  });
+  
+  const Categories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/categories/home`, {
+    method: 'GET',
+    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+  });
+  const servicesR:Service[] = await res.json();
+  const categoriesResult:Category[] = await Categories.json();
   const messages = await getMessages({ locale });
 
   return (
@@ -30,6 +43,9 @@ export default async function LocaleLayout({
 
         <CallOptionPanel  />
              </div> */}
+          <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+          <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
+          </div>
       </Providers>
     </NextIntlClientProvider>
   );

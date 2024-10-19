@@ -149,9 +149,7 @@ export default async function Home() {
       <div className="w-full my-10 sm:my-24 dark:bg-black-100">
       <ServiceApp />
       </div>
-      <div className='w-full bg-[#111]'>
-          <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
-          </div>
+     
     </main>
   )
 }
