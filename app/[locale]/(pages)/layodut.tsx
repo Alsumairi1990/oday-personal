@@ -15,7 +15,7 @@ export default function signupLayout({
                 {/* <NavBar  /> */}
             {children}
             <div className="">
-             <Footerk />
+             {/* <Footerk /> */}
              </div>
             </div>
           
