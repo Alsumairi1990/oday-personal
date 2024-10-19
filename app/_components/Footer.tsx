@@ -1,10 +1,28 @@
 'use client'
+import { Category, Service } from '@prisma/client';
+import { AbstractIntlMessages } from 'next-intl';
+import Link from 'next/link';
 import React from 'react';
+interface Props{
+   services? : Service[],
+   categories? : Category[],
+   locale : string,
+   messages : AbstractIntlMessages
 
-const Footerk = () => {
+
+}
+const Footerk = ({services,categories,locale,messages}:Props) => {
+   const bg = '/images/fotter-bg.webp';
+   const servicesNavHeader = (messages as any).Common.servicesNavHeader;
+   const categoriesNavHeader = (messages as any).Common.categoriesNavHeader;
+
+ 
+
+
   return (
     <div className="">
-    <div className="bg-[#1e1e1e] pt-3 " > 
+    {/* <div className="bg-[#1e1e1e] pt-3 " style={{backgroundImage : }}>  */}
+    <div className=" sm:pt-8 sm:pb-2 px-3 w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${bg})`}}>
        <div className="w-11.4/12 mx-auto mb-6">
           <div className="p-2 text-center">
              <h2 className="text-md font-bold text-gray-300 uppercase">SUBSCRIBE TO OUR NEWS LETTER </h2>
@@ -76,39 +94,46 @@ const Footerk = () => {
        <div className="grid grid-cols-2 sm:grid-cols-4 w-11.4/12 mx-auto mb-3">
           <div className="">
              <div className="mb-4">
-                <p><a href="" className="font-bold text-gray-200 border-b border-b-gray-400 text-sm pb-2 uppercase">University Comparison</a></p>
+                <p><a href="" className="font-bold text-orange-400 rtl:font-arabic border-b border-b-gray-400 text-sm pb-2 uppercase">{servicesNavHeader}</a></p>
              </div>
-             <div className="text-gray-400 text-sm leading-7">
+             <div className="text-gray-200 text-sm leading-7">
                 <ul>
-                   <li><a href="">Mobile Design </a></li>
-                   <li><a href="">Tables Prototype</a></li>
-                   <li><a href="">Resources </a></li>
-                   <li><a href="">Service Apply</a></li>
-                   <li><a href="">Prototyping</a></li>
-                   <li><a href="">Design Training</a></li>
-                   <li><a href="">Financials</a></li>
+                  {
+                     services?.slice(0, 8).map((service)=> (
+                        <li>
+                           {locale === 'en' ? <Link className='capitalize' href={`/services/${service.name_slug}`}> {service.name} </Link>
+                           :<Link className='capitalize font-arabic' href={`/services/${service.name_slug}`}> {service.nameAr} </Link>
+                           }
+                        </li>
+
+                     ))
+                  }
+                  
                 </ul>
              </div>
           </div>
           <div className="">
              <div className="mb-4">
-                <p><a href="" className="font-bold text-gray-200 border-b text-sm border-b-gray-400 pb-2 uppercase">Study abrodas</a></p>
+                <p><a href="" className="font-bold text-orange-400 border-b rtl:font-arabic text-sm border-b-gray-400 pb-2 uppercase">{categoriesNavHeader}</a></p>
              </div>
-             <div className="text-gray-400 text-sm leading-7">
+             <div className="text-gray-200 text-sm leading-7">
                 <ul>
-                   <li><a href="">Home</a></li>
-                   <li><a href="">Power Comparison</a></li>
-                   <li><a href="">Equipment Gate</a></li>
-                   <li><a href="">Countries List</a></li>
-                   <li><a href="">Compare Search Panel</a></li>
-                   <li><a href="">Discover Country </a></li>
-                   <li><a href="">forces Details</a></li>
+                {    
+                     categories?.slice(0, 8).map((category)=> (
+                        <li>
+                           {locale === 'en' ? <Link className='capitalize' href={`/services/${category.slug}`}> {category.name} </Link>
+                           :<Link className='capitalize font-arabic' href={`/services/${category.slug}`}> {category.nameAr} </Link>
+                           }
+                        </li>
+
+                     ))
+                  }
                 </ul>
              </div>
           </div>
           <div className="quick-links">
              <div className="mb-4">
-                <p><a href="" className="font-bold text-gray-200 border-b border-b-gray-400 text-sm pb-2 uppercase">Top Rankings</a></p>
+                <p><a href="" className="font-bold text-orange-400 border-b border-b-gray-400 text-sm pb-2 uppercase">Top Rankings</a></p>
              </div>
              <div className="text-gray-400 text-sm leading-7">
                 <ul>
@@ -123,7 +148,7 @@ const Footerk = () => {
           </div>
           <div className="quick-links">
              <div className="mb-4">
-                <p><a href="" className="font-bold text-gray-200 border-b border-b-gray-400 text-sm pb-2 uppercase">Histrories Stroy</a></p>
+                <p><a href="" className="font-bold text-orange-400 border-b border-b-gray-400 text-sm pb-2 uppercase">Histrories Stroy</a></p>
              </div>
              <div className="text-gray-400 text-sm leading-7">
                 <ul>

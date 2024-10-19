@@ -22,10 +22,6 @@ interface Props{
 const NavBar = ({menusData}:Props) => {
   const imagePath = '/images/logo-01.svg';
   const imagePath2 = '/images/logo-03.jpeg';
-  const [isSticky, setIsSticky] = useState(false);
-  const [background, setBackground] = useState('transparent');
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [logoSrc, setLogoSrc] = useState(imagePath); 
   const logoImage = document.querySelector('.light-logo') as HTMLImageElement; 
   const logoRef1 = useRef<HTMLImageElement | null>(null); // Ref for the first logo
   const logoRef2 = useRef<HTMLImageElement | null>(null); 

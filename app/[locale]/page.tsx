@@ -89,6 +89,7 @@ export default async function Home() {
     const heroData = await hero.json();
     const sectionMeta:PageSection[] = await sections.json();
     const aboutUS:AboutUsSection = await about.json();
+    
     const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
     const serviceCatMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'servicesCategory');  
     const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
@@ -148,8 +149,8 @@ export default async function Home() {
       <div className="w-full my-10 sm:my-24 dark:bg-black-100">
       <ServiceApp />
       </div>
-      <div className='w-full pt-8 bg-[#111]'>
-          <Footerk />
+      <div className='w-full bg-[#111]'>
+          <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
           </div>
     </main>
   )
