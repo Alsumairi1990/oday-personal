@@ -38,7 +38,7 @@ const Markets = async ({markets,locale,messages}:Props) => {
       </div>
       <div className="grid grid-cols-1  mx-auto sm:grid-cols-3 sm:w-11/12 gap-6 pb-5">
           {markets.map((market)=> (
-             <div className="p-0.5 sm:h-80  relative flex items-center justify-center border border-gray-500 rounded-md">
+             <div className="p-0.5 sm:h-80 h-48 relative flex items-center justify-center border border-gray-500 rounded-md">
                 <Image 
                     src={market.image}
                     height={400}
@@ -46,7 +46,7 @@ const Markets = async ({markets,locale,messages}:Props) => {
                     alt="Product Image"
                     className='w-full h-full mx-auto rounded-t-md sm:rounded-md'
                     />
-              <div className="absolute w-full h-full sm:w-7/12 sm:h-3/4 flex items-center justify-center flex-col bg-[#111111ad] sm:bg-[#111111c9] border border-white rounded-md">
+              <div className="absolute w-full h-full sm:w-7/12 sm:h-3/4 flex items-center justify-center flex-col bg-[#1111118e] sm:bg-[#111111c9] border border-white rounded-md">
                 <div className="w-10 sm:w-14">
                 <Image 
                     src={market.icon}
