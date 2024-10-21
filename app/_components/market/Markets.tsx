@@ -38,7 +38,7 @@ const Markets = async ({markets,locale,messages}:Props) => {
       </div>
       <div className="grid grid-cols-1  mx-auto sm:grid-cols-3 sm:w-11/12 gap-6 pb-5">
           {markets.map((market)=> (
-             <div className="p-0.5 sm:h-80 h-48 relative flex items-center justify-center border border-gray-500 rounded-md">
+             <div className="p-0.5 sm:h-80 h-52 overflow-hidden relative flex items-center justify-center border border-gray-500 rounded-md">
                 <Image 
                     src={market.image}
                     height={400}
