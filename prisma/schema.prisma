@@ -414,6 +414,7 @@ model Location {
   prices    Price[]
   services  Service[]
   teams     Team[]
+  products  Product[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
@@ -818,6 +819,7 @@ model Product {
   tags          Tag[] // Many-to-many relation with Tag model
   media         Media[] // One-to-many relation with the Media model
   services      Service[]
+  locations      Location[]
   vendorId      String? // Foreign key to Vendor model
   vendor        Vendor?    @relation(fields: [vendorId], references: [id])
   rating        Decimal?
