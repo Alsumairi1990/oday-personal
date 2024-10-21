@@ -16,61 +16,67 @@ import { AboutUsSection, Category, Industry, PageSection, Post, Service, Testimo
 import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 import { WorksFrontData } from './admin/works/utils/WorksFrontData'
 import Markets from '../_components/Markets'
+import { MarketWithModels } from './admin/market/_utils/MarketWithModels'
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
   
   const Categories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/categories/home`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
 
   const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
   const latestPosts = await fetch(`${process.env.NEXTAUTH_URL}/api/front/posts/latest`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
 
   const pagePhases = await fetch(`${process.env.NEXTAUTH_URL}/api/front/phases`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
   const pageWorks = await fetch(`${process.env.NEXTAUTH_URL}/api/front/works/home`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
 
   const pageTestimonials = await fetch(`${process.env.NEXTAUTH_URL}/api/front/testimonials/home`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
 
   const pageIdustries = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industries/home`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
+
+  const pageMarkets = await fetch(`${process.env.NEXTAUTH_URL}/api/front/markets`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
   const page = 'mainPage'
   const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Optional revalidation for ISR (30 minutes)
+    next: { revalidate: 3600 }, // Optional revalidation for ISR (30 minutes)
   });
 
   const sections = await fetch(`${process.env.NEXTAUTH_URL}/api/front/meta/sections`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
 
 
   const about = await fetch(`${process.env.NEXTAUTH_URL}/api/front/about-section`, {
     method: 'GET',
-    next: { revalidate: 1800 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
 
 
@@ -89,6 +95,7 @@ export default async function Home() {
     const heroData = await hero.json();
     const sectionMeta:PageSection[] = await sections.json();
     const aboutUS:AboutUsSection = await about.json();
+    const markets:MarketWithModels[] = await pageMarkets.json();
     
     const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
     const serviceCatMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'servicesCategory');  

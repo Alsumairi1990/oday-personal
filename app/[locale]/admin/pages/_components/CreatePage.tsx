@@ -1,48 +1,24 @@
 "use client";
-import React, { ChangeEvent, useEffect, useRef } from 'react';
+import React, { ChangeEvent, useRef } from 'react';
 import { useState } from 'react';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Image from 'next/image';
-import { MdDone, MdOutlineAddCircle } from 'react-icons/md';
+import { MdDone} from 'react-icons/md';
 import { LuAlertOctagon } from 'react-icons/lu';
-import { MarketSchema } from '../_utils/MarketSchema';
-import { addBasic, getLocations } from '../_actions/Actions';
-import { Location } from '@prisma/client';
-import MenuPanel from '../../common/utils/MenuPanel';
-import CreatePage from './CreatePage';
-import PagesPanel from './PagesPanel';
+import { PageSchema } from '../_utils/PageSchema';
+import { addBasic } from '../_actions/Actions';
 
 
-
-
-type inputType = z.infer<typeof MarketSchema>;
-
+type inputType = z.infer<typeof PageSchema>;
 
 const CreateMarket = () => {
     const [basic, setBasic] = useState<number>(); // Use Category type
     const [error , setError] = useState<string>('');
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const [iconSrc, setIconSrc] = useState<string | null>(null);
-    const [elements, setElements] = useState<Location[]>([]);
-    const [selectedElement, setSelectedElement] = useState<string>('');
-    const [selectedElement2, setSelectedElement2] = useState<string>('');
-    const [selectedLocation, setSelectedLocation] = useState<string>('');
-    const [selectedPages, setSelectedPages] = useState<string[]>([]);
-    const [selectedPagesId, setSelectedPagesId] = useState<number[]>([]);
-
-    
-
-    const [menuShow1, setMenuShow1] = useState<boolean>(false); 
-    const [menuShow2, setMenuShow2] = useState<boolean>(false); 
-    const [locationShow, setLocationShow] = useState<boolean>(false); 
-    const [pageCreateShow, setPageCreateShow] = useState<boolean>(false); 
     const [basicId, setBasicId] = useState<number>(0);
-
-    const [countries, setCountries] = useState<string[]>([]);
-    const [countriesAr, setCountriesAr] = useState<string[]>([]);
-
     const [loading, setLoading] = useState<boolean>(false);
     const messageRef = useRef<HTMLDivElement>(null);
 
@@ -54,7 +30,7 @@ const CreateMarket = () => {
     watch,
     formState: { errors },
   } = useForm<inputType>({
-    resolver: zodResolver(MarketSchema),
+    resolver: zodResolver(PageSchema),
   });
   const rows = 5;
   const cols = 5;
@@ -77,67 +53,6 @@ const CreateMarket = () => {
       reader.readAsDataURL(file);
     }
   };
-
-  const setSelect = (value:string,id:number) => {
-    setSelectedPages(prevValues => {
-      const newValues = [...prevValues, value];
-      return newValues;
-    });
-    setSelectedPagesId(prevValues => {
-      const newValues = [...prevValues, id];
-      return newValues;
-    });
-  }
-  const deSelect = (value:string,id:number) => {
-  setSelectedPages(prevValues => {
-    const newValues = prevValues.filter(item => item !== value);
-    return newValues;
-    });
-
-    setSelectedPagesId(prevValues => {
-      const newValues = prevValues.filter(item => item !== id);
-      return newValues;
-      });
-  }
-
-  const typeSelect = (value:string) => {
-    setSelectedElement(value)
-  }
-  const unTypeSelect = (value:string) => {
-    setSelectedElement('')
-  }
-  const typeSelect2 = (value:string) => {
-    setSelectedElement2(value)
-  }
-  const unTypeSelect2 = (value:string) => {
-    setSelectedElement2('')
-  }
-  const selectLocation= (value:string) => {
-  setSelectedLocation(value)
-  }
-  const deSelectLocation = (value:string) => {
-    setSelectedLocation('')
-  }
-  const setMeueElements = async ()=>{
-    try {
-      setLoading(true);
-      const elements = await getLocations();
-      const countries = elements.map(element => element.country);
-      const countriesArr = elements.map(element => element.countryAr ?? '');
-      setCountriesAr(countriesArr);
-        setCountries(countries);
-      setElements(elements)
-      setLoading(false);
-      setError('')
-      
-    } catch (error:any) {
-      setLoading(false);
-      setError(error.messages);
-    }
-  }
-  useEffect(() => {
-    setMeueElements();
-    }, []);
  
   const handleIconChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -162,13 +77,8 @@ const CreateMarket = () => {
         } 
       });
      
-      if(selectedElement !== ''){
-        formData.append('name', selectedElement)
-      }
+    
 
-      if(selectedElement2 !== ''){
-        formData.append('nameAr', selectedElement2)
-      }
       console.log(JSON.stringify(formData, null, 2));
       try {
         setLoading(true);
@@ -187,10 +97,7 @@ const CreateMarket = () => {
       }
     }
 
-    const closeModel = (value:boolean) => {
-       setPageCreateShow(value);
-    }
-    
+ 
     
   return (
     // <div className=" bg-white"></div>
@@ -233,124 +140,25 @@ const CreateMarket = () => {
        
          
         <div className=" flex flex-wrap justify-between px-5 relative  pt-6 ">
-          <div className=" sm:flex-48  flex  flex-col z-20 w-full mb-5 ">
-              <label htmlFor="degree" className="font-medium mb-1.5 pl-0.5 text-sm text-gray-700 duration-300 capitalize">Market Name</label>
-              <div className="flex flex-col  w-full ">
-              <button
-                type="button"
-                onClick={() => {
-                  setMenuShow1((prevState) => {
-                    if (prevState == false) {
-                      setSelectedElement('');
-                    }
-                    return !prevState;
-                  });
-                }}
-                className="flex w-full bg-gray-50   items-center border gap-x-3 h-10 border-gray-200  px-2 rounded-2xl"
-              >
-                {selectedElement != '' ? (
-                  <span className="text-md inline-flex text-gray-600 font-medium">
-                        <span className="px-2 first:pl-0 border-r border-r-gray-300 last:border-none">{selectedElement}</span>
-                  </span>
-                ) : (
-                  <div className="text-md inline-flex text-gray-500 font-medium capitalize">
-                    <span className="px-1 capitalize text-sm">name </span>
-                  </div>
-                )}
-                <span className="ml-auto">
-                  <MdOutlineAddCircle className="text-2xl border-2 border-violet-800 rounded-full text-violet-800" />
-                </span>
-                <input type="hidden" {...register('name')}  name="name" value={selectedElement} />
-
-              </button> 
-                {menuShow1 &&
-                <div className="relative z-50">
-                  <MenuPanel menuElements={countries} setSelect={typeSelect} unSelect={unTypeSelect} />
-                </div>
-                    }
-              </div> 
-              <span className="text-red-400 text-xs mt-2">{errors.name?.message} </span>
-        </div>
-
-
-        <div className=" sm:flex-48 flex  flex-col z-20 w-full mb-5 ">
-                    <label htmlFor="degree" className="font-medium mb-1.5 pl-0.5 text-sm text-gray-700 duration-300 capitalize">Market Name arabic </label>
-                    <div className="flex flex-col  w-full ">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMenuShow2((prevState) => {
-                      if (prevState == false) {
-                        setSelectedElement2('');
-                      }
-                      return !prevState;
-                    });
-                  }}
-                  className="flex w-full bg-gray-50   items-center border gap-x-3 h-10 border-gray-200  px-2 rounded-2xl"
-                >
-                  {selectedElement2 != '' ? (
-                    <span className="text-md inline-flex text-gray-600 font-medium">
-                          <span className="px-2 first:pl-0 border-r border-r-gray-300 last:border-none">{selectedElement2}</span>
-                    </span>
-                  ) : (
-                    <div className="text-md inline-flex text-gray-500 font-medium capitalize">
-                      <span className="px-1 capitalize text-sm">name arabic</span>
-                    </div>
-                  )}
-                  <span className="ml-auto">
-                    <MdOutlineAddCircle className="text-2xl border-2 border-violet-800 rounded-full text-violet-800" />
-                  </span>
-                  <input type="hidden" {...register('nameAr')}  name="nameAr" value={selectedElement2} />
-                </button> 
-                  {menuShow2 &&
-                  <div className="relative z-50 font-arabic">
-                    <MenuPanel menuElements={countriesAr} setSelect={typeSelect2} unSelect={unTypeSelect2} />
-                  </div>
-                      }
-                </div> 
-                <span className="text-red-400 text-xs mt-2">{errors.nameAr?.message} </span>
-        </div>
-
-        <div className=" flex-100  flex  flex-col z-10 w-full mb-5 ">
-                    <label htmlFor="degree" className="font-medium mb-1.5 pl-0.5 text-sm text-gray-700 duration-300 capitalize">Location </label>
-                    <div className="flex flex-col  w-full ">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setLocationShow((prevState) => {
-                      if (prevState == false) {
-                        setSelectedLocation('');
-                      }
-                      return !prevState;
-                    });
-                  }}
-                  className="flex w-full bg-gray-50   items-center border gap-x-3 h-10 border-gray-200  px-2 rounded-2xl"
-                >
-                  {selectedElement2 != '' ? (
-                    <span className="text-md inline-flex text-gray-600 font-medium">
-                          <span className="px-2 first:pl-0 border-r border-r-gray-300 last:border-none">{selectedLocation}</span>
-                    </span>
-                  ) : (
-                    <div className="text-md inline-flex text-gray-500 font-medium capitalize">
-                      <span className="px-1 capitalize text-sm">Location</span>
-                    </div>
-                  )}
-                  <span className="ml-auto">
-                    <MdOutlineAddCircle className="text-2xl border-2 border-violet-800 rounded-full text-violet-800" />
-                  </span>
-                  <input type="hidden" {...register('location')}  name="location" value={selectedLocation} />
-                </button> 
-                  {locationShow &&
-                  <div className="relative z-50 font-arabic">
-                    <MenuPanel menuElements={countries} setSelect={selectLocation} unSelect={deSelectLocation} />
-                  </div>
-                      }
-                </div> 
-                <span className="text-red-400 text-xs mt-2">{errors.nameAr?.message} </span>
-        </div>
-
-          
-
+       
+             <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> name</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('name')}  type="text" name="name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="name ...." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.name?.message} </span>
+            </div>
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="nameAr" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> name arabic</label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('nameAr')}  type="text" name="nameAr" id="nameAr" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="nara arabic...." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.nameAr?.message} </span>
+            </div>
             <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="title" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> title</label>
                     <div className="flex items-center w-full">
@@ -371,29 +179,12 @@ const CreateMarket = () => {
                     <span className="text-red-400 text-xs mt-2">{errors.titleAr?.message} </span>
             </div>
 
-            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="topTitle" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> Top Title </label>
-                    <div className="flex items-center w-full">
-                        <div className="relative flex w-full">
-                        <input {...register('topTitle')}  type="text" name="topTitle" id="topTitle" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Top Title ...." required />
-                        </div>
-                    </div> 
-                    <span className="text-red-400 text-xs mt-2">{errors.topTitle?.message} </span>
-            </div>
+          
 
-            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="topTitlAr" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> Top Title Arabic </label>
-                    <div className="flex items-center w-full">
-                        <div className="relative flex w-full">
-                        <input {...register('topTitlAr')}  type="text" name="topTitleAr" id="topTitleAr" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Top Title Arabic ...." required />
-                        </div>
-                    </div> 
-                    <span className="text-red-400 text-xs mt-2">{errors.topTitlAr?.message} </span>
-            </div>
+           
 
 
-
-            <div className="flex flex-100 items-center mb-4 justify-center w-full">
+            <div className="flex flex-48 items-center mb-4 justify-center w-full">
                     <label htmlFor="image" className="flex flex-col items-center justify-center w-full h-36 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
                         <div className="flex flex-col items-center justify-center pt-2 pb-3">
                         {imageSrc ? (
@@ -418,9 +209,9 @@ const CreateMarket = () => {
 
             </div> 
 
-            <div className="flex flex-100 items-center mb-4 justify-center w-full">
+            <div className="flex flex-48 items-center mb-4 justify-center w-full">
                     <label htmlFor="icon" className="flex flex-col items-center justify-center w-full h-36 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50  hover:bg-gray-100">
-                        <div className="flex flex-col w-26 items-center justify-center pt-2 pb-3">
+                        <div className="flex flex-col w-32 items-center justify-center pt-2 pb-3">
                         {iconSrc ? (
                         <Image className='rounded-md w-full h-full'
                             src={iconSrc}
@@ -463,19 +254,7 @@ const CreateMarket = () => {
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
             </div>
-            <div className=" flex sm:flex-100 flex-col z-0 w-full mb-5 group">
-              <button 
-                  type='button'
-                  onClick={()=> setPageCreateShow(true)}
-                  className='capitalize text-md w-full py-1 rounded border border-gray-300 bg-gray-50 text-gray-800'
-                >
-                add Pages
-              </button>
-            </div>
-
-          
-          
-           
+         
            
         </div>
         <div className="py-2 w-full flex  border-t-gray-300 left-0 bottom-0 bg-white pr-3">
@@ -487,9 +266,7 @@ const CreateMarket = () => {
                 </div>
             </div>
     </form>
-    {pageCreateShow  && basicId > 0 &&
-    <PagesPanel id={basicId} closePanel={closeModel} selectElement={setSelect} deSelectElement={deSelect} />
-    }
+   
     </>
     
   );

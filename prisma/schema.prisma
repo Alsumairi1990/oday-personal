@@ -356,6 +356,21 @@ model Offer {
   userId        String // References one specific user (modified)
   user          User     @relation(fields: [userId], references: [id])
 }
+
+model Page {
+  id            Int      @id @default(autoincrement())
+  name          String
+  nameAr        String
+  description   String?
+  descriptionAr String?
+  title         String?
+  titleAr       String?
+  image         String?
+  icon          String?
+  marketPages   MarketPage[] 
+   userId        String // References one specific user (modified)
+  user          User     @relation(fields: [userId], references: [id])
+}
 model Market {
   id            Int      @id @default(autoincrement())
   name          String
@@ -371,8 +386,19 @@ model Market {
   icon          String   // Storing file paths or URLs for icons
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
-    userId        String // References one specific user (modified)
+  marketPages   MarketPage[] 
+  userId        String // References one specific user (modified)
   user          User     @relation(fields: [userId], references: [id])
+}
+model MarketPage {
+  marketId    Int
+  pageId    Int
+  url         String?   // Optional URL field for this specific relation
+
+  market      Market     @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  mrPage      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+
+  @@id([marketId, pageId]) // Composite primary key
 }
 
 model Location {
@@ -512,7 +538,7 @@ model User {
   industry        Industry[]
   offers          Offer[]
   markets         Market[]
-
+  pages           Page[]
   aboutUs AboutUsSection[]
 
   @@map(name: "users")

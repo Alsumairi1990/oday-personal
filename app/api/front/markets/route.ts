@@ -3,12 +3,13 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/utils/prisma'; // Ensure the path is correct
 import { Market, Service } from '@prisma/client';
+import { MarketWithModels } from '@/app/[locale]/admin/market/_utils/MarketWithModels';
 
 export async function GET() {
 
   try {
     // Fetch services using the caching logic
-    const element = await getServices();
+    const element = await getMarkets();
     if (element) {
         return NextResponse.json(element); // Return a single object
       } else {
@@ -19,12 +20,19 @@ export async function GET() {
   }
 }
 
-async function getServices(): Promise<Market | null> {
+async function getMarkets(): Promise<MarketWithModels[] | null> {
   try {
-    const element = await prisma.market.findFirst({
-     
+    const marketsWithPages = await prisma.market.findMany({
+      include: {
+        marketPages: {
+          include: {
+            mrPage: true, // Include the related MrPage data
+          },
+        },
+      },
     });
-    return element ;
+    
+    return marketsWithPages as MarketWithModels[];
   } catch (error) {
     console.error('Error fetching market:', error);
     throw new Error('Failed to fetch market');

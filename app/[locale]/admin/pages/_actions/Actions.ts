@@ -4,38 +4,9 @@ import { getServerSession } from "next-auth";
 import authOptions from "@/utils/AuthOptions";
 import fs from "fs/promises"
 import prisma from "@/utils/prisma";
-import { MarketSchema } from "../_utils/MarketSchema";
-import { Location, Market } from "@prisma/client";
-
-export async function addMarketPage(id:number,formData:FormData):Promise<string | null>{
-  const pageId = formData.get('page_id') as string;
-  const url = formData.get('url') as string;
-  console.log("-------------------------------------- page_id"+pageId);
-  console.log("-------------------------------------- Url"+url);
-
-
-  if (!id || !pageId || !url) {
-    throw new Error('Missing required fields: market_id, page_id, or url');
-  }
-
-  try {
-    // Create a new relation in the join table with the URL
-    const newMarketMrPageRelation = await prisma.marketPage.create({
-      data: {
-        market: { connect: { id: id } }, 
-        mrPage: { connect: { id: parseInt(pageId) } },   // Connect the existing MrPage
-        url,  // Store the URL for this specific relation
-      },
-    });
-
-    return newMarketMrPageRelation.url ;
-  } catch (error) {
-    console.error('Error associating page with market:', error);
-    throw error;
-  }
-
-  
-}
+import { Location, Market, Page } from "@prisma/client";
+import { MarketSchema } from "../../market/_utils/MarketSchema";
+import { PageSchema } from "../_utils/PageSchema";
 
 //edit markte by id 
 export async function editMarket(data:FormData,id:number,market:Market):Promise<number>{
@@ -110,8 +81,8 @@ export async function getMarketByName(id:number):Promise<Market | null>{
 
 }
 // get all markets
-export async function getMarkets(): Promise<Market[]> {
-  const elements = await prisma.market.findMany({
+export async function getPages(): Promise<Page[]> {
+  const elements = await prisma.page.findMany({
   });
   return elements;
 }
@@ -128,7 +99,7 @@ export async function getLocations(): Promise<Location[]> {
 // creating Market  info
 export async function  addBasic(data:FormData):Promise<number>{
     try {
-     const result = MarketSchema.safeParse(Object.fromEntries(data.entries()))
+     const result = PageSchema.safeParse(Object.fromEntries(data.entries()))
      const session = await getServerSession(authOptions);
      if (!session) {
        throw new Error('User not authenticated');
@@ -139,31 +110,28 @@ export async function  addBasic(data:FormData):Promise<number>{
        let imagePath = '';
        let iconPath = '';
        if(data.image && data.image.name){
-         await fs.mkdir("public/market/images", { recursive: true })
-         imagePath = `/market/images/${crypto.randomUUID()}-${data.image.name}`
+         await fs.mkdir("public/page-media/images", { recursive: true })
+         imagePath = `/page-media/images/${crypto.randomUUID()}-${data.image.name}`
          const buffer = Buffer.from(await data.image.arrayBuffer());
          await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
          }
          if(data.icon && data.icon.name){
-            await fs.mkdir("public/market/icons", { recursive: true })
-            iconPath = `/market/icons/${crypto.randomUUID()}-${data.image.name}`
+            await fs.mkdir("public/page-media/icons", { recursive: true })
+            iconPath = `/page-media/icons/${crypto.randomUUID()}-${data.image.name}`
             const buffer = Buffer.from(await data.icon.arrayBuffer());
             await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
             }
-         const basic = await prisma.market.create({
+         const basic = await prisma.page.create({
            data: {
              name: data.name,
              nameAr : data.nameAr,
              title : data.title,
              titleAr : data.titleAr,
-             topTitle : data.topTitle,
-             topTitlAr : data.topTitlAr,
              description : data.description,
              descriptionAr : data.descriptionAr,
              image : imagePath,
              icon : iconPath,
              userId : userId,
-             location : data.location
            },
          });         
          return basic.id;

@@ -1,35 +1,36 @@
 "use client";
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Category, MenuParent} from '@prisma/client';
+import { Category, MenuParent, Page} from '@prisma/client';
 import { LuAlertOctagon } from "react-icons/lu";
 import { GrSelect } from "react-icons/gr";
 import { MdAssignmentAdd } from "react-icons/md";
 import { IoMdCloseCircle } from "react-icons/io";
 import Image from 'next/image'
 import { FiPlusCircle } from "react-icons/fi";
-import { getMenuParent } from '../_actions/Action';
-import MenuParentCreate from './MenuParentCreate';
 import { removeProjectCategory } from '@/app/[locale]/admin/projects/_actions/Actions';
 import { PiImageThin } from 'react-icons/pi';
+import { getMenuParent } from '../../setting/left-nav/_actions/Action';
+import MenuParentCreate from '../../setting/left-nav/_components/MenuParentCreate';
+import { getPages } from '../../pages/_actions/Actions';
+import { addMarketPage } from '../_actions/Actions';
 
 interface Props {
-    menuId? : string,
+    id? : number,
     closePanel : (value:boolean) => void,
-    selectElement : (value:string,value2:string) => void,
-    deSelectElement : (value:string,value2:string) => void
+    selectElement : (value:string,value2:number) => void,
+    deSelectElement : (value:string,value2:number) => void
   }
-const ParentPanel = ({menuId,closePanel,selectElement,deSelectElement}:Props) => {
+const PagesPanel = ({id,closePanel,selectElement,deSelectElement}:Props) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
     const [element, setElement ]= useState<MenuParent>(); 
-    const [elements, setElements ]= useState<MenuParent[]>(); 
+    const [elements, setElements ]= useState<Page[]>(); 
     const [trigger, setTrigger] = useState(0);
     const [showDelete, setShowDelete] = useState(false);
     const [baseUrl, setBaseUrl] = useState<string>('');
     const [categoryNames, setCategoryNames] = useState<Category[]>([]);
-    const [selectedElement, setSelectedElement] = useState<string[]>([]);
-    const [selectedElementIds, setSelectedElementIds] = useState<number[]>([]);    
+
     const [error, setError] = useState<string | null>(null);
     const [showAddTool , setShowAddTool ] = useState<boolean>(false);
     const [showRemoveTool , setShowRemoveTool] = useState<boolean>(false);
@@ -44,15 +45,11 @@ const ParentPanel = ({menuId,closePanel,selectElement,deSelectElement}:Props) =>
     setBaseUrl(`${protocol}//${host}`);
 }, []);
 
-
-
-const getSelected= (selected:string,title:string)=>{
-    selectElement(selected,title);
-    setSvalue(selected)
+const getSelected= (name:string,id:number)=>{
+    selectElement(name,id);
    }
-   const unSelected = (selected:string,title:string) => {
-    deSelectElement(selected,title);
-    setSvalue('');
+   const unSelected = (name:string,id:number) => {
+    deSelectElement(name,id);
    }
    const addCategoryName = (name:string)=>{
     // setCategoryName(name);
@@ -62,7 +59,7 @@ const getSelected= (selected:string,title:string)=>{
     
     try {
       setLoading(true);
-    //   const tools = await removeProjectCategory(menuId,removedTool);
+    //   const tools = await removeProjectCategory(id,removedTool);
     //   setLoading(false);
     //  setCategoryNames(tools);
      setError(null);
@@ -78,7 +75,7 @@ const getSelected= (selected:string,title:string)=>{
   const getMenuParentElements = async ()=>{
     try {
         setLoading(true)
-         const element =  await getMenuParent();
+         const element =  await getPages();
          setElements(element)
          setError('')
     } catch (error:any) {
@@ -96,7 +93,21 @@ const getSelected= (selected:string,title:string)=>{
 const closeModel = (flag:boolean) => {
     setShowAddTool(flag);
 }
-  
+
+const addPage = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault(); // Prevent form from submitting normally
+
+    const formData = new FormData(e.currentTarget); // Automatically collects the form data
+    // const id = "someId"; // Replace this with how you're getting the `id`
+
+    try {
+        const response = await addMarketPage(Number(id), formData);
+        console.log("Page added:", response);
+    } catch (error: any) {
+        setError(error.message);
+    }
+};
+
   return (
     <div className="w-full h-full bg-[#0003]  m-auto fixed left-0 top-0 flex items-center justify-center sm:p-4 pb-0 z-50 ">
     {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
@@ -213,21 +224,21 @@ const closeModel = (flag:boolean) => {
                </div>
            </div>
            
-           <div className="grid grid-cols-2 sm:grid-cols max-sm:gap-4  max-sm:gap-y-8 sm:gap-x-2  sm:max-h-44 mt-2 overflow-y-auto">
+           <div className="grid grid-cols-1 sm:grid-cols max-sm:gap-4  max-sm:gap-y-8 sm:gap-x-2  sm:max-h-44 mt-2 overflow-y-auto">
                
               {elements && elements.length > 0 ? (
                elements.filter((element) =>
-                   element.title.toLowerCase().includes(searchTerm.toLowerCase())
+                   element.name.toLowerCase().includes(searchTerm.toLowerCase())
                )
                .map((element, index) => (
-                   <div className=" relative border bg-gray-50 flex flex-wrap my-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 " >
-                    <div className="sm:flex-15 flex-100 max-sm:h-8 sm:h-8  rounded-l-md  border-r border-r-gray-200">
+                <form onSubmit={addPage} className=" relative border bg-gray-50 flex flex-wrap my-2 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 " >
+                    <div className="sm:flex-10 flex-100 max-sm:h-8 sm:h-8  rounded-l-md  border-r border-r-gray-200">
                         {element.icon ?(<img className=' sm:h-full rounded-l-md' src={`${baseUrl}/${element?.icon}`} alt="" />)
                         :
                         <PiImageThin className="text-xl text-gray-500 rounded  items-center justify-center bg-gray-50 inline-flex w-full h-full " />
                     }
                     </div>
-                    <div className=" flex-100 sm:flex-70 sm:h-8 sm:flex sm:mx-auto items-center bg-white border-r border-r-gray-200 rounded-l-md">
+                    <div className=" flex-100 sm:flex-30 sm:h-8 sm:flex sm:mx-auto items-center bg-white border-r border-r-gray-200 rounded-l-md">
                           
                            <div className="pl-4  w-full">
                                <div className="w-full flex items-center">
@@ -235,35 +246,21 @@ const closeModel = (flag:boolean) => {
                                </div>
                            </div>
                    </div>
+                   <input type="hidden" name="page_id" value={element.id} />
+                   <div className="sm:flex-45 bg-white border-r h-full border-r-gray-300">
+                      <input type="text" name='url' className='bg-transparent w-full h-full pl-1 outline-none border-0 placeholder:text-gray-400 placeholder:text-sm' placeholder='page url' />
+                   </div>
                     <div className="flex flex-100 gap-x-2 sm:flex-15  justify-center items-center  ">
                     <div className="inline-flex  z-20 bg-white  justify-center rounded-md">
-                        <label className="relative bg-whit justify-center flex items-center  rounded-full cursor-pointer" htmlFor="parent">
-                            <input type="radio"
-                                className="before:content[''] peer relative h-[18px] w-[18px] cursor-pointer appearance-none rounded-md border !border-[#ccc] transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-indigo-600 checked:bg-indigo-600 checked:before:bg-indigo-600 hover:before:opacity-10"
-                                id="parent"  
-                                name='parent'
-                                onChange={(e) => {
-                                    const isChecked = e.target.checked;
-                                    if (isChecked) {
-                                    getSelected(String(element?.id),element.title);
-                                    } else {
-                                    unSelected(String(element?.id),element.title);
-                                    }
-                                }}
-                                />
-                            <span
-                            className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
-                                stroke="currentColor" stroke-width="1">
-                                <path fill-rule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clip-rule="evenodd"></path>
-                            </svg>
-                            </span>
-                        </label>
+                             <button 
+                            //  onClick={()=> }
+                             className='rounded bg-indigo-600 px-4 py-0.5 h-full inline-flex text-white capitalize text-sm'
+                             >
+                                Add 
+                             </button>
                     </div> 
                     </div>
-                </div>
+                </form>
                        
                ))
                ) : (
@@ -303,7 +300,7 @@ const closeModel = (flag:boolean) => {
   );
 };
 
-export default ParentPanel;
+export default PagesPanel;
 
 
 

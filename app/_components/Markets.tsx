@@ -9,11 +9,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FiArrowRight } from 'react-icons/fi';
 import { LuArrowRight } from 'react-icons/lu';
+import { MarketWithModels } from '../[locale]/admin/market/_utils/MarketWithModels';
 interface Props {
+  markets : MarketWithModels[],
   locale : string,
   messages : AbstractIntlMessages
 }
-const Markets = async ({locale,messages}:Props) => {
+const Markets = async ({markets,locale,messages}:Props) => {
     const img1 = "/images/market.webp";
     const m1 = "/market/images/saudi-3.jpg";
     const m2 = "/market/images/malaysia-4.jpg";
@@ -31,7 +33,7 @@ const Markets = async ({locale,messages}:Props) => {
     <div className=" m-h-lvh sm:h-[30rem] justify-center pb-4 sm:pb-0 pt-8 flex  px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${img1})`}}>
       <div className="">
       <div className="flex flex-col gap-y-2 items-center mb-5">
-      <h2 className="text-gray-50 rtl:font-arabic text-2xl font-semibold">{title}</h2>
+      <h2 className="text-gray-50 rtl:font-arabic text-2xl font-semibold">m {markets.length}--{title}</h2>
       <p className="text-md text-gray-100 rtl:font-arabic ">{subTitle}</p>
       </div>
       <div className="grid grid-cols-1  mx-auto sm:grid-cols-3 sm:w-11/12 gap-6 pb-5">
