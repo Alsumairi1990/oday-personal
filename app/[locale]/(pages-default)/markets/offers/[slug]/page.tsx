@@ -10,6 +10,8 @@ import { WorkSingleData } from "@/app/[locale]/admin/works/utils/WorkSingleData"
 import MarketWorkCard from "@/app/_components/work/MarketWorkCard";
 import Works from "@/app/_components/work/Works";
 import MarketOfferCard from "@/app/_components/offer/MarketOfferCard";
+import Hero from "@/app/_components/HeroSect";
+import GeneralHero from "@/app/_components/GeneralHero";
 
 interface Props {
   params: {
@@ -24,23 +26,34 @@ const ServiceMarketPage = async ({params}:Props) => {
    method: 'GET',
    next: { revalidate: 1800 }, // Revalidate for ISR if needed
  });
+ const page = 'MarketOffers'
+ const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
+   method: 'GET',
+   next: { revalidate: 3600 }, // Optional revalidation for ISR (30 minutes)
+ });
+
  const offersPage = await fetch(`${process.env.NEXTAUTH_URL}/api/front/offers/location/${params.slug}`, {
     method: 'GET',
     next: { revalidate: 3600 }, // Optional revalidation for ISR (30 minutes)
   });
-  const offersData:Offer[] = await offersPage.json();
-
+ const offersData:Offer[] = await offersPage.json();
+ const heroData = await hero.json();
  const sectionMeta:PageSection[] = await sections.json();
  const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
  const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
  const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
  
-
+//  const pageName = params.slug.replace(/-/g, ' ');
+ const pageName = (messages as any).Common.markets;
 
   return (
-     <div className="w-full mt-10 sm:mt-16">
+     <div className="w-full">
+             <div className="w-full ">    
 
-         <div className="dark:w-11/12 mx-auto  dark:bg-[rgb(17,17,17)]">
+        
+        {heroData && <GeneralHero    heroData={heroData} locale={locale} messages={messages} page={pageName}/> }
+       </div>
+         <div className="dark:w-11/12 mx-auto  mt-10 dark:bg-[rgb(17,17,17)]">
             <div className="grid sm:grid-cols-4">
             {offersData.length > 0  && 
              offersData.map((offer) => (

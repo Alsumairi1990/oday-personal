@@ -73,7 +73,8 @@
       "loctaionTitle" : "Our Matketplaces",
       "locationSubTitle" : "Our List of markets for services and products where main offices exist in these countries for services and products",
       "servicesNavHeader" : "Our Services",
-      "categoriesNavHeader" : "Service Categories"
+      "categoriesNavHeader" : "Service Categories",
+      "markets" : "markets"
 
    
     }

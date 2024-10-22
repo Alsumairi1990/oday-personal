@@ -72,7 +72,9 @@
        "loctaionTitle" : "بوابة المتاجر الرئيسية",
        "locationSubTitle" : "قائمة المتاجر الرئيسية للخدمات والمنتجات حيث يتواجد فروع الشركة ومكاتبها للخدمات",
        "servicesNavHeader" : "قائمة خدمات الشركة",
-       "categoriesNavHeader" : "مجالات الخدمات "
+       "categoriesNavHeader" : "مجالات الخدمات ",
+       "markets" : "المتاجر"
+
 
 
     }
