@@ -12,6 +12,7 @@ import Works from "@/app/_components/work/Works";
 import MarketOfferCard from "@/app/_components/offer/MarketOfferCard";
 import Hero from "@/app/_components/HeroSect";
 import GeneralHero from "@/app/_components/GeneralHero";
+import MarketHero from "@/app/_components/market/MarketHero";
 
 interface Props {
   params: {
@@ -26,6 +27,12 @@ const ServiceMarketPage = async ({params}:Props) => {
    method: 'GET',
    next: { revalidate: 1800 }, // Revalidate for ISR if needed
  });
+
+ const marketData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/markets/${params.slug}`, {
+  method: 'GET',
+  next: { revalidate: 1800 }, // Optional revalidation for ISR (30 minutes)
+});
+
  const page = 'MarketOffers'
  const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
    method: 'GET',
@@ -37,6 +44,8 @@ const ServiceMarketPage = async ({params}:Props) => {
     next: { revalidate: 3600 }, // Optional revalidation for ISR (30 minutes)
   });
  const offersData:Offer[] = await offersPage.json();
+
+ const market:Market = await marketData.json();
  const heroData = await hero.json();
  const sectionMeta:PageSection[] = await sections.json();
  const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
@@ -48,10 +57,8 @@ const ServiceMarketPage = async ({params}:Props) => {
 
   return (
      <div className="w-full">
-             <div className="w-full ">    
-
-        
-        {heroData && <GeneralHero    heroData={heroData} locale={locale} messages={messages} page={pageName}/> }
+       <div className="w-full ">  
+            {heroData && <MarketHero    heroData={heroData} locale={locale} messages={messages} page={pageName} market={market}/> }
        </div>
          <div className="dark:w-11/12 mx-auto  mt-10 dark:bg-[rgb(17,17,17)]">
             <div className="grid sm:grid-cols-4">

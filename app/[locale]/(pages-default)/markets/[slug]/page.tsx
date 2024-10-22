@@ -92,55 +92,7 @@ const Serivice = async ({params}:Props) => {
                {market &&  <HeroSection  market={market} locale={locale} messages={messages} /> }
          </div>
 
-        <div className="py-4 px-8 pt-0 w-full">
-           <div className="flex ">
-            <div className="flex-35 p-2 pt-0 ">
-               <div className="flex flex-wrap  justify-between">
-                 <span className="text-black-100 uppercase text-sm mb-2">KNOW US BETTER</span>
-               </div>
-               <h2 className="text-3xl font-bold text-gray-">What Company Do?</h2>
-               <div className="flex mt-4">
-                  <p className="text-sm leading-7 text-gray-900">Webvolty is an Indian  IT Company for Website Development, Web Designing, Mobile App Development, Software Development, Web Hosting, Search Engine Optimization, Mobile Solutions and lot many IT and IT Enabled Services.</p>
-               </div>
-            </div>
-            <div className="flex-20 p-2">
-               <div className="bg-[#f9f9f9] px-2 py-3 text-center rounded-md">
-                  <div className="flex justify-center">
-                     <img src="https://www.webvolty.com/img/about/Years_Experience.png" alt="" />
-                  </div>
-                  <div className="p2 mt-3">
-                     <p className="text-gray-800 text-2xl mb-2 font-bold pb-2">154+</p>
-                     <p className="text-gray-700 text-base">Yers of Experience in Design</p>
-                  </div>
-               </div>
-            </div>
-
-            <div className="flex-20 p-2">
-               <div className="bg-[#f9f9f9] px-2 py-3 text-center rounded-md">
-                  <div className="flex justify-center">
-                     <img src="https://www.webvolty.com/img/about/Years_Experience.png" alt="" />
-                  </div>
-                  <div className="p2 mt-3">
-                     <p className="text-gray-800 text-2xl mb-2 font-bold pb-2">154+</p>
-                     <p className="text-gray-700 text-base">Yers of Experience in Design</p>
-                  </div>
-               </div>
-            </div>
-
-            <div className="flex-20 p-2">
-               <div className="bg-[#f9f9f9] px-2 py-3 text-center rounded-md">
-                  <div className="flex justify-center">
-                     <img src="https://www.webvolty.com/img/about/Years_Experience.png" alt="" />
-                  </div>
-                  <div className="p2 mt-3">
-                     <p className="text-gray-800 text-2xl mb-2 font-bold pb-2">154+</p>
-                     <p className="text-gray-700 text-base">Yers of Experience in Design</p>
-                  </div>
-               </div>
-            </div>
-           
-           </div>
-        </div>
+      
 
 
 

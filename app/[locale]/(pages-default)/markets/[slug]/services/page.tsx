@@ -5,6 +5,7 @@ import HeroSection from "@/app/_components/market/HeroSection";
 import ServiceSingleCards from "@/app/_components/_services/ServiceSinglCards";
 import { WorksFrontData } from "@/app/[locale]/admin/works/utils/WorksFrontData";
 import Works from "@/app/_components/Works";
+import MarketHero from "@/app/_components/market/MarketHero";
 
 interface Props {
   params: {
@@ -16,11 +17,15 @@ const SeriviceMarketPage = async ({params}:Props) => {
    const locale= await getLocale();
    const messages = await getMessages({ locale });
  
- const marketData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/location/${params.slug}`, {
+ const marketData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/markets/${params.slug}`, {
       method: 'GET',
       next: { revalidate: 1800 }, 
     });
-    
+    const page = "market-services"
+    const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
+      method: 'GET',
+      next: { revalidate: 3600 }, // Optional revalidation for ISR (30 minutes)
+    });
  const serviceData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/location/${params.slug}`, {
    method: 'GET',
    next: { revalidate: 1800 }, // Optional revalidation for ISR (30 minutes)
@@ -29,10 +34,7 @@ const SeriviceMarketPage = async ({params}:Props) => {
    method: 'GET',
    next: { revalidate: 1800 }, // Revalidate for ISR if needed
  });
- const pageWorks = await fetch(`${process.env.NEXTAUTH_URL}/api/front/works/home`, {
-   method: 'GET',
-   next: { revalidate: 1800 }, // Revalidate for ISR if needed
- });
+
 
 
  
@@ -40,30 +42,24 @@ const SeriviceMarketPage = async ({params}:Props) => {
  const market:Market = await marketData.json();
 //  const service:ServiceForFront = await serviceData.json();
  const services:ServiceForFront[] = await serviceData.json();
- const works:WorksFrontData[] = await pageWorks.json();
+ const heroData = await hero.json();
 
  const sectionMeta:PageSection[] = await sections.json();
  const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
  const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
  const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
  
-
-
-
-
+ const pageName = (messages as any).Common.servicesPage;
 
  
 
 
   return (
      <div className="w-full">
-       {/* <div className="w-full mb-16">    
-               {market &&  <HeroSection  market={market} locale={locale} messages={messages} /> }
-         </div> */}
-
-
-
-
+      <div className="w-full pb-16">  
+        
+            {heroData && <MarketHero  heroData={heroData} locale={locale} messages={messages} page={pageName} market={market}/> }
+       </div>
         <div className='gray:bg-[#111]"'>{services.length}---------------------------
             {services.length> 0 && serviceMeta && <ServiceSingleCards services={services} meta={serviceMeta} />}
         </div>

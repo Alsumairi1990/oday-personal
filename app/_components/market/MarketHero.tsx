@@ -9,7 +9,7 @@ interface ServiceProps {
     page : string,
     market : Market
   }
-const GeneralHeroSection = ({ heroData, locale,messages,page,market }: ServiceProps) => {
+const MarketHero = ({ heroData, locale,messages,page,market }: ServiceProps) => {
     const talkToConsultant = (messages as any).CategoryPage.talkToConsultant;
     const home = (messages as any).Common.home;
   return (
@@ -21,14 +21,14 @@ const GeneralHeroSection = ({ heroData, locale,messages,page,market }: ServicePr
              <div className="flex-100 sm:flex-60">
                {locale == 'en' ? 
                <>
-                <span className="text-sm text-white mb-6 inline-block">{home} / {page} </span>
-                <h2 className="sm:text-4xl text-xl text-white font-extrabold mb-4">{heroData.title}</h2>
+                <span className="text-sm text-white mb-6 inline-block">{home} | {page} </span>
+                <h2 className="sm:text-3xl text-xl text-white font-extrabold mb-4">{heroData.title}{market.location}</h2>
                 </>
                 :
                 <>
-                <span className="text-sm text-white mb-6 inline-block">{home} / {page} </span>
-                <h2 className="sm:text-4xl text-xl text-white font-extrabold font-arabic mb-4">{heroData.titleAr}</h2>
-                <h2 className="text-base sm:text-2xl sm:leading-10 text-white font-bold line-clamp-2 sm:line-clamp-3 font-arabic mb-4">{heroData.subTitl}</h2>
+                <span className="text-[13px] font-arabic flex  items-center text-white mb-6">{home} <span className='text-[12px] px-2'>|</span> {page} </span>
+                <h2 className="sm:text-3xl text-xl text-white font-extrabold font-arabic mb-4">{heroData.titleAr}</h2>
+                <h2 className="text-base sm:text-md leading-8 sm:leading-8 text-white font-bold line-clamp-2 sm:line-clamp-3 font-arabic mb-4">{heroData.subTitlAr}</h2>
                 </>
                 }
                 {/* <p className="text-sm text-gray-100 font-medium leading-8">{category.description}</p> */}
@@ -54,4 +54,4 @@ const GeneralHeroSection = ({ heroData, locale,messages,page,market }: ServicePr
   );
 };
 
-export default GeneralHeroSection;
+export default MarketHero;
