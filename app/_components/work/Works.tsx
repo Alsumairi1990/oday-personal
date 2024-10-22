@@ -1,10 +1,9 @@
 
 import React from 'react';
-import { WorksFrontData } from '../[locale]/admin/works/utils/WorksFrontData';
 import { PageSection } from '@prisma/client';
-import WorkElement from './WorkElement';
-import GetMenuPanel from './GetMenuPanel';
 import { getLocale, getMessages } from 'next-intl/server';
+import { WorksFrontData } from '@/app/[locale]/admin/works/utils/WorksFrontData';
+import MarketWorkCard from './MarketWorkCard';
 
 interface Props{
     works : WorksFrontData[],
@@ -39,14 +38,10 @@ const elements = ['element1','element2']
         }
        
     </div>
-    <div className="p-1 mt-3 flex justify-center items-center border border-gray-200 bg-white sm:w-6/12 rounded-xl mx-auto py-2 px-6">
-      <div className=""><span className="text-md rtl:font-arabic rtl:ml-4 rtl:text-sm rtl:border-l rtl:pl-3 rtl:border-gray-300">{filterAdd}</span></div>
-       <div className="fle"><GetMenuPanel elements={elements} title={categoryOption}  /></div>
-       <div className="mx-3"><GetMenuPanel elements={elements} title={location} /></div>
-    </div>
+   
     <div className='grid grid-cols w-11/12 mx-auto sm:grid-cols-3 px-0 mt-6 py-4 gap-6'>
        {works && works.map((work)=>(
-        <WorkElement work={work} />
+        <MarketWorkCard work={work} />
        ))
     }
     </div>

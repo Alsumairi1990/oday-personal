@@ -67,22 +67,6 @@ const Markets = async ({markets,locale,messages}:Props) => {
                      <LuArrowRight className='text-base rtl:rotate-1 text-gray-800 ' />
                    </div>
                   ))}
-                  <div className="flex rounded px-2 gap-x-1 py-1 text-sm bg-gray-100 text-gray-800 items-center">
-                    <Link href={`/markets/saudi-arabia/services/`} className=' capitalize '>products</Link>
-                    <LuArrowRight className='text-base rtl:rotate-1 text-gray-800 ' />
-                  </div>
-                  <div className="flex rounded px-2 gap-x-1 py-1 text-sm bg-gray-100 text-gray-800 items-center">
-                    <Link href={`/markets/saudi-arabia/services/`} className=' capitalize '>Works</Link>
-                    <LuArrowRight className='text-base text-gray-800 ' />
-                  </div>
-                  <div className="flex rounded px-2 gap-x-1 py-1 text-sm bg-gray-100 text-gray-800 items-center">
-                    <Link href={`/markets/saudi-arabia/services/`} className=' capitalize '>Services</Link>
-                    <LuArrowRight className='text-base text-gray-800 ' />
-                  </div>
-                  <div className="flex rounded px-2 gap-x-1 py-1 text-sm bg-gray-100 text-gray-800 items-center">
-                    <Link href={`/markets/saudi-arabia/services/`} className=' capitalize '>categories</Link>
-                    <LuArrowRight className='text-base text-gray-800 ' />
-                  </div>
                 </div>
                 </>
                 :
