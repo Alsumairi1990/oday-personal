@@ -27,10 +27,10 @@ const BlogList = async ({ meta, posts }: Props) => {
           {posts &&
             posts.map((post) => (
               <div className="grid grid-cols-3 sm:grid-cols-2">
-                <div className="relative">
+                <div className="relative max-sm:h-20 rtl:rounded-r-md">
                   {post.image && (
                     <img
-                      className="w-full h-full mx-auto"
+                      className="w-full h-full mx-auto rtl:rounded-r-md"
                       src={post.image}
                       alt=""
                     />
@@ -40,7 +40,7 @@ const BlogList = async ({ meta, posts }: Props) => {
                     <span className="text-sm">MAR</span>
                   </div>
                 </div>
-                <div className="p-1 bg-[#1c1c1c] flex flex-col max-sm:col-span-2 max-sm:col-start-2">
+                <div className="p-1 bg-[#1c1c1c] flex flex-col max-sm:col-span-2 max-sm:col-start-2 rtl:rounded-l-md">
                   <div className="p-1 sm:p-4">
                     {locale == "en" ? (
                       <>
