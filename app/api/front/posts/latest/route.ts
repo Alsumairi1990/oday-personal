@@ -6,7 +6,7 @@ export async function GET() {
   try {
     // Fetch the latest 2 posts
     const latestPosts = await prisma.post.findMany({
-      take: 2, // Limit to latest 2 posts
+      take: 4, // Limit to latest 2 posts
     });
 
     return NextResponse.json(latestPosts);

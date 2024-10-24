@@ -3,6 +3,7 @@ import { Category, Service } from '@prisma/client';
 import { AbstractIntlMessages } from 'next-intl';
 import Link from 'next/link';
 import React from 'react';
+import Image from 'next/image';
 interface Props{
    services? : Service[],
    categories? : Category[],
@@ -13,10 +14,17 @@ interface Props{
 }
 const Footerk = ({services,categories,locale,messages}:Props) => {
    const bg = '/images/fotter-bg.webp';
+   const map = '/footer/footer-map.png'
    const servicesNavHeader = (messages as any).Common.servicesNavHeader;
    const categoriesNavHeader = (messages as any).Common.categoriesNavHeader;
+   const name = (messages as any).HomePage.ContactUs.name;
+   const email = (messages as any).HomePage.ContactUs.email;
+   const phonNo = (messages as any).HomePage.ContactUs.phonNo;
+   const subscribe = (messages as any).Common.subscribe;
 
- 
+
+
+   
 
 
   return (
@@ -31,13 +39,16 @@ const Footerk = ({services,categories,locale,messages}:Props) => {
              <div className="p-1.5">
                 <form action="" className="m-0">
                    <div className="grid grid-cols-2 sm:grid-cols-25/25/40/10">
-                      <div className="p-1 border-r border-gray-700">
-                        <input type="text" className="border-0 bg-transparent text-sm text-gray-300 py-2" placeholder="EMAIL ID"/>
+                      <div className="p-1 ltr:border-r rtl:border-l  border-gray-700">
+                        <input type="text" className="border-0 bg-transparent text-sm rtl:font-arabic text-gray-300 py-2" placeholder={name}/>
                         </div>
-                      <div className="p-1 border-r border-gray-700">
-                        <input type="text" className="border-0 bg-transparent text-sm text-gray-300 py-2 pl-2" placeholder="MOBILE NO" />
+                      <div className="p-1 ltr:border-r rtl:border-l rtl:pr-2  border-gray-700">
+                        <input type="text" className="border-0 bg-transparent text-sm rtl:font-arabic text-gray-300 py-2 pl-2" placeholder={email} />
                       </div>
-                      <div className="p-1 border-r border-gray-700">
+                      <div className="p-1 ltr:border-r rtl:border-l rtl:pr-2  border-gray-700">
+                        <input type="text" className="border-0 bg-transparent text-sm rtl:font-arabic text-gray-300 py-2 pl-2" placeholder={phonNo} />
+                      </div>
+                      {/* <div className="p-1 border-r border-gray-700">
                          <div className="flex-100 relative max-w-full p-1 search-top">
                             <div className="typ-opt ran-c flex py-[3px] rounded-lg search-otp-rnk items-center">
                                <div className="rnk-btn20 rnk-opt-btn pl-[5px] flex flex-col w-full">
@@ -84,8 +95,8 @@ const Footerk = ({services,categories,locale,messages}:Props) => {
                                </div>
                             </div>
                          </div>
-                      </div>
-                      <div className="p-1"><a href="http://" className="flex items-center bg-fuchsia-600 justify-center h-full rounded text-white text-sm">SUBMITE</a></div>
+                      </div> */}
+                      <div className="p-1"><a href="http://" className="flex items-center bg-fuchsia-600 justify-center h-full rounded text-white rtl:font-arabic text-sm">{subscribe}</a></div>
                    </div>
                 </form>
              </div>
@@ -131,37 +142,28 @@ const Footerk = ({services,categories,locale,messages}:Props) => {
                 </ul>
              </div>
           </div>
-          <div className="quick-links">
+          <div className="">
              <div className="mb-4">
-                <p><a href="" className="font-bold text-orange-400 border-b border-b-gray-400 text-sm pb-2 uppercase">Top Rankings</a></p>
+                <p><a href="" className="font-bold text-orange-400 rtl:font-arabic border-b border-b-gray-400 text-sm pb-2 uppercase">{servicesNavHeader}</a></p>
              </div>
-             <div className="text-gray-400 text-sm leading-7">
+             <div className="text-gray-200 text-sm leading-7">
                 <ul>
-                   <li><a href="">Technology</a></li>
-                   <li><a href="">Health</a></li>
-                   <li><a href="">Economics</a></li>
-                   <li><a href="">Tutorials</a></li>
-                   <li><a href="">News </a></li>
-                   <li><a href="">Arabic Calture</a></li>
+                  {
+                     services?.slice(0, 8).map((service)=> (
+                        <li>
+                           {locale === 'en' ? <Link className='capitalize' href={`/services/${service.name_slug}`}> {service.name} </Link>
+                           :<Link className='capitalize font-arabic' href={`/services/${service.name_slug}`}> {service.nameAr} </Link>
+                           }
+                        </li>
+
+                     ))
+                  }
+                  
                 </ul>
              </div>
           </div>
-          <div className="quick-links">
-             <div className="mb-4">
-                <p><a href="" className="font-bold text-orange-400 border-b border-b-gray-400 text-sm pb-2 uppercase">Histrories Stroy</a></p>
-             </div>
-             <div className="text-gray-400 text-sm leading-7">
-                <ul>
-                   <li><a href="">Home</a></li>
-                   <li><a href="">Power Comparison</a></li>
-                   <li><a href="">Equipment Gate</a></li>
-                   <li><a href="">Countries List</a></li>
-                   <li><a href="">Compare Search Panel</a></li>
-                   <li><a href="">Discover Country </a></li>
-                   <li><a href="">forces Details</a></li>
-                </ul>
-             </div>
-          </div>
+        
+        
        </div>
        <div className="border-t border-t-gray-700 flex h-14 items-center justify-center gap-2">
           <a href="http://" className="">
