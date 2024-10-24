@@ -17,6 +17,7 @@ import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 import { WorksFrontData } from './admin/works/utils/WorksFrontData'
 import { MarketWithModels } from './admin/market/_utils/MarketWithModels'
 import Markets from '../_components/market/Markets'
+import BlogList from '../_components/BlogList'
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
@@ -135,7 +136,7 @@ export default async function Home() {
      {aboutUS && <About aboutUS={aboutUS} /> }
      </div>
      <div className="dark:bg-[#111]">
-     {posts && blogsMeta && <Blogs meta={blogsMeta} posts={posts}  /> }
+     {posts && blogsMeta && <BlogList meta={blogsMeta} posts={posts}  /> }
      </div>
      <div className="">
      </div>

@@ -7,13 +7,11 @@ interface Props {
   meta: PageSection;
   posts: Post[];
 }
-const Blogs = async ({ meta, posts }: Props) => {
-  const imagePath = "/images/p1.webp";
-  const imagePath1 = "/images/p2.webp";
+const BlogList = async ({ meta, posts }: Props) => {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
   return (
-    <div className="flex w-[90%] mx-auto  items-center flex-col my-8">
+    <div className="flex w-11.6/12 sm:w-[90%] mx-auto  items-center flex-col my-8">
       +
       <div className="p-2">
         {locale == "en" ? (
@@ -28,7 +26,7 @@ const Blogs = async ({ meta, posts }: Props) => {
         <div className="grid sm:grid-cols-2 gap-3 mt-8">
           {posts &&
             posts.map((post) => (
-              <div className="grid sm:grid-cols-2">
+              <div className="grid grid-cols-3 sm:grid-cols-2">
                 <div className="relative">
                   {post.image && (
                     <img
@@ -37,34 +35,34 @@ const Blogs = async ({ meta, posts }: Props) => {
                       alt=""
                     />
                   )}
-                  <div className="absolute flex px-3 py-1.5 flex-col justify-center items-center bg-fuchsia-600 text-white top-0 left-0">
-                    <span className="text-lg font-semibold">05</span>
+                  <div className="absolute flex px-2 py-1 sm:px-3 sm:py-1.5 flex-col justify-center items-center bg-fuchsia-600 text-white top-0 left-0">
+                    <span className="text-base sm:text-lg font-semibold">05</span>
                     <span className="text-sm">MAR</span>
                   </div>
                 </div>
-                <div className="p-1 bg-[#1c1c1c] flex flex-col">
-                  <div className="p-4">
+                <div className="p-1 bg-[#1c1c1c] flex flex-col max-sm:col-span-2 max-sm:col-start-2">
+                  <div className="p-1 sm:p-4">
                     {locale == "en" ? (
                       <>
-                        <h2 className="text-gray-100 mb-2 text-base font-semibold">
+                        <h2 className="text-gray-100 sm:mb-2 text-md sm:text-base font-semibold">
                           {post.title}
                         </h2>
-                        <p className="text-[13px]  font-normal text-gray-200 line-clamp-4">
+                        <p className="text-[13px] max-sm:hidden font-normal text-gray-200 line-clamp-4">
                           {post.content}
                         </p>
                       </>
                     ) : (
                       <>
-                        <h2 className="text-gray-100 font-arabic mb-2 text-base font-semibold">
+                        <h2 className="text-gray-100 font-arabic sm:mb-2 text-md max-sm:leading-[26px] sm:text-base  font-semibold">
                           {post.titleAr}
                         </h2>
-                        <p className="text-[13px] font-arabic font-normal text-gray-200 leading-6 line-clamp-4">
+                        <p className="text-[13px] max-sm:hidden font-arabic font-normal text-gray-200 leading-6 line-clamp-4">
                           {post.contentAr}
                         </p>
                       </>
                     )}
                   </div>
-                  <div className="px-4 py-2 mb-2">
+                  <div className="px-4 py-2 mb-2 max-sm:hidden">
                     {locale == "en" ? (
                       <Link
                         href={"/services"}
@@ -114,4 +112,4 @@ const Blogs = async ({ meta, posts }: Props) => {
   );
 };
 
-export default Blogs;
+export default BlogList;
