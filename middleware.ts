@@ -38,7 +38,9 @@ export const config = {
     '/works/:path*',             
     '/(en|ar)/works/:path*', 
     '/markets/:path*',             
-    '/(en|ar)/markets/:path*',       
+    '/(en|ar)/markets/:path*', 
+    '/products/:path*',             
+    '/(en|ar)/products/:path*',       
     '/(en|ar)/:path*',             
   ],
 };
