@@ -14,15 +14,25 @@ const BlogList = async ({ meta, posts }: Props) => {
     <div className="flex w-11.6/12 sm:w-[90%] mx-auto  items-center flex-col my-8">
       +
       <div className="p-2">
+        <div className="relative">
         {locale == "en" ? (
           <h2 className="text-base sm:text-3xl font-bold text-blue-600 dark:text-white mt-3 text-center">
             {meta.title}
           </h2>
         ) : (
-          <h2 className="text-base sm:text-3xl font-bold font-arabic text-blue-600 dark:text-white mt-3 text-center">
+          <div className="mt-8 flex justify-center relative  " >
+
+          <h2 className="text-base  sm:text-xl font-bold z-10 font-arabic text-blue-600 dark:text-white mt-3 text-center
+          relative after:content[''] after:absolute after:top-1/2 after:transform after:-translate-y-1/2 after:border-y-[15px] after:border-l-[25px] after:border-r-[0px] after:border-y-transparent after:-right-[27px]  
+                before:content[''] before:absolute before:top-1/2 before:transform before:-translate-y-1/2 before:border-y-[15px] before:border-r-[25px] before:border-l-[0px] before:border-y-transparent before:-left-[27px]   text-md px-2.5 rounded-md py-1.5  bg-gray-200
+          ">
             {meta.titleAr}
           </h2>
+          <span className="h-[0.1rem] w-full bg-gray-300 dark:bg-gray-800 absolute z-0 top-[60%]">
+          </span>
+          </div>
         )}
+        </div>
         <div className="grid sm:grid-cols-2 gap-3 mt-8">
           {posts &&
             posts.map((post) => (
@@ -96,8 +106,8 @@ const BlogList = async ({ meta, posts }: Props) => {
             ) : (
               <Link
                 href={"/blog"}
-                className="capitalize font-arabic border z-10 relative 
-                after:content[''] after:absolute after:top-1/2 after:transform after:-translate-y-1/2 after:border-y-[18px] after:border-l-[30px] after:border-r-[0px] after:border-y-transparent after:-right-[30px]  
+                className="capitalize font-arabic border z-10 
+                relative after:content[''] after:absolute after:top-1/2 after:transform after:-translate-y-1/2 after:border-y-[18px] after:border-l-[30px] after:border-r-[0px] after:border-y-transparent after:-right-[30px]  
                 before:content[''] before:absolute before:top-1/2 before:transform before:-translate-y-1/2 before:border-y-[18px] before:border-r-[30px] before:border-l-[0px] before:border-y-transparent before:-left-[30px]  border-orange-600 text-gray-50 text-md px-2.5 rounded-md py-1.5 font-semibold bg-orange-600 "
               >
                 {meta.moreAr}{" "}

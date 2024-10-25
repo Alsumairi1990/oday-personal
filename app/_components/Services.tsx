@@ -76,12 +76,28 @@ const Services = async ({categories,meta}:Props) => {
          ))}
 
         </div>
-        <div className="mt-8 flex justify-center">
-        
-        {locale == 'en' ? <Link href={'/services/categories'} className="capitalize text-gray-700  px-2.5 rounded py-1.5 font-semibold bg-gray-100 ">{meta.more} </Link>
-                  : <Link href={'/services/categories'} className="capitalize font-arabic text-gray-700  px-2.5 rounded py-1.5 font-semibold bg-gray-100 "> {meta.moreAr} </Link> 
-                  // <h2 className="text-xl  rtl:font-bold rtl:mb-3 text-center px-3 mb-6 text-blue-700 dark:text-white font-normal">{service.nameAr}</h2>
-                  }
+        <div className="mt-8 flex justify-center relative " >
+          {
+            locale == "en" ? (
+              <Link
+                href={"/blog"}
+                className="capitalize text-gray-700 z-10 px-2.5 rounded py-1.5 font-semibold bg-gray-100 "
+              >
+                {meta.more}{" "}
+              </Link>
+            ) : (
+              <Link
+                href={"/blog"}
+                className="capitalize font-arabic border z-10 
+                relative after:content[''] after:absolute after:top-1/2 after:transform after:-translate-y-1/2 after:border-y-[18px] after:border-l-[30px] after:border-r-[0px] after:border-y-transparent after:-right-[30px]  
+                before:content[''] before:absolute before:top-1/2 before:transform before:-translate-y-1/2 before:border-y-[18px] before:border-r-[30px] before:border-l-[0px] before:border-y-transparent before:-left-[30px]  border-orange-600 text-gray-50 text-md px-2.5 rounded-md py-1.5 font-semibold bg-orange-600 "
+              >
+                {meta.moreAr}{" "}
+              </Link>
+            )
+          }
+            <span className="h-[0.1rem] w-full bg-gray-300 dark:bg-gray-800 absolute z-0 top-4">
+            </span>
         </div>
         
         </div>
