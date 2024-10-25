@@ -4,6 +4,7 @@ import ProductCardModels from "@/app/_components/products/ProductCardModels";
 import ProductHero from "@/app/_components/products/ProductHero";
 import { HeroSection } from "@prisma/client";
 import { ProductForFront } from "@/app/[locale]/admin/products/_utils/ProductForFront";
+import ProductSingleHero from "@/app/_components/products/ProductSingleHero";
 
 interface Props {
    params: {
@@ -30,29 +31,24 @@ const ServiceCategory = async ({params}:Props) => {
 
   
  
- const productsPage = await fetch(`${process.env.NEXTAUTH_URL}/api/front/products/categories/${params.name}`, {
+ const productData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/products/${params.name}`, {
    method: 'GET',
    next: { revalidate: 3600 }, // Revalidate for ISR if needed
  });
- const page = 'products'
-  const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
-    method: 'GET',
-    next: { revalidate: 3600 }, // Optional revalidation for ISR (30 minutes)
-  });
-  const heroData:HeroSection = await hero.json();
+ 
 
  
- const products:ProductForFront[] = await productsPage.json();
-
+ const product:ProductForFront = await productData.json();
+ const page = 'products'
 
   return (
      <div className="w-full">
         {/* <CategoryHero category={category} locale={locale} messages={messages} /> */}
         
         <div className="hed">
-           {heroData && <ProductHero heroData={heroData} locale={locale} messages={messages} page={productPage} /> }
+           {product.name !== '' && <ProductSingleHero product={product} locale={locale} messages={messages} page={page} /> }
         </div>
-
+  {product.name}----{params.name}
          <div className="w-full my-16 py-8   dark:bg-[#111] ">
           <div className="w-11.7/12 mx-auto ">
             <div className="flex flex-col items-center sm:mb-8">
@@ -60,11 +56,7 @@ const ServiceCategory = async ({params}:Props) => {
                :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic rtl:text-3xl dark:text-orange-400">{ourProducts}<span className="text-orange-600">{}</span></h2>
             }
             </div>
-            <div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
-            {products && products.map((product, index:number) => (
-               <ProductCardModels key={product.id} product={product} locale={locale} messages={messages} />
-            ))}
-            </div>
+           
            </div>
          </div>
     

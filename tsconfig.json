@@ -24,7 +24,7 @@
     "typeRoots": ["./node_modules/@types", "./utils/tailwindTypes"] // Add this line
 
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/prismaClient.js", "app/NavBar.tjs", "app/Footer.jsx", "app/NavBar.jsx","utils/types.d.ts", "app/[locale]/page.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/prismaClient.js", "app/NavBar.tjs", "app/Footer.jsx", "app/NavBar.jsx","utils/types.d.ts", "app/[locale]/page.tsx", "app/[locale]/admin/works/utils/WorksSingleDatats"],
   "exclude": ["node_modules"]
 }
 

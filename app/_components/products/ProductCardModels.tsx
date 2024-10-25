@@ -36,10 +36,10 @@ const ProductCardModels = ({ product,locale,messages } : Props) => {
             <p className="text-gray-500 text-sm tracking-8  leading-7 px-1.5 dark:text-gray-100 line-clamp-5 font-medium mb-4">{product.descriptionAr}</p>
             <div className="flex px-3 gap-x-3 justify-center border-t border-t-gray-200 pt-3">
              <div className="py-1 px-2 text-center bg-orange-600 border border-orange-600 rounded-md">
-              <Link href="/product" className="text-base rtl:font-arabic rtl:text-sm rtl:font-bold text-white">{buy}</Link>
+              <Link href={`/products/${product.slug}`} className="text-base rtl:font-arabic rtl:text-sm rtl:font-bold text-white">{buy}</Link>
              </div>
              <div className="py-1 px-2 text-center border bg-gray-50 rounded-md">
-              <Link href="/product" className="text-base rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
+              <Link href={`/products/${product.slug}`}  className="text-base rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
              </div>
            </div>
         </div>

@@ -48,22 +48,10 @@ const ServiceMarketPage = async ({params}:Props) => {
 
  const products:ProductForFront[] = await productData.json();
  const heroData = await hero.json();
-
- 
  const pageName = (messages as any).Common.productsPage;
-
-
-
-
-
- 
-
-
   return (
      <div className="w-full ">
-         <div className="w-full pb-16">  
-            {heroData && market && <MarketHero  heroData={heroData} locale={locale} messages={messages} page={pageName} market={market}/> }
-       </div>
+        
 
         <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">
             {products &&  <ProductMarket  products = {products} locale={locale} messages={messages} /> }

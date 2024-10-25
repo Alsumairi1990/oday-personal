@@ -110,10 +110,9 @@ export default async function Home() {
        <div className="flex flex-col">
         {menuElements && <NavBar menusData={menuElements} />}
           </div>   
-      <div className="hed">
-        
-       {heroData && <Hero heroData={heroData} services={servicesR} categories={categoriesResult} /> }
-      </div>
+    <div className="hed">
+      {heroData && <Hero heroData={heroData} services={servicesR} categories={categoriesResult} /> }
+    </div>
 
      {servicesR.length} {heroData.length}
      <div className="clear"></div>

@@ -25,7 +25,6 @@ async function MarketOfferCard({offer,locale,messages}:Props) {
        alt="Product Image"
        className='w-full rounded-md border border-gray-400 h-full'
        />
-        
       }
 
     </div>
