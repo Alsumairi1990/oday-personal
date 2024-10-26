@@ -1,11 +1,14 @@
 
 import { getLocale, getMessages } from "next-intl/server";
+import { ProductForFront } from "../../admin/products/_utils/ProductForFront";
+import ProductHero from "@/app/_components/products/ProductHero";
 import { Post } from "@prisma/client";
-import HeroNews from "@/app/_components/blog/HeroNews";
+import HeroSection from "@/app/_components/blog/HeroSection";
 
 const BlogPage = async () => {
    const locale = await getLocale();
   const messages = await getMessages({ locale });
+  const productPage = (messages as any).Common.productsPage; 
  const postsPage = await fetch(`${process.env.NEXTAUTH_URL}/api/front/blogs/latest/5`, {
    method: 'GET',
    next: { revalidate: 3600 }, // Revalidate for ISR if needed
@@ -22,8 +25,10 @@ const BlogPage = async () => {
 
   return (
 
-     <div className="w-full my-6">    
-      <HeroNews posts={heroPosts} locale={locale}  messages={messages} />
+     <div className="w-full mt-24">    
+     <div className="hero-section h-0">
+      </div>    
+      <HeroSection posts={heroPosts} locale={locale}  messages={messages} />
 
      </div>
   )

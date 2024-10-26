@@ -39,8 +39,8 @@ export default function NavBar() {
     <button type='button' 
       onClick={()=> {setMenuShow(true)}}
     className="flex gap-x-0.5 sm:gap-x-1 max-sm:pr-0.5 items-center" >
-      <span className="sm:text-md text-sm text-gray-100 capitalize ">{locale}</span>
-        <span className="p-1 text-gray-50">
+      <span className="sm:text-md text-sm text-gray-600 dark:text-gray-100 capitalize ">{locale}</span>
+        <span className="p-1 text-gray-600 dark:text-gray-50">
           <GrLanguage className='' />
         </span>
     </button>

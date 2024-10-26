@@ -116,5 +116,4 @@ const Markets = async ({markets,locale,messages}:Props) => {
 
   );
 };
-
 export default Markets;

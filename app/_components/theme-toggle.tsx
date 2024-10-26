@@ -30,8 +30,8 @@ export default function ThemeToggle() {
   }
 
   if (resolvedTheme === 'light') {
-    return <span className="flex items-center light-swicher-theme justify-center w-6 h-6 rounded-full bg-[#000000c4]" onClick={() => setTheme('dark')} >
-      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-moon absolute h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
+    return <span className="flex items-center light-swicher-theme justify-center w-6 h-6 rounded-full bg-gray-100" onClick={() => setTheme('dark')} >
+      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="#999" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-moon absolute h-6 w-6 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
   }
 
 }
