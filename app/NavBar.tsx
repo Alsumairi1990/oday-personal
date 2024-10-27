@@ -1,17 +1,65 @@
+// 'use client'
+// import Link from 'next/link'
+// import React from 'react'
+// import { MenuWithAllModels } from './[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
+// import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
+
+
+// interface Props{
+//   menusData: Record<number, MenuWithAllModels[]>;
+// }
+
+
+// const NavBar = ({menusData}:Props) => {
+//   const imagePath = '/images/logo-01.svg';
+//   const imagePath2 = '/images/logo-03.jpeg';
+//   // const logoImage = document && document.querySelector('.light-logo') as HTMLImageElement; 
+//   return (
+//     <nav 
+//     className={`top-nav flex main-nav fixed max-sm:flex-col sm:h-[75px] h-[64px] top-0 dark:max-sm:border-b dark:max-sm:border-b-gray-700   w-full pt-2 sm:p-2 z-50 items-center justify-between font-bold  `}
+//     >
+//      <FrontTopNav  menusData ={menusData} />
+//     </nav>
+//   )
+// }
+
+// export default NavBar
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 'use client'
 import Link from 'next/link'
 import React, { useRef } from 'react'
 import {useEffect, useState} from 'react';
 import ThemeToggle from './_components/theme-toggle'
 import LocaleSwitcher from './_components/LangToggle'
-
-import ServicePanel from './_components/_navbar/ServicesPanel'
-import AboutUs from'./_components/_navbar/AboutUs'
-import WorksPanel from './_components/_navbar/WorksPanel'
-import IndustriesPanel from './_components/_navbar/IndustriesPanel'
-import SigninButton from './_components/SigninButton'
 import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
 import { MenuWithAllModels } from './[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
+import SigninButton from './_components/SigninButton';
 
 
 interface Props{
@@ -22,8 +70,8 @@ interface Props{
 const NavBar = ({menusData}:Props) => {
   const imagePath = '/images/logo-01.svg';
   const imagePath2 = '/images/logo-03.jpeg';
-  const logoImage = document.querySelector('.light-logo') as HTMLImageElement; 
-  const logoRef1 = useRef<HTMLImageElement | null>(null); // Ref for the first logo
+  // const logoImage = document.querySelector('.light-logo') as HTMLImageElement; 
+  const logoRef1 = useRef<HTMLImageElement | null>(null); 
   const logoRef2 = useRef<HTMLImageElement | null>(null); 
 
   useEffect(() => {
@@ -32,43 +80,40 @@ const NavBar = ({menusData}:Props) => {
     const isDarkTheme = () => htmlElement.classList.contains('dark');
 
 
-    // Intersection Observer for the hero section
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (isDarkTheme()) return;
-        const isVisible = entry.isIntersecting; // Check if hero section is visible
+        const isVisible = entry.isIntersecting; 
         if (!isVisible) {
           themeSwitcher?.classList.add('nav-top-l');
           if (logoRef1.current) {
-            logoRef1.current.src = imagePath2; // Change first logo to dark logo when hero is not visible
+            logoRef1.current.src = imagePath2;
           }
           if (logoRef2.current) {
-            logoRef2.current.src = imagePath2; // Change second logo to dark logo when hero is not visible
+            logoRef2.current.src = imagePath2; 
           }
           
-          // themeSwitcher?.classList.remove('bg-[#00000059]', 'border-gray-600');
+          
         } else {
           themeSwitcher?.classList.remove('nav-top-l');
           if (logoRef1.current) {
-            logoRef1.current.src = imagePath; // Change first logo to dark logo when hero is not visible
+            logoRef1.current.src = imagePath;
           }
           if (logoRef2.current) {
-            logoRef2.current.src = imagePath; // Change second logo to dark logo when hero is not visible
+            logoRef2.current.src = imagePath; 
           }
         }
       },
       {
-        threshold: 0, // Trigger when hero section leaves/enters the viewport
+        threshold: 0, 
       }
     );
   
-    // Find the hero section on the current page and observe
     const heroSection = document.querySelector('.hero-section');
     if (heroSection) {
       observer.observe(heroSection);
     }
   
-    // Function to handle click events for menu interactions
     const handleClickOutside = (event: any) => {
       const menus = document.getElementsByClassName('log-menu');
       if (event.target.closest('.menu-btn ') !== null) {
@@ -104,10 +149,8 @@ const NavBar = ({menusData}:Props) => {
       }
     };
   
-    // Add event listeners
     document.addEventListener('click', handleClickOutside);
   
-    // Cleanup observer and event listeners
     return () => {
       if (heroSection) {
         observer.unobserve(heroSection);
@@ -115,78 +158,7 @@ const NavBar = ({menusData}:Props) => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
-  
-  // useEffect(() => {
-  //   const themeSwitcher = document.querySelector('.theme-switcher');
-  //   const htmlElement = document.documentElement;
-  //   const observer = new IntersectionObserver(
-  //     ([entry]) => {
-  //       const isVisible = entry.isIntersecting; 
-  //       if (!isVisible) {
-  //         themeSwitcher?.classList.add('bg-gray-800', 'border-gray-400');
-  //         themeSwitcher?.classList.remove('bg-[#00000059]', 'border-gray-600');
-  //       } else {
-  //         themeSwitcher?.classList.remove('bg-gray-800', 'border-gray-400');
-  //         themeSwitcher?.classList.add('bg-[#00000059]', 'border-gray-600');
-  //       }
-  //     },
-  //     {
-  //       threshold: 0, 
-  //     }
-  //   );
-  //   const heroSection = document.querySelector('.hero-section'); 
-  //   if (heroSection) {
-  //     observer.observe(heroSection); 
-  //   }
-  //   return () => {
-  //     if (heroSection) {
-  //       observer.unobserve(heroSection); 
-  //     }
-  //   };
-  // }, []);
 
-  // useEffect(() => {
-  //   const handleClickOutside = (event:any) => {
-  //    const menus = document.getElementsByClassName('log-menu');
-  //     if (event.target.closest('.menu-btn ') !== null) {
-  //       const prnt = event.target.closest('.menu-pr');
-  //       const menu = prnt.querySelector('.log-menu');
-  //       if(menu && menu.classList.contains('hidden')){
-  //         for (let i = 0; i < menus.length; i++) {
-  //           menus[i].classList.add('hidden');
-  //         }
-  //         menu.classList.remove('hidden');
-  //       }
-  //       else if(menu && !menu.classList.contains('hidden')){
-  //         menu.classList.add('hidden');
-  //       }
-  //   }
-  //   else if (event.target.closest('.login-menu ') !== null) return;  
-  //   else if (event.target.closest('.main-menu-btn') !== null) {
-  //     const mainPrnt = event.target.closest('.main-nav');
-  //       const menu = mainPrnt.querySelector('.main-drop-menu');
-  //       if(menu.classList.contains('hidden')){
-  //         menu.classList.remove('hidden');
-  //         document.body.style.overflow = 'hidden'; // Disable scroll
-  //       }
-  //       else if(menu && !menu.classList.contains('hidden')){
-  //         document.body.style.overflow = ''; // Enable scroll
-  //         menu.classList.add('hidden');
-  //       }
-  //   }
-  //   else if (event.target.closest('.log-menu ') !== null) return;
-  //   else {
-  //      for (let i = 0; i < menus.length; i++) {
-  //       const menu = menus[i];
-  //       menu.classList.add('hidden');
-  //     }
-  //   }
-  //   };
-  //   document.addEventListener('click', handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener('click', handleClickOutside);
-  //   };
-  // });
   
   return (
     <nav 
@@ -295,29 +267,11 @@ const NavBar = ({menusData}:Props) => {
 
           <div className='max-sm:h-full w-full mx-auto max-sm:bg-white px-4 max-sm:border max-sm:border-gray-200 sm:flex sm:items-center'>
              
-              {/* <div className="py-3 max-sm:border-b max-sm:border-b-gray-200"> 
-                <div className="menu-pr ">
-                  <div className="menu-btn  cursor-pointer">
-                    <div className="flex items-center px-2  pointer ">
-                    <span className="text-base sm:text-md text-gray-800 sm:text-white tracking-wide font-medium  capitalize">Services</span>
-                    <span className=" max-sm:ml-auto">
-                      <svg className="w-6 h-6 sm:w-5 sm:h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7 10L12 15L17 10" className='stroke-slate-500 sm:stroke-white' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                      </span>
-                    </div>
-                  </div>
-                  <div id="log-menu" className=" log-menu hidden w-full  h-full top-0 left-0 " >
             
-                    <ServicePanel />    
-                      // </div>
-                      </div>
-                </div> */}
                 <div className="w-full flex ltr:justify-end ">
                   <FrontTopNav  menusData ={menusData} /></div>
                 
           
-                {/* <ServicePanel />     */}
            
 
             <div className="py-1 px-2 flex ">

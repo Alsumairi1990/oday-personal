@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 import { MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 import { MenuWithModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithModels';
-import { getAdminLeftMenuElements } from '@/app/_components/admin/common/Actions';
-import NavMenuElem from '@/app/_components/admin/nav/NavMenuElem';
 import NavPanel from './NavPanel';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 interface MenusDisplayProps {
