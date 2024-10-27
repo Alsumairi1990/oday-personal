@@ -115,7 +115,7 @@ const NavBarBlog = ({menusData}:Props) => {
               </Link>
         </div>
        
-        <div className={`main-drop-menu sm:justify-end text-sm max-sm:h-lvh sm:flex-80  max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base  `} > 
+        <div className={`main-drop-menu max-sm:hidden sm:justify-end text-sm max-sm:h-lvh sm:flex-80  max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base  `} > 
           <div className=" sm:px-0 py-4 flex flex-col bg-[#ffebce] sm:hidden">
             <div className="flex pt-3">
                 <div className="flex-15">
@@ -344,7 +344,7 @@ const NavBarBlog = ({menusData}:Props) => {
           </div>
         </div>
     </nav>
-    <div className="flex w-full sm:border-y sm:border-gray-200 sm:mt-2 sm:py-4">
+    <div className="flex w-full sm:border-y max-sm:hidden sm:border-gray-200 sm:mt-2 sm:py-4">
       <div className="w-11.4/12  mx-auto flex ">
           <BlogTopNav  menusData ={menusData} />
         </div> 

@@ -27,9 +27,9 @@ const HeroNews = async ({posts,locale,messages}:Props) => {
                                           <div className="h-full">
                                               <img className="w-full max-w-full h-full rounded" src={latestPost.image || "/images/w01.png"} alt="" />  
                                           </div>
-                                          <div className="absolute bottom-2">
-                                              <div className=""> 
-                                                  <p className="text-lg font-bold font-arabic mt-2">
+                                          <div className="absolute bottom-0 w-full ">
+                                              <div className="pb-4 py-4 w-full rtl:pr-2" style={{background:'-webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 30%, rgba(0, 0, 0, 0.8) 100%)'}}> 
+                                                  <p className="text-lg text-white font-bold font-arabic mt-2">
                                                   <Link href={`/blog/${latestPost.title}`}>{latestPost.titleAr}</Link> 
                                                   </p>
                                               </div>
