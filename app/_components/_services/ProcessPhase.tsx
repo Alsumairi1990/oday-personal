@@ -56,16 +56,16 @@ const isLastIndex = index === phaseSize - 1;
                   {
                     phase.steps && phase.steps.map((step, index) => (
                       <div className='flex items-center border-b border-gray-200 dark:border-b-gray-700' key={step.id}>
-                         {locale == 'en' ? ( <li className='flex w-full items-center py-2.5 ' key={step.id}>
+                         {locale == 'en' ? ( <div className='flex w-full items-center py-2.5 ' key={step.id}>
                                 <span className="flex h-2 w-2 rounded-full bg-red-400 dark:bg-violet-500 mr-2.5 "></span>
                                 <h3 className='text-sm text-gray-700 dark:text-gray-300 font-semibold'>{step.name}</h3>
-                            </li>
+                            </div>
                             ):
                             (
-                              <li className='flex w-full items-center py-2.5 ' key={step.id}>
+                              <div className='flex w-full items-center py-2.5 ' key={step.id}>
                                 <span className="flex h-2 w-2 rounded-full bg-red-400 dark:bg-violet-500 ml-2.5 "></span>
                                 <h3 className='text-sm text-gray-700 font-arabic dark:text-gray-300 font-semibold'>{step.nameAr}</h3>
-                            </li>
+                            </div>
                             )
                     }
                         

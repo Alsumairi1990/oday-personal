@@ -21,7 +21,7 @@ function CallOptionPanel({locale,messages}:Props) {
         <WhatsAppLive />
         </div>
         <div className="border w-10 h-10 justify-center flex rounded-md items-center border-gray-300 bg-gray-100">
-          <button onClick={() => setMobileContactFlag(true)}>
+          <button aria-label="click to call" onClick={() => setMobileContactFlag(true)}>
             <span className="">
             <LuPhoneCall className='text-gray-700 text-2xl' />
             </span>

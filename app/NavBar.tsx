@@ -200,7 +200,7 @@ const NavBar = ({menusData}:Props) => {
         </div>
        
         <div className="p-2 max-sm:hidden text-[#333]">
-            <Link href="/" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2  font-bold`} > 
+            <Link href="/" aria-label="Go to home page" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2  font-bold`} > 
             <div className='sm:w-36 mr-1.5 inline-block'>
               <img className='w-full max-w-full light-logo' src={imagePath} ref={logoRef2}  alt="" />
             </div>

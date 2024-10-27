@@ -10,7 +10,7 @@ function WhatsAppLive() {
 
   return (
     <div>
-          <a href={whatsappURL}  target="_blank" rel="noopener noreferrer" className="focus:outline-none w-7 inline-flex">
+          <a href={whatsappURL} aria-label="click to contact" target="_blank" rel="noopener noreferrer" className="focus:outline-none w-7 inline-flex">
           <svg className='w-full h-full' version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"  
                     viewBox="0 0 58 58">
                 <g>

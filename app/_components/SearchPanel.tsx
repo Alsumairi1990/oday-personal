@@ -272,7 +272,7 @@ const PanelSearch = ({services,categories,locale}:Props) => {
          </div>
          <div  className="search-btn max-sm:px-1 text-center sm:ltr:border-l sm:ltr:border-l-gray-300 sm:rtl:border-r sm:rtl:border-r-gray-300 ">
             <div className="inline-block max-sm:bg-white  rounded-xl max-sm:w-full sm:pl-[15px]">
-                <button  className="searchBtn py-[5px] px-[10px] bg-primary-btn border-1 border-white">
+                <button aria-label="search"  className="searchBtn py-[5px] px-[10px] bg-primary-btn border-1 border-white">
                     <span ><MdOutlineManageSearch className='text-2xl' /></span>
                     </button>
                     </div>
