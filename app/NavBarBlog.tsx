@@ -17,7 +17,7 @@ interface Props{
 const NavBarBlog = ({menusData}:Props) => {
   // const imagePath = '/images/logo-01.svg';
   const imagePath2 = '/images/logo-03.jpeg';
-  const logoImage = document.querySelector('.light-logo') as HTMLImageElement; 
+  // const logoImage = document.querySelector('.light-logo') as HTMLImageElement; 
   const logoRef1 = useRef<HTMLImageElement | null>(null); // Ref for the first logo
   const logoRef2 = useRef<HTMLImageElement | null>(null); 
 

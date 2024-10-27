@@ -2,6 +2,7 @@
 import { getLocale, getMessages } from "next-intl/server";
 import { Post } from "@prisma/client";
 import HeroNews from "@/app/_components/blog/HeroNews";
+import { PostForFront } from "../../admin/blogs/_utils/PostForfront";
 
 const BlogPage = async () => {
    const locale = await getLocale();
@@ -17,7 +18,7 @@ const BlogPage = async () => {
   });
 
  
- const heroPosts:Post[] = await postsPage.json();
+ const heroPosts:PostForFront[] = await postsPage.json();
 
 
   return (

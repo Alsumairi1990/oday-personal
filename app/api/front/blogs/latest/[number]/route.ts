@@ -22,7 +22,10 @@ export async function GET(req: Request, { params }: { params: { number: string }
 async function getElements(number:number): Promise<Post[] | null> {
   try {
     const elements = await prisma.post.findMany({
-      take : number
+      take : number,
+      include : {
+        categories : true
+      }
     });
 
     return elements ;
