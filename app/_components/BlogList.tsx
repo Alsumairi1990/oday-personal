@@ -2,6 +2,8 @@ import { PageSection, Post } from "@prisma/client";
 import { getLocale, getMessages } from "next-intl/server";
 import Link from "next/link";
 import React from "react";
+import Image from 'next/image'
+import ImagePostCard from "./blog/ImagePostCard";
 
 interface Props {
   meta: PageSection;
@@ -39,11 +41,13 @@ const BlogList = async ({ meta, posts }: Props) => {
               <div className="grid grid-cols-3 sm:grid-cols-2">
                 <div className="relative max-sm:h-20 rtl:rounded-r-md">
                   {post.image && (
-                    <img
-                      className="w-full h-full mx-auto rtl:rounded-r-md"
-                      src={post.image}
-                      alt=""
-                    />
+                    // <img
+                    //   className="w-full h-full mx-auto rtl:rounded-r-md"
+                    //   src={post.image}
+                    //   alt=""
+                    // />
+                  
+                   <ImagePostCard image={post.image} name={post.titleAr} />
                   )}
                   <div className="absolute flex px-2 py-1 sm:px-3 sm:py-1.5 flex-col justify-center items-center bg-fuchsia-600 text-white top-0 left-0">
                     <span className="text-base sm:text-lg font-semibold">05</span>

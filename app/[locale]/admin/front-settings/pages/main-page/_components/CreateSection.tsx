@@ -165,7 +165,7 @@ const CreateSection = () => {
                       </span>
                     </div>
                   <div className="p-4 w-full flex flex-wrap justify-between">
-                  <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
+                    <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
                             <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize">  Section name</label>
                             <div className="flex items-center w-full">
                                 <div className="relative flex w-full">

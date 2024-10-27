@@ -39,7 +39,7 @@ const ProductCardModels = ({ product,locale,messages } : Props) => {
               <Link href={`/products/${product.slug}`} className="text-base rtl:font-arabic rtl:text-sm rtl:font-bold text-white">{buy}</Link>
              </div>
              <div className="py-1 px-2 text-center border bg-gray-50 rounded-md">
-              <Link href={`/products/${product.slug}`}  className="text-base rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
+            <Link href={`/products/${product.slug}`}  className="text-base rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
              </div>
            </div>
         </div>
