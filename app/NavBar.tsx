@@ -57,7 +57,7 @@ import React, { useRef } from 'react'
 import {useEffect, useState} from 'react';
 import ThemeToggle from './_components/theme-toggle'
 import LocaleSwitcher from './_components/LangToggle'
-import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
+// import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
 import { MenuWithAllModels } from './[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 import SigninButton from './_components/SigninButton';
 
@@ -75,11 +75,11 @@ const NavBar = ({menusData}:Props) => {
   const logoRef2 = useRef<HTMLImageElement | null>(null); 
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+
     const themeSwitcher = document.querySelector('.top-nav');
     const htmlElement = document.documentElement;
     const isDarkTheme = () => htmlElement.classList.contains('dark');
-
-
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (isDarkTheme()) return;
@@ -92,8 +92,6 @@ const NavBar = ({menusData}:Props) => {
           if (logoRef2.current) {
             logoRef2.current.src = imagePath2; 
           }
-          
-          
         } else {
           themeSwitcher?.classList.remove('nav-top-l');
           if (logoRef1.current) {
@@ -269,7 +267,8 @@ const NavBar = ({menusData}:Props) => {
              
             
                 <div className="w-full flex ltr:justify-end ">
-                  <FrontTopNav  menusData ={menusData} /></div>
+                  {/* <FrontTopNav  menusData ={menusData} /> */}
+                  </div>
                 
           
            

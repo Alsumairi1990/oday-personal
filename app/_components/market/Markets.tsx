@@ -1,15 +1,11 @@
 
 import React from 'react';
-import hero from '@/public/images/hero.jpg';
-import PanelSearch from '../../../app/_components/SearchPanel';
-import { Category, HeroSection, Service, ServiceCategory } from '@prisma/client';
-import { getLocale, getMessages } from 'next-intl/server';
+
 import { AbstractIntlMessages } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FiArrowRight } from 'react-icons/fi';
-import { LuArrowLeft, LuArrowRight } from 'react-icons/lu';
 import { MarketWithModels } from '../../../app/[locale]/admin/market/_utils/MarketWithModels';
+import { LuArrowRight } from 'react-icons/lu';
 interface Props {
   markets : MarketWithModels[],
   locale : string,
@@ -17,17 +13,10 @@ interface Props {
 }
 const Markets = async ({markets,locale,messages}:Props) => {
       const img1 = "/images/market.webp";
-    // const m1 = "/market/images/saudi-3.jpg";
-    // const m2 = "/market/images/malaysia-4.jpg";
-    // const m3 = "/market/images/yemen-1.jpg";
-    // const sFlag = "/market/icons/sadu-flag.png";
-    // const mFlag = "/market/icons/malaysia-flag.png";
-    // const yFlag = "/market/icons/yemen-flag.png";
+    
     const title = (messages as any).Common.loctaionTitle;
     const subTitle = (messages as any).Common.locationSubTitle;  
     const marketDetails = (messages as any).Common.marketDetails;
-
-
   return (
 
     <div className="w-full " >  

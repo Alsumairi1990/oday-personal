@@ -1,6 +1,5 @@
 'use client'
 import { useTranslations } from 'next-intl';
-import { getLocale, getMessages } from 'next-intl/server';
 import React from 'react';
 
 const ServiceApp = async () => {

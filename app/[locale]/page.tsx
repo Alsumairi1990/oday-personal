@@ -3,6 +3,7 @@ import Hero from '../_components/HeroSect'
 import Services from '../_components/Services'
 import ServicesFull from '../_components/ServicesFull'
 import About from '../_components/About'
+import React, { Suspense } from 'react';
 import Works from '../_components/Works'
 import Testimonials from '../_components/Testimonials'
 import ServiceApp from '../_components/ServiceApp'
@@ -107,8 +108,12 @@ export default async function Home() {
   return (
     <main className="flex flex-col dark:bg-[#111]">
        <div className="flex flex-col">
-        {menuElements && <NavBar menusData={menuElements} />}
+        {/* {menuElements && <NavBar menusData={menuElements} />} */}
           </div>   
+          <Suspense fallback={<div>Loading navigation...</div>}>
+        <NavBar menusData={menuElements} />
+      </Suspense>
+
     <div className="hed">
       {heroData && <Hero heroData={heroData} services={servicesR} categories={categoriesResult} /> }
     </div>
@@ -153,7 +158,7 @@ export default async function Home() {
       {testimonials && testimonialMeta && <Testimonials testimonials={testimonials} meta={testimonialMeta} /> }
       </div>
       <div className="w-full my-10 sm:my-24 dark:bg-black-100">
-      <ServiceApp />
+      {/* <ServiceApp /> */}
       </div>
      
     </main>

@@ -28,7 +28,7 @@ const Hero = async ({heroData,services,categories}:Props) => {
     </h1>
       }
            <div className="py-2 px-2 my-2 rounded-xl max-sm:bg-[#00000021] max-sm:border max-sm:border-[#4c4c4c] w-full">
-             <PanelSearch services={services} categories={categories} locale={locale} />
+             {/* <PanelSearch services={services} categories={categories} locale={locale} /> */}
          </div>
          {locale == 'en' ? ( 
           <>
