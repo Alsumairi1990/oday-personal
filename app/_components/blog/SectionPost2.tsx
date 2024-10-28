@@ -10,7 +10,7 @@ interface Props {
   locale : string,
   messages : AbstractIntlMessages,
 }
-const HeroNews = async ({posts,locale,messages}:Props) => {
+const SectionPost2 = async ({posts,locale,messages}:Props) => {
     const marketDetails = (messages as any).Common.marketDetails;
     const latestPost = posts[0];
     const otherPosts = posts.slice(1); 
@@ -102,4 +102,4 @@ const HeroNews = async ({posts,locale,messages}:Props) => {
 
   )
 };
-export default HeroNews;
+export default SectionPost2;
