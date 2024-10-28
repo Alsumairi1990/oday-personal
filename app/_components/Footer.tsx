@@ -96,7 +96,7 @@ const Footerk = ({services,categories,locale,messages}:Props) => {
                             </div>
                          </div>
                       </div> */}
-                      <div className="p-1"><a href="http://" className="flex items-center bg-fuchsia-600 justify-center h-full rounded text-white rtl:font-arabic text-sm">{subscribe}</a></div>
+                      <div className="p-1"><a href="/subscribe" aria-label='subscribe' className="flex items-center bg-fuchsia-600 justify-center h-full rounded text-white rtl:font-arabic text-sm">{subscribe}</a></div>
                    </div>
                 </form>
              </div>
