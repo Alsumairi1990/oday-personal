@@ -57,7 +57,7 @@ import React, { useRef } from 'react'
 import {useEffect, useState} from 'react';
 import ThemeToggle from './_components/theme-toggle'
 import LocaleSwitcher from './_components/LangToggle'
-// import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
+import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
 import { MenuWithAllModels } from './[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 import SigninButton from './_components/SigninButton';
 
@@ -75,7 +75,7 @@ const NavBar = ({menusData}:Props) => {
   const logoRef2 = useRef<HTMLImageElement | null>(null); 
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
+        if (typeof window === 'undefined') return;
 
     const themeSwitcher = document.querySelector('.top-nav');
     const htmlElement = document.documentElement;
@@ -267,7 +267,7 @@ const NavBar = ({menusData}:Props) => {
              
             
                 <div className="w-full flex ltr:justify-end ">
-                  {/* <FrontTopNav  menusData ={menusData} /> */}
+                  <FrontTopNav  menusData ={menusData} />
                   </div>
                 
           

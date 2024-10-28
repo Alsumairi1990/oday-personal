@@ -8,7 +8,7 @@ import TopNav from './TopNav';
 interface Props {
   menusData: Record<number, MenuWithAllModels[]>;
 }
-const BlogTopNav = async ({menusData}:Props) => {
+const BlogTopNav = ({menusData}:Props) => {
   // const menusData: Record<number, MenuWithAllModels[]> = await getMenusElementse2();
 return <TopNav menusData={menusData} />;
 };

@@ -2,23 +2,17 @@
 import React, { useEffect, useState } from 'react';
 
 import { MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
-import { MenuWithModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithModels';
-import NavPanel from './NavPanel';
+// import NavPanel from './NavPanel';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 interface MenusDisplayProps {
     menusData: Record<number, MenuWithAllModels[]>;
   }
 
 const TopNav: React.FC<MenusDisplayProps> = ({ menusData }) => {
-   const imagePath = '/images/navbg.webp';
-   const imagePath2 = '/images/manager2.png';
    const [visibleContent, setVisibleContent] = useState<boolean>(false);
-   const [navElement, setNavElement] = useState<MenuWithModels[]>([]);
-   const [loading, setLoading] = useState<boolean>(false);
-   const [error, setError] = useState<string>('');
-//    const[menusData , setMenusData] = useState<MenuWithAllModels[]>();
-
 useEffect(() => {
+  if (typeof window === 'undefined') return;
+
   const handleClickOutside = (event:any) => {
    const menus = document.getElementsByClassName('log-menu');
     if (event.target.closest('.menu-btn ') !== null) {
@@ -41,23 +35,15 @@ useEffect(() => {
     
      };
   }
-    
   };
-
   document.addEventListener('click', handleClickOutside);
-
   return () => {
     document.removeEventListener('click', handleClickOutside);
   };
 });
-
-
-
 const [activeLink, setActiveLink] = useState<string | null>(null); 
-
    const handleClick = (e:any) => {
-    const nearestContent = e.currentTarget.closest('li').querySelector('.side-sub');
-
+    const nearestContent = e.currentTarget.closest('li').querySelector('.side-sub')
     if (nearestContent) {
       setVisibleContent(prevContent => prevContent === nearestContent ? false : nearestContent);
     }}
@@ -65,7 +51,6 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
     setActiveLink(link);
   };
   return (
-        
         <div className='flex justify-end rtl:pl-5 r w-full'>
             {Object.entries(menusData).map(([parentId, menus]) => {
             const parentMenu = menus.length > 0 ? menus[0].menuParent : null;
@@ -78,9 +63,9 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
                   <MdOutlineArrowDropDown className='text-xl parent-arr text-gray-50' />
                 </div>
                      <div className='pl-3 w-full log-menu sm:hidden grid grid-cols-4 bg-white absolute top-20 left-0 z-50'>
-                        {menus.map(menu => (
+                        {/* {menus.map(menu => (
                              <NavPanel menu={menu}  />
-                        ))}
+                        ))} */}
                         </div>
                     </div>
                     );

@@ -5,7 +5,7 @@ import { CgTikcode } from "react-icons/cg";
 import { CgTwilio } from "react-icons/cg";
 import { MdOutlineManageSearch } from "react-icons/md";
 import {useEffect} from 'react'
-import { Category, Service, ServiceCategory } from '@prisma/client';
+import { Category, Service } from '@prisma/client';
 import { useTranslations } from 'next-intl';
 
 interface Props {
