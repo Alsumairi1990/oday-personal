@@ -1,25 +1,39 @@
-import React from 'react'
-import { getLocale, getMessages } from 'next-intl/server';
-import Link from 'next/link';
-import Image from 'next/image';
-import { WorksFrontData } from '@/app/[locale]/admin/works/utils/WorksFrontData';
+'use client'
+import React, { useEffect, useState } from 'react'
 import { AbstractIntlMessages } from 'next-intl';
-import { Offer } from '@prisma/client';
 interface Props {
     locale : string,
     messages : AbstractIntlMessages
 
 }
-async function PackagesPanel({locale,messages}:Props) {
+function PackagesPanel({locale,messages}:Props) {
   
   const preview = (messages as any).HomePage.workPreview;
-  const img = "/plans-media/images/packages.jpg"
+  // const img1 = "/plans-media/images/packages.jpg"
+  // const img2 = "/plans-media/images/packages.jpg"
+ 
   const logo = "/plans-media/images/plan-logo1.webp"
+  const [isMobile, setIsMobile] = useState(false);
+  const img = isMobile
+  ? "/plans-media/images/plan-mob1.webp"
+  : "/plans-media/images/packages.jpg";
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Set initial screen size
+    handleResize();
+
+    // Add event listener for screen resize
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
 
   return (
     <div className="w-11.3/12 py-6 rounded  mx-auto flex flex-wrap  px-4 relative  bg-no-repeat bg-center bg-cover -z-0"  style={{backgroundImage: `url(${img})`}}>
-       <div className="sm:flex-30 flex ">
+       <div className="sm:flex-30 flex max-sm:mb-3">
         <div className="p-1 flex items-center">
           <img src={logo} className='w-20' alt="subscription" />
           <div className="bg-gray-50 flex items-center mt-7 px-2 rounded-l-md -mr-2">
@@ -55,8 +69,8 @@ async function PackagesPanel({locale,messages}:Props) {
              </div>
            </div>
        </div>
-       <div className="sm:flex-30 flex items-center justify-center">
-            <div className="py-1.5 px-5 max-sm:mt-4 rounded-md  h-fit" style={{background:'linear-gradient(0deg, #981c45, #e91818)'}}>
+       <div className="flex-100 sm:flex-30 flex items-center justify-center">
+            <div className="py-1.5 text-center px-5 max-sm:mt-4 max-sm:w-full rounded-md  h-fit" style={{background:'linear-gradient(0deg, #981c45, #e91818)'}}>
                <span className="text-white font-arabic text-base font-bold pb-2" >  المـــزيد  </span>
              </div>
        </div>
