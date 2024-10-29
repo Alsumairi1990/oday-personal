@@ -50,7 +50,18 @@ model PostCategory {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
-
+model Plan {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  titleAr     String?
+  content     String?
+  contentAr   String?
+  description String?
+  descriptionAr String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
 model ServiceCode {
   id          Int       @id @default(autoincrement())
   code        String    @unique
