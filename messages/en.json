@@ -79,7 +79,10 @@
       "worksPage" : "works",
       "servicesPage" : "services",
       "subscribe" : "Subscribe",
-      "marketDetails" : "Go to Market"
+      "marketDetails" : "Go to Market",
+      "news" : "News",
+      "ecnomics" : "ecnomics" ,
+      "more" : "More"
 
       
 
