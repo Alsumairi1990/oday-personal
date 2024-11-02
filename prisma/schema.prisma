@@ -50,18 +50,83 @@ model PostCategory {
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 }
+
 model Plan {
-  id          Int       @id @default(autoincrement())
-  slug        String    @unique
-  title       String
-  titleAr     String?
-  content     String?
-  contentAr   String?
-  description String?
-  descriptionAr String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  id              Int             @id @default(autoincrement())
+  name            String
+  nameAr          String
+  slug            String          @unique
+  description     String?
+  descriptionAr   String?
+  monthlyPrice    Decimal         @default(100.0) // Monthly price
+  semiAnnualPrice Decimal         @default(500.0) // Semi-annual price with discount
+  yearlyPrice     Decimal         @default(900.0) // Yearly price with a further discount
+  features        String? 
+  featuresAr      String?
+  limits          String?
+  limitsAr        String?
+  support         String?
+  supportAr       String?
+  purpose         String?
+  purposeAr       String?
+  image           String?
+  icon            String?
+  services        Service[]
+  categories      PlanCategory[]
+  interval        BillingInterval @default(MONTHLY)
+  duration        Int             @default(1)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  subscriptions   Subscription[]
+  userId        String
+  user          User?             @relation(fields: [userId], references: [id])
 }
+
+enum BillingInterval {
+  MONTHLY // Monthly billing cycle
+  SEMI_ANNUAL // Every six months
+  YEARLY // Every year
+}
+
+model Subscription {
+  id        Int                @id @default(autoincrement())
+  userId    String // Foreign key for the User who subscribed
+  user      User               @relation(fields: [userId], references: [id])
+  planId    Int // Foreign key for the selected Plan
+  plan      Plan               @relation(fields: [planId], references: [id])
+  startDate DateTime           @default(now())
+  endDate   DateTime?
+  status    SubscriptionStatus @default(ACTIVE)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  EXPIRED
+}
+
+model PlanCategory {
+  id            Int      @id @default(autoincrement())
+  name          String
+  nameAr        String?
+  slug          String   @unique
+  image         String?
+  title         String?
+  titleAr       String?
+  subTitle      String?
+  subTitleAr    String?
+  icon          String?
+  description   String?
+  descriptionAr String?
+  plans         Plan[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  userId        String
+  user          User?             @relation(fields: [userId], references: [id])
+}
+
 model ServiceCode {
   id          Int       @id @default(autoincrement())
   code        String    @unique
@@ -100,6 +165,7 @@ model Service {
   phases        Phase[]
   works         Work[]
   industries    Industry[]
+  plans         Plan[]
   userId        String
   user          User?             @relation(fields: [userId], references: [id])
   codeId        Int?
@@ -365,11 +431,11 @@ model Offer {
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
   userId        String // References one specific user (modified)
-  user          User     @relation(fields: [userId], references: [id])
+  user          User       @relation(fields: [userId], references: [id])
 }
 
 model Page {
-  id            Int      @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   name          String
   nameAr        String
   description   String?
@@ -378,12 +444,13 @@ model Page {
   titleAr       String?
   image         String?
   icon          String?
-  marketPages   MarketPage[] 
-   userId        String // References one specific user (modified)
-  user          User     @relation(fields: [userId], references: [id])
+  marketPages   MarketPage[]
+  userId        String // References one specific user (modified)
+  user          User         @relation(fields: [userId], references: [id])
 }
+
 model Market {
-  id            Int      @id @default(autoincrement())
+  id            Int          @id @default(autoincrement())
   name          String
   nameAr        String
   location      String
@@ -393,21 +460,22 @@ model Market {
   titleAr       String
   topTitle      String
   topTitlAr     String
-  image         String   // Storing file paths or URLs for images
-  icon          String   // Storing file paths or URLs for icons
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  marketPages   MarketPage[] 
+  image         String // Storing file paths or URLs for images
+  icon          String // Storing file paths or URLs for icons
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  marketPages   MarketPage[]
   userId        String // References one specific user (modified)
-  user          User     @relation(fields: [userId], references: [id])
+  user          User         @relation(fields: [userId], references: [id])
 }
-model MarketPage {
-  marketId    Int
-  pageId    Int
-  url         String?   // Optional URL field for this specific relation
 
-  market      Market     @relation(fields: [marketId], references: [id], onDelete: Cascade)
-  mrPage      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+model MarketPage {
+  marketId Int
+  pageId   Int
+  url      String? // Optional URL field for this specific relation
+
+  market Market @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  mrPage Page   @relation(fields: [pageId], references: [id], onDelete: Cascade)
 
   @@id([marketId, pageId]) // Composite primary key
 }
@@ -551,7 +619,10 @@ model User {
   offers          Offer[]
   markets         Market[]
   pages           Page[]
-  aboutUs AboutUsSection[]
+  aboutUs         AboutUsSection[]
+  subscription    Subscription[]
+  plans           Plan[]
+  planCategories  PlanCategory[]
 
   @@map(name: "users")
 }
@@ -640,8 +711,6 @@ model Department {
   createdAt        DateTime         @default(now())
   updatedAt        DateTime         @updatedAt
 }
-
-
 
 model Team {
   id           Int            @id @default(autoincrement())
@@ -830,7 +899,7 @@ model Product {
   tags          Tag[] // Many-to-many relation with Tag model
   media         Media[] // One-to-many relation with the Media model
   services      Service[]
-  locations      Location[]
+  locations     Location[]
   vendorId      String? // Foreign key to Vendor model
   vendor        Vendor?    @relation(fields: [vendorId], references: [id])
   rating        Decimal?
