@@ -176,6 +176,25 @@ const CreatePlanCategory = () => {
                       {allPages}
                     </div>
                   <div className="p-4 w-full flex flex-wrap justify-between">
+
+                  <div className=" flex flex-48 flex-col z-0 w-full mb-5 group">
+                            <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> name</label>
+                            <div className="flex items-center w-full">
+                                <div className="relative flex w-full">
+                                <input {...register('name')}  type="text" name="name" id="name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="name...." required />
+                                </div>
+                            </div> 
+                            <span className="text-red-400 text-xs mt-2">{errors.name?.message} </span>
+                    </div>
+                    <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                            <label htmlFor="nameAr" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> nameAr Arabic</label>
+                            <div className="flex items-center w-full">
+                                <div className="relative flex w-full">
+                                <input {...register('nameAr')}  type="text" name="nameAr" id="nameAr" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="nameAr Arabic...." required />
+                                </div>
+                            </div> 
+                            <span className="text-red-400 text-xs mt-2">{errors.nameAr?.message} </span>
+                    </div>
                     <div className=" flex flex-48 flex-col z-0 w-full mb-5 group">
                             <label htmlFor="heroTitle" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> Hero Section Title</label>
                             <div className="flex items-center w-full">
@@ -214,6 +233,27 @@ const CreatePlanCategory = () => {
                             </div> 
                             <span className="text-red-400 text-xs mt-2">{errors.subTitleAr?.message} </span>
                     </div>
+
+                    <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                            <label htmlFor="description" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 "> description </label>
+                            <div className="flex items-center w-full">
+                                <div className="relative flex w-full">
+                                <textarea {...register('description')} cols={cols} rows={rows}   name="description" id="description" className="block bg-gray-50 pl-2 pt-2 px-0 z-0 w-full text-sm text-gray-900  border rounded-xl border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="description ...." required />
+                                </div>
+                            </div> 
+                            <span className="text-red-400 text-xs mt-2">{errors.description?.message} </span>
+                    </div>
+
+                    <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                            <label htmlFor="descriptionAr" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 ">description Arabic</label>
+                            <div className="flex items-center w-full">
+                                <div className="relative flex w-full">
+                                <textarea {...register('descriptionAr')} cols={cols} rows={rows}   name="descriptionAr" id="subTitleAr" className="block bg-gray-50 pl-2 pt-2 px-0 z-0 w-full text-sm text-gray-900  border rounded-xl border-gray-300 appearance-none  focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="description Arabic ...." required />
+                                </div>
+                            </div> 
+                            <span className="text-red-400 text-xs mt-2">{errors.descriptionAr?.message} </span>
+                    </div>
+                   
                    
                    
                     

@@ -17,13 +17,12 @@ export async function  addHero(data:FormData):Promise<number>{
      if (result.success) {
        const data = result.data;
        let imagePath = '';
-       if(data.image && data.image.name){
-         await fs.mkdir("public/front/hero/images", { recursive: true })
-         imagePath = `/front/hero/images/${crypto.randomUUID()}-${data.image.name}`
+       if (data.image && data.image.name) {
+         await fs.mkdir("public/front/hero/images", { recursive: true });
+         imagePath = `/front/hero/images/${crypto.randomUUID()}-${data.image.name.trim()}`;
          const buffer = Buffer.from(await data.image.arrayBuffer());
          await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
-       
-         }
+       }
          const basic = await prisma.heroSection.create({
            data: {
              title: data.title?data.title : "",

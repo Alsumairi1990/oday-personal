@@ -167,7 +167,7 @@ const CreateHero = () => {
                             <label htmlFor="heroTitle" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> Hero Section Title</label>
                             <div className="flex items-center w-full">
                                 <div className="relative flex w-full">
-                                <input {...register('title')}  type="text" name="heroTitle" id="title" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Hero Area Title ...." required />
+                                <input {...register('title')}  type="text" name="title" id="title" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Hero Area Title ...." required />
                                 </div>
                             </div> 
                             <span className="text-red-400 text-xs mt-2">{errors.title?.message} </span>
@@ -201,6 +201,16 @@ const CreateHero = () => {
                             </div> 
                             <span className="text-red-400 text-xs mt-2">{errors.subTitlAr?.message} </span>
                     </div>
+                    
+                    <div className=" flex sm:flex-23 flex-col z-0 w-full mb-5 group">
+                            <label htmlFor="pageName" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> page Name</label>
+                            <div className="flex items-center w-full">
+                                <div className="relative flex w-full">
+                                <input {...register('pageName')}  type="text" name="pageName" id="pageName" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="Page Name ...." required />
+                                </div>
+                            </div> 
+                            <span className="text-red-400 text-xs mt-2">{errors.pageName?.message} </span>
+                    </div>
                     <div className=" flex sm:flex-23 flex-col z-0 w-full mb-5 group">
                             <label htmlFor="heroMore" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> hero More</label>
                             <div className="flex items-center w-full">
@@ -222,7 +232,7 @@ const CreateHero = () => {
                    
                     <div className="flex sm:flex-25 mb-6 justify-between">
                         <div className=" flex-100 ">
-                            <h3 className="mb-1.5 text-md font-medium text-gray-600 ">Show Status ? </h3>
+                            <h3 className="mb-0.5 text-md font-medium text-gray-600 ">Show Status ? </h3>
                             <ul className="grid w-full gap-6 md:grid-cols-2 bord ">
                                 <li>
                                     <input type="radio" 

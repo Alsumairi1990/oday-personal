@@ -7,7 +7,18 @@ import prisma from "@/utils/prisma";
 import { PlanSchema } from "../_utils/PlanSchema";
 import { slugify } from "@/utils/TextUtils";
 import { PlanCategorySchema } from "../category/_utils/PlanCategorySchema";
+import { PlanCategory } from "@prisma/client";
 
+export async function getPlanCategories(): Promise<PlanCategory[]> {
+  try {
+    const elements = await prisma.planCategory.findMany({
+    });
+    return elements;
+  } catch (error) {
+    throw error;
+  }
+  
+}
 
 
 export async function addPlanCategory(data: FormData): Promise<number> {
@@ -149,6 +160,7 @@ export async function addPlan(data: FormData, categories: string[], services: st
             duration: data.duration,
             image: imagePath,
             icon: iconPath,
+            userId : userId
           },
         });
   

@@ -1,6 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import { AbstractIntlMessages } from 'next-intl';
+import Link from 'next/link';
 interface Props {
     locale : string,
     messages : AbstractIntlMessages
@@ -70,9 +71,9 @@ function PackagesPanel({locale,messages}:Props) {
            </div>
        </div>
        <div className="flex-100 sm:flex-30 flex items-center justify-center">
-            <div className="py-1.5 text-center px-5 max-sm:mt-4 max-sm:w-full rounded-md  h-fit" style={{background:'linear-gradient(0deg, #981c45, #e91818)'}}>
+            <Link href="/plans/categories" className="py-1.5 text-center px-5 max-sm:mt-4 max-sm:w-full rounded-md  h-fit" style={{background:'linear-gradient(0deg, #981c45, #e91818)'}}>
                <span className="text-white font-arabic text-base font-bold pb-2" >  المـــزيد  </span>
-             </div>
+             </Link>
        </div>
      </div>
   )

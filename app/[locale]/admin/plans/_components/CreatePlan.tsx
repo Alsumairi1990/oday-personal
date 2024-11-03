@@ -14,6 +14,7 @@ import { getServices } from '@/app/[locale]/_actions/Actions';
 import MultiMenuPanel from '../../common/utils/MultiMenuPanel';
 import { PlanSchema } from '../_utils/PlanSchema';
 import { addOffer } from '../../offers/_actions/Actions';
+import { addPlan, getPlanCategories } from '../_actions/Actions';
 
 
 
@@ -103,9 +104,9 @@ const CreatePlan = () => {
   const setMeueElements = async ()=>{
     try {
       setLoading(true);
-      const elements = await getLocations();
-      const countries = elements.map(element => element.country);
-      const countriesArr = elements.map(element => element.countryAr ?? '');
+      const elements = await getPlanCategories();
+      const countries = elements.map(element => element.name);
+      const countriesArr = elements.map(element => element.nameAr ?? '');
       setCountriesAr(countriesArr);
       setCountries(countries);
       setLoading(false);
@@ -166,7 +167,7 @@ const CreatePlan = () => {
       // console.log(JSON.stringify(formData, null, 2));
       try {
         setLoading(true);
-        const codeData =  await addOffer(formData,selectedLocation,selectedElement);
+        const codeData =  await addPlan(formData,selectedLocation,selectedElement);
         // setBasic(codeData);
         // addOfferId(codeData);
         setLoading(false);
@@ -312,6 +313,15 @@ const CreatePlan = () => {
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.name?.message} </span>
+            </div>
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+                    <label htmlFor="interval" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> interval </label>
+                    <div className="flex items-center w-full">
+                        <div className="relative flex w-full">
+                        <input {...register('interval')}  type="text" name="interval" id="interval" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 border rounded-xl border-gray-300 appearance-none  bg-gray-50 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="interval ...." required />
+                        </div>
+                    </div> 
+                    <span className="text-red-400 text-xs mt-2">{errors.interval?.message} </span>
             </div>
 
             <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
