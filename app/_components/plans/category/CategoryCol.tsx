@@ -37,7 +37,7 @@ const CategoryCol = ({ category,locale,messages } : ServiceProps) => {
               <Link href="/service" className="text-base rtl:font-arabic rtl:text-sm rtl:font-bold text-white">{request}</Link>
              </div>
              <div className="py-1 px-2 text-center border bg-gray-50 rounded-md">
-              <Link href="/service" className="text-base rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
+              <Link href={`/plans/categories/${category.slug}`} className="text-base rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
              </div>
            </div>
         </div>
