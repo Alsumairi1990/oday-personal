@@ -91,7 +91,13 @@
       "support" : "support" ,
       "purpose" : "purpose" ,
       "duration" : "duration",
-      "interval" : "interval"
+      "interval" : "interval",
+      "paymentInterval" : "Payment Interval",
+      "cycleOfpayment" : "pay Per",
+      "year" : "year",
+      "semAnnual" : "six month",
+      "month" : "month"
+
 
 
       

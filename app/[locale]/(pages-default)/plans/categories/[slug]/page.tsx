@@ -44,7 +44,7 @@ const category:PlanCategoryForFront = await categoryData.json();
            </div>
             
            <div className="w-11.6/12 my-10 mx-auto grid sm:grid-cols-75/25">
-              <div className="grid sm:grid-cols-3">
+              <div className="grid sm:grid-cols-3 gap-x-6">
                 {category && category.plans && 
                    category.plans.map((plan) => (
                     <PlanCard  plan = {plan} locale = {locale} messages = {messages}  />

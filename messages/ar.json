@@ -91,7 +91,12 @@
        "support" : "الدعم" ,
        "purpose" : "الشريحة المستهدفة" ,
        "duration" : "مدة الاشتراك",
-       "interval" : "مدة التجديد"
+       "interval" : "مدة التجديد",
+       "paymentInterval" : "دورة الدفع",
+       "cycleOfpayment" : "يتم التجديد كل ",
+       "year" : "سنة",
+       "semAnnual" : "ستة اشهر",
+       "month" : "شهر"
 
 
 
