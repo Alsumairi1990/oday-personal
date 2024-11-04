@@ -6,6 +6,7 @@ import { PlanCategoryForFront } from "@/app/[locale]/admin/plans/category/_utils
 import CategoryPanel from "@/app/_components/plans/category/CategoryPanel";
 import MainHeroSection from "@/app/_components/MainHeroSection";
 import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
+import PlanCard from "@/app/_components/plans/PlanCard";
 interface Props {
     params: {
         slug: string;
@@ -42,17 +43,21 @@ const category:PlanCategoryForFront = await categoryData.json();
             }
            </div>
             
-           <div className="w-11.6/12 mx-auto grid sm:grid-cols-75/25">
-              <div >
-                {category.name}
+           <div className="w-11.6/12 my-10 mx-auto grid sm:grid-cols-75/25">
+              <div className="grid sm:grid-cols-3">
+                {category && category.plans && 
+                   category.plans.map((plan) => (
+                    <PlanCard  plan = {plan} locale = {locale} messages = {messages}  />
+                   ))
+                }
                 {/* <CategoryPanel categories={categories} locale={locale} messages={messages}  /> */}
               </div>
-              <div className="p-2 h-fit">
+              {/* <div className="p-2 h-fit">
                   <div className="" >
                   <SidQuery  />
                   </div>
                   
-              </div>
+              </div> */}
            </div>
      </>
   )

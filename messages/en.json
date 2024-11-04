@@ -85,7 +85,14 @@
       "more" : "More",
       "totalPlans" : "total plans",
       "plans" : "plans",
-      "categories" : "categories"
+      "categories" : "categories",
+      "features" : "features",
+      "limits" : "limits",
+      "support" : "support" ,
+      "purpose" : "purpose" ,
+      "duration" : "duration",
+      "interval" : "interval"
+
 
       
 

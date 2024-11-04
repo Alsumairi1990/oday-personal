@@ -85,7 +85,13 @@
        "more" : "المزيـد",
        "totalPlans" : "مجموع الباقات",
        "plans" : "الباقات",
-      "categories" : "تصنيفات"
+       "categories" : "تصنيفات",
+       "features" : "خصائص",
+       "limits" : "حدود الباقة",
+       "support" : "الدعم" ,
+       "purpose" : "الشريحة المستهدفة" ,
+       "duration" : "مدة الاشتراك",
+       "interval" : "مدة التجديد"
 
 
 
