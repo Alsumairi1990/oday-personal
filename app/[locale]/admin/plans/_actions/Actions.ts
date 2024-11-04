@@ -41,16 +41,16 @@ export async function addPlanCategory(data: FormData): Promise<number> {
 
       // Handle image upload
       if (data.image && data.image.name) {
-        await fs.mkdir("public/offers/images", { recursive: true });
-        imagePath = `/offers/images/${crypto.randomUUID()}-${data.image.name}`;
+        await fs.mkdir("public/plans-media/category/images", { recursive: true });
+        imagePath = `/plans-media/category/images/${crypto.randomUUID()}-${data.image.name.replace(/\s+/g, '').replace(/[()]/g, '') }`;
         const buffer = Buffer.from(await data.image.arrayBuffer());
         await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
       }
 
       // Handle icon upload
       if (data.icon && data.icon.name) {
-        await fs.mkdir("public/offers/icons", { recursive: true });
-        iconPath = `/offers/icons/${crypto.randomUUID()}-${data.icon.name}`;
+        await fs.mkdir("public/plans-media/category/icons", { recursive: true });
+        iconPath = `/plans-media/category/icons/${crypto.randomUUID()}-${data.icon.name.replace(/\s+/g, '').replace(/[()]/g, '') }`;
         const buffer = Buffer.from(await data.icon.arrayBuffer());
         await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
       }
@@ -103,16 +103,16 @@ export async function addPlan(data: FormData, categories: string[], services: st
   
         // Handle image upload
         if (data.image && data.image.name) {
-          await fs.mkdir("public/offers/images", { recursive: true });
-          imagePath = `/offers/images/${crypto.randomUUID()}-${data.image.name}`;
+          await fs.mkdir("public/plans-media/category/images", { recursive: true });
+          imagePath = `/plans-media/category/images/${crypto.randomUUID()}-${data.image.name.replace(/\s+/g, '').replace(/[()]/g, '') }`;
           const buffer = Buffer.from(await data.image.arrayBuffer());
           await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
         }
   
-        // Handle icon upload
+     
         if (data.icon && data.icon.name) {
-          await fs.mkdir("public/offers/icons", { recursive: true });
-          iconPath = `/offers/icons/${crypto.randomUUID()}-${data.icon.name}`;
+          await fs.mkdir("public/plans-media/icon", { recursive: true });
+          iconPath = `/plans-media/icons/${crypto.randomUUID()}-${data.icon.name.replace(/\s+/g, '').replace(/[()]/g, '') }`;
           const buffer = Buffer.from(await data.icon.arrayBuffer());
           await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
         }

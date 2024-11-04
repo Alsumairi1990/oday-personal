@@ -83,7 +83,9 @@
       "news" : "News",
       "ecnomics" : "ecnomics" ,
       "more" : "More",
-      "totalPlans" : "total plans"
+      "totalPlans" : "total plans",
+      "plans" : "plans",
+      "categories" : "categories"
 
       
 

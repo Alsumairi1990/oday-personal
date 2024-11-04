@@ -109,6 +109,7 @@ const CreatePlanCategory = () => {
         // addBasicId(codeData);
         setLoading(false);
         messageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if(codeData > 0) { reset();}
       } catch (error:any) {
         setLoading(false);
          setError(error.message);
