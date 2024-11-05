@@ -31,7 +31,7 @@ const PlanHeroSect = ({ plan, locale,messages,page }: ServiceProps) => {
   return (
         <div className="w-full " >  
         <div className=" sm:h-[calc(100%-350px)] hero-section pt-[100px] sm:pb-8 flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${plan.image})`}}>
-           <div className="absolute sm:top-[75px] h-[calc(100%-50px)] sm:h-[calc(100%-75px)] top-16 bottom-0 border-t border-t-gray-800  w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
+           <div className="absolute sm:top-[75px] h-[calc(100%-50px)] sm:h-[calc(100%-75px)] top-16 bottom-0 border-t border-t-gray-800  w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 37%), rgb(8 8 8))'}}></div>
 
           <div className="flex w-full sm:w-11/12 mx-auto  relative">
              <div className="flex-100 ">
