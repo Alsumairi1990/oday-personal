@@ -48,18 +48,18 @@ const PlanHeroSect = ({ plan, locale,messages,page }: ServiceProps) => {
                 <h2 className="sm:text-base text-base text-center text-white font-arabic line-clamp-2 font-sembold mb-4">{plan.descriptionAr}</h2>
                 </>
                 }
-                <div className="flex sm:gap-x-4 rtl:font-arabic mt-2 sm:gap-6 sm:my-6 justify-center sm:w-8/12 mx-auto ">
-                   <div className="sm:flex-25 bg-[rgba(31,41,55,0.5)] rounded relative border py-3  items-center gap-y-4 mt-4 font-semibold flex flex-col border-gray-400">
+                <div className="flex sm:gap-x-4 rtl:font-arabic mt-2 gap-2 sm:gap-6 sm:my-6 justify-center sm:w-8/12 mx-auto ">
+                   <div className="sm:flex-25 bg-[rgba(31,41,55,0.5)] sm:bg-subscriptionBg rounded relative border py-3  items-center gap-y-4 mt-4 font-semibold flex flex-col border-gray-400">
                      <span className="absolute -top-5 items-center justify-center  rounded-full border inline-flex h-9 w-9 bg-[rgba(31,41,55,0.5)] border-gray-300"><FaArtstation className='text-white text-xl' /></span>
                      <span className="text-gray-100 max-sm:text-base max-sm:text-center border-b mt-3 border-b-gray-400 pb-2">{ duration}</span>
                      <span className="text-gray-100 ">{plan.duration}</span>
                    </div>
-                   <div className="sm:flex-25 bg-[rgba(31,41,55,0.5)] rounded relative border py-3  items-center gap-y-4 mt-4 font-semibold flex flex-col border-gray-400">
+                   <div className="sm:flex-25 bg-[rgba(31,41,55,0.5)] sm:bg-subscriptionBg rounded relative border py-3  items-center gap-y-4 mt-4 font-semibold flex flex-col border-gray-400">
                      <span className="absolute -top-5 items-center justify-center  rounded-full border inline-flex h-9 w-9 bg-[rgba(31,41,55,0.5)] border-gray-300"><IoCalendarClear className='text-white text-xl' /></span>
                      <span className="text-gray-100 max-sm:text-base max-sm:text-center border-b mt-3 border-b-gray-400 pb-2">{ cycleOfpayment}</span>
                      <span className="text-gray-100 ">{plan.interval == 'MONTHLY'? month : plan.interval === 'YEARLY'? annual : semiAnnual  }</span>
                    </div>
-                   <div className="sm:flex-25 bg-[rgba(31,41,55,0.5)] rounded relative border py-3  items-center gap-y-4 mt-4 font-semibold flex flex-col border-gray-400">
+                   <div className="sm:flex-25 bg-[rgba(31,41,55,0.5)] sm:bg-subscriptionBg rounded relative border py-3  items-center gap-y-4 mt-4 font-semibold flex flex-col border-gray-400" >
                      <span className="absolute -top-5 items-center justify-center  rounded-full border inline-flex h-9 w-9 bg-[rgba(31,41,55,0.5)] border-gray-300"><BiSolidOffer className='text-white text-xl' /></span>
                      <span className="text-gray-100 max-sm:text-base max-sm:text-center border-b mt-3 border-b-gray-400 pb-2">{ totalServices}</span>
                      <span className="text-gray-100 ">{plan.services.length}</span>

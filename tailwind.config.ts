@@ -117,6 +117,10 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
+      backgroundImage : {
+        subscriptionBg : "linear-gradient(45deg, #2b2c2c 25%, black 25%, #000000cf 75%, #363535db 75%, #464444), linear-gradient(45deg, #080808 25%, transparent 25%, transparent 75%, #f3f3f3 75%, #000000)",
+
+      },
       gridTemplateColumns: {
         // Simple 16 column grid
         '25/75': '25% 75%',
