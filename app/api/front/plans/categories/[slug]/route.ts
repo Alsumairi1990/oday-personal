@@ -18,14 +18,26 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
 }
 async function getElements(slug:string): Promise<PlanCategoryForFront | null> {
   try {
+    // const elements = await prisma.planCategory.findUnique({
+    //     where : {
+    //         slug : slug
+    //     },
+    //     include: {
+    //      plans : true
+    //      },
+    //   });
     const elements = await prisma.planCategory.findUnique({
-        where : {
-            slug : slug
+      where: {
+        slug: slug,
+      },
+      include: {
+        plans: {
+          include: {
+            services: true, // Include related services for each plan
+          },
         },
-        include: {
-         plans : true
-         },
-      });
+      },
+    });
     return elements as PlanCategoryForFront;
   } catch (error) {
     console.error('Error fetching data:', error);
