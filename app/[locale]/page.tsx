@@ -18,7 +18,7 @@ import { WorksFrontData } from './admin/works/utils/WorksFrontData'
 import { MarketWithModels } from './admin/market/_utils/MarketWithModels'
 import Markets from '../_components/market/Markets'
 import BlogList from '../_components/BlogList'
-import PackagesPanel from '../_components/OurPackages/PackagesPanel'
+import PlansPanel from '../_components/OurPlans/PlansPanel'
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
@@ -144,7 +144,7 @@ export default async function Home() {
      </div>
 
      <div className="pak">
-      <PackagesPanel locale={locale} messages={messages} />
+      <PlansPanel locale={locale} messages={messages} />
      </div>
      <div className="dark:bg-black-100">
       {phases && phaseMeta && <PhaseCompany phases={phases} meta={phaseMeta} />}

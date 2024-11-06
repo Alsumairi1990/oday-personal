@@ -61,7 +61,7 @@ model Plan {
   monthlyPrice    Decimal         @default(100.0) // Monthly price
   semiAnnualPrice Decimal         @default(500.0) // Semi-annual price with discount
   yearlyPrice     Decimal         @default(900.0) // Yearly price with a further discount
-  features        String? 
+  features        String?
   featuresAr      String?
   limits          String?
   limitsAr        String?
@@ -78,8 +78,8 @@ model Plan {
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
   subscriptions   Subscription[]
-  userId        String
-  user          User?             @relation(fields: [userId], references: [id])
+  userId          String
+  user            User?           @relation(fields: [userId], references: [id])
 }
 
 enum BillingInterval {
@@ -124,7 +124,7 @@ model PlanCategory {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   userId        String
-  user          User?             @relation(fields: [userId], references: [id])
+  user          User?    @relation(fields: [userId], references: [id])
 }
 
 model ServiceCode {
@@ -434,6 +434,37 @@ model Offer {
   user          User       @relation(fields: [userId], references: [id])
 }
 
+model Package {
+  id            Int      @id @default(autoincrement())
+  name          String
+  nameAr        String
+  description   String?
+  descriptionAr String?
+  price         Float
+  isPopular     Boolean  @default(false)
+  image         String?
+  icon          String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  userId        String
+  user          User     @relation(fields: [userId], references: [id])
+
+  features PackageFeature[]
+}
+
+model PackageFeature {
+  id            Int     @id @default(autoincrement())
+  name          String
+  nameAr        String
+  value         String?
+  valueAr       String?
+  description   String?
+  descriptionAr String?
+  included      Boolean
+  packageId     Int
+  package       Package @relation(fields: [packageId], references: [id])
+}
+
 model Page {
   id            Int          @id @default(autoincrement())
   name          String
@@ -623,6 +654,7 @@ model User {
   subscription    Subscription[]
   plans           Plan[]
   planCategories  PlanCategory[]
+  packages        Package[]
 
   @@map(name: "users")
 }

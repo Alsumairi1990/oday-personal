@@ -2,12 +2,15 @@
 import React, { useEffect, useState } from 'react'
 import { AbstractIntlMessages } from 'next-intl';
 import Link from 'next/link';
+import { FaArtstation } from 'react-icons/fa';
+import { IoCalendarClear } from 'react-icons/io5';
+import { BiSolidOffer } from 'react-icons/bi';
 interface Props {
     locale : string,
     messages : AbstractIntlMessages
 
 }
-function PackagesPanel({locale,messages}:Props) {
+function PlansPanel({locale,messages}:Props) {
   
   const preview = (messages as any).HomePage.workPreview;
   // const img1 = "/plans-media/images/packages.jpg"
@@ -33,11 +36,11 @@ function PackagesPanel({locale,messages}:Props) {
 
 
   return (
-    <div className="w-11.3/12 py-6 rounded  mx-auto flex flex-wrap  px-4 relative  bg-no-repeat bg-center bg-cover -z-0"  style={{backgroundImage: `url(${img})`}}>
+    <div className="w-11.3/12 pt-9 pb-6 rounded  mx-auto flex flex-wrap  px-4 relative  bg-no-repeat bg-center bg-cover -z-0"  style={{backgroundImage: `url(${img})`}}>
        <div className="sm:flex-30 flex max-sm:mb-3">
         <div className="p-1 flex items-center">
           <img src={logo} className='w-20' alt="subscription" />
-          <div className="bg-gray-50 flex items-center mt-7 px-2 rounded-l-md -mr-2">
+          <div className="bg-gray-50 flex items-center mt-7 px-2 rounded-l-md relative -mr-2">
             <span className="text-gray-900 font-bold font-arabic inline-flex py-2"> باقات الاشتراك
             </span>
           </div>
@@ -45,28 +48,38 @@ function PackagesPanel({locale,messages}:Props) {
         
        </div>
        <div className="sm:flex-40 grid grid-cols-3 gap-x-2">
-           <div className=" bg-[#293347] flex flex-col items-center rounded border border-[#6a707e] ">
-             <div className="p-2 py-4">
+           <div className=" bg-[#293347] flex flex-col relative items-center rounded border border-[#6a707e] ">
+             <span className="absolute -top-6 items-center justify-center  rounded-full border bg-[#293347] inline-flex h-10 w-10 bcg-[rgba(31,41,55,0.5)] border-[#6a707e]">
+              <FaArtstation className='text-white text-xl' />
+              </span>
+              
+             <div className="px-2 pt-5 pb-4">
                <span className="text-white font-arabic text-lg font-bold pb-2">  الباقة الاساسية </span>
              </div>
              <div className="p-1 bg-[#4a5162] w-full text-center">
-               <span className="text-white font-bold">  2097  </span>
+               <span className="text-white font-bold">  2097$  </span>
              </div>
            </div>
-           <div className=" bg-[#293347] flex flex-col items-center rounded border border-[#6a707e] ">
-             <div className="p-2 py-4">
+           <div className=" bg-[#293347] flex flex-col items-center rounded border relative border-[#6a707e] ">
+              <span className="absolute -top-6 items-center justify-center  rounded-full border bg-[#293347] inline-flex h-10 w-10 bcg-[rgba(31,41,55,0.5)] border-[#6a707e]">
+               <IoCalendarClear className='text-white text-xl' />
+              </span>
+             <div className="px-2 py-5 pb-4">
                <span className="text-white font-arabic text-lg font-bold pb-2">  الباقة الاحترافية </span>
              </div>
              <div className="p-1 bg-[#4a5162] w-full text-center">
-               <span className="text-white font-bold">  8765  </span>
+               <span className="text-white font-bold">  8765$  </span>
              </div>
            </div>
-           <div className=" bg-[#293347] flex flex-col items-center rounded border border-[#6a707e] ">
-             <div className="p-2 py-4">
+           <div className=" bg-[#293347] flex flex-col items-center relative rounded border border-[#6a707e] ">
+              <span className="absolute -top-6 items-center justify-center  rounded-full border bg-[#293347] inline-flex h-10 w-10 bcg-[rgba(31,41,55,0.5)] border-[#6a707e]">
+               <BiSolidOffer className='text-white text-xl' />
+              </span>
+             <div className="px-2 pt-5 pb-4">
                <span className="text-white font-arabic text-lg font-bold pb-2">  الباقة المتقدمة </span>
              </div>
              <div className="p-1 bg-[#4a5162] w-full text-center">
-               <span className="text-white font-bold">  12876  </span>
+               <span className="text-white font-bold">  12876$  </span>
              </div>
            </div>
        </div>
@@ -79,4 +92,4 @@ function PackagesPanel({locale,messages}:Props) {
   )
 }
 
-export default PackagesPanel
+export default PlansPanel

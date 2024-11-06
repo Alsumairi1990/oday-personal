@@ -96,8 +96,8 @@ const planSinglePage = async ({params}:Props) => {
                 </span>
               </div>
               <div className="flex-100 sm:h-16 rtl:pr-1  border-b border-b-gray-300 flex items-center rounded-md ">
-                <span className="text-base h-[90%] flex justify-center items-center flex-20 sm:flex-15  px-2 font-semibold w-full text-center py-1.5 rounded-md text-gray-800 dark:text-gray-50 bg-gray-200 dark:bg-gray-800">{paymentInterval}</span>
-                <span className="text-base flex-80  rtl:pr-7 px-1 text-gray-700 leading-6">{plan.interval == 'MONTHLY'? month : plan.interval === 'YEARLY'? annual : semiAnnual  } </span>
+                <span className="text-base h-[90%] flex justify-center items-center flex-35 sm:flex-15  px-2 font-semibold w-full text-center py-1.5 rounded-md text-gray-800 dark:text-gray-50 bg-gray-200 dark:bg-gray-800">{paymentInterval}</span>
+                <span className="text-base flex-65  rtl:pr-7 px-1 text-gray-700 leading-6">{plan.interval == 'MONTHLY'? month : plan.interval === 'YEARLY'? annual : semiAnnual  } </span>
               </div>
             </div>
            </div>
