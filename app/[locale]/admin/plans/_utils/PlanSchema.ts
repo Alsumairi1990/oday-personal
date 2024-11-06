@@ -22,8 +22,6 @@ export const PlanSchema = z.object({
   limitsAr: z.string(),
   purpose: z.string(),
   purposeAr: z.string(),
-  paymentTerms: z.string().optional(),
-  paymentMethod: z.string().optional(),
   image: z
     .custom<File>(
       (file) => {

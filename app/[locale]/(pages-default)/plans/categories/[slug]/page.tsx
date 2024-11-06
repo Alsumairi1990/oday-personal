@@ -54,9 +54,10 @@ const planCategorySinglePage = async ({params}:Props) => {
             
            <div className="w-11/12 my-10 mx-auto">
               <div className="grid sm:grid-cols-3 sm:gap-x-12 max-sm:gap-y-6  w-full">
+                {params.slug}rr
                 {category && category.plans && 
                    category.plans.map((plan) => (
-                    <PlanCard  plan = {plan} locale = {locale} messages = {messages}  />
+                    <PlanCard  plan = {plan} locale = {locale} messages = {messages} categorySlug={params.slug}  />
                    ))
                 }
               </div>

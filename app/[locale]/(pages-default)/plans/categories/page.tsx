@@ -42,12 +42,6 @@ const categories:PlanCategoryForFront[] = await categoryData.json();
                   
               </div>
            </div>
-           
-         
-
-        
-
-   
      </>
   )
 };

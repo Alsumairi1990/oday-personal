@@ -7,12 +7,11 @@ import { PlanCategoryForFront } from '@/app/[locale]/admin/plans/category/_utils
 import { PlanForFront } from '@/app/[locale]/admin/plans/_utils/PlanForFront';
 import { Plan } from '@prisma/client';
 interface ServiceProps {
-    plan: PlanForFront,
+    plan: Plan,
     locale : string,
     messages : AbstractIntlMessages,
-    categorySlug : string
   }
-const PlanCard = ({ plan,locale,messages ,categorySlug} : ServiceProps) => {
+const PlanCardSimilar = ({ plan,locale,messages } : ServiceProps) => {
   const request = (messages as any).HomePage.requestService;
   const details = (messages as any).HomePage.details;
   const features = (messages as any).Common.features;
@@ -70,44 +69,16 @@ const PlanCard = ({ plan,locale,messages ,categorySlug} : ServiceProps) => {
         <div className="mt-1.5 font-arabic ">
             <p className="text-gray-800 text-lg font-bold dark:text-orange-500 mb-">{plan.nameAr}</p>
             <p className="text-gray-700 text-sm tracking-8  leading-7 px-1.5 dark:text-gray-100 line-clamp-3 font-medium mb-4">{plan.descriptionAr}</p>
-            <div className="">
+            {/* <div className="">
                 <span className="text-gray-900 text-md font-semibold mb-1">{features} : </span>
                 <p className="text-sm text-gray-700 leading-6">{plan.featuresAr}</p>
-            </div>
-            <div className="mt-3">
-                <span className="text-gray-900 text-md font-semibold mb-1">{limits} : </span>
-                <p className="text-sm text-gray-700 leading-6">{plan.limitsAr}</p>
-            </div>
-            <div className="mt-3">
-                <span className="text-gray-900 text-md font-semibold mb-1">{support} : </span>
-                <p className="text-sm text-gray-700 leading-6">{plan.supportAr}</p>
-            </div>
-            <div className="mt-3">
-                <span className="text-gray-900 text-md font-semibold mb-1">{purpose} : </span>
-                <p className="text-sm text-gray-700 leading-6">{plan.purposeAr}</p>
-            </div>
-            <div className="mt-3">
-                <span className="text-gray-900 text-md font-semibold mb-1">{duration} : </span>
-                <span className="text-sm px-1 text-gray-700 leading-6">{plan.duration}</span>
-            </div>
-           
-            <div className="mt-3">
-                <span className="text-gray-900 text-md font-semibold mb-1">{paymentInterval} : </span>
-                <span className="text-sm px-1 text-gray-700 leading-6">{plan.interval == 'MONTHLY'? month : plan.interval === 'YEARLY'? annual : semiAnnual  } </span>
-            </div>
-            <div className="mt-3">
-                <span className="text-gray-900 text-md font-semibold mb-1">{totalServices} : </span>
-                {plan && plan.services.map((service) =>(
-                  <span className="text-sm border border-gray-300 mx-1 my-1 inline-flex rounded px-1 font-semibold text-gray-700 leading-6">{ service.nameAr }  </span>
-                ))}
-            </div>
-            
+            </div> */}
             <div className="flex px-3 gap-x-3 justify-center border-t border-t-gray-200 pt-3">
              <div className="py-1 px-2 text-center bg-orange-600 border border-orange-600 rounded-md">
               <Link href="/service" className="text-base rtl:font-arabic rtl:text-sm rtl:font-bold text-white">{request}</Link>
              </div>
              <div className="py-1 px-2 text-center border bg-gray-50 rounded-md">
-              {categorySlug !== '' && <Link href={`/plans/${categorySlug}/${plan.slug}`} className="text-base rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>}
+              <Link href={`/plans/${plan.slug}`} className="text-base rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
              </div>
            </div>
         </div>
@@ -118,5 +89,5 @@ const PlanCard = ({ plan,locale,messages ,categorySlug} : ServiceProps) => {
   );
 };
 
-export default PlanCard;
+export default PlanCardSimilar;
 

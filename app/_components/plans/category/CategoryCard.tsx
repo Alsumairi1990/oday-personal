@@ -59,7 +59,7 @@ const CategoryCard = ({category,locale,messages,}:Props) => {
               <Link href="/category" className="text-base rtl:font-arabic rtl:text-sm rtl:font-bold text-white">{request}</Link>
              </div>
              <div className="py-1 max-sm:hidden max-sm:flex-40 text-center border bg-gray-50 rounded-md">
-              <Link href={`/plans/categories/${category.slug}`} className="text-base rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
+              <Link href={`/plans/${category.slug}`} className="text-base rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
              </div>
            </div>
            
