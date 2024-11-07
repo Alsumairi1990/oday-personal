@@ -13,6 +13,8 @@ interface Props {
 function PlansPanel({locale,messages}:Props) {
   
   const preview = (messages as any).HomePage.workPreview;
+  const request = (messages as any).HomePage.request;
+
   // const img1 = "/plans-media/images/packages.jpg"
   // const img2 = "/plans-media/images/packages.jpg"
  
@@ -36,7 +38,24 @@ function PlansPanel({locale,messages}:Props) {
 
 
   return (
-    <div className="w-11.3/12 pt-9 pb-6 rounded  mx-auto flex flex-wrap  px-4 relative  bg-no-repeat bg-center bg-cover -z-0"  style={{backgroundImage: `url(${img})`}}>
+    <>
+    <div className="flex w-fit px-4 gap-x-4 rounded-[7rem] bg-gray-50 py-[9px] border border-gray-300 my-3  mx-auto justify-center">
+      <button type='button'
+       className="p-2 rounded-3xl text-md font-medium text-white  border  relative text-foreground text-center bg-red-500  border-red-500"
+       >
+        Web Deveopment
+        <span className="z-10 absolute left-[40%] top-1/2 -bottom-6 border-l-[20px] border-r-[20px] border-b-[13px] border-l-transparent border-r-transparent border-b-red-600 "></span>
+      </button>
+      <button type='button'
+       className="p-2 hover:bg-red-500 rounded-3xl text-md font-medium text-gray-800 bg-white border relative text-foreground text-center bg-background  border-gray-300"
+       >
+        Hraphic Design
+        <span className="z-10 hidden absolute left-[40%] top-1/2 -bottom-6 border-l-[20px] border-r-[20px] border-b-[13px] border-l-transparent border-r-transparent border-b-red-600 "></span>
+      </button>
+
+
+    </div>
+    <div className="w-11.3/12 pt-9 pb-6 rounded  mx-auto rtl:font-arabic flex flex-wrap  px-4 relative  bg-no-repeat bg-center bg-cover -z-0"  style={{backgroundImage: `url(${img})`}}>
        <div className="sm:flex-30 flex max-sm:mb-3">
         <div className="p-1 flex items-center">
           <img src={logo} className='w-20' alt="subscription" />
@@ -59,6 +78,9 @@ function PlansPanel({locale,messages}:Props) {
              <div className="p-1 bg-[#4a5162] w-full text-center">
                <span className="text-white font-bold">  2097$  </span>
              </div>
+             <div className="p-2  w-full text-center border-t border-t-[#6a707e]">
+               <span className="text-whie inline-flex py-0.5 text-sm border border-orange-400 rounded-md text-orange-400 justify-center w-full font-bold"> {request}   </span>
+             </div>
            </div>
            <div className=" bg-[#293347] flex flex-col items-center rounded border relative border-[#6a707e] ">
               <span className="absolute -top-6 items-center justify-center  rounded-full border bg-[#293347] inline-flex h-10 w-10 bcg-[rgba(31,41,55,0.5)] border-[#6a707e]">
@@ -69,6 +91,9 @@ function PlansPanel({locale,messages}:Props) {
              </div>
              <div className="p-1 bg-[#4a5162] w-full text-center">
                <span className="text-white font-bold">  8765$  </span>
+             </div>
+             <div className="p-2  w-full text-center border-t border-t-[#6a707e]">
+               <span className="text-whie inline-flex py-0.5 text-sm border border-orange-400 rounded-md text-orange-400 justify-center w-full font-bold"> {request}   </span>
              </div>
            </div>
            <div className=" bg-[#293347] flex flex-col items-center relative rounded border border-[#6a707e] ">
@@ -81,6 +106,9 @@ function PlansPanel({locale,messages}:Props) {
              <div className="p-1 bg-[#4a5162] w-full text-center">
                <span className="text-white font-bold">  12876$  </span>
              </div>
+             <div className="p-2  w-full text-center border-t border-t-[#6a707e]">
+               <span className="text-whie inline-flex py-0.5 text-sm border border-orange-400 rounded-md text-orange-400 justify-center w-full font-bold"> {request}   </span>
+             </div>
            </div>
        </div>
        <div className="flex-100 sm:flex-30 flex items-center justify-center">
@@ -89,6 +117,7 @@ function PlansPanel({locale,messages}:Props) {
              </Link>
        </div>
      </div>
+     </>
   )
 }
 

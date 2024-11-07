@@ -143,7 +143,7 @@ export default async function Home() {
      {posts && blogsMeta && <BlogList meta={blogsMeta} posts={posts}  /> }
      </div>
 
-     <div className="pak">
+     <div className="my-6">
       <PlansPanel locale={locale} messages={messages} />
      </div>
      <div className="dark:bg-black-100">

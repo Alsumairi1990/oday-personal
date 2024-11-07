@@ -129,7 +129,6 @@ const CreatePlanCategory = () => {
                 <span className=""><MdAssignmentAdd className="text-gray-600 text-2xl mr-2" /> </span>
                 <span className="text-[.96rem] font-medium text-gray-600">Main Page Form</span>
             </div>
-            
         </div>
     <div id="add-main-panel" className="w-full relative  mx-auto add-main-panel bg-white mb-6 flex flex-col  rounded-md  borrder borrder-gray-200 bg-whitey">
            
