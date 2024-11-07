@@ -5,7 +5,7 @@ export const PackageSchema = z.object({
   nameAr : z.string(),
   description: z.string(),
   descriptionAr : z.string(),
-  price: z.coerce.number().int().min(1).optional(),
+  price: z.coerce.number().int().min(1),
   isPopular: z.string(),
   image: z
     .custom<File>(

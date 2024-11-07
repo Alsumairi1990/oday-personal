@@ -12,13 +12,15 @@ import { getLocale, getMessages } from 'next-intl/server';
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
 import PhaseCompany from '../_components/PhaseCompany'
 import IndustryCard from '../_components/IndustryCard'
-import { AboutUsSection, Category, Industry, PageSection, Post, Service, Testimonial } from '@prisma/client'
+import { AboutUsSection, Category, Industry, PageSection, PlanCategory, Post, Service, Testimonial } from '@prisma/client'
 import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 import { WorksFrontData } from './admin/works/utils/WorksFrontData'
 import { MarketWithModels } from './admin/market/_utils/MarketWithModels'
 import Markets from '../_components/market/Markets'
 import BlogList from '../_components/BlogList'
 import PlansPanel from '../_components/OurPlans/PlansPanel'
+import PackageSect from '../_components/package/PackageSect'
+import { PlanCatPackForFront } from './admin/plans/category/_utils/PlanCatPackForFront'
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
@@ -75,6 +77,11 @@ export default async function Home() {
     next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
 
+  const packageCategory = await fetch(`${process.env.NEXTAUTH_URL}/api/front/packages/categories/web-development-plans/3`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
+
 
   const about = await fetch(`${process.env.NEXTAUTH_URL}/api/front/about-section`, {
     method: 'GET',
@@ -98,6 +105,7 @@ export default async function Home() {
     const sectionMeta:PageSection[] = await sections.json();
     const aboutUS:AboutUsSection = await about.json();
     const markets:MarketWithModels[] = await pageMarkets.json();
+    const packageCatgegoryData:PlanCatPackForFront = await packageCategory.json(); 
     
     const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
     const serviceCatMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'servicesCategory');  
@@ -148,6 +156,9 @@ export default async function Home() {
      </div>
      <div className="dark:bg-black-100">
       {phases && phaseMeta && <PhaseCompany phases={phases} meta={phaseMeta} />}
+     </div>
+     <div className="my-14 w-11.4/12 mx-auto">
+      {packageCatgegoryData && <PackageSect packagesData={packageCatgegoryData.packages}  locale={locale} messages={messages} />}
      </div>
      <div className="">
       <Markets markets={markets} locale={locale} messages={messages}/>

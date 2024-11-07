@@ -122,7 +122,7 @@ model PlanCategory {
   descriptionAr String?
   priority      Int @default(0)
   plans         Plan[]
-  package       Package[]
+  packages       Package[]
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
   userId        String
@@ -440,6 +440,7 @@ model Package {
   id            Int      @id @default(autoincrement())
   name          String
   nameAr        String
+  slug            String          @unique
   description   String?
   descriptionAr String?
   price         Float

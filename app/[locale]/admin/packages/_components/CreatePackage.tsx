@@ -8,13 +8,11 @@ import Image from 'next/image';
 import { MdAssignmentAdd, MdDone, MdOutlineAddCircle } from 'react-icons/md';
 import { LuAlertOctagon } from 'react-icons/lu';
 import { Offer } from '@prisma/client';
-import MenuPanel from '../../common/utils/MenuPanel';
-import { getLocations } from '../../location/_actions/Actions';
 import { getServices } from '@/app/[locale]/_actions/Actions';
 import MultiMenuPanel from '../../common/utils/MultiMenuPanel';
-import { addOffer } from '../../offers/_actions/Actions';
+import { addPackage, getPlanCategories } from '../_actions/Actions';
 import { PackageSchema } from '../_utils/PackageSchema';
-import { addPlan, getPlanCategories } from '../_actions/Actions';
+import CreateFeature from './CreateFeature';
 
 
 
@@ -23,7 +21,7 @@ type inputType = z.infer<typeof PackageSchema>;
 
 
 const CreatePackage = () => {
-    const [basic, setBasic] = useState<number>(0); // Use Category type
+    const [result, setResult] = useState<number>(0); // Use Category type
     const [error , setError] = useState<string>('');
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const [iconSrc, setIconSrc] = useState<string | null>(null);
@@ -34,7 +32,9 @@ const CreatePackage = () => {
 
     const [menuShow1, setMenuShow1] = useState<boolean>(false); 
     const [locationShow, setLocationShow] = useState<boolean>(false); 
+    const [showFeature, setShowFeature] = useState<boolean>(false); 
 
+    
     const [countries, setCountries] = useState<string[]>([]);
     const [countriesAr, setCountriesAr] = useState<string[]>([]);
     const [services, setServices] = useState<string[]>([]);
@@ -167,8 +167,8 @@ const CreatePackage = () => {
       // console.log(JSON.stringify(formData, null, 2));
       try {
         setLoading(true);
-        const codeData =  await addPlan(formData,selectedLocation,selectedElement);
-        // setBasic(codeData);
+        const codeData =  await addPackage(formData,selectedLocation);
+        // setResult(codeData);
         // addOfferId(codeData);
         setLoading(false);
         setError('')
@@ -182,6 +182,9 @@ const CreatePackage = () => {
       }
     }
     
+  const closePanel = (flag:boolean) => {
+    setShowFeature(flag)
+  }
     
   return (
     // <div className=" bg-white"></div>
@@ -211,7 +214,7 @@ const CreatePackage = () => {
                 </div>
             </div>
             }
-             {basic !== 0 &&
+             {result !== 0 &&
               <div className="border-green-600 mt-4 flex w-full rounded-lg border-l-[6px] bg-green-200/30 px-7 py-4  sm:py-6">
                   <div className="bg-green-700 mr-5 flex h-8 w-9 items-center justify-center rounded-md">
                         <MdDone  className='text-xl rounded-full border border-gray-50 p-0.5 text-white'  />
@@ -221,7 +224,7 @@ const CreatePackage = () => {
                         Order Created Successfully
                       </h5>
                       <p className="text-gray-600 text-sm font-medium leading-relaxed">
-                        Order Basic Data has been added with order id : ( {basic} )
+                        Order result Data has been added with order id : ( {result} )
                       </p>
                   </div>
               </div>
@@ -270,47 +273,6 @@ const CreatePackage = () => {
                 </div> 
         </div>
 
-        <div className=" flex-100  flex  flex-col z-10 w-full mb-5 ">
-                <label htmlFor="degree" className="font-medium mb-1.5 pl-0.5 text-sm text-gray-700 duration-300 capitalize">Service </label>
-                    <div className="flex flex-col  w-full ">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMenuShow1((prevState) => {
-                      if (prevState == false) {
-                        setSelectedElement([]);
-                      }
-                      return !prevState;
-                    });
-                  }}
-                  className="flex w-full bg-gray-50   items-center border gap-x-3 h-10 border-gray-200  px-2 rounded-2xl"
-                >
-                  {selectedElement.length > 0  ? (
-                    selectedElement.map((element)=> (
-                      <span className="text-md inline-flex text-gray-600 font-medium">
-                          <span className="px-2 first:pl-0 border-r border-r-gray-300 last:border-none">{element}</span>
-                      </span>
-                    ))
-                    
-                  ) : (
-                    <div className="text-md inline-flex text-gray-500 font-medium capitalize">
-                      <span className="px-1 capitalize text-sm">Service</span>
-                    </div>
-                  )}
-                  <span className="ml-auto">
-                    <MdOutlineAddCircle className="text-2xl border-2 border-violet-800 rounded-full text-violet-800" />
-                  </span>
-                </button> 
-                  {menuShow1 &&
-                  <div className="relative z-50 font-arabic">
-                    <MultiMenuPanel menuElements={services} setSelect={setSelect} unSelect={deSelect} />
-                  </div>
-                      }
-                </div> 
-            </div>
-
-          
-
 
             <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> name </label>
@@ -321,6 +283,7 @@ const CreatePackage = () => {
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.name?.message} </span>
             </div>
+
             <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="price" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> Price </label>
                     <div className="flex items-center w-full">
@@ -340,6 +303,41 @@ const CreatePackage = () => {
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.nameAr?.message} </span>
             </div>
+            <div className="flex sm:flex-48 mb-6 justify-between">
+                <div className=" flex-100 ">
+                    <h3 className="mb-0.5 text-md font-medium text-gray-600 ">Show Status ? </h3>
+                    <ul className="grid w-full gap-6 md:grid-cols-2 bord ">
+                        <li>
+                            <input type="radio" 
+                            {...register('isPopular')} 
+                            id="heroActive-1" defaultChecked name="isActive" value="yes" className="hidden peer" required />
+                            <label htmlFor="heroActive-1" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-orange-400 peer-checked:bg-gray-50 peer-checked:text-orange-600 hover:text-gray-600 hover:bg-gray-100 " >                           
+                                <div className="block">
+                                    <div className="w-full text-sm font-medium">popular</div>
+                                </div>
+                                <svg className="w-4 h-4 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </label>
+                        </li>
+                        <li>
+                            <input type="radio" 
+                            {...register('isPopular')}
+                            id="heroActive-2" name="isActive" value="no" className="hidden peer" />
+                            <label htmlFor="heroActive-2" className="inline-flex items-center justify-between w-full p-2 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer   peer-checked:border-orange-600 peer-checked:text-orange-400 peer-checked:bg-gray-50 hover:text-gray-600 hover:bg-gray-100 " >
+                                <div className="block">
+                                    <div className="w-full text-sm font-medium">Un popluar</div>
+                                </div>
+                                <svg className="w-4 h-4 ms-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                </svg>
+                            </label>
+                        </li>
+                    </ul>
+                    <span className="text-red-400 text-xs mt-2">{errors.isPopular?.message} </span>
+                    </div>
+                </div>
+
 
 
             <div className="flex flex-100 items-center mb-4 justify-center w-full">
@@ -412,6 +410,22 @@ const CreatePackage = () => {
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.descriptionAr?.message} </span>
             </div>
+            
+            <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+            <button
+                  type="button"
+                  onClick={() => {
+                    setShowFeature(true)
+                  }}
+                  className="flex w-full bg-gray-50   items-center border gap-x-3 h-10 border-gray-200  px-2 rounded-2xl"
+                >
+                  Add Feature
+               
+                  <span className="ml-auto">
+                    <MdOutlineAddCircle className="text-2xl border-2 border-violet-800 rounded-full text-violet-800" />
+                  </span>
+                </button> 
+            </div>
 
          
           
@@ -427,7 +441,11 @@ const CreatePackage = () => {
                 </div>
             </div>
       </form>
+      {showFeature && 
+      <CreateFeature id={result} closeModel={closePanel} />
+    }
     </div>
+   
   );
 };
 

@@ -5,9 +5,11 @@ import authOptions from "@/utils/AuthOptions";
 import fs from "fs/promises"
 import prisma from "@/utils/prisma";
 import { slugify } from "@/utils/TextUtils";
-import { PlanCategory } from "@prisma/client";
+import { Package, PlanCategory } from "@prisma/client";
 import { PlanCategorySchema } from "../../plans/category/_utils/PlanCategorySchema";
 import { PlanSchema } from "../../plans/_utils/PlanSchema";
+import { PackageSchema } from "../_utils/PackageSchema";
+import { PackageFeatureSchema } from "../_utils/PackageFeatureSchema";
 
 export async function getPlanCategories(): Promise<PlanCategory[]> {
   try {
@@ -20,55 +22,40 @@ export async function getPlanCategories(): Promise<PlanCategory[]> {
   
 }
 
-
-export async function addPlanCategory(data: FormData): Promise<number> {
+export async function getPackages(): Promise<Package[]> {
   try {
-    // Parse the offer data from the form
-    const result = PlanCategorySchema.safeParse(Object.fromEntries(data.entries()));
-    const session = await getServerSession(authOptions);
+    const elements = await prisma.package.findMany({
+    });
+    return elements;
+  } catch (error) {
+    throw error;
+  }
+  
+}
 
-    if (!session) {
-      throw new Error('User not authenticated');
-    }
 
-    const userId = session.user.id;
-
+export async function addPackageFeature(data: FormData,name:string): Promise<number> {
+  try {
+    // Pars the offer data from the form
+    const result = PackageFeatureSchema.safeParse(Object.fromEntries(data.entries()));
     if (result.success) {
       const data = result.data;
-
-      let imagePath = '';
-      let iconPath = '';
-
-      // Handle image upload
-      if (data.image && data.image.name) {
-        await fs.mkdir("public/plans-media/category/images", { recursive: true });
-        imagePath = `/plans-media/category/images/${crypto.randomUUID()}-${data.image.name.replace(/\s+/g, '').replace(/[()]/g, '') }`;
-        const buffer = Buffer.from(await data.image.arrayBuffer());
-        await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+     const packageData = await prisma.package.findUnique({
+      where : {
+        slug : slugify(name)
       }
-
-      // Handle icon upload
-      if (data.icon && data.icon.name) {
-        await fs.mkdir("public/plans-media/category/icons", { recursive: true });
-        iconPath = `/plans-media/category/icons/${crypto.randomUUID()}-${data.icon.name.replace(/\s+/g, '').replace(/[()]/g, '') }`;
-        const buffer = Buffer.from(await data.icon.arrayBuffer());
-        await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
-      }
-
-     const basic = await prisma.planCategory.create({
+     })
+     if(!packageData){ throw new Error('package not there')}
+     const basic = await prisma.packageFeature.create({
           data: {
             name: data.name,
             nameAr: data.nameAr,
-            slug : slugify(data.name),
-            title : data.title,
-            titleAr :data.titleAr,
-            subTitle : data.subTitle,
-            subTitleAr : data.subTitleAr,
+            value : data.value,
+            valueAr : data.valueAr,
             description : data.description,
             descriptionAr : data.descriptionAr,
-            icon : iconPath,
-            image : imagePath,
-            userId : userId
+            included : data.included === 'yes' ? true : false,
+            packageId : packageData.id
 
           }
         })
@@ -82,11 +69,11 @@ export async function addPlanCategory(data: FormData): Promise<number> {
     throw error;
   }
 }
-// creating offer info
-export async function addPlan(data: FormData, categories: string[], services: string[]): Promise<number> {
+// creating package info
+export async function addPackage(data: FormData, categories: string[]): Promise<number> {
     try {
       // Parse the offer data from the form
-      const result = PlanSchema.safeParse(Object.fromEntries(data.entries()));
+      const result = PackageSchema.safeParse(Object.fromEntries(data.entries()));
       const session = await getServerSession(authOptions);
   
       if (!session) {
@@ -103,31 +90,21 @@ export async function addPlan(data: FormData, categories: string[], services: st
   
         // Handle image upload
         if (data.image && data.image.name) {
-          await fs.mkdir("public/plans-media/category/images", { recursive: true });
-          imagePath = `/plans-media/category/images/${crypto.randomUUID()}-${data.image.name.replace(/\s+/g, '').replace(/[()]/g, '') }`;
+          await fs.mkdir("public/package-media/images", { recursive: true });
+          imagePath = `/package-media/images/${crypto.randomUUID()}-${data.image.name.replace(/\s+/g, '').replace(/[()]/g, '') }`;
           const buffer = Buffer.from(await data.image.arrayBuffer());
           await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
         }
   
      
         if (data.icon && data.icon.name) {
-          await fs.mkdir("public/plans-media/icon", { recursive: true });
-          iconPath = `/plans-media/icons/${crypto.randomUUID()}-${data.icon.name.replace(/\s+/g, '').replace(/[()]/g, '') }`;
+          await fs.mkdir("public/package-media/icons", { recursive: true });
+          iconPath = `/package-media/icons/${crypto.randomUUID()}-${data.icon.name.replace(/\s+/g, '').replace(/[()]/g, '') }`;
           const buffer = Buffer.from(await data.icon.arrayBuffer());
           await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
         }
   
-        // Fetch the IDs of the services by their names
-        const serviceRecords = await prisma.service.findMany({
-          where: {
-            name: {
-              in: services, // Find all services whose name is in the provided array
-            },
-          },
-          select: {
-            id: true, // Only select the id field
-          },
-        });
+        
   
         // Fetch the IDs of the locations by their names
         const locationRecords = await prisma.planCategory.findMany({
@@ -142,52 +119,38 @@ export async function addPlan(data: FormData, categories: string[], services: st
         });
   
         // Create the offer first
-        const basic = await prisma.plan.create({
+        const basic = await prisma.package.create({
           data: {
             name: data.name,
             nameAr: data.nameAr,
             slug : slugify(data.name),
             description: data.description,
             descriptionAr: data.descriptionAr,
-            monthlyPrice: data.monthlyPrice,
-            semiAnnualPrice: data.semiAnnualPrice,
-            yearlyPrice: data.yearlyPrice,
-            features: data.features,
-            featuresAr: data.featuresAr,limits: data.limits,
-            limitsAr: data.limitsAr,
-            support: data.support,
-            supportAr: data.supportAr,
-            duration: data.duration,
+            price : data.price,
             image: imagePath,
+            isPopular : data.isPopular === 'yes' ? true : false,
             icon: iconPath,
             userId : userId
           },
         });
   
         // Fetch current associations for services and locations (if any exist)
-        const existingOffer = await prisma.plan.findUnique({
+        const existingOffer = await prisma.package.findUnique({
           where: { id: basic.id },
           select: {
-            services: { select: { id: true } }, // Fetch already associated services
             categories: { select: { id: true } }, // Fetch already associated locations
           },
         });
   
-        const existingServiceIds = existingOffer?.services.map(service => service.id) || [];
         const existingLocationIds = existingOffer?.categories.map(category => category.id) || [];
-  
         // Filter out services and locations that are already associated
-        const newServicesToAssociate = serviceRecords.filter(service => !existingServiceIds.includes(service.id));
         const newLocationsToAssociate = locationRecords.filter(category => !existingLocationIds.includes(category.id));
   
         // Update the offer to connect the new services and locations (if any)
-        if (newServicesToAssociate.length > 0 || newLocationsToAssociate.length > 0) {
-          await prisma.plan.update({
+        if (newLocationsToAssociate.length > 0) {
+          await prisma.package.update({
             where: { id: basic.id },
             data: {
-              services: {
-                connect: newServicesToAssociate.map(service => ({ id: service.id })),
-              },
               categories: {
                 connect: newLocationsToAssociate.map(category => ({ id: category.id })),
               },
