@@ -10,7 +10,7 @@ import { Package, PackageFeature } from '@prisma/client';
 import { getMenuParent } from '../../setting/left-nav/_actions/Action';
 import { PackageFeatureSchema } from '../_utils/PackageFeatureSchema';
 import MenuPanel from '../../common/utils/MenuPanel';
-import { addPackageFeature, getPackageFeatures, getPackages } from '../_actions/Actions';
+import { addFeature, addPackageFeature, getPackageFeatures, getPackages } from '../_actions/Actions';
 
 interface Props {
     id? : number
@@ -158,17 +158,34 @@ const CreateFeature = ({id,closeModel}:Props) => {
       const unInclude = (id:string,status:string) => {
       
      }
-     const handlePaySubmit = (event: React.FormEvent<HTMLFormElement>) => {
+     const handlePaySubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const formData = new FormData(event.currentTarget);
     
       // Retrieve the checkbox value
       const isChecked = formData.get("included") === "on";
+      const featureId = formData.get("featureId")?.toString();
       console.log("Checkbox checked:", isChecked);
   
       const data = Object.fromEntries(formData.entries());
-      console.log(data);
-      // pay(data);
+      try {
+        
+          setLoading(true)
+          if(packageName && featureId && isChecked){
+           const element =  await addFeature(packageName,featureId,isChecked );
+          //  setFeatures(element)
+          }
+           setError('')
+           setLoading(false);
+        
+      } catch (error:any) {
+        setLoading(false);
+        setError(error.message);
+      } finally{
+        setLoading(false)
+      }
+      
+
     };
   return (
    <div className="w-full h-full bg-[#0003]  m-auto fixed left-0 top-0 flex items-center justify-center sm:p-4 pb-0 z-50 ">
@@ -289,7 +306,7 @@ const CreateFeature = ({id,closeModel}:Props) => {
                )
                .map((element, index) => (
                    <form  onSubmit={handlePaySubmit} className=" relative border bg-gray-50 flex flex-wrap my-1 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 " >
-                  
+                   <input type="hidden" name="featureId" value={element.id} />
                    <div className=" flex-100 sm:flex-80 sm:h-10  sm:flex sm:mx-auto items-center  border-r border-r-gray-300 rounded-l-md">
                           
                            <div className="pl-4  w-full">

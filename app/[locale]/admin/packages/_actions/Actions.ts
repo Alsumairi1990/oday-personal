@@ -19,7 +19,7 @@ export async function getPlanCategories(): Promise<PlanCategory[]> {
   }
 }
 
-export async function addFeature(packageName:string,featureID:string,isIncluded:string): Promise<number> {
+export async function addFeature(packageName:string,featureID:string,included:boolean): Promise<number> {
   try {
     const packageData  = await prisma.package.findUnique({
       where : {
@@ -36,7 +36,7 @@ export async function addFeature(packageName:string,featureID:string,isIncluded:
     if (!feature){throw new Error('no package feature data')}
     const packageId = packageData.id;
     const featureId = feature.id;
-    const included = isIncluded === 'on' ? true : false;
+    // const included = isIncluded === 'on' ? true : false;
     const featur =  await prisma.packageFeatureLink.upsert({
       where: {
         packageId_featureId: {
