@@ -19,6 +19,19 @@ export async function GET(req: Request, { params }: { params: { slug: string , n
 async function getElements(slug:string,no:number): Promise<PlanCatPackForFront | null> {
   try {
   
+    // const elements = await prisma.planCategory.findUnique({
+    //   where: {
+    //     slug: slug,
+    //   },
+    //   include: {
+    //     packages: {
+    //       include: {
+    //         features: true, 
+    //       },
+    //       take : no
+    //     },
+    //   },
+    // });
     const elements = await prisma.planCategory.findUnique({
       where: {
         slug: slug,
@@ -26,12 +39,24 @@ async function getElements(slug:string,no:number): Promise<PlanCatPackForFront |
       include: {
         packages: {
           include: {
-            features: true, 
+            features: {
+              include: {
+                feature: true, // Include the related PackageFeature data
+              },
+              orderBy: {
+                id: 'asc', 
+              },
+            },
           },
-          take : no
+          
+          take: no,
         },
+        
       },
     });
+    
+    // TypeScript will now know how to handle the query result as PlanCatPackForFront
+    
     return elements as PlanCatPackForFront;
   } catch (error) {
     console.error('Error fetching data:', error);

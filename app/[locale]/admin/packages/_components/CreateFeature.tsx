@@ -300,8 +300,8 @@ const CreateFeature = ({id,closeModel}:Props) => {
            
            <div className="grid sm:grid-cols max-sm:gap-4  max-sm:gap-y-8 sm:gap-x-2 sm:max-h-72 mt-2 overflow-y-auto">
                
-              {packages && packages.length > 0 ? (
-               packages.filter((element) =>
+              {features && features.length > 0 ? (
+               features.filter((element) =>
                    element.name.toLowerCase().includes(searchTerm.toLowerCase())
                )
                .map((element, index) => (

@@ -37,8 +37,8 @@ const PackageCard = ({ packageData,locale,messages } : ServiceProps) => {
             </div>
          </div>
     <div className=" rounded-b-md  px-3 ">
-     <div className="flex px-2 pt-4 justify-center">
-        {packageData.image && <img src={packageData.image} className='w-10/12 rounded-lg ' alt={packageData.name} />}
+     <div className="flex px-2 pt-4 sm:h-44 justify-center">
+        {packageData.image && <img src={packageData.image} className='w-10/12 mx-auto border border-gray-300 h-full rounded-lg ' alt={packageData.name} />}
      </div>
         {locale == 'en' ? <div className="mt-1.5 ">
             <p className="text-gray-800 text-xl mb-1 font-semibold dark:text-orange-500 ">{packageData.name}</p>
@@ -62,10 +62,10 @@ const PackageCard = ({ packageData,locale,messages } : ServiceProps) => {
               {packageData.features.length > 0 && 
                packageData.features.map((featuter)=> (
                 <div className="py-2.5 flex gap-x-2 items-center border-b border-b-gray-200">
-                  <span className="inline-flex items-center  justify-center h-6 w-6 rounded-full border border-[#00a8c6] bg-[#00a8c6]">
+                  <span className={`inline-flex items-center  justify-center h-6 w-6 rounded-full border  ${featuter.included?'bg-[#00a8c6] border-[#00a8c6]' : 'bg-gray-400 border-gray-400'} `}>
                   <MdOutlineDone className="text-white text-base " />
                   </span>
-                  <span className="text-md font-semibold text-gray800 dark:text-white">{featuter.valueAr}</span>
+                  {featuter.feature && <span className="text-md font-semibold text-gray800 dark:text-white">{featuter.feature.valueAr}</span> }
                 </div>
                ))
               }

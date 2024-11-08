@@ -59,7 +59,7 @@ function PlansPanel({packagesData,locale,messages}:Props) {
 
 
     </div>
-    <div className="w-11.3/12 grid sm:grid-cols-3 rtl:font-arabic  px-4 ">
+    <div className="w-11.3/12 grid sm:grid-cols-3 gap-y-7 sm:gap-x-9 mx-auto rtl:font-arabic  px-4 ">
          {packagesData &&
             packagesData.map((packageData)=> (
                 <PackageCard packageData={packageData}   locale={locale} messages={messages} />
