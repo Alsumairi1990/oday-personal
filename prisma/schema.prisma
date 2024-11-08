@@ -453,7 +453,7 @@ model Package {
   userId        String
   user          User     @relation(fields: [userId], references: [id])
 
-  features PackageFeature[]
+  features      PackageFeatureLink[] 
 }
 
 model PackageFeature {
@@ -464,11 +464,19 @@ model PackageFeature {
   valueAr       String?
   description   String?
   descriptionAr String?
-  included      Boolean
-  packageId     Int
-  package       Package @relation(fields: [packageId], references: [id])
+  packages      PackageFeatureLink[] // Linking to the join table
+
 }
 
+model PackageFeatureLink {
+  id            Int               @id @default(autoincrement())
+  included      Boolean           @default(true)
+  packageId     Int
+  package       Package           @relation(fields: [packageId], references: [id])
+  featureId     Int
+  feature       PackageFeature    @relation(fields: [featureId], references: [id])
+  @@unique([packageId, featureId])
+}
 model Page {
   id            Int          @id @default(autoincrement())
   name          String

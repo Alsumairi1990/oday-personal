@@ -10,7 +10,7 @@ import { Package, PackageFeature } from '@prisma/client';
 import { getMenuParent } from '../../setting/left-nav/_actions/Action';
 import { PackageFeatureSchema } from '../_utils/PackageFeatureSchema';
 import MenuPanel from '../../common/utils/MenuPanel';
-import { addPackageFeature, getPackages } from '../_actions/Actions';
+import { addPackageFeature, getPackageFeatures, getPackages } from '../_actions/Actions';
 
 interface Props {
     id? : number
@@ -18,18 +18,21 @@ interface Props {
 }
 type inputType = z.infer<typeof PackageFeatureSchema>;
 const CreateFeature = ({id,closeModel}:Props) => {
-    const [results, setResults ]= useState<PackageFeature[]>([]); 
+    const [features, setFeatures ]= useState<PackageFeature[]>([]); 
     const [result, setResult ]= useState<number>(0); 
-
+  
     const [elements, setElements ]= useState<string[]>([]); 
     const [iconSrc, setIconSrc] = useState<string | null>(null);
    const [loading, setLoading] = useState<boolean>(false);
    const [error, setError] = useState<string | null>(null);
    const [selectedLocation, setSelectedLocation] = useState<string[]>([]);
    const [locationShow, setLocationShow] = useState<boolean>(false); 
+   const [featureShow, setFeatureShow] = useState<boolean>(false); 
+   const [searchTerm, setSearchTerm] = useState<string>('');
    const [packages,setPackages] = useState<Package[]>([])
    const [baseUrl,setBaseUrl] = useState<string>('');
    const [packageName,setPackageName] = useState<string>('');
+   const [svalues, setSvalues] = useState<string[]>([]);
 
    const [removedTool, setRemovedTool] = useState<string>('');
    const messageRef = useRef<HTMLDivElement>(null);
@@ -111,13 +114,14 @@ const CreateFeature = ({id,closeModel}:Props) => {
         setError(error.messages);
       }
     }
-    const getMenuInner = async ()=>{
+    const getFeatures = async ()=>{
       try {
         if(id) {
           setLoading(true)
-           const element =  await getMenuParent();
-          //  setElements(element)
+           const element =  await getPackageFeatures();
+           setFeatures(element)
            setError('')
+           setLoading(false);
         }
       } catch (error:any) {
         setLoading(false);
@@ -127,7 +131,7 @@ const CreateFeature = ({id,closeModel}:Props) => {
       }
     }
       useEffect(() => {
-        getMenuInner();
+        getFeatures();
         setMeueElements();
       }, []);
      const selectPackage =(value:string)=>{
@@ -136,6 +140,36 @@ const CreateFeature = ({id,closeModel}:Props) => {
      const deSelectPackage =(value:string)=>{
       setPackageName('')
      }
+     const getSelected= (selected:string)=>{
+      setSvalues(prevValues => {
+          const newValues = [...prevValues, selected];
+          return newValues;
+      });
+     }
+     const unSelected = (id:string) => {
+      setSvalues(prevValues => {
+          const newValues = prevValues.filter(item => item !== id);
+          return newValues;
+      });
+     }
+     const include = (id:string,status:string) => {
+
+     }
+      const unInclude = (id:string,status:string) => {
+      
+     }
+     const handlePaySubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+    
+      // Retrieve the checkbox value
+      const isChecked = formData.get("included") === "on";
+      console.log("Checkbox checked:", isChecked);
+  
+      const data = Object.fromEntries(formData.entries());
+      console.log(data);
+      // pay(data);
+    };
   return (
    <div className="w-full h-full bg-[#0003]  m-auto fixed left-0 top-0 flex items-center justify-center sm:p-4 pb-0 z-50 ">
          <div   className="flex flex-col w-full  sm:w-5/12 animate-modalEnter relative max-sm:h-full add-menu  bg-white items-center rounded-md  border border-gray-300 " style={{boxShadow: 'rgb(82 63 104 / 12%) 0px 0px 10px 0px'}}>
@@ -192,10 +226,10 @@ const CreateFeature = ({id,closeModel}:Props) => {
 
       
 
-    frfr{result}
        
-     <form onSubmit={handleSubmit(saveMenu3)} className="text-start  z-40 rounded-md">
+     <div className="text-start  z-40 rounded-md">
         <div className="flex flex-wrap justify-between ">
+
         <div className=" flex-100  flex  flex-col z-20 w-full mb-5 ">
                     <label htmlFor="degree" className="font-medium mb-1.5 pl-0.5 text-sm text-gray-700 duration-300 capitalize">Location </label>
                     <div className="flex flex-col  w-full ">
@@ -233,7 +267,83 @@ const CreateFeature = ({id,closeModel}:Props) => {
                       }
                 </div> 
         </div>
-        <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
+
+        <div className="grid grid-cols-1 flex-100">
+           <div className="border-b border-b-gray-200 w-full mb-2">
+               <div className="bg-gray-100 border border-gray-200 rounded-3xl py-1.5 mb-2 w-full h-11 ">
+               <input
+               type="text"
+               placeholder="Search categories"
+               value={searchTerm}
+               className='w-full h-full bg-transparent px-3 placeholder:text-md outline-none'
+               onChange={(e) => setSearchTerm(e.target.value)}
+                 />   
+               </div>
+           </div>
+           
+           <div className="grid sm:grid-cols max-sm:gap-4  max-sm:gap-y-8 sm:gap-x-2 sm:max-h-72 mt-2 overflow-y-auto">
+               
+              {packages && packages.length > 0 ? (
+               packages.filter((element) =>
+                   element.name.toLowerCase().includes(searchTerm.toLowerCase())
+               )
+               .map((element, index) => (
+                   <form  onSubmit={handlePaySubmit} className=" relative border bg-gray-50 flex flex-wrap my-1 w-11.8/12 mx-auto items-center  border-gray-200 rounded-md max-sm:pb-3 " >
+                  
+                   <div className=" flex-100 sm:flex-80 sm:h-10  sm:flex sm:mx-auto items-center  border-r border-r-gray-300 rounded-l-md">
+                          
+                           <div className="pl-4  w-full">
+                               <div className="w-full flex items-center">
+                                   <span className="text-sm  text-black  font-medium">{element?.name}</span>
+                               </div>
+                           </div>
+                           <div className="flex items-center gap-x-1 px-2 border-l border-l-gray-200">
+                            <span className="text-sm text-gray-800">Included</span>
+                              <label className="relative bg-whit justify-center flex items-center  rounded-full cursor-pointer" htmlFor="included"> 
+                                <input type="checkbox"
+                                    className="before:content[''] peer relative h-[16px] w-[16px] cursor-pointer appearance-none rounded-md border !border-[#ccc] transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-orange-600 checked:bg-orange-600 checked:before:bg-orange-600 hover:before:opacity-10"
+                                    id="included"
+                                    name = "included"
+                                    onChange={(e) => {
+                                        const isChecked = e.target.checked;
+                                        if (isChecked) {
+                                        include(String(element?.id),'yes');
+                                        } else {
+                                        unInclude(String(element?.id),'no');
+                                        }
+                                    }}
+                                    />
+                                <span
+                                className="absolute text-white transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
+                                    stroke="currentColor" stroke-width="1">
+                                    <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                                </svg>
+                                </span>
+                            </label>
+                        </div>
+                   </div>
+                    <div className="flex flex-100 gap-x-2 sm:flex-20  justify-center items-center  ">
+                      <button className="flex items-center px-2 bg-white gap-x-2 border border-gray-300 rounded-md py-1">
+                            <span className="text-md text-gray-700">Add</span>
+                      </button> 
+                    </div>
+                </form>
+                       
+               ))
+               ) : (
+                 <div className=" relative h-16  w-11.8/12 mx-auto items-center bg-white border border-gray-300 rounded-md flex justify-center">
+                   <p className="text-gray-700 text-md">No Data</p>
+                 </div>
+              
+               )}
+           </div>
+       </div>
+    
+          <form onSubmit={handleSubmit(saveMenu3)} className="">
+           <div className=" flex sm:flex-48 flex-col z-0 w-full mb-5 group">
                     <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize"> name </label>
                     <div className="flex items-center w-full">
                         <div className="relative flex w-full">
@@ -324,12 +434,13 @@ const CreateFeature = ({id,closeModel}:Props) => {
                     <span className="text-red-400 text-xs mt-2">{errors.included?.message} </span>
                     </div>
                 </div>
+                </form>
 
         </div>
           <div className="mt-4 flex w-full sticky bottom-0 pr-3 z-40 left-0 bg-white border-t border-t-gray-300 py-1.5 ">
                 <input type="submit" className="btn px-3 ml-auto py-0.5  bg-indigo-600  hover:bg-indigo-700 border-indigo-600 hover:border-indigo-700 text-white rounded " value="Register" />
             </div>
-    </form>
+    </div>
     </div>
     </div>
    </div>

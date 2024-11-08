@@ -46,20 +46,20 @@ const CategoryCreate = ({serviceId}:Props) => {
     setBaseUrl(`${protocol}//${host}`);
 }, []);
 
-const getSelected= (selected:string)=>{
+  const getSelected= (selected:string)=>{
     setSvalues(prevValues => {
         const newValues = [...prevValues, selected];
         setTrigger(trigger + 1);
         return newValues;
     });
-   }
-   const unSelected = (id:string) => {
+    }
+    const unSelected = (id:string) => {
     setSvalues(prevValues => {
         const newValues = prevValues.filter(item => item !== id);
         setTrigger(trigger + 1); 
         return newValues;
     });
-   }
+    }
    const addCategoryName = (name:string)=>{
     setCategoryName(name);
    }

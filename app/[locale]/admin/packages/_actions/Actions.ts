@@ -5,9 +5,7 @@ import authOptions from "@/utils/AuthOptions";
 import fs from "fs/promises"
 import prisma from "@/utils/prisma";
 import { slugify } from "@/utils/TextUtils";
-import { Package, PlanCategory } from "@prisma/client";
-import { PlanCategorySchema } from "../../plans/category/_utils/PlanCategorySchema";
-import { PlanSchema } from "../../plans/_utils/PlanSchema";
+import { Package, PackageFeature, PlanCategory } from "@prisma/client";
 import { PackageSchema } from "../_utils/PackageSchema";
 import { PackageFeatureSchema } from "../_utils/PackageFeatureSchema";
 
@@ -19,8 +17,61 @@ export async function getPlanCategories(): Promise<PlanCategory[]> {
   } catch (error) {
     throw error;
   }
-  
 }
+
+export async function addFeature(packageName:string,featureID:string,isIncluded:string): Promise<number> {
+  try {
+    const packageData  = await prisma.package.findUnique({
+      where : {
+        slug : slugify(packageName)
+      }
+     
+    })
+    const feature = await prisma.packageFeature.findUnique({
+      where : {
+        id : parseInt(featureID)
+      }
+    })
+    if (!packageData){throw new Error('no package data')}
+    if (!feature){throw new Error('no package feature data')}
+    const packageId = packageData.id;
+    const featureId = feature.id;
+    const included = isIncluded === 'on' ? true : false;
+    const featur =  await prisma.packageFeatureLink.upsert({
+      where: {
+        packageId_featureId: {
+          packageId,
+          featureId,
+        },
+      },
+      create: {
+        packageId,
+        featureId,
+        included,
+      },
+      update: {
+        included,
+      },
+    });
+    
+    return featur.featureId;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+
+export async function getPackageFeatures(): Promise<PackageFeature[]> {
+  try {
+    const elements = await prisma.packageFeature.findMany({
+    });
+    return elements;
+  } catch (error) {
+    throw error;
+  }
+}
+
 
 export async function getPackages(): Promise<Package[]> {
   try {
@@ -54,8 +105,6 @@ export async function addPackageFeature(data: FormData,name:string): Promise<num
             valueAr : data.valueAr,
             description : data.description,
             descriptionAr : data.descriptionAr,
-            included : data.included === 'yes' ? true : false,
-            packageId : packageData.id
 
           }
         })
