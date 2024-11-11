@@ -3,17 +3,22 @@ import { MenuWithAllModels } from "../admin/setting/left-nav/_utils/MenuWithAllM
 import NavBar from "@/app/NavBar";
 import { getMenusElementse2 } from "../admin/setting/left-nav/_actions/Action";
 import WhatsAppLive from "@/app/_components/WhatsAppLive";
+import { getLocale, getMessages } from "next-intl/server";
 // import NavBar from "@/app/NavBar.jsx"
 
 
 
 export default async function signupLayout({
+  
     children,
   }: {
     children: React.ReactNode
   }) {
     let menusData:Record<number, MenuWithAllModels[]> ;
+    const locale = await getLocale();
+      const messages = await getMessages({ locale });
     try {
+      
       // services = await getServices();
       // serviceCatMeta = await getServiceCatMeta();
       // categories = await getServiceCategory();
@@ -42,7 +47,7 @@ export default async function signupLayout({
             
 
             <div className="h-full dark:bg-[#111]" >
-               {menusData && <NavBar menusData={menusData} />}
+               {menusData && <NavBar menusData={menusData} locale={locale} messages={messages} />}
             {children}
             <div className="">
              {/* <Footerk /> */}
