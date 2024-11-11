@@ -22,16 +22,14 @@ const NavBarBlog = ({menusData}:Props) => {
   const logoRef2 = useRef<HTMLImageElement | null>(null); 
 
   useEffect(() => {
-    const themeSwitcher = document.querySelector('.top-nav');
-    const htmlElement = document.documentElement;
-    const isDarkTheme = () => htmlElement.classList.contains('dark');
+    
     
     // Function to handle click events for menu interactions
     const handleClickOutside = (event: any) => {
-      const menus = document.getElementsByClassName('log-menu');
-      if (event.target.closest('.menu-btn ') !== null) {
-        const prnt = event.target.closest('.menu-pr');
-        const menu = prnt?.querySelector('.log-menu');
+      const menus = document.getElementsByClassName('blog-log-menu');
+      if (event.target.closest('.blog-menu-btn ') !== null) {
+        const prnt = event.target.closest('.blog-menu-pr');
+        const menu = prnt?.querySelector('.blog-log-menu');
         if (menu && menu.classList.contains('hidden')) {
           for (let i = 0; i < menus.length; i++) {
             menus[i].classList.add('hidden');
@@ -52,7 +50,7 @@ const NavBarBlog = ({menusData}:Props) => {
           document.body.style.overflow = ''; // Enable scroll
           menu.classList.add('hidden');
         }
-      } else if (event.target.closest('.log-menu ') !== null) {
+      } else if (event.target.closest('.blog-log-menu ') !== null) {
         return;
       } else {
         for (let i = 0; i < menus.length; i++) {
@@ -201,10 +199,10 @@ const NavBarBlog = ({menusData}:Props) => {
 
 
 
-              <div className="menu-pr ">
+              <div className="blog-menu-pr ">
                   <div className=" rounded-md  text-white" >
               
-                  <div  className="avatar menu-btn flex items-center  border border-orange-600 bg-orange-600 dark:border-[#71247c] dark:bg-[#00000059] dark:hover:!bg-fuchsia-500 px-1.5 py-1.5 rounded-3xl cursor-pointer relative" >
+                  <div  className="avatar blog-menu-btn flex items-center  border border-orange-600 bg-orange-600 dark:border-[#71247c] dark:bg-[#00000059] dark:hover:!bg-fuchsia-500 px-1.5 py-1.5 rounded-3xl cursor-pointer relative" >
                           <span className="icon mr-2 icon-profile">
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 17.625a.728.728 0 0 1-.75-.75c0-.2.071-.375.213-.525A.706.706 0 0 1 4 16.125h16a.71.71 0 0 1 .538.225c.141.15.212.325.212.525 0 .217-.07.396-.212.538a.731.731 0 0 1-.538.212H4Zm0-4.875a.726.726 0 0 1-.75-.75.728.728 0 0 1 .75-.75h16c.217 0 .396.07.538.212a.731.731 0 0 1 .212.538.728.728 0 0 1-.75.75H4Zm0-4.875a.706.706 0 0 1-.537-.225.74.74 0 0 1-.213-.525.726.726 0 0 1 .75-.75h16a.728.728 0 0 1 .75.75c0 .2-.07.375-.212.525a.71.71 0 0 1-.538.225H4Z" ></path>
@@ -218,7 +216,7 @@ const NavBarBlog = ({menusData}:Props) => {
                           </span>
                         </div>
                   </div>
-                  <div id="log-menu" className=" log-menu hidden w-full fixed h-full top-0 z-[18] bg-black left-0 menu-overlay " style={{background:'#00000052'}}>
+                  <div id="blog-log-menu" className=" blog-log-menu hidden w-full fixed h-full top-0 z-[18] bg-black left-0 menu-overlay " style={{background:'#00000052'}}>
               <div className="absolute login-menu top-[4.78rem] z-10 right-6 bg-white border border-gray-600 dark:border-gray-800 dark:bg-black-100  w-80  pb-4 flex flex-col  rounded-xl" style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}>
                   <span className="absolute inline-block w-4 h-4 bg-[#ffebce] dark:bg-violet-600 top-[-.5rem] sm:right-8 sm:mr-4 sm:rotate-45"></span>
 

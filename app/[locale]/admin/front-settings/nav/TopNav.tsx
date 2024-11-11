@@ -4,36 +4,56 @@ import React, { useEffect, useState } from 'react';
 import { MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 // import NavPanel from './NavPanel';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
+import NavPanel from './NavPanel';
+import { AbstractIntlMessages } from 'next-intl';
+import ServicesPanel from './ServicesPanel';
 interface MenusDisplayProps {
-    menusData: Record<number, MenuWithAllModels[]>;
+    menusData: Record<number, MenuWithAllModels[]>,
+    locale : string,
+    messages : AbstractIntlMessages,
   }
 
-const TopNav: React.FC<MenusDisplayProps> = ({ menusData }) => {
+const TopNav: React.FC<MenusDisplayProps> = ({ menusData,locale,messages }) => {
    const [visibleContent, setVisibleContent] = useState<boolean>(false);
 useEffect(() => {
   if (typeof window === 'undefined') return;
 
   const handleClickOutside = (event:any) => {
-   const menus = document.getElementsByClassName('log-menu');
-    if (event.target.closest('.menu-btn ') !== null) {
-      const prnt = event.target.closest('.menu-pr');
-      const menu = prnt.querySelector('.log-menu');
-      if(menu && menu.classList.contains('sm:hidden')){
+   const menus = document.getElementsByClassName('parent-log-menu');
+   const downMenus = document.getElementsByClassName('down-nav');
+
+    if (event.target.closest('.parent-menu-btn ') !== null) {
+      const prnt = event.target.closest('.parent-menu-pr');
+      const menu = prnt.querySelector('.parent-log-menu');
+      const downMenu = prnt.querySelector('.down-nav');
+
+      if(menu && menu.classList.contains('hidden')){
         for (let i = 0; i < menus.length; i++) {
-          menus[i].classList.add('sm:hidden');
+          menus[i].classList.add('hidden');
         }
-        menu.classList.remove('sm:hidden');
+        menu.classList.remove('hidden');
       }
-      else if(menu && !menu.classList.contains('sm:hidden')){
-        menu.classList.add('sm:hidden');
+      if(downMenu && downMenu.classList.contains('hidden')){
+        for (let i = 0; i < downMenus.length; i++) {
+          downMenus[i].classList.add('hidden');
+        }
+        downMenu.classList.remove('hidden');
+      }
+      else if(menu && !menu.classList.contains('hidden')){
+        menu.classList.add('hidden');
+      }
+      else if(downMenu && !downMenu.classList.contains('hidden')){
+        downMenu.classList.add('hidden');
       }
   }
-  else if (event.target.closest('.log-menu ') !== null) return;
+  else if (event.target.closest('.parent-log-menu ') !== null) return;
   else {
   for(let menu of  Array.from(menus)){
-    menu.classList.add('sm:hidden');
-    
+    menu.classList.add('hidden');
      };
+  for(let menu of  Array.from(downMenus)){
+  menu.classList.add('hidden');
+    };
   }
   };
   document.addEventListener('click', handleClickOutside);
@@ -51,22 +71,30 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
     setActiveLink(link);
   };
   return (
-        <div className='flex justify-end rtl:pl-5 r w-full'>
+        <div className='flex max-sm:flex-col max-sm:mt-3 max-sm:gap-y-4 sm:justify-end rtl:pl-5 r w-full'>
             {Object.entries(menusData).map(([parentId, menus]) => {
             const parentMenu = menus.length > 0 ? menus[0].menuParent : null;
             return (
-            <div key={parentId} className='flex menu-pr'>
-                <div className='parent-elm text-sm flex items-center gap-x-2 px-2 rtl:font-arabic font-semibold text-gray-200'>
-                  <span className="menu-btn cursor-pointer">
+            <div key={parentId} className='flex max-sm:flex-col  parent-menu-pr'>
+                <div className='parent-elm text-sm   relative flex items-center gap-x-2 px-2 rtl:font-arabic font-semibold text-gray-200'>
+                  <span className="parent-menu-btn max-sm:text-gray-800 inline-flex w-full h-full items-center cursor-pointer">
                      {parentMenu?.titleAr || ''}
                   </span> 
-                  <MdOutlineArrowDropDown className='text-xl parent-arr text-gray-50' />
+                  <MdOutlineArrowDropDown className='text-xl max-sm:rtl:ml-4 parent-arr text-gray-800 sm:text-gray-50' />
+                  <span className="z-10  hidden down-nav absolute left-[40%] top-[30%] -bottom-4 border-l-[16px] border-r-[16px] border-b-[13px] border-l-transparent border-r-transparent border-b-white "></span>
+
                 </div>
-                     <div className='pl-3 w-full log-menu sm:hidden grid grid-cols-4 bg-white absolute top-20 left-0 z-50'>
-                        {/* {menus.map(menu => (
-                             <NavPanel menu={menu}  />
-                        ))} */}
-                        </div>
+
+                <div className="parent-log-menu hidden">
+                <ServicesPanel menusData={menus} />
+                </div>
+                     {/* <div className='pl-3 w-full parent-log-menu hidden grid grid-cols-4 bg-white absolute top-20 left-0 z-50'>
+                         <div className="sm:w-11/12 sm:px-4  sm:mx-auto ">
+                        {menus.map(menu => (
+                             <NavPanel menu={menu} locale={locale} messages={messages}  />
+                        ))}
+                         </div>
+                        </div> */}
                     </div>
                     );
                 })}

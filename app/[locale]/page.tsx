@@ -115,12 +115,12 @@ export default async function Home() {
     const blogsMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'blog');  
  
   return (
-    <main className="flex flex-col dark:bg-[#111]">
+    <main className="flex flex-col dark:bg-[#111] rtl:font-arabic" >
        <div className="flex flex-col">
         {/* {menuElements && <NavBar menusData={menuElements} />} */}
           </div>   
           <Suspense fallback={<div>Loading navigation...</div>}>
-        <NavBar menusData={menuElements} />
+        <NavBar menusData={menuElements} locale={locale} messages={messages} />
       </Suspense>
 
     <div className="hed">

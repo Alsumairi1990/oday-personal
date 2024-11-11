@@ -60,14 +60,18 @@ import LocaleSwitcher from './_components/LangToggle'
 import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
 import { MenuWithAllModels } from './[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 import SigninButton from './_components/SigninButton';
+import { AbstractIntlMessages } from 'next-intl';
 
 
 interface Props{
-  menusData: Record<number, MenuWithAllModels[]>;
+  menusData: Record<number, MenuWithAllModels[]>,
+  locale : string,
+  messages : AbstractIntlMessages,
+
 }
 
 
-const NavBar = ({menusData}:Props) => {
+const NavBar = ({menusData,locale,messages}:Props) => {
   const imagePath = '/images/logo-01.svg';
   const imagePath2 = '/images/logo-03.jpeg';
   // const logoImage = document.querySelector('.light-logo') as HTMLImageElement; 
@@ -113,8 +117,10 @@ const NavBar = ({menusData}:Props) => {
     }
   
     const handleClickOutside = (event: any) => {
+      
       const menus = document.getElementsByClassName('log-menu');
       if (event.target.closest('.menu-btn ') !== null) {
+        
         const prnt = event.target.closest('.menu-pr');
         const menu = prnt?.querySelector('.log-menu');
         if (menu && menu.classList.contains('hidden')) {
@@ -160,7 +166,7 @@ const NavBar = ({menusData}:Props) => {
   
   return (
     <nav 
-    className={`top-nav flex main-nav fixed max-sm:flex-col sm:h-[75px] h-[64px] top-0 dark:max-sm:border-b dark:max-sm:border-b-gray-700   w-full pt-2 sm:p-2 z-50 items-center justify-between font-bold  `}
+    className={`top-nav flex main-nav fixed max-sm:flex-col rtl:font-arabic sm:h-[75px] h-[64px] top-0 dark:max-sm:border-b dark:max-sm:border-b-gray-700   w-full pt-2 sm:p-2 z-50 items-center justify-between font-bold  `}
     >
         <div className="flex sm:hidden items-center pl-1 w-full">
         <div className='main-menu-btn flex-10 flex items-center pl-1 rtl:pr-1'>
@@ -205,8 +211,8 @@ const NavBar = ({menusData}:Props) => {
               </Link>
         </div>
        
-        <div className={`main-drop-menu text-sm max-sm:h-lvh sm:flex-80  max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base  `} > 
-          <div className=" px-4 py-4 flex flex-col bg-[#ffebce] sm:hidden">
+        <div className={`main-drop-menu text-sm max-sm:h-lvh sm:flex-80   max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base  `} > 
+          <div className=" px-4 py-4 flex flex-col bg-[#ffebce]  sm:hidden">
             <div className="flex pt-3">
                 <div className="flex-15">
                     <span className="flex w-10 ">
@@ -267,7 +273,7 @@ const NavBar = ({menusData}:Props) => {
              
             
                 <div className="w-full flex ltr:justify-end ">
-                  <FrontTopNav  menusData ={menusData} />
+                  <FrontTopNav  menusData ={menusData} locale={locale} messages={messages} />
                   </div>
                 
           
