@@ -27,24 +27,30 @@ useEffect(() => {
       const menu = prnt.querySelector('.parent-log-menu');
       const downMenu = prnt.querySelector('.down-nav');
 
-      if(menu && menu.classList.contains('hidden')){
+      if(menu && menu.classList.contains('hidden') && downMenu && downMenu.classList.contains('hidden') ){
         for (let i = 0; i < menus.length; i++) {
           menus[i].classList.add('hidden');
         }
-        menu.classList.remove('hidden');
-      }
-      if(downMenu && downMenu.classList.contains('hidden')){
         for (let i = 0; i < downMenus.length; i++) {
           downMenus[i].classList.add('hidden');
         }
+        menu.classList.remove('hidden');
         downMenu.classList.remove('hidden');
+
       }
-      else if(menu && !menu.classList.contains('hidden')){
+    //  else if(downMenu && downMenu.classList.contains('hidden')){
+    //     for (let i = 0; i < downMenus.length; i++) {
+    //       downMenus[i].classList.add('hidden');
+    //     }
+    //     downMenu.classList.remove('hidden');
+    //   }
+      else if(menu && !menu.classList.contains('hidden') && downMenu && !downMenu.classList.contains('hidden')){
         menu.classList.add('hidden');
-      }
-      else if(downMenu && !downMenu.classList.contains('hidden')){
         downMenu.classList.add('hidden');
       }
+      // else if(downMenu && !downMenu.classList.contains('hidden')){
+      //   downMenu.classList.add('hidden');
+      // }
   }
   else if (event.target.closest('.parent-log-menu ') !== null) return;
   else {
@@ -81,11 +87,11 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
                      {parentMenu?.titleAr || ''}
                   </span> 
                   <MdOutlineArrowDropDown className='text-xl max-sm:rtl:ml-4 parent-arr text-gray-800 sm:text-gray-50' />
-                  <span className="z-10  hidden down-nav absolute left-[40%] top-[30%] -bottom-6 border-l-[16px] border-r-[16px] border-b-[13px] border-l-transparent border-r-transparent border-b-white "></span>
+                  <span className="z-10  hidden down-nav absolute left-[40%] h-0 topdd-[30%] -bottom-6 border-l-[16px] border-r-[16px] border-b-[13px] border-l-transparent border-r-transparent border-b-white "></span>
 
                 </div>
 
-                <div className="parent-log-menu hidden">
+                <div className="parent-log-menu hidden border-b border-b-gray-300">
                 <ServicesPanel menusData={menus} />
                 </div>
                      {/* <div className='pl-3 w-full parent-log-menu hidden grid grid-cols-4 bg-white absolute top-20 left-0 z-50'>
