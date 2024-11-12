@@ -81,7 +81,7 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
                      {parentMenu?.titleAr || ''}
                   </span> 
                   <MdOutlineArrowDropDown className='text-xl max-sm:rtl:ml-4 parent-arr text-gray-800 sm:text-gray-50' />
-                  <span className="z-10  hidden down-nav absolute left-[40%] top-[30%] -bottom-4 border-l-[16px] border-r-[16px] border-b-[13px] border-l-transparent border-r-transparent border-b-white "></span>
+                  <span className="z-10  hidden down-nav absolute left-[40%] top-[30%] -bottom-6 border-l-[16px] border-r-[16px] border-b-[13px] border-l-transparent border-r-transparent border-b-white "></span>
 
                 </div>
 
