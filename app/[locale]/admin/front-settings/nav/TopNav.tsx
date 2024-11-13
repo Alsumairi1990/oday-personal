@@ -82,11 +82,11 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
             const parentMenu = menus.length > 0 ? menus[0].menuParent : null;
             return (
             <div key={parentId} className='flex max-sm:flex-col  parent-menu-pr'>
-                <div className='parent-elm text-sm   relative flex items-center gap-x-2 px-2 rtl:font-arabic font-semibold text-gray-200'>
+                <div className='parent-elm text-sm   relative flex items-center  px-2 rtl:font-arabic font-semibold text-gray-200'>
                   <span className="parent-menu-btn max-sm:text-gray-800 inline-flex w-full h-full items-center cursor-pointer">
                      {parentMenu?.titleAr || ''}
                   </span> 
-                  <MdOutlineArrowDropDown className='text-xl max-sm:rtl:ml-4 parent-arr text-gray-800 sm:text-gray-50' />
+                  <MdOutlineArrowDropDown className='text-2xl max-sm:rtl:ml-4 parent-arr text-gray-800 sm:text-gray-50' />
                   <span className="z-10  hidden down-nav absolute left-[40%] h-0 topdd-[30%] -bottom-6 border-l-[16px] border-r-[16px] border-b-[13px] border-l-transparent border-r-transparent border-b-white "></span>
 
                 </div>

@@ -24,7 +24,7 @@ export default function RootLayout({
       <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.jpg" />
       </Head>
       <body className="min-h-full ">
         <Providers>
