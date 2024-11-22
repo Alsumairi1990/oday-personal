@@ -4,6 +4,7 @@ import NavBar from "@/app/NavBar";
 import { getMenusElementse2 } from "../admin/setting/left-nav/_actions/Action";
 import WhatsAppLive from "@/app/_components/WhatsAppLive";
 import { getLocale, getMessages } from "next-intl/server";
+import { Category, Service } from "@prisma/client";
 // import NavBar from "@/app/NavBar.jsx"
 
 
@@ -17,22 +18,19 @@ export default async function signupLayout({
     let menusData:Record<number, MenuWithAllModels[]> ;
     const locale = await getLocale();
       const messages = await getMessages({ locale });
-    try {
+      const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, {
+        method: 'GET',
+        next: { revalidate: 1800 },
+      });
       
-      // services = await getServices();
-      // serviceCatMeta = await getServiceCatMeta();
-      // categories = await getServiceCategory();
-      // heroData = await getHeroData();
+      const Categories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/categories/home`, {
+        method: 'GET',
+        next: { revalidate: 1800 }, 
+      });
+      const servicesR:Service[] = await res.json();
+      const categoriesResult:Category[] = await Categories.json();
+    try {
       menusData = await getMenusElementse2();
-      // blogsMeta = await getBlogMeta();
-      // blogs = await getForntBlogs();
-      // phases = await getPhaseElements();
-      // phaseMeta = await gethaseMeta();
-      // workMeta = await getWorkMeta();
-      // works = await getWorksMainPage();
-      // aboutUS =  await getAboutUsData();
-      // testimonials = await getTesimonialsFront();
-      // testimonialMeta = await getTesimonialsMeta();
     } catch (error) {
       console.error("Failed to fetch service meta:", error);
       // Return or render an error message when an error occurs
@@ -49,9 +47,9 @@ export default async function signupLayout({
             <div className="h-full dark:bg-[#111]" >
                {menusData && <NavBar menusData={menusData} locale={locale} messages={messages} />}
             {children}
-            <div className="">
-             {/* <Footerk /> */}
-             </div>
+            <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+              <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
+          </div>
              
             </div>
              
