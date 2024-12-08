@@ -193,6 +193,7 @@ model Tool {
   updatedAt     DateTime      @updatedAt
   services      ServiceTool[]
   works         WorkTool[]
+  categories    Category[]
   projects      Project[]
 }
 
@@ -227,6 +228,7 @@ model Category {
   clients       Client[]
   phases        Phase[]
   industries    Industry[]
+  tools         Tool[]
   userId        String // References one specific user (modified)
   user          User?                 @relation(fields: [userId], references: [id]) // Relation to User
   createdAt     DateTime              @default(now())

@@ -12,7 +12,7 @@ import { getLocale, getMessages } from 'next-intl/server';
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
 import PhaseCompany from '../_components/PhaseCompany'
 import IndustryCard from '../_components/IndustryCard'
-import { AboutUsSection, Category, Industry, PageSection, PlanCategory, Post, Service, Testimonial } from '@prisma/client'
+import { AboutUsSection, Category, Industry, PageSection, PlanCategory, Post, Service, Testimonial, Tool } from '@prisma/client'
 import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 import { WorksFrontData } from './admin/works/utils/WorksFrontData'
 import { MarketWithModels } from './admin/market/_utils/MarketWithModels'
@@ -21,6 +21,8 @@ import BlogList from '../_components/BlogList'
 import PlansPanel from '../_components/OurPlans/PlansPanel'
 import PackageSect from '../_components/package/PackageSect'
 import { PlanCatPackForFront } from './admin/plans/category/_utils/PlanCatPackForFront'
+import TechPanel from '../_components/technologies/TechPanel'
+import { CategoryWithTools } from './admin/category/util/CategoryWithTools'
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
@@ -79,7 +81,17 @@ export default async function Home() {
 
   const packageCategory = await fetch(`${process.env.NEXTAUTH_URL}/api/front/packages/categories/web-development-plans/3`, {
     method: 'GET',
-    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, 
+  });
+
+  const toolsCategory = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies/categories/front-end/16`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, 
+  });
+
+  const toolsCategories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies/categories`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, 
   });
 
 
@@ -106,6 +118,8 @@ export default async function Home() {
     const aboutUS:AboutUsSection = await about.json();
     const markets:MarketWithModels[] = await pageMarkets.json();
     const packageCatgegoryData:PlanCatPackForFront = await packageCategory.json(); 
+    const tools:Tool[] = await toolsCategory.json(); 
+    const toolsCategorires:CategoryWithTools[] = await toolsCategories.json();
     
     const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
     const serviceCatMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'servicesCategory');  
@@ -113,6 +127,7 @@ export default async function Home() {
     const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
     const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
     const blogsMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'blog');  
+    const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');  
  
   return (
     <main className="flex flex-col dark:bg-[#111] rtl:font-arabic" >
@@ -137,9 +152,11 @@ export default async function Home() {
      </div>
      <div className="w-full my-8 pb-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-full mx-auto">
+            
             <div className="grid grid-cols-2 sm:grid-cols-4  max-sm:p-4">
             {industries && industries.map((industry, index:number) => (
                <IndustryCard key={industry.id} industry={industry} locale={locale} messages={messages} />
+               
             ))}
             </div>
            </div>
@@ -163,6 +180,24 @@ export default async function Home() {
      <div className="">
       <Markets markets={markets} locale={locale} messages={messages}/>
      </div>
+     <div className="w-full mx-auto bg-gray-100 my-10 dark:bg-[#111]">
+       <div className="p-1 w-full flex mt-8 mb-5 justify-center">
+        {locale === 'en' ? <h2 className="text-gray-800">
+          {techMeta?.title}
+        </h2>
+        :
+        <div className='flex flex-col items-center'>
+            <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold font-arabic">
+              {techMeta?.titleAr}
+            </h2>
+            <p className="text-base mt-2 text-gray-700 leading-7 text-center">
+              {techMeta?.descAr}
+            </p>
+        </div>
+          }
+       </div>
+       {tools && <TechPanel categories={toolsCategorires} locale = {locale} messages={messages} /> }
+      </div>
      <div className="">
       <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">
       {works && workMeta &&  <Works  works = {works} meta={workMeta} /> }

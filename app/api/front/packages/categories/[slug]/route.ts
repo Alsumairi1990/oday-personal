@@ -43,8 +43,6 @@ async function getElements(slug:string): Promise<PackageCatForFront | null> {
                 },
               },
             },
-            
-            
           },
           
         },

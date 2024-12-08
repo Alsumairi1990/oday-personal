@@ -14,7 +14,7 @@ interface Props {
 const ServicesPanel = ({menusData}:Props) => {
    const imagePath = '/images/10.png';
   return (
-    <div className="sm:absolute max-sm:mt-3 top-[4.5rem] z-10 bg-white right-0 w-full border-t border-t-gray-300  px-2 py-3 flex flex-col " >
+    <div className="sm:absolute max-sm:mt-3 top-[4.5rem] z-10 bg-white right-0 w-full border-t border-t-orange-500  px-2 py-3 flex flex-col " >
     {/* <span className="absolute inline-block w-4 h-4 bg-white top-[-.5rem] sm:right-28 sm:mr-4 sm:rotate-45"></span> */}
     <div className="sm:px-6 py-0.5 grid sm:grid-cols-5">
        <div className="col-start-1 col-span-4">

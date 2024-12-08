@@ -2,7 +2,8 @@
 
 import { NextResponse } from 'next/server';
 import prisma from '@/utils/prisma'; // Ensure the path is correct
-import { PackageCatForFront } from '@/app/[locale]/admin/packages/_utils/PackageCatForFront';
+import { Category, Tool } from '@prisma/client';
+import { CategoryWithTools } from '@/app/[locale]/admin/category/util/CategoryWithTools';
 
 export async function GET() {
   try {
@@ -16,26 +17,19 @@ export async function GET() {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
-async function getElements(): Promise<PackageCatForFront[] | null> {
+async function getElements(): Promise<CategoryWithTools[] | null> {
   try {
-    const elements = await prisma.planCategory.findMany({
-        include: {
-          packages: {
-            include: {
-              features: {
-                include: {
-                  feature: true, // Include the related PackageFeature data
-                },
-                orderBy: {
-                  id: 'asc', 
-                },
-              },
-            },
+    const elements = await prisma.category.findMany({
+        where: {
+          tools: {
+            some: {}, 
           },
-          
+        },
+        include: {
+          tools: true, 
         },
       });
-    return elements as PackageCatForFront[];
+    return elements as CategoryWithTools[];
   } catch (error) {
     console.error('Error fetching data:', error);
     throw new Error('Failed to fetch data');

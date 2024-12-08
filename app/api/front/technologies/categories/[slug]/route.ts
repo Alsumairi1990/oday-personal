@@ -2,11 +2,12 @@
 
 import { NextResponse } from 'next/server';
 import prisma from '@/utils/prisma'; // Ensure the path is correct
-import { PackageCatForFront } from '@/app/[locale]/admin/packages/_utils/PackageCatForFront';
+import { PlanCatPackForFront } from '@/app/[locale]/admin/plans/category/_utils/PlanCatPackForFront';
+import { Tool } from '@prisma/client';
 
-export async function GET() {
+export async function GET(req: Request, { params }: { params: { slug: string } }) {
   try {
-    const elements = await getElements();
+    const elements = await getElements(params.slug);
     if (elements) {
         return NextResponse.json(elements);
       } else {
@@ -16,26 +17,21 @@ export async function GET() {
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
-async function getElements(): Promise<PackageCatForFront[] | null> {
+async function getElements(slug:string): Promise<Tool[] | null> {
   try {
-    const elements = await prisma.planCategory.findMany({
-        include: {
-          packages: {
-            include: {
-              features: {
-                include: {
-                  feature: true, // Include the related PackageFeature data
-                },
-                orderBy: {
-                  id: 'asc', 
-                },
-              },
+    const elements = await prisma.tool.findMany({
+        where: {
+          categories: {
+            some: {
+              slug: slug,
             },
           },
-          
         },
+        
       });
-    return elements as PackageCatForFront[];
+    
+        
+    return elements ;
   } catch (error) {
     console.error('Error fetching data:', error);
     throw new Error('Failed to fetch data');
