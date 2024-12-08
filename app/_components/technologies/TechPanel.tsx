@@ -25,7 +25,7 @@ function TechPanel({tools,categories,locale,messages}:Props) {
   return (
     <>
     {categories.length > 0 && 
-    <div className="p-2 grid sm:grid-cols-3 gap-6 rtl:font-arabic w-11/12 m-auto">
+    <div className="pt-2 pb-6 grid sm:grid-cols-3 gap-6 rtl:font-arabic w-11/12 m-auto">
       {categories.map ((category) => (
             <TechCategoryCard category={category} locale={locale} messages={messages} />
       ))}

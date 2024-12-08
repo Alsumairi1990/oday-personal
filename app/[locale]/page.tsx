@@ -181,7 +181,7 @@ export default async function Home() {
       <Markets markets={markets} locale={locale} messages={messages}/>
      </div>
      <div className="w-full mx-auto bg-gray-100 my-10 dark:bg-[#111]">
-       <div className="p-1 w-full flex mt-8 mb-5 justify-center">
+       <div className="p-1 w-full flex mt-8 justify-center">
         {locale === 'en' ? <h2 className="text-gray-800">
           {techMeta?.title}
         </h2>

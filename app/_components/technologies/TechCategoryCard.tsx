@@ -32,7 +32,7 @@ function TechCategoryCard({category,locale,messages}:Props) {
             </div>
         </div>
         : 
-        <div className=" border flex flex-col   pt-4 items-center bg-white dark:bg-[#111] border-gray-200  rounded-xl">
+        <div className=" border flex flex-col   pt-6 items-center bg-white dark:bg-[#111] border-gray-200  rounded-xl">
             <div className="w-16 h-16 flex items-center">
             {category.icon && <Image className='w-full'
                     src={category.icon}
@@ -41,20 +41,20 @@ function TechCategoryCard({category,locale,messages}:Props) {
                     alt={category.nameAr!}
                 />}
             </div>
-            <div className="p-2 text-center">
+            <div className="p-2 pb-0 text-center">
                 <h2 className="text-lg font-semibold  text-gray-900 ">
                     {category.nameAr}
                 </h2>
-                <p className="text-gray-700 text-md leading-6 px-2 mt-3 line-clamp-4">
+                <p className="text-gray-700 text-md leading-6 px-2 mt-3 line-clamp-3">
                     {category.descriptionAr}
                 </p>
             </div>
             {category.tools.length > 0 &&
-                <div className="flex my-10 flex-wrap gap-8 justify-center w-10/12 m-auto">
-                {category.tools.map((tool) => (
-                <div className="flex-30 sm:flex-10 p-1">
-                    <TechCard tool={tool} locale={locale} messages={messages} />
-                </div>
+                <div className="flex my-10 flex-wrap gap-y-6 gap-x-4 justify-center w-11/12 m-auto">
+                  {category.tools.slice(0, 8).map((tool) => (
+                    <div className="flex-25 sm:flex-15 p-1" key={tool.id}>
+                        <TechCard tool={tool} locale={locale} messages={messages} />
+                    </div>
                 ))}
                 </div>
             } 

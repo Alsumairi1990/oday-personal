@@ -30,8 +30,8 @@ function TechCard({tool,locale,messages}:Props) {
             </div>
         </div>
         : 
-        <div className=" border flex justify-center w-[4rem] h-[4rem] items-center bg-white dark:bg-[#111] border-gray-200 shadow-md rounded-md">
-            <div className="w-12 h-12 flex items-center">
+        <div className=" border flex justify-center w-[3.5rem] h-[3.5rem] items-center bg-white dark:bg-[#111] border-gray-200 shasdow-md rounded-md">
+            <div className="w-10 h-10 flex items-center">
             {tool.icon && <Image className=''
                     src={tool.icon}
                     height={200}
