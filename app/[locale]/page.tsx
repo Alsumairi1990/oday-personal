@@ -130,9 +130,11 @@ export default async function Home() {
     const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');  
  
   return (
-    <main className="flex flex-col dark:bg-[#111] rtl:font-arabic" >
-       <div className="flex flex-col">
-        {/* {menuElements && <NavBar menusData={menuElements} />} */}
+    <main className="flex flex-col h-full  bg-gray-700 dark:bg-[#111] rtl:font-arabic" >
+   <div className="flex justify-center bg-black text-white font-semibold h-lvh w-full items-center text-xl">
+     Under Work
+   </div>
+       {/* <div className="flex flex-col">
           </div>   
           <Suspense fallback={<div>Loading navigation...</div>}>
         <NavBar menusData={menuElements} locale={locale} messages={messages} />
@@ -161,9 +163,7 @@ export default async function Home() {
             </div>
            </div>
       </div>
-     {/* <div className="gray:bg-[#111]">
-     {aboutUS && <About aboutUS={aboutUS} /> }
-     </div> */}
+    
      <div className="dark:bg-[#111]">
      {posts && blogsMeta && <BlogList meta={blogsMeta} posts={posts}  /> }
      </div>
@@ -207,11 +207,11 @@ export default async function Home() {
       {testimonials && testimonialMeta && <Testimonials testimonials={testimonials} meta={testimonialMeta} /> }
       </div>
       <div className="w-full my-10 sm:my-24 dark:bg-black-100">
-      {/* <ServiceApp /> */}
+      <ServiceApp />
       </div>
       <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
-      </div>
+      </div> */}
      
     </main>
   )
