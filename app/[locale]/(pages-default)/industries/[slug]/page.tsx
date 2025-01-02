@@ -8,6 +8,7 @@ import { WorksFrontData } from "@/app/[locale]/admin/works/utils/WorksFrontData"
 import Works from "@/app/_components/Works";
 import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
 import { IndustryForFront } from "@/app/[locale]/admin/industries/_utils/IndustryForFront";
+import IndustryService from "@/app/_components/industries/IndustryService";
 
 interface Props {
   params: {
@@ -79,14 +80,41 @@ const industryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industri
 
   return (
      <div className="w-full">
-       <div className="w-full mb-16">    
+       <div className="w-full">    
                {industry &&  <GeneralHeroSect  title={industry.title!} titleAr={industry.titleAr!} subTitle={industry.description!} subTitleAr={industry.descriptionAr!}  locale={locale} messages={messages} page="industry"  image={industry.image!}/> }
         </div>
 
       
 
-        <div className='gray:bg-[#111]"'>
-            {services.length> 0 && serviceMeta && <ServiceSingleCards services={services} meta={serviceMeta} />}
+        <div className=' dark:bg-[#111] bg-gray-50  pb-6'>
+           <div className="p-1 w-full sm:w-11/12 mx-auto  flex sm:py-10 py-4 justify-center rtl:font-arabic">
+                {locale === 'en' ?   <div className='flex flex-col items-center'>
+                    <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold">
+                      {serviceMeta?.title}
+                    </h2>
+                    <p className="text-base mt-2 text-gray-700 leading-7 text-center">
+                      {serviceMeta?.desc}
+                    </p>
+                </div>
+                :
+                <div className='flex flex-col items-center'>
+                    <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold font-arabic">
+                      {serviceMeta?.titleAr}
+                    </h2>
+                    {industry && <span className="text-xl mt-2 font-semibold text-orange-600">[ {industry.nameAr} ]</span>}
+                    <p className="text-base mt-2 text-gray-700 leading-7 text-center">
+                      {serviceMeta?.descAr}
+                    </p>
+                </div>
+                  }
+            </div>
+            {industry && industry.services.length> 0 && serviceMeta && 
+              <div className="grid grid-cols-2 sm:grid-cols-5 sm:w-11/12 mx-auto sm:gap-y-8 gap-5 sm:gap-x-8 max-sm:p-3">
+              { industry.services.map((service) => (
+              <IndustryService service={service} locale={locale} messages={messages} />
+            )) }
+            </div>
+            }
         </div>
 
         <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">
