@@ -4,8 +4,8 @@ import { AbstractIntlMessages } from 'next-intl';
 interface ServiceProps {
     title: string,
     titleAr : string,
-    subTitle : string,
-    subTitleAr : string,
+    subTitle? : string,
+    subTitleAr? : string,
     locale : string,
     messages : AbstractIntlMessages,
     page : string,

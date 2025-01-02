@@ -17,7 +17,7 @@ const IndustryCard = ({ industry,locale,messages } : Props) => {
   const buy = (messages as any).Common.buy;
   return (
     
-    <div className=" relative border border-dashed border-orange-600 pt-3 rounded-md bg-white dark:bg-[#111] ">
+    <Link href={`/industries/${industry.slug}`}  className=" relative border border-dashed border-orange-600 pt-3 rounded-md bg-white dark:bg-[#111] ">
      {/* <div className="flex h-full  justify-center">
         {industry.image && industry.name && <img className='h-full' src={industry.image} alt={industry.name} />}
      </div> */}
@@ -40,7 +40,7 @@ const IndustryCard = ({ industry,locale,messages } : Props) => {
         </div>
           }
 
-    </div>
+    </Link>
   );
 };
 

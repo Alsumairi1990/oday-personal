@@ -39,6 +39,8 @@ export const config = {
     '/(en|ar)/works/:path*', 
     '/plans/:path*',             
     '/(en|ar)/plans/:path*', 
+    '/industries/:path*',             
+    '/(en|ar)/industries/:path*', 
     '/packages/:path*',             
     '/(en|ar)/packages/:path*', 
     '/markets/:path*',             

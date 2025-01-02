@@ -32,6 +32,8 @@ model Post {
   categories      PostCategory[]
   author          User?          @relation(fields: [authorId], references: [id])
   authorId        String?
+
+  Industry Industry[]
 }
 
 model PostCategory {
@@ -416,6 +418,8 @@ model Work {
   updatedAt     DateTime       @updatedAt
   userId        String // References one specific user (modified)
   user          User           @relation(fields: [userId], references: [id]) // Relation to User
+
+  Industry Industry[]
 }
 
 model Offer {
@@ -1148,6 +1152,8 @@ model Industry {
   user          User       @relation(fields: [userId], references: [id])
   categories    Category[]
   services      Service[]
+  works         Work[]
+  posts         Post[]
 }
 
 model Order {
