@@ -36,7 +36,7 @@ export default async function LocaleLayout({
         {children}
         </div>
         <div className="parent z-[9999999999] ">
-         {/* <CallOptionPanel locale={locale} messages={messages} /> */}
+         <CallOptionPanel locale={locale} messages={messages} />
          {/* <div className="child">Child (Fixed)</div> */}
 </div>
         {/* <div className="fixed top-1/2 right-2 transform -translate-y-1/2 z-[9999999999]  animate-rotate-back">

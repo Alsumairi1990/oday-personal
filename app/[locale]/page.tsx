@@ -2,16 +2,13 @@ import NavBar from '../NavBar'
 import Hero from '../_components/HeroSect'
 import Services from '../_components/Services'
 import ServicesFull from '../_components/ServicesFull'
-import About from '../_components/About'
 import React, { Suspense } from 'react';
 import Works from '../_components/Works'
 import Testimonials from '../_components/Testimonials'
-import ServiceApp from '../_components/ServiceApp'
 import Footerk from '../_components/Footer'
 import { getLocale, getMessages } from 'next-intl/server';
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
 import PhaseCompany from '../_components/PhaseCompany'
-import IndustryCard from '../_components/IndustryCard'
 import { AboutUsSection, Category, Industry, PageSection, PlanCategory, Post, Service, Testimonial, Tool } from '@prisma/client'
 import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 import { WorksFrontData } from './admin/works/utils/WorksFrontData'
@@ -23,6 +20,7 @@ import PackageSect from '../_components/package/PackageSect'
 import { PlanCatPackForFront } from './admin/plans/category/_utils/PlanCatPackForFront'
 import TechPanel from '../_components/technologies/TechPanel'
 import { CategoryWithTools } from './admin/category/util/CategoryWithTools'
+import IndustryCard from '../_components/industries/IndustryCard';
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
@@ -128,13 +126,12 @@ export default async function Home() {
     const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
     const blogsMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'blog');  
     const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');  
+    const industryMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'industries');  
  
   return (
-    <main className="flex flex-col h-full  bg-gray-700 dark:bg-[#111] rtl:font-arabic" >
-   <div className="flex justify-center bg-black text-white font-semibold h-lvh w-full items-center text-xl">
-     Under Work
-   </div>
-       {/* <div className="flex flex-col">
+    <main className="flex flex-col h-ful dark:bg-[#111] rtl:font-arabic" >
+   
+     <div className="flex flex-col">
           </div>   
           <Suspense fallback={<div>Loading navigation...</div>}>
         <NavBar menusData={menuElements} locale={locale} messages={messages} />
@@ -153,12 +150,25 @@ export default async function Home() {
      {servicesR && serviceMeta && <ServicesFull services={servicesR} meta={serviceMeta} />}
      </div>
      <div className="w-full my-8 pb-8  bg-gray-100 dark:bg-[#111] ">
-          <div className="w-full mx-auto">
-            
-            <div className="grid grid-cols-2 sm:grid-cols-4  max-sm:p-4">
+          <div className="sm:w-11/12 mx-auto p-4">
+              <div className="p-1 w-full flex my-8 justify-center">
+                {locale === 'en' ? <h2 className="text-gray-800">
+                  {industryMeta?.title}
+                </h2>
+                :
+                <div className='flex flex-col items-center'>
+                    <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold font-arabic">
+                      {industryMeta?.titleAr}
+                    </h2>
+                    <p className="text-base mt-2 text-gray-700 leading-7 text-center">
+                      {industryMeta?.descAr}
+                    </p>
+                </div>
+                  }
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 sm:gap-y-8 gap-5 sm:gap-x-8 max-sm:p-1">
             {industries && industries.map((industry, index:number) => (
                <IndustryCard key={industry.id} industry={industry} locale={locale} messages={messages} />
-               
             ))}
             </div>
            </div>
@@ -207,11 +217,11 @@ export default async function Home() {
       {testimonials && testimonialMeta && <Testimonials testimonials={testimonials} meta={testimonialMeta} /> }
       </div>
       <div className="w-full my-10 sm:my-24 dark:bg-black-100">
-      <ServiceApp />
+      {/* <ServiceApp /> */}
       </div>
       <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
-      </div> */}
+      </div> 
      
     </main>
   )
