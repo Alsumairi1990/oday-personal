@@ -22,7 +22,7 @@ const IndustryCard = ({ industry,locale,messages } : Props) => {
         {industry.image && industry.name && <img className='h-full' src={industry.image} alt={industry.name} />}
      </div> */}
         {locale == 'en' ? <div className=" h-full w-full flex flex-col items-center justify-center ">
-            <div className="w-20">
+            <div className="w-20 h-20">
             {industry.icon && industry.name && <img className='h-full' src={industry.icon} alt={industry.name} />}
             </div>
             <p className="text-gray-800 text-xl text-center mb-1 font-semibold dark:text-orange-500 ">{industry.name}</p>
@@ -31,7 +31,7 @@ const IndustryCard = ({ industry,locale,messages } : Props) => {
         </div>
         : 
         <div className="font-arabic w-full flex flex-col h-full items-center justify-center ">
-              <div className="w-20 mb-2">
+              <div className="w-20 h-20 mb-2">
                 {/* {industry.icon} */}
             {industry.icon && industry.name && <img className='h-full' src={industry.icon} alt={industry.name} />}
             </div>
