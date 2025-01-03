@@ -9,6 +9,7 @@ import Works from "@/app/_components/Works";
 import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
 import { IndustryForFront } from "@/app/[locale]/admin/industries/_utils/IndustryForFront";
 import IndustryService from "@/app/_components/industries/IndustryService";
+import WorkElement from "@/app/_components/WorkElement";
 
 interface Props {
   params: {
@@ -52,7 +53,7 @@ const industryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industri
    method: 'GET',
    next: { revalidate: 1800 }, // Revalidate for ISR if needed
  });
- const pageWorks = await fetch(`${process.env.NEXTAUTH_URL}/api/front/works/home`, {
+ const pageWorks = await fetch(`${process.env.NEXTAUTH_URL}/api/front/works/industry/${params.slug}`, {
    method: 'GET',
    next: { revalidate: 1800 }, // Revalidate for ISR if needed
  });
@@ -118,7 +119,14 @@ const industryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industri
         </div>
 
         <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">
-            {works && workMeta &&  <Works  works = {works} meta={workMeta} /> }
+            {/* {works && workMeta &&  <Works  works = {works} meta={workMeta} /> } */}
+            
+            <div className='grid grid-cols w-11/12 mx-auto sm:grid-cols-4 px-0 mt-6 py-4 gap-6'>
+              {works && works.map((work)=>(
+                <WorkElement work={work} />
+              ))
+            }
+    </div>
          </div>
    
          <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
