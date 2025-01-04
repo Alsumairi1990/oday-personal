@@ -33,6 +33,7 @@ model Post {
   author          User?          @relation(fields: [authorId], references: [id])
   authorId        String?
 
+  tools           Tool[]
   Industry Industry[]
 }
 
@@ -197,6 +198,9 @@ model Tool {
   works         WorkTool[]
   categories    Category[]
   projects      Project[]
+  posts         Post[]
+
+  Feature Feature[]
 }
 
 model ServiceTool {
@@ -1249,6 +1253,23 @@ model PageSection {
   user      User     @relation(fields: [userId], references: [id])
 }
 
+model Feature {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  title     String?
+  titleAr   String?
+  desc      String?
+  descAr    String?
+  more      String?
+  image     String?
+  moreAr    String?
+  isActive  String?
+  url       String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  toolId    Int
+  tool      Tool     @relation(fields: [toolId], references: [id])
+}
 model ServiceFeature {
   id        Int      @id @default(autoincrement())
   name      String?

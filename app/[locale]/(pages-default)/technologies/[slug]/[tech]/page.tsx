@@ -11,14 +11,16 @@ import { IndustryForFront } from "@/app/[locale]/admin/industries/_utils/Industr
 import IndustryService from "@/app/_components/industries/IndustryService";
 import WorkElement from "@/app/_components/WorkElement";
 import WorkCard2 from "@/app/_components/work/WorkCard2";
+import { ToolSingle } from "@/app/[locale]/admin/tools/utils/ToolSingle";
 
 interface Props {
   params: {
       slug: string;
+      tech : string
   };
 }
 
-const Serivice = async ({params}:Props) => {
+const Technology = async ({params}:Props) => {
   
 
    const locale= await getLocale();
@@ -42,7 +44,7 @@ const Serivice = async ({params}:Props) => {
       next: { revalidate: 1800 }, // Optional revalidation for ISR (30 minutes)
     });
     
-const industryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industries/${params.slug}`, {
+const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies/category/${params.slug}/${params.tech}`, {
         method: 'GET',
         next: { revalidate: 1800 }, // Optional revalidation for ISR (30 minutes)
       });
@@ -65,29 +67,18 @@ const industryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industri
  const market:Market = await marketData.json();
  const services:ServiceForFront[] = await serviceData.json();
  const works:WorksFrontData[] = await pageWorks.json();
- const industry:IndustryForFront = await industryData.json();
+ const tech:ToolSingle = await techData.json();
 
  const sectionMeta:PageSection[] = await sections.json();
  const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
  const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
  const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
  
-
-
-
-
-
- 
-
-
   return (
      <div className="w-full">
        <div className="w-full">    
-               {industry &&  <GeneralHeroSect  title={industry.title!} titleAr={industry.titleAr!} subTitle={industry.description!} subTitleAr={industry.descriptionAr!}  locale={locale} messages={messages} page="industry"  image={industry.image!}/> }
+               {tech &&  <GeneralHeroSect  title={tech.name!} titleAr={tech.nameAr!} subTitle={tech.description!} subTitleAr={tech.descriptionAr!}  locale={locale} messages={messages} page="industry"  image={tech.image!}/> }
         </div>
-
-      
-
         <div className=' dark:bg-[#111] bg-gray-50  pb-6'>
            <div className="p-1 w-full sm:w-11/12 mx-auto  flex sm:py-10 py-4 justify-center rtl:font-arabic">
                 {locale === 'en' ?   <div className='flex flex-col items-center'>
@@ -103,17 +94,17 @@ const industryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industri
                     <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold font-arabic">
                       {serviceMeta?.titleAr}
                     </h2>
-                    {industry && <span className="text-xl mt-2 font-semibold text-orange-600">[ {industry.nameAr} ]</span>}
+                    {tech && <span className="text-xl mt-2 font-semibold text-orange-600">[ {tech.nameAr} ]</span>}
                     <p className="text-base mt-2 text-gray-700 leading-7 text-center">
                       {serviceMeta?.descAr}
                     </p>
                 </div>
                   }
             </div>
-            {industry && industry.services.length> 0 && serviceMeta && 
+            {tech && tech.services && tech.services.length> 0 && serviceMeta && 
               <div className="grid grid-cols-2 sm:grid-cols-5 sm:w-11/12 mx-auto sm:gap-y-8 gap-5 sm:gap-x-8 max-sm:p-3">
-              { industry.services.map((service) => (
-              <IndustryService service={service} locale={locale} messages={messages} />
+              { tech.services.map((service) => (
+              <IndustryService service={service.service} locale={locale} messages={messages} />
             )) }
             </div>
             }
@@ -144,8 +135,8 @@ const industryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industri
             </div>
             
             <div className='grid grid-cols w-11/12 mx-auto sm:grid-cols-4 px-0 mt-6 py-4 gap-6'>
-              {industry && industry.works && industry.works.length > 0 && industry.works.map((work)=>(
-                <WorkCard2 work={work} />
+              {works && tech.works && tech.works.map((work)=>(
+                <WorkCard2 work={work.work} />
               ))
             }
     </div>
@@ -221,4 +212,4 @@ const industryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industri
      </div>
   )
 };
-export default Serivice;
+export default Technology;

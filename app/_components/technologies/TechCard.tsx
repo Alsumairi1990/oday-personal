@@ -4,14 +4,17 @@ import { AbstractIntlMessages } from 'next-intl';
 import SelectTechCategory from './SelectTechCategory';
 import { Tool } from '@prisma/client';
 import Image from 'next/image';
+import { LinkAuthenticationElement } from '@stripe/react-stripe-js';
+import Link from 'next/link';
 
 interface Props {
     tool : Tool,
+    category : string,
     locale : string,
     messages : AbstractIntlMessages
 
 }
-function TechCard({tool,locale,messages}:Props) {
+function TechCard({tool,category,locale,messages}:Props) {
   const preview = (messages as any).HomePage.workPreview;
   const request = (messages as any).HomePage.request;
  
@@ -30,7 +33,7 @@ function TechCard({tool,locale,messages}:Props) {
             </div>
         </div>
         : 
-        <div className=" border flex justify-center w-[3.5rem] h-[3.5rem] items-center bg-white dark:bg-[#111] border-gray-200 shasdow-md rounded-md">
+        <Link href={`/technologies/${category}/${tool.slug}`} className=" border flex justify-center w-[3.5rem] h-[3.5rem] items-center bg-white dark:bg-[#111] border-gray-200 shasdow-md rounded-md">
             <div className="w-10 h-10 flex items-center">
             {tool.icon && <Image className=''
                     src={tool.icon}
@@ -39,7 +42,7 @@ function TechCard({tool,locale,messages}:Props) {
                     alt={tool.nameAr!}
                 />}
             </div>
-        </div>
+        </Link>
       }      
      </>
   )

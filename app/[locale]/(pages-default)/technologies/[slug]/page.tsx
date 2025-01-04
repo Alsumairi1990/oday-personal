@@ -15,10 +15,11 @@ import WorkCard2 from "@/app/_components/work/WorkCard2";
 interface Props {
   params: {
       slug: string;
+      tech : string
   };
 }
 
-const Serivice = async ({params}:Props) => {
+const TechnologyCategory = async ({params}:Props) => {
   
 
    const locale= await getLocale();
@@ -144,7 +145,7 @@ const industryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industri
             </div>
             
             <div className='grid grid-cols w-11/12 mx-auto sm:grid-cols-4 px-0 mt-6 py-4 gap-6'>
-              {industry && industry.works && industry.works.length > 0 && industry.works.map((work)=>(
+              {works && works.map((work)=>(
                 <WorkCard2 work={work} />
               ))
             }
@@ -221,4 +222,4 @@ const industryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industri
      </div>
   )
 };
-export default Serivice;
+export default TechnologyCategory;

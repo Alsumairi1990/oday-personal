@@ -53,7 +53,7 @@ function TechCategoryCard({category,locale,messages}:Props) {
                 <div className="flex my-10 flex-wrap gap-y-6 gap-x-4 justify-center w-11/12 m-auto">
                   {category.tools.slice(0, 8).map((tool) => (
                     <div className="flex-25 sm:flex-15 p-1" key={tool.id}>
-                        <TechCard tool={tool} locale={locale} messages={messages} />
+                        <TechCard tool={tool} category={category.slug} locale={locale} messages={messages} />
                     </div>
                 ))}
                 </div>
