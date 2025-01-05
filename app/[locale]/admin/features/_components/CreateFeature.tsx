@@ -1,5 +1,5 @@
 'use client'
-import React, { ChangeEvent, useRef } from 'react';
+import React, { ChangeEvent, useEffect, useRef } from 'react';
 import {useState} from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
@@ -12,24 +12,25 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import MenuPanel from '@/app/[locale]/admin/common/utils/MenuPanel';
 import Image from 'next/image';
 import { FeaturesSchema } from '../_utils/FeatureSchema';
-import { CreateFeature } from '../_actions/Actions';
+import { CreateFeature, getTools } from '../_actions/Actions';
+import { Tool } from '@prisma/client';
 
 
 type inputType = z.infer<typeof FeaturesSchema>;
 
-interface Props {
-        toolId: string;
-  }
 
-const AddFeature = ({toolId}:Props) => {
+
+const AddFeature = () => {
     const [basic, setBasic] = useState<string>(''); // Use Category type
     const [error , setError] = useState<string>('');
     const [imageSrc, setImageSrc] = useState<string | null>(null);
-    const [selectedMenuElement, setSelectedMenuElement] = useState<string>('');
-    const [selectedTypeElement, setSelectedTypeElement] = useState<string>('');
-    const [selectedMethod, setSelectedMethod] = useState<string>('');
+    const [selectedLocation, setSelectedLocation] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(false);
+    const [locationShow, setLocationShow] = useState<boolean>(false); 
     const messageRef = useRef<HTMLDivElement>(null);
+    const [countries, setCountries] = useState<string[]>([]);
+    const [countriesAr, setCountriesAr] = useState<string[]>([]);
+    const [tools, setTools] = useState<Tool[]>([]);
 
      const {
     register,
@@ -63,25 +64,37 @@ const AddFeature = ({toolId}:Props) => {
     }
   };
 
-  const setSelect = (value:string) => {
-    setSelectedMenuElement(value)
+ 
+ 
+  const selectLocation= (value:string) => {
     
-  }
-  const unSelect = (value:string) => {
-    setSelectedMenuElement('')
-  }
-  const typeSelect = (value:string) => {
-    setSelectedTypeElement(value)
-  }
-  const unTypeSelect = (value:string) => {
-    setSelectedTypeElement('')
-  }
-  const paymentSelect = (value:string) => {
-    setSelectedMethod(value)
-  }
-  const unPaymentSelect = (value:string) => {
-    setSelectedMethod('')
-  }
+    setSelectedLocation(value)
+    }
+    const deSelectLocation = (value:string) => {
+      setSelectedLocation('')
+    }
+  
+
+  const setMeueElements = async ()=>{
+      try {
+        setLoading(true);
+        const elements = await getTools();
+        const countries = elements.map(element => element.name);
+        const countriesArr = elements.map(element => element.nameAr ?? '');
+        setCountriesAr(countriesArr);
+          setCountries(countries);
+        setTools(elements)
+        setLoading(false);
+        setError('')
+        
+      } catch (error:any) {
+        setLoading(false);
+        setError(error.messages);
+      }
+    }
+    useEffect(() => {
+        setMeueElements();
+        }, []);
  
     const saveUser: SubmitHandler<inputType> = async (data)=>{
       alert("called");
@@ -97,10 +110,11 @@ const AddFeature = ({toolId}:Props) => {
         } 
       });
       
+
       console.log(JSON.stringify(formData, null, 2));
       try {
         setLoading(true);
-        const codeData =  await CreateFeature(formData,toolId);
+        const codeData =  await CreateFeature(formData,selectedLocation);
         setBasic(String(codeData));
         // addBasicId(codeData);
         setLoading(false);
@@ -113,19 +127,52 @@ const AddFeature = ({toolId}:Props) => {
       }
     }
   return (
-    <div  className="flex flex-wrap h-auto bg-white border border-gray-300 " >
+    <div  className="flex flex-wrap p-5  bg-white border border-gray-300 " >
         <div className="p-1 border-b border-b-gray-300 border-dashed flex py-3 items-center w-full">
            <div className="flex items-center pl-2">
                 <span className=""><MdAssignmentAdd className="text-gray-600 text-2xl mr-2" /> </span>
-                <span className="text-[.96rem] font-medium text-gray-600">Main Page Form {toolId}</span>
+                <span className="text-[.96rem] font-medium text-gray-600">Main Page Form </span>
             </div>
-            {/* <div className="pl-1">
-                <span className="text-gray-600 text-md font-medium">Product Form</span>
-            </div> */}
-        </div>
-    <div id="add-main-panel" className="w-full relative  mx-auto add-main-panel bg-white mb-6 flex flex-col  rounded-md  borrder borrder-gray-200 bg-whitey">
            
-            <form onSubmit={handleSubmit(saveUser)} className=" text-start z-40  ">
+        </div>
+    <div id="add-main-panel" className="w-full relative  mx-auto add-main-panel bg-white mb-6 flex flex-col  rounded-md  borrder borrder-gray-200 ">
+           
+           <div className="   flex  flex-col z-50 w-full mb-5 ">
+                                {/* <label htmlFor="degree" className="font-medium mb-1.5 pl-0.5 text-sm text-gray-700 duration-300 capitalize">Location </label> */}
+                        <div className="flex flex-col mt-4 w-full ">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setLocationShow((prevState) => {
+                                  if (prevState == false) {
+                                    setSelectedLocation('');
+                                  }
+                                  return !prevState;
+                                });
+                              }}
+                              className="flex w-full bg-gray-50   items-center border gap-x-3 h-10 border-gray-200  px-2 rounded-2xl"
+                            >
+                              {selectedLocation != '' ? (
+                                <span className="text-md inline-flex text-gray-600 font-medium">
+                                      <span className="px-2 first:pl-0 border-r border-r-gray-300 last:border-none">{selectedLocation}</span>
+                                </span>
+                              ) : (
+                                <div className="text-md inline-flex text-gray-500 font-medium capitalize">
+                                  <span className="px-1 capitalize text-sm">Location</span>
+                                </div>
+                              )}
+                              <span className="ml-auto">
+                                <MdOutlineAddCircle className="text-2xl border-2 border-violet-800 rounded-full text-violet-800" />
+                              </span>
+                            </button> 
+                              {locationShow &&
+                              <div className="relative z-50 font-arabic">
+                                <MenuPanel menuElements={countries} setSelect={selectLocation} unSelect={deSelectLocation} />
+                              </div>
+                                  }
+                            </div> 
+            </div>
+            <form onSubmit={handleSubmit(saveUser)} className="w-full text-start z-40  ">
                 {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
                 
                 <div className='px-4' ref={messageRef}>
@@ -167,7 +214,10 @@ const AddFeature = ({toolId}:Props) => {
                       Service Category Section
                       </span>
                     </div>
+
                   <div className="p-4 w-full flex flex-wrap justify-between">
+
+                   
                     <div className=" flex flex-100 flex-col z-0 w-full mb-5 group">
                             <label htmlFor="name" className="font-medium mb-1.5 text-sm  text-gray-700 duration-300 capitalize">  Section name</label>
                             <div className="flex items-center w-full">

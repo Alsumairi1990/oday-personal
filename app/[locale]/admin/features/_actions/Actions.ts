@@ -6,6 +6,7 @@ import fs from "fs/promises"
 import prisma from "@/utils/prisma";
 import { ServiceFeature, Tool } from "@prisma/client";
 import { FeaturesSchema } from "../_utils/FeatureSchema";
+import { slugify } from "@/utils/TextUtils";
 
 
 
@@ -26,10 +27,18 @@ export async function  getTools():Promise<Tool[]>{
 
 
 // creating Page Section  info
-export async function  CreateFeature(data:FormData,toolId:string):Promise<number>{
+export async function  CreateFeature(data:FormData,toolName:string):Promise<number>{
     try {
-     const result = FeaturesSchema.safeParse(Object.fromEntries(data.entries()))     
-     if (result.success) {
+     const result = FeaturesSchema.safeParse(Object.fromEntries(data.entries()))    
+     const slug = slugify(toolName) ;
+     const tool = await prisma.tool.findUnique({
+      where : {
+        slug : slug
+      }
+    })
+     if(!tool){throw new Error("noo tool ")}
+
+     if (result.success ) {
        const data = result.data;
        let imagePath = '';
        if(data.image && data.image.name){
@@ -50,7 +59,7 @@ export async function  CreateFeature(data:FormData,toolId:string):Promise<number
              moreAr : data.moreAr?data.moreAr : "",
              url : data.url?data.url : "",
              image : imagePath,
-             toolId : Number(toolId)
+             toolId : tool.id
            },
          });         
          return basic.id;

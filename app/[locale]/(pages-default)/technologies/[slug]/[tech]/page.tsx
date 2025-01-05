@@ -12,6 +12,7 @@ import IndustryService from "@/app/_components/industries/IndustryService";
 import WorkElement from "@/app/_components/WorkElement";
 import WorkCard2 from "@/app/_components/work/WorkCard2";
 import { ToolSingle } from "@/app/[locale]/admin/tools/utils/ToolSingle";
+import FeatureCard from "@/app/_components/features/FeatureCard";
 
 interface Props {
   params: {
@@ -139,7 +140,7 @@ const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies
                 <WorkCard2 work={work.work} />
               ))
             }
-    </div>
+             </div>
          </div>
    
          <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
@@ -149,10 +150,19 @@ const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies
                :  <h2 className="sm:text-4xl text-gray-900  border-b-[0.3rem] pb-2 border-b-blue-400 capitalize font-bold tracking-wide rtl:text-3xl font-arabic dark:text-orange-400">{ourClients }</h2>
             }
             </div>
-            <div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
-            {/* {service && service.clients && service.clients.map((client, index:number) => (
-               <ClientCard key={client.id} client={client} locale={locale} messages={messages} />
-            ))} */}
+            <div className=" sm:flex flex-col gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
+              <div className="w-full flex justify-center">
+                <div className="w-32 h-32 my-2 bg-white p-4 rounded-full border border-dashed border-orange-500">
+                    {tech.icon && tech.icon && <img className='h-full' src={tech.icon} alt={tech.name} />}
+                </div>
+              </div>
+              
+              <div className='grid grid-cols w-11/12 mx-auto sm:grid-cols-2 px-0 mt-1 py-4 gap-6'>
+                {tech && tech.Feature.length > 0 && tech.Feature && tech.Feature.map((feature)=>(
+                  <FeatureCard  feature={feature} locale={locale} messages={messages} />
+                ))
+              }
+                </div>
             </div>
            </div>
          </div>

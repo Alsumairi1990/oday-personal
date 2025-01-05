@@ -30,7 +30,7 @@ const GeneralHeroSect = ({ title,titleAr,subTitle,subTitleAr, locale,messages,pa
                 :
                 <>
                 <span className="text-sm text-white font-arabic mb-6 inline-block">{home} / {page} </span>
-                <h2 className="sm:text-4xl text-xl text-white font-extrabold font-arabic mb-2 sm:mb-4">{titleAr}</h2>
+                <h2 className="sm:text-4xl text-xl text-white font-extrabold font-arabic mb-2 line-clamp-3 sm:mb-4">{titleAr}</h2>
                 <h2 className="text-md sm:text-xl sm:leading-10 text-white font-bold line-clamp-2 sm:line-clamp-3 font-arabic mb-4">{subTitleAr}</h2>
                 </>
                 }
