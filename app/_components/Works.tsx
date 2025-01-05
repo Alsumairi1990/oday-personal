@@ -5,6 +5,7 @@ import { PageSection } from '@prisma/client';
 import WorkElement from './WorkElement';
 import GetMenuPanel from './GetMenuPanel';
 import { getLocale, getMessages } from 'next-intl/server';
+import WorkCard2 from './work/WorkCard2';
 
 interface Props{
     works : WorksFrontData[],
@@ -46,7 +47,9 @@ const elements = ['element1','element2']
     </div> */}
     <div className='grid grid-cols w-11/12 mx-auto sm:grid-cols-3 px-0 mt-6 py-4 gap-6'>
        {works && works.map((work)=>(
-        <WorkElement work={work} />
+        // <WorkElement work={work} />
+        <WorkCard2 work={work} />
+
        ))
     }
     </div>

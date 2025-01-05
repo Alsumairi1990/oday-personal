@@ -143,10 +143,10 @@ export default async function Home() {
 
      {servicesR.length} {heroData.length}
      <div className="clear"></div>
-     <div className='gray:bg-[#111]"'>
-     {categoriesResult  && serviceCatMeta && <Services categories={categoriesResult} meta={serviceCatMeta}  />}
+     <div className=' gray:bg-[#111]"'>
+        {categoriesResult  && serviceCatMeta && <Services categories={categoriesResult} meta={serviceCatMeta}  />}
      </div>
-     <div className='gray:bg-[#111]"'>
+     <div className='bg-gray-50 gray:bg-[#111]"'>
      {servicesR && serviceMeta && <ServicesFull services={servicesR} meta={serviceMeta} />}
      </div>
      <div className="w-full my-8 pb-8  bg-gray-100 dark:bg-[#111] ">

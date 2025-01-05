@@ -3,21 +3,20 @@
 import { getServerSession } from "next-auth";
 import authOptions from "@/utils/AuthOptions";
 import fs from "fs/promises"
-import { ServiceFeaturesSchema } from "../ServiceFeaturesSchema";
 import prisma from "@/utils/prisma";
-import { ServiceFeature } from "@prisma/client";
+import { ServiceFeature, Tool } from "@prisma/client";
+import { FeaturesSchema } from "../_utils/FeatureSchema";
 
 
 
 // get service features 
-export async function  getServicefeatures():Promise<ServiceFeature[]>{
+export async function  getTools():Promise<Tool[]>{
   try {
-    const services = await prisma.serviceFeature.findMany({
-      take:4
+    const elements = await prisma.tool.findMany({
     })
-    return services;
+    return elements;
   } catch (error) {
-      console.log("[getServicefeatures]" + error)
+      console.log("[getTools]" + error)
       throw error;
    }
  }
@@ -27,25 +26,20 @@ export async function  getServicefeatures():Promise<ServiceFeature[]>{
 
 
 // creating Page Section  info
-export async function  CreateServiceFeature(data:FormData):Promise<number>{
+export async function  CreateFeature(data:FormData,toolId:string):Promise<number>{
     try {
-     const result = ServiceFeaturesSchema.safeParse(Object.fromEntries(data.entries()))
-     const session = await getServerSession(authOptions);
-     if (!session) {
-       throw new Error('User not authenticated');
-     }
-     const userId = session.user.id;
+     const result = FeaturesSchema.safeParse(Object.fromEntries(data.entries()))     
      if (result.success) {
        const data = result.data;
        let imagePath = '';
        if(data.image && data.image.name){
-          await fs.mkdir("public/service-market/images", { recursive: true })
-          imagePath = `/service-market/images/${crypto.randomUUID()}-${data.image.name}`
-          const buffer = Buffer.from(await data.image.arrayBuffer());
-          await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+         await fs.mkdir("public/feature-market/images", { recursive: true })
+            imagePath = `/feature-market/images/${crypto.randomUUID()}-${data.image.name}`
+            const buffer = Buffer.from(await data.image.arrayBuffer());
+            await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
          }
       
-         const basic = await prisma.serviceFeature.create({
+         const basic = await prisma.feature.create({
            data: {
              name : data.name?data.name : "",
              title: data.title?data.title : "",
@@ -56,7 +50,7 @@ export async function  CreateServiceFeature(data:FormData):Promise<number>{
              moreAr : data.moreAr?data.moreAr : "",
              url : data.url?data.url : "",
              image : imagePath,
-             userId : userId
+             toolId : Number(toolId)
            },
          });         
          return basic.id;
