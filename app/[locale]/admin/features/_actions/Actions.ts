@@ -36,7 +36,7 @@ export async function  CreateFeature(data:FormData,toolName:string):Promise<numb
         slug : slug
       }
     })
-     if(!tool){throw new Error("noo tool ")}
+     if(!tool){throw new Error("noo tool")}
 
      if (result.success ) {
        const data = result.data;

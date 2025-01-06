@@ -13,6 +13,7 @@ import WorkElement from "@/app/_components/WorkElement";
 import WorkCard2 from "@/app/_components/work/WorkCard2";
 import { ToolSingle } from "@/app/[locale]/admin/tools/utils/ToolSingle";
 import FeatureCard from "@/app/_components/features/FeatureCard";
+import FeatureStoryCard from "@/app/_components/features/FeatureStoryCard";
 
 interface Props {
   params: {
@@ -36,7 +37,7 @@ const Technology = async ({params}:Props) => {
    const workProcess = (messages as any).Common.workProcess;
    const startProject = (messages as any).Common.startProject;
    const projectContact = (messages as any).Common.projectContact;
-   const projectStory = (messages as any).Common.projectStory;
+   const primaryFeatures = (messages as any).Common.primaryFeatures;
    const projectDescripyion = (messages as any).Common.projectDescripyion;
 
  
@@ -146,16 +147,19 @@ const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies
          <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-11/12 mx-auto ">
             <div className="flex flex-col items-center sm:mb-8 ">
-               {locale == 'en' ? <h2 className="sm:text-4xl  border-b-[0.3rem] pb-2 border-b-blue-400 text-gray-900 capitalize font-bold tracking-wide rtl:text-3xl  dark:text-orange-400">{ourClients}</h2>
-               :  <h2 className="sm:text-4xl text-gray-900  border-b-[0.3rem] pb-2 border-b-blue-400 capitalize font-bold tracking-wide rtl:text-3xl font-arabic dark:text-orange-400">{ourClients }</h2>
+               {locale == 'en' ? <h2 className="sm:text-4xl  pb-2  text-gray-900 capitalize font-bold tracking-wide rtl:text-3xl  dark:text-orange-400">{primaryFeatures} <span className="text-orange-500">{tech.name}</span></h2>
+               : <>
+                 <h2 className="sm:text-4xl text-gray-900  pb-2 capitalize font-bold tracking-wide rtl:text-2xl font-arabic dark:text-orange-400">{primaryFeatures } <span className="text-orange-500">{tech.nameAr}</span></h2>
+                 <p className="text-base text-gray-700 line-clamp-2 font-arabic leading-7">{tech.descriptionAr}</p>
+               </> 
             }
             </div>
             <div className=" sm:flex flex-col gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
-              <div className="w-full flex justify-center">
-                <div className="w-32 h-32 my-2 bg-white p-4 rounded-full border border-dashed border-orange-500">
+              {/* <div className="w-full flex justify-center">
+                <div className="w-32 h-32  bg-white p-4 rounded-full border border-dashed border-orange-500">
                     {tech.icon && tech.icon && <img className='h-full' src={tech.icon} alt={tech.name} />}
                 </div>
-              </div>
+              </div> */}
               
               <div className='grid grid-cols w-11/12 mx-auto sm:grid-cols-2 px-0 mt-1 py-4 gap-6'>
                 {tech && tech.Feature.length > 0 && tech.Feature && tech.Feature.map((feature)=>(
@@ -175,9 +179,12 @@ const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies
             }
             </div>
             <div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
-            {/* {service.products && service.products.map((product, index:number) => (
-               <ProductCard key={product.id} product={product} locale={locale} messages={messages} />
-            ))} */}
+                <div className='grid grid-cols w-11/12 mx-auto sm:grid-cols-3 px-0 mt-1 py-4 gap-6'>
+                {tech && tech.posts.length > 0 && tech.posts && tech.posts.map((post)=>(
+                  <FeatureStoryCard  post={post} locale={locale} messages={messages} />
+                ))
+              }
+                </div>
             </div>
            </div>
          </div>
