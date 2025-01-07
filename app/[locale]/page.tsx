@@ -21,6 +21,7 @@ import { PlanCatPackForFront } from './admin/plans/category/_utils/PlanCatPackFo
 import TechPanel from '../_components/technologies/TechPanel'
 import { CategoryWithTools } from './admin/category/util/CategoryWithTools'
 import IndustryCard from '../_components/industries/IndustryCard';
+import ServicePanel from '../_components/_services/ServicePanle';
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
@@ -146,7 +147,10 @@ export default async function Home() {
      <div className=' gray:bg-[#111]"'>
         {categoriesResult  && serviceCatMeta && <Services categories={categoriesResult} meta={serviceCatMeta}  />}
      </div>
+
+
      <div className='bg-gray-50 gray:bg-[#111]"'>
+      {/* <ServicePanel   services={servicesR}  locale={locale} messages={messages} /> */}
      {servicesR && serviceMeta && <ServicesFull services={servicesR} meta={serviceMeta} />}
      </div>
      <div className="w-full my-8 pb-8  bg-gray-100 dark:bg-[#111] ">

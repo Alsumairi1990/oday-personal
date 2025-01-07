@@ -14,6 +14,7 @@ import WorkCard2 from "@/app/_components/work/WorkCard2";
 import { ToolSingle } from "@/app/[locale]/admin/tools/utils/ToolSingle";
 import FeatureCard from "@/app/_components/features/FeatureCard";
 import FeatureStoryCard from "@/app/_components/features/FeatureStoryCard";
+import TechnologyServiceCard from "@/app/_components/technologies/TechnologyServiceCard";
 
 interface Props {
   params: {
@@ -104,9 +105,9 @@ const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies
                   }
             </div>
             {tech && tech.services && tech.services.length> 0 && serviceMeta && 
-              <div className="grid grid-cols-2 sm:grid-cols-5 sm:w-11/12 mx-auto sm:gap-y-8 gap-5 sm:gap-x-8 max-sm:p-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 sm:w-11/12 mx-auto sm:gap-y-8 gap-5  sm:gap-x-8 max-sm:p-3">
               { tech.services.map((service) => (
-              <IndustryService service={service.service} locale={locale} messages={messages} />
+              <TechnologyServiceCard service={service.service} locale={locale} messages={messages} />
             )) }
             </div>
             }
@@ -171,7 +172,7 @@ const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies
            </div>
          </div>
          {services &&
-          <div className="w-full my-16 py-8   dark:bg-[#111] ">
+          <div className="w-full my-16 py-8 dark:bg-[#111] ">
           <div className="w-full mx-auto ">
             <div className="flex flex-col items-center sm:mb-8">
                {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400 rtl:text-3xl rtl:font-arabic">{ourProducts}<span className="text-orange-600">{}</span>{feature2}</h2>

@@ -26,7 +26,7 @@ const CreateMarket = () => {
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const [iconSrc, setIconSrc] = useState<string | null>(null);
     const [elements, setElements] = useState<Location[]>([]);
-    const [selectedElement, setSelectedElement] = useState<string>('');
+    const [selectedElement, setSelectedElement] = useState<string>('');  
     const [selectedElement2, setSelectedElement2] = useState<string>('');
     const [selectedLocation, setSelectedLocation] = useState<string>('');
     const [selectedPages, setSelectedPages] = useState<string[]>([]);
