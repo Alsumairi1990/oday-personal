@@ -17,6 +17,7 @@ import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
 import { ServiceForFront } from "@/app/[locale]/admin/service/utils/ServiceForFront";
 import { PageSection } from "@prisma/client";
+import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
 
 interface Props {
   params: {
@@ -65,12 +66,19 @@ const Serivice = async ({params}:Props) => {
 
 
   return (
-     <div className="w-full">
+     <div className="w-full rtl:font-arabic">
        <div className="w-full mb-16">    
-               {service &&  <ServiceHero service={service} /> }
+               {/* {service &&  <ServiceHero service={service} /> } */}
+               {service &&  <GeneralHeroSect  title={service.name!}
+                                              titleAr={service.nameAr!} 
+                                              subTitle={service.description!} 
+                                              subTitleAr={service.descriptionAr!}  
+                                              locale={locale} messages={messages} 
+                                              page={service.name} pageAr={service.nameAr!}  
+                                              image={service.image!}/> }
          </div>
 
-        <div className="py-4 px-8 pt-0 w-full">
+        {/* <div className="py-4 px-8 pt-0 w-full">
            <div className="flex ">
             <div className="flex-35 p-2 pt-0 ">
                <div className="flex flex-wrap  justify-between">
@@ -118,7 +126,7 @@ const Serivice = async ({params}:Props) => {
             </div>
            
            </div>
-        </div>
+        </div> */}
 
 
         <div className="w-full my-16 ">
@@ -152,23 +160,7 @@ const Serivice = async ({params}:Props) => {
 
 
 
-        <div className="w-full mt-8 bg-[#f4f2ff]">
-         <div className="w-11/12 mx-auto">
-         <div className="p-2 grid grid-cols-2">
-            <div className="p-2">
-               <img className="w-full " src="https://www.controlf5.in/wp-content/uploads/2024/01/Herosectionrightimage.webp" alt="" />
-            </div>
-            <div className="p-4 pl-8">
-               <h2 className="text-3xl font-bold text-gray-900 mb-3">We Are ControlF5</h2>
-               <p className="text-xl font-bold text-gray-700 mb-6 ">Creating advanced and competitive digital solutions for both SMEs and Fortune companies.</p>
-              <p className="text-base text-gray-500 font-semibold leading-7">We are a professional website and mobile app company with considerable experience in a variety of high-tech verticals such as eCommerce, finance, banking, healthcare, hospitality, and food and beverage. At its core, we assist our clients in innovating and implementing technological transformations.</p>
-              <span className="inline-block text-white text-base font-semibold px-3 py-1.5 bg-violet-600 rounded mt-6">Get More </span>
-            </div>
-
-         </div>
-         </div>
         
-        </div>
 
 {/* 
         <div className="w-full my-16 py-8  bg-gray-100 ">
@@ -201,17 +193,23 @@ const Serivice = async ({params}:Props) => {
            </div>
          </div>
          {service &&
-          <div className="w-full my-16 py-8   dark:bg-[#111] ">
+          <div className="w-full sm:w-11/12 mx-auto my-16 py-8   dark:bg-[#111] ">
           <div className="w-full mx-auto ">
             <div className="flex flex-col items-center sm:mb-8">
                {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400 rtl:text-3xl rtl:font-arabic">{ourProducts}<span className="text-orange-600">{service.name}</span>{feature2}</h2>
                :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic rtl:text-3xl dark:text-orange-400">{ourProducts}<span className="text-orange-600">{service.nameAr}</span></h2>
             }
             </div>
-            <div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
-            {service.products && service.products.map((product, index:number) => (
-               <ProductCard key={product.id} product={product} locale={locale} messages={messages} />
-            ))}
+            <div className=" grid sm:grid-cols-4 gap-x-4 gap-y-6  max-sm:p-4 mt-2">
+            {service.products && service.products.slice(0, 8).map((product, index) => (
+               <ProductCard 
+                  key={product.id} 
+                  product={product} 
+                  locale={locale} 
+                  messages={messages} 
+               />
+               ))}
+
             </div>
            </div>
          </div>
@@ -258,7 +256,7 @@ const Serivice = async ({params}:Props) => {
                 :  <p className="text-2xl  text-center mt-3 mb-2 font-bold text-orange-600 font-arabic dark:text-gray-200">( {service.nameAr} )</p>
                 }
            </div>
-            <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
+            <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4 ">
             {service.works && service.works.map((work) => (
                <ServiceWork serviceWork={work} locale={locale} messages={messages} category={service.name} />
             ))}

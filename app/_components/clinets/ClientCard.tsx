@@ -16,8 +16,8 @@ const ClientCard = ({ client,locale,messages,category } : clientProps) => {
   const details = (messages as any).HomePage.details;
  
   return (
-    <div className=" max-h-16 flex items-center bg-white text-center p-2 py-3.5 rounded-md shadow-xl border border-gray-200">
-        {client.image  && <img src={client.image} className='w-full max-h-full' alt={client.name!} />}
+    <div className="  flex items-center bg-white justify-center text-center p-2 py-3.5 rounded-md shadow-xl border border-gray-200">
+        {client.image  && <img src={client.image} className='max-h-full ' alt={client.name!} />}
         {/* {locale == 'en' ? <div className="mt-1.5 ">
             <p className="text-gray-800 text-xl mb-1 font-semibold dark:text-orange-500 ">{client.name}</p>
             <p className="text-gray-500 text-sm tracking-8  leading-6 px-1.5 dark:text-gray-100 line-clamp-5 font-medium mb-4">{client.description}</p>

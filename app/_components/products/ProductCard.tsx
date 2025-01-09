@@ -16,7 +16,7 @@ const ProductCard = ({ product,locale,messages } : Props) => {
   const details = (messages as any).HomePage.details;
   const buy = (messages as any).Common.buy;
   return (
-    <div className="flex-100 sm:flex-20 py-2">
+
     <div className=" py-3 text-center rounded-md shadow-xl border border-gray-200">
      <div className="flex px-2  h-32 overflow-hidden justify-center">
         {product.image && <img src={product.image} className='h-full w-full' alt={product.name} />}
@@ -47,7 +47,7 @@ const ProductCard = ({ product,locale,messages } : Props) => {
           }
 
     </div>
-    </div>
+  
   );
 };
 
