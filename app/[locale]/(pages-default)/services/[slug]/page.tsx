@@ -18,6 +18,8 @@ import ProductCard from "@/app/_components/products/ProductCard";
 import { ServiceForFront } from "@/app/[locale]/admin/service/utils/ServiceForFront";
 import { PageSection } from "@prisma/client";
 import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
+import TechCard1 from "@/app/_components/technologies/TechCard1";
+import ServiceTechCard from "@/app/_components/_services/ServiceTechCard";
 
 interface Props {
   params: {
@@ -57,6 +59,7 @@ const Serivice = async ({params}:Props) => {
  const sectionMeta:PageSection[] = await sections.json();
  const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
  const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
+ const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');  
 
 
 
@@ -67,7 +70,7 @@ const Serivice = async ({params}:Props) => {
 
   return (
      <div className="w-full rtl:font-arabic">
-       <div className="w-full mb-16">    
+       <div className="w-full mb-4">    
                {/* {service &&  <ServiceHero service={service} /> } */}
                {service &&  <GeneralHeroSect  title={service.name!}
                                               titleAr={service.nameAr!} 
@@ -129,19 +132,44 @@ const Serivice = async ({params}:Props) => {
         </div> */}
 
 
-        <div className="w-full my-16 ">
-          <div className="w-11/12 mx-auto">
-            <div className="flex flex-col items-center sm:mb-8">
-               <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">How it works</h2>
-               <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">At Mobulous, we represent a well-established set of social, educational, and professional values which represent our highest ambitions for how we engage as Co-workers, Collaborators, Alumni, Associates, and Board members.</p>
+        {service &&
+          <div className="w-full sm:w-11/12 mx-auto my-10 py-8   dark:bg-[#111] ">
+          <div className="w-full mx-auto ">
+           <div className="p-1 w-full mb-3 flex mt-8 justify-center">
+            {locale === 'en' ? <div className='flex flex-col items-center'>
+                  <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold ">
+                  {techMeta?.title}
+                  </h2>
+                  <p className="text-base mt-2 text-gray-700 text-center">
+                  {techMeta?.desc}
+                  </p>
             </div>
-            <div className="flex flex-wrap gap-6 max-sm:p-4">
-            {/* {phases.map((phase, index:number) => (
-               <ProcessPhase key={phase.id} phase={phase} index={index} />
-            ))} */}
+            :
+            <div className='flex flex-col items-center'>
+                  <p className="text-xl font-semibold mb-3 text-orange-500">[ {service.nameAr} ]</p>
+                  <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold ">
+                  {techMeta?.titleAr}
+                  </h2>
+                  <p className="text-base mt-2 text-gray-700 leading-7 text-center">
+                  {techMeta?.descAr}
+                  </p>
+            </div>
+               }
+            </div>
+            <div className=" grid grid-cols-3 sm:grid-cols-6 gap-x-4 gap-y-6  max-sm:p-4 mt-2">
+            {service.tools && service.tools.slice(0, 8).map((tool, index) => (
+               <ServiceTechCard 
+                   
+                  tool={tool.tool} 
+                  locale={locale} 
+                  messages={messages} 
+               />
+               ))}
+
             </div>
            </div>
          </div>
+         }
 
 
          {/* <div className="w-full my-16 ">
@@ -233,7 +261,7 @@ const Serivice = async ({params}:Props) => {
 
 
 
-         {service && <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
+         {/* {service && <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-full mx-auto">
             <div className="flex flex-col items-center sm:mb-8">
                {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">industry of <span className="text-orange-600">{service.name}</span>{feature2}</h2>
@@ -246,7 +274,7 @@ const Serivice = async ({params}:Props) => {
             ))}
             </div>
            </div>
-         </div>}
+         </div>} */}
 
          {service && <div className="w-full my-16 py-8 ">
           <div className="w-11/12 mx-auto">
