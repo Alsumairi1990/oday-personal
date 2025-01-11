@@ -15,11 +15,15 @@ const ProductCard = ({ product,locale,messages } : Props) => {
   const request = (messages as any).HomePage.requestproduct;
   const details = (messages as any).HomePage.details;
   const buy = (messages as any).Common.buy;
+  const mainMarket = (messages as any).Common.mainMarket;
   return (
 
-    <div className=" py-2 text-center rounded-md shadow-xl border border-gray-200">
-     <div className="flex px-2 h-64 sm:h-[17rem] overflow-hidden justify-center">
+    <div className=" py-2 text-center rounded-md sm:shadow-xl border border-gray-200">
+     <div className="flex px-2 h-60 sm:h-[17rem] overflow-hidden justify-center">
         {product.image && <img src={product.image} className='h-full w-full rounded-t-md' alt={product.name} />}
+     </div>
+     <div className="p-2 text-left rtl:text-right w-full">
+      <span className="text-sm bg-orange-500 rounded-md text-white px-1 py-0.5 ">{mainMarket}</span>
      </div>
         {locale == 'en' ? <div className="mt-4 px-2 ">
             <p className="text-gray-800 text-xl mb-1 font-semibold dark:text-orange-500 ">{product.name}</p>

@@ -228,7 +228,7 @@ const Serivice = async ({params}:Props) => {
                :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic rtl:text-3xl dark:text-orange-400">{ourProducts}<span className="text-orange-600">{service.nameAr}</span></h2>
             }
             </div>
-            <div className=" grid sm:grid-cols-4 gap-x-4 gap-y-6  max-sm:p-4 mt-2">
+            <div className=" grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6  max-sm:p-4 mt-2">
             {service.products && service.products.slice(0, 8).map((product, index) => (
                <ProductCard 
                   key={product.id} 
