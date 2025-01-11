@@ -142,9 +142,8 @@ export default async function Home() {
       {heroData && <Hero heroData={heroData} services={servicesR} categories={categoriesResult} /> }
     </div>
 
-     {servicesR.length} {heroData.length}
      <div className="clear"></div>
-     <div className=' gray:bg-[#111]"'>
+     <div className='bg-gray-50 gray:bg-[#111]"'>
         {categoriesResult  && serviceCatMeta && <Services categories={categoriesResult} meta={serviceCatMeta}  />}
      </div>
 

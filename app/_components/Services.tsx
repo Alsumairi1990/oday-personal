@@ -27,30 +27,30 @@ const Services = async ({categories,meta}:Props) => {
           :<p className="text-base font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center leading-7 px-8">{meta.descAr}</p>
           }
        
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-2 gap-y-8 sm:gap-8 mt-8">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-8 sm:gap-8 mt-8">
 
          {categories && categories.map((service) => (
-               <div className=" sm:p-2 flex flex-col justify-center  sm:pt-6 border shadow-lg dark:shadow-0 dark:max-sm:bg-[#171717] rounded-xl border-gray-200 dark:border-gray-600 ">
-               <div className=" pb-1 pt-1 w-full h-28 sm:h-20  overflow-hidden sm:bg-gray-300 dark:bg-[#080808]  sm:w-[6.5rem]  rounded-xl  px-1  flex items-center mx-auto ">
+               <div className=" sm:p-2 flex flex-col justify-centersm :pt-6 border shadow-lg dark:shadow-0 border-gray-300 bg-white dark:bg-[#111] dark:max-sm:bg-[#171717] rounded-xl dark:border-gray-600 ">
+               <div className="pt-3 sm:pt-1  w-16 sm:w-24  overflow-hidden   dark:bg-[#080808] rounded-xl  px-1  flex items-center mx-auto ">
                 {service.image && 
                   //  <img className='w-full h-full mx-auto rounded-t-md sm:rounded-md' src={service.image} alt="" />
                    <Image 
                    src={service.image}
-                   height={200}
-                   width={200}
-                   alt="Product Image"
-                   className='w-full h-full mx-auto rounded-t-md sm:rounded-md'
+                   height={300}
+                   width={300}
+                   alt={service.name}
+                   className='w-full mx-auto rounded-t-md sm:rounded-md'
                    />
                     }
                </div>
-               <div className="sm:p2 mt-2 sm:mt-4 text-center">
+               <div className="sm:p2 mt-2 sm:mt-3 text-center">
                  {/* <h2 className="text-base sm:text-xl capitalize sm:uppercase font-semibold text-orange-500 dark:text-[#ca82ef]">{service.name}</h2> */}
     
                  {locale == 'en' ? <h2 className="text-base sm:text-xl capitalize sm:uppercase font-semibold text-orange-500 dark:text-[#ca82ef]">{service.name} </h2>
-                 :  <h2 className="text-lg font-arabic rtl:font-bold  sm:rtl:mb-3 rtl:mb-1.5 text-center px-3 mb-3 sm:mb-6 text-blue-700 dark:text-white font-normal">{service.nameAr}</h2>
+                 :  <h2 className="text-md font-arabic rtl:font-bold  sm:rtl:mb-3 rtl:mb-1.5 text-center px-3 mb-2 sm:mb-6 text-gray-800 dark:text-white font-semibold">{service.nameAr}</h2>
                   }
                    {locale == 'en' ? <p className="text-sm leading-[22px] text-gray-500 dark:text-gray-300 text-center sm:leading-6 line-clamp-4 mt-1.5 sm:mt-3 sm:px-3">{service.description}</p>
-                    :<p className="text-md font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center sm:leading-7 leading-6 line-clamp-3 sm:line-clamp-5 px-3">{service.descriptionAr}</p>
+                    :<p className="text-sm font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center sm:leading-6 leading-6 line-clamp-3 px-3">{service.descriptionAr}</p>
                     }
                  {/* <p className="text-sm leading-[22px] text-gray-500 dark:text-gray-300 text-center sm:leading-6 mt-1.5 sm:mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p> */}
                  <div className="p-1 flex flex-col sm:flex-row justify-around mt-6 mb-4">

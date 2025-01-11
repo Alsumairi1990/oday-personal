@@ -6,7 +6,7 @@ import prisma from '@/utils/prisma';
 export async function GET() {
   try {
     const categories = await prisma.category.findMany({
-      take: 10, // Retrieve the first 10 categories
+      take: 6, // Retrieve the first 10 categories
       distinct: ['id'], // Ensure no duplicates based on the category ID
       include: {
         services: true, // Include related services
