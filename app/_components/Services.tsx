@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Category, PageSection, Service } from '@prisma/client';
 import { getLocale, getMessages } from 'next-intl/server';
 import Image from 'next/image';
+import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
 interface Props {
   categories : Category[],
   meta : PageSection
@@ -31,7 +32,7 @@ const Services = async ({categories,meta}:Props) => {
 
          {categories && categories.map((service) => (
                <div className=" sm:p-2 flex flex-col justify-centersm :pt-6 border shadow-lg dark:shadow-0 border-gray-300 bg-white dark:bg-[#111] dark:max-sm:bg-[#171717] rounded-xl dark:border-gray-600 ">
-               <div className="pt-3 sm:pt-1  w-16 sm:w-24  overflow-hidden   dark:bg-[#080808] rounded-xl  px-1  flex items-center mx-auto ">
+               <div className="pt-3 sm:pt-1  w-20 sm:w-24  overflow-hidden   dark:bg-[#080808] rounded-xl  px-1  flex items-center mx-auto ">
                 {service.image && 
                   //  <img className='w-full h-full mx-auto rounded-t-md sm:rounded-md' src={service.image} alt="" />
                    <Image 
@@ -47,26 +48,20 @@ const Services = async ({categories,meta}:Props) => {
                  {/* <h2 className="text-base sm:text-xl capitalize sm:uppercase font-semibold text-orange-500 dark:text-[#ca82ef]">{service.name}</h2> */}
     
                  {locale == 'en' ? <h2 className="text-base sm:text-xl capitalize sm:uppercase font-semibold text-orange-500 dark:text-[#ca82ef]">{service.name} </h2>
-                 :  <h2 className="text-md font-arabic rtl:font-bold  sm:rtl:mb-3 rtl:mb-1.5 text-center px-3 mb-2 sm:mb-6 text-gray-800 dark:text-white font-semibold">{service.nameAr}</h2>
+                 :  <h2 className="text-md font-arabic rtl:font-bold  sm:rtl:mb-2 rtl:mb-1.5 text-center px-3 mb-2 sm:mb-6 text-gray-800 dark:text-white font-semibold">{service.nameAr}</h2>
                   }
-                   {locale == 'en' ? <p className="text-sm leading-[22px] text-gray-500 dark:text-gray-300 text-center sm:leading-6 line-clamp-4 mt-1.5 sm:mt-3 sm:px-3">{service.description}</p>
-                    :<p className="text-sm font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center sm:leading-6 leading-6 line-clamp-3 px-3">{service.descriptionAr}</p>
-                    }
+
+                  {locale == 'en' ? <p className="text-sm leading-[22px] text-gray-500 dark:text-gray-300 text-center sm:leading-6 line-clamp-4 mt-1.5 sm:mt-3 sm:px-3">{service.description}</p>
+                  :<p className="text-sm font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center sm:leading-6 leading-6 line-clamp-3 px-3">{service.descriptionAr}</p>
+                  }
                  {/* <p className="text-sm leading-[22px] text-gray-500 dark:text-gray-300 text-center sm:leading-6 mt-1.5 sm:mt-3 sm:px-3">Search including videos and more. Google has many special features to help you find exactly what you're looking </p> */}
-                 <div className="p-1 flex flex-col sm:flex-row justify-around mt-6 mb-4">
-                   <Link href={'/services/category/kj'} className='px-4 max-sm:hidden py-1.5 rtl:font-arabic border dark:border-[0.13rem] max-sm:mb-4 border-gray-300 dark:border-[#4a235e] rounded text-gray-700 dark:text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >{categoryEnq} 
-                  
-                   </Link>
-                   <Link href={`/services/categories/${service.slug}`} className='px-4 py-1.5 rtl:font-arabic flex items-center justify-center border-[0.13rem] bg-orange-500 border-orange-500 dark:bg-[#00ba35] dark:border-[#00ba35] rounded text-white dark:text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >{categoryDetails} 
-                   <span className="ml-2 rtl:mr-2">
-                   <svg height="15px" width="15px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
-                           viewBox="0 0 512 512" >
-                         <path fill="#FFFFFF" d="M256,504C119.248,504,8,392.752,8,256S119.248,8,256,8s248,111.248,248,248S392.752,504,256,504z"/>
-                        <path fill="#8AD5DD" d="M256,16c132.336,0,240,107.664,240,240S388.336,496,256,496S16,388.336,16,256S123.664,16,256,16
-                           M256,0C114.608,0,0,114.608,0,256c0,141.376,114.608,256,256,256s256-114.624,256-256C512,114.608,397.392,0,256,0L256,0z"/>
-                         <polygon fill="#2D2D2D" points="214.656,95.936 378.016,256 214.656,416.064 165.856,366.096 278.208,256 165.856,145.904 
-                           "/>
-                         </svg>
+                 <div className="p-1 flex flex-col sm:flex-row justify-around mt-4 mb-1">
+                   {/* <Link href={'/services/category/kj'} className='px-4 max-sm:hidden py-1.5 rtl:font-arabic border dark:border-[0.13rem] max-sm:mb-4 border-gray-300 dark:border-[#4a235e] rounded text-gray-700 dark:text-gray-100 text-sm' style={{borderRadius:'36px 67px'}} >{categoryEnq} 
+                   </Link>  */}
+                   <Link href={`/services/categories/${service.slug}`} className='px-2 sm:px-4 py-1 sm:py-1.5 rtl:font-arabic flex items-center justify-center border dark:border-[0.13rem] bg-gray-50 border-gray-100 dark:bg-[#00ba35] dark:border-[#00ba35] rounded text-gray-600 dark:text-black font-semibold text-sm' style={{borderRadius:'36px 67px'}} >{categoryDetails} 
+                   <span className="ml-2 rtl:mr-2 rtl:-rotate-90">
+                   <MdOutlineKeyboardArrowLeft className='text-lg text-gray-500' />
+
                        </span>
                    </Link>
                  </div>
