@@ -58,7 +58,7 @@ const BlogList = async ({ meta, posts }: Props) => {
                   <div className="p-1 sm:p-4">
                     {locale == "en" ? (
                       <>
-                        <h2 className="text-gray-100 sm:mb-2 text-md sm:text-base font-semibold">
+                        <h2 className="text-gray-100 sm:mb-2 text-md line-clamp-2 sm:text-base font-semibold">
                           {post.title}
                         </h2>
                         <p className="text-[13px] max-sm:hidden font-normal text-gray-200 line-clamp-4">
@@ -67,10 +67,10 @@ const BlogList = async ({ meta, posts }: Props) => {
                       </>
                     ) : (
                       <>
-                        <h2 className="text-gray-100 font-arabic sm:mb-2 text-md max-sm:leading-[26px] sm:text-base  font-semibold">
+                        <h2 className="text-gray-100 font-arabic sm:mb-2 text-md line-clamp-2 max-sm:leading-[26px] sm:text-base  font-semibold">
                           {post.titleAr}
                         </h2>
-                        <p className="text-[13px] max-sm:hidden font-arabic font-normal text-gray-200 leading-6 line-clamp-4">
+                        <p className="text-[13px] max-sm:hidden font-arabic font-normal text-gray-200 leading-6 line-clamp-3">
                           {post.contentAr}
                         </p>
                       </>

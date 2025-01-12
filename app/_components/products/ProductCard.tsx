@@ -19,11 +19,11 @@ const ProductCard = ({ product,locale,messages } : Props) => {
   return (
 
     <div className=" py-2 text-center rounded-md sm:shadow-xl border border-gray-200">
-     <div className="flex px-2 h-60 sm:h-[17rem] overflow-hidden justify-center">
+     <div className="flex px-2 h-44 sm:h-[17rem] overflow-hidden justify-center">
         {product.image && <img src={product.image} className='h-full w-full rounded-t-md' alt={product.name} />}
      </div>
      <div className="p-2 text-left rtl:text-right w-full">
-      <span className="text-sm bg-orange-500 rounded-md text-white px-1 py-0.5 ">{mainMarket}</span>
+      <span className="text-bxs mt-1 bg-orange-500 rounded-md text-white px-1 py-0.5 ">{mainMarket}</span>
      </div>
         {locale == 'en' ? <div className="mt-4 px-2 ">
             <p className="text-gray-800 text-xl mb-1 font-semibold dark:text-orange-500 ">{product.name}</p>
@@ -41,10 +41,10 @@ const ProductCard = ({ product,locale,messages } : Props) => {
             {/* <p className="text-gray-500 text-sm tracking-8  leading-7 px-1.5 dark:text-gray-100 line-clamp-3 font-medium mb-4">{product.descriptionAr}</p> */}
             <div className="flex px-3 gap-x-3 justify-center border-t border-t-gray-200 pt-3">
              <div className="py-0.5 px-2 text-center bg-orange-600 border border-orange-600 rounded-md">
-              <Link href="/product" className="text-sm rtl:font-arabic rtl:text-sm rtl:font-bold text-white">{buy}</Link>
+              <Link href="/product" className="text-bxs rtl:font-arabic rtl:text-sm rtl:font-bold text-white">{buy}</Link>
              </div>
              <div className="py-0.5 px-2 text-center border bg-gray-50 rounded-md">
-              <Link href="/product" className="text-sm rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
+              <Link href="/product" className="text-bxs rtl:font-arabic rtl:font-semibold rtl:text-sm"> {details}</Link>
              </div>
            </div>
         </div>
