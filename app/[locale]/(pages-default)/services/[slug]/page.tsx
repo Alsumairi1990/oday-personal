@@ -43,7 +43,7 @@ const Serivice = async ({params}:Props) => {
    const startProject = (messages as any).Common.startProject;
    const projectContact = (messages as any).Common.projectContact;
    const projectStory = (messages as any).Common.projectStory;
-   const projectDescripyion = (messages as any).Common.projectDescripyion;
+   const discussProject = (messages as any).Common.discussProject;
 
  
  
@@ -133,41 +133,44 @@ const Serivice = async ({params}:Props) => {
 
 
         {service &&
-          <div className="w-full sm:w-11/12 mx-auto my-10 py-8   dark:bg-[#111] ">
-          <div className="w-full mx-auto ">
-           <div className="p-1 w-full mb-3 flex mt-8 justify-center">
-            {locale === 'en' ? <div className='flex flex-col items-center'>
-                  <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold ">
-                  {techMeta?.title}
-                  </h2>
-                  <p className="text-base mt-2 text-gray-700 text-center">
-                  {techMeta?.desc}
-                  </p>
+          <div className="w-full  mx-auto my-10 py-6 sm:py-12 bg-[#202529]  dark:bg-[#111] ">
+            <div className="w-11/12 sm:flex sm:flex-wrap  mx-auto ">
+              <div className="p-1 sm:flex-40 w-full mb-3 flex mt-4 justify-center">
+               {locale === 'en' ? <div className='flex flex-col items-center'>
+                     <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold ">
+                     {techMeta?.title}
+                     </h2>
+                     <p className="text-base mt-2 text-gray-700 text-center">
+                     {techMeta?.desc}
+                     </p>
+               </div>
+               :
+               <div className='flex flex-col '>
+                     <div className="flex items-center mb-3 ">
+                        <span className="h-[3px] w-20 ml-2 bg-[#EE9143] inline-block"></span>
+                        <p className="text-md sm:text-lg font-semibold text-gray-100 ">{service.nameAr} </p>
+                     </div>
+                     <h2 className="text-gray-50 sm:leading-9  dark:text-gray-50 text-xl sm:text-2xl font-semibold ">
+                     {techMeta?.titleAr}
+                     </h2>
+                     <p className="text-sm mt-2 text-gray-100 leading-7 ">
+                     {techMeta?.descAr}
+                     </p>
+                     <p className="text-sm  w-fit border my-3 sm:mt-5 text-orange-400 border-[#EE9143] rounded-2xl sm:rounded-3xl sm:px-4 px-3 py-1.5 sm:py-3 text-center">{discussProject}</p>
+               </div>
+                  }
+               </div>
+               <div className=" grid sm:flex-60 grid-cols-3 sm:grid-cols-4 gap-x-4 gap-y-6 sm:gap-x-6 max-sm:p-4 mt-2 sm:rtl:pr-8">
+               {service.tools && service.tools.slice(0, 8).map((tool, index) => (
+                  <ServiceTechCard 
+                     
+                     tool={tool.tool} 
+                     locale={locale} 
+                     messages={messages} 
+                  />
+                  ))}
+               </div>
             </div>
-            :
-            <div className='flex flex-col items-center'>
-                  <p className="text-xl font-semibold mb-3 text-orange-500">[ {service.nameAr} ]</p>
-                  <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold ">
-                  {techMeta?.titleAr}
-                  </h2>
-                  <p className="text-base mt-2 text-gray-700 leading-7 text-center">
-                  {techMeta?.descAr}
-                  </p>
-            </div>
-               }
-            </div>
-            <div className=" grid grid-cols-3 sm:grid-cols-6 gap-x-4 gap-y-6  max-sm:p-4 mt-2">
-            {service.tools && service.tools.slice(0, 8).map((tool, index) => (
-               <ServiceTechCard 
-                   
-                  tool={tool.tool} 
-                  locale={locale} 
-                  messages={messages} 
-               />
-               ))}
-
-            </div>
-           </div>
          </div>
          }
 
@@ -213,7 +216,7 @@ const Serivice = async ({params}:Props) => {
                :  <h2 className="sm:text-4xl text-gray-900  border-b-[0.3rem] pb-2 border-b-blue-400 capitalize font-bold tracking-wide rtl:text-3xl font-arabic dark:text-orange-400">{ourClients }</h2>
             }
             </div>
-            <div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
+            <div className=" sm:flex grid grid-cols-2 sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
             {service && service.clients && service.clients.map((client, index:number) => (
                <ClientCard key={client.id} client={client} locale={locale} messages={messages} />
             ))}

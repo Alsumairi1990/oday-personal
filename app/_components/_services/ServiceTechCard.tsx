@@ -18,7 +18,7 @@ function ServiceTechCard({tool,locale,messages}:Props) {
 
   return (
     <>
-      <div className="p-1 py-2 flex justify-center flex-col items-center rounded-lg border border-gray-300 ">
+      <div className="p-1 py-2 bg-white flex justify-center flex-col items-center rounded-lg border border-gray-300 ">
         <div className="">
             <TechCard1 
             tool={tool}

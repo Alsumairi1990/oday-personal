@@ -19,7 +19,7 @@ const ProductCard = ({ product,locale,messages } : Props) => {
   return (
 
     <div className=" py-2 text-center rounded-md sm:shadow-xl border border-gray-200">
-     <div className="flex px-2 h-44 sm:h-[17rem] overflow-hidden justify-center">
+     <div className="flex px-2 h-40 sm:h-[17rem] overflow-hidden justify-center">
         {product.image && <img src={product.image} className='h-full w-full rounded-t-md' alt={product.name} />}
      </div>
      <div className="p-2 text-left rtl:text-right w-full">
