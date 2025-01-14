@@ -57,7 +57,9 @@ const Serivice = async ({params}:Props) => {
  const sectionMeta:PageSection[] = await sections.json();
  const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
  const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
- const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');  
+ const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');   
+ const serFeatures: PageSection | undefined = sectionMeta.find((section) => section.name === 'ServiceFeature');  
+
 
 
 
@@ -132,8 +134,18 @@ const Serivice = async ({params}:Props) => {
 <div className="w-full mb-16 py-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-11.4/12 sm:w-11/12 mx-auto">
             <div className="flex flex-col items-center sm:mb-8">
-               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{feature1}<span className="text-orange-600">{service.name}</span>{feature2}</h2>
-               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">{feature1}<span className="text-orange-600">{service.nameAr}</span></h2>
+               {locale == 'en' ?
+               <>
+                  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{feature1}<span className="text-orange-600">{service.name}</span>{feature2}</h2>
+                  <p className="text-base my-2 text-gray-700 gray:text-gray-50 line-clamp-2">{serFeatures?.desc}</p>
+               
+               </>
+               :
+               <>
+                  <h2 className="sm:text-3xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">{feature1}<span className="text-orange-600">{service.nameAr}</span></h2>
+                  <p className="text-base my-2 text-gray-700 text-md gray:text-gray-50 sm:leading-7 line-clamp-2">{serFeatures?.descAr}</p>
+
+               </>  
             }
             </div>
             <div className="grid sm:grid-cols-4 gap-6  mt-2">
