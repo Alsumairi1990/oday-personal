@@ -177,8 +177,8 @@ model Service {
   code          ServiceCode?      @relation(fields: [codeId], references: [id])
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
-
   Order Order[]
+  features      ServiceFeature[]
 }
 
 model Tool {
@@ -1281,6 +1281,7 @@ model ServiceFeature {
   moreAr    String?
   isActive  String?
   url       String?
+  services  Service[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String

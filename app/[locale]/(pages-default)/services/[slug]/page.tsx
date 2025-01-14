@@ -5,10 +5,6 @@ import ProcessPhase from "@/app/_components/_services/ProcessPhase";
 import { PhaseInt } from "@/app/models/PhaseInt";
 import ServiceOffer from "@/app/_components/_services/ServiceOffer";
 import { fservices } from '@/app/utils/ServicesData';
-import { clients } from '@/app/utils/Cleints';
-import ServiceFeature from "@/app/_components/_services/ServicesFeature1";
-import ServiceClient from "@/app/_components/_services/ServiceClient";
-import { serviceWorks } from '@/app/utils/ServiceWorks';
 import ServiceWork from "@/app/_components/_services/ServiceWork";
 import { getLocale, getMessages } from "next-intl/server";
 import { gethaseMeta, getServiceBySlug, getServiceCatMeta, getWorkMeta } from "@/app/[locale]/admin/common/_actions/FrontActions";
@@ -16,10 +12,12 @@ import IndustryCard from "@/app/_components/IndustryCard";
 import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
 import { ServiceForFront } from "@/app/[locale]/admin/service/utils/ServiceForFront";
-import { PageSection } from "@prisma/client";
+import { PageSection, ServiceFeature } from "@prisma/client";
 import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
 import TechCard1 from "@/app/_components/technologies/TechCard1";
 import ServiceTechCard from "@/app/_components/_services/ServiceTechCard";
+import { default as CustomServiceFeature } from "@/app/_components/_services/ServicesFeature1";
+
 
 interface Props {
   params: {
@@ -70,7 +68,7 @@ const Serivice = async ({params}:Props) => {
 
   return (
      <div className="w-full rtl:font-arabic">
-       <div className="w-full mb-4">    
+       <div className="w-full ">    
                {/* {service &&  <ServiceHero service={service} /> } */}
                {service &&  <GeneralHeroSect  title={service.name!}
                                               titleAr={service.nameAr!} 
@@ -130,6 +128,21 @@ const Serivice = async ({params}:Props) => {
            
            </div>
         </div> */}
+
+<div className="w-full mb-16 py-8  bg-gray-100 dark:bg-[#111] ">
+          <div className="w-11.4/12 sm:w-11/12 mx-auto">
+            <div className="flex flex-col items-center sm:mb-8">
+               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{feature1}<span className="text-orange-600">{service.name}</span>{feature2}</h2>
+               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">{feature1}<span className="text-orange-600">{service.nameAr}</span></h2>
+            }
+            </div>
+            <div className="grid sm:grid-cols-4 gap-6  mt-2">
+            {service.features && service.features.length > 0 && service.features.map((feature, index:number) => (
+               <CustomServiceFeature key={service.id} servicefeature={feature} locale={locale} messages={messages} />
+            ))}
+            </div>
+           </div>
+         </div>
 
 
         {service &&

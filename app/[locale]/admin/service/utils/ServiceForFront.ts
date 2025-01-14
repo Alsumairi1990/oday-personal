@@ -1,4 +1,4 @@
-import { Category, Service, ServiceCategory, WorkCategory, Work, Product, Client, ServiceTool, Tool, ServiceTag, Tag, Testimonial, Industry } from "@prisma/client";
+import { Category, Service, ServiceCategory, WorkCategory, Work, Product, Client, ServiceTool, Tool, ServiceTag, Tag, Testimonial, Industry, ServiceFeature } from "@prisma/client";
 import { PhaseWithModels } from "../../service/phases/utils/PhaseWithModels";
 
 export type ServiceForFront = Service & {
@@ -11,4 +11,5 @@ export type ServiceForFront = Service & {
   phases : PhaseWithModels[];
   testimonials : Testimonial[];
   industries : Industry[];
+  features : ServiceFeature[]
 };

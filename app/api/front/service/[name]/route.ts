@@ -61,6 +61,7 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
           },
           industries : true,
           testimonials : true,
+          features : true
         },
       });
     console.log('Setting services to cache');
