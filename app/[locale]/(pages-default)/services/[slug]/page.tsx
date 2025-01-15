@@ -46,7 +46,7 @@ const Serivice = async ({params}:Props) => {
  
  const serviceData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/${params.slug}`, {
    method: 'GET',
-   next: { revalidate: 1800 },
+   // next: { revalidate: 1800 },
  });
  const sections = await fetch(`${process.env.NEXTAUTH_URL}/api/front/meta/sections`, {
    method: 'GET',
