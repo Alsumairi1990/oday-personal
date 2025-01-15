@@ -99,7 +99,9 @@
        "month" : "شهر",
        "primaryFeatures" : "المميزات الرئيسية لـ",
        "mainMarket" : "المتجر الرئيسي",
-       "discussProject" : "!ناقش تفاصيل مشروعك "
+       "discussProject" : "!ناقش تفاصيل مشروعك ",
+       "startDate" : "يبدأ بتأريخ",
+       "endDate" : "ينتهي بتأريخ "
 
 
 

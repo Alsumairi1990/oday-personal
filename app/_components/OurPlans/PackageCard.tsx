@@ -41,7 +41,7 @@ const PackageCard = ({ packageData,locale,messages } : ServiceProps) => {
         {packageData.image && <img src={packageData.image} className='w-10/12 mx-auto border border-gray-300 h-full rounded-lg ' alt={packageData.name} />}
      </div>
         {locale == 'en' ? <div className="mt-1.5 ">
-            <p className="text-gray-800 text-xl mb-1 font-semibold dark:text-orange-500 ">{packageData.name}</p>
+            <p className="text-gray-800 text-xl mb-1 text-center font-semibold dark:text-orange-500 ">{packageData.name}</p>
             <p className="text-gray-700  text-sm tracking-8  leading-6 px-1.5 dark:text-gray-100 line-clamp-5 font-medium mb-4">{packageData.description}</p>
             <div className="">
                 <span className="text-gray-900 text-md font-semibold">Features : </span>
@@ -56,7 +56,7 @@ const PackageCard = ({ packageData,locale,messages } : ServiceProps) => {
         </div>
         : 
         <div className="mt-1.5 font-arabic ">
-            <p className="text-gray-800 text-lg font-bold dark:text-orange-500 mb-">{packageData.nameAr}</p>
+            <p className="text-gray-800 text-lg font-bold text-center dark:text-orange-500 mb-">{packageData.nameAr}</p>
             <p className="text-gray-700 text-sm tracking-8  leading-7 px-1.5 dark:text-gray-100 line-clamp-3 font-medium mb-4">{packageData.descriptionAr}</p>
             <div className="flex flex-col p-2">
               {packageData.features.length > 0 && 

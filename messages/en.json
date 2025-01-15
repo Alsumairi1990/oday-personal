@@ -99,7 +99,10 @@
       "month" : "month",
       "primaryFeatures" : "primary features of ",
       "mainMarket" : "main market",
-      "discussProject" : "Discuss your project! "
+      "discussProject" : "Discuss your project! ",
+      "startDate" : "Start Date ",
+      "endDate" : "end Date "
+
 
     }
    

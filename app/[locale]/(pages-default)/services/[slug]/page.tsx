@@ -17,6 +17,8 @@ import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
 import TechCard1 from "@/app/_components/technologies/TechCard1";
 import ServiceTechCard from "@/app/_components/_services/ServiceTechCard";
 import { default as CustomServiceFeature } from "@/app/_components/_services/ServicesFeature1";
+import PackageCard from "@/app/_components/OurPlans/PackageCard";
+import OfferCard from "@/app/_components/offer/OfferCard";
 
 
 interface Props {
@@ -270,7 +272,34 @@ const Serivice = async ({params}:Props) => {
            </div>
          </div>
          }
-
+         {service && <div className="w-full my-16 py-8  dark:bg-[#111] ">
+               <div className="w-11/12 mx-auto ">
+                  <div className="flex flex-col items-center sm:mb-8">
+                     <h2 className="sm:text-4xl rtl:text-3xl text-gray-900 capitalize font-bold rtl:font-arabic rtl:mb-4  tracking-wide dark:text-orange-400">{workProcess}</h2>
+                     <span className="w-14 h-1 bg-blue-500 mb-2"></span>
+                  </div>
+                  <div className=" sm:grid  sm:grid-cols-4 gap-x-10 gap-y-6 justify-center  max-sm:p-4 mt-2">
+                  {service.offers && service.offers.length>0 && service.offers.map((element) => (
+                     <OfferCard offer={element} locale={locale} messages={messages} />
+                     ))}
+                  </div>
+               </div>
+            </div>
+          }  
+         {service && <div className="w-full my-16 py-8  dark:bg-[#111] ">
+               <div className="w-11/12 mx-auto ">
+                  <div className="flex flex-col items-center sm:mb-8">
+                     <h2 className="sm:text-4xl rtl:text-3xl text-gray-900 capitalize font-bold rtl:font-arabic rtl:mb-4  tracking-wide dark:text-orange-400">{workProcess}</h2>
+                     <span className="w-14 h-1 bg-blue-500 mb-2"></span>
+                  </div>
+                  <div className=" sm:grid  sm:grid-cols-3 gap-x-10 gap-y-6 justify-center  max-sm:p-4 mt-2">
+                  {service.packages && service.packages.length>0 && service.packages.map((element) => (
+                     <PackageCard packageData={element} locale={locale} messages={messages} />
+                     ))}
+                  </div>
+               </div>
+            </div>
+          }    
 
          {service && <div className="w-full my-16 py-8  dark:bg-[#111] ">
           <div className="w-11/12 mx-auto ">

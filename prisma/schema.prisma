@@ -157,7 +157,8 @@ model Service {
   image         String?
   icon          String?
   location      String?
-  offres        Offer[]
+  offers        Offer[]
+  packages      Package[]
   markets       Location[]
   categories    ServiceCategory[]
   tags          ServiceTag[]
@@ -456,6 +457,7 @@ model Package {
   isPopular     Boolean  @default(false)
   categories    PlanCategory[]
   image         String?
+  services      Service[]
   icon          String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
