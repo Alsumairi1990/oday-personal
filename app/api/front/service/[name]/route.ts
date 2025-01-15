@@ -35,17 +35,18 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
             include: {
               tool: true, // Include related Service details
             },
+            take : 8
           },
-          tags: {
-            include: {
-              tag: true, // Include related Service details
-            },
-          },
-          categories: {
-            include: {
-              category: true, // Include related Service details
-            },
-          },
+          // tags: {
+          //   include: {
+          //     tag: true, // Include related Service details
+          //   },
+          // },
+          // categories: {
+          //   include: {
+          //     category: true, // Include related Service details
+          //   },
+          // },
           works: true,
           phases : {
             include : {
@@ -59,10 +60,10 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
               image : true
             }
           },
-          industries : true,
-          testimonials : true,
+          // industries : true,
+          // testimonials : true,
           features : true,
-          plans  : true,
+          // plans  : true,
           offers : true,
           packages: {
             include: {
