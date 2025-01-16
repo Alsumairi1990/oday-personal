@@ -20,7 +20,7 @@ import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
 import IndustryCard from "@/app/_components/IndustryCard";
 import { CategoryForFront } from "@/app/[locale]/admin/category/util/CategoryForFront";
-import { Industry, Service, ServiceFeature } from "@prisma/client";
+import { Category, Industry, Service, ServiceFeature } from "@prisma/client";
 import ServicesFeature from "@/app/_components/_services/ServicesFeature1";
 
 
@@ -54,6 +54,11 @@ const ServiceCategory = async ({params}:Props) => {
    method: 'GET',
    next: { revalidate: 3600 }, 
  });
+ const categoriesData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/categories/names`, {
+   method: 'GET',
+   next: { revalidate: 3600 }, // Revalidate for ISR if needed
+ });
+
  const pageIdustries = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industries/home`, {
    method: 'GET',
    next: { revalidate: 3600 }, // Revalidate for ISR if needed
@@ -71,6 +76,7 @@ const ServiceCategory = async ({params}:Props) => {
  const industries:Industry[] = await pageIdustries.json();
  const features:ServiceFeature[] = await ServiceFeatures.json();
  const services:Service[] = await servicesData.json();
+ const categories:Category[] = await categoriesData.json();
 
 
 
@@ -81,7 +87,7 @@ const ServiceCategory = async ({params}:Props) => {
    
 
   return (
-     <div className="w-full">
+     <div className="w-full rtl:font-arabic">
         <CategoryHero category={category} locale={locale} messages={messages} />
         
          <div className="w-full my-16 ">
@@ -101,13 +107,8 @@ const ServiceCategory = async ({params}:Props) => {
                      </p>
                </div>
             }
-            {/* <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4">
-            {services.map((service, index:number) => (
-               <ServiceOffer key={service.id} serviceOffer={service}  />
-            ))}
-
-            </div> */}
-            <CategoryDisplay services={services} locale={locale} messages={messages} category={category} />
+        
+            <CategoryDisplay services={services} categories={categories} locale={locale} messages={messages} category={category} />
            </div>
          </div>
 
