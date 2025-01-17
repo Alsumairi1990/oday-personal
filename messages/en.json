@@ -108,7 +108,11 @@
       "findProducts" : "Find the the best products",
       "exploreSame" : "Explore Sam",
       "packages" : "packages",
-      "products"  : "products"
+      "products"  : "products",
+      "sam" : "sam",
+       "creative" : "creative",
+       "techs" : "technologies",
+       "explore" : "explore"
       
 
 

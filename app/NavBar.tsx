@@ -35,6 +35,7 @@ import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
 import { MenuWithAllModels } from './[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 import SigninButton from './_components/SigninButton';
 import { AbstractIntlMessages } from 'next-intl';
+import { TbGridDots } from 'react-icons/tb';
 
 
 interface Props{
@@ -45,6 +46,9 @@ interface Props{
 
 const NavBar = ({menusData,locale,messages}:Props) => {
   const imagePath = '/images/logo-01.svg';
+  const logo ='/images/logoSamDark.png';
+  const logoAr = '/images/logoAr.png';
+  const logoDarkAr = '/images/logoDarkAr.png';
   const imagePath2 = '/images/logo-03.jpeg';
   const logoRef1 = useRef<HTMLImageElement | null>(null); 
   const logoRef2 = useRef<HTMLImageElement | null>(null); 
@@ -57,6 +61,12 @@ const NavBar = ({menusData,locale,messages}:Props) => {
   const products = (messages as any).Common.products;  
   const discussProject = (messages as any).Common.discussProject;  
   const plans = (messages as any).Common.plans;  
+  const sam = (messages as any).Common.sam;  
+  const creative = (messages as any).Common.creative;  
+  const techs = (messages as any).Common.techs;  
+  const explore = (messages as any).Common.explore;  
+
+
 
 
   
@@ -82,10 +92,10 @@ const NavBar = ({menusData,locale,messages}:Props) => {
         } else {
           themeSwitcher?.classList.remove('nav-top-l');
           if (logoRef1.current) {
-            logoRef1.current.src = imagePath;
+            logoRef1.current.src = logo;
           }
           if (logoRef2.current) {
-            logoRef2.current.src = imagePath; 
+            logoRef2.current.src = logo; 
           }
         }
       },
@@ -167,10 +177,13 @@ const NavBar = ({menusData,locale,messages}:Props) => {
             </div>
         <div className=" flex-60 flex justify-center">
             <Link href="/" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2  font-bold`} > 
-            <span className='w-32 sm:w-[2.7rem] mr-1.5 inline-block'>
-              <img className='w-full max-w-full light-logo' src={imagePath} ref={logoRef1}  alt="" />
+            <span className='w-12 sm:w-[2.7rem] mr-1.5 inline-block'>
+            {locale === 'en' ? <img className='w-full max-w-full p-0 light-logo' src={imagePath} ref={logoRef2}  alt="" />
+             :<img className='w-full max-w-full  light-logo' src={logo} ref={logoRef2}  alt="" />
+               }
+              {/* <img className='w-full max-w-full light-logo' src={imagePath} ref={logoRef1}  alt="" /> */}
             </span>
-              </Link>
+              </Link>  
         </div>
         <div className="px-2 flex-10">
               <div className=" pr-0.5 cursor-pointer">
@@ -189,9 +202,47 @@ const NavBar = ({menusData,locale,messages}:Props) => {
        
         <div className="p-2 max-sm:hidden text-[#333]">
             <Link href="/" aria-label="Go to home page" className={` text-2xl sm:text-xl flex items-center pl-1 sm:pl-4 pr-2  font-bold`} > 
-            <div className='sm:w-36 mr-1.5 inline-block'>
-              <img className='w-full max-w-full light-logo' src={imagePath} ref={logoRef2}  alt="" />
+            <div className='mr-1.5 inline-block'>
+             {locale === 'en' ? 
+              <div className='flex items-center' >
+                <div className="sm:w-12">
+                  <img className='w-full max-w-full p-0 light-logo' src={logo} ref={logoRef2}  alt="" />
+                </div>
+                <div className="flex uppercase text-bxs pt-3.5 leading-4  flex-col">
+                  <span className=" text-gray-300">
+                    Creative 
+                  </span>
+                  <span className=" text-gray-300">
+                    Technolgies 
+                  </span>
+                </div>
+              </div>
+             : 
+             <>
+             <div className='flex items-center ' >
+             <div className="sm:w-12">
+               <img className='w-full max-w-full p-0 light-logo' src={logo} ref={logoRef2}  alt="" />
+             </div>
+             <div className="flex uppercase text-[#c8c8c8] leading-4 pt-[12px] font-bold text-[12px] rtl:ml-4 flex-col">
+               <span className="pb-1">
+                 {sam} 
+               </span>
+               <span className=" ">
+               {techs}  {creative} 
+               </span>
+             </div>
+             <div className="flex max-sm:hidden items-center">
+              <span className="inline-block h-5 rtl:ml-1 w-0.5 pt-4 bg-gray-500"></span>
+              <TbGridDots className='text-gray-300 hover:text-orange-400' />
+              <span className="text-bxs text-gray-200 rtl:mr-1">{explore}</span>
+             </div>
+            
+              </div>
+           
+            </>
+               }
             </div>
+            
               </Link>
         </div>
        
