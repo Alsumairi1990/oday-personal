@@ -101,7 +101,16 @@
       "mainMarket" : "main market",
       "discussProject" : "Discuss your project! ",
       "startDate" : "Start Date ",
-      "endDate" : "end Date "
+      "endDate" : "end Date ",
+      "welcome" : "Hello, Welcome To Sam Creative",
+      "welcomeDesc" : "Search Services,Works,products & more",
+      "findServices" : "Find the the best Services",
+      "findProducts" : "Find the the best products",
+      "exploreSame" : "Explore Sam",
+      "packages" : "packages",
+      "products"  : "products"
+      
+
 
 
     }

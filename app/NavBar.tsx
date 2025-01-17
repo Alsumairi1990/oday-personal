@@ -25,36 +25,10 @@
 
 // export default NavBar
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 'use client'
 import Link from 'next/link'
 import React, { useRef } from 'react'
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import ThemeToggle from './_components/theme-toggle'
 import LocaleSwitcher from './_components/LangToggle'
 import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
@@ -67,20 +41,29 @@ interface Props{
   menusData: Record<number, MenuWithAllModels[]>,
   locale : string,
   messages : AbstractIntlMessages,
-
 }
-
 
 const NavBar = ({menusData,locale,messages}:Props) => {
   const imagePath = '/images/logo-01.svg';
   const imagePath2 = '/images/logo-03.jpeg';
-  // const logoImage = document.querySelector('.light-logo') as HTMLImageElement; 
   const logoRef1 = useRef<HTMLImageElement | null>(null); 
   const logoRef2 = useRef<HTMLImageElement | null>(null); 
+  const welcome = (messages as any).Common.welcome;
+  const welcomeDesc = (messages as any).Common.welcomeDesc;  
+  const findServices = (messages as any).Common.findServices;  
+  const findProducts = (messages as any).Common.findProducts;  
+  const exploreSame = (messages as any).Common.exploreSame;  
+  const packages = (messages as any).Common.packages;  
+  const products = (messages as any).Common.products;  
+  const discussProject = (messages as any).Common.discussProject;  
+  const plans = (messages as any).Common.plans;  
+
+
+  
+  
 
   useEffect(() => {
-        if (typeof window === 'undefined') return;
-
+    if (typeof window === 'undefined') return;
     const themeSwitcher = document.querySelector('.top-nav');
     const htmlElement = document.documentElement;
     const isDarkTheme = () => htmlElement.classList.contains('dark');
@@ -120,7 +103,7 @@ const NavBar = ({menusData,locale,messages}:Props) => {
       
       const menus = document.getElementsByClassName('log-menu');
       if (event.target.closest('.menu-btn ') !== null) {
-        
+
         const prnt = event.target.closest('.menu-pr');
         const menu = prnt?.querySelector('.log-menu');
         if (menu && menu.classList.contains('hidden')) {
@@ -132,8 +115,10 @@ const NavBar = ({menusData,locale,messages}:Props) => {
           menu.classList.add('hidden');
         }
       } else if (event.target.closest('.login-menu ') !== null) {
-        return;
-      } else if (event.target.closest('.main-menu-btn') !== null) {
+        return;}
+        
+      else if (event.target.closest('.main-menu-btn') !== null) {
+
         const mainPrnt = event.target.closest('.main-nav');
         const menu = mainPrnt?.querySelector('.main-drop-menu');
         if (menu?.classList.contains('hidden')) {
@@ -143,9 +128,8 @@ const NavBar = ({menusData,locale,messages}:Props) => {
           document.body.style.overflow = ''; // Enable scroll
           menu.classList.add('hidden');
         }
-      } else if (event.target.closest('.log-menu ') !== null) {
-        return;
-      } else {
+      } 
+       else {
         for (let i = 0; i < menus.length; i++) {
           const menu = menus[i];
           menu.classList.add('hidden');
@@ -241,10 +225,10 @@ const NavBar = ({menusData,locale,messages}:Props) => {
                 </div>
                 <div className="flex-85 pl-3">
                     <div className="">
-                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-100">Hello, Welcome To Collegedunia</span>
+                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-100">{welcome}</span>
                     </div>
                     <div className="pt-1 px-2">
-                    <span className="text-[13px] text-gray-600 dark:text-gray-100">Search Colleges, Exams, Courses & More</span>
+                    <span className="text-[13px] text-gray-600 dark:text-gray-100">{welcomeDesc}</span>
                     </div>
                 </div>
             </div>
@@ -252,7 +236,7 @@ const NavBar = ({menusData,locale,messages}:Props) => {
 
             <div className="px-4 py-3">
               <div className="flex items-center  rounded py-2 px-2 bg-white border border-[#f7b065] dark:border-violet-600">
-                <span className="pl-1 text-sm text-gray-500  capitalize">Get Collage Rank</span>
+                <span className="pl-1 text-sm text-gray-500  capitalize">{discussProject}</span>
                 <span className="ml-auto">
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.295 15.833h1.03l7.717-7.716-1.03-1.03-7.717 7.716v1.03Zm11.42-8.62-2.813-2.787 1.095-1.094c.24-.24.534-.36.884-.36s.646.12.885.36l1.03 1.03c.24.24.364.53.372.872.009.342-.107.633-.346.872l-1.107 1.107Zm-11.917 9.87a.73.73 0 0 1-.538-.215.73.73 0 0 1-.215-.538v-1.745c0-.1.018-.196.054-.287a.755.755 0 0 1 .172-.253l8.727-8.728 2.813 2.813-8.728 8.727a.754.754 0 0 1-.253.172.766.766 0 0 1-.287.054H3.798Z" fill="#1C1B1F"></path>
@@ -305,8 +289,7 @@ const NavBar = ({menusData,locale,messages}:Props) => {
 
               <div className="menu-pr ">
                   <div className=" rounded-md  text-white" >
-              
-                  <div  className="avatar menu-btn flex items-center  border border-gray-600 dark:border-[#71247c] bg-[#00000059] dark:hover:!bg-fuchsia-500 px-1.5 py-1.5 rounded-3xl cursor-pointer relative" >
+                       <div  className="avatar menu-btn flex items-center  border border-gray-600 dark:border-[#71247c] bg-[#00000059] dark:hover:!bg-fuchsia-500 px-1.5 py-1.5 rounded-3xl cursor-pointer relative" >
                           <span className="icon mr-2 icon-profile">
                               <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 17.625a.728.728 0 0 1-.75-.75c0-.2.071-.375.213-.525A.706.706 0 0 1 4 16.125h16a.71.71 0 0 1 .538.225c.141.15.212.325.212.525 0 .217-.07.396-.212.538a.731.731 0 0 1-.538.212H4Zm0-4.875a.726.726 0 0 1-.75-.75.728.728 0 0 1 .75-.75h16c.217 0 .396.07.538.212a.731.731 0 0 1 .212.538.728.728 0 0 1-.75.75H4Zm0-4.875a.706.706 0 0 1-.537-.225.74.74 0 0 1-.213-.525.726.726 0 0 1 .75-.75h16a.728.728 0 0 1 .75.75c0 .2-.07.375-.212.525a.71.71 0 0 1-.538.225H4Z" ></path>
@@ -320,11 +303,13 @@ const NavBar = ({menusData,locale,messages}:Props) => {
                           </span>
                         </div>
                   </div>
-                  <div id="log-menu" className=" log-menu hidden w-full fixed h-full top-0 z-[18] bg-black left-0 menu-overlay " style={{background:'#00000052'}}>
-              <div className="absolute login-menu top-[4.78rem] z-10 right-6 bg-white border border-gray-600 dark:border-gray-800 dark:bg-black-100  w-80  pb-4 flex flex-col  rounded-xl" style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}>
-                  <span className="absolute inline-block w-4 h-4 bg-[#ffebce] dark:bg-violet-600 top-[-.5rem] sm:right-8 sm:mr-4 sm:rotate-45"></span>
 
-                  <div className="pb-2  rounded-tl-xl  h-[31rem]">
+
+            <div id="log-menu" className=" log-menu parent-log-menu hidden w-full fixed h-full top-0 z-[18] bg-black left-0 menu-overlay " style={{background:'#00000052'}}>
+              <div className="absolute login-menu top-[4.78rem] z-10 ltr:right-6 rtl:left-6 bg-white border border-gray-600 dark:border-gray-800 dark:bg-black-100  w-80  pb-4 flex flex-col  rounded-xl" style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}>
+                  <span className="absolute inline-block w-4 h-4 bg-[#ffebce] dark:bg-violet-600 top-[-.5rem] ltr:sm:right-8 rtl:sm:left-8 sm:mr-4 sm:rotate-45"></span>
+
+                  <div className="pb-2 rounded-tl-xl  h-[31rem] overflow-y-auto">
                       <div className="flex flex-col">
                         <div className="flex flex-col  pt-4 rounded-t-xl bg-[#ffebce] dark:bg-violet-600">
                               <div className=" px-4 flex">
@@ -353,19 +338,19 @@ const NavBar = ({menusData,locale,messages}:Props) => {
                                           </svg>
                                     </span>
                                 </div>
-                                <div className="flex-85 pl-3">
+                                <div className="flex-85 ltr:pl-3 rtl:pr-3">
                                     <div className="">
-                                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-100">Hello, Welcome To Collegedunia</span>
+                                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-100">{welcome}</span>
                                     </div>
                                     <div className="pt-1 px-2">
-                                    <span className="text-[13px] text-gray-600 dark:text-gray-100">Search Colleges, Exams, Courses & More</span>
+                                    <span className="text-[13px] text-gray-600 dark:text-gray-100">{welcomeDesc}</span>
                                     </div>
                                 </div>
                               </div>
                               <div className="px-4 py-3">
                                 <div className="flex items-center  rounded py-2 px-2 bg-white border border-[#f7b065] dark:border-violet-600">
-                                  <span className="pl-1 text-sm text-gray-500  capitalize">Get Collage Rank</span>
-                                  <span className="ml-auto">
+                                  <span className="ltr:pl-1 rtl:pr-1.5 text-sm text-gray-500  capitalize">{discussProject}</span>
+                                  <span className="ltr:ml-auto rtl:mr-auto">
                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <path d="M4.295 15.833h1.03l7.717-7.716-1.03-1.03-7.717 7.716v1.03Zm11.42-8.62-2.813-2.787 1.095-1.094c.24-.24.534-.36.884-.36s.646.12.885.36l1.03 1.03c.24.24.364.53.372.872.009.342-.107.633-.346.872l-1.107 1.107Zm-11.917 9.87a.73.73 0 0 1-.538-.215.73.73 0 0 1-.215-.538v-1.745c0-.1.018-.196.054-.287a.755.755 0 0 1 .172-.253l8.727-8.728 2.813 2.813-8.728 8.727a.754.754 0 0 1-.253.172.766.766 0 0 1-.287.054H3.798Z" fill="#1C1B1F"></path>
                                     </svg>
@@ -383,9 +368,9 @@ const NavBar = ({menusData,locale,messages}:Props) => {
 
                           <div className="px-4 py-2">
                             <div className="flex items-center justify-center rounded py-3 bg-[#e7f8ff] dark:border dark:border-gray-800 mt-1 dark:bg-black-150 px-2 ">
-                              <span className="pl-1 text-base text-gray-700 dark:text-gray-100 font-semibold  capitalize">Find the the best Colleges  </span>
+                              <span className="pl-1 text-md text-gray-700 dark:text-gray-100 font-semibold  capitalize">{findServices} </span>
                               <div className="ml-auto w-20">
-                                <img src="" alt="" />
+                                <img src="https://oday-personal.vercel.app/service/icons/flyer.png" alt="" />
                               </div>
                             </div>
                           </div>
@@ -394,11 +379,11 @@ const NavBar = ({menusData,locale,messages}:Props) => {
                             <div className="flex flex-col" >
                                 <div className="flex  items-center justify-center dark:border dark:border-gray-800 rounded py-2 pl-2 bg-[#ffebce] dark:bg-black-150 pr-0.5">
                                   <div className="flex-col flex-75">
-                                  <span className="pl-1 text-base text-gray-700 dark:text-gray-100 font-semibold  capitalize">Eduycation Ranking  </span>
+                                  <span className="pl-1 text-base text-gray-700 dark:text-gray-100 font-semibold  capitalize">{exploreSame}  </span>
                                   <div className="flex flex-wrap gap-2 mt-2">
-                                    <span className="text-sm bg-white px-2 py-1 border border-[#f7b065] dark:border-gray-100 rounded text-gray-600">HTE </span>
-                                    <span className="text-sm bg-white px-2 py-1 border border-[#f7b065] dark:border-gray-100 rounded text-gray-600">QS </span>
-                                    <span className="text-sm bg-white px-2 py-1 border border-[#f7b065] dark:border-gray-100 rounded text-gray-600">US News  </span>
+                                    <span className="text-sm bg-white px-2 py-1 border border-[#f7b065] dark:border-gray-100 rounded text-gray-600">{packages} </span>
+                                    <span className="text-sm bg-white px-2 py-1 border border-[#f7b065] dark:border-gray-100 rounded text-gray-600">{products} </span>
+                                    <span className="text-sm bg-white px-2 py-1 border border-[#f7b065] dark:border-gray-100 rounded text-gray-600">{plans}</span>
                                   </div>
                                   </div>
                                   <div className="ml-auto flex-25">
@@ -428,9 +413,9 @@ const NavBar = ({menusData,locale,messages}:Props) => {
 
                           <div className="px-4 py-2">
                             <div className="flex items-center justify-center rounded py-3 bg-[#e7f8ff] dark:bg-black-150 dark:border dark:border-gray-800 px-2 ">
-                              <span className="pl-1 text-base text-gray-700 font-semibold dark:text-gray-100 capitalize">Find the the best Colleges  </span>
-                              <div className="ml-auto w-20">
-                                <img src="" alt="" />
+                              <span className=" flex-60 text-md text-gray-700 line-clamp-8 font-semibold dark:text-gray-100 capitalize">{findProducts} </span>
+                              <div className="flex justify-end ltr:pl-2 rtl:pl-2 flex-40">
+                                <img className='w-20' src="https://oday-personal.vercel.app/service/icons/web-custom.png" alt="" />
                               </div>
                             </div>
                           </div>

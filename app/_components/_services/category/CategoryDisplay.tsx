@@ -109,7 +109,7 @@ const CategoryDisplay = ({services,categories,locale,messages,category}:Props) =
              </div>
              <div className=" max-sm:flex-wrap max-sm:w-full max-sm:border-t max-sm:pt-2 border-gray-300 relative space-x-3 items-center mt-3 gap-x-3 flex px-2">
                    
-                    <button className='text-sm min-w-14 flex items-center bg-gray-50 text-gray-500 border border-gray-200 rounded-md px-2 py-1' type='button' onClick={() => setCategoryMenu(prevState => !prevState)}>{selectedCategory}
+                  <button className='text-sm min-w-14 flex items-center bg-gray-50 text-gray-500 border border-gray-200 rounded-md px-2 py-1' type='button' onClick={() => setCategoryMenu(prevState => !prevState)}>{selectedCategory}
                     <MdOutlineKeyboardArrowDown className="m-1 text-gray-500 text-base"   />
                     </button>
                     {categoryMenu && locale ==='en' && <div className="p-1 absolute top-9 right-0 w-full">

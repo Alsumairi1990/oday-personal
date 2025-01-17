@@ -26,7 +26,6 @@ useEffect(() => {
       const prnt = event.target.closest('.parent-menu-pr');
       const menu = prnt.querySelector('.parent-log-menu');
       const downMenu = prnt.querySelector('.down-nav');
-
       if(menu && menu.classList.contains('hidden') && downMenu && downMenu.classList.contains('hidden') ){
         for (let i = 0; i < menus.length; i++) {
           menus[i].classList.add('hidden');
@@ -38,19 +37,11 @@ useEffect(() => {
         downMenu.classList.remove('hidden');
 
       }
-    //  else if(downMenu && downMenu.classList.contains('hidden')){
-    //     for (let i = 0; i < downMenus.length; i++) {
-    //       downMenus[i].classList.add('hidden');
-    //     }
-    //     downMenu.classList.remove('hidden');
-    //   }
       else if(menu && !menu.classList.contains('hidden') && downMenu && !downMenu.classList.contains('hidden')){
         menu.classList.add('hidden');
         downMenu.classList.add('hidden');
       }
-      // else if(downMenu && !downMenu.classList.contains('hidden')){
-      //   downMenu.classList.add('hidden');
-      // }
+      
   }
   else if (event.target.closest('.parent-log-menu ') !== null) return;
   else {
@@ -94,13 +85,7 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
                 <div className="parent-log-menu hidden border-b border-b-gray-300">
                 <ServicesPanel menusData={menus} />
                 </div>
-                     {/* <div className='pl-3 w-full parent-log-menu hidden grid grid-cols-4 bg-white absolute top-20 left-0 z-50'>
-                         <div className="sm:w-11/12 sm:px-4  sm:mx-auto ">
-                        {menus.map(menu => (
-                             <NavPanel menu={menu} locale={locale} messages={messages}  />
-                        ))}
-                         </div>
-                        </div> */}
+                   
                     </div>
                     );
                 })}
