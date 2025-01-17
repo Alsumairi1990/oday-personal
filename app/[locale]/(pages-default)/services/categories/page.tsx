@@ -1,13 +1,11 @@
 
-import { getHeroData, getServiceCategories } from "@/app/[locale]/admin/common/_actions/FrontActions";
 import { getLocale, getMessages } from "next-intl/server";
 
 import CategoryPanel from "@/app/_components/_services/category/CategoryPanel";
-import Hero from "@/app/_components/HeroSect";
-import { getServices } from "@/app/[locale]/_actions/Actions";
 import SidQuery from "@/app/_components/SidQuery";
-import { Category, Service } from "@prisma/client";
+import {  Service } from "@prisma/client";
 import { CategoryFrontSingle } from "@/app/[locale]/admin/category/util/CategoryFrontSingle";
+import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
 
 
 interface Props {
@@ -17,23 +15,10 @@ interface Props {
 }
 
 const Categories = async ({params}:Props) => {
-   const imagePath = '/images/777.png';
-   const imagePath1 = '/images/curve.png';
-   const imagePath2 = '/images/service2.png';
+  
    const locale = await getLocale();
   const messages = await getMessages({ locale });
-  const feature1 = (messages as any).Common.featureTitle1;
-  const feature2 = (messages as any).Common.featureTitle1;
-  const serviceSecTitle = (messages as any).Common.serviceSecTitle;
-  const categoryWorkTitle = (messages as any).Common.categoryWorkTitle;
-  const ourProducts = (messages as any).Common.ourProducts;
-  const latestWork = (messages as any).HomePage.latestWork;
-  const ourClients = (messages as any).Common.ourClients;
-  const workProcess = (messages as any).Common.workProcess;
-  const startProject = (messages as any).Common.startProject;
-  const projectContact = (messages as any).Common.projectContact;
-  const projectStory = (messages as any).Common.projectStory;
-  const projectDescripyion = (messages as any).Common.projectDescripyion;
+  
 
   
   const categoryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/categories`, {
@@ -62,7 +47,17 @@ const Categories = async ({params}:Props) => {
   return (
    <>
    <div className="w-full">
-      {heroData && categories && services  && <Hero heroData={heroData} services={services} categories={categories} /> }
+      {/* {heroData && categories && services  && <Hero heroData={heroData} services={services} categories={categories} /> } */}
+
+      <div className="w-full ">    
+               {heroData &&  <GeneralHeroSect  title={heroData.name!}
+                                              titleAr={heroData.nameAr!} 
+                                              subTitle={heroData.description!} 
+                                              subTitleAr={heroData.descriptionAr!}  
+                                              locale={locale} messages={messages} 
+                                              page={heroData.name} pageAr={heroData.nameAr!}  
+                                              image={heroData.image!}/> }
+         </div>
    </div>
      <div className="w-11.8/12 mx-auto grid sm:grid-cols-75/25">
         {/* <CategoryHero category={category} locale={locale} messages={messages} /> */}

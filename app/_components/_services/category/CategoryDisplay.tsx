@@ -102,12 +102,12 @@ const CategoryDisplay = ({services,categories,locale,messages,category}:Props) =
     <div className="relative sm:w-11.8/12 sm:pb-8 mx-auto flex flex-wrap self-center mt-4  rounded-md w-full  ">
       {loading && <div className=' w-full h-72 z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
     <div className="flex-100  bg-white sm:rounded-lg dark:bg-[#111] ">
-            <div className="flex  p-2  items-center my-3 pb-3 border rounded border-gray-200 justify-between">
-            <div className="p-1 flex gap-x-2">
+            <div className="flex max-sm:flex-col  p-2  items-center my-3 pb-3 border rounded border-gray-200 justify-between">
+            <div className="p-1 flex max-sm:w-full max-sm:pb-0 gap-x-2">
                 <span className="p-1"><AiFillFunnelPlot /> </span>
                 <span className="text-gray-600 rtl:font-arabic rtl:font-bold">{listOfServices}</span>
              </div>
-             <div className=" max-sm:flex-wrap relative space-x-3 items-center mt-3 gap-x-3 flex px-2">
+             <div className=" max-sm:flex-wrap max-sm:w-full max-sm:border-t max-sm:pt-2 border-gray-300 relative space-x-3 items-center mt-3 gap-x-3 flex px-2">
                    
                     <button className='text-sm min-w-14 flex items-center bg-gray-50 text-gray-500 border border-gray-200 rounded-md px-2 py-1' type='button' onClick={() => setCategoryMenu(prevState => !prevState)}>{selectedCategory}
                     <MdOutlineKeyboardArrowDown className="m-1 text-gray-500 text-base"   />
