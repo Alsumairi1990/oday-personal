@@ -246,7 +246,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
             </>
                }
 
-            <div className="absolute explore-menu  top-[4.78rem] z-10 w-9/12 ltr:right-6 rtl:right-9 bg-white border border-gray-600 dark:border-gray-800 dark:bg-[#111]   pb-4 flex flex-col  rounded-xl" style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}>
+            <div className="absolute explore-menu hidden  top-[4.78rem] z-10 w-9/12 ltr:right-6 rtl:right-9 bg-white border border-gray-600 dark:border-gray-800 dark:bg-[#111]   pb-4 flex-col  rounded-xl" style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}>
                  <p className="text-md text-gray-600 dark:text-gray-200 px-3 sm:px-10 py-3 border-b border-gray-200 dark:border-gray-700">{explore} {sam}</p>
                  <div className="flex ">
                   <div className="flex-65   sm:ltr:pl-5 sm:rtl:pr-5 py-4">
