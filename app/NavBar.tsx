@@ -38,8 +38,9 @@ import { AbstractIntlMessages } from 'next-intl';
 import { TbGridDots } from 'react-icons/tb';
 import { FaUserTie } from 'react-icons/fa';
 import { Explore } from '@prisma/client';
-import ExploreElemCard from './_components/explore/ExploreElemCard';
 import ExplorePanel from './_components/explore/ExplorePanel';
+import Image from 'next/image';
+
 
 
 interface Props{
@@ -54,7 +55,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
   const logo ='/images/logoSamDark.png';
   const logoAr = '/images/logoAr.png';
   const logoDarkAr = '/images/logoDarkAr.png';
-  const imagePath2 = '/images/logo-03.jpeg';
+  const eploreImage = '/images/col1min.png';
   const logoSamL = '/images/logoSamL.png';
 
   const logoRef1 = useRef<HTMLImageElement | null>(null); 
@@ -72,6 +73,8 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
   const creative = (messages as any).Common.creative;  
   const techs = (messages as any).Common.techs;  
   const explore = (messages as any).Common.explore;  
+  const exploreSub = (messages as any).Common.exploreSub;  
+
 
 
 
@@ -119,6 +122,8 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
     const handleClickOutside = (event: any) => {
       
       const menus = document.getElementsByClassName('log-menu');
+      const exploreMenu = document.getElementById('exploreMenu');
+
       if (event.target.closest('.menu-btn ') !== null) {
 
         const prnt = event.target.closest('.menu-pr');
@@ -132,10 +137,10 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
           menu.classList.add('hidden');
         }
       } else if (event.target.closest('.login-menu ') !== null) {
+        return;
+      } else if (event.target.closest('.explore-menu ') !== null) {
         return;}
-        
       else if (event.target.closest('.main-menu-btn') !== null) {
-
         const mainPrnt = event.target.closest('.main-nav');
         const menu = mainPrnt?.querySelector('.main-drop-menu');
         if (menu?.classList.contains('hidden')) {
@@ -146,11 +151,25 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
           menu.classList.add('hidden');
         }
       } 
+      else if (event.target.closest('.explore-btn') !== null) {
+        const mainPrnt = event.target.closest('.main-nav');
+        const menu = mainPrnt?.querySelector('.explore-menu');
+         if (menu?.classList.contains('hidden')) {
+          menu.classList.remove('hidden');
+          document.body.style.overflow = 'hidden'; // Disable scroll
+        } else if (menu && !menu.classList.contains('hidden')) {
+          document.body.style.overflow = ''; // Enable scroll
+          menu.classList.add('hidden');
+        }
+
+
+      }
        else {
         for (let i = 0; i < menus.length; i++) {
           const menu = menus[i];
           menu.classList.add('hidden');
         }
+        {exploreMenu && exploreMenu.classList.add('hidden')}
       }
     };
   
@@ -238,9 +257,9 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
                </span>
              </div>
              <div className="flex max-sm:hidden explore-btn text-gray-300 items-center">
-              <span className="inline-block h-5 rtl:ml-1 w-0.5 pt-4 bg-gray-500"></span>
-              <TbGridDots className=' hover:text-orange-400' />
-              <span className="text-bxs rtl:mr-1">{explore}</span>
+                <span className="inline-block h-5 rtl:ml-1 w-0.5 pt-4 bg-gray-500"></span>
+                <TbGridDots className=' hover:text-orange-400' />
+                <span className="text-bxs rtl:mr-1">{explore}</span>
              </div>
             
               </div>
@@ -248,7 +267,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
             </>
                }
 
-            <div className="absolute explore-menu hidden  top-[4.78rem] z-10 w-9/12 ltr:right-6 rtl:right-9 bg-white border border-gray-600 dark:border-gray-800 dark:bg-[#111]   pb-4 flex-col  rounded-xl" style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}>
+            <div id="exploreMenu" className="absolute explore-menu hidden  top-[4.78rem] z-10 w-9/12 ltr:right-6 rtl:right-9 bg-white border border-gray-300 dark:border-gray-800 dark:bg-[#111]   pb-4 flex-col  rounded-xl" style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}>
                  <p className="text-md text-gray-600 dark:text-gray-200 px-3 sm:px-10 py-3 border-b border-gray-200 dark:border-gray-700">{explore} {sam}</p>
                  <div className="flex ">
                   <div className="flex-65   sm:ltr:pl-5 sm:rtl:pr-5 py-4">
@@ -257,8 +276,18 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
                    }
                   </div>
                   <div className="flex-35 p-4 sm:rtl:pr-10">
-                     <div className="bg-orange-100 h-full rounded-md">
-
+                     <div className="bg-orange-100 pt-5  flex-col justify-center h-full rounded-md">
+                      <div className="w-7/12 mx-auto flex-60 h-52">
+                          {eploreImage && <Image className=' w-full h-full rounded-md '
+                                        src={eploreImage}
+                                        height={400}
+                                        width={400}
+                                        alt="eplore"
+                                    />}
+                        </div>
+                        <div className="text-lg font-semibold leading-8 flex-40 py-4 px-5 text-gray-800">
+                          <p className="text-center">{exploreSub}</p>
+                        </div>
                      </div>
                   </div>
                   </div>
