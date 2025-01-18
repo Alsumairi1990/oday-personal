@@ -55,7 +55,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
   const logoAr = '/images/logoAr.png';
   const logoDarkAr = '/images/logoDarkAr.png';
   const imagePath2 = '/images/logo-03.jpeg';
-  const logoSamL = '/images/logoSamL.jpeg';
+  const logoSamL = '/images/logoSamL.png';
 
   const logoRef1 = useRef<HTMLImageElement | null>(null); 
   const logoRef2 = useRef<HTMLImageElement | null>(null); 
@@ -214,11 +214,11 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
                 <div className="sm:w-12">
                   <img className='w-full max-w-full p-0 light-logo' src={logo} ref={logoRef2}  alt="" />
                 </div>
-                <div className="flex uppercase text-bxs pt-3.5 leading-4  flex-col">
-                  <span className=" text-gray-300">
+                <div className="flex logText text-gray-300 uppercase text-bxs pt-3.5 leading-4  flex-col">
+                  <span className=" ">
                     Creative 
                   </span>
-                  <span className=" text-gray-300">
+                  <span className="">
                     Technolgies 
                   </span>
                 </div>
@@ -229,7 +229,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
              <div className="sm:w-12">
                <img className='w-full max-w-full p-0 light-logo' src={logo} ref={logoRef2}  alt="" />
              </div>
-             <div className="flex uppercase text-[#c8c8c8] leading-4 pt-[12px] font-bold text-[12px] rtl:ml-4 flex-col">
+             <div className="flex uppercase logText text-[#c8c8c8] leading-4 pt-[12px] font-bold text-[12px] rtl:ml-4 flex-col">
                <span className="pb-1">
                  {sam} 
                </span>
