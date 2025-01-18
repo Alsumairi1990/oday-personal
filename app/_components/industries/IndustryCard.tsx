@@ -1,8 +1,6 @@
 
 import React from 'react';
-
 import { AbstractIntlMessages } from 'next-intl';
-import { CategoryForFront } from '@/app/[locale]/admin/category/util/CategoryForFront';
 import Link from 'next/link';
 import { Industry } from '@prisma/client';
 interface Props {

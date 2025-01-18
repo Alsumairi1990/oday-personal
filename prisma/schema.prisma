@@ -678,6 +678,7 @@ model User {
   plans           Plan[]
   planCategories  PlanCategory[]
   packages        Package[]
+  explore         Explore[]
 
   @@map(name: "users")
 }
@@ -1160,6 +1161,24 @@ model Industry {
   works         Work[]
   posts         Post[]
 }
+
+
+model Explore {
+  id            Int        @id @default(autoincrement())
+  name          String?
+  nameAr        String?
+  url           String @unique
+  slug          String?
+  title         String?
+  titleAr       String?
+  image         String?
+  icon          String?
+  description   String?
+  descriptionAr String?
+  userId        String
+  user          User       @relation(fields: [userId], references: [id])
+}
+
 
 model Order {
   id                 String        @id @default(cuid())

@@ -9,7 +9,7 @@ import Footerk from '../_components/Footer'
 import { getLocale, getMessages } from 'next-intl/server';
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
 import PhaseCompany from '../_components/PhaseCompany'
-import { AboutUsSection, Category, Industry, PageSection, PlanCategory, Post, Service, Testimonial, Tool } from '@prisma/client'
+import { AboutUsSection, Category, Explore, Industry, PageSection, PlanCategory, Post, Service, Testimonial, Tool } from '@prisma/client'
 import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 import { WorksFrontData } from './admin/works/utils/WorksFrontData'
 import { MarketWithModels } from './admin/market/_utils/MarketWithModels'
@@ -93,6 +93,11 @@ export default async function Home() {
     next: { revalidate: 3600 }, 
   });
 
+  const exploresData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/explores`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, 
+  });
+
 
   const about = await fetch(`${process.env.NEXTAUTH_URL}/api/front/about-section`, {
     method: 'GET',
@@ -119,7 +124,7 @@ export default async function Home() {
     const packageCatgegoryData:PlanCatPackForFront = await packageCategory.json(); 
     const tools:Tool[] = await toolsCategory.json(); 
     const toolsCategorires:CategoryWithTools[] = await toolsCategories.json();
-    
+    const explores:Explore[] = await exploresData.json();    
     const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
     const serviceCatMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'servicesCategory');  
     const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
@@ -135,7 +140,7 @@ export default async function Home() {
      <div className="flex flex-col">
           </div>   
           <Suspense fallback={<div>Loading navigation...</div>}>
-        <NavBar menusData={menuElements} locale={locale} messages={messages} />
+        <NavBar menusData={menuElements} explores={explores} locale={locale} messages={messages} />
       </Suspense>
 
     <div className="hed">
