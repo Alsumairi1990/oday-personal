@@ -55,6 +55,8 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
   const logoAr = '/images/logoAr.png';
   const logoDarkAr = '/images/logoDarkAr.png';
   const imagePath2 = '/images/logo-03.jpeg';
+  const logoSamL = '/images/logoSamL.jpeg';
+
   const logoRef1 = useRef<HTMLImageElement | null>(null); 
   const logoRef2 = useRef<HTMLImageElement | null>(null); 
   const welcome = (messages as any).Common.welcome;
@@ -89,10 +91,10 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
         if (!isVisible) {
           themeSwitcher?.classList.add('nav-top-l');
           if (logoRef1.current) {
-            logoRef1.current.src = imagePath2;
+            logoRef1.current.src = logoSamL;
           }
           if (logoRef2.current) {
-            logoRef2.current.src = imagePath2; 
+            logoRef2.current.src = logoSamL; 
           }
         } else {
           themeSwitcher?.classList.remove('nav-top-l');
@@ -235,10 +237,10 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
                {techs}  {creative} 
                </span>
              </div>
-             <div className="flex max-sm:hidden items-center">
+             <div className="flex max-sm:hidden explore-btn text-gray-300 items-center">
               <span className="inline-block h-5 rtl:ml-1 w-0.5 pt-4 bg-gray-500"></span>
-              <TbGridDots className='text-gray-300 hover:text-orange-400' />
-              <span className="text-bxs text-gray-200 rtl:mr-1">{explore}</span>
+              <TbGridDots className=' hover:text-orange-400' />
+              <span className="text-bxs rtl:mr-1">{explore}</span>
              </div>
             
               </div>

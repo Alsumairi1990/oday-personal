@@ -21,7 +21,6 @@ import { PlanCatPackForFront } from './admin/plans/category/_utils/PlanCatPackFo
 import TechPanel from '../_components/technologies/TechPanel'
 import { CategoryWithTools } from './admin/category/util/CategoryWithTools'
 import IndustryCard from '../_components/industries/IndustryCard';
-import ServicePanel from '../_components/_services/ServicePanle';
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });

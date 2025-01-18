@@ -518,6 +518,10 @@ ol li p {
   background-color: #f2f2f2 !important;
   border :  1px solid #ccc !important;
 }
+.nav-top-l .explore-btn {
+  color: #222;
+  
+}
 .nav-top-l .them-switcher .light-swicher-theme{
   background-color: #f2f2f2 !important;
 }
