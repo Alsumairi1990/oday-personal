@@ -142,7 +142,7 @@ export default async function Home() {
         <NavBar menusData={menuElements} explores={explores} locale={locale} messages={messages} />
       </Suspense>
 
-    {/* <div className="hed">
+    <div className="hed">
       {heroData && <Hero heroData={heroData} services={servicesR} categories={categoriesResult} /> }
     </div>
 
@@ -226,7 +226,7 @@ export default async function Home() {
       </div>
       <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
-      </div>   */}
+      </div>   
      
     </main>
   )

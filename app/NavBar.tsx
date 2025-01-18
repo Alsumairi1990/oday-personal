@@ -256,7 +256,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
                {techs}  {creative} 
                </span>
              </div>
-             <div className="flex max-sm:hidden explore-btn text-gray-300 items-center">
+             <div className="flex cursor-pointer max-sm:hidden explore-btn text-gray-300 items-center">
                 <span className="inline-block h-5 rtl:ml-1 w-0.5 pt-4 bg-gray-500"></span>
                 <TbGridDots className=' hover:text-orange-400' />
                 <span className="text-bxs rtl:mr-1">{explore}</span>
