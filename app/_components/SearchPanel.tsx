@@ -109,11 +109,12 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
              }, []);
 
       const searchInvoke = (slug:string) => {
-            alert(slug)
+            
             setSelectedCategory(slug);
-            if(selectedCategory !== ''){
-                fetchServiceData(slug);
-            }
+            fetchServiceData(slug);
+            // if(selectedCategory !== ''){
+            //     fetchServiceData(slug);
+            // }
           }
       const findService = (slug:string) => {
         setSelectedService(slug);

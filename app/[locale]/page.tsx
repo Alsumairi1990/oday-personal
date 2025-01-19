@@ -152,7 +152,7 @@ export default async function Home() {
      </div>
 
 
-     {/* <div className='bg-gray-50 gray:bg-[#111]"'>
+    <div className='bg-gray-50 gray:bg-[#111]"'>
      {servicesR && serviceMeta && <ServicesFull services={servicesR} meta={serviceMeta} />}
      </div>
      <div className="w-full my-8 pb-8  bg-gray-100 dark:bg-[#111] ">
@@ -226,7 +226,7 @@ export default async function Home() {
       </div>
       <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
-      </div>    */}
+      </div>    
      
     </main>
   )
