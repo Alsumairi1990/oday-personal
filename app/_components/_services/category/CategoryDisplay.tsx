@@ -1,9 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { Category, Service } from '@prisma/client';
-import HashLoader from 'react-spinners/HashLoader';
+import {  Service } from '@prisma/client';
 import { FaThList } from "react-icons/fa";
-import { BsTable } from "react-icons/bs";
 import { RiLayoutGridFill } from "react-icons/ri";
 import CardCol from './CardCol';
 import ServiceCard from './ServiceCard';
