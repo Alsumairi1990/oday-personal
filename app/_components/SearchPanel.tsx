@@ -8,6 +8,7 @@ import {useEffect} from 'react'
 import { Category, Service } from '@prisma/client';
 import { AbstractIntlMessages, useTranslations } from 'next-intl';
 import { features } from 'node:process';
+import Link from 'next/link';
 
 interface Props {
     services : Service[],
@@ -18,8 +19,10 @@ interface Props {
 const PanelSearch = ({services,categories,locale,messages}:Props) => {
     const t = useTranslations('SearchPanel'); 
     const [categoriesData, setCategoriesData] = useState<Category[]>([]); 
-    const [serviceType, setServiceType] = useState<string>('service'); 
+    const [serviceType, setServiceType] = useState<string>(''); 
+    const [serviceTypeSlug, setServiceTypeSlug] = useState<string>(''); 
     const [selectedCategory, setSelectedCategory] = useState<string>(''); 
+     const [selectedCategorySlug, Slug] = useState<string>(''); 
     const [selectedService, setSelectedService] = useState<string>(''); 
     const [servicesData, setServicesData] = useState<{name:string,nameAr:string}[]>([]); 
     const [searchTerm, setSearchTerm] = useState<string>("");
@@ -27,7 +30,7 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
     const servicePlacholder = (messages as any).SearchPanel.servicePlacholder;
 
     useEffect(() => {
-        if (typeof document === 'undefined') return;
+        // if (typeof document === 'undefined') return;
 
         const handleClickOutsidr = (event:any) => {
 
@@ -59,9 +62,12 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
         };
       });
 
-      const setType = (type:string) => {
+      
+
+      const setType = (type:string,slug:string) => {
         setServiceType(type);
-        fetchCategoryData(type);
+        setServiceTypeSlug(slug);
+        fetchCategoryData(slug);
         
       }
     const fetchCategoryData = async (slug:string) => {
@@ -79,7 +85,6 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
               const data = await response.json(); 
               const categoryD:Category[] = data; 
               setCategoriesData(categoryD);
-            //   setCategoryMenu(false)
               setLoading(false);
             } catch (err) {
             }
@@ -108,16 +113,18 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
             setCategoriesData(categories);
              }, []);
 
-      const searchInvoke = (slug:string) => {
+      const searchInvoke = (slug:string,name:Category) => {
             
-            setSelectedCategory(slug);
+            {locale ==='en' ? setSelectedCategory(name.name) : setSelectedCategory(name.nameAr!)};
             fetchServiceData(slug);
             // if(selectedCategory !== ''){
             //     fetchServiceData(slug);
             // }
           }
-      const findService = (slug:string) => {
-        setSelectedService(slug);
+      const findService = (slug:string,name:string) => {
+        {locale === 'en' ? setSelectedService(slug) : setSelectedService(name)}
+        setSearchTerm(slug);
+        // setSelectedService(slug);
         
       }
       const sendSearch = ()=> {
@@ -131,21 +138,42 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
       <div  className="grid sm:grid-cols-25/25/40/10 max-sm:gap-4 search-row items-center rounded">
          <div  className="p-1">
             <div  className="menu-pr ran-c flex relative py-[3px] bg-white rounded-lg search-otp-rnk">
-               <div  className="pl-[10px] rtl:pr-2 self-end">
+               <div  className="ltr:pl-2.5 rtl:pr-2.5 ltr:pr-1 rtl:pl-1 self-end">
                  <span className="flex w-5 items-center h-5">
                   <CgDribbble className='text-sky-800 text-lg' />
                  </span>
                </div>
-               <div  className="menu-btn rnk-opt-btn  pl-[5px] flex flex-col py-1 h-[50px] ltr:border-r ltr:border-r-gray-300 rtl:border-l rtl:border-l-gray-300 w-full">
+               <div  className="menu-btn rnk-opt-btn  pl-[5px] flex flex-col py-1 h-[50px] sm:ltr:border-r sm:ltr:border-r-gray-300 sm:rtl:border-l sm:rtl:border-l-gray-300 w-full">
                   <div  className="flex-22">
-                     <div  className=""><span  className="font-bold text-gray-700 text-xs rtl:font-arabic uppercase">{t('searchType')}</span></div>
+                     <div className="">
+                     <span className="font-bold text-gray-700 text-xs rtl:font-arabic uppercase">
+                          {t('searchType')}
+                        </span>
+                   
+
+                      </div>
                  </div>
                   <div  className="btn-trk flex items-end flex-70 pb-[6px]">
-                     <div  className="actv-slc flex flex-nowrap items-center cursor-pointer"><span  className="text-sm text-gray-400 rtl:font-arabic ">{t('typePlaceholder')} ...</span></div>
+                     <div  className="actv-slc flex flex-nowrap items-center cursor-pointer">
+                     {!serviceType ? (
+                       <span  className="text-sm text-gray-400 rtl:font-arabic ">{t('typePlaceholder')} ...</span>
+
+                      ) : (
+                        <span  className="text-sm text-gray-400 rtl:font-arabic ">
+                        {locale === 'en' ? (
+                            <>{serviceType}</>
+                          ) : (
+                            <>{serviceType}</>
+                          )}
+                        </span>
+                      )}                    
+                        </div>
+
+
                      <span  className="ml-auto mr-[15px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
                </div>
-                  <div id="dropdownRadioHelper" className="drop-menu log-menu1 hidden !z-50 max-h-56  overflow-y-auto absolute  top-16 sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
+              <div id="dropdownRadioHelper" className="drop-menu log-menu1 hidden !z-50 max-h-56  overflow-y-auto absolute  top-16 sm:left-0 bg-white divide-y border border-gray-200 w-full divide-gray-100 rounded-lg shadow  dark:bg-gray-700 dark:divide-gray-600">
                         <ul className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownRadioHelperButton">
                                 {locale == "en" ? 
                                 <>
@@ -154,7 +182,7 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
                                         <div className="flex items-center h-5">
                                             <input
                                                 id=""
-                                                onClick={()=> {setType('product')}}
+                                                onClick={()=> {setType('product','product')}}
                                                 name="helper-radio"
                                                 type="radio"
                                                 value={t('typeProduct')} 
@@ -173,7 +201,7 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
                                         <div className="flex items-center h-5">
                                             <input
                                                 id=""
-                                                onClick={()=> {setType('service')}}
+                                                onClick={()=> {setType('service','service')}}
                                                 name="helper-radio"
                                                 type="radio"
                                                 value={t('typeService')} 
@@ -195,7 +223,7 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
                                         <div className="flex items-center h-5">
                                             <input
                                                 id="product"
-                                                onClick={()=> {setType('product')}}
+                                                onClick={()=> {setType('منتجات','product')}}
                                                 name="product"
                                                 type="radio"
                                                 value={t('typeProduct')} 
@@ -214,7 +242,7 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
                                         <div className="flex items-center h-5">
                                             <input
                                                 id="service"
-                                                onClick={()=> {setType('service')}}
+                                                onClick={()=> {setType('خدمات','service')}}
                                                 name="product"
                                                 type="radio"
                                                 
@@ -239,18 +267,29 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
          </div>
          <div  className="flex-100 relative max-w-full p-1">
             <div  className="menu-pr flex py-[3px] bg-white rounded-lg search-otp-rnk">
-               <div  className="pl-[10px] self-end">
+               <div  className="ltr:pl-2.5 rtl:pr-2.5 ltr:pr-1 rtl:pl-1 self-end">
                  <span className="flex w-5 items-center h-5">
                   <CgTikcode className='text-sky-800 text-lg' />
                  </span>
                </div>
-               <div  className="menu-btn rnk-opt-btn pl-[5px] flex flex-col py-1 h-[50px] w-full ltr:border-r ltr:border-r-gray-300 rtl:border-l rtl:border-l-gray-300">
+               <div  className="menu-btn rnk-opt-btn pl-[5px] flex flex-col py-1 h-[50px] w-full sm:ltr:border-r sm:ltr:border-r-gray-300 sm:rtl:border-l sm:rtl:border-l-gray-300">
                   <div  className="flex-22">
                      <div  className="ext-left"><span  className="font-bold text-gray-700 text-xs uppercase rtl:font-arabic">{t('category')} </span></div>
                   </div>
                   <div  id="" className="btn-rk78 flex items-end flex-70 pb-[7px]">
                      <div  className="actv-slc flex flex-nowrap items-center  cursor-pointer">
-                        <span  className="text-sm font-nav text-gray-400 font-arabic">{t('categoryPlaceholder')}  ...</span>
+                     {!selectedCategory ? (
+                       <span  className="text-sm text-gray-400 rtl:font-arabic ">{t('categoryPlaceholder')} ...</span>
+
+                      ) : (
+                        <span  className="text-sm text-gray-400 rtl:font-arabic ">
+                        {locale === 'en' ? (
+                            <>{selectedCategory}</>
+                          ) : (
+                            <>{selectedCategory}</>
+                          )}
+                        </span>
+                      )}
                      </div>
                      <span  className="ml-auto mr-[15px] text-xs text-gray-500"><i  className="fas fa-chevron-down"></i></span>
                   </div>
@@ -263,7 +302,7 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
                                         <div className="flex items-center h-5">
                                             <input
                                                 id={`helper-radio-${index}`}
-                                                onClick={()=> {searchInvoke(category.slug)}}
+                                                onClick={()=> {searchInvoke(category.slug,category)}}
                                                 name="helper-radio"
                                                 type="radio"
                                                 value={category.name}
@@ -298,7 +337,7 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
          </div>
          <div  className="p-1 relative">
             <div  className="menu-pr flex py-[3px] bg-white rounded-lg search-otp-rnk">
-               <div  className="pl-[10px] self-end">
+               <div  className="ltr:pl-2.5 rtl:pr-2.5 ltr:pr-1 rtl:pl-1 self-end">
                  <span className="flex w-5 items-center h-5">
                   <CgTwilio className='text-sky-800 text-lg' />
                  </span>
@@ -338,7 +377,7 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
                                                 id={`helper-radio-${index}`}
                                                 name="helper-radio"
                                                 type="radio"
-                                                 onClick={()=> {findService(service.name)}}
+                                                 onClick={()=> {findService(service.name,service.nameAr)}}
                                                 value={selectedService}
                                                 className="w-4 h-4 text-blue-600 bg-gray-100 outline-none border-gray-300 focus:ring-gray-100 dark:focus:ring-gray-100 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
                                             />
@@ -359,13 +398,13 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
                     </div>
             </div>
          </div>
-         <div  className="search-btn max-sm:px-1 text-center sm:ltr:border-l sm:ltr:border-l-gray-300 sm:rtl:border-r sm:rtl:border-r-gray-300 ">
+          <div  className="search-btn max-sm:px-1 text-center sm:ltr:border-l sm:ltr:border-l-gray-300 sm:rtl:border-r sm:rtl:border-r-gray-300 ">
             <div className="inline-block max-sm:bg-white  rounded-xl max-sm:w-full sm:pl-[15px]">
-                <button aria-label="search" onClick={() => sendSearch()} className="searchBtn py-[5px] px-[10px] bg-primary-btn border-1 border-white">
-                    <span ><MdOutlineManageSearch className='text-2xl' /></span>
-                    </button>
-                    </div>
-                    </div>
+                <Link href={`search/services/result/${searchTerm}`} aria-label="search" onClick={() => sendSearch()} className="searchBtn py-[5px] px-[10px] bg-primary-btn border-1 border-white">
+                     <span ><MdOutlineManageSearch className='text-2xl' /></span>
+                </Link>
+            </div>
+          </div>
       </div>
    </div>
 </div>

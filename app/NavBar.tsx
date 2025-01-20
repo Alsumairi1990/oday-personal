@@ -1,30 +1,3 @@
-// 'use client'
-// import Link from 'next/link'
-// import React from 'react'
-// import { MenuWithAllModels } from './[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
-// import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
-
-
-// interface Props{
-//   menusData: Record<number, MenuWithAllModels[]>;
-// }
-
-
-// const NavBar = ({menusData}:Props) => {
-//   const imagePath = '/images/logo-01.svg';
-//   const imagePath2 = '/images/logo-03.jpeg';
-//   // const logoImage = document && document.querySelector('.light-logo') as HTMLImageElement; 
-//   return (
-//     <nav 
-//     className={`top-nav flex main-nav fixed max-sm:flex-col sm:h-[75px] h-[64px] top-0 dark:max-sm:border-b dark:max-sm:border-b-gray-700   w-full pt-2 sm:p-2 z-50 items-center justify-between font-bold  `}
-//     >
-//      <FrontTopNav  menusData ={menusData} />
-//     </nav>
-//   )
-// }
-
-// export default NavBar
-
 'use client'
 import Link from 'next/link'
 import React, { useRef } from 'react'
@@ -40,8 +13,6 @@ import { FaUserTie } from 'react-icons/fa';
 import { Explore } from '@prisma/client';
 import ExplorePanel from './_components/explore/ExplorePanel';
 import Image from 'next/image';
-
-
 
 interface Props{
   menusData: Record<number, MenuWithAllModels[]>,
@@ -74,13 +45,6 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
   const techs = (messages as any).Common.techs;  
   const explore = (messages as any).Common.explore;  
   const exploreSub = (messages as any).Common.exploreSub;  
-
-
-
-
-
-  
-  
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -207,7 +171,6 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
             {locale === 'en' ? <img className='w-full max-w-full p-0 light-logo' src={imagePath} ref={logoRef2}  alt="" />
              :<img className='w-full max-w-full  light-logo' src={logo} ref={logoRef2}  alt="" />
                }
-              {/* <img className='w-full max-w-full light-logo' src={imagePath} ref={logoRef1}  alt="" /> */}
             </span>
               </Link>  
         </div>
