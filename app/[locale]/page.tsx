@@ -1,26 +1,15 @@
 import NavBar from '../NavBar'
 import Hero from '../_components/HeroSect'
 import Services from '../_components/Services'
-import ServicesFull from '../_components/ServicesFull'
 import React, { Suspense } from 'react';
-import Works from '../_components/Works'
-import Testimonials from '../_components/Testimonials'
-import Footerk from '../_components/Footer'
 import { getLocale, getMessages } from 'next-intl/server';
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
-import PhaseCompany from '../_components/PhaseCompany'
 import { AboutUsSection, Category, Explore, Industry, PageSection, PlanCategory, Post, Service, Testimonial, Tool } from '@prisma/client'
 import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 import { WorksFrontData } from './admin/works/utils/WorksFrontData'
 import { MarketWithModels } from './admin/market/_utils/MarketWithModels'
-import Markets from '../_components/market/Markets'
-import BlogList from '../_components/BlogList'
-import PlansPanel from '../_components/OurPlans/PlansPanel'
-import PackageSect from '../_components/package/PackageSect'
 import { PlanCatPackForFront } from './admin/plans/category/_utils/PlanCatPackForFront'
-import TechPanel from '../_components/technologies/TechPanel'
 import { CategoryWithTools } from './admin/category/util/CategoryWithTools'
-import IndustryCard from '../_components/industries/IndustryCard';
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });

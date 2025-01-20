@@ -1,11 +1,7 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { Providers } from '../providers';
-import WhatsAppLive from '../_components/WhatsAppLive';
 import CallOptionPanel from '../_components/CallOptionPanel';
-import NextTopLoader from 'nextjs-toploader';
-import Footerk from '../_components/Footer';
-import { Category, Service } from '@prisma/client';
 
 export default async function LocaleLayout({
   children,

@@ -110,10 +110,21 @@
       "packages" : "packages",
       "products"  : "products",
       "sam" : "sam",
-       "creative" : "creative",
-       "techs" : "technologies",
-       "explore" : "explore",
-       "exploreSub" : "Subscribe with Sam Creative to Access All Services"
+      "creative" : "creative",
+      "techs" : "technologies",
+      "explore" : "explore",
+      "exploreSub" : "Subscribe with Sam Creative to Access All Services",
+      "password": "password",
+      "email" : "email address",
+      "signIn" : "signIn",
+      "register" : "register",
+      "loginDesc" : "Get more things done with Loggin platform.",
+      "whySignIn" : "Why Sign Up?",
+      "whyReason1" : "get project estimation ",
+      "whyReason2" : "check service price details ",
+      "whyReason3" : "Ask Questions to senior Counselors",
+      "whyReason4" : "get free offers "
+
       
 
 

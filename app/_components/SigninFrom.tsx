@@ -7,16 +7,18 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { useRouter } from "next/navigation";
-
 import { useState } from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { signIn , useSession} from "next-auth/react";
 import { toast } from "react-toastify";
+import { AbstractIntlMessages } from "next-intl";
 
 
 
 interface Props{
-    callbackUrl? : String
+    callbackUrl? : String,
+    locale : String,
+    messages : AbstractIntlMessages,
 }
 
 const FormSchema = z.object({
@@ -30,6 +32,14 @@ type InputType = z.infer<typeof FormSchema>;
 const SignInForm = (props : Props) => {
     const router = useRouter();
    const { data: session } = useSession();
+   const password = (props.messages as any).Common.password;
+   const email = (props.messages as any).Common.email;
+   const registerNew = (props.messages as any).Common.register;
+   const signIn = (props.messages as any).Common.signIn;
+
+
+
+
 
     const [isVisiable,setIsVisiable] = useState(false);
     const toggleVisible = () => {setIsVisiable((prev) => !prev)}
@@ -82,47 +92,37 @@ const SignInForm = (props : Props) => {
     <div className="">
      <form onSubmit={handleSubmit(onSubmit)} className="text-start z-40  ">
         <div className="grid grid-cols-1">
-        
-         
-
-
-
             <div className=" flex flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="user_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Email Address</label>
+                    <label htmlFor="user_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">{email}</label>
                     <div className="flex items-center w-full">
-                        <span className=" border bg-gray-100 border-r-0 rounded-l-md border-gray-300 h-10 flex items-center px-2">
+                        <span className=" border bg-gray-100 ltr:border-r-0 ltr:rounded-l-md rtl:border-l-0 rtl:rounded-r-md border-gray-300 h-10 flex items-center px-2">
                         <MdMarkEmailUnread className='text-lg text-gray-500'/>
                         </span>
                         <div className="relative flex w-full">
-                        <input {...register('email')} type="email"  name="email" id="email" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-md rounded-l-none border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="example@gmail.com" required />
+                        <input {...register('email')} type="email"  name="email" id="email" className="block ltr:pl-2 rtl:pr-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-md ltr:rounded-l-none rtl:rounded-r-none border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="example@gmail.com" required />
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.email?.message} </span>
             </div>
-
-
             <div className=" flex flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="password" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Password</label>
+                    <label htmlFor="password" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">{password}</label>
                     <div className="flex items-center w-full">
-                        <span className=" border bg-gray-100 border-r-0 rounded-l-md border-gray-300 h-10 flex items-center px-2">
+                        <span className=" border bg-gray-100 ltr:border-r-0 ltr:rounded-l-md rtl:border-l-0 rtl:rounded-r-md border-gray-300 h-10 flex items-center px-2">
                         <RiLockPasswordFill className='text-lg text-gray-500'/>
                         </span>
-                        <div className="relative flex items-center border h-10  w-full">
-                        <input {...register('password')} type={isVisiable? "text" : "password"} name="password" id="password" className="block pl-2 px-0 pt-1 z-0 w-full text-sm text-gray-900 bg-transparent  rounded-md rounded-l-none focus-within:!border-orange-500  appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer" placeholder="*********" required />
-                         {isVisiable ? <FaEye className='mr-2' onClick={toggleVisible} /> : <FaRegEyeSlash className='mr-2' onClick={toggleVisible} /> }
+                        <div className="relative flex items-center border border-gray-300 ltr:rounded-r-md rtl:rounded-l-md h-10   w-full">
+                        <input {...register('password')} type={isVisiable? "text" : "password"} name="password" id="password" className="block ltr:pl-2 rtl:pr-2 px-0 pt-1 z-0 w-full text-sm text-gray-900 bg-transparent  rounded-md rounded-l-none focus-within:!border-orange-500  appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer" placeholder="*********" required />
+                         {isVisiable ? <FaEye className='mr-2' onClick={toggleVisible} /> : <FaRegEyeSlash className='ltr:mr-2 rtl:ml-2' onClick={toggleVisible} /> }
                         </div>
                     </div> 
-                    <span className="text-red-400 text-xs mt-2">{errors?.password?.message} </span>
-                    
+                    <span className="text-red-400 text-xs mt-2">{errors?.password?.message} </span> 
             </div>
-            
-            
 
             <div className="mb-4">
                 <button type="submit" disabled={isSubmitting} className="btn py-2.5 bg-violet-600  hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full w-full" >  {isSubmitting ? 
                 <div className="flex items-center pl-2">
                     <AiOutlineLoading3Quarters />
-                    <span className="text-md ml-2">Signing In... </span>
+                    <span className="text-md ml-2">{signIn} ... </span>
                 </div>
                 : "Sign In"} </button>
             </div>

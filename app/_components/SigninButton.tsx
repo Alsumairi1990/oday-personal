@@ -21,9 +21,9 @@ const SigninButton = () => {
       ) : (
         <>
           <button onClick={() => signIn()}>Sign In</button>
-          <a href={"/auth/signup"}>
+          <Link href={`/auth/signin`}>
             Sign Up
-          </a>
+          </Link>
         </>
       )}
     </div>

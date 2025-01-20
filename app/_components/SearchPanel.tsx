@@ -7,7 +7,6 @@ import { MdOutlineManageSearch } from "react-icons/md";
 import {useEffect} from 'react'
 import { Category, Service } from '@prisma/client';
 import { AbstractIntlMessages, useTranslations } from 'next-intl';
-import { features } from 'node:process';
 import Link from 'next/link';
 
 interface Props {
@@ -22,7 +21,7 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
     const [serviceType, setServiceType] = useState<string>(''); 
     const [serviceTypeSlug, setServiceTypeSlug] = useState<string>(''); 
     const [selectedCategory, setSelectedCategory] = useState<string>(''); 
-     const [selectedCategorySlug, Slug] = useState<string>(''); 
+    const [selectedCategorySlug, setSelectedCategorySlug] = useState<string>(''); 
     const [selectedService, setSelectedService] = useState<string>(''); 
     const [servicesData, setServicesData] = useState<{name:string,nameAr:string}[]>([]); 
     const [searchTerm, setSearchTerm] = useState<string>("");
@@ -31,9 +30,7 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
 
     useEffect(() => {
         // if (typeof document === 'undefined') return;
-
         const handleClickOutsidr = (event:any) => {
-
          const menus = document.getElementsByClassName('log-menu1');
          if (event.target.closest('.log-menu1') !== null) return;
           if (event.target.closest('.menu-btn ') !== null) {
@@ -116,16 +113,14 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
       const searchInvoke = (slug:string,name:Category) => {
             
             {locale ==='en' ? setSelectedCategory(name.name) : setSelectedCategory(name.nameAr!)};
+            setSelectedCategorySlug(slug)
             fetchServiceData(slug);
-            // if(selectedCategory !== ''){
-            //     fetchServiceData(slug);
-            // }
+           
           }
       const findService = (slug:string,name:string) => {
+        alert(slug);
         {locale === 'en' ? setSelectedService(slug) : setSelectedService(name)}
-        setSearchTerm(slug);
-        // setSelectedService(slug);
-        
+        setSearchTerm(name);
       }
       const sendSearch = ()=> {
         alert("service"+selectedService);
@@ -400,9 +395,14 @@ const PanelSearch = ({services,categories,locale,messages}:Props) => {
          </div>
           <div  className="search-btn max-sm:px-1 text-center sm:ltr:border-l sm:ltr:border-l-gray-300 sm:rtl:border-r sm:rtl:border-r-gray-300 ">
             <div className="inline-block max-sm:bg-white  rounded-xl max-sm:w-full sm:pl-[15px]">
-                <Link href={`search/services/result/${searchTerm}`} aria-label="search" onClick={() => sendSearch()} className="searchBtn py-[5px] px-[10px] bg-primary-btn border-1 border-white">
-                     <span ><MdOutlineManageSearch className='text-2xl' /></span>
-                </Link>
+               {selectedCategory && searchTerm ? 
+                <Link href={`search/services/category=${selectedCategorySlug}&service=${searchTerm}`} aria-label="search" onClick={() => sendSearch()} className="searchBtn py-[5px] px-[10px] bg-primary-btn border-1 border-white">
+                     <MdOutlineManageSearch className='text-2xl' />
+                </Link>:
+                <Link href={`search/services/${searchTerm}`} aria-label="search" onClick={() => sendSearch()} className="searchBtn py-[5px] px-[10px] bg-primary-btn border-1 border-white">
+                    <MdOutlineManageSearch className='text-2xl' />
+                 </Link>
+                }
             </div>
           </div>
       </div>
