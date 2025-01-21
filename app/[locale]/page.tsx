@@ -10,6 +10,17 @@ import { WorksFrontData } from './admin/works/utils/WorksFrontData'
 import { MarketWithModels } from './admin/market/_utils/MarketWithModels'
 import { PlanCatPackForFront } from './admin/plans/category/_utils/PlanCatPackForFront'
 import { CategoryWithTools } from './admin/category/util/CategoryWithTools'
+import ServicesFull from '../_components/ServicesFull';
+import IndustryCard from '../_components/industries/IndustryCard';
+import BlogList from '../_components/BlogList';
+import PhaseCompany from '../_components/PhaseCompany';
+import PlansPanel from '../_components/OurPlans/PlansPanel';
+import TechPanel from '../_components/technologies/TechPanel';
+import Works from '../_components/Works';
+import Testimonials from '../_components/Testimonials';
+import Markets from '../_components/market/Markets';
+import Footerk from '../_components/Footer';
+import PackageSect from '../_components/package/PackageSect';
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
@@ -141,7 +152,7 @@ export default async function Home() {
      </div>
 
 
-     {/* <div className='bg-gray-50 gray:bg-[#111]"'>
+      <div className='bg-gray-50 gray:bg-[#111]"'>
      {servicesR && serviceMeta && <ServicesFull services={servicesR} meta={serviceMeta} />}
      </div>
      <div className="w-full my-8 pb-8  bg-gray-100 dark:bg-[#111] ">
@@ -215,7 +226,7 @@ export default async function Home() {
       </div>
       <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
-      </div>    */}
+      </div>   
      
     </main>
   )
