@@ -7,8 +7,8 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
 interface Props {
-    locale : string,
-    messages : AbstractIntlMessages
+    locale? : string,
+    messages? : AbstractIntlMessages
 }
 const ContactForm = ({locale,messages}:Props) => {
     const imagePath = 'https://d3mds3ychln71.cloudfront.net/img/title-bg3.png';
