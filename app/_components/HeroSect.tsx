@@ -1,6 +1,6 @@
 
 import React from 'react';
-import PanelSearch from './SearchPanel';
+// import PanelSearch from './SearchPanel';
 import { Category, HeroSection, Service} from '@prisma/client';
 import { getLocale, getMessages } from 'next-intl/server';
 interface Props {
@@ -26,7 +26,7 @@ const Hero = async ({heroData,services,categories}:Props) => {
     </h1>
       }
            <div className="py-2 px-2 my-2 rounded-xl max-sm:bg-[#00000021] max-sm:border max-sm:border-[#4c4c4c] w-full">
-             <PanelSearch services={services} categories={categories} locale={locale} messages={messages} />
+             {/* <PanelSearch services={services} categories={categories} locale={locale} messages={messages} /> */}
          </div>
          {locale == 'en' ? ( 
           <>
@@ -48,22 +48,7 @@ const Hero = async ({heroData,services,categories}:Props) => {
      </div>
  </div>
     </div>
-  /* // <div className="w-full " >  
-  //   <div className="min-h-lvh mobile-clip relative sm:h-[35rem] px-4 w-full bg-no-repeat bg-center bg-cover" style={{backgroundImage: `url(${imagePath})`}}>
-  //      <div className="absolute top-0 h-full w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
-  //       <div className="relative flex sm:pt-8 flex-col h-full items-center justify-center z-40">
-  //         <h1 className="text-xl sm:text-3xl sm:max-w-[70%] text-center max-sm:mb-4 sm:leading-10 uppercase pt-4 px-4 font-bold text-white" style={{textShadow:'0 0 10px #000'}}>
-  //           Design Shine Gate for Template and Web devlopment
-  //         </h1>
-  //         <div className="w-11/12 mt-2  mx-auto">
-  //             <PanelSearch />
-  //         </div>
-          
-  //         <p className="text-gray-300 max-sm:hidden sm:max-w-[70%] text-center text-sm sm:text-base mb-4">He formatting rules are not configurable but are already optimized for the best possible output. Note that the formatter will keep spaces and tabs between content tags such as div and span </p>
-  //         <a href="/" className="inline-block text-base sm:text-base text-white bg-green-600 py-1.5 sm:py-1 px-3 rounded-md border hover:!bg-green-700 border-green-500 font-medium">Discover Work</a>
-  //       </div>
-  //   </div>
-  // </div> */
+ 
 
 
   );

@@ -3,29 +3,30 @@ import Link from 'next/link'
 import React, { useRef } from 'react'
 import {useEffect} from 'react';
 import ThemeToggle from './_components/theme-toggle'
-import LocaleSwitcher from './_components/LangToggle'
+// import LocaleSwitcher from './_components/LangToggle'
 import FrontTopNav from './[locale]/admin/front-settings/nav/FronTopNav';
 import { MenuWithAllModels } from './[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 import SigninButton from './_components/SigninButton';
 import { AbstractIntlMessages } from 'next-intl';
 import { TbGridDots } from 'react-icons/tb';
 import { FaUserTie } from 'react-icons/fa';
-import { Explore } from '@prisma/client';
-import ExplorePanel from './_components/explore/ExplorePanel';
+import { CompanyMenu, Explore } from '@prisma/client';
+// import ExplorePanel from './_components/explore/ExplorePanel';
 import Image from 'next/image';
+import { IoIosArrowBack } from 'react-icons/io';
+import { BsColumnsGap } from 'react-icons/bs';
 
 interface Props{
   menusData: Record<number, MenuWithAllModels[]>,
   explores? : Explore[],
+  companyMenu? : CompanyMenu[],
   locale : string,
   messages : AbstractIntlMessages,
 }
 
-const NavBar = ({menusData,explores,locale,messages}:Props) => {
+const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
   const imagePath = '/images/logo-01.svg';
   const logo ='/images/logoSamDark.png';
-  const logoAr = '/images/logoAr.png';
-  const logoDarkAr = '/images/logoDarkAr.png';
   const eploreImage = '/images/col1min.png';
   const logoSamL = '/images/logoSamL.png';
 
@@ -45,6 +46,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
   const techs = (messages as any).Common.techs;  
   const explore = (messages as any).Common.explore;  
   const exploreSub = (messages as any).Common.exploreSub;  
+  const about = (messages as any).Common.about;  
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -87,6 +89,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
       
       const menus = document.getElementsByClassName('log-menu');
       const exploreMenu = document.getElementById('exploreMenu');
+      const profileMenu = document.querySelector('.profile-menu')
 
       if (event.target.closest('.menu-btn ') !== null) {
 
@@ -104,6 +107,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
         return;
       } else if (event.target.closest('.explore-menu ') !== null) {
         return;}
+        
       else if (event.target.closest('.main-menu-btn') !== null) {
         const mainPrnt = event.target.closest('.main-nav');
         const menu = mainPrnt?.querySelector('.main-drop-menu');
@@ -120,20 +124,32 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
         const menu = mainPrnt?.querySelector('.explore-menu');
          if (menu?.classList.contains('hidden')) {
           menu.classList.remove('hidden');
-          document.body.style.overflow = 'hidden'; // Disable scroll
         } else if (menu && !menu.classList.contains('hidden')) {
-          document.body.style.overflow = ''; // Enable scroll
           menu.classList.add('hidden');
         }
+      } 
+      else if (event.target.closest('.prof-btn') !== null) {
+        const mainPrnt = event.target.closest('.main-nav');
+        const menu = mainPrnt?.querySelector('.profile-menu');
+         if (menu?.classList.contains('hidden')) {
+          menu.classList.remove('hidden');
+        } else if (menu && !menu.classList.contains('hidden')) {
+          menu.classList.add('hidden');
+        }
+       
+      } 
 
-
-      }
+      
        else {
         for (let i = 0; i < menus.length; i++) {
           const menu = menus[i];
           menu.classList.add('hidden');
         }
         {exploreMenu && exploreMenu.classList.add('hidden')}
+        {profileMenu && profileMenu.classList.add('hidden')}
+
+        
+        
       }
     };
   
@@ -177,7 +193,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
         <div className="px-2 flex-10">
               <div className=" pr-0.5 cursor-pointer">
                 <div className="flex items-center locl-toggle border border-gray-600 px-1 sm:px-1.5 py-1 sm:py-1.5 bg-[#00000059] rounded-full pointer relative">
-                  <LocaleSwitcher />
+                  {/* <LocaleSwitcher /> */}
                 </div>
               </div>
             </div>
@@ -189,9 +205,9 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
         </div>
         </div>
        
-        <div className="p-2 max-sm:hidden text-[#333]">
+         <div className="p-2 max-sm:hidden text-[#333]">
             <div className='mr-1.5 inline-block'>
-             {locale === 'en' ? 
+            {locale === 'en' ? 
               <div className='flex items-center' >
                 <div className="sm:w-12">
                   <img className='w-full max-w-full p-0 light-logo' src={logo} ref={logoRef2}  alt="" />
@@ -228,15 +244,15 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
               </div>
            
             </>
-               }
+               } 
 
             <div id="exploreMenu" className="absolute explore-menu hidden  top-[4.78rem] z-10 w-9/12 ltr:right-6 rtl:right-9 bg-white border border-gray-300 dark:border-gray-800 dark:bg-[#111]   pb-4 flex-col  rounded-xl" style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}>
                  <p className="text-md text-gray-600 dark:text-gray-200 px-3 sm:px-10 py-3 border-b border-gray-200 dark:border-gray-700">{explore} {sam}</p>
                  <div className="flex ">
                   <div className="flex-65   sm:ltr:pl-5 sm:rtl:pr-5 py-4">
-                   {explores && 
-                   <ExplorePanel explores={explores} locale={locale} messages={messages} />
-                   }
+                   {/* {explores && 
+                    <ExplorePanel explores={explores} locale={locale} messages={messages} />
+                   } */}
                   </div>
                   <div className="flex-35 p-4 sm:rtl:pr-10">
                      <div className="bg-orange-100 pt-5  flex-col justify-center h-full rounded-md">
@@ -252,13 +268,18 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
                           <p className="text-center">{exploreSub}</p>
                         </div>
                      </div>
-                  </div>
+                  </div> 
                   </div>
              </div>
+
+             
             </div>
             
               
-        </div>
+        </div> 
+
+
+
        
         <div className={`main-drop-menu text-sm max-sm:h-lvh sm:flex-80   max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base  `} > 
           <div className=" px-4 py-4 flex flex-col bg-[#ffebce]  sm:hidden">
@@ -325,8 +346,45 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
                   <FrontTopNav  menusData ={menusData} locale={locale} messages={messages} />
                   </div>
                 
-          
-           
+                                    
+              {/* <span
+               
+
+              className='text-sm prof-btn text-gray-800 inline-flex sm:text-gray-50 hover:text-orange-400  items-center'
+              >
+                {sam}
+             <MdOutlineArrowDropDown className='text-xl max-sm:rtl:ml-4  ' />
+              </span> */}
+              <div className="flex w-8 cursor-pointer max-sm:hidden prof-btn pb-1 text-gray-300 items-center">
+                {/* <span className="inline-block h-5 rtl:ml-1 w-0.5 pt-4 bg-gray-500"></span> */}
+                <BsColumnsGap className=' hover:text-orange-400 text-bxs' />
+
+                <span className="text-bxs rtl:mr-1.5 ">{about} {sam}</span>
+             </div>
+              
+
+            <div className="profile-menu text-white hidden border border-gray-300 absolute top-[4.8rem] w-8/12 bg-white rounded-lg  rtl:left-[10%] ">
+              <div className="flex p-4">
+                <div className="flex-25 rounded-lg p-5 bg-orange-100">
+                    {eploreImage && <Image className=' w-full h-full rounded-md '
+                                        src={eploreImage}
+                                        height={400}
+                                        width={400}
+                                        alt="eplore"
+                                    />}
+                </div>
+              
+               <div className="flex-75 grid grid-cols-3 gap-x-7 gap-y-6 p-5 ">
+               {companyMenu && companyMenu.length > 0 && companyMenu.map((element) => (
+               locale === 'en' ? <Link href={element.url} className="p-2 border border-gray-200 rounded-md"><span className="text-gray-700 text-sm">{element.name}</span></Link>
+               :  <Link href={`${locale}/${element.url}`} className="p-2 py-2.5 bg-gray-50 border border-gray-200 flex items-center rounded-lg">
+                   <span className="text-gray-900 text-sm font-medium">{element.nameAr}</span>
+                   <IoIosArrowBack className="text-base rtl:mr-auto text-gray-600 ltr:rotate-180" />               
+                  </Link>
+                ))}
+               </div>
+              </div>
+            </div>
 
             <div className="py-1 px-2 flex ">
             <div className="">
@@ -340,7 +398,7 @@ const NavBar = ({menusData,explores,locale,messages}:Props) => {
             <div className="px-2">
               <div className=" pr-0.5 cursor-pointer">
                 <div className="flex locl-toggle  items-center border border-gray-600 px-1.5 py-1.5 bg-[#00000059] rounded-full pointer relative">
-                  <LocaleSwitcher />
+                  {/* <LocaleSwitcher /> */}
                 </div>
               </div>
             </div>

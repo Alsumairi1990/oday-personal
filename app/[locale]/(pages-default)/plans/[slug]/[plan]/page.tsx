@@ -1,8 +1,8 @@
 
 import { getLocale, getMessages } from "next-intl/server";
-import { PlanCategoryForFront } from "@/app/[locale]/admin/plans/category/_utils/PlanCategoryForFront";
-import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
-import PlanCard from "@/app/_components/plans/PlanCard";
+// import { PlanCategoryForFront } from "@/app/[locale]/admin/plans/category/_utils/PlanCategoryForFront";
+// import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
+// import PlanCard from "@/app/_components/plans/PlanCard";
 import { PlanForFront } from "@/app/[locale]/admin/plans/_utils/PlanForFront";
 import PlanHeroSect from "@/app/_components/plans/PlanHeroSect";
 import PlanCardSimilar from "@/app/_components/plans/PlanCardSimilar";
@@ -90,7 +90,7 @@ const planSinglePage = async ({params}:Props) => {
               <div className="flex-100 sm:h-16 rtl:pr-1  border-b border-b-gray-300 flex items-center rounded-md ">
                 <span className="text-base h-[90%] flex justify-center items-center flex-35 sm:flex-15  px-2 font-semibold w-full text-center py-1.5 rounded-md text-gray-800 dark:text-gray-50 bg-gray-200 dark:bg-gray-800">{totalServices}</span>
                 <span className="text-md flex-65 rtl:pr-7 font-semibold mt-1 text-gray-700 max-sm:leading-6 py-2">
-                {plan && plan.services.map((service) =>(
+                {plan && plan.services && plan.services.length > 0 && plan.services.map((service) =>(
                   <span className="text-sm border border-gray-300 mx-1 my-1 inline-flex rounded px-1 font-semibold text-gray-700 leading-6">{ service.nameAr }  </span>
                 ))}
                 </span>

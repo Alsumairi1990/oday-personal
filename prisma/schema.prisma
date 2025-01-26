@@ -679,6 +679,7 @@ model User {
   planCategories  PlanCategory[]
   packages        Package[]
   explore         Explore[]
+  companyMenus    CompanyMenu[]
 
   @@map(name: "users")
 }
@@ -718,6 +719,20 @@ model EmployeeProfile {
   skills            EmployeeSkill[]
   teams             TeamEmployee[]
   teamId            Int?
+  bioAr             String?
+  cityAr            String?
+  countryAr         String?
+  degreeAr          String?
+  employmentTypeAr  String?
+  firstNameAr       String?
+  institutionAr     String?
+  jobTitleAr        String?
+  lastNameAr        String?
+  nationalityAr     String?
+  sexAr             String?
+  specializationAr  String?
+
+
   departmentHeadOf  Department[]
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
@@ -771,9 +786,11 @@ model Department {
 model Team {
   id           Int            @id @default(autoincrement())
   name         String         @unique
+  nameAr         String       @unique         
   icon         String?
   image        String?
   description  String?
+  descriptionAr  String?
   status       String?
   locationId   Int?
   location     Location?      @relation(fields: [locationId], references: [id])
@@ -1164,6 +1181,22 @@ model Industry {
 
 
 model Explore {
+  id            Int        @id @default(autoincrement())
+  name          String?
+  nameAr        String?
+  url           String @unique
+  slug          String?
+  title         String?
+  titleAr       String?
+  image         String?
+  icon          String?
+  description   String?
+  descriptionAr String?
+  userId        String
+  user          User       @relation(fields: [userId], references: [id])
+}
+
+model CompanyMenu {
   id            Int        @id @default(autoincrement())
   name          String?
   nameAr        String?

@@ -2,7 +2,7 @@
 
 const Testimonials = () => {
     const imagePath = 'https://dcstatic.com/images/background/background-about-us-c188d84f24.svg';
-    const imagePath1 = 'https://cdn-kpbff.nitrocdn.com/BIqbPXrNizxHMrZEuWjiIDigcWJtuMrr/assets/images/optimized/rev-3d7ee36/d3mds3ychln71.cloudfront.net/img/banners/our_client_banner.jpg';
+    const imagePath1 = '/images/hero.webp';
     const imagePath2 = '/images/service2.png';
     const testimonials = [
       {
@@ -47,8 +47,8 @@ const Testimonials = () => {
    return (
       <div className="w-full" >
          <div className=" m-h-lvh sm:min-h-[28rem] sm:h-[28rem] pb-4 sm:pb-0 pt-[100px] flex px-4 relative w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath1})`}}>
-         {/* <div className="w-full h-full absolute left-0 top-0 bg-black z-10 opacity-70"></div> */}
-          <div className="flex flex-wrap w-11/12 mx-auto z-20">
+         <div className="absolute sm:top-[75px] h-[calc(100%-64px)] sm:h-[calc(100%-75px)] top-16 bottom-0 border-t border-t-gray-800  w-full left-0" style={{backgroundImage: 'linear-gradient(to top, rgb(8 8 8),rgb(0 0 0 / 55%), rgb(8 8 8))'}}></div>
+         <div className="flex flex-wrap w-11/12 mx-auto z-20">
             
              <div className="w-10/12 mx-auto flex flex-col justify-center  items-center">
                  <span className="w-[4.5rem] h-[4.5rem] mb-2 inline-block">

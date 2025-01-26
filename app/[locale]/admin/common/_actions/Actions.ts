@@ -761,23 +761,23 @@ export async function createServicePhase(data:FormData, id: number): Promise<str
     let imagePath = '';
     let iconPath = '';
     
-    if(dataPhase.image && dataPhase.image.name){
-      await fs.mkdir("public/services/phases/images", { recursive: true })
-      imagePath = `/services/phases/images/${crypto.randomUUID()}-${dataPhase.image.name}`
-      await fs.writeFile(
-        `public${imagePath}`,
-        Buffer.from(await dataPhase.image.arrayBuffer())
-        )
-      }
+    // if(dataPhase.image && dataPhase.image.name){
+    //   await fs.mkdir("public/services/phases/images", { recursive: true })
+    //   imagePath = `/services/phases/images/${crypto.randomUUID()}-${dataPhase.image.name}`
+    //   await fs.writeFile(
+    //     `public${imagePath}`,
+    //     Buffer.from(await dataPhase.image.arrayBuffer())
+    //     )
+    //   }
 
-    if(dataPhase.icon && dataPhase.icon.name){
-      await fs.mkdir("public/services/phases/icons", { recursive: true })
-      iconPath = `/services/phases/icons/${crypto.randomUUID()}-${dataPhase.icon.name}`
-      await fs.writeFile(
-        `public${iconPath}`,
-        Buffer.from(await dataPhase.icon.arrayBuffer())
-        )
-      }
+    // if(dataPhase.icon && dataPhase.icon.name){
+    //   await fs.mkdir("public/services/phases/icons", { recursive: true })
+    //   iconPath = `/services/phases/icons/${crypto.randomUUID()}-${dataPhase.icon.name}`
+    //   await fs.writeFile(
+    //     `public${iconPath}`,
+    //     Buffer.from(await dataPhase.icon.arrayBuffer())
+    //     )
+    //   }
       const phase = await prisma.phase.create({
         data: {
           serviceId : id,

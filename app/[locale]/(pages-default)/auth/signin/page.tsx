@@ -22,40 +22,29 @@ export default async function SigninPage({searchParams}: Props) {
   const whyReason2 = (messages as any).Common.whyReason2;
   const whyReason3 = (messages as any).Common.whyReason3;
   const whyReason4 = (messages as any).Common.whyReason4;
-
-
-
-
-
-  
-
-
     return (
 
       <div className="flex fixed top-0 left-0 h-full w-full rtl:font-arabic items-center  justify-center bg-no-repeat bg-center bg-cover  z-[60]"  style={{backgroundImage:`url(${imageBg})`}}>
         <div className="absolute top-0 z-[80]  left-0 w-full  h-full bg-[#000000e0]  " ></div>
         <div className="flex items-center w-11/12 sm:w-7/12 flex-wrap justify-center z-[90] bg-white dark:bg-card border border-gray-600 rounded-xl">
          <div className="flex-100 sm:flex-40 max-sm:hidden ltr:border-r rtl:border-l border-b-gray-200">
-           <div className="img-loginOuter"  >
-                <div className="font-semibold capitalize flex items-center text-2xl pl-2 pt-3">
-                   <h1 className="font-semibold text-blue-700 mr-1" >{sam} </h1><h1 className="text-pink-700"></h1>
-                </div>
-                <div className="flex  justify-center mt-2">
-                    <img className="sm:w-36 max-full" src={image2} alt="" />
-                </div>
-                <div className="px-4 flex flex-col items-center mb-4 ">
-                    <h1 className="text-2xl font-semibold mb-2 text-pink-700">{whySignIn}</h1>
-                    {/* <!-- <p class="py-2 mb-2">Descove and Contribute to our platform database  in all areas of knowledge , to get more oprion and access all feature , login and get access  </p> --> */}
-                    <div className="flex w-full text-gray-500 dark:text-gray-100 text-sm flex-col gap-3 justify-between">
-                        <span className="flex-30 px-3 py-1 rounded-md border border-gray-200 dark:border-gray-600  font-semibold">{whyReason1}</span>
-                        <span className="flex-30 px-3 py-1 rounded-md border border-gray-200 dark:border-gray-600 font-semibold"> {whyReason2}</span>
-                        <span className="flex-30 px-3 py-1 rounded-md border border-gray-200 dark:border-gray-600  font-semibold"> {whyReason3}</span>
-                        <span className="flex-30 px-3 py-1 rounded-md border border-gray-200 dark:border-gray-600 font-semibold"> {whyReason4}</span>
-                        {/* <span className="flex-30 px-3 py-1 rounded-md border border-gray-200 font-semibold">Shortlist and Apply to colleges</span> */}
+         <div className="img-loginOuter flex flex-col"  >
+                    <div className="font-semibold flex-10 capitalize flex items-center text-2xl pl-2 pt-3">
+                      <h1 className="font-semibold text-blue-700 mr-1" >{sam}</h1>
+                    </div>
+                    <div className="flex  justify-center mt-2">
+                        <img className="w-72 max-w-full  mx-auto max-full" src={image2} alt="" />
+                    </div>
+                    <div className="px-4 flex-70 flex flex-col items-center mb-4 ">
+                        <h1 className="text-2xl font-semibold mb-2 text-pink-700">{whySignIn}</h1>
+                        <div className="flex w-full text-gray-500 text-sm flex-col gap-3 justify-between">
+                            <span className="flex-30 px-3 py-1 rounded-md border border-gray-200  font-semibold">{whyReason1}</span>
+                            <span className="flex-30 px-3 py-1 rounded-md border border-gray-200 font-semibold">{whyReason2}</span>
+                            <span className="flex-30 px-3 py-1 rounded-md border border-gray-200  font-semibold"> {whyReason3}</span>
+                            <span className="flex-30 px-3 py-1 rounded-md border border-gray-200 font-semibold"> {whyReason4}</span>
+                        </div> 
                     </div> 
-                </div> 
-               
-            </div>
+                </div>
         </div>
         <div className="flex-100 sm:flex-60 flex flex-col items-  justify-center">
         <div className="w-full max-w-full sm:w-9/12 sm:max-w-full py-4 m-auto p-6  borfder dark:bofrder-gray-800 sfhadow-md dark:sha0dow-gray-800 rounded-md">

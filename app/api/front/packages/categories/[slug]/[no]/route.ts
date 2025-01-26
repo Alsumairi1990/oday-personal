@@ -30,7 +30,7 @@ async function getElements(slug:string,no:number): Promise<PlanCatPackForFront |
     //       },
     //       take : no
     //     },
-    //   },
+  //   },
     // });
     const elements = await prisma.planCategory.findUnique({
       where: {

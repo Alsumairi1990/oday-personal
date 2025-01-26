@@ -7,11 +7,11 @@ import { AbstractIntlMessages } from 'next-intl';
 import NavElements from './NavElements';
 interface Props {
    menusData: MenuWithAllModels[],
-   locale? : string,
-   messages? : AbstractIntlMessages[],
+   locale : string,
+   messages : AbstractIntlMessages,
    
 }
-const ServicesPanel = ({menusData}:Props) => {
+const ServicesPanel = ({menusData,locale,messages}:Props) => {
    const imagePath = '/images/10.png';
   return (
     <div className="sm:absolute max-sm:mt-3 top-[4.5rem] z-10 bg-white right-0 w-full border-t border-t-orange-500  px-2 py-3 flex flex-col " >
@@ -20,7 +20,7 @@ const ServicesPanel = ({menusData}:Props) => {
        <div className="col-start-1 col-span-4">
        <div className="sm:pl-5 max-sm:grid grid-cols-2 sm:grid-cols-1 sm:columns-3 gap-4 sm:gap-10 " >
        {menusData.map((categoryService) => (
-                  <NavElements  serviceCategory={categoryService} />
+                  <NavElements  serviceCategory={categoryService} locale={locale} messages={messages} />
                ))}
        </div>
        </div>

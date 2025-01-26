@@ -548,3 +548,22 @@ ol li p {
 .nav-top-l .main-menu-btn svg{
   fill: #333 !important;
 }
+.phoneClass{
+  height: 4rem;
+}
+.react-tel-input .form-control{
+  height: 2.5rem !important;
+}
+
+.dark .react-tel-input .flag-dropdown {
+  background-color: #111 !important;
+}
+.dark .react-tel-input .form-control{
+  border: 1px solid#434a55 !important;
+}
+.dark .react-tel-input .flag-dropdown {
+  border: 1px solid#434a55 !important;
+}
+.dark .react-tel-input .country-list .country-name{
+  color: #222 !important;
+}

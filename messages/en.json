@@ -107,6 +107,7 @@
       "findServices" : "Find the the best Services",
       "findProducts" : "Find the the best products",
       "exploreSame" : "Explore Sam",
+      "display" : "display",
       "packages" : "packages",
       "products"  : "products",
       "sam" : "sam",
@@ -123,7 +124,28 @@
       "whyReason1" : "get project estimation ",
       "whyReason2" : "check service price details ",
       "whyReason3" : "Ask Questions to senior Counselors",
-      "whyReason4" : "get free offers "
+      "whyReason4" : "get free offers ",
+      "userName" : "user name",
+      "phonNo" : "phone no",
+      "confirmedPassword" : "Confirmed Password",
+      "accept" : "i accept",
+      "termsCondition" : "terms & conditions",
+      "alreadyAccount" : "Already hav an account",
+      "webDevelopment" : "web development",
+      "graphicDesign" : "graphic design",
+      "contactPart1" : "contact",
+      "contactPart2" : "to get more information",
+      "communicationMethod" : "CommunicationPreferred Communication Method",
+      "videoCall" : "video call",
+      "yourMessage" : "your message",
+      "contactUsthrough" : "contact sam through ",
+      "chooseService" : "choose you service",
+      "phoneCall" : "phone call",
+      "about" : "about"
+      
+
+      
+
 
       
 

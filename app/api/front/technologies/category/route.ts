@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 import prisma from '@/utils/prisma'; // Ensure the path is correct
 import { PlanCatPackForFront } from '@/app/[locale]/admin/plans/category/_utils/PlanCatPackForFront';
 import { Tool } from '@prisma/client';
+import { ToolForFront } from '@/app/[locale]/admin/tools/utils/ToolsForFront';
 
 export async function GET(req: Request, { params }: { params: { slug: string } }) {
   try {
@@ -17,7 +18,7 @@ export async function GET(req: Request, { params }: { params: { slug: string } }
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
-async function getElement(slug:string): Promise<Tool | null> {
+async function getElement(slug:string): Promise<ToolForFront | null> {
   try {
     const element = await prisma.tool.findUnique({
         where: {
@@ -27,7 +28,7 @@ async function getElement(slug:string): Promise<Tool | null> {
       });
     
         
-    return element ;
+    return element as ToolForFront ;
   } catch (error) {
     console.error('Error fetching data:', error);
     throw new Error('Failed to fetch data');

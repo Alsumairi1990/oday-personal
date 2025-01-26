@@ -12,11 +12,11 @@ import validator from 'validator';
 import { z } from 'zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { error } from 'console';
 import { passwordStrength } from 'check-password-strength';
 import PasswordStrengthCheck from './PasswordStrengthCheck';
 import { registerUser } from '@/utils/authActions';
 import { toast } from 'react-toastify';
+import { AbstractIntlMessages } from 'next-intl';
 const formSchema = z.object({
     user_name : z.string().min(4, "User Name Must be at least 4 chars")
                           .max(45, "User Name Must less than 45 chars")
@@ -39,11 +39,30 @@ const formSchema = z.object({
 
 type inputType = z.infer<typeof formSchema>;
 
+interface Props{
+    callbackUrl? : String,
+    locale : String,
+    messages : AbstractIntlMessages,
+}
 
-const SignUpForm = () => {
+const SignUpForm = (props : Props) => {
     // const {register,handleSubmit,reset,control,formState:{errors}} = useForm<inputType>({
     //     resolver: zodResolver(formSchema)
     // });
+
+    const password = (props.messages as any).Common.password;
+    const email = (props.messages as any).Common.email;
+    const registerNew = (props.messages as any).Common.register;
+    const signIn = (props.messages as any).Common.signIn;
+    const userName = (props.messages as any).Common.UserName;
+    const phoneNo = (props.messages as any).Common.phoneNo;
+    const confirmedPassword = (props.messages as any).Common.confirmedPassword;
+    const accept = (props.messages as any).Common.accept;
+    const termsCondition = (props.messages as any).Common.termsCondition;   
+    const alreadyAccount = (props.messages as any).Common.alreadyAccount;   
+
+
+
      const {
     register,
     handleSubmit,
@@ -91,13 +110,13 @@ const SignUpForm = () => {
          
 
             <div className=" flex flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="user_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">User Name</label>
+                    <label htmlFor="user_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">{userName}</label>
                     <div className="flex items-center w-full">
-                        <span className=" border bg-gray-100 border-r-0 rounded-l-md border-gray-300 h-10 flex items-center px-2">
-                        <FaUserTie className='text-gray-500'/>
+                       <span className=" border bg-gray-100 ltr:border-r-0 ltr:rounded-l-md rtl:border-l-0 rtl:rounded-r-md border-gray-300 h-10 flex items-center px-2">
+                         <FaUserTie className='text-gray-500'/>
                         </span>
                         <div className="relative flex w-full">
-                        <input   {...register('user_name')} type="text" name="user_name" id="user_name" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-md rounded-l-none border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="first nanme" required />
+                        <input   {...register('user_name')} type="text" name="user_name" id="user_name" className="block ltr:pl-2 rtl:pr-2 ltr:rounded-l-none rtl:rounded-r-none h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-md border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder={userName} required />
                         
                         </div>
                         
@@ -106,40 +125,40 @@ const SignUpForm = () => {
             </div>
 
             <div className=" flex flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="user_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Email Address</label>
+                    <label htmlFor="user_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">{email}</label>
                     <div className="flex items-center w-full">
-                        <span className=" border bg-gray-100 border-r-0 rounded-l-md border-gray-300 h-10 flex items-center px-2">
-                        <MdMarkEmailUnread className='text-lg text-gray-500'/>
+                       <span className=" border bg-gray-100 ltr:border-r-0 ltr:rounded-l-md rtl:border-l-0 rtl:rounded-r-md border-gray-300 h-10 flex items-center px-2">
+                       <MdMarkEmailUnread className='text-lg text-gray-500'/>
                         </span>
                         <div className="relative flex w-full">
-                        <input {...register('email')} type="email"  name="email" id="email" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-md rounded-l-none border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="example@gmail.com" required />
+                        <input {...register('email')} type="email"  name="email" id="email" className="block ltr:pl-2 rtl:pr-2 ltr:rounded-l-none rtl:rounded-r-none h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-md border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="example@gmail.com" required />
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.email?.message} </span>
             </div>
 
             <div className=" flex flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="user_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Phone No</label>
+                    <label htmlFor="user_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">{phoneNo}</label>
                     <div className="flex items-center w-full">
-                        <span className=" border bg-gray-100 border-r-0 rounded-l-md border-gray-300 h-10 flex items-center px-2">
-                        <FaPhoneAlt className='text-lg text-gray-500'/>
+                        <span className=" border bg-gray-100 ltr:border-r-0 ltr:rounded-l-md rtl:border-l-0 rtl:rounded-r-md border-gray-300 h-10 flex items-center px-2">
+                          <FaPhoneAlt className='text-lg text-gray-500'/>
                         </span>
                         <div className="relative flex w-full">
-                        <input {...register('phone')} type="text" name="phone" id="email" className="block pl-2 h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-md rounded-l-none border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="phone number" required />
+                        <input {...register('phone')} type="text" name="phone" id="email" className="block ltr:pl-2 rtl:pr-2 ltr:rounded-l-none rtl:rounded-r-none h-10 px-0 z-0 w-full text-sm text-gray-900 bg-transparent border rounded-md border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-orange-500 peer" placeholder="9832434" required />
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.phone?.message} </span>
             </div>
 
             <div className=" flex flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="password" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Password</label>
+                    <label htmlFor="password" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">{password}</label>
                     <div className="flex items-center w-full">
-                        <span className=" border bg-gray-100 border-r-0 rounded-l-md border-gray-300 h-10 flex items-center px-2">
-                        <RiLockPasswordFill className='text-lg text-gray-500'/>
-                        </span>
+                       <span className=" border bg-gray-100 ltr:border-r-0 ltr:rounded-l-md rtl:border-l-0 rtl:rounded-r-md border-gray-300 h-10 flex items-center px-2">
+                         <RiLockPasswordFill className='text-lg text-gray-500'/>
+                          </span>
                         <div className="relative flex items-center border h-10  w-full">
                         <input {...register('password')} type={isVisiable? "text" : "password"} name="password" id="password" className="block pl-2 px-0 pt-1 z-0 w-full text-sm text-gray-900 bg-transparent  rounded-md rounded-l-none focus-within:!border-orange-500  appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer" placeholder="*********" required />
-                         {isVisiable ? <FaEye className='mr-2' onClick={toggleVisible} /> : <FaRegEyeSlash className='mr-2' onClick={toggleVisible} /> }
+                         {isVisiable ? <FaEye className='mr-2' onClick={toggleVisible} /> : <FaRegEyeSlash className='ltr:mr-2 rtl:ml-2' onClick={toggleVisible} /> }
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors?.password?.message} </span>
@@ -151,14 +170,14 @@ const SignUpForm = () => {
             
 
             <div className=" flex flex-col z-0 w-full mb-5 group">
-                    <label htmlFor="confirmed_password" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">Confirmed Password</label>
+                    <label htmlFor="confirmed_password" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">{confirmedPassword}</label>
                     <div className="flex items-center w-full">
-                        <span className=" border bg-gray-100 border-r-0 rounded-l-md border-gray-300 h-10 flex items-center px-2">
-                        <RiLockPasswordFill className='text-lg text-gray-500' />
+                       <span className=" border bg-gray-100 ltr:border-r-0 ltr:rounded-l-md rtl:border-l-0 rtl:rounded-r-md border-gray-300 h-10 flex items-center px-2">
+                       <RiLockPasswordFill className='text-lg text-gray-500' />
                         </span>
                         <div className="relative flex items-center border h-10  w-full">
                         <input {...register('confirmed_password')} type={isVisiableConf? "text" : "password"} name="confirmed_password" id="confirmed_password" className="block pl-2 px-0 pt-1 z-0 w-full text-sm text-gray-900 bg-transparent  rounded-md rounded-l-none focus-within:!border-orange-500  appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 peer" placeholder="*********" required />
-                         {isVisiableConf ? <FaEye className='mr-2' onClick={toggleVisibleConif}/> : <FaRegEyeSlash className='mr-2' onClick={toggleVisibleConif}/> }
+                         {isVisiableConf ? <FaEye className='mr-2' onClick={toggleVisibleConif}/> : <FaRegEyeSlash className='ltr:mr-2 rtl:ml-2' onClick={toggleVisibleConif}/> }
                         </div>
                     </div> 
                     <span className="text-red-400 text-xs mt-2">{errors.confirmed_password?.message} </span>
@@ -167,13 +186,13 @@ const SignUpForm = () => {
             
             <div className="flex items-center mb-4">
                     <input className="form-checkbox rounded border-gray-200 dark:border-gray-800 text-violet-600 focus:border-violet-600/30 focus:ring focus:ring-offset-0 focus:ring-violet-600/20 focus:ring-opacity-50 me-2" type="checkbox" value="" id="accept" />
-                    <label className="form-checkbox-label dark:text-slate-400" htmlFor="accept">I Accept <a href="" className="text-violet-600">Terms And Condition</a></label>
+                    <label className="form-checkbox-label dark:text-slate-400" htmlFor="accept">{accept} <a href="" className="text-violet-600">{termsCondition}</a></label>
                 </div>
             <div className="mb-4">
                 <input type="submit" className="btn py-2.5 bg-violet-600  hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full w-full" value="Register" />
             </div>
             <div className="text-center">
-                <span className="text-slate-400 me-2">Already have an account ? </span> <a href="login.html" className="text-black dark:text-white font-bold">Sign in</a>
+                <span className="text-slate-400 me-2">{alreadyAccount}? </span> <a href="login.html" className="text-black dark:text-white font-bold">Sign in</a>
             </div>
         </div>
     </form>

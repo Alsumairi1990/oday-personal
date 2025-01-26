@@ -3,7 +3,7 @@ import React from 'react';
 import { AbstractIntlMessages } from 'next-intl';
 import { PlanForFront } from '@/app/[locale]/admin/plans/_utils/PlanForFront';
 import { FaArtstation } from 'react-icons/fa';
-import { GoCalendar } from 'react-icons/go';
+// import { GoCalendar } from 'react-icons/go';
 import { IoCalendarClear } from 'react-icons/io5';
 import { BiSolidOffer } from 'react-icons/bi';
 interface ServiceProps {
@@ -62,7 +62,7 @@ const PlanHeroSect = ({ plan, locale,messages,page }: ServiceProps) => {
                    <div className="sm:flex-25 bg-[rgba(31,41,55,0.5)] sm:bg-subscriptionBg rounded relative border py-3  items-center gap-y-4 mt-4 font-semibold flex flex-col border-gray-400" >
                      <span className="absolute -top-5 items-center justify-center  rounded-full border inline-flex h-9 w-9 bg-[rgba(31,41,55,0.5)] border-gray-300"><BiSolidOffer className='text-white text-xl' /></span>
                      <span className="text-gray-100 max-sm:text-base max-sm:text-center border-b mt-3 border-b-gray-400 pb-2">{ totalServices}</span>
-                     <span className="text-gray-100 ">{plan.services.length}</span>
+                     <span className="text-gray-100 ">{plan.services && plan.services.length}</span>
                      </div>
                  
                  

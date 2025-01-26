@@ -55,6 +55,7 @@
       "serviceSecTitle" : "مجموعة خدماتنا الشاملة والمتكاملة في ",
       "featureTitle2"  : "",
       "displayMode" : "طريقة العرض",
+      "display" : "عرض",
       "listOfServices" : "قائمة الخدمات",
       "categoryWorkTitle" : "أطلع على افضل واخر اعمالنا في ",
       "ourProducts" : "اطلع على منتجاتنا في ",
@@ -84,7 +85,7 @@
        "ecnomics" : "أقتصـاد",
        "more" : "المزيـد",
        "totalPlans" : "مجموع الباقات",
-       "plans" : "اشتراكات",
+       "plans" : "خطط الاشتراك",
        "categories" : "تصنيفات",
        "features" : "خصائص",
        "limits" : "حدود الباقة",
@@ -123,7 +124,28 @@
        "whyReason1" : "أحصل على التقدير الاولى لمشروعك",
        "whyReason2" : "عرض جميع تفاصيل الاسعار",
        "whyReason3" : "تكلم مع الخبراء في سام",
-       "whyReason4" : "الحصول على العروض المجانية"
+       "whyReason4" : "الحصول على العروض المجانية",
+       "userName" : "اسم المستخدم",
+       "phonNo" : "رقم الموبايل",
+       "confirmedPassword" : "تاكيد كلمة المرور",
+       "accept" : "قبول",
+       "termsCondition" : "الشروط والاحكام",
+       "alreadyAccount" : "هل تملك حساب",
+       "webDevelopment" : "برمجة تطبيقات الويب",
+       "graphicDesign" : "تصميم الاجرافيك",
+       "contactPart1" : "تواصل مع ",
+       "contactPart2" : "للحصول على ماتريد من المعلومات",
+       "communicationMethod" : "طريقة التواصل المفضلة",
+       "videoCall" : "اتصال فيديو",
+       "yourMessage" : "رسالتك",
+       "contactUsthrough" : "تواصل مع سام عن طريق",
+       "chooseService" : "اختار الخدمة",
+       "phoneCall" : "اتصال موبايل",
+       "about" : "عن"
+
+
+
+
  
 
 

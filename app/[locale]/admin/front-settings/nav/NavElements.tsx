@@ -7,14 +7,17 @@ import { FiArrowLeft } from "react-icons/fi";
 import {useEffect} from 'react';
 import { MenuWithAllModels } from "../../setting/left-nav/_utils/MenuWithAllModels";
 import { IoIosArrowBack } from "react-icons/io";
+import { AbstractIntlMessages } from "next-intl";
 
 
 interface ServiceCategoryProps {
     // serviceCategory: ServiceCategoryInt,
-    serviceCategory : MenuWithAllModels
+    serviceCategory : MenuWithAllModels,
+    locale : string,
+    messages : AbstractIntlMessages,
   }
   
-  function CategoryElements({ serviceCategory}: ServiceCategoryProps) {
+  function CategoryElements({ serviceCategory,locale,messages}: ServiceCategoryProps) {
     const serviceRef = useRef(null);
          const handleClick = (event:any) => {
     const clickedDiv = event.currentTarget; 
@@ -51,10 +54,18 @@ interface ServiceCategoryProps {
             {serviceCategory.icon && <img className='w-full' src={serviceCategory.icon} alt="" />   }
             </span>
             <div className=" bg-white borfder max-sm:mb-2 w-8 sm:w-[19px] border-gray-400 mr-0.5  justify-center flex items-center rounded-full "  >
-                   {serviceCategory.icon &&  <img className='w-full' src={serviceCategory.icon} alt={serviceCategory.title} /> }
-                  </div> 
-          <span className='text-sm  px-2 text-gray-800 sm:text-orange-500 tracking-wide font-medium sm:font-semibold'>{serviceCategory.titleAr}</span>  
-        {/* <p className='mt-3 text-sm leading-6 text-gray-500 font-semibold pl-4'>{serviceCategory.desc}</p> */}
+                   {locale === 'en' ? (
+                    serviceCategory.icon &&  <img className='w-full' src={serviceCategory.icon} alt={serviceCategory.title} />
+                   ) 
+                   :(
+                    serviceCategory.icon &&  <img className='w-full' src={serviceCategory.icon} alt={serviceCategory.titleAr!} /> 
+                   )
+                  }
+                    </div> 
+                  {locale === 'en' ? <span className='text-sm  px-2 text-gray-800 sm:text-orange-500 tracking-wide font-medium sm:font-semibold'>{serviceCategory.title}</span> 
+                  :
+                  <span className='text-sm  px-2 text-gray-800 sm:text-orange-500 tracking-wide font-medium sm:font-semibold'>{serviceCategory.titleAr}</span> 
+                } 
         </div>
         
         {serviceCategory.elements && serviceCategory.elements.length > 0 && (
@@ -65,9 +76,13 @@ interface ServiceCategoryProps {
               </span>
               <div className="flex justify-center pb-6 items-center">
                  
+                {locale === 'en' ? <span className="text-lg font-semibold text-white">
+                    {serviceCategory.title}
+                </span>:
                 <span className="text-lg font-semibold text-white">
-                    {serviceCategory.titleAr}
-                </span>
+                {serviceCategory.titleAr}
+            </span>
+                }
               </div>
             </div>
             
@@ -79,8 +94,11 @@ interface ServiceCategoryProps {
                   {/* <div className=" bg-white border max-sm:mb-2 w-8 sm:w-[22px] border-gray-400 p-1 mr-2  justify-center flex items-center rounded-full "  >
                     <img className='w-full' src={service.image} alt={service.name} />
                   </div> */}
-                  <span className="flex max-sm:hidden rtl:ml-0.5"><IoIosArrowBack className="text-base text-gray-400 " /></span>
+                  <span className="flex max-sm:hidden rtl:ml-0.5"><IoIosArrowBack className="text-base text-gray-400 ltr:rotate-180" /></span>
+                  {locale === 'en' ? <h3 className='text-sm sm:text-sm text-gray-800 font-medium max-sm:text-center'>{service.title}</h3>
+                  :
                   <h3 className='text-sm sm:text-sm text-gray-800 font-medium max-sm:text-center'>{service.titleAr}</h3>
+                  }
                   
                 </li>
               ))}
