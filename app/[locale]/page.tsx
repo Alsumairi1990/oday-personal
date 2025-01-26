@@ -246,7 +246,7 @@ export default async function Home() {
      <div className='bg-gray-50 gray:bg-[#111]"'>
         {categoriesResult  && serviceCatMeta && <Services categories={categoriesResult} meta={serviceCatMeta}  />}
      </div>  */}
-
+{/* hh */}
 {/* 
     <div className='bg-gray-50 gray:bg-[#111]"'>
      {servicesR && serviceMeta && <ServicesFull services={servicesR} meta={serviceMeta} />}
