@@ -41,7 +41,7 @@ const ContactUS = () => {
          </div>
          
          <div className="w-11/12 mx-auto z-20 relative -mt-10">
-            <ContactForm />
+            {/* <ContactForm /> */}
          </div>
          
  
