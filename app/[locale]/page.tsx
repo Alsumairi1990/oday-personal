@@ -83,7 +83,7 @@ export default async function Home() {
 
   const companyMenuData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/company-menu`, {
     method: 'GET',
-    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // Revalidate for ISR 
   });
 
   // const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
