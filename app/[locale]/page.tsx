@@ -35,64 +35,56 @@ export default async function Home() {
   const page = 'mainPage'
 
 
-  // const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
+  const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
 
-  // const exploresData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/explores`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, 
-  // })
+  const exploresData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/explores`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, 
+  })
 
-  // const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Optional revalidation for ISR (30 minutes)
-  // });
+  const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Optional revalidation for ISR (30 minutes)
+  });
 
 
-  // const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
+  const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
   
-  // const Categories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/categories/home`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
+  const Categories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/categories/home`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
 
-  // const planCategoryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/plans/categories/web-development-plans`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, 
-  // });
+  const planCategoryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/plans/categories/web-development-plans`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, 
+  });
 
-  // const packageCategoryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/packages/categories/web-development-plans/3`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, 
-  // });
+  const packageCategoryData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/packages/categories/web-development-plans/3`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, 
+  });
 
-  // const pageTestimonials = await fetch(`${process.env.NEXTAUTH_URL}/api/front/testimonials/home`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
+  const pageTestimonials = await fetch(`${process.env.NEXTAUTH_URL}/api/front/testimonials/home`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
 
-  // const sections = await fetch(`${process.env.NEXTAUTH_URL}/api/front/meta/sections`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
+  const sections = await fetch(`${process.env.NEXTAUTH_URL}/api/front/meta/sections`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
 
-  // const companyMenuData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/company-menu`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
-
-
-
-
-
-
-
-
+  const companyMenuData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/company-menu`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
 
   // const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
   //   method: 'GET',
@@ -169,22 +161,22 @@ export default async function Home() {
   // }
  
 
-  // const menuElements:Record<number, MenuWithAllModels[]> = await elements.json();
-  // const explores:Explore[] = await exploresData.json();
-  // const heroData = await hero.json();
-  // const servicesR:Service[] = await res.json();
-  // const categoriesResult:Category[] = await Categories.json();
-  // const planCategory:PlanCategoryForFront = await planCategoryData.json();
-  // const packageCategory:PlanCatPackForFront = await packageCategoryData.json(); 
-  // const testimonials:Testimonial[] = await pageTestimonials.json();
-  // const sectionMeta:PageSection[] = await sections.json();
-  // const companyMenu:CompanyMenu[] = await companyMenuData.json();
+  const menuElements:Record<number, MenuWithAllModels[]> = await elements.json();
+  const explores:Explore[] = await exploresData.json();
+  const heroData = await hero.json();
+  const servicesR:Service[] = await res.json();
+  const categoriesResult:Category[] = await Categories.json();
+  const planCategory:PlanCategoryForFront = await planCategoryData.json();
+  const packageCategory:PlanCatPackForFront = await packageCategoryData.json(); 
+  const testimonials:Testimonial[] = await pageTestimonials.json();
+  const sectionMeta:PageSection[] = await sections.json();
+  const companyMenu:CompanyMenu[] = await companyMenuData.json();
 
   
 
 
 
-  // const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
+  const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
 
 
 
@@ -220,9 +212,8 @@ export default async function Home() {
     <main className="flex flex-col h-ful dark:bg-[#111] rtl:font-arabic" >
    
      <div className="flex flex-col">
-      fff
           </div>   
-          {/* <Suspense fallback={<div></div>}>
+          <Suspense fallback={<div></div>}>
         <NavBar menusData={menuElements} explores={explores} companyMenu={companyMenu} locale={locale} messages={messages} />
       </Suspense>
     <div className="hed">
@@ -240,13 +231,13 @@ export default async function Home() {
      <div className="w-full my-24 ]">
        {testimonials && testimonialMeta && <Testimonials testimonials={testimonials} meta={testimonialMeta} /> }
       </div>
-      <ContactForm  locale={locale} messages={messages} /> */}
+      <ContactForm  locale={locale} messages={messages} />
 
      {/* <div className="clear"></div>
      <div className='bg-gray-50 gray:bg-[#111]"'>
         {categoriesResult  && serviceCatMeta && <Services categories={categoriesResult} meta={serviceCatMeta}  />}
      </div>  */}
-{/* hh */}
+
 {/* 
     <div className='bg-gray-50 gray:bg-[#111]"'>
      {servicesR && serviceMeta && <ServicesFull services={servicesR} meta={serviceMeta} />}
