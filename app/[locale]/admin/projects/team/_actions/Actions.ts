@@ -22,22 +22,22 @@ export async function  createTeam(data:FormData,country:string,projectId:string)
         const data = result.data; 
         let iconPath = '';
         let imagePath = '';
-        if(data.image && data.image.name){
-            await fs.mkdir("public/employees/team/images", { recursive: true })
-            iconPath = `/employees/team/images/${crypto.randomUUID()}-${data.image.name}`
-            await fs.writeFile(
-              `public${imagePath}`,
-              Buffer.from(await data.image.arrayBuffer())
-              )
-            }
-        if(data.icon && data.icon.name){
-          await fs.mkdir("public/employees/team/images", { recursive: true })
-          iconPath = `/employees/team/images/${crypto.randomUUID()}-${data.icon.name}`
-          await fs.writeFile(
-            `public${iconPath}`,
-            Buffer.from(await data.icon.arrayBuffer())
-            )
-          }
+        // if(data.image && data.image.name){
+        //     await fs.mkdir("public/employees/team/images", { recursive: true })
+        //     iconPath = `/employees/team/images/${crypto.randomUUID()}-${data.image.name}`
+        //     await fs.writeFile(
+        //       `public${imagePath}`,
+        //       Buffer.from(await data.image.arrayBuffer())
+        //       )
+        //     }
+        // if(data.icon && data.icon.name){
+        //   await fs.mkdir("public/employees/team/images", { recursive: true })
+        //   iconPath = `/employees/team/images/${crypto.randomUUID()}-${data.icon.name}`
+        //   await fs.writeFile(
+        //     `public${iconPath}`,
+        //     Buffer.from(await data.icon.arrayBuffer())
+        //     )
+        //   }
           const locationData = await prisma.location.findFirst({
             where : {
               country : country
@@ -47,6 +47,7 @@ export async function  createTeam(data:FormData,country:string,projectId:string)
             const teamCreated = await prisma.team.create({
                     data: {
                     name: data.name,
+                    nameAr : "",
                     status : data.status,
                     description : data.description,
                     icon : iconPath,
