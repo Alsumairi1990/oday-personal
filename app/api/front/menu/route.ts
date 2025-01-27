@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import prisma from '@/utils/prisma'; // Ensure the path to prisma is correct
 import { MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 
-// Function to get menu elements
+// Function to get admin menu elements 
 async function getMenusElementse2(): Promise<Record<number, MenuWithAllModels[]>> {
   try {
     // Fetch data from the database
