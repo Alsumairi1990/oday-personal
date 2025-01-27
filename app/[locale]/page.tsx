@@ -37,7 +37,7 @@ export default async function Home() {
 
   const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
     method: 'GET',
-    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+    next: { revalidate: 3600 }, // 
   });
 
   const exploresData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/explores`, {
