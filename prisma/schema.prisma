@@ -778,7 +778,9 @@ model Permission {
 model Department {
   id               Int              @id @default(autoincrement())
   name             String           @unique
+  nameAr           String?
   description      String?
+  descriptionAr      String?
   image            String?
   icon             String?
   teams            Team[]
