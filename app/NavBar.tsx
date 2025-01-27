@@ -11,7 +11,7 @@ import { AbstractIntlMessages } from 'next-intl';
 import { TbGridDots } from 'react-icons/tb';
 import { FaAppStore, FaUserTie } from 'react-icons/fa';
 import { CompanyMenu, Explore } from '@prisma/client';
-// import ExplorePanel from './_components/explore/ExplorePanel';
+import ExplorePanel from './_components/explore/ExplorePanel';
 import Image from 'next/image';
 import { IoIosArrowBack } from 'react-icons/io';
 // import { BsColumnsGap } from 'react-icons/bs';
@@ -115,7 +115,7 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
           menu.classList.remove('hidden');
           document.body.style.overflow = 'hidden'; // Disable scroll
         } else if (menu && !menu.classList.contains('hidden')) {
-          document.body.style.overflow = ''; // Enable scroll
+          document.body.style.overflow = '';
           menu.classList.add('hidden');
         }
       } 
@@ -250,9 +250,9 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
                  <p className="text-md text-gray-600 dark:text-gray-200 px-3 sm:px-10 py-3 border-b border-gray-200 dark:border-gray-700">{explore} {sam}</p>
                  <div className="flex ">
                   <div className="flex-65   sm:ltr:pl-5 sm:rtl:pr-5 py-4">
-                   {/* {explores && 
+                    {explores && 
                     <ExplorePanel explores={explores} locale={locale} messages={messages} />
-                   } */}
+                   } 
                   </div>
                   <div className="flex-35 p-4 sm:rtl:pr-10">
                      <div className="bg-orange-100 pt-5  flex-col justify-center h-full rounded-md">
