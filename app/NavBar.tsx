@@ -9,12 +9,12 @@ import { MenuWithAllModels } from './[locale]/admin/setting/left-nav/_utils/Menu
 import SigninButton from './_components/SigninButton';
 import { AbstractIntlMessages } from 'next-intl';
 import { TbGridDots } from 'react-icons/tb';
-import { FaUserTie } from 'react-icons/fa';
+import { FaAppStore, FaUserTie } from 'react-icons/fa';
 import { CompanyMenu, Explore } from '@prisma/client';
 // import ExplorePanel from './_components/explore/ExplorePanel';
 import Image from 'next/image';
 import { IoIosArrowBack } from 'react-icons/io';
-import { BsColumnsGap } from 'react-icons/bs';
+// import { BsColumnsGap } from 'react-icons/bs';
 
 interface Props{
   menusData: Record<number, MenuWithAllModels[]>,
@@ -355,9 +355,10 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
                 {sam}
              <MdOutlineArrowDropDown className='text-xl max-sm:rtl:ml-4  ' />
               </span> */}
-              <div className="flex w-8 cursor-pointer max-sm:hidden prof-btn pb-1 text-gray-300 items-center">
+              <div className="flex w-24 cursor-pointer max-sm:hidden prof-btn pb-1 text-gray-300 items-center">
                 {/* <span className="inline-block h-5 rtl:ml-1 w-0.5 pt-4 bg-gray-500"></span> */}
-                <BsColumnsGap className=' hover:text-orange-400 text-bxs' />
+                <FaAppStore className=' hover:text-orange-400 text-bxs' />
+
 
                 <span className="text-bxs rtl:mr-1.5 ">{about} {sam}</span>
              </div>
