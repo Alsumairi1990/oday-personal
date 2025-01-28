@@ -249,7 +249,7 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
             <div id="exploreMenu" className="absolute explore-menu hidden  top-[4.78rem] z-10 w-9/12 ltr:right-6 rtl:right-9 bg-white border border-gray-300 dark:border-gray-800 dark:bg-[#111]   pb-4 flex-col  rounded-xl" style={{filter: 'drop-shadow(0px 0px 18px rgba(0,0,0,0.08))'}}>
                  <p className="text-md text-gray-600 dark:text-gray-200 px-3 sm:px-10 py-3 border-b border-gray-200 dark:border-gray-700">{explore} {sam}</p>
                  <div className="flex ">
-                  <div className="flex-65   sm:ltr:pl-5 sm:rtl:pr-5 py-4">
+                  <div className="flex-65 sm:ltr:pl-5 sm:rtl:pr-5 py-4">
                     {explores && 
                     <ExplorePanel explores={explores} locale={locale} messages={messages} />
                    } 
@@ -346,15 +346,7 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
                   <FrontTopNav  menusData ={menusData} locale={locale} messages={messages} />
                   </div>
                 
-                                    
-              {/* <span
-               
-
-              className='text-sm prof-btn text-gray-800 inline-flex sm:text-gray-50 hover:text-orange-400  items-center'
-              >
-                {sam}
-             <MdOutlineArrowDropDown className='text-xl max-sm:rtl:ml-4  ' />
-              </span> */}
+             
               <div className="flex w-24 cursor-pointer max-sm:hidden prof-btn pb-1 text-gray-300 items-center">
                 {/* <span className="inline-block h-5 rtl:ml-1 w-0.5 pt-4 bg-gray-500"></span> */}
                 <FaAppStore className=' hover:text-orange-400 text-bxs' />
