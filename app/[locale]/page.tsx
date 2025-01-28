@@ -1,5 +1,4 @@
 import NavBar from '../NavBar'
-// import Hero from '../_components/HeroSect'
 // import Services from '../_components/Services'
 import React, { Suspense } from 'react';
 import { getLocale, getMessages } from 'next-intl/server';
