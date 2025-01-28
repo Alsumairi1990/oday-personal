@@ -28,7 +28,6 @@ import ContactForm from '../_components/ContactForm';
 // import Testimonials from '../_components/Testimonials';
 // import Markets from '../_components/market/Markets';
 // import Footerk from '../_components/Footer';
-// import PackageSect from '../_components/package/PackageSect';
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
