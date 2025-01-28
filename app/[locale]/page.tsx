@@ -11,6 +11,8 @@ import { PlanCatPackForFront } from './admin/plans/category/_utils/PlanCatPackFo
 import PackageSect from '../_components/package/PackageSect';
 import Testimonials from '../_components/Testimonials';
 import ContactForm from '../_components/ContactForm';
+import Services from '../_components/Services';
+import ServicesFull from '../_components/ServicesFull';
 // import { AboutUsSection, Category, Explore, Industry, PageSection, PlanCategory, Post, Service, Testimonial, Tool } from '@prisma/client'
 // import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 // import { WorksFrontData } from './admin/works/utils/WorksFrontData'
@@ -175,6 +177,8 @@ export default async function Home() {
 
 
   const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
+  const serviceCatMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'servicesCategory'); 
+  const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
 
 
 
@@ -217,6 +221,14 @@ export default async function Home() {
     <div className="hed">
       {heroData && <Hero heroData={heroData} services={servicesR} categories={categoriesResult} /> }
     </div>
+
+    <div className='bg-gray-50 gray:bg-[#111]"'>
+        {categoriesResult  && serviceCatMeta && <Services categories={categoriesResult} meta={serviceCatMeta}  />}
+     </div> 
+
+     <div className='bg-gray-50 gray:bg-[#111]"'>
+     {servicesR && serviceMeta && <ServicesFull services={servicesR} meta={serviceMeta} />}
+     </div>
     
     <div className="my-6">
       <PlansPanel category={planCategory} locale={locale} messages={messages} />
@@ -231,10 +243,8 @@ export default async function Home() {
       </div>
       <ContactForm  locale={locale} messages={messages} />
 
-     {/* <div className="clear"></div>
-     <div className='bg-gray-50 gray:bg-[#111]"'>
-        {categoriesResult  && serviceCatMeta && <Services categories={categoriesResult} meta={serviceCatMeta}  />}
-     </div>  */}
+     <div className="clear"></div>
+     
 
 {/* 
     <div className='bg-gray-50 gray:bg-[#111]"'>
