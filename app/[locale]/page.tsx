@@ -3,7 +3,7 @@ import NavBar from '../NavBar'
 import React, { Suspense } from 'react';
 import { getLocale, getMessages } from 'next-intl/server';
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
-import { Category, CompanyMenu, Explore, PageSection, Service, Testimonial } from '@prisma/client';
+import { Category, CompanyMenu, Explore, Industry, PageSection, Service, Testimonial } from '@prisma/client';
 import Hero from '../_components/HeroSect';
 import PlansPanel from '../_components/OurPlans/PlansPanel';
 import { PlanCategoryForFront } from './admin/plans/category/_utils/PlanCategoryForFront';
@@ -13,6 +13,9 @@ import Testimonials from '../_components/Testimonials';
 import ContactForm from '../_components/ContactForm';
 import Services from '../_components/Services';
 import ServicesFull from '../_components/ServicesFull';
+import IndustryCard from '../_components/industries/IndustryCard';
+import { WorksFrontData } from './admin/works/utils/WorksFrontData';
+import Works from '../_components/Works';
 // import { AboutUsSection, Category, Explore, Industry, PageSection, PlanCategory, Post, Service, Testimonial, Tool } from '@prisma/client'
 // import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 // import { WorksFrontData } from './admin/works/utils/WorksFrontData'
@@ -85,6 +88,14 @@ export default async function Home() {
     method: 'GET',
     next: { revalidate: 3600 }, // Revalidate for ISR 
   });
+  const pageIdustries = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industries/home`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
+  const pageWorks = await fetch(`${process.env.NEXTAUTH_URL}/api/front/works/home`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
 
   // const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
   //   method: 'GET',
@@ -99,20 +110,14 @@ export default async function Home() {
   //   method: 'GET',
   //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
   // });
-  // const pageWorks = await fetch(`${process.env.NEXTAUTH_URL}/api/front/works/home`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
+  
 
   // const pageTestimonials = await fetch(`${process.env.NEXTAUTH_URL}/api/front/testimonials/home`, {
   //   method: 'GET',
   //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
   // });
 
-  // const pageIdustries = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industries/home`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
+  
 
   // const pageMarkets = await fetch(`${process.env.NEXTAUTH_URL}/api/front/markets`, {
   //   method: 'GET',
@@ -171,6 +176,10 @@ export default async function Home() {
   const testimonials:Testimonial[] = await pageTestimonials.json();
   const sectionMeta:PageSection[] = await sections.json();
   const companyMenu:CompanyMenu[] = await companyMenuData.json();
+  const industries:Industry[] = await pageIdustries.json();
+  const works:WorksFrontData[] = await pageWorks.json();
+
+
 
   
 
@@ -178,7 +187,9 @@ export default async function Home() {
 
   const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
   const serviceCatMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'servicesCategory'); 
-  const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
+  const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services');
+  const industryMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'industries');   
+  const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
 
 
 
@@ -190,9 +201,7 @@ export default async function Home() {
   //   const menuElements:Record<number, MenuWithAllModels[]> = await elements.json();
   //   const posts:Post[] = await latestPosts.json();
   //   const phases:PhaseWithModels[] = await pagePhases.json();
-  //   const works:WorksFrontData[] = await pageWorks.json();
   //   const testimonials:Testimonial[] = await pageTestimonials.json();
-  //   const industries:Industry[] = await pageIdustries.json();
   //   const heroData = await hero.json();
   //   const sectionMeta:PageSection[] = await sections.json();
   //   const aboutUS:AboutUsSection = await about.json();
@@ -205,10 +214,8 @@ export default async function Home() {
   //   const serviceCatMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'servicesCategory');  
   //   const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
   //   const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
-  //   const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
   //   const blogsMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'blog');  
   //   const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');  
-  //   const industryMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'industries');  
  
   return (
     <main className="flex flex-col h-ful dark:bg-[#111] rtl:font-arabic" >
@@ -237,9 +244,35 @@ export default async function Home() {
      <div className="my-14 w-11.4/12 mx-auto">
       {packageCategory && <PackageSect packagesData={packageCategory.packages}  locale={locale} messages={messages} />}
      </div> 
-
+     <div className="w-full my-8 pb-8  bg-gray-100 dark:bg-[#111] ">
+          <div className="sm:w-11/12 mx-auto p-4">
+              <div className="p-1 w-full flex my-8 justify-center">
+                {locale === 'en' ? <h2 className="text-gray-800">
+                  {industryMeta?.title}
+                </h2>
+                :
+                <div className='flex flex-col items-center'>
+                    <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold font-arabic">
+                      {industryMeta?.titleAr}
+                    </h2>
+                    <p className="text-base mt-2 text-gray-700 leading-7 text-center">
+                      {industryMeta?.descAr}
+                    </p>
+                </div>
+                  }
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 sm:gap-y-8 gap-5 sm:gap-x-8 max-sm:p-1">
+            {industries && industries.map((industry, index:number) => (
+               <IndustryCard key={industry.id} industry={industry} locale={locale} messages={messages} />
+            ))}
+            </div>
+           </div>
+      </div>
+      <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">
+      {works && workMeta &&  <Works  works = {works} meta={workMeta} /> }
+      </div>
      <div className="w-full my-24 ]">
-       {testimonials && testimonialMeta && <Testimonials testimonials={testimonials} meta={testimonialMeta} /> }
+       {testimonials && testimonialMeta && <Testimonials testimonials={testimonials} meta={testimonialMeta} locale={locale} messages={messages} /> }
       </div>
       <ContactForm  locale={locale} messages={messages} />
 
