@@ -1,11 +1,10 @@
 import Footerk from "@/app/_components/Footer"
 import { MenuWithAllModels } from "../admin/setting/left-nav/_utils/MenuWithAllModels";
-// import NavBar from "@/app/NavBar";
+import NavBar from "@/app/NavBar";
 import { getMenusElementse2 } from "../admin/setting/left-nav/_actions/Action";
 import WhatsAppLive from "@/app/_components/WhatsAppLive";
 import { getLocale, getMessages } from "next-intl/server";
 import { Category, Service } from "@prisma/client";
-// import NavBar from "@/app/NavBar.jsx"
 
 
 
@@ -45,11 +44,11 @@ export default async function signupLayout({
             
 
             <div className="h-full dark:bg-[#111]" >
-               {/* {menusData && <NavBar menusData={menusData} locale={locale} messages={messages} />} */}
+               {menusData && <NavBar menusData={menusData} locale={locale} messages={messages} />}
             {children}
-            <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+            {/* <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
-          </div>
+          </div> */}
              
             </div>
              
