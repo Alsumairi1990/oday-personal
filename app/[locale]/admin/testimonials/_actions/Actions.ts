@@ -29,7 +29,7 @@ export async function editTestimonialContent(id:number , content:string):Promise
           tag: true,
         },
       },
-      service : true,
+      services : true,
       customer : true,
       user : true
     },
@@ -69,7 +69,7 @@ export async function editTestimonialBasicData(id:number, data:FormData):Promise
           tag: true,
         },
       },
-      service : true,
+      services : true,
       customer : true,
       user : true
     },
@@ -82,13 +82,19 @@ export async function editTestimonialImage(testimonialId:number,formData:FormDat
 const imageFile = formData.get('image') as File;
 let imagePath:string = ''; 
 if(imageFile && imageFile.name){
-  await fs.mkdir("public/testimonials/images", { recursive: true })
-  imagePath = `/testimonials/images/${crypto.randomUUID()}-${imageFile.name}`;
-  console.log("image path"+imagePath);
-  await fs.writeFile(
-    `public${imagePath}`,
-    Buffer.from(await imageFile.arrayBuffer())
-    )
+  // await fs.mkdir("public/testimonials/images", { recursive: true })
+  // imagePath = `/testimonials/images/${crypto.randomUUID()}-${imageFile.name}`;
+  // console.log("image path"+imagePath);
+  // await fs.writeFile(
+  //   `public${imagePath}`,
+  //   Buffer.from(await imageFile.arrayBuffer())
+  //   )
+    if (imageFile && imageFile) {
+      await fs.mkdir("public/testimonials-media/images", { recursive: true });
+      imagePath = `/testimonials-media/images/${crypto.randomUUID()}-${imageFile}`;
+      const buffer = Buffer.from(await imageFile.arrayBuffer());
+      await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+    }
 
     const updated = await prisma.testimonial.update({
       where : {
@@ -108,7 +114,7 @@ if(imageFile && imageFile.name){
             tag: true,
           },
         },
-        service : true,
+        services : true,
         customer : true,
         user : true
       },
@@ -149,7 +155,7 @@ export async function removeTesimonialCategory(testimonialId: number, name: stri
             tag: true,
           },
         },
-        service : true,
+        services : true,
         customer : true,
         user : true
       },
@@ -218,7 +224,7 @@ export async function addTestimonialCategory(id:number , ids:number[]):Promise<T
             tag: true,
           },
         },
-        service : true,
+        services : true,
         customer : true,
         user : true
       },
@@ -262,7 +268,7 @@ export async function removeTesimonialTag(testimonialId: number, name: string): 
             tag: true,
           },
         },
-        service : true,
+        services : true,
         customer : true,
         user : true
       },
@@ -330,7 +336,7 @@ export async function addTestimonialTag(id:number , ids:number[]):Promise<Testim
             tag: true,
           },
         },
-        service : true,
+        services : true,
         customer : true,
         user : true
       },
@@ -348,15 +354,23 @@ export async function addTestimonialTag(id:number , ids:number[]):Promise<Testim
 
 // Remove Service from Testimonial
 export async function removeTestimonialService(id:number, serviceId:number):Promise<number>{
-  const result = await prisma.testimonial.update({
-    where: {
-      id: id,
-      serviceId: serviceId
-    },
-    data :{
-      serviceId : null
+  // const result = await prisma.testimonial.update({
+  //   where: {
+  //     id: id,
+  //     serviceId: serviceId
+  //   },
+  //   data :{
+  //     serviceId : null
+  //   }
+  // }); 
+  const result = await prisma.service.update({
+    where: { id: serviceId },
+    data: {
+      testimonials: {
+        disconnect: {id} 
+      }
     }
-  }); 
+  });
   return result.id;
 }
 
@@ -373,8 +387,9 @@ export async function addTestimonialService(id:number , serviceId:number):Promis
       id: id
     },
     data: {
-      serviceId : serviceId
-    },
+      services: {
+        connect: { id: serviceId } 
+      }    },
     include: {
       categories: {
         include: {
@@ -386,7 +401,7 @@ export async function addTestimonialService(id:number , serviceId:number):Promis
           tag: true,
         },
       },
-      service : true,
+      services : true,
       customer : true,
       user : true
     }
@@ -443,7 +458,7 @@ export async function getTestimonialWModels():Promise<TestimonialWithModels[] | 
           tag: true,
         },
       },
-      service : true,
+      services : true,
       customer : true,
       user : true
     },
@@ -472,7 +487,7 @@ export async function getTestimonialWModelsById(id:number):Promise<TestimonialWi
           tag: true,
         },
       },
-      service : true,
+      services : true,
       customer : true,
       user : true
     },
@@ -500,15 +515,15 @@ export async function addTestimonial(data:FormData, categoryIds:string[],tagIds:
           const data = result.data; 
           let imagePath = '';
           let iconPath = '';
-          
-          if(data.image && data.image.name){
-            await fs.mkdir("public/testimonials/images", { recursive: true })
-            imagePath = `/testimonials/images/${crypto.randomUUID()}-${data.image.name}`
-            await fs.writeFile(
-              `public${imagePath}`,
-              Buffer.from(await data.image.arrayBuffer())
-              )
-            }
+         
+             if (data.image && data.image.name) {
+                      await fs.mkdir("public/testimonials-media/images", { recursive: true });
+                      imagePath = `/testimonials-media/images/${crypto.randomUUID()}-${data.image.name}`;
+                      const buffer = Buffer.from(await data.image.arrayBuffer());
+                      await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+                    }
+              
+                   
             let verify = data.verified === 'yes' ? true : false;
             let published = data.published === 'yes' ? true : false;
 

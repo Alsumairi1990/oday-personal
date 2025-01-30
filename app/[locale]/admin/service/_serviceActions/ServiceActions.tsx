@@ -197,9 +197,13 @@ export async function removeServiceTestimonial(serviceId: number, name: string):
     if (!testimonial) {
       throw new Error('Work Not Exist');
     }
-    const updatedWork = await prisma.testimonial.update({
-      where: { id: testimonial.id }, 
-      data: { serviceId: null },
+    await prisma.service.update({
+      where: { id: serviceId },
+      data: {
+        testimonials: {
+          disconnect: testimonial // Remove specific testimonials
+        }
+      }
     });
 
     const removed = await prisma.service.findUnique({
@@ -244,14 +248,22 @@ export async function removeServiceTestimonial(serviceId: number, name: string):
 export async function addServiceTestimonial(serviceId:number , ids:number[]):Promise<ServiceWithModels>{
   try {
     console.log("add service wotk -- Start")
-      const updatePromises = ids.map( id => 
-       prisma.testimonial.update({
-          where: { id: id },
-          data: { serviceId: serviceId },
-        })
+      // const updatePromises = ids.map( id => 
+      //  prisma.testimonial.update({
+      //     where: { id: id },
+      //     data: { serviceId: serviceId },
+      //   })
         
-      );
-      const updatedWorks = await Promise.all(updatePromises);
+      // );
+      await prisma.service.update({
+        where: { id: serviceId },
+        data: {
+          testimonials: {
+            connect: ids.map(id => ({ id })) // Link the testimonials to the service
+          }
+        }
+      });
+      // const updatedWorks = await Promise.all(updatePromises);
       const updated = await prisma.service.findUnique({
         where: { id: serviceId },
         include: {

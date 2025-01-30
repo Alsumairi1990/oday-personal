@@ -5,6 +5,6 @@ export type TestimonialWithModels = Testimonial & {
     tags : (TestimonialTag & { tag: Tag })[],
     user : User,
     customer : Customer,
-    service : Service
+    services : Service[]
   };
 

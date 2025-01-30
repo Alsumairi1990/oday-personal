@@ -17,6 +17,7 @@ function PlansPanel({packagesData,locale,messages}:Props) {
   const grahicDesign = (messages as any).Common.graphicDesign;
   const plans = (messages as any).Common.packages;
   const display = (messages as any).Common.display;
+  const packages = (messages as any).Common.packages;
   const more = (messages as any).Common.more; 
   const [packageCategory, setPackageCategory] = useState<PackageForFront[]>();
 
@@ -125,7 +126,7 @@ function PlansPanel({packagesData,locale,messages}:Props) {
       {packageCategory && packageCategory.length > 0 && (
         <>
           <PackageCard packageData={packageCategory[visibleTestimonial]}   locale={locale} messages={messages} />
-          <div className="mt-4 flex justify-center gap-x-3  w-full">
+          <div className="mt-4 flex  justify-center gap-x-3  w-full">
             {packageCategory.map((_, index) => (
               <button
                 key={index}
@@ -135,7 +136,11 @@ function PlansPanel({packagesData,locale,messages}:Props) {
                 {/* {index + 1} */}
               </button>
             ))}
+           
           </div>
+          <div className="p-2">
+              <span className="text-sm text-orange-200 border border-orange-300">{more} {packages}</span>
+            </div>
         </>
       )}
     </div>

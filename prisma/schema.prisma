@@ -331,9 +331,8 @@ model Testimonial {
   rating       Float?                @default(0)
   videoContent String?
   customerId   String?
+  services     Service[]
   customer     Customer?             @relation(fields: [customerId], references: [id], onDelete: Cascade)
-  serviceId    Int?
-  service      Service?              @relation(fields: [serviceId], references: [id], onDelete: Cascade)
   userId       String?
   user         User?                 @relation(fields: [userId], references: [id], onDelete: Cascade)
   verified     Boolean?              @default(false)

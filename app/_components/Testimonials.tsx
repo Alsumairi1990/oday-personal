@@ -11,10 +11,12 @@ interface Props {
   messages : AbstractIntlMessages,
 }
 
-const TestimonialsClient = ({ testimonials, meta, locale }: Props) => {
+const TestimonialsClient = ({ testimonials, meta, locale ,messages}: Props) => {
   const [testimonialsList, setTestimonialsList] = useState<Testimonial[]>(testimonials);
   const [visibleTestimonial, setVisibleTestimonial] = useState(0); 
   const noImage = '/images/no-image.svg';
+  const more = (messages as any).Common.more; 
+
   const handleClick = (index: number) => {
     setVisibleTestimonial(index); 
   };
@@ -116,7 +118,7 @@ const TestimonialsClient = ({ testimonials, meta, locale }: Props) => {
                         {locale === 'en' ? testi.content : testi.contentAr}
                       </p>
                       <span className="inline-block border border-orange-500 bg-white px-3 dark:bg-transparent dark:border-violet-600 p-1.5 mb-2 rounded-md">
-                        see full
+                        {more}
                       </span>
                    </div>
                    
