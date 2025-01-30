@@ -10,15 +10,16 @@ import { PhaseSchema } from "@/app/[locale]/admin/service/phases/utils/PhaseSche
 // get project Phases' names
 export async function getProjectWPhasesById(projectId:string):Promise<string[] >{
     try{
-    const phases = await prisma.phase.findMany({
-      where: {
-        projectId: projectId,
-      },
-      select: {
-         name : true
-      }
-      
-    });
+      const phases = await prisma.phase.findMany({
+        where: {
+          projects: {
+            some: {}, // Ensures only phases with at least one project are retrieved
+          },
+        },
+        include: {
+          projects: true, // Fetch related projects
+        },
+      });
     const phaseNames: string[] = phases.map(assoc => assoc.name);
     return phaseNames;
     } catch (error) {
@@ -43,10 +44,10 @@ export async function removeProjectPhase(projectId: string, name: string): Promi
       if (!phase) {
         throw new Error('phase Not Exist');
       }
-      const updatedWork = await prisma.phase.update({
-        where: { id: phase.id }, // ID of the work you want to update
-        data: { projectId: null },
-      });
+      // const updatedWork = await prisma.phase.update({
+      //   where: { id: phase.id }, // ID of the work you want to update
+      //   data: { projectId: null },
+      // });
   
       const removed = await prisma.project.findUnique({
         where: { id: projectId },
@@ -82,26 +83,23 @@ export async function createProjectPhase(data:FormData, id: string): Promise<str
       let imagePath = '';
       let iconPath = '';
       
-      if(dataPhase.image && dataPhase.image.name){
-        await fs.mkdir("public/projects/phases/images", { recursive: true })
-        imagePath = `/projects/phases/images/${crypto.randomUUID()}-${dataPhase.image.name}`
-        await fs.writeFile(
-          `public${imagePath}`,
-          Buffer.from(await dataPhase.image.arrayBuffer())
-          )
-        }
-  
-      if(dataPhase.icon && dataPhase.icon.name){
-        await fs.mkdir("public/projects/phases/icons", { recursive: true })
-        iconPath = `/projects/phases/icons/${crypto.randomUUID()}-${dataPhase.icon.name}`
-        await fs.writeFile(
-          `public${iconPath}`,
-          Buffer.from(await dataPhase.icon.arrayBuffer())
-          )
-        }
+     
+       if (dataPhase.image && dataPhase.image.name) {
+                await fs.mkdir("public/offers/images", { recursive: true });
+                imagePath = `/offers/images/${crypto.randomUUID()}-${dataPhase.image.name}`;
+                const buffer = Buffer.from(await dataPhase.image.arrayBuffer());
+                await fs.writeFile(`public${imagePath}`, buffer as unknown as Uint8Array);
+              }
+        
+              // Handle icon upload
+              if (dataPhase.icon && dataPhase.name) {
+                await fs.mkdir("public/offers/icons", { recursive: true });
+                iconPath = `/offers/icons/${crypto.randomUUID()}-${dataPhase.icon.name}`;
+                const buffer = Buffer.from(await dataPhase.icon.arrayBuffer());
+                await fs.writeFile(`public${iconPath}`, buffer as unknown as Uint8Array);
+              }
         const phase = await prisma.phase.create({
           data: {
-          projectId : id,
           name: dataPhase.name,
           description: dataPhase.description,
           sequence: 9,
