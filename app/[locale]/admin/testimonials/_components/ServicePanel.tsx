@@ -153,14 +153,14 @@ const ServicePanel = ({ testimonial, colseModel }: FormEditProps) => {
               {testimonialData &&
               <div>
                 <div className="py-2 flex items-center border-b border-b-gray-300 flex-wrap overflow-y-auto">
-                {testimonialData.service && testimonialData.service.name ?(
+                {testimonialData.services.length ? testimonialData.services.map((service) => (
                   <div className="flex items-center rounded-md pl-2 pr-1 bg-white border border-gray-200">
                     <span className="text-sm text-orange-600 py-1 mr-2 font-medium">
-                      {testimonialData.service.name}
+                      {service.name}
                     </span>
                     <button
                       onClick={() => {
-                        if(testimonialData.serviceId) setRemovedTool(testimonialData.serviceId);
+                        if(service.id) setRemovedTool(service.id);
                         setShowRemoveTool(true);
                       }}
                       className="flex items-center border size-[22px] justify-center ml-auto  border-sky-500 bg-sky-500 rounded-md"
@@ -168,7 +168,7 @@ const ServicePanel = ({ testimonial, colseModel }: FormEditProps) => {
                       <IoMdCloseCircle className="text-base text-white" />
                     </button>
                   </div>
-                  ):(
+                  )):(
                     <div className="pb-1">
                         <span className="text-sm text-orange-600 px-4 inline-flex capitalize">No Services  </span>
                     </div>  
