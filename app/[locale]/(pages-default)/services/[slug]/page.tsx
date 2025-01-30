@@ -20,6 +20,7 @@ import { default as CustomServiceFeature } from "@/app/_components/_services/Ser
 import PackageCard from "@/app/_components/OurPlans/PackageCard";
 import OfferCard from "@/app/_components/offer/OfferCard";
 import Testimonials from "@/app/_components/Testimonials";
+import PackageSect from "@/app/_components/package/PackageSect";
 
 
 interface Props {
@@ -263,7 +264,7 @@ const Serivice = async ({params}:Props) => {
                </div>
             </div>
           }  
-         {service && <div className="w-full my-16 py-8  dark:bg-[#111] ">
+         {/* {service && <div className="w-full my-16 py-8  dark:bg-[#111] ">
                <div className="w-11/12 mx-auto ">
                   <div className="flex flex-col items-center sm:mb-8">
                      <h2 className="sm:text-4xl rtl:text-3xl text-gray-900 capitalize font-bold rtl:font-arabic rtl:mb-4  tracking-wide dark:text-orange-400">{workProcess}</h2>
@@ -276,8 +277,10 @@ const Serivice = async ({params}:Props) => {
                   </div>
                </div>
             </div>
-          }    
-
+          }     */}
+ <div className="my-14 w-11.4/12 mx-auto">
+      {service.packages && <PackageSect packagesData={service.packages}  locale={locale} messages={messages} />}
+     </div> 
          {service && <div className="w-full my-16 py-8  dark:bg-[#111] ">
           <div className="w-11/12 mx-auto ">
             <div className="flex flex-col items-center sm:mb-8">
