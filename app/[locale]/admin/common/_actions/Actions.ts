@@ -780,7 +780,6 @@ export async function createServicePhase(data:FormData, id: number): Promise<str
     //   }
       const phase = await prisma.phase.create({
         data: {
-          serviceId : id,
         name: dataPhase.name,
         
         description: dataPhase.description,
