@@ -268,8 +268,8 @@ export default async function Home() {
             </div>
            </div>
       </div>
-      <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">
-      {works && workMeta &&  <Works  works = {works} meta={workMeta} /> }
+      <div className="w-full dark:w-11/12 mx-auto  dark:bg-[#111]">
+         {works && workMeta &&  <Works  works = {works} meta={workMeta} /> }
       </div>
      <div className="w-full my-24 ]">
        {testimonials && testimonialMeta && <Testimonials testimonials={testimonials} meta={testimonialMeta} locale={locale} messages={messages} /> }

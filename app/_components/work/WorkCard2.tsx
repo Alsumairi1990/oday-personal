@@ -26,7 +26,7 @@ async function WorkCard2({work}:Props) {
         
       }
     </div>
-    <div className="absolute inset-0 rounded-md bg-black bg-opacity-50 pointer-events-none"></div>
+    <div className="absolute inset-0 rounded-md bg-black bg-opacity-50 dark:opacity-0 pointer-events-none"></div>
     <div className="absolute bottom-1 p-2">
             <div className="px-2 pb-2 pt-3 flex w-full justify-between">
                 {locale == 'en' ?(  <div className="flex flex-col">

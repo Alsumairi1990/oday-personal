@@ -53,37 +53,37 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
     const themeSwitcher = document.querySelector('.top-nav');
     const htmlElement = document.documentElement;
     const isDarkTheme = () => htmlElement.classList.contains('dark');
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (isDarkTheme()) return;
-        const isVisible = entry.isIntersecting; 
-        if (!isVisible) {
-          themeSwitcher?.classList.add('nav-top-l');
-          if (logoRef1.current) {
-            logoRef1.current.src = logoSamL;
-          }
-          if (logoRef2.current) {
-            logoRef2.current.src = logoSamL; 
-          }
-        } else {
-          themeSwitcher?.classList.remove('nav-top-l');
-          if (logoRef1.current) {
-            logoRef1.current.src = logo;
-          }
-          if (logoRef2.current) {
-            logoRef2.current.src = logo; 
-          }
-        }
-      },
-      {
-        threshold: 0, 
-      }
-    );
+    // const observer = new IntersectionObserver(
+    //   ([entry]) => {
+    //     if (isDarkTheme()) return;
+    //     const isVisible = entry.isIntersecting; 
+    //     if (!isVisible) {
+    //       themeSwitcher?.classList.add('nav-top-l');
+    //       if (logoRef1.current) {
+    //         logoRef1.current.src = logoSamL;
+    //       }
+    //       if (logoRef2.current) {
+    //         logoRef2.current.src = logoSamL; 
+    //       }
+    //     } else {
+    //       themeSwitcher?.classList.remove('nav-top-l');
+    //       if (logoRef1.current) {
+    //         logoRef1.current.src = logo;
+    //       }
+    //       if (logoRef2.current) {
+    //         logoRef2.current.src = logo; 
+    //       }
+    //     }
+    //   },
+    //   {
+    //     threshold: 0, 
+    //   }
+    // );
   
-    const heroSection = document.querySelector('.hero-section');
-    if (heroSection) {
-      observer.observe(heroSection);
-    }
+    // const heroSection = document.querySelector('.hero-section');
+    // if (heroSection) {
+    //   observer.observe(heroSection);
+    // }
   
     const handleClickOutside = (event: any) => {
       
@@ -155,12 +155,12 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
   
     document.addEventListener('click', handleClickOutside);
   
-    return () => {
-      if (heroSection) {
-        observer.unobserve(heroSection);
-      }
-      document.removeEventListener('click', handleClickOutside);
-    };
+    // return () => {
+    //   if (heroSection) {
+    //     observer.unobserve(heroSection);
+    //   }
+    //   document.removeEventListener('click', handleClickOutside);
+    // };
   }, []);
 
   

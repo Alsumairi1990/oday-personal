@@ -13,6 +13,10 @@ interface Props {
 
 const TestimonialsClient = ({ testimonials, meta, locale }: Props) => {
   const [testimonialsList, setTestimonialsList] = useState<Testimonial[]>(testimonials);
+  const [visibleTestimonial, setVisibleTestimonial] = useState(0); 
+  const handleClick = (index: number) => {
+    setVisibleTestimonial(index); 
+  };
 
   return (
     <div className="w-full bg-[#202529] dark:bg-[#111] border-y border-y-gray-300 dark:border-0">
@@ -47,25 +51,68 @@ const TestimonialsClient = ({ testimonials, meta, locale }: Props) => {
 
         {/* Right Section */}
         <div className="flex-100 sm:flex-65 ltr:pl-3 rtl:pr-3 sm:pr-2 sm:col-span-3">
-          <div className="grid sm:grid-cols-3 gap-6">
+        <div className="flex sm:hidden justify-between max-sm:flex-wrap">
+      {testimonialsList.length > 0 && (
+        <>
+          {/* Show only one testimonial based on the visibleTestimonial state on mobile */}
+          <div key={testimonialsList[visibleTestimonial].id} className="flex flex-col rounded-md border border-gray-300 shadow-xl dark:border-gray-800 sm:hidden">
+            <div className="rounded-t-md bg-gray-50 dark:bg-[#161616]">
+              <div className="h-24 relative flex flex-col rounded-md justify-end items-center bg-[#005974] dark:bg-violet-600">
+                <div className="w-14 bg-white border border-gray-300 dark:border-transparent p-0.5 rounded-full absolute -top-6">
+                  {testimonialsList[visibleTestimonial].image && (
+                    <img className="w-full rounded-full" src={testimonialsList[visibleTestimonial].image} alt="" />
+                  )}
+                </div>
+                <div className="p-2 text-center">
+                  <h2 className="text-base font-semibold text-gray-100 mb-0.5">{testimonialsList[visibleTestimonial].title}</h2>
+                  <p className="text-[13px] font-semibold text-gray-300">{locale === 'en' ? testimonialsList[visibleTestimonial].title : testimonialsList[visibleTestimonial].titleAr}</p>
+                </div>
+              </div>
+              <div className="h-fit">
+                <p className="text-sm pt-4 pb-10 px-2 leading-8 text-center line-clamp-6 dark:text-gray-200">
+                  {locale === 'en' ? testimonialsList[visibleTestimonial].content : testimonialsList[visibleTestimonial].contentAr}
+                </p>
+                <span className="inline-block border border-orange-500 bg-orange-500 dark:bg-transparent dark:border-violet-600 p-1.5 mb-2 rounded-md">
+                  see full
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Show buttons to switch testimonials only on mobile */}
+          <div className="mt-4 flex justify-center gap-x-3  w-full">
+            {testimonialsList.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleClick(index)}
+                className={`p-2  h-[3px] w-8 rounded ${visibleTestimonial === index ? 'bg-orange-500 text-white' : 'bg-gray-300'}`}
+              >
+                {/* {index + 1} */}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+          <div className="grid grid-cols-3 gap-x-4 max-sm:hidden pt-6 justify-between">
             {testimonialsList.length > 0 &&
               testimonialsList.map((testi) => (
                 <div key={testi.id} className="flex flex-col rounded-md border border-gray-300 shadow-xl dark:border-gray-800">
                   <div className="  rounded-t-md bg-gray-50 dark:bg-[#161616]">
-                    <div className="h-24 relative flex flex-col rounded-md justify-end items-center bg-[#005974] dark:bg-violet-600">
+                    <div className="h-24 relative flex flex-col rounded-md rounded-b-none justify-end items-center bg-[#005974] dark:bg-violet-600">
                       <div className="w-14 bg-white border border-gray-300 dark:border-transparent p-0.5 rounded-full absolute -top-6">
                         {testi.image && <img className="w-full rounded-full" src={testi.image} alt="" /> }
                       </div>
                       <div className="p-2 text-center">
                         <h2 className="text-base font-semibold text-gray-100 mb-0.5">{testi.title}</h2>
-                        <p className="text-[13px] font-semibold  text-gray-300">{locale === 'en' ? testi.title : testi.titleAr}</p>
+                        <p className="text-[13px] font-semibold line-clamp-1 text-gray-300">{locale === 'en' ? testi.title : testi.titleAr}</p>
                       </div>
                     </div>
-                   <div className='h-fit'>
+                   <div className='h-fit text-center'>
                     <p className="text-sm pt-4 pb-10 px-2 leading-8 text-center line-clamp-6  dark:text-gray-200">
                         {locale === 'en' ? testi.content : testi.contentAr}
                       </p>
-                      <span className="inline-block border border-orange-500 bg-orange-500 dark:bg-transparent dark:border-violet-600 p-1.5 mb-2 rounded-md">
+                      <span className="inline-block border border-orange-500 bg-white px-3 dark:bg-transparent dark:border-violet-600 p-1.5 mb-2 rounded-md">
                         see full
                       </span>
                    </div>

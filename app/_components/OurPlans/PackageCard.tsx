@@ -36,7 +36,7 @@ const PackageCard = ({ packageData,locale,messages } : ServiceProps) => {
                 }
             </div>
          </div>
-    <div className=" rounded-b-md  px-3 ">
+    <div className=" rounded-b-md  px-3 max-sm:h-60 max-sm:overflow-y-auto ">
      <div className="flex px-2 pt-4 sm:h-44 justify-center">
         {packageData.image && <img src={packageData.image} className='w-10/12 mx-auto border border-gray-300 h-full rounded-lg ' alt={packageData.name} />}
      </div>

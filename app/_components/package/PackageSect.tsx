@@ -30,6 +30,12 @@ function PlansPanel({packagesData,locale,messages}:Props) {
     setActiveButton(category);
     fetchCategoryData(category);
   };
+
+  // const [testimonialsList, setTestimonialsList] = useState<Testimonial[]>(testimonials);
+    const [visibleTestimonial, setVisibleTestimonial] = useState(0); 
+    const handleClick = (index: number) => {
+      setVisibleTestimonial(index); 
+    };
   const fetchCategoryData = async (slug:string) => {
         setLoading(true);
         try {
@@ -69,7 +75,7 @@ function PlansPanel({packagesData,locale,messages}:Props) {
 
   return (
     <>
-       <div className="relative w-11.3/12 mx-auto flex flex-col sm:mb-4">
+       <div className="relative w-full sm:w-11.3/12 mx-auto flex flex-col sm:mb-4">
          <span className="w-full absolute top-1/2 inline-flex z-0 h-[1px] bg-gray-300 dark:bg-[#424957]
            after:content-[''] after:absolute after:-top-1.5 after:h-3.5 after:w-0.5 after:rounded-sm after:bg-gray-300 dark:after:bg-[#434a58] after:z-10 
            before:content-[''] before:absolute before:left-0 before:-top-1.5 before:h-3.5 before:w-0.5 before:rounded-sm dark:before:bg-[#293347] before:bg-gray-300 before:z-0">
@@ -106,15 +112,33 @@ function PlansPanel({packagesData,locale,messages}:Props) {
           </div>
    
        </div>
-    <div className="w-11.3/12 grid sm:grid-cols-3 gap-y-7 sm:gap-x-11 mx-auto rtl:font-arabic relative  px-4 ">
+    <div className="w-11.3/12 grid sm:grid-cols-3 max-sm:hidden gap-y-7 sm:gap-x-11 mx-auto rtl:font-arabic relative  px-4 ">
     {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
-
          {packageCategory &&
             packageCategory.map((packageData)=> (
                 <PackageCard packageData={packageData}   locale={locale} messages={messages} />
             ))
          }
      </div>
+
+     <div className="flex sm:hidden bg-cardOnyx pt-2 px-2 pb-5 rounded-md justify-between max-sm:flex-wrap">
+      {packageCategory && packageCategory.length > 0 && (
+        <>
+          <PackageCard packageData={packageCategory[visibleTestimonial]}   locale={locale} messages={messages} />
+          <div className="mt-4 flex justify-center gap-x-3  w-full">
+            {packageCategory.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => handleClick(index)}
+                className={`p-2  h-[3px] w-8 rounded ${visibleTestimonial === index ? 'bg-orange-500 text-white' : 'bg-gray-300'}`}
+              >
+                {/* {index + 1} */}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
      </>
   )
 }

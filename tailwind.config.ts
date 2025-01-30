@@ -89,6 +89,7 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         card: "var(--card)",
+        cardOnyx : "var(--card-onyx-black)",
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
