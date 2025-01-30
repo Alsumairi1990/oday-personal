@@ -61,7 +61,7 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
             }
           },
           // industries : true,
-          // testimonials : true,
+          testimonials : true,
           features : true,
           // plans  : true,
           offers : true,
