@@ -1452,10 +1452,15 @@ export async function getServiceWWorksById(serviceId:number):Promise<string[] >{
 // get service Phases
 export async function getServicePhasesById(serviceId:number):Promise<Phase[] >{
   const phases = await prisma.phase.findMany({
-    where: {
-      serviceId: serviceId,
-    },
-  });
+         where: {
+           services: {
+             some: {}, // Ensures only phases with at least one project are retrieved
+           },
+         },
+         include: {
+           services: true, // Fetch related projects
+         },
+       });
   return phases;
 }
 // Delete Service/services  by passing 'ids'
@@ -1658,11 +1663,12 @@ export async function getServiceById(serviceId:number):Promise<Service | null >{
 export async function getServiceWPhasesById(serviceId:number):Promise<string[] >{
   const serviceWithTools = await prisma.phase.findMany({
     where: {
-      serviceId: serviceId,
-    },
+      services: {
+        some: {}, 
+      }},
     select: {
        name : true
-    }
+    }     
     
   });
   const toolNames: string[] = serviceWithTools.map(assoc => assoc.name);
