@@ -14,6 +14,7 @@ interface Props {
 const TestimonialsClient = ({ testimonials, meta, locale }: Props) => {
   const [testimonialsList, setTestimonialsList] = useState<Testimonial[]>(testimonials);
   const [visibleTestimonial, setVisibleTestimonial] = useState(0); 
+  const noImage = '/images/no-image.svg';
   const handleClick = (index: number) => {
     setVisibleTestimonial(index); 
   };
@@ -60,7 +61,9 @@ const TestimonialsClient = ({ testimonials, meta, locale }: Props) => {
               <div className="h-24 relative flex flex-col rounded-md justify-end items-center bg-[#005974] dark:bg-violet-600">
                 <div className="w-14 bg-white border border-gray-300 dark:border-transparent p-0.5 rounded-full absolute -top-6">
                   {testimonialsList[visibleTestimonial].image && (
-                    <img className="w-full rounded-full" src={testimonialsList[visibleTestimonial].image} alt="" />
+                    <img className="w-full rounded-full" 
+                    src={testimonialsList[visibleTestimonial].image ?? noImage }
+                     alt={testimonialsList[visibleTestimonial].title ?? ""} /> 
                   )}
                 </div>
                 <div className="p-2 text-center">
