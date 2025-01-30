@@ -373,15 +373,13 @@ model Phase {
   icon          String?
   phaseType     String?
   sequence      Int
-  serviceId     Int?
+  
   categories    Category[]
   steps         Step[]
   services      Service[]
   userId        String // References one specific user (modified)
   user          User       @relation(fields: [userId], references: [id]) // Relation to User
-
-  projectId String?
-  project   Project? @relation(fields: [projectId], references: [id])
+  projects      Project[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
