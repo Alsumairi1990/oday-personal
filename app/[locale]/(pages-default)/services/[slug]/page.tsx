@@ -19,6 +19,7 @@ import ServiceTechCard from "@/app/_components/_services/ServiceTechCard";
 import { default as CustomServiceFeature } from "@/app/_components/_services/ServicesFeature1";
 import PackageCard from "@/app/_components/OurPlans/PackageCard";
 import OfferCard from "@/app/_components/offer/OfferCard";
+import Testimonials from "@/app/_components/Testimonials";
 
 
 interface Props {
@@ -58,6 +59,8 @@ const Serivice = async ({params}:Props) => {
  const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
  const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');   
  const serFeatures: PageSection | undefined = sectionMeta.find((section) => section.name === 'ServiceFeature');  
+ const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
+
 
 
 
@@ -156,7 +159,7 @@ const Serivice = async ({params}:Props) => {
          </div>
 
 
-        {service &&
+        {/* {service &&
           <div className="w-full  mx-auto my-10 py-6 sm:py-12 bg-[#202529]  dark:bg-[#111] ">
             <div className="w-11/12 sm:flex sm:flex-wrap  mx-auto ">
               <div className="p-1 sm:flex-40 w-full mb-3 flex mt-4 justify-center">
@@ -196,11 +199,13 @@ const Serivice = async ({params}:Props) => {
                </div>
             </div>
          </div>
-         }
+         } */}
 
 
         
-
+      <div className="w-full my-24 ]">
+       {service.testimonials && testimonialMeta && <Testimonials testimonials={service.testimonials} meta={testimonialMeta} locale={locale} messages={messages} /> }
+      </div>
 
 
         
