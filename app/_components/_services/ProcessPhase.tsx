@@ -1,25 +1,22 @@
 
+'use client'
 import React from 'react';
-import { PhaseInt } from '@/app/models/PhaseInt'
 import { RiArrowLeftFill, RiArrowRightFill } from "react-icons/ri";
-import { Phase } from '@prisma/client';
 import { PhaseWithModels } from '@/app/[locale]/admin/service/phases/utils/PhaseWithModels';
-import { getLocale, getMessages } from 'next-intl/server';
 import { AbstractIntlMessages } from 'next-intl';
 
 
 interface PhaseIntProps {
     phase: PhaseWithModels;
-    index: number;
-    phaseSize : number,
+    index?: number;
+    phaseSize? : number,
     locale? : string,
     messages ? : AbstractIntlMessages
   }
-const ProcessPhase = async ({ phase,index,phaseSize } : PhaseIntProps ) => {
+const ProcessPhase =  ({ phase,index,phaseSize ,locale , messages} : PhaseIntProps ) => {
   
-const isLastIndex = index === phaseSize - 1;
-  const locale = await getLocale();
-  const messages = await getMessages({ locale });
+const isLastIndex = index === phaseSize! - 1;
+  
   
   return (
    
@@ -36,12 +33,12 @@ const isLastIndex = index === phaseSize - 1;
          {locale == 'en' ? (
           
           <div className="flex mt-12 mb-2 items-center justify-center">
-            <span className="text-red-500 font-semibold tex-xl mr-1.5 ">{index+1}</span><span className="text-xs text-red-500 mr-1.5">|</span>
+            <span className="text-red-500 font-semibold tex-xl mr-1.5 ">{index!+1}</span><span className="text-xs text-red-500 mr-1.5">|</span>
             <h2 className="text-xl font-semibold text-gray-700 dark:text-orange-400">{phase.name}</h2>
             </div>
             ): (
               <div className="flex mt-12 mb-2 items-center justify-center">
-                <span className="text-red-500 font-semibold tex-xl  ">{index+1}</span><span className="text-xs text-red-500 mr-1.5">|</span>
+                <span className="text-red-500 font-semibold tex-xl  ">{index!+1}</span><span className="text-xs text-red-500 mr-1.5">|</span>
                 <h2 className="text-xl font-semibold font-arabic text-gray-700 mr-1.5 dark:text-orange-400">{phase.nameAr}</h2>
               </div>
             )

@@ -405,8 +405,7 @@ model Work {
   description   String?
   descriptionAr String?
   imageUrls     String[]       @default([])
-  serviceId     Int?
-  service       Service?       @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  services       Service[]
   categories    WorkCategory[]
   tags          WorkTag[]
   locationId    Int?

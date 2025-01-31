@@ -20,7 +20,7 @@ const PackageCard = ({ packageData,locale,messages } : ServiceProps) => {
 
 
   return (
-    <div className="bg-gray-100 border border-gray-300 rounded-xl shadow-xl dark:bg-[#151515] pb-5">
+    <div className="bg-gray-100 modalSlide border border-gray-300 rounded-xl shadow-xl dark:bg-[#151515] pb-5">
         <div className="bg-black-150 rounded-2xl flex flex-col justify-center items-center">
             <div className=" py-4 bg-[#151318] w-full rounded-t-xl border border-gray-500" >
                 {locale === 'en' ? <div>

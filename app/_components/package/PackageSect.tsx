@@ -122,11 +122,11 @@ function PlansPanel({packagesData,locale,messages}:Props) {
          }
      </div>
 
-     <div className="flex sm:hidden bg-cardOnyx pt-2 px-2 pb-5 rounded-md justify-between max-sm:flex-wrap">
+     <div className="flex sm:hidden bg-cardOnyx  pt-2 px-2 pb-5 rounded-md justify-between max-sm:flex-wrap">
       {packageCategory && packageCategory.length > 0 && (
         <>
           <PackageCard packageData={packageCategory[visibleTestimonial]}   locale={locale} messages={messages} />
-          <div className="mt-4 flex  justify-center gap-x-3  w-full">
+          <div className="mt-4 flex  justify-center gap-x-3  w-full ">
             {packageCategory.map((_, index) => (
               <button
                 key={index}
@@ -136,7 +136,6 @@ function PlansPanel({packagesData,locale,messages}:Props) {
                 {/* {index + 1} */}
               </button>
             ))}
-           
           </div>
           <div className="p-2">
               <span className="text-sm text-orange-200 border border-orange-300">{more} {packages}</span>

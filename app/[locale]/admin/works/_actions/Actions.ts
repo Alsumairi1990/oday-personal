@@ -20,7 +20,7 @@ export async function removeWorkLocation(id:number, locationId:number):Promise<W
        const result = await prisma.work.update({
         where: {
           id: id,
-          serviceId: locationId
+          locationId: locationId
         },
         data :{
           locationId : null

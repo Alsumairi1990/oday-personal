@@ -12,7 +12,6 @@ import { slugify } from "@/utils/TextUtils";
 import { BasicSchema } from "../utils/BasicSchema";
 import { Category, Phase, Service, Tag, Tool, Work } from "@prisma/client";
 import { ServiceWCategory } from "../utils/ServiceWCategory";
-import { Icons } from "react-toastify";
 import { MediaSchema } from "../utils/MediaSchema";
 import { ServiceWithModels } from "../utils/ServiceWithModels";
 import { PriceSchema } from "../utils/PriceSchema";
@@ -372,8 +371,11 @@ export async function addServiceWorks(serviceId:number , ids:number[]):Promise<S
       const updatePromises = ids.map( workId => 
        prisma.work.update({
           where: { id: workId },
-          data: { serviceId: serviceId },
-        })
+          data: {
+            services: {
+              connect: { id: serviceId } 
+            }
+          }        })
         
       );
       const updatedWorks = await Promise.all(updatePromises);
@@ -423,7 +425,11 @@ export async function removeServiceWork(serviceId: number, name: string): Promis
     }
     const updatedWork = await prisma.work.update({
       where: { id: work.id }, 
-      data: { serviceId: null },
+      data: {
+        services: {
+          disconnect: { id: serviceId } // ✅ Remove the relationship
+        }
+      }
     });
 
     const removed = await prisma.service.findUnique({
@@ -1175,8 +1181,11 @@ export async function addServiceWork(serviceId: number, ids: number[]): Promise<
     const updatePromises = ids.map( workId => 
      prisma.work.update({
         where: { id: workId },
-        data: { serviceId: serviceId },
-      })
+        data: {
+          services: {
+            connect: { id: serviceId } 
+          }
+        }      })
       
     );
     const updatedWorks = await Promise.all(updatePromises);
@@ -1188,9 +1197,13 @@ export async function addServiceWork(serviceId: number, ids: number[]): Promise<
 
 
     const works = await prisma.work.findMany({
-      where: { serviceId: serviceId },
-      select:{
-        title : true
+      where: {
+        services: {
+          some: { id: serviceId } // ✅ Find works linked to the service
+        }
+      },
+      select: {
+        title: true
       }
     });
     works.map( (f) => console.log("----"+f.title))
@@ -1448,16 +1461,17 @@ export async function getServiceWTagById(serviceId:number):Promise<string[] >{
 
 // get service Tools
 export async function getServiceWWorksById(serviceId:number):Promise<string[] >{
-  const serviceWithTools = await prisma.work.findMany({
+  const works = await prisma.work.findMany({
     where: {
-      serviceId: serviceId,
+      services: {
+        some: { id: serviceId } // ✅ Find works linked to the service
+      }
     },
     select: {
-       title : true
+      title: true
     }
-    
   });
-  const toolNames: string[] = serviceWithTools.map(assoc => assoc.title);
+  const toolNames: string[] = works.map(assoc => assoc.title);
   return toolNames;
 }
 

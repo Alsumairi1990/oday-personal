@@ -25,6 +25,7 @@ export async function GET(req: Request, { params }: { params: { name: string } }
 async function getServices(name:string): Promise<ServiceForFront | null> {
   try {
     
+    const start = performance.now();
 
     const service = await prisma.service.findFirst({
         where : {
@@ -33,7 +34,13 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
         include: {
           tools: {
             include: {
-              tool: true, // Include related Service details
+              tool: {
+                select : {
+                  name : true,
+                  nameAr : true,
+                  icon : true,
+                }
+              }
             },
             take : 8
           },
@@ -47,40 +54,142 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
           //     category: true, // Include related Service details
           //   },
           // },
-          works: true,
-          phases : {
-            include : {
-              steps : true
+          works: {
+            select: {
+              id: true,
+              title: true,
+              titleAr: true,
+              image:true,
+              location : {
+                select : {
+                  country : true,
+                  countryAr : true
+                }
+              }
             }
           },
-          products: true,
+
+          phases: {
+            select: {
+              id: true,
+              name: true,
+              nameAr: true,
+              description: true,
+              descriptionAr: true,
+              icon: true,
+              phaseType: true,
+              steps: {
+                select: {
+                  id: true,
+                  name: true,
+                  nameAr: true,
+                }
+              }
+            }
+          },
+          
+          products: {
+            select: {
+              id: true,
+              name: true,
+              nameAr: true,
+              image:true
+            }
+          },
           clients : {
             select : {
+              id: true,
               companyName: true,
               image : true
             }
           },
           // industries : true,
-          features : true,
+          features : {
+            select: {
+              id : true,
+              name : true,
+              title : true,
+              titleAr :  true,
+              desc : true ,
+              descAr : true,
+              image : true,
+            },
+            take : 4
+          },
           testimonials: {
+            select : {
+              id : true,
+              title : true,
+              titleAr : true,
+              content :  true,
+              contentAr : true,
+              image : true,
+            },
             take: 3, 
           },
           // plans  : true,
-          offers : true,
+          offers : {
+            select : {
+              title : true,
+              titleAr : true,
+              image : true,
+              icon : true,
+              id : true
+            }
+          },
           packages: {
-            include: {
+            select: {
+              id: true,
+              name: true,
+              nameAr: true,
+              description: true,
+              descriptionAr: true,
+              image: true,
+              icon: true,
+              price: true,
               features: {
-                include: {
-                  feature: true, 
+                select: {
+                  feature: true
                 },
                 orderBy: {
-                  id: 'asc', 
+                  id: "asc"
                 },
-              },
+                take: 3
+              }
             },
-          },
+            take: 3
+          }
+        
+          
+          // packages: {
+          //   select : {
+          //     id :  true,
+          //     name: true,
+          //     nameAr : true,
+          //     description : true,
+          //     descriptionAr : true,
+          //     image : true,
+          //     icon : true,
+          //     price : true,
+          //   },
+          //   include: {
+          //     features: {
+          //       include: {
+          //         feature: true, 
+          //       },
+          //       orderBy: {
+          //         id: 'asc', 
+          //       },
+          //       take : 3
+          //     },
+          //   },
+          //   take : 3
+          // },
         },
       });
+
+      const end = performance.now();
+      console.log(`Query took====================> ${(end - start).toFixed(2)} ms`);
     console.log('Setting services to cache');
 
     return service as ServiceForFront;
