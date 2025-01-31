@@ -250,8 +250,12 @@ export async function removeServicePhase(serviceId: number, name: string): Promi
       throw new Error('phase Not Exist');
     }
     const updatedWork = await prisma.work.update({
-      where: { id: phase.id }, // ID of the work you want to update
-      data: { serviceId: null },
+      where: { id: phase.id }, 
+      data: {
+        services: {
+          disconnect: { id: serviceId } // ✅ Remove the relationship
+        }
+      }
     });
 
     const removed = await prisma.service.findUnique({
@@ -282,10 +286,14 @@ export async function removeServiceWork(serviceId: number, name: string): Promis
     if (!work) {
       throw new Error('Work Not Exist');
     }
-    const updatedWork = await prisma.work.update({
-      where: { id: work.id }, // ID of the work you want to update
-      data: { serviceId: null },
-    });
+   const updatedWork = await prisma.work.update({
+         where: { id: work.id }, 
+         data: {
+           services: {
+             disconnect: { id: serviceId } // ✅ Remove the relationship
+           }
+         }
+       });
 
     const removed = await prisma.service.findUnique({
       where: { id: serviceId },
@@ -829,14 +837,12 @@ export async function createServiceWork(serviceId: number, name:string): Promise
   const newWork = await prisma.work.create({
     data: {
       title : name,
-      serviceId: serviceId,
       userId : userId
     },
   });
     const toolName = await prisma.work.findFirst({
       where: {
           id: newWork.id,
-          serviceId : serviceId
       },
       select: {
           title: true
