@@ -32,12 +32,12 @@ async function MarketWorkCard({work}:Props) {
     <div className="px-2 pb-2 pt-3 flex w-full justify-between">
         {locale == 'en' ?(  <div className="flex flex-col">
             <h2 className="text-gray-800 dark:text-gray-100 font-semibold text-base">{work.title}</h2>
-            <span className="inline-block text-gray-700 dark:text-gray-100 uppercase mt-1.5 text-sm">{work.service?.name}</span>
+            <span className="inline-block text-gray-700 dark:text-gray-100 uppercase mt-1.5 text-sm">{work.services?.name}</span>
         </div>) :
         (
         <div className="flex flex-col font-arabic">
             <h2 className="text-gray-800 dark:text-gray-100 font-semibold text-base">{work.titleAr}</h2>
-            <span className="inline-block text-gray-700 dark:text-gray-100 uppercase mt-1.5 text-sm">{work.service?.nameAr}</span>
+            <span className="inline-block text-gray-700 dark:text-gray-100 uppercase mt-1.5 text-sm">{work.services?.nameAr}</span>
         </div>)
         
       }
