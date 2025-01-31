@@ -32,18 +32,18 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
           name_slug : name
         },
         include: {
-          tools: {
-            include: {
-              tool: {
-                select : {
-                  name : true,
-                  nameAr : true,
-                  icon : true,
-                }
-              }
-            },
-            take : 8
-          },
+          // tools: {
+          //   include: {
+          //     tool: {
+          //       select : {
+          //         name : true,
+          //         nameAr : true,
+          //         icon : true,
+          //       }
+          //     }
+          //   },
+          //   take : 8
+          // },
         
           works: {
             select: {
@@ -87,13 +87,13 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
               image:true
             }
           },
-          clients : {
-            select : {
-              id: true,
-              companyName: true,
-              image : true
-            }
-          },
+          // clients : {
+          //   select : {
+          //     id: true,
+          //     companyName: true,
+          //     image : true
+          //   }
+          // },
           // industries : true,
           features : {
             select: {
