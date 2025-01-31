@@ -375,6 +375,7 @@ async function getServiceData(name_slug: string): Promise<ServiceForFront | null
 const SingleService = async ({ params }: Props) => {
   const { locale, slug } = params;
   unstable_setRequestLocale(locale); // Enable static rendering
+  
 
   const messages = await getMessages({ locale });
   const feature1 = (messages as any).Common.featureTitle1;
@@ -398,11 +399,127 @@ const SingleService = async ({ params }: Props) => {
     next: { revalidate: 1800 }, // Revalidate for ISR if needed
   });
   const sectionMeta: PageSection[] = await sections.json();
+  const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
+   const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
+   const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');   
+   const serFeatures: PageSection | undefined = sectionMeta.find((section) => section.name === 'ServiceFeature');  
+   const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
+  
 
   return (
     <div className="w-full rtl:font-arabic">
-      {/* Render your UI here */}
-    </div>
+     <div className="w-full ">    
+               {service &&  <GeneralHeroSect  title={service.name!}
+                  titleAr={service.nameAr!} 
+                  subTitle={service.description!} 
+                  subTitleAr={service.descriptionAr!}  
+                  locale={locale} messages={messages} 
+                  page={service.name} pageAr={service.nameAr!}  
+                  image={service.image!}/> }
+         </div>
+<div className="w-full mb-16 py-8  bg-gray-100 dark:bg-[#111] ">
+          <div className="w-11.4/12 sm:w-11/12 mx-auto">
+            <div className="flex flex-col items-center sm:mb-8">
+               {locale == 'en' ?
+               <>
+                  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{feature1}<span className="text-orange-600">{service.name}</span>{feature2}</h2>
+                  <p className="text-base my-2 text-gray-700 gray:text-gray-50 line-clamp-2">{serFeatures?.desc}</p>
+               </>
+               :
+               <>
+                  <h2 className="sm:text-3xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">{feature1}<span className="text-orange-600">{service.nameAr}</span></h2>
+                  <p className="text-base my-2 text-gray-700 text-md gray:text-gray-50 sm:leading-7 line-clamp-2">{serFeatures?.descAr}</p>
+               </>  
+            }
+            </div>
+            <div className="grid sm:grid-cols-4 gap-6  mt-2">
+            {service.features && service.features.length > 0 && service.features.map((feature, index:number) => (
+               <CustomServiceFeature key={service.id} servicefeature={feature} locale={locale} messages={messages} />
+            ))}
+            </div>
+           </div>
+         </div>
+        {service &&
+          <div className="w-full  mx-auto my-10 py-6 sm:py-12 bg-[#202529]  dark:bg-[#111] ">
+            <div className="w-11/12 sm:flex sm:flex-wrap  mx-auto ">
+              <div className="p-1 sm:flex-40 w-full mb-3 flex mt-4 justify-center">
+               {locale === 'en' ? <div className='flex flex-col items-center'>
+                     <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold ">
+                     {techMeta?.title}
+                     </h2>
+                     <p className="text-base mt-2 text-gray-700 text-center">
+                     {techMeta?.desc}
+                     </p>
+               </div>
+               :
+               <div className='flex flex-col '>
+                     <div className="flex items-center mb-3 ">
+                        <span className="h-[3px] w-20 ml-2 bg-[#EE9143] inline-block"></span>
+                        <p className="text-md sm:text-lg font-semibold text-gray-100 ">{service.nameAr} </p>
+                     </div>
+                     <h2 className="text-gray-50 sm:leading-9  dark:text-gray-50 text-xl sm:text-2xl font-semibold ">
+                     {techMeta?.titleAr}
+                     </h2>
+                     <p className="text-sm mt-2 text-gray-100 leading-7 ">
+                     {techMeta?.descAr}
+                     </p>
+                     <p className="text-sm  w-fit border my-3 sm:mt-5 text-orange-400 border-[#EE9143] rounded-2xl sm:rounded-3xl sm:px-4 px-3 py-1.5 sm:py-3 text-center">{discussProject}</p>
+               </div>
+                  }
+               </div>
+               <div className=" grid sm:flex-60 grid-cols-3 sm:grid-cols-4 gap-x-4 gap-y-6 sm:gap-x-6 max-sm:p-4 mt-2 sm:rtl:pr-8">
+               {service.tools && service.tools.slice(0, 8).map((tool, index) => (
+                  <ServiceTechCard 
+                     tool={tool.tool} 
+                     locale={locale} 
+                     messages={messages} 
+                  />
+                  ))}
+               </div>
+            </div>
+         </div>
+         } 
+        
+      <div className="w-full my-24 ]">
+       {service.testimonials && testimonialMeta && <Testimonials testimonials={service.testimonials} meta={testimonialMeta} locale={locale} messages={messages} /> }
+      </div>
+       <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
+          <div className="w-11/12 mx-auto ">
+            <div className="flex flex-col items-center sm:mb-8 ">
+               {locale == 'en' ? <h2 className="sm:text-4xl  border-b-[0.3rem] pb-2 border-b-blue-400 text-gray-900 capitalize font-bold tracking-wide rtl:text-3xl  dark:text-orange-400">{ourClients}</h2>
+               :  <h2 className="sm:text-4xl text-gray-900  border-b-[0.3rem] pb-2 border-b-blue-400 capitalize font-bold tracking-wide rtl:text-3xl font-arabic dark:text-orange-400">{ourClients }</h2>
+            }
+            </div>
+            <div className=" sm:flex grid grid-cols-2 sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
+            {service && service.clients && service.clients.map((client, index:number) => (
+               <ClientCard key={client.id} client={client} locale={locale} messages={messages} />
+            ))}
+            </div>
+           </div>
+         </div>
+         {service &&
+          <div className="w-full sm:w-11/12 mx-auto my-16 py-8   dark:bg-[#111] ">
+          <div className="w-full mx-auto ">
+            <div className="flex flex-col items-center sm:mb-8">
+               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400 rtl:text-3xl rtl:font-arabic">{ourProducts}<span className="text-orange-600">{service.name}</span>{feature2}</h2>
+               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic rtl:text-3xl dark:text-orange-400">{ourProducts}<span className="text-orange-600">{service.nameAr}</span></h2>
+            }
+            </div>
+            <div className=" grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6  max-sm:p-4 mt-2">
+            {service.products && service.products.slice(0, 8).map((product, index) => (
+               <ProductCard 
+                  key={product.id} 
+                  product={product} 
+                  locale={locale} 
+                  messages={messages} 
+               />
+               ))}
+
+            </div>
+           </div>
+         </div>
+         }
+   </div>
   );
 };
 
