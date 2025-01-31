@@ -45,20 +45,20 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
           //   take : 8
           // },
         
-          works: {
-            select: {
-              id: true,
-              title: true,
-              titleAr: true,
-              image:true,
-              location : {
-                select : {
-                  country : true,
-                  countryAr : true
-                }
-              }
-            }
-          },
+          // works: {
+          //   select: {
+          //     id: true,
+          //     title: true,
+          //     titleAr: true,
+          //     image:true,
+          //     location : {
+          //       select : {
+          //         country : true,
+          //         countryAr : true
+          //       }
+          //     }
+          //   }
+          // },
 
           phases: {
             select: {
@@ -119,15 +119,15 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
             take: 3, 
           },
           // plans  : true,
-          offers : {
-            select : {
-              title : true,
-              titleAr : true,
-              image : true,
-              icon : true,
-              id : true
-            }
-          },
+          // offers : {
+          //   select : {
+          //     title : true,
+          //     titleAr : true,
+          //     image : true,
+          //     icon : true,
+          //     id : true
+          //   }
+          // },
           packages: {
             select: {
               id: true,
