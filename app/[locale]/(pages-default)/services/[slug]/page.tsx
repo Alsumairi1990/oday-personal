@@ -198,9 +198,8 @@
 //   )
 // };
 // export default SingleService;
-
 import ServiceWork from "@/app/_components/_services/ServiceWork";
-import { getLocale, getMessages } from "next-intl/server";
+import { getMessages } from "next-intl/server";
 import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
 import { unstable_setRequestLocale } from 'next-intl/server';
@@ -213,11 +212,12 @@ import OfferCard from "@/app/_components/offer/OfferCard";
 import Testimonials from "@/app/_components/Testimonials";
 import PackageSect from "@/app/_components/package/PackageSect";
 import PhaseCompany from "@/app/_components/PhaseCompany";
-import prisma from "@/utils/prisma"; // Import Prisma client
+import prisma from "@/utils/prisma";
 
 interface Props {
   params: {
     slug: string;
+    locale: string; // Add locale to the params
   };
 }
 
@@ -229,9 +229,14 @@ export async function generateStaticParams() {
     },
   });
 
-  return services.map((service) => ({
-    slug: service.name_slug,
-  }));
+  // Generate static paths for all locales
+  const locales = ['en', 'ar']; // Add all supported locales here
+  return locales.flatMap((locale) =>
+    services.map((service) => ({
+      slug: service.name_slug,
+      locale, // Include the locale in the params
+    }))
+  );
 }
 
 // Fetch service data at build time
@@ -368,7 +373,9 @@ async function getServiceData(name_slug: string): Promise<ServiceForFront | null
 }
 
 const SingleService = async ({ params }: Props) => {
-  const locale = await getLocale();
+  const { locale, slug } = params;
+  unstable_setRequestLocale(locale); // Enable static rendering
+
   const messages = await getMessages({ locale });
   const feature1 = (messages as any).Common.featureTitle1;
   const feature2 = (messages as any).Common.featureTitle1;
@@ -379,7 +386,7 @@ const SingleService = async ({ params }: Props) => {
   const discussProject = (messages as any).Common.discussProject;
 
   // Fetch service data directly from the database
-  const service = await getServiceData(params.slug);
+  const service = await getServiceData(slug);
 
   if (!service) {
     return <div>Service not found</div>;
@@ -391,17 +398,11 @@ const SingleService = async ({ params }: Props) => {
     next: { revalidate: 1800 }, // Revalidate for ISR if needed
   });
   const sectionMeta: PageSection[] = await sections.json();
-  const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
-  const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');
-  const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');
-  const serFeatures: PageSection | undefined = sectionMeta.find((section) => section.name === 'ServiceFeature');
-  const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
 
   return (
     <div className="w-full rtl:font-arabic">
-  <div className="dark:bg-black-100">
-      {service.phases && service.phases.length > 0  && phaseMeta && <PhaseCompany phases={service.phases} meta={phaseMeta} locale={locale} messages={messages} />}
-   </div>    </div>
+      {/* Render your UI here */}
+    </div>
   );
 };
 
