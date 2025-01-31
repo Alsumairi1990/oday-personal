@@ -160,7 +160,7 @@ const LocationPanel = ({ work, colseModel }: FormEditProps) => {
                     </span>
                     <button
                       onClick={() => {
-                        if(workData.serviceId) setRemovedTool(workData.location.id);
+                        if(workData.service.id) setRemovedTool(workData.location.id);
                         setShowRemoveTool(true);
                       }}
                       className="flex items-center border size-[22px] justify-center ml-auto  border-sky-500 bg-sky-500 rounded-md"
