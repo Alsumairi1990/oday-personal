@@ -1,52 +1,32 @@
-import ServiceHero from "@/app/_components/_services/ServiceHero";
-import { ServiceInt1 } from "@/app/models/ServiceInt";
-import ProcessPhase from "@/app/_components/_services/ProcessPhase";
 
-import { PhaseInt } from "@/app/models/PhaseInt";
-import ServiceOffer from "@/app/_components/_services/ServiceOffer";
-import { fservices } from '@/app/utils/ServicesData';
 import ServiceWork from "@/app/_components/_services/ServiceWork";
 import { getLocale, getMessages } from "next-intl/server";
-import { gethaseMeta, getServiceBySlug, getServiceCatMeta, getWorkMeta } from "@/app/[locale]/admin/common/_actions/FrontActions";
-import IndustryCard from "@/app/_components/IndustryCard";
 import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
 import { ServiceForFront } from "@/app/[locale]/admin/service/utils/ServiceForFront";
-import { PageSection, ServiceFeature } from "@prisma/client";
+import { PageSection} from "@prisma/client";
 import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
-import TechCard1 from "@/app/_components/technologies/TechCard1";
 import ServiceTechCard from "@/app/_components/_services/ServiceTechCard";
 import { default as CustomServiceFeature } from "@/app/_components/_services/ServicesFeature1";
-import PackageCard from "@/app/_components/OurPlans/PackageCard";
 import OfferCard from "@/app/_components/offer/OfferCard";
 import Testimonials from "@/app/_components/Testimonials";
 import PackageSect from "@/app/_components/package/PackageSect";
 import PhaseCompany from "@/app/_components/PhaseCompany";
-
-
 interface Props {
   params: {
       slug: string;
   };
 }
-
-const Serivice = async ({params}:Props) => {
-  
-
+const SingleService = async ({params}:Props) => {
    const locale= await getLocale();
    const messages = await getMessages({ locale });
    const feature1 = (messages as any).Common.featureTitle1;
    const feature2 = (messages as any).Common.featureTitle1;
-   const serviceSecTitle = (messages as any).Common.serviceSecTitle;
    const categoryWorkTitle = (messages as any).Common.categoryWorkTitle;
    const ourProducts = (messages as any).Common.ourProducts;
-   const latestWork = (messages as any).HomePage.latestWork;
    const ourClients = (messages as any).Common.ourClients;
    const workProcess = (messages as any).Common.workProcess;
    const discussProject = (messages as any).Common.discussProject;
-
- 
- 
  const serviceData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/${params.slug}`, {
    method: 'GET',
    next: { revalidate: 1800 },
@@ -62,79 +42,17 @@ const Serivice = async ({params}:Props) => {
  const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');   
  const serFeatures: PageSection | undefined = sectionMeta.find((section) => section.name === 'ServiceFeature');  
  const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
-
-
-
-
-
-
-
- 
-
-
   return (
      <div className="w-full rtl:font-arabic">
        <div className="w-full ">    
-               {/* {service &&  <ServiceHero service={service} /> } */}
                {service &&  <GeneralHeroSect  title={service.name!}
-                                              titleAr={service.nameAr!} 
-                                              subTitle={service.description!} 
-                                              subTitleAr={service.descriptionAr!}  
-                                              locale={locale} messages={messages} 
-                                              page={service.name} pageAr={service.nameAr!}  
-                                              image={service.image!}/> }
+                  titleAr={service.nameAr!} 
+                  subTitle={service.description!} 
+                  subTitleAr={service.descriptionAr!}  
+                  locale={locale} messages={messages} 
+                  page={service.name} pageAr={service.nameAr!}  
+                  image={service.image!}/> }
          </div>
-
-        {/* <div className="py-4 px-8 pt-0 w-full">
-           <div className="flex ">
-            <div className="flex-35 p-2 pt-0 ">
-               <div className="flex flex-wrap  justify-between">
-                 <span className="text-black-100 uppercase text-sm mb-2">KNOW US BETTER</span>
-               </div>
-               <h2 className="text-3xl font-bold text-gray-">What Company Do?</h2>
-               <div className="flex mt-4">
-                  <p className="text-sm leading-7 text-gray-900">Webvolty is an Indian  IT Company for Website Development, Web Designing, Mobile App Development, Software Development, Web Hosting, Search Engine Optimization, Mobile Solutions and lot many IT and IT Enabled Services.</p>
-               </div>
-            </div>
-            <div className="flex-20 p-2">
-               <div className="bg-[#f9f9f9] px-2 py-3 text-center rounded-md">
-                  <div className="flex justify-center">
-                     <img src="https://www.webvolty.com/img/about/Years_Experience.png" alt="" />
-                  </div>
-                  <div className="p2 mt-3">
-                     <p className="text-gray-800 text-2xl mb-2 font-bold pb-2">154+</p>
-                     <p className="text-gray-700 text-base">Yers of Experience in Design</p>
-                  </div>
-               </div>
-            </div>
-
-            <div className="flex-20 p-2">
-               <div className="bg-[#f9f9f9] px-2 py-3 text-center rounded-md">
-                  <div className="flex justify-center">
-                     <img src="https://www.webvolty.com/img/about/Years_Experience.png" alt="" />
-                  </div>
-                  <div className="p2 mt-3">
-                     <p className="text-gray-800 text-2xl mb-2 font-bold pb-2">154+</p>
-                     <p className="text-gray-700 text-base">Yers of Experience in Design</p>
-                  </div>
-               </div>
-            </div>
-
-            <div className="flex-20 p-2">
-               <div className="bg-[#f9f9f9] px-2 py-3 text-center rounded-md">
-                  <div className="flex justify-center">
-                     <img src="https://www.webvolty.com/img/about/Years_Experience.png" alt="" />
-                  </div>
-                  <div className="p2 mt-3">
-                     <p className="text-gray-800 text-2xl mb-2 font-bold pb-2">154+</p>
-                     <p className="text-gray-700 text-base">Yers of Experience in Design</p>
-                  </div>
-               </div>
-            </div>
-           
-           </div>
-        </div> */}
-
 <div className="w-full mb-16 py-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-11.4/12 sm:w-11/12 mx-auto">
             <div className="flex flex-col items-center sm:mb-8">
@@ -142,13 +60,11 @@ const Serivice = async ({params}:Props) => {
                <>
                   <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">{feature1}<span className="text-orange-600">{service.name}</span>{feature2}</h2>
                   <p className="text-base my-2 text-gray-700 gray:text-gray-50 line-clamp-2">{serFeatures?.desc}</p>
-               
                </>
                :
                <>
                   <h2 className="sm:text-3xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">{feature1}<span className="text-orange-600">{service.nameAr}</span></h2>
                   <p className="text-base my-2 text-gray-700 text-md gray:text-gray-50 sm:leading-7 line-clamp-2">{serFeatures?.descAr}</p>
-
                </>  
             }
             </div>
@@ -159,9 +75,7 @@ const Serivice = async ({params}:Props) => {
             </div>
            </div>
          </div>
-
-
-        {/* {service &&
+        {service &&
           <div className="w-full  mx-auto my-10 py-6 sm:py-12 bg-[#202529]  dark:bg-[#111] ">
             <div className="w-11/12 sm:flex sm:flex-wrap  mx-auto ">
               <div className="p-1 sm:flex-40 w-full mb-3 flex mt-4 justify-center">
@@ -192,7 +106,6 @@ const Serivice = async ({params}:Props) => {
                <div className=" grid sm:flex-60 grid-cols-3 sm:grid-cols-4 gap-x-4 gap-y-6 sm:gap-x-6 max-sm:p-4 mt-2 sm:rtl:pr-8">
                {service.tools && service.tools.slice(0, 8).map((tool, index) => (
                   <ServiceTechCard 
-                     
                      tool={tool.tool} 
                      locale={locale} 
                      messages={messages} 
@@ -201,21 +114,12 @@ const Serivice = async ({params}:Props) => {
                </div>
             </div>
          </div>
-         } */}
-
-
+         } 
         
       <div className="w-full my-24 ]">
        {service.testimonials && testimonialMeta && <Testimonials testimonials={service.testimonials} meta={testimonialMeta} locale={locale} messages={messages} /> }
       </div>
-
-
-        
-
-
-
- 
-         <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
+       <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-11/12 mx-auto ">
             <div className="flex flex-col items-center sm:mb-8 ">
                {locale == 'en' ? <h2 className="sm:text-4xl  border-b-[0.3rem] pb-2 border-b-blue-400 text-gray-900 capitalize font-bold tracking-wide rtl:text-3xl  dark:text-orange-400">{ourClients}</h2>
@@ -265,59 +169,13 @@ const Serivice = async ({params}:Props) => {
                </div>
             </div>
           }  
-         {/* {service && <div className="w-full my-16 py-8  dark:bg-[#111] ">
-               <div className="w-11/12 mx-auto ">
-                  <div className="flex flex-col items-center sm:mb-8">
-                     <h2 className="sm:text-4xl rtl:text-3xl text-gray-900 capitalize font-bold rtl:font-arabic rtl:mb-4  tracking-wide dark:text-orange-400">{workProcess}</h2>
-                     <span className="w-14 h-1 bg-blue-500 mb-2"></span>
-                  </div>
-                  <div className=" sm:grid  sm:grid-cols-3 gap-x-10 gap-y-6 justify-center  max-sm:p-4 mt-2">
-                  {service.packages && service.packages.length>0 && service.packages.map((element) => (
-                     <PackageCard packageData={element} locale={locale} messages={messages} />
-                     ))}
-                  </div>
-               </div>
-            </div>
-          }     */}
- <div className="my-14 w-11.4/12 mx-auto">
-      {service.packages && <PackageSect packagesData={service.packages}  locale={locale} messages={messages} />}
-     </div> 
-         {/* {service && <div className="w-full my-16 py-8  dark:bg-[#111] ">
-          <div className="w-11/12 mx-auto ">
-            <div className="flex flex-col items-center sm:mb-8">
-               <h2 className="sm:text-4xl rtl:text-3xl text-gray-900 capitalize font-bold rtl:font-arabic rtl:mb-4  tracking-wide dark:text-orange-400">{workProcess}</h2>
-               <span className="w-14 h-1 bg-blue-500 mb-2"></span>
-            </div>
-            <div className=" sm:flex sm:flex-wrap gap-x-6 gap-y-6 justify-center  max-sm:p-4 mt-2">
-            {service.phases.map((phase) => (
-               <ProcessPhase index={phase.id} phase={phase} locale={locale} messages={messages} phaseSize={service.phases.length} />
-               ))}
-            </div>
-           </div>
-         </div>
-          } */}
-
+        
+      <div className="my-14 w-11.4/12 mx-auto">
+       {service.packages && <PackageSect packagesData={service.packages}  locale={locale} messages={messages} />}
+      </div> 
       <div className="dark:bg-black-100">
          {service.phases && service.phases.length > 0  && phaseMeta && <PhaseCompany phases={service.phases} meta={phaseMeta} locale={locale} messages={messages} />}
       </div>
-
-
-
-         {/* {service && <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
-          <div className="w-full mx-auto">
-            <div className="flex flex-col items-center sm:mb-8">
-               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">industry of <span className="text-orange-600">{service.name}</span>{feature2}</h2>
-               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">industry<span className="text-orange-600">{service.nameAr}</span></h2>
-            }
-            </div>
-            <div className="grid sm:grid-cols-4  max-sm:p-4 mt-2">
-            {service.industries && service.industries .map((industry, index:number) => (
-               <IndustryCard key={industry.id} industry={industry} locale={locale} messages={messages} />
-            ))}
-            </div>
-           </div>
-         </div>} */}
-
          {service && <div className="w-full my-16 py-8 ">
           <div className="w-11/12 mx-auto">
             <div className="flex flex-col items-center sm:mb-8 border-b border-b-gray-300 pb-1.5">
@@ -337,4 +195,20 @@ const Serivice = async ({params}:Props) => {
      </div>
   )
 };
-export default Serivice;
+export default SingleService;
+
+
+// Generate static paths at build time
+export async function generateStaticParams() {
+   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, { cache: "no-store" });
+ 
+   if (!res.ok) {
+     return [];
+   }
+ 
+   const services = await res.json();
+ 
+   return services.map((service: { slug: string }) => ({
+     slug: service.slug,
+   }));
+ }

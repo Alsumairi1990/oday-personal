@@ -44,16 +44,7 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
             },
             take : 8
           },
-          // tags: {
-          //   include: {
-          //     tag: true, // Include related Service details
-          //   },
-          // },
-          // categories: {
-          //   include: {
-          //     category: true, // Include related Service details
-          //   },
-          // },
+        
           works: {
             select: {
               id: true,
@@ -159,32 +150,6 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
             },
             take: 3
           }
-        
-          
-          // packages: {
-          //   select : {
-          //     id :  true,
-          //     name: true,
-          //     nameAr : true,
-          //     description : true,
-          //     descriptionAr : true,
-          //     image : true,
-          //     icon : true,
-          //     price : true,
-          //   },
-          //   include: {
-          //     features: {
-          //       include: {
-          //         feature: true, 
-          //       },
-          //       orderBy: {
-          //         id: 'asc', 
-          //       },
-          //       take : 3
-          //     },
-          //   },
-          //   take : 3
-          // },
         },
       });
 
