@@ -13,6 +13,7 @@ import OfferCard from "@/app/_components/offer/OfferCard";
 import Testimonials from "@/app/_components/Testimonials";
 import PackageSect from "@/app/_components/package/PackageSect";
 import PhaseCompany from "@/app/_components/PhaseCompany";
+import { GetStaticPaths, GetStaticProps } from "next";
 interface Props {
   params: {
       slug: string;
@@ -200,18 +201,41 @@ const SingleService = async ({params}:Props) => {
 export default SingleService;
 
 
-export async function generateStaticParams() {
-   unstable_setRequestLocale('en'); // Set a default locale for static rendering
- 
-   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, { cache: 'no-store' });
- 
-   if (!res.ok) {
-     return [];
-   }
- 
+// Fetch static paths at build time for dynamic routing
+export const getStaticPaths: GetStaticPaths = async () => {
+   // Fetch all available service slugs for static paths
+   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`);
    const services = await res.json();
  
-   return services.map((service: { slug: string }) => ({
-     slug: service.slug,
+   // Return a list of paths to pre-render
+   const paths = services.map((service: { slug: string }) => ({
+     params: { slug: service.slug },
    }));
- }
+ 
+   return { paths, fallback: 'blocking' };
+ };
+ 
+ // Fetch data at build time for the individual service page
+ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+   const serviceRes = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/${params?.slug}`);
+   const sectionsRes = await fetch(`${process.env.NEXTAUTH_URL}/api/front/meta/sections`);
+ 
+   const service: ServiceForFront = await serviceRes.json();
+   const sectionMeta: PageSection[] = await sectionsRes.json();
+ 
+   // Fetch messages and locale data
+   const messages = await getMessages({ locale });
+   const feature1 = (messages as any).Common.featureTitle1;
+   const feature2 = (messages as any).Common.featureTitle1;
+ 
+   // Pass the required data as props
+   return {
+     props: {
+       service,
+       sectionMeta,
+       locale: locale || 'en',
+       messages,
+     },
+     revalidate: 1800, // Optional: ISR (Incremental Static Regeneration)
+   };
+ };
