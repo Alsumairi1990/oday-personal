@@ -7,7 +7,7 @@ export type WorksFrontData = Work & {
         nameAr: string; 
       };
     }[];
-    service: {
+    services: {
       name: string; 
       nameAr: string;
     };

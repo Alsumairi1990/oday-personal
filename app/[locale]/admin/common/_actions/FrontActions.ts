@@ -231,7 +231,7 @@ export async function getServiceMeta():Promise<PageSection>{
               },
             },
           },
-          service: {
+          services: {
             select: {
               name: true, // This fetches the 'name' field from the Service model
               nameAr : true
@@ -239,8 +239,8 @@ export async function getServiceMeta():Promise<PageSection>{
           },
         },
       });
-      setWorksHomePageCache(results as WorksFrontData[]);
-      return results as WorksFrontData[];
+      setWorksHomePageCache(results as unknown as WorksFrontData[]);
+      return results as unknown as WorksFrontData[];
     } catch (error) {
       console.log('[getPhaseElements]'+ error);
       throw error;
