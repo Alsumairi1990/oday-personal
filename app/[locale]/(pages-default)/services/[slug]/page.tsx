@@ -3,6 +3,7 @@ import ServiceWork from "@/app/_components/_services/ServiceWork";
 import { getLocale, getMessages } from "next-intl/server";
 import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
+import { unstable_setRequestLocale } from 'next-intl/server';
 import { ServiceForFront } from "@/app/[locale]/admin/service/utils/ServiceForFront";
 import { PageSection} from "@prisma/client";
 import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
@@ -29,6 +30,7 @@ const SingleService = async ({params}:Props) => {
    const discussProject = (messages as any).Common.discussProject;
  const serviceData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/${params.slug}`, {
    method: 'GET',
+   cache: 'force-cache', // ✅ Force static caching
    next: { revalidate: 1800 },
  });
  const sections = await fetch(`${process.env.NEXTAUTH_URL}/api/front/meta/sections`, {
@@ -198,9 +200,10 @@ const SingleService = async ({params}:Props) => {
 export default SingleService;
 
 
-// Generate static paths at build time
 export async function generateStaticParams() {
-   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, { cache: "no-store" });
+   unstable_setRequestLocale('en'); // Set a default locale for static rendering
+ 
+   const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, { cache: 'no-store' });
  
    if (!res.ok) {
      return [];
