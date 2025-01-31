@@ -14,7 +14,7 @@ export type WorkSingleData = Work & {
       };
     }[];
     
-    service: {
+    services: {
       name: string; 
       nameAr: string;
     };

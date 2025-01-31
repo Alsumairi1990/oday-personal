@@ -54,7 +54,7 @@ async function getWorks(name:string): Promise<WorkSingleData[] | null> {
               },
             },
           },
-          service: {
+          services: {
             select: {
               name: true,
               nameAr: true,
@@ -84,7 +84,7 @@ async function getWorks(name:string): Promise<WorkSingleData[] | null> {
       
     
 
-    return workData as WorkSingleData[];
+    return workData as unknown as WorkSingleData[];
   } catch (error) {
     console.error('Error fetching services:', error);
     throw new Error('Failed to fetch services');

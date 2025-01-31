@@ -49,7 +49,7 @@ async function getWorks(industryName: string): Promise<WorkSingleData[]> {
               },
             },
           },
-          service: {
+          services: {
             select: {
               name: true,
               nameAr: true,
@@ -83,7 +83,7 @@ async function getWorks(industryName: string): Promise<WorkSingleData[]> {
         },
       });
   
-      return workData as WorkSingleData[]; // Returns an array of work objects that meet the criteria
+      return workData as unknown as WorkSingleData[]; // Returns an array of work objects that meet the criteria
     } catch (error) {
       console.error('Error fetching works:', error);
       throw new Error('Failed to fetch works');

@@ -17,7 +17,7 @@ export async function GET() {
               },
             },
           },
-          service: {
+          services: {
             select: {
               name: true, // This fetches the 'name' field from the Service model
               nameAr : true
