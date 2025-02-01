@@ -20,7 +20,7 @@ const isLastIndex = index === phaseSize! - 1;
   
   return (
    
-        <div className="rounded-md max-sm:w-full max-sm:flex-100 flex flex-col max-sm:mb-8 shadow-md  items-center relative sm:flex-23 sm:justify-betwejen border border-gray-300 dark:border-gray-600 dark:bg-black-150">
+        <div className="rounded-md max-sm:w-full max-sm:bg-white animate-modalSlide max-sm:flex-100 flex flex-col max-sm:mb-8 shadow-md  items-center relative sm:flex-23 sm:justify-betwejen border border-gray-300 dark:border-gray-600 dark:bg-black-150">
           {!isLastIndex  && locale == 'en' &&
             <span className="flex absolute -bottom-6 sm:top-4 sm:-right-6 "><RiArrowRightFill className='text-xl max-sm:rotate-90 text-blue-500' /></span>
           }

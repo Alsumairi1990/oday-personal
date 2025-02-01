@@ -124,7 +124,7 @@ function PlansPanel({packagesData,locale,messages}:Props) {
          }
      </div>
 
-     <div className="flex sm:hidden bg-cardOnyx  pt-2 px-2 pb-5 rounded-md justify-between max-sm:flex-wrap">
+     <div className="flex sm:hidden bg-cardOnyx animate-modalSlide  pt-2 px-2 pb-5 rounded-md justify-between max-sm:flex-wrap">
       {packageCategory && packageCategory.length > 0 && (
         <>
           <PackageCard packageData={packageCategory[visibleTestimonial]}   locale={locale} messages={messages} />

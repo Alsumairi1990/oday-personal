@@ -20,9 +20,9 @@ const PackageCard = ({ packageData,locale,messages } : ServiceProps) => {
 
 
   return (
-    <div className="bg-gray-100 modalSlide border border-gray-300 rounded-xl shadow-xl dark:bg-[#151515] pb-5">
-        <div className="bg-black-150 rounded-2xl flex flex-col justify-center items-center">
-            <div className=" py-4 bg-[#151318] w-full rounded-t-xl border border-gray-500" >
+    <div className="bg-gray-100 animate-modalSlide border border-gray-300 rounded-xl shadow-xl dark:bg-[#151515] pb-5">
+        <div className="bg-black-150 rounded-2xl animate-modalSlide flex flex-col justify-center items-center">
+            <div className=" py-4 bg-[#151318] w-full animate-modalSlide rounded-t-xl border border-gray-500" >
                 {locale === 'en' ? <div>
                   <p className="text-white text-xl text-center  font-semibold px-4">{packageData.name}<span className="text-[#ff7900] mt-2 text-md block">: 30,000 </span><span className="text-[#ff7900] block text-sm">Sam Company LDT </span></p>
                   <p className="relative text-center before:content-[''] before:absolute before:top-[50%] before:left-0 before:w-[104px] before:h-px before:bg-gradient-to-r before:from-transparent before:via-white before:to-white after:content-[''] after:absolute after:top-[50%] after:right-0 after:w-[104px] after:h-px after:bg-gradient-to-l after:from-transparent after:via-white after:to-white"><span className="text-white text-md px-4 pt-4">Finder Tool</span></p>

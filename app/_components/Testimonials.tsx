@@ -56,12 +56,12 @@ const TestimonialsClient = ({ testimonials, meta, locale ,messages}: Props) => {
 
         {/* Right Section */}
         <div className="flex-100 sm:flex-65 ltr:pl-3 rtl:pr-3 sm:pr-2 sm:col-span-3">
-        <div className="flex sm:hidden justify-between  max-sm:flex-wrap " >
+        <div className="flex sm:hidden justify-between animate-modalSlide max-sm:flex-wrap " >
       {testimonialsList.length > 0 && (
         <>
           {/* Show only one testimonial based on the visibleTestimonial state on mobile */}
-          <div key={testimonialsList[visibleTestimonial].id} className="flex flex-col w-11.5/12 mx-auto rounded-md border border-gray-300 shadow-xl dark:border-gray-800 sm:hidden">
-            <div className="rounded-t-md bg-gray-50 dark:bg-[#161616]">
+          <div key={testimonialsList[visibleTestimonial].id} className="flex animate-modalSlide flex-col w-11.5/12 mx-auto rounded-md border border-gray-300 shadow-xl dark:border-gray-800 sm:hidden">
+            <div className="rounded-t-md bg-gray-50 dark:bg-[#161616] animate-modalSlide">
               <div className="h-24 relative flex flex-col rounded-md justify-end items-center bg-[#005974] dark:bg-violet-600">
                 <div className="w-14 bg-white border border-gray-300 dark:border-transparent p-0.5 rounded-full absolute -top-6">
                   {testimonialsList[visibleTestimonial].image && (
