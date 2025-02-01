@@ -27,137 +27,151 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
     
     const start = performance.now();
 
-    const service = await prisma.service.findFirst({
-        where : {
-          name_slug : name
+    const service1 = await prisma.service.findFirst({
+      where: {
+        name_slug: name,
+      },
+      include: {
+        phases: {
+          select: {
+            id: true,
+            name: true,
+            nameAr: true,
+            description: true,
+            descriptionAr: true,
+            icon: true,
+            phaseType: true,
+            steps: {
+              select: {
+                id: true,
+                name: true,
+                nameAr: true,
+              },
+            },
+          },
         },
-        include: {
-          // tools: {
-          //   include: {
-          //     tool: {
-          //       select : {
-          //         name : true,
-          //         nameAr : true,
-          //         icon : true,
-          //       }
-          //     }
-          //   },
-          //   take : 8
-          // },
-        
-          // works: {
-          //   select: {
-          //     id: true,
-          //     title: true,
-          //     titleAr: true,
-          //     image:true,
-          //     location : {
-          //       select : {
-          //         country : true,
-          //         countryAr : true
-          //       }
-          //     }
-          //   }
-          // },
-
-          phases: {
-            select: {
-              id: true,
-              name: true,
-              nameAr: true,
-              description: true,
-              descriptionAr: true,
-              icon: true,
-              phaseType: true,
-              steps: {
-                select: {
-                  id: true,
-                  name: true,
-                  nameAr: true,
-                }
-              }
-            }
+        products: {
+          select: {
+            id: true,
+            name: true,
+            nameAr: true,
+            image: true,
           },
-          
-          products: {
-            select: {
-              id: true,
-              name: true,
-              nameAr: true,
-              image:true
-            }
-          },
-          // clients : {
-          //   select : {
-          //     id: true,
-          //     companyName: true,
-          //     image : true
-          //   }
-          // },
-          // industries : true,
-          features : {
-            select: {
-              id : true,
-              name : true,
-              title : true,
-              titleAr :  true,
-              desc : true ,
-              descAr : true,
-              image : true,
-            },
-            take : 4
-          },
-          testimonials: {
-            select : {
-              id : true,
-              title : true,
-              titleAr : true,
-              content :  true,
-              contentAr : true,
-              image : true,
-            },
-            take: 3, 
-          },
-          // plans  : true,
-          // offers : {
-          //   select : {
-          //     title : true,
-          //     titleAr : true,
-          //     image : true,
-          //     icon : true,
-          //     id : true
-          //   }
-          // },
-          packages: {
-            select: {
-              id: true,
-              name: true,
-              nameAr: true,
-              description: true,
-              descriptionAr: true,
-              image: true,
-              icon: true,
-              price: true,
-              features: {
-                select: {
-                  feature: true
-                },
-                orderBy: {
-                  id: "asc"
-                },
-                take: 3
-              }
-            },
-            take: 3
-          }
         },
-      });
+        features: {
+          select: {
+            id: true,
+            name: true,
+            title: true,
+            titleAr: true,
+            desc: true,
+            descAr: true,
+            image: true,
+          },
+          take: 4,
+        },
+        testimonials: {
+          select: {
+            id: true,
+            title: true,
+            titleAr: true,
+            content: true,
+            contentAr: true,
+            image: true,
+          },
+          take: 3,
+        },
+        packages: {
+          select: {
+            id: true,
+            name: true,
+            nameAr: true,
+            description: true,
+            descriptionAr: true,
+            image: true,
+            icon: true,
+            price: true,
+            features: {
+              select: {
+                feature: true,
+              },
+              orderBy: {
+                id: "asc",
+              },
+              take: 3,
+            },
+          },
+          take: 3,
+        },
+      },
+    });
+    
+    const service2 = await prisma.service.findFirst({
+      where: {
+        name_slug: name,
+      },
+      include: {
+        tools: {
+          include: {
+            tool: {
+              select: {
+                name: true,
+                nameAr: true,
+                icon: true,
+              },
+            },
+          },
+          take: 8,
+        },
+        works: {
+          select: {
+            id: true,
+            title: true,
+            titleAr: true,
+            image: true,
+            location: {
+              select: {
+                country: true,
+                countryAr: true,
+              },
+            },
+          },
+        },
+        clients: {
+          select: {
+            id: true,
+            companyName: true,
+            image: true,
+          },
+        },
+        industries: true,
+        plans: true,
+        offers: {
+          select: {
+            title: true,
+            titleAr: true,
+            image: true,
+            icon: true,
+            id: true,
+          },
+        },
+      },
+    });
+    
+    // Combine service1 and service2 into a single object
+    const combinedService = {
+      ...service1,
+      ...service2,
+      tools: service2?.tools || [],
+      works: service2?.works || [],
+      clients: service2?.clients || [],
+      industries: service2?.industries || [],
+      plans: service2?.plans || [],
+      offers: service2?.offers || [],
+    } as ServiceForFront;
+    
 
-      const end = performance.now();
-      console.log(`Query took====================> ${(end - start).toFixed(2)} ms`);
-    console.log('Setting services to cache');
-
-    return service as ServiceForFront;
+    return combinedService as ServiceForFront;
   } catch (error) {
     console.error('Error fetching services:', error);
     throw new Error('Failed to fetch services');
