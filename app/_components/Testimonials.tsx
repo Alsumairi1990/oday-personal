@@ -67,6 +67,7 @@ const TestimonialsClient = ({ testimonials, meta, locale ,messages}: Props) => {
                     src={testimonialsList[visibleTestimonial].image ?? noImage }
                      alt={testimonialsList[visibleTestimonial].title ?? ""} /> 
                   )}
+                  
                 </div>
                 <div className="p-2 text-center">
                   <h2 className="text-base font-semibold text-gray-100 mb-0.5">{testimonialsList[visibleTestimonial].title}</h2>

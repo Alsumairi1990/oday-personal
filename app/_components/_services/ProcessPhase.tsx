@@ -28,7 +28,7 @@ const isLastIndex = index === phaseSize! - 1;
            <span className="flex absolute -bottom-6 sm:top-4 sm:-left-6 "><RiArrowLeftFill className='text-xl max-sm:rotate-90 text-blue-500' /></span>
           }
             <div className="p-1.5  w-14 h-14 bg-gray-50 flex flex-col items-center shadow-md absolute -top-6 rounded-full border border-gray-400">
-              {phase.image && <img className='  rounded-full' src={phase.image} alt="" />}
+              {phase.icon && <img className='  rounded-full' src={phase.icon} alt="" />}
            </div>
          {locale == 'en' ? (
           

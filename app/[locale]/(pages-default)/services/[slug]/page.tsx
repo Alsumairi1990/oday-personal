@@ -3,7 +3,6 @@ import ServiceWork from "@/app/_components/_services/ServiceWork";
 import { getLocale, getMessages } from "next-intl/server";
 import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
-import { unstable_setRequestLocale } from 'next-intl/server';
 import { ServiceForFront } from "@/app/[locale]/admin/service/utils/ServiceForFront";
 import { PageSection} from "@prisma/client";
 import GeneralHeroSect from "@/app/_components/GeneralHeroSect";
@@ -46,7 +45,7 @@ const SingleService = async ({params}:Props) => {
  const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
   return (
      <div className="w-full rtl:font-arabic">
-       <div className="w-full ">    
+        {service && <div className="w-full ">    
                {service &&  <GeneralHeroSect  title={service.name!}
                   titleAr={service.nameAr!} 
                   subTitle={service.description!} 
@@ -54,8 +53,9 @@ const SingleService = async ({params}:Props) => {
                   locale={locale} messages={messages} 
                   page={service.name} pageAr={service.nameAr!}  
                   image={service.image!}/> }
-         </div>
-<div className="w-full mb-16 py-8  bg-gray-100 dark:bg-[#111] ">
+         </div>}
+
+        {service && service.features && service.features.length > 0 && <div className="w-full mb-16 py-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-11.4/12 sm:w-11/12 mx-auto">
             <div className="flex flex-col items-center sm:mb-8">
                {locale == 'en' ?
@@ -71,13 +71,15 @@ const SingleService = async ({params}:Props) => {
             }
             </div>
             <div className="grid sm:grid-cols-4 gap-6  mt-2">
-            {service.features && service.features.length > 0 && service.features.map((feature, index:number) => (
+            {service.features.map((feature, index:number) => (
                <CustomServiceFeature key={service.id} servicefeature={feature} locale={locale} messages={messages} />
             ))}
             </div>
            </div>
-         </div>
-        {service &&
+         </div>}
+
+
+        {service && service.tools && service.tools.length > 0 &&
           <div className="w-full  mx-auto my-10 py-6 sm:py-12 bg-[#202529]  dark:bg-[#111] ">
             <div className="w-11/12 sm:flex sm:flex-wrap  mx-auto ">
               <div className="p-1 sm:flex-40 w-full mb-3 flex mt-4 justify-center">
@@ -118,10 +120,11 @@ const SingleService = async ({params}:Props) => {
          </div>
          } 
         
-      <div className="w-full my-24 ]">
+      {service && service.testimonials && service.testimonials.length > 0 && <div className="w-full my-24 ]">
        {service.testimonials && testimonialMeta && <Testimonials testimonials={service.testimonials} meta={testimonialMeta} locale={locale} messages={messages} /> }
-      </div>
-       <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
+      </div>}
+
+      {service && service.clients && service.clients.length > 0 && <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
           <div className="w-11/12 mx-auto ">
             <div className="flex flex-col items-center sm:mb-8 ">
                {locale == 'en' ? <h2 className="sm:text-4xl  border-b-[0.3rem] pb-2 border-b-blue-400 text-gray-900 capitalize font-bold tracking-wide rtl:text-3xl  dark:text-orange-400">{ourClients}</h2>
@@ -135,7 +138,9 @@ const SingleService = async ({params}:Props) => {
             </div>
            </div>
          </div>
-         {service &&
+         }
+
+         {service && service.products && service.products.length > 0 &&
           <div className="w-full sm:w-11/12 mx-auto my-16 py-8   dark:bg-[#111] ">
           <div className="w-full mx-auto ">
             <div className="flex flex-col items-center sm:mb-8">
@@ -157,7 +162,7 @@ const SingleService = async ({params}:Props) => {
            </div>
          </div>
          }
-         {service && <div className="w-full my-16 py-8  dark:bg-[#111] ">
+         {service && service.offers && service.offers.length > 0  && <div className="w-full my-16 py-8  dark:bg-[#111] ">
                <div className="w-11/12 mx-auto ">
                   <div className="flex flex-col items-center sm:mb-8">
                      <h2 className="sm:text-4xl rtl:text-3xl text-gray-900 capitalize font-bold rtl:font-arabic rtl:mb-4  tracking-wide dark:text-orange-400">{workProcess}</h2>
@@ -171,28 +176,31 @@ const SingleService = async ({params}:Props) => {
                </div>
             </div>
           }  
+
+  
         
-      <div className="my-14 w-11.4/12 mx-auto">
+      {service && service.packages && service.packages.length && <div className="my-14 w-11.4/12 mx-auto">
        {service.packages && <PackageSect packagesData={service.packages}  locale={locale} messages={messages} />}
-      </div> 
-      <div className="dark:bg-black-100">
+      </div>}
+      {service && service.phases && service.phases.length > 0 && <div className="dark:bg-black-100">
          {service.phases && service.phases.length > 0  && phaseMeta && <PhaseCompany phases={service.phases} meta={phaseMeta} locale={locale} messages={messages} />}
-      </div>
-         {service && <div className="w-full my-16 py-8 ">
-          <div className="w-11/12 mx-auto">
-            <div className="flex flex-col items-center sm:mb-8 border-b border-b-gray-300 pb-1.5">
-               <h2 className="sm:text-2xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400 rtl:font-arabic rtl:text-xl">{categoryWorkTitle}</h2>
-               {locale === 'en' ? <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">{service.name}</p>
-                :  <p className="text-2xl  text-center mt-3 mb-2 font-bold text-orange-600 font-arabic dark:text-gray-200">( {service.nameAr} )</p>
-                }
-           </div>
-            <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4 ">
-            {service.works && service.works.map((work) => (
-               <ServiceWork serviceWork={work} locale={locale} messages={messages} category={service.name} />
-            ))}
-            </div>
-           </div>
-         </div>}
+      </div>}
+
+      {service && service.works && service.works.length > 0 && <div className="w-full my-16 py-8 ">
+         <div className="w-11/12 mx-auto">
+         <div className="flex flex-col items-center sm:mb-8 border-b border-b-gray-300 pb-1.5">
+            <h2 className="sm:text-2xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400 rtl:font-arabic rtl:text-xl">{categoryWorkTitle}</h2>
+            {locale === 'en' ? <p className="text-md leading-7 text-center mt-1.5 mb-2 text-gray-700 dark:text-gray-200">{service.name}</p>
+               :  <p className="text-2xl  text-center mt-3 mb-2 font-bold text-orange-600 font-arabic dark:text-gray-200">( {service.nameAr} )</p>
+               }
+         </div>
+         <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4 ">
+         {service.works && service.works.map((work) => (
+            <ServiceWork serviceWork={work} locale={locale} messages={messages} category={service.name} />
+         ))}
+         </div>
+         </div>
+      </div>}
 
      </div>
   )
