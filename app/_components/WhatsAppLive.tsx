@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 function WhatsAppLive() {
-    const phoneNumber = '1234567890';  // Replace with your WhatsApp number (including country code)
+    const phoneNumber = '+601164228317';  // Replace with your WhatsApp number (including country code)
   const message = 'Hello, I would like to know more about your services.';  // Pre-filled message
   const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 

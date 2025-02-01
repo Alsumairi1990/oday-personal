@@ -140,7 +140,7 @@ function PlansPanel({packagesData,locale,messages}:Props) {
             ))}
           </div>
           <div className="pt-5 flex items-center w-full flex-col ">
-          <p className="relative w-full text-center before:content-[''] before:absolute before:top-[50%] before:-left-1 before:w-[104px] before:h-px before:bg-gradient-to-r before:from-transparent before:via-orange-200 before:to-orange-200 after:content-[''] after:absolute after:top-[50%] after:-right-1 after:w-[104px] after:h-px after:bg-gradient-to-l after:from-transparent after:via-orange-200 after:to-orange-200"><span className="text-orange-200 text-sm px-1 border border-orange-200 rounded-md">{more} {packages}</span></p>
+             <p className="relative w-full text-center before:content-[''] before:absolute before:top-[50%] before:-left-1 before:w-[104px] before:h-px before:bg-gradient-to-r before:from-transparent before:via-orange-200 before:to-orange-200 after:content-[''] after:absolute after:top-[50%] after:-right-1 after:w-[104px] after:h-px after:bg-gradient-to-l after:from-transparent after:via-orange-200 after:to-orange-200"><span className="text-orange-200 text-sm px-1 border border-orange-200 rounded-md">{more} {packages}</span></p>
           </div>
         </>
       )}
