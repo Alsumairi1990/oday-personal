@@ -72,8 +72,10 @@ const fetchCategoryData = async (slug:string) => {
         after:content-[''] after:absolute after:-top-1.5 after:h-3.5 after:w-0.5 after:rounded-sm after:bg-gray-300 dark:after:bg-[#434a58] after:z-10 
         before:content-[''] before:absolute before:left-0 before:-top-1.5 before:h-3.5 before:w-0.5 before:rounded-sm dark:before:bg-[#293347] before:bg-gray-300 before:z-0">
       </span>
-      <div className="flex w-fit px-4 gap-x-4 max-sm:flex-wrap rounded-xl items-center z-20 bg-gray-50 dark:bg-card py-1.5 border border-gray-300 my-3  mx-auto justify-center">
-          <span className="text-md max-sm:flex-100 text-gray-600 font-semibold inline-block ltr:pr-2 rtl:pl-2 py-1 max-sm:border-b max-sm:mb-3 max-sm:py-1.5 sm:ltr:pr-border-r sm:rtl:border-l border-gray-300 ">{plans}</span>
+      <div className="flex w-fit px-4 gap-x-4 max-sm:flex-wrap rounded-xl items-center z-20 bg-gradient-to-t from-[#e5e9f0] to-white dark:bg-card pt-0 pb-1.5 max-sm:px-0 sm:py-1.5 border border-gray-300 my-3  mx-auto justify-center">
+          <div className="text-md max-sm:flex-100 text-center text-gray-600 font-semibold inline-block ltr:pr-2 rtl:pl-2 py-1 max-sm:border-b max-sm:mb-3 max-sm:py-4 sm:ltr:pr-border-r sm:rtl:border-l border-gray-300 ">
+            <span className="sm:p-1.5 px-2.5 py-[5px] text-[#994700] max-sm:rounded-md max-sm:border max-sm:border-gray-300 max-sm:bg-white max-sm: border-x border-gray-300 ">{plans}</span>
+          </div>
           <button
             type="button"
             onClick={() => handleButtonClick('web-development-plans')}
@@ -108,6 +110,8 @@ const fetchCategoryData = async (slug:string) => {
        </div>
 
     </div>
+
+    
     <div className="w-11.3/12 pt-9 pb-6 rounded  mx-auto rtl:font-arabic flex flex-wrap dark:border-x dark:border-b dark:border-b-gray-400 dark:border-x-gray-400  px-4 relative  bg-no-repeat bg-center bg-cover -z-0"  style={{backgroundImage: `url(${img})`}}>
     {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
        <div className="sm:flex-30 flex max-sm:mb-3">

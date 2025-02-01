@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Link from 'next/link'
-import { Category, PageSection, Service } from '@prisma/client';
+import { Category, PageSection } from '@prisma/client';
 import { getLocale, getMessages } from 'next-intl/server';
 import Image from 'next/image';
 import { MdOutlineKeyboardArrowLeft } from 'react-icons/md';
@@ -19,12 +19,12 @@ const Services = async ({categories,meta}:Props) => {
   return (
 
       <div className="flex flex-col sm:py-8  dark:bg-[#080808]">
-        <div className="p-1 w-11.7/12 sm:w-11/12 mx-auto">
-        {locale == 'en' ? <h2 className="text-3xl text-center px-8 mb-6 text-blue-700 dark:text-white font-semibold">{meta.title}</h2>
-          : <h2 className="text-3xl font-arabic rtl:font-bold rtl:mb-3 text-center px-8 mb-6 text-blue-700 dark:text-white font-normal">{meta.titleAr}</h2>
+        <div className="p-1 w-11.7/12 sm:w-11/12 mx-auto max-sm:pt-6">
+        {locale == 'en' ? <h2 className="sm:text-3xl text-lg text-center px-8 mb-6 text-blue-700 dark:text-white font-semibold">{meta.title}</h2>
+          : <h2 className="sm:text-3xl text-log font-arabic rtl:font-bold rtl:mb-3 text-center px-8 mb-6 text-blue-700 dark:text-white font-normal">{meta.titleAr}</h2>
           }
-          {locale == 'en' ? <p className="text-base text-gray-600 dark:text-gray-300 text-center leading-7 px-8">{meta.desc}</p>
-          :<p className="text-base font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center leading-7 px-8">{meta.descAr}</p>
+          {locale == 'en' ? <p className="sm:text-base text-md text-gray-600 dark:text-gray-300 text-center leading-6 py-0 px-2 sm:px-8">{meta.desc}</p>
+          :<p className="sm:text-base text-md  font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center leading-6 py-0 px-2 sm:px-8">{meta.descAr}</p>
           }
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-2 gap-y-8 sm:gap-8 mt-8">
          {categories && categories.map((service) => (
@@ -60,7 +60,7 @@ const Services = async ({categories,meta}:Props) => {
          ))}
 
         </div>
-        <div className="mt-8 flex justify-center relative " >
+        <div className="my-8 flex justify-center relative " >
           {
             locale == "en" ? (
               <Link

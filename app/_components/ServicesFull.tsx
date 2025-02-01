@@ -15,12 +15,12 @@ const ServicesFull = async ({services,meta}:Props) => {
 
       <div className="flex flex-col sm:py-8   dark:bg-[#080808]">
         <div className="p-1 w-11/12 mx-auto">
-        {locale == 'en' ? <h2 className="text-3xl text-center px-8 mb-6 text-blue-700 dark:text-white font-semibold">{meta.title}</h2>
-        : <h2 className="text-3xl font-arabic rtl:font-bold text-center px-8 mb-3 text-blue-700 dark:text-white font-normal">{meta.titleAr}</h2>
+        {locale == 'en' ? <h2 className="sm:text-3xl text-lg text-center px-8 mb-6 text-blue-700 dark:text-white font-semibold">{meta.title}</h2>
+        : <h2 className="sm:text-3xl text-lg font-arabic rtl:font-bold text-center px-8 mb-3 text-blue-700 dark:text-white font-normal">{meta.titleAr}</h2>
         }
 
-        {locale == 'en' ? <p className="text-base text-gray-600 dark:text-gray-300 text-center leading-7 px-8">{meta.desc}</p>
-        :<p className="text-base font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center leading-7 px-8">{meta.descAr}</p>
+        {locale == 'en' ? <p className="sm:text-base text-md text-gray-600 dark:text-gray-300 text-center leading-6 py-0 px-2 sm:px-8">{meta.desc}</p>
+        :<p className="sm:text-base text-md font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center leading-6 py-0 px-2 sm:px-8">{meta.descAr}</p>
          }
         <div className="grid grid-cols-2 sm:grid-cols-6 gap-x-5 gap-y-8 mt-8">
           {services && services.map((service) => (
@@ -32,7 +32,7 @@ const ServicesFull = async ({services,meta}:Props) => {
                 {locale == 'en' ? <h2 className="text-base sm:text-base capitalize sm:capitalize font-semibold ">{service.name}</h2>             
                    : <h2 className="text-base sm:text-base font-arabic capitalize sm:capitalize font-semibold ">{service.nameAr}</h2>
                    }
-             </div>
+            </div>
               </Link>
 
          ))}

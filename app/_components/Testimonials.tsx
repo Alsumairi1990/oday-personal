@@ -16,6 +16,7 @@ const TestimonialsClient = ({ testimonials, meta, locale ,messages}: Props) => {
   const [visibleTestimonial, setVisibleTestimonial] = useState(0); 
   const noImage = '/images/no-image.svg';
   const more = (messages as any).Common.more; 
+  const testimonial = (messages as any).Common.testimonials; 
 
   const handleClick = (index: number) => {
     setVisibleTestimonial(index); 
@@ -37,12 +38,12 @@ const TestimonialsClient = ({ testimonials, meta, locale ,messages}: Props) => {
                 <div className="flex flex-col">
                   <div className="flex items-center mb-3">
                     <span className="h-[3px] w-20 ml-2 bg-[#EE9143] inline-block"></span>
-                    <p className="text-md sm:text-lg font-semibold text-gray-100">{meta.name}</p>
+                    <p className="text-md sm:text-lg font-semibold text-gray-100">{testimonial}</p>
                   </div>
-                  <h2 className="text-gray-50 sm:leading-9 dark:text-gray-50 text-xl sm:text-2xl font-semibold">
+                  <h2 className="text-gray-50 sm:leading-9 dark:text-gray-50 text-lg sm:text-2xl font-semibold">
                     {meta?.titleAr}
                   </h2>
-                  <p className="text-sm mt-2 text-gray-100 line-clamp-[7] leading-8">{meta?.descAr}</p>
+                  <p className="text-sm mt-2 text-gray-100 line-clamp-1 sm:line-clamp-[7] leading-8 ">{meta?.descAr}</p>
                   <p className="text-sm w-fit border my-3 sm:mt-5 text-orange-400 border-[#EE9143] rounded-2xl sm:px-4 px-3 py-1.5 sm:py-3">
                     {meta.moreAr}
                   </p>
