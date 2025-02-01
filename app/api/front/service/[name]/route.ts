@@ -26,8 +26,8 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
   try {
     
     const start = performance.now();
-
-    const service1 = await prisma.service.findFirst({
+    const [service1, service2] = await Promise.all([
+    prisma.service.findFirst({
       where: {
         name_slug: name,
       },
@@ -104,9 +104,9 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
           take: 3,
         },
       },
-    });
+    }),
     
-    const service2 = await prisma.service.findFirst({
+     prisma.service.findFirst({
       where: {
         name_slug: name,
       },
@@ -156,20 +156,46 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
           },
         },
       },
-    });
-    
+    })
+  ]);
     // Combine service1 and service2 into a single object
-    const combinedService = {
-      ...service1,
-      ...service2,
-      tools: service2?.tools || [],
-      works: service2?.works || [],
-      clients: service2?.clients || [],
-      industries: service2?.industries || [],
-      plans: service2?.plans || [],
-      offers: service2?.offers || [],
-    } as ServiceForFront;
+    // const combinedService = {
+    //   ...service1,
+    //   ...service2,
+    //   tools: service2?.tools || [],
+    //   works: service2?.works || [],
+    //   clients: service2?.clients || [],
+    //   industries: service2?.industries || [],
+    //   plans: service2?.plans || [],
+    //   offers: service2?.offers || [],
+    // } as ServiceForFront;
     
+
+    // const [service1, service2] = await Promise.all([
+    //   prisma.service.findFirst({
+    //     where: { name_slug: name },
+    //     include: {
+    //       phases: { ... },
+    //       products: { ... },
+    //       features: { ... },
+    //       testimonials: { ... },
+    //       packages: { ... },
+    //     },
+    //   }),
+    //   prisma.service.findFirst({
+    //     where: { name_slug: name },
+    //     include: {
+    //       tools: { ... },
+    //       works: { ... },
+    //       clients: { ... },
+    //       industries: { ... },
+    //       plans: { ... },
+    //       offers: { ... },
+    //     },
+    //   }),
+    // ]);
+    
+    const combinedService = { ...service1, ...service2 } as ServiceForFront;
 
     return combinedService as ServiceForFront;
   } catch (error) {
