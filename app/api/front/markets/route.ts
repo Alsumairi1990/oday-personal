@@ -26,7 +26,7 @@ async function getMarkets(): Promise<MarketWithModels[] | null> {
       include: {
         marketPages: {
           include: {
-            mrPage: true, // Include the related MrPage data
+            mrPage: true,
           },
         },
       },

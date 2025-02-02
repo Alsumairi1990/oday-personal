@@ -14,13 +14,18 @@ interface Props{
 }
 const Footerk = ({services,categories,locale,messages}:Props) => {
    const bg = '/images/fotter-bg.webp';
-   const map = '/footer/footer-map.png'
+   const map = '/footer/footer-map.png';
+
    const servicesNavHeader = (messages as any).Common.servicesNavHeader;
    const categoriesNavHeader = (messages as any).Common.categoriesNavHeader;
    const name = (messages as any).HomePage.ContactUs.name;
    const email = (messages as any).HomePage.ContactUs.email;
    const phonNo = (messages as any).HomePage.ContactUs.phonNo;
-   const subscribe = (messages as any).Common.subscribe;
+   const subscribe = (messages as any).Common.subscribe;    
+   const companyOffices = (messages as any).Common.companyOffices;
+   const companyOfficeDesc = (messages as any).Common.companyOfficeDesc;
+
+
 
 
 
@@ -28,7 +33,7 @@ const Footerk = ({services,categories,locale,messages}:Props) => {
 
 
   return (
-    <div className="">
+    <div className="rtl:font-arabic">
     {/* <div className="bg-[#1e1e1e] pt-3 " style={{backgroundImage : }}>  */}
     <div className=" sm:pt-8 sm:pb-2 px-3 w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${bg})`}}>
        <div className="w-11.4/12 mx-auto mb-6">
@@ -102,8 +107,8 @@ const Footerk = ({services,categories,locale,messages}:Props) => {
              </div>
           </div>
        </div>
-       <div className="grid grid-cols-2 sm:grid-cols-4 w-11.4/12 mx-auto mb-3">
-          <div className="">
+       <div className="flex flex-wrap max-sm:gap-y-6 justify-between w-11.7/12 mx-auto mb-3">
+          <div className="flex-48 sm:flex-20">
              <div className="mb-4">
                 <p><a href="" className="font-bold text-orange-400 rtl:font-arabic border-b border-b-gray-400 text-sm pb-2 uppercase">{servicesNavHeader}</a></p>
              </div>
@@ -123,7 +128,7 @@ const Footerk = ({services,categories,locale,messages}:Props) => {
                 </ul>
              </div>
           </div>
-          <div className="">
+          <div className="flex-48 sm:flex-20">
              <div className="mb-4">
                 <p><a href="" className="font-bold text-orange-400 border-b rtl:font-arabic text-sm border-b-gray-400 pb-2 uppercase">{categoriesNavHeader}</a></p>
              </div>
@@ -142,7 +147,7 @@ const Footerk = ({services,categories,locale,messages}:Props) => {
                 </ul>
              </div>
           </div>
-          <div className="">
+          <div className="max-sm:hidden sm:flex-20">
              <div className="mb-4">
                 <p><a href="" className="font-bold text-orange-400 rtl:font-arabic border-b border-b-gray-400 text-sm pb-2 uppercase">{servicesNavHeader}</a></p>
              </div>
@@ -161,6 +166,26 @@ const Footerk = ({services,categories,locale,messages}:Props) => {
                   
                 </ul>
              </div>
+          </div>
+          <div className="flex-100 relative max-sm:border-t max-sm:border-gray-300 max-sm:pt-5 sm:flex-40">
+            <div className="px-2 pt-0 flex flex-col gap-y-1 max-sm:mb-2">
+               <span className="text-sm pb-2 boredr-b w-fit rtl:font-bold border-b border-gray-300 mb-1 text-orange-300">{companyOffices}</span>
+               <p className="text-gray-300 text-sm mb-1.5 line-clamp-1 ">{companyOfficeDesc}</p>
+            </div>
+            <div className="absolute top-[70%] right-[20%] sm:top-[65%] sm:right-[22.4%] w-8 h-8">
+               <div className="absolute w-2 h-2 bg-gray-50 rounded-full transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 z-10"></div>
+               <div className="absolute w-5 h-5 border-2 border-gray-50 rounded-full opacity-0 animate-pulsate  transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"></div>
+            </div>
+            <div className="absolute top-[62.5%] right-[32%] sm:top-[56%] sm:right-[34.3%] w-8 h-8">
+               <div className="absolute w-2 h-2 bg-gray-50 rounded-full transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 z-10"></div>
+               <div className="absolute w-5 h-5 border-2 border-gray-50 rounded-full opacity-0 animate-pulsate  transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2"></div>
+            </div>
+              {map && <Image className='rounded-md w-full'
+                                      src={map}
+                                      height={400}
+                                      width={600}
+                                      alt="map"
+                                  />}
           </div>
         
         

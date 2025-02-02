@@ -23,6 +23,16 @@ const config = {
       },
     },
     extend: {
+        keyframes: {
+        pulsate: {
+              '0%': { transform: 'translate(-50%, -50%) scale(0.8)', opacity: '0.7' },
+              '100%': { transform: 'translate(-50%, -50%) scale(2)', opacity: '0' },
+            },
+          },
+          animation: {
+            pulsate: 'pulsate 2s ease-out infinite',
+          },
+        
       flex: {
         '5': '0 0 5%',
         '6': '0 0 6%',
