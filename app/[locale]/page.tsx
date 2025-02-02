@@ -16,6 +16,8 @@ import ServicesFull from '../_components/ServicesFull';
 import IndustryCard from '../_components/industries/IndustryCard';
 import { WorksFrontData } from './admin/works/utils/WorksFrontData';
 import Works from '../_components/Works';
+import TechPanel from '../_components/technologies/TechPanel';
+import { CategoryWithTools } from './admin/category/util/CategoryWithTools';
 // import { AboutUsSection, Category, Explore, Industry, PageSection, PlanCategory, Post, Service, Testimonial, Tool } from '@prisma/client'
 // import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 // import { WorksFrontData } from './admin/works/utils/WorksFrontData'
@@ -95,6 +97,10 @@ export default async function Home() {
   const pageWorks = await fetch(`${process.env.NEXTAUTH_URL}/api/front/works/home`, {
     method: 'GET',
     next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
+  const toolsCategories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies/categories`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, 
   });
 
   // const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
@@ -178,6 +184,8 @@ export default async function Home() {
   const companyMenu:CompanyMenu[] = await companyMenuData.json();
   const industries:Industry[] = await pageIdustries.json();
   const works:WorksFrontData[] = await pageWorks.json();
+  const toolsCategorires:CategoryWithTools[] = await toolsCategories.json();
+
 
 
 
@@ -190,6 +198,8 @@ export default async function Home() {
   const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services');
   const industryMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'industries');   
   const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
+  const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');  
+
 
 
 
@@ -274,8 +284,29 @@ export default async function Home() {
      <div className="w-full my-24 ]">
        {testimonials && testimonialMeta && <Testimonials testimonials={testimonials} meta={testimonialMeta} locale={locale} messages={messages} /> }
       </div>
-      <ContactForm  locale={locale} messages={messages} />
 
+      <div className="w-full mx-auto bg-gray-100 my-10 pb-5 max-sm:bg=[#11212f] dark:bg-[#111]">
+       <div className="p-1 w-full flex mt-8 justify-center">
+        {locale === 'en' ? <h2 className="text-gray-800">
+          {techMeta?.title}
+        </h2>
+        :
+        <div className='flex flex-col items-center'>
+            <h2 className="text-gray-800 max-sm:text-center max-sm:text-white dark:text-gray-50 text-lg leading-7 max-sm:mb-2 sm:text-2xl font-semibold font-arabic">
+              {techMeta?.titleAr}
+            </h2>
+            <span className="sm:hidden h-0.5 w-14 bg-orange-200 mb-2" ></span>
+            <p className="text-base max-sm:hidden mt-2 text-gray-700 leading-7 text-center">
+              {techMeta?.descAr}
+            </p>
+        </div>
+          }
+       </div>
+       {toolsCategorires && <TechPanel categories={toolsCategorires} locale = {locale} messages={messages} /> }
+      </div>
+      
+      <ContactForm  locale={locale} messages={messages} />
+       
      <div className="clear"></div>
      
 

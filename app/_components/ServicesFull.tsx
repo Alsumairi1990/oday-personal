@@ -20,7 +20,7 @@ const ServicesFull = async ({services,meta}:Props) => {
         }
 
         {locale == 'en' ? <p className="sm:text-base text-md text-gray-600 dark:text-gray-300 text-center leading-6 py-0 px-2 sm:px-8">{meta.desc}</p>
-        :<p className="sm:text-base text-md font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center leading-6 py-0 px-2 sm:px-8">{meta.descAr}</p>
+        :<p className="sm:text-base text-md font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300  text-center leading-6 py-0 px-2 sm:px-8">{meta.descAr}</p>
          }
         <div className="grid grid-cols-2 sm:grid-cols-6 gap-x-5 gap-y-8 mt-8">
           {services && services.map((service) => (
