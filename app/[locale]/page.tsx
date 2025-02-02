@@ -3,7 +3,7 @@ import NavBar from '../NavBar'
 import React, { Suspense } from 'react';
 import { getLocale, getMessages } from 'next-intl/server';
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
-import { Category, CompanyMenu, Explore, Industry, PageSection, Service, Testimonial } from '@prisma/client';
+import { Category, CompanyMenu, Explore, Industry, PageSection, Post, Service, Testimonial } from '@prisma/client';
 import Hero from '../_components/HeroSect';
 import PlansPanel from '../_components/OurPlans/PlansPanel';
 import { PlanCategoryForFront } from './admin/plans/category/_utils/PlanCategoryForFront';
@@ -18,6 +18,9 @@ import { WorksFrontData } from './admin/works/utils/WorksFrontData';
 import Works from '../_components/Works';
 import TechPanel from '../_components/technologies/TechPanel';
 import { CategoryWithTools } from './admin/category/util/CategoryWithTools';
+import BlogList from '../_components/BlogList';
+import Markets from '../_components/market/Markets';
+import { MarketWithModels } from './admin/market/_utils/MarketWithModels';
 // import { AboutUsSection, Category, Explore, Industry, PageSection, PlanCategory, Post, Service, Testimonial, Tool } from '@prisma/client'
 // import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
 // import { WorksFrontData } from './admin/works/utils/WorksFrontData'
@@ -103,14 +106,21 @@ export default async function Home() {
     next: { revalidate: 3600 }, 
   });
 
+  const latestPosts = await fetch(`${process.env.NEXTAUTH_URL}/api/front/posts/latest`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
+
+  const pageMarkets = await fetch(`${process.env.NEXTAUTH_URL}/api/front/markets`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
+
   // const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
   //   method: 'GET',
   //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
   // });
-  // const latestPosts = await fetch(`${process.env.NEXTAUTH_URL}/api/front/posts/latest`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
+ 
 
   // const pagePhases = await fetch(`${process.env.NEXTAUTH_URL}/api/front/phases`, {
   //   method: 'GET',
@@ -125,10 +135,7 @@ export default async function Home() {
 
   
 
-  // const pageMarkets = await fetch(`${process.env.NEXTAUTH_URL}/api/front/markets`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
+  
   // const page = 'mainPage'
   // const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
   //   method: 'GET',
@@ -185,6 +192,11 @@ export default async function Home() {
   const industries:Industry[] = await pageIdustries.json();
   const works:WorksFrontData[] = await pageWorks.json();
   const toolsCategorires:CategoryWithTools[] = await toolsCategories.json();
+  const posts:Post[] = await latestPosts.json();
+  const markets:MarketWithModels[] = await pageMarkets.json();
+
+
+  
 
 
 
@@ -198,7 +210,12 @@ export default async function Home() {
   const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services');
   const industryMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'industries');   
   const workMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'works');  
-  const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');  
+  const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');
+  const blogsMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'blog');
+  const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
+ 
+   
+  
 
 
 
@@ -209,22 +226,18 @@ export default async function Home() {
   //   const servicesR:Service[] = await res.json();
   //   const categoriesResult:Category[] = await Categories.json();
   //   const menuElements:Record<number, MenuWithAllModels[]> = await elements.json();
-  //   const posts:Post[] = await latestPosts.json();
   //   const phases:PhaseWithModels[] = await pagePhases.json();
   //   const testimonials:Testimonial[] = await pageTestimonials.json();
   //   const heroData = await hero.json();
   //   const sectionMeta:PageSection[] = await sections.json();
   //   const aboutUS:AboutUsSection = await about.json();
-  //   const markets:MarketWithModels[] = await pageMarkets.json();
   //   const packageCatgegoryData:PlanCatPackForFront = await packageCategory.json(); 
   //   const tools:Tool[] = await toolsCategory.json(); 
   //   const toolsCategorires:CategoryWithTools[] = await toolsCategories.json();
   //   const explores:Explore[] = await exploresData.json();    
   //   const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
   //   const serviceCatMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'servicesCategory');  
-  //   const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
   //   const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
-  //   const blogsMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'blog');  
   //   const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');  
  
   return (
@@ -249,6 +262,14 @@ export default async function Home() {
     
     <div className="my-6">
       <PlansPanel category={planCategory} locale={locale} messages={messages} />
+     </div>
+
+      <div className="">
+      <Markets markets={markets} locale={locale} messages={messages}/>
+     </div>
+     
+      <div className="dark:bg-[#111]">
+          {posts && posts.length > 0 && blogsMeta && <BlogList meta={blogsMeta} posts={posts}  /> }
      </div>
 
      <div className="my-14 w-11.4/12 mx-auto">
@@ -311,78 +332,19 @@ export default async function Home() {
      
 
 {/* 
-    <div className='bg-gray-50 gray:bg-[#111]"'>
-     {servicesR && serviceMeta && <ServicesFull services={servicesR} meta={serviceMeta} />}
-     </div>
-     <div className="w-full my-8 pb-8  bg-gray-100 dark:bg-[#111] ">
-          <div className="sm:w-11/12 mx-auto p-4">
-              <div className="p-1 w-full flex my-8 justify-center">
-                {locale === 'en' ? <h2 className="text-gray-800">
-                  {industryMeta?.title}
-                </h2>
-                :
-                <div className='flex flex-col items-center'>
-                    <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold font-arabic">
-                      {industryMeta?.titleAr}
-                    </h2>
-                    <p className="text-base mt-2 text-gray-700 leading-7 text-center">
-                      {industryMeta?.descAr}
-                    </p>
-                </div>
-                  }
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-4 sm:gap-y-8 gap-5 sm:gap-x-8 max-sm:p-1">
-            {industries && industries.map((industry, index:number) => (
-               <IndustryCard key={industry.id} industry={industry} locale={locale} messages={messages} />
-            ))}
-            </div>
-           </div>
-      </div>
+ 
     
-     <div className="dark:bg-[#111]">
-     {posts && blogsMeta && <BlogList meta={blogsMeta} posts={posts}  /> }
-     </div>
+    
 
-     <div className="my-6">
-      <PlansPanel locale={locale} messages={messages} />
-     </div>
+    
      <div className="dark:bg-black-100">
       {phases && phaseMeta && <PhaseCompany phases={phases} meta={phaseMeta} />}
      </div>
-     <div className="my-14 w-11.4/12 mx-auto">
-      {packageCatgegoryData && <PackageSect packagesData={packageCatgegoryData.packages}  locale={locale} messages={messages} />}
-     </div> 
-     <div className="">
-      <Markets markets={markets} locale={locale} messages={messages}/>
-     </div>
-     <div className="w-full mx-auto bg-gray-100 my-10 dark:bg-[#111]">
-       <div className="p-1 w-full flex mt-8 justify-center">
-        {locale === 'en' ? <h2 className="text-gray-800">
-          {techMeta?.title}
-        </h2>
-        :
-        <div className='flex flex-col items-center'>
-            <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold font-arabic">
-              {techMeta?.titleAr}
-            </h2>
-            <p className="text-base mt-2 text-gray-700 leading-7 text-center">
-              {techMeta?.descAr}
-            </p>
-        </div>
-          }
-       </div>
-       {tools && <TechPanel categories={toolsCategorires} locale = {locale} messages={messages} /> }
-      </div>
-     <div className="">
-      <div className="dark:w-11/12 mx-auto  dark:bg-[#111]">
-      {works && workMeta &&  <Works  works = {works} meta={workMeta} /> }
-      </div>
-      </div>
-      <div className="w-full my-24 ]">
-       {testimonials && testimonialMeta && <Testimonials testimonials={testimonials} meta={testimonialMeta} /> }
-      </div>
-      <div className="w-full my-10 sm:my-24 dark:bg-black-100">
-      </div>
+     
+    
+     
+        
+   
       <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
           <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
       </div>    */}
