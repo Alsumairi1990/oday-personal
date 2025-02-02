@@ -21,7 +21,7 @@ const Services = async ({categories,meta}:Props) => {
       <div className="flex flex-col sm:py-8  dark:bg-[#080808]">
         <div className="p-1 w-11.7/12 sm:w-11/12 mx-auto max-sm:pt-6">
         {locale == 'en' ? <h2 className="sm:text-3xl text-lg text-center px-8 mb-6 text-blue-700 dark:text-white font-semibold">{meta.title}</h2>
-          : <h2 className="sm:text-3xl text-log font-arabic rtl:font-bold rtl:mb-3 text-center px-8 mb-6 text-blue-700 dark:text-white font-normal">{meta.titleAr}</h2>
+          : <h2 className="sm:text-3xl text-lg font-arabic rtl:font-bold rtl:mb-2 text-center px-8 mb-6 text-blue-700 dark:text-white font-normal">{meta.titleAr}</h2>
           }
           {locale == 'en' ? <p className="sm:text-base text-md text-gray-600 dark:text-gray-300 text-center leading-6 py-0 px-2 sm:px-8">{meta.desc}</p>
           :<p className="sm:text-base text-md  font-arabic rtl:text-gray-700 text-gray-600 dark:text-gray-300 text-center leading-6 py-0 px-2 sm:px-8">{meta.descAr}</p>

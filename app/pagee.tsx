@@ -41,7 +41,6 @@ export default function Home() {
      </div>
 
      <div className="gray:bg-[#111]">
-     {/* <About /> */}
      </div>
      <div className="dark:bg-[#111]">
      {/* <Blogs /> */}
