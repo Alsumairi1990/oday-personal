@@ -25,7 +25,7 @@ const PhaseCompany =  ({meta,phases,locale,messages}:Props) => {
         };
    
   return (
-           <div className="w-full my-16  ">
+          <div className="w-full my-16  ">
           <div className="sm:w-11/12 w-11.5/12 mx-auto max-sm:bg-cardOnyx max-sm:rounded-md max-sm:pt-6">
           { locale == 'en' ? (
             <div className="flex flex-col items-center sm:mb-8">
