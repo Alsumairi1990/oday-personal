@@ -285,7 +285,7 @@ export default async function Home() {
        {testimonials && testimonialMeta && <Testimonials testimonials={testimonials} meta={testimonialMeta} locale={locale} messages={messages} /> }
       </div>
 
-      <div className="w-full mx-auto bg-gray-100 my-10 pb-5 max-sm:bg=[#11212f] dark:bg-[#111]">
+      <div className="w-full mx-auto bg-gray-100 my-10 pb-5 max-sm:bg-[#11212f] dark:bg-[#111]">
        <div className="p-1 w-full flex mt-8 justify-center">
         {locale === 'en' ? <h2 className="text-gray-800">
           {techMeta?.title}
