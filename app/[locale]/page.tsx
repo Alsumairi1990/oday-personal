@@ -228,17 +228,7 @@ export default async function Home() {
   //   const menuElements:Record<number, MenuWithAllModels[]> = await elements.json();
   //   const phases:PhaseWithModels[] = await pagePhases.json();
   //   const testimonials:Testimonial[] = await pageTestimonials.json();
-  //   const heroData = await hero.json();
-  //   const sectionMeta:PageSection[] = await sections.json();
   //   const aboutUS:AboutUsSection = await about.json();
-  //   const packageCatgegoryData:PlanCatPackForFront = await packageCategory.json(); 
-  //   const tools:Tool[] = await toolsCategory.json(); 
-  //   const toolsCategorires:CategoryWithTools[] = await toolsCategories.json();
-  //   const explores:Explore[] = await exploresData.json();    
-  //   const serviceMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'services'); 
-  //   const serviceCatMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'servicesCategory');  
-  //   const testimonialMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'testimonials');
-  //   const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');  
  
   return (
     <main className="flex flex-col h-ful dark:bg-[#111] rtl:font-arabic" >
