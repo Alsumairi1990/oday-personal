@@ -2,6 +2,7 @@
 'use client'
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
+import { MdOutlineWhatsapp } from 'react-icons/md';
 
 function WhatsAppLive() {
     const phoneNumber = '+601164228317';  // Replace with your WhatsApp number (including country code)
@@ -9,9 +10,10 @@ function WhatsAppLive() {
   const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   return (
-    <div>
-          <a href={whatsappURL} aria-label="click to contact" target="_blank" rel="noopener noreferrer" className="focus:outline-none w-7 inline-flex">
-          <svg className='w-full h-full' version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"  
+    
+          <a href={whatsappURL} aria-label="click to contact" 
+          target="_blank" rel="noopener noreferrer" className="focus:outline-none items-center justify-center w-7 inline-flex">
+          {/* <svg className='w-full h-full' version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"  
                     viewBox="0 0 58 58">
                 <g>
                     <path fill="#2CB742" d="M0,58l4.988-14.963C2.457,38.78,1,33.812,1,28.5C1,12.76,13.76,0,29.5,0S58,12.76,58,28.5
@@ -22,9 +24,11 @@ function WhatsAppLive() {
                         c-1.058-0.56-2.357-0.364-3.203,0.482l-1.758,1.758c-5.577,5.577-2.831,11.873,2.746,17.45l5.097,5.097l5.097,5.097
                         c5.577,5.577,11.873,8.323,17.45,2.746l1.758-1.758C48.048,40.341,48.243,39.042,47.683,37.985z"/>
                 </g>
-                </svg>
+                </svg> */}
+                <MdOutlineWhatsapp className='text-2xl text-white'/>
+
       </a>
-    </div>
+    
   )
 }
 

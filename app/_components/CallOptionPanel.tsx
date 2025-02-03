@@ -17,13 +17,13 @@ function CallOptionPanel({locale,messages}:Props) {
 
   return (
     <div className='flex flex-col  rounded-l-md items-center gap-y-2 '>
-        <div className="border w-10 h-10 flex justify-center items-center rounded-md border-gray-300 bg-gray-100">
+        <div className="border w-10 h-10 flex justify-center items-center rounded-md border-white bg-[#46b500]">
         <WhatsAppLive />
         </div>
-        <div className="border w-10 h-10 justify-center flex rounded-md items-center border-gray-300 bg-gray-100">
+        <div className="border w-10 h-10 justify-center flex rounded-md items-center border-white bg-[#0d72a3]">
           <button aria-label="click to call" onClick={() => setMobileContactFlag(true)}>
             <span className="">
-            <LuPhoneCall className='text-gray-700 text-2xl' />
+            <LuPhoneCall className='text-white text-2xl' />
             </span>
           </button>
             {mobileContactFlag && <MobilCall locale={locale} messages={messages} closePanle={closePanel}  /> }

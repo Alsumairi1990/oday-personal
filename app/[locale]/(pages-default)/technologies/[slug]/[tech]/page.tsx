@@ -42,10 +42,7 @@ const Technology = async ({params}:Props) => {
    const projectDescripyion = (messages as any).Common.projectDescripyion;
 
  
- const marketData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/markets/${params.slug}`, {
-      method: 'GET',
-      next: { revalidate: 1800 }, // Optional revalidation for ISR (30 minutes)
-    });
+ 
     
 const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies/category/${params.slug}/${params.tech}`, {
         method: 'GET',
@@ -67,7 +64,6 @@ const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies
 
  
 
- const market:Market = await marketData.json();
  const services:ServiceForFront[] = await serviceData.json();
  const works:WorksFrontData[] = await pageWorks.json();
  const tech:ToolSingle = await techData.json();

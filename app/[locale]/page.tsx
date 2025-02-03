@@ -1,5 +1,4 @@
 import NavBar from '../NavBar'
-// import Services from '../_components/Services'
 import React, { Suspense } from 'react';
 import { getLocale, getMessages } from 'next-intl/server';
 import { MenuWithAllModels } from './admin/setting/left-nav/_utils/MenuWithAllModels'
@@ -21,22 +20,9 @@ import { CategoryWithTools } from './admin/category/util/CategoryWithTools';
 import BlogList from '../_components/BlogList';
 import Markets from '../_components/market/Markets';
 import { MarketWithModels } from './admin/market/_utils/MarketWithModels';
-// import { AboutUsSection, Category, Explore, Industry, PageSection, PlanCategory, Post, Service, Testimonial, Tool } from '@prisma/client'
-// import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels'
-// import { WorksFrontData } from './admin/works/utils/WorksFrontData'
-// import { MarketWithModels } from './admin/market/_utils/MarketWithModels'
-// import { PlanCatPackForFront } from './admin/plans/category/_utils/PlanCatPackForFront'
-// import { CategoryWithTools } from './admin/category/util/CategoryWithTools'
-// import ServicesFull from '../_components/ServicesFull';
-// import IndustryCard from '../_components/industries/IndustryCard';
-// import BlogList from '../_components/BlogList';
-// import PhaseCompany from '../_components/PhaseCompany';
-// import PlansPanel from '../_components/OurPlans/PlansPanel';
-// import TechPanel from '../_components/technologies/TechPanel';
-// import Works from '../_components/Works';
-// import Testimonials from '../_components/Testimonials';
-// import Markets from '../_components/market/Markets';
-// import Footerk from '../_components/Footer';
+import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels';
+import PhaseCompany from '../_components/PhaseCompany';
+
 export default async function Home() {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
@@ -115,39 +101,13 @@ export default async function Home() {
     method: 'GET',
     next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
-
-  // const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
- 
-
-  // const pagePhases = await fetch(`${process.env.NEXTAUTH_URL}/api/front/phases`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
-  
-
-  // const pageTestimonials = await fetch(`${process.env.NEXTAUTH_URL}/api/front/testimonials/home`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
+  const pagePhases = await fetch(`${process.env.NEXTAUTH_URL}/api/front/phases`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
 
   
-
-  
-  // const page = 'mainPage'
-  // const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Optional revalidation for ISR (30 minutes)
-  // });
-
-  // const sections = await fetch(`${process.env.NEXTAUTH_URL}/api/front/meta/sections`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
-
-  // const packageCategory = await fetch(`${process.env.NEXTAUTH_URL}/api/front/packages/categories/web-development-plans/3`, {
+ // const packageCategory = await fetch(`${process.env.NEXTAUTH_URL}/api/front/packages/categories/web-development-plans/3`, {
   //   method: 'GET',
   //   next: { revalidate: 3600 }, 
   // });
@@ -157,15 +117,9 @@ export default async function Home() {
   //   next: { revalidate: 3600 }, 
   // });
 
-  // const toolsCategories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies/categories`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, 
-  // });
+  
 
-  // const exploresData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/explores`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, 
-  // });
+  
 
 
   // const about = await fetch(`${process.env.NEXTAUTH_URL}/api/front/about-section`, {
@@ -194,6 +148,8 @@ export default async function Home() {
   const toolsCategorires:CategoryWithTools[] = await toolsCategories.json();
   const posts:Post[] = await latestPosts.json();
   const markets:MarketWithModels[] = await pageMarkets.json();
+  const phases:PhaseWithModels[] = await pagePhases.json();
+
 
 
   
@@ -213,21 +169,7 @@ export default async function Home() {
   const techMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'technologies');
   const blogsMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'blog');
   const phaseMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'workPhase');
- 
-   
-  
 
-
-
-
-
-
-
-  //   const servicesR:Service[] = await res.json();
-  //   const categoriesResult:Category[] = await Categories.json();
-  //   const menuElements:Record<number, MenuWithAllModels[]> = await elements.json();
-  //   const phases:PhaseWithModels[] = await pagePhases.json();
-  //   const testimonials:Testimonial[] = await pageTestimonials.json();
   //   const aboutUS:AboutUsSection = await about.json();
  
   return (
@@ -315,29 +257,20 @@ export default async function Home() {
        </div>
        {toolsCategorires && <TechPanel categories={toolsCategorires} locale = {locale} messages={messages} /> }
       </div>
+
+
+    
+     <div className="dark:bg-black-100">
+      {phases && phaseMeta && <PhaseCompany phases={phases} meta={phaseMeta} locale={locale} messages={messages} />}
+     </div>
+     
       
       <ContactForm  locale={locale} messages={messages} />
        
      <div className="clear"></div>
      
 
-{/* 
- 
-    
-    
 
-    
-     <div className="dark:bg-black-100">
-      {phases && phaseMeta && <PhaseCompany phases={phases} meta={phaseMeta} />}
-     </div>
-     
-    
-     
-        
-   
-      <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-          <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
-      </div>    */}
      
     </main>
   )
