@@ -109,6 +109,7 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
         return;}
         
       else if (event.target.closest('.main-menu-btn') !== null) {
+
         const mainPrnt = event.target.closest('.main-nav');
         const menu = mainPrnt?.querySelector('.main-drop-menu');
         if (menu?.classList.contains('hidden')) {
@@ -155,12 +156,12 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
   
     document.addEventListener('click', handleClickOutside);
   
-    // return () => {
-    //   if (heroSection) {
-    //     observer.unobserve(heroSection);
-    //   }
-    //   document.removeEventListener('click', handleClickOutside);
-    // };
+    return () => {
+      // if (heroSection) {
+      //   observer.unobserve(heroSection);
+      // }
+      document.removeEventListener('click', handleClickOutside);
+    };
   }, []);
 
   
@@ -320,7 +321,7 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
             </div>
            
 
-            <div className="px-4 py-3">
+            <div className="px-4 py-3 max-sm:hidden">
               <div className="flex items-center  rounded py-2 px-2 bg-white border border-[#f7b065] dark:border-violet-600">
                 <span className="pl-1 text-sm text-gray-500  capitalize">{discussProject}</span>
                 <span className="ml-auto">
@@ -339,7 +340,7 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
             </div>
           </div> 
 
-          <div className='max-sm:h-full w-full mx-auto max-sm:bg-white px-4 max-sm:border max-sm:border-gray-200 sm:flex sm:items-center'>
+          <div className='max-sm:h-full w-full mx-auto max-sm:bg-white sm:px-4 max-sm:border max-sm:border-gray-200 sm:flex sm:items-center'>
              
             
                 <div className="w-full flex ltr:justify-end ">

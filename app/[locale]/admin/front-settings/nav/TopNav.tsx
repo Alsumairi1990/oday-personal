@@ -68,11 +68,11 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
     setActiveLink(link);
   };
   return (
-        <div className='flex max-sm:flex-col max-sm:mt-3 max-sm:gap-y-4 sm:justify-end rtl:pl-2 r w-full'>
+        <div className='flex max-sm:flex-col max-sm:mt-3  sm:justify-end rtl:pl-2 r w-full'>
             {Object.entries(menusData).map(([parentId, menus]) => {
             const parentMenu = menus.length > 0 ? menus[0].menuParent : null;
             return (
-            <div key={parentId} className='flex max-sm:flex-col  parent-menu-pr'>
+            <div key={parentId} className='flex max-sm:flex-col  parent-menu-pr max-sm:py-2.5 max-sm:border-b max-sm:border-gray-300'>
                 <div className='parent-elm text-sm   relative flex items-center  px-2 rtl:font-arabic font-semibold text-gray-200'>
                   {locale === 'en' ?<span className="parent-menu-btn max-sm:text-gray-800 inline-flex w-full h-full items-center cursor-pointer">
                      {parentMenu?.title || ''}
