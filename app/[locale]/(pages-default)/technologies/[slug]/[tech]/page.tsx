@@ -143,7 +143,7 @@ const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies
              </div>
          </div>
    
-         <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
+         <div className="w-full my-16 py-8  bg-[#fff5f1] dark:bg-[#111] ">
           <div className="w-full  mx-auto ">
             <div className="flex flex-col items-center sm:mb-8 ">
                {locale == 'en' ? <h2 className="sm:text-4xl  pb-2  text-gray-900 capitalize font-bold tracking-wide rtl:text-3xl  dark:text-orange-400">{primaryFeatures} <span className="text-orange-500">{tech.name}</span></h2>
@@ -153,14 +153,14 @@ const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies
                </> 
             }
             </div>
-            <div className=" sm:flex flex-col w-11.6/12 mx-auto border-dashed border-l border-orange-500 gap-x-4 gap-y-6 justify-center  max-sm:pb-4 mt-2">
+            <div className=" sm:flex flex-col w-11.3/12 mx-auto border-dashed max-sm:border-l border-orange-500 gap-x-4 gap-y-6 justify-center  max-sm:pb-4 mt-2">
               {/* <div className="w-full flex justify-center">
                 <div className="w-32 h-32  bg-white p-4 rounded-full border border-dashed border-orange-500">
                     {tech.icon && tech.icon && <img className='h-full' src={tech.icon} alt={tech.name} />}
                 </div>
               </div> */}
               
-              <div className='grid grid-cols w-full mx-auto sm:grid-cols-2 max-sm:pl-[30px] rtl:max-sm:pr-[30px] border-l-2  border-white  px-0 mt-1 py-4 gap-6'>
+              <div className='grid grid-cols w-full mx-auto sm:grid-cols-2 max-sm:pl-[30px] max-sm:pr-1 max-sm:border-l-[4px]  border-white  px-0 mt-1 py-4 gap-6'>
                 {tech && tech.Feature.length > 0 && tech.Feature && tech.Feature.map((feature)=>(
                   <FeatureCard  feature={feature} locale={locale} messages={messages} />
             ))

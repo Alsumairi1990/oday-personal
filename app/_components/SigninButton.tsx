@@ -20,9 +20,9 @@ const SigninButton = () => {
         </>
       ) : (
         <>
-          <button onClick={() => signIn()}>Sign In</button>
-          <Link href={`/auth/signin`}>
-            Sign Up
+          {/*<button onClick={() => signIn()}>Sign In</button>*/}
+          <Link className="text-white" href={`/auth/signin`}>
+            Sign In
           </Link>
         </>
       )}
