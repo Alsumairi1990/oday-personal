@@ -6,8 +6,8 @@ import Link from "next/link";
 
 
 interface Props{
-    locale : String,
-    messages : AbstractIntlMessages,
+    locale? : String,
+    messages? : AbstractIntlMessages,
 }
 const SigninButton = ({locale,messages}:Props) => {
   const { data: session } = useSession();

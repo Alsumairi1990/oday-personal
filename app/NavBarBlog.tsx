@@ -271,7 +271,7 @@ const NavBarBlog = ({menusData}:Props) => {
 
                               <div className="px-4 pt-2 pb-2">
                                 <div className="flex items-center justify-center rounded py-1.5 px-2 bg-orange-500">
-                                  <SigninButton />
+                                  <SigninButton  />
                                   
                                 </div>
                               </div>
