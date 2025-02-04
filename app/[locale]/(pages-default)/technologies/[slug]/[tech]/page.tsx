@@ -173,8 +173,8 @@ const techData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies
           <div className="w-full my-16 py-8 dark:bg-[#111] ">
           <div className="w-full mx-auto ">
             <div className="flex flex-col items-center sm:mb-8">
-               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400 rtl:text-3xl rtl:font-arabic">{blogsMeta.title} | <span className="text-orange-600">{tech.name}</span>{}</h2>
-               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic rtl:text-3xl dark:text-orange-400">{blogsMeta.titleAr} | <span className="text-orange-600">{tech.nameAr}</span></h2>
+               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400 rtl:text-3xl rtl:font-arabic">{blogsMeta && blogsMeta.title} | <span className="text-orange-600">{tech.name}</span>{}</h2>
+               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic rtl:text-3xl dark:text-orange-400">{blogsMeta && blogsMeta.titleAr} | <span className="text-orange-600">{tech.nameAr}</span></h2>
             }
             </div>
             <div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
