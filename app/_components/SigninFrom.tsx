@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
+import { useEffect } from 'react'
 import { MdMarkEmailUnread } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEye } from "react-icons/fa";
@@ -35,14 +36,10 @@ const SignInForm = (props : Props) => {
    const password = (props.messages as any).Common.password;
    const email = (props.messages as any).Common.email;
    const registerNew = (props.messages as any).Common.register;
-   const signIn = (props.messages as any).Common.signIn;
-
-
-
-
-
+   const sign_in = (props.messages as any).Common.signIn;
     const [isVisiable,setIsVisiable] = useState(false);
     const toggleVisible = () => {setIsVisiable((prev) => !prev)}
+
     const {
         register,
         handleSubmit,
@@ -50,6 +47,12 @@ const SignInForm = (props : Props) => {
       } = useForm<InputType>({
         resolver: zodResolver(FormSchema),
       });
+
+     useEffect(() => {
+                      document.body.style.overflow = '';
+
+          }, []);
+
 
       const onSubmit: SubmitHandler<InputType> = async (data) => {
         console.log("-------------------  start of signin form -------------");
@@ -80,14 +83,9 @@ const SignInForm = (props : Props) => {
           };
         
           handleSessionUpdate(); // Call the callback function
-
       }
 
        
-          
-         
-
-
     return(
     <div className="">
      <form onSubmit={handleSubmit(onSubmit)} className="text-start z-40  ">
@@ -122,7 +120,7 @@ const SignInForm = (props : Props) => {
                 <button type="submit" disabled={isSubmitting} className="btn py-2.5 bg-violet-600  hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full w-full" >  {isSubmitting ? 
                 <div className="flex items-center pl-2">
                     <AiOutlineLoading3Quarters />
-                    <span className="text-md ml-2">{signIn} ... </span>
+                    <span className="text-md ml-2">{sign_in} ... </span>
                 </div>
                 : "Sign In"} </button>
             </div>

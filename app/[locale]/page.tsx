@@ -107,10 +107,7 @@ export default async function Home() {
   });
 
   
- // const packageCategory = await fetch(`${process.env.NEXTAUTH_URL}/api/front/packages/categories/web-development-plans/3`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, 
-  // });
+ 
 
   // const toolsCategory = await fetch(`${process.env.NEXTAUTH_URL}/api/front/technologies/categories/front-end/16`, {
   //   method: 'GET',
@@ -118,16 +115,6 @@ export default async function Home() {
   // });
 
   
-
-  
-
-
-  // const about = await fetch(`${process.env.NEXTAUTH_URL}/api/front/about-section`, {
-  //   method: 'GET',
-  //   next: { revalidate: 3600 }, // Revalidate for ISR if needed
-  // });
-
-
   // if (!Categories.ok || !elements || !Categories) {
   //   throw new Error('Failed to fetch categories');
   // }
@@ -257,9 +244,6 @@ export default async function Home() {
        </div>
        {toolsCategorires && <TechPanel categories={toolsCategorires} locale = {locale} messages={messages} /> }
       </div>
-
-
-    
      <div className="dark:bg-black-100">
       {phases && phaseMeta && <PhaseCompany phases={phases} meta={phaseMeta} locale={locale} messages={messages} />}
      </div>

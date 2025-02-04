@@ -58,6 +58,8 @@ export const config = {
     '/(en|ar)/blog/:path*',
     '/products/:path*',
     '/(en|ar)/products/:path*',
+    '/auth/:path*',
+    '/(en|ar)/auth/:path*',
     '/(en|ar)/:path*',
   ],
 };
