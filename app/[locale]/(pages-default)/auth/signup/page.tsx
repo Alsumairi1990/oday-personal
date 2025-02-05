@@ -22,7 +22,7 @@ export default async function Signup() {
     return (
 
     
-      <div className="flex fixed top-0 left-0 h-full w-full items-center  justify-center bg-no-repeat bg-center bg-cover  z-[60]"  style={{backgroundImage:`url(${imageBg})`}}>
+      <div className="flex fixed rtl:font-arabic top-0 left-0 h-full w-full items-center  justify-center bg-no-repeat bg-center bg-cover  z-[60]"  style={{backgroundImage:`url(${imageBg})`}}>
         <div className="absolute top-0 z-[80]  left-0 w-full  h-full bg-[#000000e0]  " ></div>
         <div className="flex items-cfenter h-full w-full bg-white dark:bg-card sm:h-[calc(100%_-_4rem)]  sm:w-9/12 flex-wrap justify-center z-[90] sm-bg-white sm:rounded-lg ">
             <div className="flex-100 sm:flex-40 max-sm:hidden border-r border-b-gray-200">

@@ -7,6 +7,8 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
+
 import validator from 'validator';
 
 import { z } from 'zod';
@@ -17,6 +19,7 @@ import PasswordStrengthCheck from './PasswordStrengthCheck';
 import { registerUser } from '@/utils/authActions';
 import { toast } from 'react-toastify';
 import { AbstractIntlMessages } from 'next-intl';
+import Link from 'next/link';
 const formSchema = z.object({
     user_name : z.string().min(4, "User Name Must be at least 4 chars")
                           .max(45, "User Name Must less than 45 chars")
@@ -49,7 +52,9 @@ const SignUpForm = (props : Props) => {
     // const {register,handleSubmit,reset,control,formState:{errors}} = useForm<inputType>({
     //     resolver: zodResolver(formSchema)
     // });
-
+    const [ registerResult , setRegisterResult] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+    const [error , setError] = useState<string>('');
     const password = (props.messages as any).Common.password;
     const email = (props.messages as any).Common.email;
     const registerNew = (props.messages as any).Common.register;
@@ -81,17 +86,20 @@ const SignUpForm = (props : Props) => {
     const toggleVisibleConif = () => {setIsVisiableConf((prev) => !prev)}
     const saveUser: SubmitHandler<inputType> = async (data)=>{
         // const user = data;
+        setLoading(true);
         const user = {
             ...data,
             role : 'user'
         }
         try{
-            const result = await registerUser(user)
-            console.log("sucess");
-            toast.success("successfully data added")
+            const result = await registerUser(user);
+            if(result === 'success'){
+                setRegisterResult(true)
+            }
+           setLoading(false)
 
         }catch(error){
-            toast.error("sothing went wrong");
+            setLoading(false);
         }
     }
     // useEffect(()=>{
@@ -103,13 +111,31 @@ const SignUpForm = (props : Props) => {
       }, [watch().password]);
     
   return (
-   <div className="max-w-[400px] w-full max-sm:border max-sm:border-gray-300  m-auto p-6 bg-white dark:bg-black-100 border dark:border-gray-800 shadow-md dark:sha0dow-gray-800 rounded-md">
+   <div className="max-w-[400px]  w-full relative max-sm:border max-sm:border-gray-300  m-auto p-6 bg-white dark:bg-black-100 border dark:border-gray-800 shadow-md dark:sha0dow-gray-800 rounded-md">
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  ">
         <div className="grid grid-cols-1">
         
-         
-
-            <div className=" flex flex-col z-0 w-full mb-5 group">
+           {registerResult && <div className="w-full left-0 top-0 fixed h-full flex justify-center items-center z-20  bg-[#00000077]" >
+                <div className="p-1 w-11.5/12 sm:w-5/12 rounded-md border bg-white border-gray-300 ">
+                <div className="py-1.5 flex items-center bg-gray-100 text-gray-700 mb-2">
+                    <span className="p"> Register prcoess</span> 
+                    <span  onClick={() => { setRegisterResult(false); }} className="ltr:ml-auto rtl:mr-auto pr-1.5"><IoMdClose className='text-2xl text-gray-600' /></span> 
+                </div>
+                <div className="my-4">
+                    <p className="text-green-500 mb-3 font-semibold text-sm">
+                    You have successfull register , pleas check your email for vervication
+                </p>
+                </div>  
+                <Link href={`/auth/signin`} className="p1 my-3">
+                  <span
+                  className="p-1.5 border border-white px-2 bg-orange-500 text-white rounded-md">got to signin page</span> 
+                </Link>
+            </div>
+           </div>}
+             {loading && <div className=' w-full h-full z-40 bg-[#00000012] absolute top-0 left-0  flex items-center justify-center' style={{backdropFilter: 'blur(2px)'}}><div className='loader-2 w-4'></div></div>}
+                
+            
+           <div className=" flex flex-col z-0 w-full mb-5 group">
                     <label htmlFor="user_name" className="font-medium mb-3 text-sm  text-gray-500 dark:text-gray-400 duration-300 ">{userName}</label>
                     <div className="flex items-center w-full">
                        <span className=" border bg-gray-100 ltr:border-r-0 ltr:rounded-l-md rtl:border-l-0 rtl:rounded-r-md border-gray-300 h-10 flex items-center px-2">

@@ -6,7 +6,7 @@ export default function SignPage() {
    const imagePath = '/images/w01.jpg';
 
     return (
-      <div className="relative h-full flex px-4 w-full bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath})`}}>
+      <div className="relative h-full flex px-4 w-full rtl:font-arabic bg-no-repeat bg-center bg-cover -z-0" style={{backgroundImage: `url(${imagePath})`}}>
    <div className="absolute top-0 z-[-1]  left-0 w-full h-full bg-[#2f2f2fba]  " style={{backgroundImage: 'linear-gradient(to top, rgb(15 23 42 / 68%),rgb(0 0 0 / 55%), rgb(255 255 255 / 0%))'}}></div>
    <div className ="max-w-[400px] w-full  m-auto p-6 bg-white dark:bg-black-100 border border-gray-800 shadow-md dark:sha0dow-gray-800 rounded-md">
    <div className="flex justify-center text-sm">

@@ -9,8 +9,11 @@ import { signJwt, verifyJwt } from "./jwt";
 
 console.log("before  refister");
 
-export async function registerUser(user: Omit<User,"id" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "clientId">){ 
-    const result = await prisma.user.create({
+export async function registerUser(user: Omit<User,"id" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "clientId">): Promise<'success' | 'notSuccess'>{ 
+  try {
+    
+   
+  const result = await prisma.user.create({
         data :{
             ...user,
             password : await bcrypt.hash(user.password, 10)
@@ -35,8 +38,11 @@ export async function registerUser(user: Omit<User,"id" | "emailVerified" | "ima
         body: body,
       });
       console.log("sendResult"+sendResult)
-    }
-      
+     }
+     return 'success'
+    } catch (error:any) {
+        throw new Error(error)
+    } 
 
 }
 
