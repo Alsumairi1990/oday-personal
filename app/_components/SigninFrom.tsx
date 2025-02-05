@@ -144,7 +144,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
 interface Props {
-  callbackUrl?: string;
+  callbackUrl?: String;
   locale: string;
   messages: any;
 }
