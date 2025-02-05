@@ -8,6 +8,7 @@ import { FaEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
+import { MdDone } from "react-icons/md";
 
 import validator from 'validator';
 
@@ -64,8 +65,14 @@ const SignUpForm = (props : Props) => {
     const confirmedPassword = (props.messages as any).Common.confirmedPassword;
     const accept = (props.messages as any).Common.accept;
     const termsCondition = (props.messages as any).Common.termsCondition;   
-    const alreadyAccount = (props.messages as any).Common.alreadyAccount;   
+    const alreadyAccount = (props.messages as any).Common.alreadyAccount;
+    const signinPage = (props.messages as any).Common.signInPage;
+    const homePage = (props.messages as any).Common.homePage;   
+    const registerProcess = (props.messages as any).Common.registerProcess; 
+    const successRegister = (props.messages as any).Common.successRegister;   
+  
 
+    
 
 
      const {
@@ -115,20 +122,21 @@ const SignUpForm = (props : Props) => {
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  ">
         <div className="grid grid-cols-1">
         
-           {registerResult && <div className="w-full left-0 top-0 fixed h-full flex justify-center items-center z-20  bg-[#00000077]" >
-                <div className="p-1 w-11.5/12 sm:w-5/12 rounded-md border bg-white border-gray-300 ">
-                <div className="py-1.5 flex items-center bg-gray-100 text-gray-700 mb-2">
-                    <span className="p"> Register prcoess</span> 
-                    <span  onClick={() => { setRegisterResult(false); }} className="ltr:ml-auto rtl:mr-auto pr-1.5"><IoMdClose className='text-2xl text-gray-600' /></span> 
+           {!registerResult && <div className="w-full h-full left-0 top-0 fixed flex justify-center items-center z-20  bg-[#00000077]" >
+                <div className="p-1 w-11/12 sm:w-3/12 rounded-md border bg-white border-gray-300 ">
+                <div className="py-1.5 px-2 flex flex-col gap-y-1.5 items-center rounded-t-md bg-[#04c760] text-white mb-2">
+                     <span className="border-2 border-white flex items-center h-10 w-10 rounded-full justify-center"><MdDone className="text-3xl text-white ltr:ml-auto rtl:mr-auto ml-1 pb-0.5" /></span>
+                    <span className="text-base font-semibold pb-3">{registerProcess}</span> 
+                    {/*<span  onClick={() => { setRegisterResult(false); }} className="ltr:ml-auto rtl:mr-auto pr-1.5"><IoMdClose className='text-xl text-gray-200' /></span> */}
                 </div>
-                <div className="my-4">
-                    <p className="text-green-500 mb-3 font-semibold text-sm">
-                    You have successfull register , pleas check your email for vervication
-                </p>
+                <div className="my-4 text-center">
+                    <p className=" mb-3 font-medium text-sm text-gray-800">
+                              {successRegister}               
+                    </p>
                 </div>  
-                <Link href={`/auth/signin`} className="p1 my-3">
+                <Link href={`/auth/signin`} className="p1 text-sm inline-flex justify-center w-full mt-1.5 mb-3">
                   <span
-                  className="p-1.5 border border-white px-2 bg-orange-500 text-white rounded-md">got to signin page</span> 
+                  className="p-1 shadow border border-white px-2 bg-orange-500 text-white rounded-md">{signinPage}</span> 
                 </Link>
             </div>
            </div>}
