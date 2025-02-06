@@ -4,7 +4,7 @@ import NavBar from "@/app/NavBar";
 import { getMenusElementse2 } from "../admin/setting/left-nav/_actions/Action";
 import WhatsAppLive from "@/app/_components/WhatsAppLive";
 import { getLocale, getMessages } from "next-intl/server";
-import { Category, Service } from "@prisma/client";
+import { Category, CompanyMenu, Explore, Service } from "@prisma/client";
 
 
 
