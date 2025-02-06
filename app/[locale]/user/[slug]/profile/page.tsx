@@ -1,7 +1,8 @@
 
 import ServiceCreate from "@/app/_components/admin/service/ServiceCreate";
 
-const ProfilePage = () => {
+const ProfilePage = async () => {
+   
    const imagePath2 = 'https://angular-material.fusetheme.com/images/avatars/male-04.jpg';
    const imgBg = 'https://angular-material.fusetheme.com/images/pages/profile/cover.jpg';
    const postImag = 'https://tixia.dexignzone.com/xhtml/images/profile/8.jpg';

@@ -1,36 +1,30 @@
-
+'use client'
 import React from 'react';
 import { BiChip } from "react-icons/bi";
 import { BiLayer } from "react-icons/bi";
 import { BiLogoCodepen } from "react-icons/bi";
-import { BiLogoGit } from "react-icons/bi";
-import { BiLogoFirefox } from "react-icons/bi";
-import { BiLogoSpringBoot } from "react-icons/bi";
 import { HiAcademicCap } from "react-icons/hi2";
 import { HiBoltSlash } from "react-icons/hi2";
 import { HiCurrencyBangladeshi } from "react-icons/hi2";
-import { MdOutlineCastForEducation } from "react-icons/md";
-import { BsBrowserChrome } from "react-icons/bs";
-import { RiMoneyDollarCircleFill } from "react-icons/ri";
-import { LiaCertificateSolid } from "react-icons/lia";
+import { MdOutlineArrowDropDown, MdOutlineCastForEducation } from "react-icons/md";
 import Link from 'next/link';
-import styles from './LeftNav.module.css';
-
-
-
-
-
-
 import { BiBasketball } from "react-icons/bi";
+import { AbstractIntlMessages } from 'next-intl';
+import { MenuWithAllModels } from '../../admin/setting/left-nav/_utils/MenuWithAllModels';
+import MenuElements from './MenuElements';
+interface Props {
+    slug : String,
+    menusData: Record<number, MenuWithAllModels[]>,
+    locale : string,
+    messages : AbstractIntlMessages
+}
 
-
-
-const LeftNav = () => {
+const UserSidNav = ({slug,menusData,locale,messages}:Props) => {
    const imagePath = '/images/navbg.webp';
    const imagePath2 = '/images/manager2.png';
   return (
     <div className="relative">
-<div id="adminLeft" className="fixed top-14 z-50  h-full ltr:left-0 rtl:right-0  sm:w-[240px] " style={{transition: 'width 0.5s ease-in-out' }}>
+<div id="userLeft" className="fixed max-sm:hidden top-14 z-50  h-full ltr:left-0 rtl:right-0  sm:w-[240px] " style={{transition: 'width 0.5s ease-in-out' }}>
 <div className="h-full overflow-y-hidden overflow-x-hidden bg-cover bg-[#051118] bg-blend-multiply " style={{backgroundImage: `url(${imagePath})`}} >
 
 
@@ -52,11 +46,36 @@ const LeftNav = () => {
 
 
     <div className="side-content pt-2  h-[calc(100%_-_10rem)] overflow-y-auto overflow-x-hidden">
-        <ul className="p-1 pl-0 whitespace-nowrap" >
+        <div className='flex flex-col mt-3  sm:justify-end rtl:pl-2 r w-full'>
+            {Object.entries(menusData).map(([parentId, menus]) => {
+            const parentMenu = menus.length > 0 ? menus[0].menuParent : null;
+            return (
+            <div key={parentId} className='flex flex-col  parent-menu-pr py-2.5 border-b border-gray-700'>
+                <div className='parent-elm text-sm   relative flex items-center  px-2 rtl:font-arabic font-semibold text-gray-200'>
+                  {locale === 'en' ?<span className="parent-menu-btn mtext-gray-800 inline-flex w-full h-full items-center cursor-pointer">
+                     {parentMenu?.title || ''}
+                  </span> 
+                    :<span className="parent-menu-btn text-gray-50 inline-flex w-full h-full items-center cursor-pointer">
+                     {parentMenu?.titleAr || ''}
+                  </span> }
+                  <MdOutlineArrowDropDown className='text-2xl rtl:ml-4 parent-arr text-gray-300' />
+                  <span className="z-20  hidden down-nav absolute left-[40%] h-0 topdd-[30%] -bottom-6  "></span>
+
+                </div>
+
+                <div className="parent-log-menu hidden ">
+                  <MenuElements menusData={menus} locale={locale} messages={messages} />
+                </div>
+                   
+                    </div>
+                    );
+                })}
+           </div>
+        {/*  <ul className="p-1 pl-0 whitespace-nowrap" >
             <div className="pl-1">
                 <span className="text-md text-gray-300 font-normal capitalize">Services :</span>
             </div>
-            <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
+           <li className="side-item-btn py-0 pl-1.5 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                  <Link href="/user/profile" className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded" >
                     <span className=" bg-[#206681] border border-[#878787] h-6 w-6 flex items-center text-[14px]  rounded ltr:mr-2 rtl:mx-2 justify-center" >
                     <BiBasketball className="text-xl text-white" />
@@ -140,9 +159,7 @@ const LeftNav = () => {
                     </li>
                 </ul>
             </li>
-           {/* <div className="pl-1 mt-1">
-                <span className="text-md text-gray-300 font-normal capitalize">Articles</span>
-            </div>*/}
+         
             <li className="side-item-btn py-0 pl-1 text-gray-300 text-base font-bold bortder-b border-side-bcolor cursor-pointer">
                 <Link href="/user/billing" className="flex items-center text-md py-2 hover:bg-side-btn pl-3 font-medium  rounded">
                 <span className=" bg-[#206681] border border-[#878787] h-6 w-6 flex items-center text-[14px]  rounded ltr:mr-2 rtl:mx-2 justify-center" >
@@ -226,19 +243,8 @@ const LeftNav = () => {
                         <a href="/admin/exam/display" className="pl-2 relative after:content-[''] after:absolute after:h-1.5 after:w-1.5 after:bg-[#355476] after:left-[-2px] after:top-1.7 after:rounded">Display All </a>
                     </li>
                 </ul>
-            </li>
-
-          
-         
-
-
-
-
-
-
-
-
-        </ul>
+            </li> 
+        </ul>  */}
 
 
 
@@ -251,4 +257,4 @@ const LeftNav = () => {
   );
 };
 
-export default LeftNav;
+export default UserSidNav;

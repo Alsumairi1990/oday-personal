@@ -26,8 +26,23 @@ export default async function signupLayout({
         method: 'GET',
         next: { revalidate: 1800 }, 
       });
+
+       const exploresData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/explores`, {
+        method: 'GET',
+        next: { revalidate: 3600 }, 
+      })
+
+       const companyMenuData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/company-menu`, {
+        method: 'GET',
+        next: { revalidate: 3600 }, // Revalidate for ISR 
+      });
+
       const servicesR:Service[] = await res.json();
       const categoriesResult:Category[] = await Categories.json();
+      const explores:Explore[] = await exploresData.json();
+      const companyMenu:CompanyMenu[] = await companyMenuData.json();
+
+
     try {
       menusData = await getMenusElementse2();
     } catch (error) {
@@ -44,7 +59,8 @@ export default async function signupLayout({
             
 
             <div className="h-full dark:bg-[#111]" >
-               {menusData && <NavBar menusData={menusData} locale={locale} messages={messages} />}
+               {menusData && <NavBar menusData={menusData} explores={explores} companyMenu={companyMenu} locale={locale} messages={messages} />}
+
             {children}
             {/* <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
               <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />

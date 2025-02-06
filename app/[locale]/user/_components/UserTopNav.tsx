@@ -1,58 +1,70 @@
 'use client'
 // import React from 'react';
-import React, { useState } from 'react';
-interface ChildProps {
-  handleClick: (newValue: boolean) => void; 
-}
-const TopNav = (props:ChildProps) => {
+import React, { useEffect, useState } from 'react';
+
+
+
+const UserTopNav = () => {
    const imagePath = '/images/navbg.webp';
    const imagePath2 = '/images/logo.png';
-   const evetAct = ()=> {
-}
-      const [openNav, setOpenNav] = useState(true);
-      // const leftAdminElement = document.getElementById('leftAdmin');
+ 
      
-      const changeParentValue = () => {
-        // if (leftAdminElement?.classList.contains('hidden')) {
-        //   leftAdminElement.classList.remove('hidden'); // Remove 'hidden' class if it exists
-        // }else {
-        //   leftAdminElement?.classList.add('hidden'); // Remove 'hidden' class if it exists
+   
+useEffect(() => {
+  if (typeof window === 'undefined') return;
 
-        // }
-  
-      };
-    // document.addEventListener("click", function(event) {
+  const handleClickOutside = (event:any) => {
+   const menus = document.getElementsByClassName('auth-menu');
+   const downMenus = document.getElementsByClassName('auth-menu');
 
-        // let menus = document.getElementsByClassName('auth-menu');
-        // let closest = event.target.closest('.auth-menu');
-        // if(event.target.closest(".openAuthBtn")) {
-        //     let prnt=  event.target.closest('.auth-outer');
-        //     let cu1 = prnt.querySelector('.auth-menu');
-        //     const drop = document.getElementById('dropDis');
-        //       if(!cu1.classList.contains("opend-src")){
-        //         for (let menu of menus) {
-        //                 menu.classList.remove('opend-src');
-        //             }
-        //          cu1.classList.add('opend-src');
-        //       }
-        //       else if(cu1.classList.contains("opend-src") ){
+    if (event.target.closest('.openAuthBtn') !== null) {
+      const prnt = event.target.closest('.auth-outer');
+      const menu = prnt.querySelector('.auth-menu');
+      const downMenu = prnt.querySelector('.auth-menu');
+      if(menu && menu.classList.contains('hidden') && downMenu && downMenu.classList.contains('hidden') ){
+        for (let i = 0; i < menus.length; i++) {
+          menus[i].classList.add('hidden');
+        }
+        for (let i = 0; i < downMenus.length; i++) {
+          downMenus[i].classList.add('hidden');
+        }
+        menu.classList.remove('hidden');
+        downMenu.classList.remove('hidden');
 
-        //             for (let menu of menus) {
-        //                   menu.classList.remove('opend-src');
+      }
+      else if(menu && !menu.classList.contains('hidden') && downMenu && !downMenu.classList.contains('hidden')){
+        menu.classList.add('hidden');
+        downMenu.classList.add('hidden');
+      }
+  }
+    else if (event.target.closest('.leftBtn') !== null){
+        const menuList = document.getElementById('userLeft');
+          
+        if (menuList && menuList.classList.contains('max-sm:hidden')) {
+             menuList.classList.remove('max-sm:hidden')
+        } else {
+            menuList && menuList.classList.add('max-sm:hidden');
+        }
+    
+    }
+  else if (event.target.closest('.auth-menu') !== null) return;
+  else {
+  for(let menu of  Array.from(menus)){
+    menu.classList.add('hidden');
+     };
+  for(let menu of  Array.from(downMenus)){
+  menu.classList.add('hidden');
+    };
+  }
+  };
+  document.addEventListener('click', handleClickOutside);
+  return () => {
+    document.removeEventListener('click', handleClickOutside);
+  };
+});
 
-        //                   }
-        //         }
-        //     }
-        // else if(event.target.closest(".auth-menu")) return ;
-        // else if (!closest) {
-        //         for (let menu of menus) {
-        //                   menu.classList.remove('opend-src');
 
-        //                   }
-        //   }
-        // })
-   // }
-  return (
+     return (
     <div className="flex h-14 items-centre justify-center sticky top-0 z-40">
         <div id='logoMenu' style={{transition: 'width 0.9s ease-in-out' }} className=" flex h-full bg-[#020910] items-center max-sm:min-w-0 max-sm:w-0 sm:min-w-[240px] border-b border-b-gray-800">
             <div className="w-10">
@@ -67,7 +79,7 @@ const TopNav = (props:ChildProps) => {
         <div className="w-full  flex items-center bg-white border-b border-b-gray-200" style={{boxShadow:'0 10px 30px 0 rgb(82 63 104 / 6%)'}}>
             <div className="pl-2">
              <div className="  flex items-center h-full">
-                    <span onClick={changeParentValue}  className="w-8">
+                    <span  className="w-8 leftBtn">
                     <svg width="100%" height="100%" className="ml-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="Menu / Menu_Alt_03">
                     <path id="Vector" d="M5 17H13M5 12H19M5 7H13" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -77,7 +89,7 @@ const TopNav = (props:ChildProps) => {
 
 
                     <span className=" pl-3">
-                        <span className="text-[#4b7b98] text-lg font-medium" >Scholarship | Adding Data</span>
+                        <span className="text-[#4b7b98] sm:text-lg text-base font-medium" >User Page</span>
                     </span>
 
                 </div>
@@ -85,7 +97,7 @@ const TopNav = (props:ChildProps) => {
             <div className="ltr:ml-auto rtl:mr-auto">
             <div className="flex p-1 mr-2 items-center flex-row-reverse gap-x-3 ">
           <div className="auth-outer relative rounded-md ">
-                      <button  className=" openAuthBtn max-sm:hidden border-x cursor-pointer border-y border-x-gray-200 border-y-200 flex items-center bg-[#f9f9f9] rounded-3xl px-2.5 py-1.5" type="button">
+                      <button  className=" openAuthBtn ma-sm:hidden border-x cursor-pointer border-y border-x-gray-200 border-y-200 flex items-center bg-[#f9f9f9] rounded-3xl px-2.5 py-1.5" type="button">
                         <span  className="mr-2 flex items-center">
                         <span className="text-sm font-semibold text-gray-700">Ahmed</span>
                         </span>
@@ -178,7 +190,7 @@ const TopNav = (props:ChildProps) => {
 
 
 
-</div>
+      </div>
 
 
 
@@ -198,4 +210,4 @@ const TopNav = (props:ChildProps) => {
 };
 
 
-export default TopNav;
+export default UserTopNav;
