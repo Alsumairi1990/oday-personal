@@ -334,16 +334,16 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
               </div>
             </div>
 
-            <div className="px-4 pt-2 pb-2 ">
-              <div className="flex items-center justify-center rounded py-1.5 px-2 bg-orange-500">
+            <div className="px-1 pt-2 pb-2 ">
+              <div className="flex items-center justify-center rounded py-1.5 px-1 bg-orange-500">
                <div className="flex text-bxs">
 
-                <Link className="text-white ltr:borer-r rtl:boder-l bordr-gray-300 rtl:pl-2 ltr:pr-2" href={`/auth/signin`}>  
+                <Link className="text-white ltr:border-r rtl:border-l border-gray-300 rtl:pl-2 ltr:pr-2" href={`/auth/signin`}>  
                   {signIn}
                 </Link>
-               {/* <Link className="text-white px-2" href={`/auth/signup`}> 
+               <Link className="text-white px-2" href={`/auth/signup`}> 
                   {register}
-                </Link>*/}
+                </Link>
 
               </div>
               </div>
