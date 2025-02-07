@@ -47,7 +47,8 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
   const explore = (messages as any).Common.explore;  
   const exploreSub = (messages as any).Common.exploreSub;  
   const about = (messages as any).Common.about;  
-
+  const signIn = (messages as any).Common.signIn;
+  const register = (messages as any).Common.register;
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const themeSwitcher = document.querySelector('.top-nav');
@@ -282,8 +283,9 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
 
 
        
-        <div className={`main-drop-menu text-sm max-sm:h-lvh sm:flex-80   max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 max-sm:w-full font-semibold sm:flex sm:items-center sm:text-base  `} > 
-          <div className=" px-4 py-4 flex flex-col bg-[#ffebce]  sm:hidden">
+        <div className={`main-drop-menu text-sm max-sm:mt-[1px] max-sm:w-9/12 max-sm:h-lvh sm:flex-80   max-sm:bg-gray-100 max-sm:overflow-y-auto hidden max-sm:text-gray-600 max-sm:absolute max-sm:left-0 max-sm:top-16 font-semibold sm:flex sm:items-center sm:text-base  `} > 
+          <div className="w-full h-full sm:hidden fixed left-0 top-16 bg-[#0000005c] z-20"></div>
+           <div className=" px-4 py-4 flex flex-col max-sm:bg-[#060606fc] relative z-50 sm:hidden">
             <div className="flex pt-3">
                 <div className="flex-15">
                     <span className="flex w-10 ">
@@ -310,12 +312,12 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
                           </svg>
                     </span>
                 </div>
-                <div className="flex-85 pl-3">
+                <div className="flex-85 ltr:pl-3 rtl:pr-3">
                     <div className="">
-                    <span className="text-sm font-semibold text-gray-700 dark:text-gray-100">{welcome}</span>
+                    <span className="text-sm font-semibold text-gray-100 dark:text-gray-100">{welcome}</span>
                     </div>
                     <div className="pt-1 px-2">
-                    <span className="text-[13px] text-gray-600 dark:text-gray-100">{welcomeDesc}</span>
+                    <span className="text-[13px] text-gray-100 dark:text-gray-100">{welcomeDesc}</span>
                     </div>
                 </div>
             </div>
@@ -332,22 +334,26 @@ const NavBar = ({menusData,explores,companyMenu,locale,messages}:Props) => {
               </div>
             </div>
 
-            <div className="px-4 pt-2 pb-2">
+            <div className="px-4 pt-2 pb-2 ">
               <div className="flex items-center justify-center rounded py-1.5 px-2 bg-orange-500">
-                <a href='/login' className="pl-1 text-sm text-white font-semibold capitalize">Login </a>
-                <a href='/signup' className="pl-1 text-sm text-white font-semibold capitalize">/ Subscribe</a>
+               <div className="flex text-bxs">
+
+                <Link className="text-white ltr:borer-r rtl:boder-l bordr-gray-300 rtl:pl-2 ltr:pr-2" href={`/auth/signin`}>  
+                  {signIn}
+                </Link>
+               {/* <Link className="text-white px-2" href={`/auth/signup`}> 
+                  {register}
+                </Link>*/}
+
+              </div>
               </div>
             </div>
           </div> 
 
-          <div className='max-sm:h-full w-full mx-auto max-sm:bg-white sm:px-4 max-sm:border max-sm:border-gray-200 sm:flex sm:items-center'>
-             
-            
+          <div className='max-sm:h-full max-sm:relative max-sm:z-50 w-full mx-auto max-sm:bg-white sm:px-4 max-sm:border max-sm:border-gray-200 sm:flex sm:items-center'>
                 <div className="w-full flex ltr:justify-end ">
                   <FrontTopNav  menusData ={menusData} locale={locale} messages={messages} />
                   </div>
-                
-             
               <div className="flex w-24 cursor-pointer max-sm:hidden prof-btn pb-1 text-gray-300 items-center">
                 {/* <span className="inline-block h-5 rtl:ml-1 w-0.5 pt-4 bg-gray-500"></span> */}
                 <FaAppStore className=' hover:text-orange-400 text-bxs' />

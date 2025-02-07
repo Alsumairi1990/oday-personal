@@ -48,7 +48,7 @@ interface ServiceCategoryProps {
          <img className='p-1.5 bg-white rounded-md' src={serviceCategory.image} alt={serviceCategory.name} style={{boxShadow:'0 0 5px #ccc'}} />
           
         </div> */}
-        <div className="flex items-center mt-1 mb-2 service-btn border border-[#eee] rounded-[10px] bg-[#f7f7f7] w-fit py-1.5 px-1 " ref={serviceRef}  onClick={handleClick}>
+        <div className="flex items-center mt-1 mb-2 service-btn border border-[#eee] rounded-[10px] bg-[#f7f7f7] w-full py-1.5 px-1 " ref={serviceRef}  onClick={handleClick}>
           
           
             <div className=" bg-white borfder max-sm:mb-2 w-8 sm:w-[19px] border-gray-400 mr-0.5  justify-center flex items-center rounded-full "  >

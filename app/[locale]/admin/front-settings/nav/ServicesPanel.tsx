@@ -18,7 +18,7 @@ const ServicesPanel = ({menusData,locale,messages}:Props) => {
     {/* <span className="absolute inline-block w-4 h-4 bg-white top-[-.5rem] sm:right-28 sm:mr-4 sm:rotate-45"></span> */}
     <div className="sm:px-6 py-0.5 grid sm:grid-cols-5">
        <div className="col-start-1 col-span-4">
-       <div className="sm:pl-5 max-sm:grid grid-cols-2 sm:grid-cols-1 sm:columns-3 gap-4 sm:gap-10 " >
+       <div className="sm:pl-5 max-sm:grid grid-cols-1 sm:grid-cols-1 sm:columns-3 gap-4 sm:gap-10 " >
        {menusData.map((categoryService) => (
                   <NavElements  serviceCategory={categoryService} locale={locale} messages={messages} />
                ))}
