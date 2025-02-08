@@ -1,5 +1,5 @@
 'use client'
-import React from 'react';
+import React,{useEffect} from 'react';
 import { BiChip } from "react-icons/bi";
 import { BiLayer } from "react-icons/bi";
 import { BiLogoCodepen } from "react-icons/bi";
@@ -22,9 +22,52 @@ interface Props {
 const UserSidNav = ({slug,menusData,locale,messages}:Props) => {
    const imagePath = '/images/navbg.webp';
    const imagePath2 = '/images/manager2.png';
+   useEffect(() => {
+  if (typeof window === 'undefined') return;
+
+  const handleClickOutside = (event:any) => {
+   const menus = document.getElementsByClassName('parent-log-menu');
+   const downMenus = document.getElementsByClassName('down-nav');
+
+    if (event.target.closest('.parent-menu-btn ') !== null) {
+      const prnt = event.target.closest('.parent-menu-pr');
+      const menu = prnt.querySelector('.parent-log-menu');
+      const downMenu = prnt.querySelector('.down-nav');
+      if(menu && menu.classList.contains('hidden') && downMenu && downMenu.classList.contains('hidden') ){
+        for (let i = 0; i < menus.length; i++) {
+          menus[i].classList.add('hidden');
+        }
+        for (let i = 0; i < downMenus.length; i++) {
+          downMenus[i].classList.add('hidden');
+        }
+        menu.classList.remove('hidden');
+        downMenu.classList.remove('hidden');
+
+      }
+      else if(menu && !menu.classList.contains('hidden') && downMenu && !downMenu.classList.contains('hidden')){
+        menu.classList.add('hidden');
+        downMenu.classList.add('hidden');
+      }
+      
+  }
+  else if (event.target.closest('.parent-log-menu ') !== null) return;
+  else {
+  for(let menu of  Array.from(menus)){
+    menu.classList.add('hidden');
+     };
+  for(let menu of  Array.from(downMenus)){
+  menu.classList.add('hidden');
+    };
+  }
+  };
+  document.addEventListener('click', handleClickOutside);
+  return () => {
+    document.removeEventListener('click', handleClickOutside);
+  };
+});
   return (
     <div className="relative">
-<div id="userLeft" className="fixed max-sm:hidden top-14 z-50  h-full ltr:left-0 rtl:right-0  sm:w-[240px] " style={{transition: 'width 0.5s ease-in-out' }}>
+<div id="userLeft" className="fixed max-sm:hidden top-14 z-50  h-full ltr:left-0 rtl:right-0 max-sm:w-7/12  sm:w-[240px] " style={{transition: 'width 0.5s ease-in-out' }}>
 <div className="h-full overflow-y-hidden overflow-x-hidden bg-cover bg-[#051118] bg-blend-multiply " style={{backgroundImage: `url(${imagePath})`}} >
 
 
@@ -46,12 +89,12 @@ const UserSidNav = ({slug,menusData,locale,messages}:Props) => {
 
 
     <div className="side-content pt-2  h-[calc(100%_-_10rem)] overflow-y-auto overflow-x-hidden">
-        <div className='flex flex-col mt-3  sm:justify-end rtl:pl-2 r w-full'>
+        <div className='flex flex-col mt-3  sm:justify-end ltr:pl-2 rtl:pr-2 w-full'>
             {Object.entries(menusData).map(([parentId, menus]) => {
             const parentMenu = menus.length > 0 ? menus[0].menuParent : null;
             return (
             <div key={parentId} className='flex flex-col  parent-menu-pr py-2.5 border-b border-gray-700'>
-                <div className='parent-elm text-sm   relative flex items-center  px-2 rtl:font-arabic font-semibold text-gray-200'>
+                <div className='parent-elm text-sm   relative flex items-center  px-2 font-semibold text-gray-200'>
                   {locale === 'en' ?<span className="parent-menu-btn mtext-gray-800 inline-flex w-full h-full items-center cursor-pointer">
                      {parentMenu?.title || ''}
                   </span> 
@@ -64,7 +107,7 @@ const UserSidNav = ({slug,menusData,locale,messages}:Props) => {
                 </div>
 
                 <div className="parent-log-menu hidden ">
-                  <MenuElements menusData={menus} locale={locale} messages={messages} />
+                  <MenuElements menusData={menus}slug={slug} locale={locale} messages={messages} />
                 </div>
                    
                     </div>

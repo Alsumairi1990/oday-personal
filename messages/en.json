@@ -157,8 +157,11 @@
       "about" : "about",
       "testimonials" : "testimonials",
       "companyOffices" : " Our Location ",
-      "companyOfficeDesc" : " Find us easily at our headquarters. We're here to help you with all your needs."
-      
+      "companyOfficeDesc" : " Find us easily at our headquarters. We're here to help you with all your needs.",
+      "profilePage" : "Profile Page",
+      "bio" : "about me",
+      "seeBio" : "see complete bio"
+
 
       
 

@@ -5,13 +5,21 @@ import { MenuWithAllModels } from '../../admin/setting/left-nav/_utils/MenuWithA
 import UserSidNav from '../_components/UserSidNav';
 import { getLocale, getMessages } from 'next-intl/server';
 
-export default async function signupLayout({
-    children,
-  }: {
-    children: React.ReactNode
-  }) {
+interface Props {
+  params: {
+      slug: string;
+  };
+}
 
-    const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/user/menu/left-nav`, {
+export default async function SignupLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+} & Props) {
+  const { slug } = params;
+
+    const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/users/menu/left-nav`, {
       method: 'GET',
       next: { revalidate: 3600 }, // 
     });
@@ -24,7 +32,7 @@ export default async function signupLayout({
                      <UserTopNav />
                 <div className="flex h-fit">
                   {menuElements && (<div id="leftAdmin" className="p-1 m  sm:min-w-[240px] left-admin">
-                     <UserSidNav slug="dd" menusData={menuElements} locale={locale}  messages={messages}  />
+                     <UserSidNav slug={slug} menusData={menuElements} locale={locale}  messages={messages}  />
                   </div> )
                 }
                 <div className="w-full  h-full">

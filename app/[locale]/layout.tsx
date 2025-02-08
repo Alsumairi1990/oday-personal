@@ -29,7 +29,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider messages={messages}>
       <Providers>
       {/* <NextTopLoader /> */}
-        <div dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+        <div dir={locale === 'ar' ? 'rtl' : 'ltr'} className="rtl:font-arabic">
 
         {children}
         </div>

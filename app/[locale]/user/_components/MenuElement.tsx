@@ -1,7 +1,6 @@
 
 'use client'
 import React, { useRef } from "react";
-import { ServiceCategoryInt } from '@/app/models/ServiceCategoryInt'
 import { FiArrowLeft } from "react-icons/fi";
 
 import {useEffect} from 'react';
@@ -10,14 +9,14 @@ import { AbstractIntlMessages } from "next-intl";
 import { MenuWithAllModels } from "../../admin/setting/left-nav/_utils/MenuWithAllModels";
 
 
-interface ServiceCategoryProps {
+interface Props {
     // serviceCategory: ServiceCategoryInt,
-    serviceCategory : MenuWithAllModels,
+    element : MenuWithAllModels,
     locale : string,
     messages : AbstractIntlMessages,
   }
   
-  function MenuElement({ serviceCategory,locale,messages}: ServiceCategoryProps) {
+  function MenuElement({ element,locale,messages}: Props) {
     const serviceRef = useRef(null);
          const handleClick = (event:any) => {
     const clickedDiv = event.currentTarget; 
@@ -43,30 +42,29 @@ interface ServiceCategoryProps {
   
     
     return (
-      <div className='service-outer sm:border-l sm:border-gray-200 sm:flex-25 max-sm:px-2 max-sm-py-1 sm:pb-2 pt-0 sm:px-2 max-sm:rounded-md max-sm:border max-sm:border-gray-200' >
+      <div className='service-outer    max-sm-py-1 sm:pb-2 pt-0  max-sm:rounded-md max-sm:border max-sm:border-gray-200' >
         {/* <div className="flex justify-center" >
-         <img className='p-1.5 bg-white rounded-md' src={serviceCategory.image} alt={serviceCategory.name} style={{boxShadow:'0 0 5px #ccc'}} />
           
         </div> */}
-        <div className="flex items-center mt-1 mb-2 service-btn border border-[#eee] rounded-[10px] bg-[#f7f7f7] w-fit py-1.5 px-1 " ref={serviceRef}  onClick={handleClick}>
+        <div className="flex items-center mt-1 mb-2 service-btn  rounded-[10px]  w-full py-1.5 px-1 " ref={serviceRef}  onClick={handleClick}>
           
           
-            <div className=" bg-white borfder max-sm:mb-2 w-8 sm:w-[19px] border-gray-400 mr-0.5  justify-center flex items-center rounded-full "  >
-                   {locale === 'en' ? (
-                    serviceCategory.icon &&  <img className='w-full' src={serviceCategory.icon} alt={serviceCategory.title} />
+           {/* <div className="borfder mb-2 w-8  border-gray-400 mr-0.5  justify-center flex items-center rounded-full "  >
+                  {locale === 'en' ? (
+                    element.icon &&  <img className='w-full' src={element.icon} alt={element.title} />
                    ) 
                    :(
-                    serviceCategory.icon &&  <img className='w-full' src={serviceCategory.icon} alt={serviceCategory.titleAr!} /> 
+                    element.icon &&  <img className='w-full' src={element.icon} alt={element.titleAr!} /> 
                    )
                   }
-                    </div> 
-                  {locale === 'en' ? <span className='text-sm  px-2 text-gray-800 sm:text-orange-500 tracking-wide font-medium sm:font-semibold'>{serviceCategory.title}</span> 
+                    </div>*/} 
+                  {locale === 'en' ? <span className='text-sm   text-gray-800 sm:text-orange-500  font-medium sm:font-semibold'>{element.title}</span> 
                   :
-                  <span className='text-sm  px-2 text-gray-800 sm:text-orange-500 tracking-wide font-medium sm:font-semibold'>{serviceCategory.titleAr}</span> 
+                  <span className='text-sm   text-gray-800 sm:text-orange-500 font-medium sm:font-semibold'>{element.titleAr}</span> 
                 } 
         </div>
         
-        {serviceCategory.elements && serviceCategory.elements.length > 0 && (
+        {element.elements && element.elements.length > 0 && (
           <div className='my-1 mb-1 max-sm:nav-mob services-menu max-sm:hidden max-sm:fixed max-sm:mt-0 max-sm:top-0 max-sm:h-full max-sm:left-0 max-sm:w-full max-sm:bg-white'>
             <div className="sm:hidden flex mb-2 flex-col bg-slate-500 ">
               <span className="sm:hidden pl-2 pt-2"  onClick={closeMenu}>
@@ -75,10 +73,10 @@ interface ServiceCategoryProps {
               <div className="flex justify-center pb-6 items-center">
                  
                 {locale === 'en' ? <span className="text-lg font-semibold text-white">
-                    {serviceCategory.title}
+                    {element.title}
                 </span>:
                 <span className="text-lg font-semibold text-white">
-                {serviceCategory.titleAr}
+                {element.titleAr}
             </span>
                 }
               </div>
@@ -86,7 +84,7 @@ interface ServiceCategoryProps {
             
            
             <ul className='grid grid-cols-2 sm:flex max-sm:mt-6 sm:flex-col rtl:sm:pr-6 ltr:sm:pl-6 max-sm:gap-4  max-sm:px-6'>
-              {serviceCategory.elements.map((service) => (
+              {element.elements.map((service) => (
                 
                 <li className='flex max-sm:flex-col items-center py-2 max-sm:shadow-md max-sm:px-2 sm:py-1.5 max-sm:border max-sm:border-gray-300 max-sm:rounded-md'  key={service.id}>
                   {/* <div className=" bg-white border max-sm:mb-2 w-8 sm:w-[22px] border-gray-400 p-1 mr-2  justify-center flex items-center rounded-full "  >
