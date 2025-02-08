@@ -160,7 +160,31 @@
       "companyOfficeDesc" : " Find us easily at our headquarters. We're here to help you with all your needs.",
       "profilePage" : "Profile Page",
       "bio" : "about me",
-      "seeBio" : "see complete bio"
+      "seeBio" : "see complete bio",
+      "generalInfo" : "user information",
+      "firstName" : "first name",
+      "lastName" : "last name",
+      "userEmail" : "use email",
+      "dateOfBirth" : "date of join",
+      "dateOfJoin" : "",
+      "sex" : "sex",
+      "mobile" : "mobile",
+      "jobTitle" : "job title",
+      "userImage" : "user image",
+      "userAvatar" : "user avatar",
+      "address" : "address",
+      "city" : "city",
+      "country" : "country",
+      "postalCode" : "postal code",
+      "degree" : "degree",
+      "institution" : "institution",
+      "specialization" : "specialization",
+      "nationality" : "nationality",
+      "languages" : "languages",
+      "maritalStatus" : "marital status",
+      "socialNetwork" : "social network ",
+      "skills" : "skills",
+      "contactInfo" : "contact info"
 
 
       

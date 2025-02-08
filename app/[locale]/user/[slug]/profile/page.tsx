@@ -25,7 +25,39 @@ const ProfilePage = async ({params}:Props) => {
    const postHight = 'https://tixia.dexignzone.com/xhtml/images/profile/1.jpg';
    const profilePage = (messages as any).Common.profilePage;
    const bio = (messages as any).Common.bio;
-   const seeBio = (messages as any).Common.seeBio;
+   const seeBio = (messages as any).Common.seeBio;  
+   const firstName = (messages as any).Common.firstName;
+   const lastName = (messages as any).Common.lastName;
+   const jobTitle = (messages as any).Common.jobTitle;
+   const userEmail = (messages as any).Common.userEmail;
+   const degree = (messages as any).Common.degree;
+   const dateOfBirth = (messages as any).Common.dateOfBirth;
+   const dateOfJoin = (messages as any).Common.dateOfJoin;
+   const userImage = (messages as any).Common.userImage;
+   const userAvatar = (messages as any).Common.userAvatar;
+   const address = (messages as any).Common.address;
+   const sex = (messages as any).Common.sex;
+   const city = (messages as any).Common.city;
+   const postalCode = (messages as any).Common.postalCode;
+   const institution = (messages as any).Common.institution;
+   const specialization = (messages as any).Common.specialization;
+   const languages = (messages as any).Common.languages;
+   const maritalStatus = (messages as any).Common.maritalStatus;
+   const socialNetwork = (messages as any).Common.socialNetwork;
+   const skills = (messages as any).Common.skills;    
+   const generalInfo = (messages as any).Common.generalInfo;
+   const mobile = (messages as any).Common.mobile;
+   const contactInfo = (messages as any).Common.contactInfo;
+   const country = (messages as any).Common.country;
+
+
+
+
+  
+
+
+
+
 
   
 
@@ -175,9 +207,130 @@ const ProfilePage = async ({params}:Props) => {
 
         </div>
 
-
-
         <div className="sm:col-span-2   sm:cols-start-2 space-y-6">
+         <div className="p-5 pt-2 bg-white rounded-xl border border-gray-300 shadow-md">
+            <div className="px-2 py-2 mb-2  border-b border-b-gray-200">
+               <span className="text-md text-gray-700 font-semibold">{generalInfo}</span>
+            </div>
+            <div className="py-2">
+               <div className="grid sm:grid-cols-2 text-sm gap-x-4 gap-y-6">
+                  <div className="flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800 font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        {firstName }  
+                     </span>
+                     <span className="flex-70 pltr:pl-4 rtl:pr-4 text-gray-800 font-semibold ">
+                        {locale === 'en' ? user.employeeProfile.firstName
+                        : user.employeeProfile.firstNameAr
+                        }
+                     </span>
+                  </div>
+                  <div className="flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        {lastName }  
+                     </span>
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
+                        {locale === 'en' ? user.employeeProfile.lastName
+                        : user.employeeProfile.lastNameAr
+                        }
+                     </span>
+                  </div>
+                  <div className="flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        {dateOfJoin }  
+                     </span>
+                     <span className="flex-70 pxltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
+                        {locale === 'en' ? user.employeeProfile.dateOfJoining?.toString()
+                        : user.employeeProfile.dateOfJoining?.toString()
+                        }
+                     </span>
+                  </div>
+                  <div className="flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        {jobTitle }  
+                     </span>
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
+                        {locale === 'en' ? user.employeeProfile.jobTitle
+                        : user.employeeProfile.jobTitleAr
+                        }
+                     </span>
+                  </div>
+                  <div className="flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        {degree }  
+                     </span>
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
+                        {user.employeeProfile.degreeAr}
+                     </span>
+                  </div>
+                  <div className="flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        {jobTitle }  
+                     </span>
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
+                        {user.employeeProfile.jobTitleAr}
+                     </span>
+                  </div>
+               </div>
+            </div>
+          </div>
+         
+
+         
+         <div className="p-5 pt-2 bg-white rounded-xl border border-gray-300 shadow-md">
+            <div className="px-2 py-2 mb-2  border-b border-b-gray-200">
+               <span className="text-md text-gray-700 font-semibold">{contactInfo}</span>
+            </div>
+            <div className="py-2">
+               <div className="flex flex-wrap text-sm gap-x-4 gap-y-6">
+                  <div className="flex-48 flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800 font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        { country}  
+                     </span>
+                     <span className="flex-70 pltr:pl-4 rtl:pr-4 text-gray-800 font-semibold ">
+                        {locale === 'en' ? user.employeeProfile.country
+                        : user.employeeProfile.countryAr
+                        }
+                     </span>
+                  </div>
+                  <div className="flex-48 flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        {city }  
+                     </span>
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
+                        {locale === 'en' ? user.employeeProfile.city
+                        : user.employeeProfile.cityAr
+                        }
+                     </span>
+                  </div>
+                  <div className="flex-100 flex border-b py-2 border-gray-200">
+                     <span className="flex-15 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        {address }  
+                     </span>
+                     <span className="flex-85 pxltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
+                        {locale === 'en' ? user.employeeProfile.address
+                        : user.employeeProfile.address
+                        }
+                     </span>
+                  </div>
+                  <div className="flex-48 flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        {postalCode }  
+                     </span>
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
+                        {locale === 'en' ? user.employeeProfile.postalCode
+                        : user.employeeProfile.postalCode
+                        }
+                     </span>
+                  </div>
+                 
+                 
+               </div>
+            </div>
+          </div>
+      
+        </div>
+
+        {/* <div className="sm:col-span-2   sm:cols-start-2 space-y-6">
           <div className="p-5 bg-white rounded-xl border border-gray-300 shadow-md">
              <img src={postImag} alt="" className="img-fluid w-100 rounded" />
              <a className="" href="post-details.html">
@@ -205,8 +358,7 @@ const ProfilePage = async ({params}:Props) => {
                <button className="px-3 py-1.5 bg-red-600 rounded-md text-white text-md" data-bs-toggle="modal" data-bs-target="#replyModal"><span className=""><i className="fa fa-reply"></i></span>Reply</button>
              </div>
           </div>
-        </div>
-
+        </div> */}
 
 
       </div>
