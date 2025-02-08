@@ -184,7 +184,10 @@
       "maritalStatus" : "marital status",
       "socialNetwork" : "social network ",
       "skills" : "skills",
-      "contactInfo" : "contact info"
+      "contactInfo" : "contact info",
+      "addressInfo" : "address info",
+      "otherData" : "another data ",
+      "yearOfPassing" : "سنة التخرج"
 
 
       

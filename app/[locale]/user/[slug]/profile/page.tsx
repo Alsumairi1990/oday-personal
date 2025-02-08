@@ -49,11 +49,16 @@ const ProfilePage = async ({params}:Props) => {
    const mobile = (messages as any).Common.mobile;
    const contactInfo = (messages as any).Common.contactInfo;
    const country = (messages as any).Common.country;
+   const addressInfo = (messages as any).Common.addressInfo;
+   const nationality = (messages as any).Common.nationality;  
+   const otherData = (messages as any).Common.otherData;  
+   const yearOfPassing = (messages as any).Common.yearOfPassing;
 
 
+   
 
 
-  
+   
 
 
 
@@ -218,7 +223,7 @@ const ProfilePage = async ({params}:Props) => {
                      <span className="flex-30 text-cyan-800 font-semibold ltr:border-r rtl:border-l border-gray-300">
                         {firstName }  
                      </span>
-                     <span className="flex-70 pltr:pl-4 rtl:pr-4 text-gray-800 font-semibold ">
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800 font-semibold ">
                         {locale === 'en' ? user.employeeProfile.firstName
                         : user.employeeProfile.firstNameAr
                         }
@@ -238,7 +243,7 @@ const ProfilePage = async ({params}:Props) => {
                      <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
                         {dateOfJoin }  
                      </span>
-                     <span className="flex-70 pxltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
                         {locale === 'en' ? user.employeeProfile.dateOfJoining?.toString()
                         : user.employeeProfile.dateOfJoining?.toString()
                         }
@@ -254,35 +259,132 @@ const ProfilePage = async ({params}:Props) => {
                         }
                      </span>
                   </div>
+                  <div className=" flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800 font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        { mobile}  
+                     </span>
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800 font-semibold ">
+                        {locale === 'en' ? user.employeeProfile.mobile
+                        : user.employeeProfile.mobile
+                        }
+                     </span>
+                  </div>
+                  <div className=" flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        {userEmail }  
+                     </span>
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
+                        {locale === 'en' ? user.email
+                        : user.email
+                        }
+                     </span>
+                  </div>
                   <div className="flex border-b py-2 border-gray-200">
                      <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
                         {degree }  
                      </span>
                      <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
-                        {user.employeeProfile.degreeAr}
+                        {locale === 'en' ? user.employeeProfile.degree
+                        :  user.employeeProfile.degreeAr
+                        }
                      </span>
                   </div>
                   <div className="flex border-b py-2 border-gray-200">
                      <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
-                        {jobTitle }  
+                        {sex }  
                      </span>
                      <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800  font-semibold">
-                        {user.employeeProfile.jobTitleAr}
+                        {locale === 'en' ? user.employeeProfile.sex
+                        :  user.employeeProfile.sexAr
+                        }
                      </span>
                   </div>
                </div>
             </div>
           </div>
          
-
-         
-         <div className="p-5 pt-2 bg-white rounded-xl border border-gray-300 shadow-md">
+          <div className="p-5 pt-2 bg-white rounded-xl border border-gray-300 shadow-md">
             <div className="px-2 py-2 mb-2  border-b border-b-gray-200">
                <span className="text-md text-gray-700 font-semibold">{contactInfo}</span>
             </div>
             <div className="py-2">
                <div className="flex flex-wrap text-sm gap-x-4 gap-y-6">
                   <div className="flex-48 flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800 font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        { dateOfBirth}  
+                     </span>
+                     <span className="flex-70 pltr:pl-4 rtl:pr-4 text-gray-800 font-semibold ">
+                        {user.employeeProfile.dateOfBirth ? locale === 'en' ? user.employeeProfile.dateOfBirth?.toString()
+                        : user.employeeProfile.dateOfBirth?.toString()
+                        : <span className="text-gray-4000">---------</span>
+                          }           
+                        </span>
+                  </div>
+                  <div className="flex-48 flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800 font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        { nationality}  
+                     </span>
+                     <span className="flex-70 ltr:pl-4 rtl:pr-4 text-gray-800 font-semibold ">
+                        {user.employeeProfile.nationality ? locale === 'en' ? user.employeeProfile.nationality
+                        : user.employeeProfile.nationalityAr
+                        : <span className="text-gray-400">---------</span>
+                          }           
+                        </span>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+         <div className="p-5 pt-2 bg-white rounded-xl border border-gray-300 shadow-md">
+            <div className="px-2 py-2 mb-2  border-b border-b-gray-200">
+               <span className="text-md text-gray-700 font-semibold">{otherData}</span>
+            </div>
+            <div className="py-2">
+               <div className="flex flex-wrap text-sm gap-x-4 gap-y-6">
+                  <div className="flex-48 flex border-b py-2 border-gray-200">
+                     <span className="flex-30 text-cyan-800 font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        { dateOfBirth}  
+                     </span>
+                     <span className="flex-70 pltr:pl-4 rtl:pr-4 text-gray-800 font-semibold ">
+                        {user.employeeProfile.institution ? locale === 'en' ? user.employeeProfile.institution
+                        : user.employeeProfile.institutionAr
+                        : <span className="text-gray-4000">----------</span>
+                          }           
+                        </span>
+                  </div>
+                  <div className="flex-48 flex border-b py-2 border-gray-200">
+                     <span className="flex-40 text-cyan-800 font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        { maritalStatus}  
+                     </span>
+                     <span className="flex-60 pltr:pl-4 rtl:pr-4 text-gray-800 font-semibold ">
+                        {user.employeeProfile.maritalStatus ? locale === 'en' ? user.employeeProfile.maritalStatus
+                        : user.employeeProfile.maritalStatus
+                        : <span className="text-gray-400">-----------</span>
+                          }           
+                        </span>
+                  </div>
+                  <div className="flex-48 flex border-b py-2 border-gray-200">
+                     <span className="flex-40 text-cyan-800 font-semibold ltr:border-r rtl:border-l border-gray-300">
+                        { languages}  
+                     </span>
+                     <span className="flex-60 pltr:pl-4 rtl:pr-4 text-gray-800 font-semibold ">
+                        {user.employeeProfile.languages.length > 0 ? locale === 'en' ? user.employeeProfile.languages.join(", ")
+                        : user.employeeProfile.languages.join(", ")
+                        : <span className="text-gray-400">-----------</span>
+                          }           
+                        </span>
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+         <div className="p-5 pt-2 bg-white rounded-xl border border-gray-300 shadow-md">
+            <div className="px-2 py-2 mb-2  border-b border-b-gray-200">
+               <span className="text-md text-gray-700 font-semibold">{addressInfo}</span>
+            </div>
+            <div className="py-2">
+               <div className="flex flex-wrap text-sm gap-x-4 gap-y-6">
+                  <div className="flex-100 sm:flex-48 flex border-b py-2 border-gray-200">
                      <span className="flex-30 text-cyan-800 font-semibold ltr:border-r rtl:border-l border-gray-300">
                         { country}  
                      </span>
@@ -292,7 +394,7 @@ const ProfilePage = async ({params}:Props) => {
                         }
                      </span>
                   </div>
-                  <div className="flex-48 flex border-b py-2 border-gray-200">
+                  <div className="flex-100 sm:flex-48 flex border-b py-2 border-gray-200">
                      <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
                         {city }  
                      </span>
@@ -312,7 +414,7 @@ const ProfilePage = async ({params}:Props) => {
                         }
                      </span>
                   </div>
-                  <div className="flex-48 flex border-b py-2 border-gray-200">
+                  <div className="flex-100 sm:flex-48 flex border-b py-2 border-gray-200">
                      <span className="flex-30 text-cyan-800  font-semibold ltr:border-r rtl:border-l border-gray-300">
                         {postalCode }  
                      </span>

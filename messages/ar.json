@@ -182,7 +182,11 @@
        "maritalStatus" : "الحالة الاجتماعية",
        "socialNetwork" : "حسابات وسائل التواصل",
        "skills" : "المهارات",
-       "contactInfo" : "معلومات التواصل"
+       "contactInfo" : "معلومات التواصل",
+       "addressInfo" : "بيانات العنوان",
+       "otherData" : "بيانات اخرى",
+       "yearOfPassing" : "year of passing"
+
 
 
 
