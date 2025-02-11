@@ -15,6 +15,9 @@ export default async function signupLayout({
       method: 'GET',
       next: { revalidate: 3600 }, // 
     });
+    {!elements && 
+      <h1>no data </h1>
+    }
     const locale = await getLocale();
     const messages = await getMessages({ locale });
   const menuElements:Record<number, MenuWithAllModels[]> = await elements.json();
