@@ -149,10 +149,6 @@ const authOptions: NextAuthOptions = {
       }
       return true;
     },
-
-
-
-
   },
 };
 

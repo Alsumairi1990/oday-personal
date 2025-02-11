@@ -6,8 +6,9 @@ const UserPage = () => {
 
     return (
       <div className="p-2">
-        <p className="text-gray-600 pt-3 mb-8">User Page</p>
-        <Service  />
+        <div className="px-3 py-2 bg-white border border-gray-200 mb-2 rounded-md">
+           <p className="text-gray-600  mb-0 max-sm:hidden">Profile Page</p>
+        </div>        <Service  />
       </div>
 )
 };

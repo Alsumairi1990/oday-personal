@@ -62,9 +62,9 @@ export default async function signupLayout({
                {menusData && <NavBar menusData={menusData} explores={explores} companyMenu={companyMenu} locale={locale} messages={messages} />}
 
             {children}
-            {/* <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-              <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
-          </div> */}
+            <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+          <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
+          </div>
              
             </div>
              

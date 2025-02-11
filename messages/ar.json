@@ -185,22 +185,55 @@
        "contactInfo" : "معلومات التواصل",
        "addressInfo" : "بيانات العنوان",
        "otherData" : "بيانات اخرى",
-       "yearOfPassing" : "year of passing"
+       "yearOfPassing" : "سنة التخرج",
+       "subscribed" : "المشترك بها ",
+       "subscribedPackages" : "باقات مشترك بها",
+       "offers" : "العروض",
+       "subscribedPlans" : "خطط مشترك بها ",
+       "view" : "عرض",
+       "userPage" : "صفحة المستخدم",
+       "mainPage" : "الصفحة الرئيسية",
+       "projectOverview" : "بيانات المشاريع",
+        "finishedProject": "مشاريع منجزة",
+        "activeProject": "مشاريع نشطة",
+        "pendingProject": "مشاريع قيد الانتظار",
+        "totalProjects": "إجمالي المشاريع",
+        "canceledProjects": "مشاريع ملغاة",
+        "projectsHasCancled": "تم الغائها قبل البدأ",
+        "orderProject" : "طلب مشروع" ,
+        "projectDeadline": "الموعد النهائي للمشروع",
+        "upcomingDeadline": "الموعد النهائي القادم",
+        "viewAllProjects": "عرض جميع المشاريع",
+        "createNewProject": "إنشاء مشروع جديد",
+        "manageProjects": "إدارة المشاريع",
+        "projectsNotCopleted": "مشاريع لم يتم انهائها",
+        "trackProgress": "تتبع التقدم",
+        "overdueProject": "مشاريع متأخره",
+        "noProjectsFound": "لم يتم العثور على مشاريع",
+        "lastUpdated": "آخر تحديث",
+        "projectStatus": "حالة المشروع",
+        "projectDetails": "تفاصيل المشروع",
 
-
-
-
-
-
-
+        "serviceData" : "بيانات الخدمات",
+        "activeServices": "الخدمات النشطة",
+        "pendingServices": "الخدمات المعلقة",
+        "completedServices": "الخدمات المكتملة",
+        "expiredServices": "الخدمات المنتهية",
+        "upcomingServices": "الخدمات القادمة",
+        "servicesInRevision": "الخدمات قيد المراجعة",
+        "servicesAwaitingFeedback": "الخدمات في انتظار الملاحظات",
+        "mostUsedService": "أكثر خدمة مستخدمة",
+        "lastOrderedService": "آخر خدمة تم طلبها",
+        "serviceSpending": "إجمالي الإنفاق على الخدمات",
+        "refundedServices": "الخدمات المستردة",
+        "delayedServices": "الخدمات المتأخرة",
+        "discountedServices": "الخدمات المخفضة",
+        "supportRequestsForServices": "طلبات الدعم للخدمات"
+        
+        
+        
 
  
-
-
-
-
-
-
 
 
     }

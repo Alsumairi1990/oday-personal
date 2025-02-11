@@ -2,13 +2,18 @@
 // import React from 'react';
 import React, { useEffect, useState } from 'react';
 
+import { AbstractIntlMessages } from "next-intl";
 
-
-const UserTopNav = () => {
+interface Props {
+   locale : string,
+   messages : AbstractIntlMessages,
+}
+   
+const UserTopNav = ({locale,messages} : Props) => {
    const imagePath = '/images/navbg.webp';
    const imagePath2 = '/images/logo.png';
- 
-     
+    const userPage = (messages as any).Common.userPage;  
+  
    
 useEffect(() => {
   if (typeof window === 'undefined') return;
@@ -77,7 +82,7 @@ useEffect(() => {
             </div>
         </div>
         <div className="w-full  flex items-center bg-white border-b border-b-gray-200" style={{boxShadow:'0 10px 30px 0 rgb(82 63 104 / 6%)'}}>
-            <div className="pl-2">
+            <div className="ltr:pl-2 rtl:pr-3">
              <div className="  flex items-center h-full">
                     <span  className="w-8 leftBtn">
                     <svg width="100%" height="100%" className="ml-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -88,8 +93,8 @@ useEffect(() => {
                     </span>
 
 
-                    <span className=" pl-3">
-                        <span className="text-[#4b7b98] sm:text-lg text-base font-medium" >User Page</span>
+                    <span className=" ltr:pl-3 rtl:pr-3">
+                        <span className="text-[#4b7b98] sm:text-lg text-base font-medium" >{userPage}</span>
                     </span>
 
                 </div>

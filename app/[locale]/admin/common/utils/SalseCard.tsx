@@ -62,15 +62,6 @@ function SelseCard() {
                 <img 
                 style={{filter: 'drop-shadow(rgba(0, 0, 0, 0.6) 0px 4px 60px)'}}
                 className=' rounded-l-md max-w-full' src={`${baseUrl}/${imagePath}`} alt="" />
-                  {/* <Image
-                        src={imagePath}
-                        height={100}
-                        width={100}
-                        alt="jjj"
-                        className="w-full object-fill max-w-full rounded"
-                        style={{boxShadow:'0 0 53px 0px #3b41c5'}}
-
-                     />  */}
                 </div>
             </div>
         </div>

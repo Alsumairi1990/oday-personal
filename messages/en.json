@@ -187,7 +187,53 @@
       "contactInfo" : "contact info",
       "addressInfo" : "address info",
       "otherData" : "another data ",
-      "yearOfPassing" : "سنة التخرج"
+      "yearOfPassing" : "year of passing",
+      "subscribed" : "subscribed",
+      "subscribedPackages" : "subscribed packages",
+      "subscrbedPlans" : "subscribed plans",
+      "finishedProject" : "finished project",
+      "offers" : "offers",
+      "view" : "view",
+      "userPage" : "user page",
+      "mainPage" : "main page",
+      "activeProject": "Active Projects",
+      "pendingProject": "Pending Projects",
+      "totalProjects": "Total Projects",
+      "projectDeadline": "Project Deadline",
+      "upcomingDeadline": "Upcoming Deadline",
+      "viewAllProjects": "View All Projects",
+      "canceledProjects": "Canceled Projects",
+      "orderProject" : "Order Project" ,
+      "projectsHasCancled": "cancled before start",
+      "createNewProject": "Create New Project",
+      "manageProjects": "Manage Projects",
+      "trackProgress": "Track Progress",
+      "overdueProject": "Overdue Project",
+      "projectsNotCopleted": "projects started but not completed",
+      "noProjectsFound": "No Projects Found",
+      "lastUpdated": "Last Updated",
+      "projectStatus": "Project Status",
+      "projectDetails": "Project Details",
+      
+      "activeServices": "Active Services",
+      "serviceData" : "Services Data",
+      "pendingServices": "Pending Services",
+      "completedServices": "Completed Services",
+      "expiredServices": "Expired Services",
+      "upcomingServices": "Upcoming Services",
+      "servicesInRevision": "Services in Revision",
+      "servicesAwaitingFeedback": "Services Awaiting Feedback",
+      "mostUsedService": "Most Used Service",
+      "lastOrderedService": "Last Ordered Service",
+      "serviceSpending": "Total Service Spending",
+      "refundedServices": "Refunded Services",
+      "delayedServices": "Delayed Services",
+      "discountedServices": "Discounted Services",
+      "supportRequestsForServices": "Support Requests for Services"
+      
+      
+
+    
 
 
       

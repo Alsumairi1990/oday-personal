@@ -66,7 +66,7 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
     }}
      const handleLinkClick = (link: string) => {
     setActiveLink(link);
-  };
+};
   return (
         <div className='flex max-sm:flex-col max-sm:mt-3  sm:justify-end rtl:pl-2 r w-full'>
             {Object.entries(menusData).map(([parentId, menus]) => {

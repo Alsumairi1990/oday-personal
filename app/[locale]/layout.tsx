@@ -36,14 +36,12 @@ export default async function LocaleLayout({
         <div className="parent z-[9999999999] ">
          <CallOptionPanel locale={locale} messages={messages} />
          {/* <div className="child">Child (Fixed)</div> */}
-</div>
+        </div>
         {/* <div className="fixed top-1/2 right-2 transform -translate-y-1/2 z-[9999999999]  animate-rotate-back">
 
         <CallOptionPanel  />
              </div> */}
-          <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
-          <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
-          </div>
+ 
       </Providers>
     </NextIntlClientProvider>
   );
