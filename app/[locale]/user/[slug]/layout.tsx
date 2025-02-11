@@ -26,10 +26,10 @@ export default async function signupLayout({
             <div className="h-fit bg-gray-100">
                      <UserTopNav  locale={locale} messages={messages} />
                 <div className="flex h-fit">
-                  {menuElements && (<div id="leftAdmin" className="sm:p-1 sm:min-w-[240px] left-admin">
+                  {/* {menuElements && (<div id="leftAdmin" className="sm:p-1 sm:min-w-[240px] left-admin">
                      <UserSidNav slug="dd" menusData={menuElements} locale={locale}  messages={messages}  />
                   </div> )
-                }
+                } */}
                 <div className="w-full  h-full">
                 {children}
                 </div>
