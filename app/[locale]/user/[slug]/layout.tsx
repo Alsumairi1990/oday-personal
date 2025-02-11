@@ -11,13 +11,11 @@ export default async function signupLayout({
     children: React.ReactNode
   }) {
 
-    const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/user/menu/left-nav`, {
+    const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/users/menu/left-nav`, {
       method: 'GET',
       next: { revalidate: 3600 }, // 
     });
-    {!elements && 
-      <h1>no data </h1>
-    }
+   
     const locale = await getLocale();
     const messages = await getMessages({ locale });
   const menuElements:Record<number, MenuWithAllModels[]> = await elements.json();
@@ -26,10 +24,10 @@ export default async function signupLayout({
             <div className="h-fit bg-gray-100">
                      <UserTopNav  locale={locale} messages={messages} />
                 <div className="flex h-fit">
-                  {/* {menuElements && (<div id="leftAdmin" className="sm:p-1 sm:min-w-[240px] left-admin">
+                  {menuElements && (<div id="leftAdmin" className="sm:p-1 sm:min-w-[240px] left-admin">
                      <UserSidNav slug="dd" menusData={menuElements} locale={locale}  messages={messages}  />
                   </div> )
-                } */}
+                }
                 <div className="w-full  h-full">
                 {children}
                 </div>

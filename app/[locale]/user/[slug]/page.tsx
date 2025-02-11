@@ -11,7 +11,7 @@ const HomePage = async () => {
 
     return (
       <div className="p-2 sm:px-4">
-        {/* <div className="px-3 py-2 bg-white border border-gray-200 mb-2 rounded-md">
+        <div className="px-3 py-2 bg-white border border-gray-200 mb-2 rounded-md">
            <p className="text-gray-600 text-sm mb-0 max-sm:hidden">{mainPage}</p>
         </div>        <HomeSection slug="ff" locale={locale} messages={messages} />
         <div className="grid sm:grid-cols-3">
@@ -20,7 +20,7 @@ const HomePage = async () => {
              <BlogSection slug="ff" locale={locale} messages={messages} />
           </div>
          
-        </div> */}
+        </div>
       </div>
 )
 };
