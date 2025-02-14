@@ -224,6 +224,8 @@
       "servicesInRevision": "Services in Revision",
       "servicesAwaitingFeedback": "Services Awaiting Feedback",
       "mostUsedService": "Most Used Service",
+      "viewAllServices" : "display all services",
+      "orderService": "order service",
       "lastOrderedService": "Last Ordered Service",
       "serviceSpending": "Total Service Spending",
       "refundedServices": "Refunded Services",

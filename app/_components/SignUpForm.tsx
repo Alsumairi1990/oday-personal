@@ -122,7 +122,7 @@ const SignUpForm = (props : Props) => {
      <form onSubmit={handleSubmit(saveUser)} className="text-start z-40  ">
         <div className="grid grid-cols-1">
         
-           {!registerResult && <div className="w-full h-full left-0 top-0 fixed flex justify-center items-center z-20  bg-[#00000077]" >
+           {registerResult && <div className="w-full h-full left-0 top-0 fixed flex justify-center items-center z-20  bg-[#00000077]" >
                 <div className="p-1 w-11/12 sm:w-3/12 rounded-md border bg-white border-gray-300 ">
                 <div className="py-1.5 px-2 flex flex-col gap-y-1.5 items-center rounded-t-md bg-[#04c760] text-white mb-2">
                      <span className="border-2 border-white flex items-center h-10 w-10 rounded-full justify-center"><MdDone className="text-3xl text-white ltr:ml-auto rtl:mr-auto ml-1 pb-0.5" /></span>

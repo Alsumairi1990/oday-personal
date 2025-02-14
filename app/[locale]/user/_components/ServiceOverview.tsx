@@ -8,6 +8,8 @@ import Image from 'next/image'
 import { MdOutlineAdd } from "react-icons/md";
 import { VscOpenPreview } from "react-icons/vsc";
 import { MdGridView } from "react-icons/md";
+import { IoIosArrowBack } from "react-icons/io";
+
 
 
 
@@ -33,14 +35,10 @@ function ServiceOverview({locale,messages}:Props) {
 
    const canceledProjects = (messages as any).Common.canceledProjects;
    const projectsHasCancled = (messages as any).Common.projectsHasCancled;   
-   const orderProject = (messages as any).Common.orderProject;   
-   const viewAllProjects = (messages as any).Common.viewAllProjects;
+   const orderService = (messages as any).Common.orderService;   
+   const viewAllServices = (messages as any).Common.viewAllServices;
    const view = (messages as any).Common.view;
-   
-   
-
-
-
+   const details = (messages as any).HomePage.details;
 
    const imagePath7 = '/images/cardResult.png';
    const imagePath = '/images/cardResult-4.png';
@@ -222,7 +220,7 @@ function ServiceOverview({locale,messages}:Props) {
              <button
              className='px-2 py-2.5 text-md flex gap-x-2 items-center font-semibold text-gray-800  max-sm:w-full bg-gray-100 rounded-md'
              >
-              <span>{orderProject}</span>
+              <span>{orderService}</span>
               <span className='rounded-xl ltr:ml-auto rtl:mr-auto bg-violet-800 inline-flex items-center justify-center h-6 w-6 mx-2'><MdOutlineAdd  className='text-lg text-white ' /> </span>
              </button>
         </div>
@@ -230,7 +228,7 @@ function ServiceOverview({locale,messages}:Props) {
              <button
              className='px-2 py-2.5 text-md flex gap-x-2 items-center font-semibold text-gray-800  max-sm:w-full bg-gray-100 rounded-md'
              >
-              <span>{viewAllProjects}</span>
+              <span>{viewAllServices}</span>
               <span className='rounded-xl ltr:ml-auto rtl:mr-auto bg-orange-700 inline-flex items-center justify-center h-6 w-6 mx-2'><VscOpenPreview  className='text-base text-white ' /> </span>
              </button>
         </div>
@@ -238,7 +236,7 @@ function ServiceOverview({locale,messages}:Props) {
              <button
              className='px-2 py-2.5 text-md flex gap-x-2 items-center font-semibold text-gray-800  max-sm:w-full bg-gray-100 rounded-md'
              >
-              <span>{view} {activeProject}</span>
+              <span>{view} {activeServices}</span>
               <span className='rounded-xl ltr:ml-auto rtl:mr-auto bg-emerald-700 inline-flex items-center justify-center h-6 w-6 mx-2'><MdGridView  className='text-base text-white ' /> </span>
              </button>
         </div>
@@ -248,8 +246,8 @@ function ServiceOverview({locale,messages}:Props) {
               <button
               className='px-2 py-2.5 text-md flex gap-x-2 max-sm:w-full items-center font-semibold text-white bg-violet-600 rounded-xl'
               >
-                 <span>{view} {activeProject}</span>
-                 <span className='rounded-xl bg-white inline-flex items-center justify-center h-6 w-6 mx-2'><MdGridView  className='text-base text-gray-800 ' /> </span>
+                 <span>{view} {details}</span>
+                 <span className='rounded-xl bg-white inline-flex items-center justify-center h-6 w-6 mx-2'><IoIosArrowBack  className='text-base text-gray-800 ' /> </span>
               </button>
            </div>
         </div>

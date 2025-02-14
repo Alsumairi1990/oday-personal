@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { MdOutlineAdd } from "react-icons/md";
 import { VscOpenPreview } from "react-icons/vsc";
 import { MdGridView } from "react-icons/md";
+import { IoIosArrowBack } from 'react-icons/io'
 
 
 
@@ -30,6 +31,9 @@ function ProjectOverview({locale,messages}:Props) {
    const orderProject = (messages as any).Common.orderProject;   
    const viewAllProjects = (messages as any).Common.viewAllProjects;
    const view = (messages as any).Common.view;
+   const details = (messages as any).HomePage.details;
+
+   
 
 
 
@@ -222,8 +226,8 @@ function ProjectOverview({locale,messages}:Props) {
             <button
             className='px-2 py-2.5 text-md flex gap-x-2 max-sm:w-full items-center font-semibold text-white bg-violet-600 rounded-xl'
             >
-               <span>{view} {activeProject}</span>
-               <span className='rounded-xl bg-white inline-flex items-center justify-center h-6 w-6 mx-2'><MdGridView  className='text-base text-gray-800 ' /> </span>
+               <span>{view} {details}</span>
+               <span className='rounded-xl bg-white inline-flex items-center justify-center h-6 w-6 mx-2'><IoIosArrowBack  className='text-base text-gray-800 ' /> </span>
             </button>
          </div>
       </div>

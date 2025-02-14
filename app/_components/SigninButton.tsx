@@ -1,9 +1,7 @@
 "use client"
-// import { Button } from "@nextui-org/react";
 import { signIn, useSession } from "next-auth/react";
 import { AbstractIntlMessages } from "next-intl";
 import Link from "next/link";
-
 
 interface Props{
     locale? : String,
@@ -13,8 +11,6 @@ const SigninButton = ({locale,messages}:Props) => {
   const { data: session } = useSession();
      const signIn = (messages as any).Common.signIn;
      const register = (messages as any).Common.register;
-
-
 
   return (
     <div className="flex items-center gap-2">
@@ -37,8 +33,6 @@ const SigninButton = ({locale,messages}:Props) => {
           <Link className="text-white px-2" href={`/auth/signup`}> 
             {register}
           </Link>
-                    {/*<button onClick={() => signIn()}>Sign In</button>*/}
-
         </div>
       )}
     </div>

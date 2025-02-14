@@ -215,6 +215,8 @@
         "projectDetails": "تفاصيل المشروع",
 
         "serviceData" : "بيانات الخدمات",
+        "orderService": "طلب خدمة",
+        "viewAllServices" : "عرض جميع الخدمات",
         "activeServices": "الخدمات النشطة",
         "pendingServices": "الخدمات المعلقة",
         "completedServices": "الخدمات المكتملة",

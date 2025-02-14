@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { AbstractIntlMessages } from 'next-intl';
 import ProjectOverview from './ProjectOverview';
 import ServiceOverview from './ServiceOverview';
+import PackageOverview from './PackageOverview';
+import UpgradeSub from './UpgradeSub';
 
 interface Props {
     slug : String,
@@ -153,6 +155,14 @@ const HomeSection = ({locale,messages}:Props) => {
            <CardResult3 />
         </div>    */}
         
+    </div>
+
+    <div className="my-8">
+    <PackageOverview slug="d" locale={locale} messages={messages} />
+    </div>
+
+    <div className="my-8">
+    <UpgradeSub slug="d" locale={locale} messages={messages} />
     </div>
 
 
