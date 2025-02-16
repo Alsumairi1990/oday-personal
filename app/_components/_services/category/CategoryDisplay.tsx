@@ -29,9 +29,9 @@ const CategoryDisplay = ({services,categories,locale,messages,category}:Props) =
    const [categoryNamesAr, setCategoryNamesAr] = useState<string[]>([]); 
    const [selectedCategory, setSelectedCategory] = useState<string>(''); 
    const [loading, setLoading] = useState<boolean>(false);
-   const [showGrid, setShowGrid] = useState(true);
+   const [showGrid, setShowGrid] = useState(false);
    const [categoryMenu, setCategoryMenu] = useState(false);
-   const [showGridCols, setGridCols] = useState(false);    
+   const [showGridCols, setGridCols] = useState(true);    
    const displayMode = (messages as any).Common.displayMode;  
    const listOfServices = (messages as any).Common.listOfServices;
    const setServiceData = ()=> {
@@ -144,13 +144,9 @@ const CategoryDisplay = ({services,categories,locale,messages,category}:Props) =
                      ))}
                      </div>
                     }
-                    
                 </div>
             </div>
-
         </div>
-
-
   </div>
 
 

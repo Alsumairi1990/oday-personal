@@ -31,14 +31,53 @@ async function getServices(slug:string): Promise<CategoryForFront | null> {
           slug : slug
         },
         include: {
+          tools: {
+            select: {
+              name: true,
+              nameAr: true,
+              icon: true,
+            }
+          },
+          industries : {
+            select: {
+              name: true,
+              nameAr: true,
+              icon: true,
+            }
+          },
+          projects : {
+            select: {
+              name: true,
+              icon: true,
+            }
+          },
+          testimonials: {
+            include: {
+              testimonial: {
+                select: {
+                  title: true,
+                  titleAr: true,
+                  image: true,
+                },
+              },
+            },
+            take: 8,
+          },
           services: {
             include: {
-              service: true, // Include related Service details
+              service: {
+                select: {
+                  name: true,
+                  nameAr: true,
+                  icon: true,
+                },
+              },
             },
+            take: 8,
           },
           works: {
             include: {
-              service: true, // Include related Work details
+              service: true, 
             },
           },
           phases : {
@@ -51,7 +90,8 @@ async function getServices(slug:string): Promise<CategoryForFront | null> {
             select : {
               companyName: true,
               image : true
-            }
+            },
+            take  : 8
           }
         },
       });

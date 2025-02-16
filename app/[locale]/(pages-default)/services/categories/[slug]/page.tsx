@@ -18,9 +18,11 @@ import CategoryDisplay from "@/app/_components/_services/category/CategoryDispla
 import { getServicefeatures } from "@/app/[locale]/admin/front-settings/common/_actions/Actions";
 import ClientCard from "@/app/_components/clinets/ClientCard";
 import ProductCard from "@/app/_components/products/ProductCard";
-import IndustryCard from "@/app/_components/IndustryCard";
+
+// import IndustryCard from "@/app/_components/IndustryCard";
+import IndustryCard from '@/app/_components/industries/IndustryCard';
 import { CategoryForFront } from "@/app/[locale]/admin/category/util/CategoryForFront";
-import { Category, Industry, Service, ServiceFeature } from "@prisma/client";
+import { Category, Industry, PageSection, Service, ServiceFeature } from "@prisma/client";
 import ServicesFeature from "@/app/_components/_services/ServicesFeature1";
 
 
@@ -56,35 +58,29 @@ const ServiceCategory = async ({params}:Props) => {
  });
  const categoriesData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/categories/names`, {
    method: 'GET',
-   next: { revalidate: 3600 }, // Revalidate for ISR if needed
+   next: { revalidate: 3600 },
  });
 
- const pageIdustries = await fetch(`${process.env.NEXTAUTH_URL}/api/front/industries/home`, {
-   method: 'GET',
-   next: { revalidate: 3600 }, // Revalidate for ISR if needed
- });
+ 
  const ServiceFeatures = await fetch(`${process.env.NEXTAUTH_URL}/api/front/features`, {
    method: 'GET',
-   next: { revalidate: 3600 }, // Revalidate for ISR if needed
+   next: { revalidate: 3600 },
  });
- const servicesData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, {
+ const servicesData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/categories/`, {
    method: 'GET',
-   next: { revalidate: 3600 }, // Revalidate for ISR if needed
+   next: { revalidate: 3600 },
+ });
+ const sections = await fetch(`${process.env.NEXTAUTH_URL}/api/front/meta/sections`, {
+   method: 'GET',
+   next: { revalidate: 3600 },
  });
  
  const category:CategoryForFront = await categoryData.json();
- const industries:Industry[] = await pageIdustries.json();
  const features:ServiceFeature[] = await ServiceFeatures.json();
  const services:Service[] = await servicesData.json();
  const categories:Category[] = await categoriesData.json();
-
-
-
-
-    
-   
-   
-   
+const sectionMeta:PageSection[] = await sections.json();
+const industryMeta: PageSection | undefined = sectionMeta.find((section) => section.name === 'industries');   
 
   return (
      <div className="w-full rtl:font-arabic">
@@ -140,29 +136,38 @@ const ServiceCategory = async ({params}:Props) => {
                :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">{feature1}<span className="text-orange-600">{category.nameAr}</span></h2>
             }
             </div>
-            <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4 mt-2">
-            {features && features.map((service, index:number) => (
-               <CustomServiceFeature key={service.id} servicefeature={service} locale={locale} messages={messages} />
-            ))}
+           <div className="grid sm:grid-cols-4 gap-6 max-sm:p-4 mt-2">
+              {features && features.slice(0, 4).map((service, index: number) => (
+                <CustomServiceFeature key={service.id} servicefeature={service} locale={locale} messages={messages} />
+              ))}
             </div>
            </div>
          </div>
 
-
-         <div className="w-full my-16 py-8  bg-gray-100 dark:bg-[#111] ">
-          <div className="w-full mx-auto">
-            <div className="flex flex-col items-center sm:mb-8">
-               {locale == 'en' ? <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide dark:text-orange-400">industry of <span className="text-orange-600">{category.name}</span>{feature2}</h2>
-               :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic dark:text-orange-400">industry<span className="text-orange-600">{category.nameAr}</span></h2>
-            }
+         <div className="w-full my-8 pb-8  bg-gray-100 dark:bg-[#111] ">
+          <div className="sm:w-11/12 mx-auto p-4">
+              <div className="p-1 w-full flex my-8 justify-center">
+                {locale === 'en' ? <h2 className="text-gray-800">
+                  {industryMeta?.title}
+                </h2>
+                :
+                <div className='flex flex-col items-center'>
+                    <h2 className="text-gray-800  dark:text-gray-50 text-2xl font-semibold font-arabic">
+                      {industryMeta?.titleAr}
+                    </h2>
+                    <p className="text-base mt-2 text-gray-700 leading-7 text-center">
+                      {industryMeta?.descAr}
+                    </p>
+                </div>
+                  }
             </div>
-            <div className="grid sm:grid-cols-4  max-sm:p-4 mt-2">
-            {industries && industries.map((industry, index:number) => (
+            <div className="grid grid-cols-2 sm:grid-cols-4 sm:gap-y-8 gap-5 sm:gap-x-8 max-sm:p-1">
+            {category && category.industries && category.industries.map((industry, index:number) => (
                <IndustryCard key={industry.id} industry={industry} locale={locale} messages={messages} />
             ))}
             </div>
            </div>
-         </div>
+      </div>
 
 
         
@@ -191,10 +196,21 @@ const ServiceCategory = async ({params}:Props) => {
                :  <h2 className="sm:text-4xl text-gray-900 capitalize font-bold tracking-wide font-arabic rtl:text-3xl dark:text-orange-400">{ourProducts}<span className="text-orange-600">{category.nameAr}</span></h2>
             }
             </div>
-            <div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
+            {/*<div className=" sm:flex sm:flex-wrap gap-x-4 gap-y-6 justify-center  max-sm:p-4 mt-2">
             {category.products && category.products.map((product, index:number) => (
                <ProductCard key={product.id} product={product} locale={locale} messages={messages} />
             ))}
+            </div>*/}
+             <div className=" grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-6  max-sm:p-4 mt-2">
+            {category.products && category.products.slice(0, 8).map((product, index) => (
+               <ProductCard 
+                  key={product.id} 
+                  product={product} 
+                  locale={locale} 
+                  messages={messages} 
+               />
+               ))}
+
             </div>
            </div>
          </div>
