@@ -3,6 +3,7 @@ import { MenuWithAllModels } from "../admin/setting/left-nav/_utils/MenuWithAllM
 import NavBar from "@/app/NavBar";
 import { getMenusElementse2 } from "../admin/setting/left-nav/_actions/Action";
 import NavBarBlog from "@/app/NavBarBlog";
+import { getLocale, getMessages } from "next-intl/server";
 
 
 
@@ -12,6 +13,8 @@ export default async function signupLayout({
     children: React.ReactNode
   }) {
     let menusData:Record<number, MenuWithAllModels[]> ;
+    const locale = await getLocale();
+    const messages = await getMessages({ locale });
     try {
       menusData = await getMenusElementse2();
     } catch (error) {
@@ -29,7 +32,7 @@ export default async function signupLayout({
 
             <div className="h-full dark:bg-[#111]" >
               <div className="w-11.7">
-              {menusData && <NavBarBlog menusData={menusData} />}
+              {menusData && <NavBarBlog menusData={menusData} locale={locale} messages={messages} />}
               </div>
             {children}
             <div className="">

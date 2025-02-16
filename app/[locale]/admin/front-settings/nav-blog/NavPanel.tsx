@@ -1,56 +1,35 @@
 'use client'
-import { MenuWithAllModels } from '@/app/[locale]/admin/setting/left-nav/_utils/MenuWithAllModels'
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
+import React from 'react';
+import {serviceCategories} from '@/app/utils/ServiceCategories'
+import { MenuWithAllModels } from '../../setting/left-nav/_utils/MenuWithAllModels';
+import { AbstractIntlMessages } from 'next-intl';
+import NavElements from './NavElements';
 interface Props {
-    menu : MenuWithAllModels
+   menusData: MenuWithAllModels[],
+   locale : string,
+   messages : AbstractIntlMessages,
+   
 }
-function NavPanel({menu}:Props) {
-    const [visibleContent, setVisibleContent] = useState<boolean>(true);
-    const [activeLink, setActiveLink] = useState<string | null>(null); 
-    const [baseUrl, setBaseUrl] = useState<string>('');
-       const handleClick = (e:any) => {
-        const nearestContent = e.currentTarget.closest('li').querySelector('.side-sub');
-        if (nearestContent) {
-          setVisibleContent(prevContent => prevContent === nearestContent ? false : nearestContent);
-        }}
-         const handleLinkClick = (link: string) => {
-        setActiveLink(link);
-      };
-       useEffect(() => {
-           const { protocol, host } = window.location;
-           setBaseUrl(`${protocol}//${host}/`);
-       });
+const NavPanel = ({menusData,locale,messages}:Props) => {
+   const imagePath = '/images/10.png';
   return (
-    <div >
-              <div  
-                 
-                  className="flex items-center text-md py-2 pl-3 font-medium  rounded" >
-                    <span className=" bg-[#206681] border border-[#878787] h-6 w-6 flex items-center text-[14px]  rounded mr-2 justify-center" >
-                    <img className='w-5 ' src={`${baseUrl}/${menu?.icon}`} alt="" />
-                    </span>
-                        {menu.title}
-                        
-
-                </div>
-                <ul className={` mb-3 font-normal flex-col ftext-[.9rem] pt-1 `}>
-                  {menu.elements.map(element => (
-                    <li key={element.id}>
-                        <Link href={baseUrl+element.link}>
-                            <div
-                            onClick={() => handleLinkClick(baseUrl+element.link)}
-                            className={`pl-6 py-[2px]   ${activeLink === baseUrl+element.link ? 'text-orange-400' : ''}`}
-                            >
-                            <span className="text-gray-800">{element.title}</span>
-                            </div>
-                            </Link>
-                      
-                        
-                        </li>
-                    ))}
-        </ul>
+    <div className="sm:absolute max-sm:mt-3 top-[10rem] z-10 bg-white right-0 w-full px-2 py-3 flex flex-col " >
+    {/* <span className="absolute inline-block w-4 h-4 bg-white top-[-.5rem] sm:right-28 sm:mr-4 sm:rotate-45"></span> */}
+    <div className="sm:px-6 py-0.5 grid sm:grid-cols-5">
+       <div className="col-start-1 col-span-4">
+       <div className="sm:pl-5 max-sm:grid grid-cols-1 sm:grid-cols-1 sm:columns-3 gap-4 sm:gap-10 " >
+       {menusData.map((categoryService) => (
+                  <NavElements  serviceCategory={categoryService} locale={locale} messages={messages} />
+               ))}
+       </div>
+       </div>
+       <div className="p-2 max-sm:hidden rounded-md" style={{background: 'rgba(226, 235, 247, 0.41)'}}>
+          <h2 className="text-xl text-gray-800 font-semibold px-3 pt-4">Find Out Best Course and Top Collages </h2>
+          <img src={imagePath} alt="My Image" />
+       </div>
     </div>
-  )
-}
+ </div>
+  );
+};
 
-export default NavPanel
+export default NavPanel;

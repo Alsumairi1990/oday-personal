@@ -7,14 +7,17 @@ import LocaleSwitcher from './_components/LangToggle'
 import SigninButton from './_components/SigninButton'
 import { MenuWithAllModels } from './[locale]/admin/setting/left-nav/_utils/MenuWithAllModels';
 import BlogTopNav from './[locale]/admin/front-settings/nav-blog/BlogTopNav';
+import { AbstractIntlMessages } from 'next-intl';
 
 
 interface Props{
   menusData: Record<number, MenuWithAllModels[]>;
+  locale : string,
+  messages : AbstractIntlMessages,
 }
 
 
-const NavBarBlog = ({menusData}:Props) => {
+const NavBarBlog = ({menusData,locale,messages}:Props) => {
   // const imagePath = '/images/logo-01.svg';
   const imagePath2 = '/images/logo-03.jpeg';
   // const logoImage = document.querySelector('.light-logo') as HTMLImageElement; 
@@ -271,7 +274,7 @@ const NavBarBlog = ({menusData}:Props) => {
 
                               <div className="px-4 pt-2 pb-2">
                                 <div className="flex items-center justify-center rounded py-1.5 px-2 bg-orange-500">
-                                  <SigninButton  />
+                                  <SigninButton locale={locale} messages={messages} />
                                   
                                 </div>
                               </div>
@@ -344,7 +347,7 @@ const NavBarBlog = ({menusData}:Props) => {
     </nav>
     <div className="flex w-full sm:border-y max-sm:hidden sm:border-gray-200 sm:mt-2 sm:py-4">
       <div className="w-11.4/12  mx-auto flex ">
-          <BlogTopNav  menusData ={menusData} />
+          <BlogTopNav  menusData ={menusData} locale={locale}  messages={messages} />
         </div> 
     </div>
     </>

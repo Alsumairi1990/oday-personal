@@ -119,7 +119,7 @@ async function getServices(name:string): Promise<ServiceForFront | null> {
                 nameAr: true,
                 icon: true,
               },
-            },
+            },          
           },
           take: 8,
         },
