@@ -159,7 +159,9 @@ const config = {
       },
       fontFamily: {
         // Add custom font families
-        arabic: ['Kufi Arabic', 'sans-serif'], // Custom name for Arabic font
+        arabic: ['Kufi Arabic', 'sans-serif'], 
+        arabicBold: ['Kufi Arabic bold', 'sans-serif'], 
+
       },
      
       // keyframes: {

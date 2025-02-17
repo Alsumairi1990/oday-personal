@@ -200,7 +200,13 @@
 } */
 @font-face {
   font-family: 'Kufi Arabic';
-  src: url('/fonts/DroidKufi-Regular.ttf') format('truetype'); /* Correct format */
+  src: url('/fonts/DroidKufi-Regular.ttf') format('truetype'); 
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Kufi Arabic bold';
+  src: url('/fonts/Cairo-ExtraBold.ttf') format('truetype'); 
   font-weight: 400;
   font-style: normal;
 }

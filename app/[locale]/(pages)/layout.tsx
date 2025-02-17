@@ -1,9 +1,9 @@
 import Footerk from "@/app/_components/Footer"
 import { MenuWithAllModels } from "../admin/setting/left-nav/_utils/MenuWithAllModels";
-import NavBar from "@/app/NavBar";
 import { getMenusElementse2 } from "../admin/setting/left-nav/_actions/Action";
 import NavBarBlog from "@/app/NavBarBlog";
 import { getLocale, getMessages } from "next-intl/server";
+import { Category, Service } from "@prisma/client";
 
 
 
@@ -15,6 +15,26 @@ export default async function signupLayout({
     let menusData:Record<number, MenuWithAllModels[]> ;
     const locale = await getLocale();
     const messages = await getMessages({ locale });
+    const res = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service`, {
+      method: 'GET',
+      next: { revalidate: 1800 },
+    });
+    
+    const Categories = await fetch(`${process.env.NEXTAUTH_URL}/api/front/service/categories/home`, {
+      method: 'GET',
+      next: { revalidate: 1800 }, 
+    });
+
+
+    const elements = await fetch(`${process.env.NEXTAUTH_URL}/api/front/menu`, {
+      method: 'GET',
+      next: { revalidate: 3600 }, // 
+    });
+
+    const menuElements:Record<number, MenuWithAllModels[]> = await elements.json();
+     const servicesR:Service[] = await res.json();
+          const categoriesResult:Category[] = await Categories.json();
+    
     try {
       menusData = await getMenusElementse2();
     } catch (error) {
@@ -35,9 +55,9 @@ export default async function signupLayout({
               {menusData && <NavBarBlog menusData={menusData} locale={locale} messages={messages} />}
               </div>
             {children}
-            <div className="">
-             {/* <Footerk /> */}
-             </div>
+            <div className='w-full bg-[#111]' dir={locale === 'ar' ? 'rtl' : 'ltr'}>
+              <Footerk services={servicesR} categories={categoriesResult} locale={locale} messages={messages} />
+            </div>
              
             </div>
              

@@ -5,6 +5,8 @@ import HeroNews from "@/app/_components/blog/HeroNews";
 import { PostForFront } from "../../admin/blogs/_utils/PostForfront";
 import SectionPost2 from "@/app/_components/blog/SectionPost2";
 import SectionSinglePost from "@/app/_components/blog/SectionSinglePost";
+import WrittersSec from "@/app/_components/blog/WrittersSec";
+import BloombergSection from "@/app/_components/blog/SectionLat";
 
 const BlogPage = async () => {
    const locale = await getLocale();
@@ -35,11 +37,17 @@ const BlogPage = async () => {
       <div className="">
       <SectionSinglePost posts={heroPosts} locale={locale} messages={messages}  />
       </div>
-      <div className="">
+      <div className="w-full">
       <SectionSinglePost posts={heroPosts} locale={locale} messages={messages}  />
       </div>
-
+      
      </div>
+     <div className="w-full my-14">
+       <WrittersSec   />
+      </div>
+       <div className="sm:w-11.5/12 my-14 mx-auto">
+       <BloombergSection  posts={heroPosts} locale={locale} messages={messages} />
+      </div>
      </>
   )
 };
