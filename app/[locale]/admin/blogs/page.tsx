@@ -1,7 +1,5 @@
 
 
-
-
 import BlogManage from "@/app/_components/admin/blogs/BlogManage"
 
 const BlogPage = () => {

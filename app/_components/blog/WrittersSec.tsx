@@ -76,7 +76,7 @@ const WrittenSec = () => {
                   className="w-16 h-16 rounded-full border border-purple-700 object-cover"
                 />
                 <div className="ltr:pl-2 rtl:pr-2">
-                  <h3 className="text-base font-semibold text-gray-900">{author.name}</h3>
+                  <h3 className="text-sm font-semibold text-gray-900">{author.name}</h3>
                   <p className="text-sm text-gray-700 mt-1">{author.title}</p>
                   <span className="text-xs text-gray-500 block mt-2">{author.timestamp}</span>
                 </div>
@@ -92,7 +92,7 @@ const WrittenSec = () => {
                 key={index}
                 className="bg-white text-black p-4 rounded-lg shadow-md transition-transform transform hover:scale-105 hover:shadow-lg"
               >
-                <h3 className="text-base font-semibold text-gray-900">{opinion.name}</h3>
+                <h3 className="text-sm font-semibold text-gray-900">{opinion.name}</h3>
                 <p className="text-sm text-gray-700 mt-1">{opinion.title}</p>
                 {/*<span className="text-xs text-gray-500 block mt-2">{opinion.timestamp}</span>*/}
               </div>

@@ -213,6 +213,13 @@
 .rtl{
   direction: rtl;
 }
+[dir="rtl"] h3 {
+  @apply font-arabicBold;
+  @apply scale-y-[1.18];
+ 
+}
+
+
 
   .inlineP-start-8{
     padding-inline-start: 5px;

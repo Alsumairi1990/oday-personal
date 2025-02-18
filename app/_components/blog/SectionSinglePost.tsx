@@ -57,10 +57,10 @@ const SectionSinglePost =  ({posts,locale,messages}:Props) => {
                             <div className="flex-25 sm:flex-30 h-32">
                               <img className=" h-full max-sm:w-full rounded-t-md max-sm:p-2 max-sm:rounded-xl max-sm:max-h-20" src={post.image || "/images/w01.png"}  />
                             </div>
-                            <div className="flex-70 pt-3 max-sm:hidden ltr:pl-2 rtl:pr-2 mb-1  text-gray-600">
-                                          <span className='rtl:border-r-2 rtl:border-r-red-600 inline-flex rtl:pr-1.5 text-gray-900 font-bold'>{post && post.categories.length > 0 && post.categories[0].nameAr}</span>
-                              </div>
-                              <div className="max-sm:flex-75 max-sm:max-w-70 px-2 sm:pt-1.5 max-sm:pt-2 pb-2">
+                             {post.categories.length > 0  && <div className="flex-70 pt-3 max-sm:hidden ltr:pl-2 rtl:pr-2 mb-1  text-gray-600"> 
+                                          <span className='rtl:border-r-2 rtl:border-r-red-600 inline-flex rtl:pr-1.5 text-gray-900 font-bold'>{post.categories[0].nameAr}</span>
+                              </div>}
+                              <div className="max-sm:flex-75 max-sm:max-w-70 px-2 sm:pt-1.5 sm:mt-2 max-sm:pt-2 pb-2">
                                   <h3 className="sm:text-md text-[15px] font-semibold "><Link href={`/blog/${post.title}`}>{post.titleAr}</Link> </h3>
                               </div>
                           </a>  

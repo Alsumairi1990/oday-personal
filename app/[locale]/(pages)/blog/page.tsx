@@ -7,6 +7,9 @@ import SectionPost2 from "@/app/_components/blog/SectionPost2";
 import SectionSinglePost from "@/app/_components/blog/SectionSinglePost";
 import WrittersSec from "@/app/_components/blog/WrittersSec";
 import BloombergSection from "@/app/_components/blog/SectionLat";
+import PostsArea3 from "@/app/_components/blog/PostsArea3";
+import PostsSection4 from "@/app/_components/blog/PostsSection4";
+import { PostCategoryFront } from "../../admin/blogs/_utils/PostCategoryFront";
 
 const BlogPage = async () => {
    const locale = await getLocale();
@@ -15,6 +18,11 @@ const BlogPage = async () => {
    method: 'GET',
    next: { revalidate: 3600 }, // Revalidate for ISR if needed
  });
+
+ const postsNews = await fetch(`${process.env.NEXTAUTH_URL}/api/front/blogs/category/news`, {
+  method: 'GET',
+  next: { revalidate: 3600 }, // Revalidate for ISR if needed
+});
  const page = 'products'
   const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
     method: 'GET',
@@ -23,6 +31,8 @@ const BlogPage = async () => {
 
  
  const heroPosts:PostForFront[] = await postsPage.json();
+ const newsPosts:PostCategoryFront = await postsNews.json();
+
 
 
   return (
@@ -48,6 +58,19 @@ const BlogPage = async () => {
        <div className="sm:w-11.5/12 my-14 mx-auto">
        <BloombergSection  posts={heroPosts} locale={locale} messages={messages} />
       </div>
+      <div className="my-8 sm:w-11.6/12 mx-auto">
+        <PostsArea3 posts={heroPosts} locale={locale} messages={messages} />
+      </div>
+      <div className="bg-gray-100  w-full">
+        <div className="my-10 py-6  w-11.6/12 mx-auto grid gap-5 grid-cols-1 sm:grid-cols-4">
+          <PostsSection4  posts={newsPosts.pots} locale={locale} messages={messages} title="علم الشرق" />
+          <PostsSection4  posts={heroPosts} locale={locale} messages={messages} title="صفحة الاخبار" />
+          <PostsSection4  posts={heroPosts} locale={locale} messages={messages} title="سياسة" />
+          <PostsSection4  posts={heroPosts} locale={locale} messages={messages} title=" تفارير عربية" />
+
+        </div>
+      </div>
+      
      </>
   )
 };
