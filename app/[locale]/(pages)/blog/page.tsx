@@ -23,6 +23,20 @@ const BlogPage = async () => {
   method: 'GET',
   next: { revalidate: 3600 }, // Revalidate for ISR if needed
 });
+const postsTech = await fetch(`${process.env.NEXTAUTH_URL}/api/front/blogs/category/technology`, {
+  method: 'GET',
+  next: { revalidate: 3600 }, // Revalidate for ISR if needed
+});
+
+const postsDesign = await fetch(`${process.env.NEXTAUTH_URL}/api/front/blogs/category/design`, {
+  method: 'GET',
+  next: { revalidate: 3600 }, // Revalidate for ISR if needed
+});
+
+const postsProgramming = await fetch(`${process.env.NEXTAUTH_URL}/api/front/blogs/category/programming`, {
+  method: 'GET',
+  next: { revalidate: 3600 }, // Revalidate for ISR if needed
+});
  const page = 'products'
   const hero = await fetch(`${process.env.NEXTAUTH_URL}/api/front/hero-data/${page}`, {
     method: 'GET',
@@ -32,6 +46,11 @@ const BlogPage = async () => {
  
  const heroPosts:PostForFront[] = await postsPage.json();
  const newsPosts:PostCategoryFront = await postsNews.json();
+ const techPosts:PostCategoryFront = await postsTech.json();
+ const designPosts:PostCategoryFront = await postsDesign.json();
+const programmingPosts:PostCategoryFront = await postsProgramming.json();
+
+
 
 
 
@@ -45,10 +64,10 @@ const BlogPage = async () => {
      </div>
      <div className="py-14 w-11.4/12 mx-auto gap-6 grid sm:grid-cols-2">
       <div className="">
-      <SectionSinglePost posts={heroPosts} locale={locale} messages={messages}  />
+      <SectionSinglePost category={programmingPosts} locale={locale} messages={messages}  />
       </div>
       <div className="w-full">
-      <SectionSinglePost posts={heroPosts} locale={locale} messages={messages}  />
+      <SectionSinglePost category={techPosts} locale={locale} messages={messages}  />
       </div>
       
      </div>
@@ -59,13 +78,13 @@ const BlogPage = async () => {
        <BloombergSection  posts={heroPosts} locale={locale} messages={messages} />
       </div>
       <div className="my-8 sm:w-11.6/12 mx-auto">
-        <PostsArea3 posts={heroPosts} locale={locale} messages={messages} />
+        <PostsArea3 posts={designPosts.pots} locale={locale} messages={messages} />
       </div>
       <div className="bg-gray-100  w-full">
         <div className="my-10 py-6  w-11.6/12 mx-auto grid gap-5 grid-cols-1 sm:grid-cols-4">
-          <PostsSection4  posts={newsPosts.pots} locale={locale} messages={messages} title="علم الشرق" />
-          <PostsSection4  posts={heroPosts} locale={locale} messages={messages} title="صفحة الاخبار" />
-          <PostsSection4  posts={heroPosts} locale={locale} messages={messages} title="سياسة" />
+          <PostsSection4  posts={newsPosts.pots} locale={locale} messages={messages} title="علوم السياسة" />
+          <PostsSection4  posts={techPosts.pots} locale={locale} messages={messages} title="تكنولوجيا" />
+          <PostsSection4  posts={programmingPosts.pots} locale={locale} messages={messages} title="ركن البرمجة" />
           <PostsSection4  posts={heroPosts} locale={locale} messages={messages} title=" تفارير عربية" />
 
         </div>

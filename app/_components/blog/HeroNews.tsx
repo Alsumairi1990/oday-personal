@@ -55,7 +55,7 @@ const HeroNews = async ({posts,locale,messages}:Props) => {
                                                     }
                                                  </div>
                                                   <div className="">
-                                                     <h3 className="text-sm text-slate-900 font-arabic leading-6 font-bold">
+                                                     <h3 className="text-bxs text-slate-900 font-arabic leading-6 font-bold">
                                                      <Link href={`/blog/${post.title}`}>{post.titleAr}</Link> 
                                                         </h3>
                                                   </div>

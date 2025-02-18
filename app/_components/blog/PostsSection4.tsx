@@ -18,7 +18,7 @@ const PostsSection4 = ({posts,locale,messages,title}:Props) => {
             <p className="text-gray-900 text-lg"> {title}</p>
         </div>
         <div className="relative">
-        {posts.length > 0 && posts.slice(0,1).map((article, index) => (
+        {posts && posts.length > 0 && posts.slice(0,1).map((article, index) => (
            <>
          <div className="">
          {article.image && <Image
@@ -26,13 +26,13 @@ const PostsSection4 = ({posts,locale,messages,title}:Props) => {
               alt=""
               width={500}
               height={300}
-              className="w-full h-auto rounded-md"
+              className="w-full h-52 rounded-md"
             />
              }
             <span className="absolute top-2 right-2 bg-blue-600 text-white px-2 py-1 text-xs rounded">خاص</span>
           </div>
           <div className="absolute bottom-0 w-full px-2 py-2" style={{backgroundImage: 'linear-gradient(0deg, #000, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))'}}>
-          <h3 className=" text-lg font-semibold mt-2   text-white">
+          <h3 className=" text-base font-semibold mt-2 pb-2  text-white">
             {article.titleAr}
           </h3>
           </div>
@@ -42,21 +42,21 @@ const PostsSection4 = ({posts,locale,messages,title}:Props) => {
 
         {/* Sub news articles */}
         <div className="flex flex-col space-y-3">
-        {posts.length > 0 && posts.slice(1,4).map((article, index) => (
+        {posts && posts.length > 0 && posts.slice(1,4).map((article, index) => (
             <div className="flex gap-2 bg-white mt-3 items-center border ">
             {article.image && 
              <div className="p-1 flex-35">
               <Image
                 src={article.image}
-                alt="رويترز تعلن عن سحب خبر مضلل"
+                alt=""
                 width={300}
                 height={300}
                 className="rounded-md h-20"
             />
             </div>
             }
-            <div className="flex-65 pl-2">
-            <h3 className="text-bxs text-gray-800 font-normal leading-7">
+            <div className="flex-65  rtl:pl-2">
+            <h3 className="text-bxs  text-gray-800 line-clamp-2 font-normal leading-6">
                 {article.titleAr}
             </h3>
             </div>
