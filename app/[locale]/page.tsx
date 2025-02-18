@@ -22,6 +22,8 @@ import Markets from '../_components/market/Markets';
 import { MarketWithModels } from './admin/market/_utils/MarketWithModels';
 import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels';
 import PhaseCompany from '../_components/PhaseCompany';
+import { PostCategoryFront } from './admin/blogs/_utils/PostCategoryFront';
+import PostsArea3 from '../_components/blog/PostsArea3';
 
 export default async function Home() {
   const locale = await getLocale();
@@ -106,6 +108,12 @@ export default async function Home() {
     next: { revalidate: 3600 }, // Revalidate for ISR if needed
   });
 
+  const postsDesign = await fetch(`${process.env.NEXTAUTH_URL}/api/front/blogs/category/design`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
+  
+
   
  
 
@@ -136,6 +144,8 @@ export default async function Home() {
   const posts:Post[] = await latestPosts.json();
   const markets:MarketWithModels[] = await pageMarkets.json();
   const phases:PhaseWithModels[] = await pagePhases.json();
+  const designPosts:PostCategoryFront = await postsDesign.json();
+  
 
 
 
@@ -187,9 +197,12 @@ export default async function Home() {
       <Markets markets={markets} locale={locale} messages={messages}/>
      </div>
      
-      <div className="dark:bg-[#111]">
+      {/* <div className="dark:bg-[#111]">
           {posts && posts.length > 0 && blogsMeta && <BlogList meta={blogsMeta} posts={posts}  /> }
-     </div>
+     </div> */}
+      <div className="my-8 sm:w-11.6/12 mx-auto max-sm:bg-gray-100 dark:bg-[#111]">
+        <PostsArea3 posts={designPosts.pots} locale={locale} messages={messages} />
+      </div>
 
      <div className="my-14 w-11.4/12 mx-auto">
       {packageCategory && <PackageSect packagesData={packageCategory.packages}  locale={locale} messages={messages} />}

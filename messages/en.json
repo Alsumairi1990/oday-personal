@@ -231,7 +231,12 @@
       "refundedServices": "Refunded Services",
       "delayedServices": "Delayed Services",
       "discountedServices": "Discounted Services",
-      "supportRequestsForServices": "Support Requests for Services"
+      "supportRequestsForServices": "Support Requests for Services",
+
+
+      "samBlogs" : "sam blogs"
+      
+
       
       
 
