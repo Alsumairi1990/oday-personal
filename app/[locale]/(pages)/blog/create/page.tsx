@@ -19,7 +19,7 @@ const EditorPage = () => {
     fetchContent();
   }, []);
 
-  return content !== "" ? <EditBody initialContent={content} /> : <p>Loading...</p>;
+  return content !== "" ? "" : <p>Loading...</p>;
 };
 
 export default EditorPage;
