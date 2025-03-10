@@ -18,6 +18,7 @@ const ShowBlogPage = ({ params }: Props) => {
     async function fetchContent() {
       try {
         const response = await fetch(`/api/front/blogs/post/${params.slug}`);
+        
         if (!response.ok) {
           throw new Error("Failed to fetch post");
         }

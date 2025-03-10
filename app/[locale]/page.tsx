@@ -24,6 +24,7 @@ import { PhaseWithModels } from './admin/service/phases/utils/PhaseWithModels';
 import PhaseCompany from '../_components/PhaseCompany';
 import { PostCategoryFront } from './admin/blogs/_utils/PostCategoryFront';
 import PostsArea3 from '../_components/blog/PostsArea3';
+import Image from 'next/image'
 
 export default async function Home() {
   const locale = await getLocale();
@@ -171,8 +172,19 @@ export default async function Home() {
  
   return (
     <main className="flex flex-col h-ful dark:bg-[#111] rtl:font-arabic" >
+       <div className="rounded-md w-10/12 mx-auto my-4">
+                  
+                    <Image
+                      src="/images/under.avif"
+                      height={1000}
+                      width={1000}
+                      alt=""
+                      className="w-full max-w-full rounded"
+                    />
+                  
+                </div>
    
-     <div className="flex flex-col">
+     {/* <div className="flex flex-col">
           </div>   
           <Suspense fallback={<div></div>}>
         <NavBar menusData={menuElements} explores={explores} companyMenu={companyMenu} locale={locale} messages={messages} />
@@ -197,9 +209,7 @@ export default async function Home() {
       <Markets markets={markets} locale={locale} messages={messages}/>
      </div>
      
-      {/* <div className="dark:bg-[#111]">
-          {posts && posts.length > 0 && blogsMeta && <BlogList meta={blogsMeta} posts={posts}  /> }
-     </div> */}
+     
       <div className="my-8 sm:w-11.6/12 mx-auto max-sm:bg-gray-100 dark:bg-[#111]">
         <PostsArea3 posts={designPosts.pots} locale={locale} messages={messages} />
       </div>
@@ -264,9 +274,11 @@ export default async function Home() {
       
       <ContactForm  locale={locale} messages={messages} />
        
-     <div className="clear"></div>
+     <div className="clear"></div> */}
      
-
+ {/* <div className="dark:bg-[#111]">
+          {posts && posts.length > 0 && blogsMeta && <BlogList meta={blogsMeta} posts={posts}  /> }
+     </div> */}
 
      
     </main>
