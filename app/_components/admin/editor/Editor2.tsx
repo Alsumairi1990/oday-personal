@@ -421,7 +421,6 @@ const TextEditor = () => {
   const setLink = useCallback(() => {
     const previousUrl = editor!.getAttributes("link").href;
     const url = window.prompt("URL", previousUrl);
-
     // cancelled
     if (url === null) {
       return;
@@ -804,10 +803,6 @@ const TextEditor = () => {
               onClick={() => editor.chain().focus().toggleUnderline().run()}
               className={editor.isActive("underline") ? "is-active" : ""}
             >
-              {/* <button
-                                  onClick={() => editor.chain().focus().toggleUnderline().run()}
-                                  className={`w-4 ${editor.isActive('underline') ? 'is-active' : ''}`}
-                                >*/}
               <FaUnderline />
             </button>
 

@@ -1,178 +1,57 @@
 
-'use client'
-import NavBar from '@/app/NavBar'
-import Footerk from '@/app/_components/Footer';
 import { MdEmail } from "react-icons/md";
-
 import { BsTwitterX } from "react-icons/bs";
+import { PostForFront } from "@/app/[locale]/admin/blogs/_utils/PostForfront";
+import { getLocale, getMessages } from "next-intl/server";
+import Image from 'next/image';
 
-
-
-export default function Post() {
+interface Props {
+  params: {
+      post: string;
+  };
+}
+export default async function Post({params}:Props) {
    const imagePath = '/images/w01.jpg';
-   const latestPost = 
-    {
-      title :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate',
-      body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have to be honorable, to be compassionate, to have it make some difference that you have to be honorable, to be compassionate, to have it make some difference that you have  lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w003.jpg',
-      category :'Business'
-    };
-    const post = 
-    {
-      title :'How to define block of css image',
-      body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w004.jpg',
-      category :'Business'
-    };
+   const locale= await getLocale();
+   const messages = await getMessages({ locale });
+   const feature1 = (messages as any).Common.featureTitle1;
+   const latestPosts = await fetch(`${process.env.NEXTAUTH_URL}/api/front/posts/latest`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
 
-    const topPost = 
-    {
-      title :'How to define block of css image',
-      body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w005.jpg',
-      category :'Web tech'
-    };
+  const postSingle = await fetch(`${process.env.NEXTAUTH_URL}/api/front/blogs/post/${params.post}`, {
+    method: 'GET',
+    next: { revalidate: 3600 }, // Revalidate for ISR if needed
+  });
 
-    const fastPosts = [
-        {
-          id:1,  
-          title :'The best programming book for proframming',
-          body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w01.jpg',
-          category :'Business'
-        },
-        {
-          id:2,  
-          title :'The best programming book for proframming',
-          body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w05.jpg',
-          category :'Brand'
-        },
-        {
-          id : 3,  
-          title :'The best programming book for proframming',
-          body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w03.jpg',
-          category :'Products'
-        }
-       ]
-
-    const mainPosts = [
-        {
-          id:1,  
-          title :'The best programming book for proframming',
-          body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w001.jpg',
-          category :'Business'
-        },
-        {
-          id:2,  
-          title :'The best programming book for proframming',
-          body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w002.jpg',
-          category :'Brand'
-        },
-        {
-          id : 3,  
-          title :'The best programming book for proframming',
-          body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w004.jpg',
-          category :'Products'
-        },
-        {
-          id : 4,
-          title :'The best programming book for proframming',
-          body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-          image : '/images/w005.jpg',
-          category :'Printting'
-        },
-      
-       ]
+  const latestPost:PostForFront[] = await latestPosts.json();
+  const post:PostForFront = await postSingle.json();
 
 
-   const posts = [
-    {
-      id:1,  
-      title :'The best programming book for proframming',
-      body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : 'https://jannah.tielabs.com/pets/wp-content/uploads/sites/13/2016/11/jnh-pets-13-780x470.jpg',
-      category :'Business'
-    },
-    {
-      id:2,  
-      title :'The best programming book for proframming',
-      body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w05.jpg',
-      category :'Brand'
-    },
-    {
-      id : 3,  
-      title :'The best programming book for proframming',
-      body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w03.jpg',
-      category :'Products'
-    },
-    {
-      id : 4,
-      title :'The best programming book for proframming',
-      body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w02.jpg',
-      category :'Printting'
-    },
-    {
-        id : 5,
-        title :'The best programming book for proframming',
-        body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-        image : '/images/w04.jpg',
-        category :'Printting'
-      }
-   ]
-
-   const newPosts = [
-    {
-      id:2,  
-      title :'The best programming book for proframming',
-      body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w05.jpg',
-      category :'Brand'
-    },
-    {
-      id : 3,  
-      title :'The best programming book for proframming',
-      body :'The purpose of life is not to be happy. It is to be useful, to be honorable, to be compassionate, to have it make some difference that you have lived and lived well.Ralph Waldo Emerson',
-      image : '/images/w03.jpg',
-      category :'Products'
-    }
-   ]
-
-//    function truncateTitle(title:String, length = 50) {
-//     return title.length > length ? title.substring(0, length) + '...' : title;
-//   }
 
     return (
-       
-        
-        
-        
       <div >
-        <div className=" shadow-sm border-b border-b-gray-200 h-20 ">
-        {/* <NavBar/> */}
-        </div>
-        
-
-
       <section className="w-11/12 max-w-full mx-auto mt-8 ">
                 <div className="grid sm:grid-cols-4 gap-[0.3rem] rounded p-0.5">
-                    <div className=" sm:col-span-3 sm:pr-12">
-                      <div className=" ">
-                          <img className="w-full max-w-full" src={latestPost.image} alt="" />  
-                      </div>
+                    <div className=" sm:col-span-3 ">
+                       {post.image && 
+                                   <div className="p-1 w-10/12 mx-auto">
+                                    <Image
+                                      src={post.image}
+                                      alt=""
+                                      width={1000}
+                                      height={1000}
+                                      className="rounded-md"
+                                  />
+                                  </div>
+                                  }
                       <div className=" self-end text-gray-700 daek:text-gray-200 pt-3 pb-4 pl-4" > 
                           <p className="mb-0.5 text-base">
                             Business
                           </p>
                           <p className="font-bold p pt-4 text-2xl pb-5">
-                              <a href="">{latestPost.title}</a>                           
+                              <a href="">{post.titleAr}</a>                           
                           </p>
                           <div className=" flex items-center">
                             <div className="mr-2">
@@ -205,17 +84,9 @@ export default function Post() {
                                     
 
                           <p className="font-medium leading-8 pr-6 pt-4 pl-10 text-md mb-5">
-                              {latestPost.body}                           
+                              {post.contentAr}                           
                           </p>
-                          <p className="font-medium leading-8 pr-6 pt-4 text-md mb-5">
-                              {latestPost.body}                           
-                          </p>
-                          <p className="font-medium leading-8 pr-6 pt-4 text-md mb-5">
-                              {latestPost.body}                           
-                          </p>
-                          <p className="font-medium leading-8 pr-6 pt-4 text-md mb-5">
-                              {latestPost.body}                           
-                          </p>
+                     
                       </div>
                     </div>  
 
@@ -224,7 +95,7 @@ export default function Post() {
                               <header className="p-2 py-3 border-b border-b-black">
                                   <h3 className="text-base text-gray-200 pl-2 font-bold mb-0">Most Popular Articles</h3>
                               </header>
-                              {posts.map((post, index) => (
+                              {latestPost.slice(0,6).map((post, index) => (
                                 <div key={post.id}> 
                              
                              

@@ -42,7 +42,7 @@ export default function PostsArea3({posts,locale,messages}:Props) {
                 <p className="text-xs text-gray-500 font-semibold mt-3 sm:mt-5">{story.publishedAt && formatDate(story.publishedAt.toString())}</p>
               </div>:
               <div className="p-2 sm:p-4 text-right max-sm:flex-65 px-2">
-              <h3 className="text-bxs sm:text-sm font-semibold max-sm:line-clamp-2 mb-2">{story.titleAr}</h3>
+              <h3 className="text-bxs sm:text-sm font-normal sm:font-semibold line-clamp-2 sm:line-clamp-3 mb-2">{story.titleAr}</h3>
               <p className="text-xs text-gray-500 font-semibold mt-3 sm:mt-5">{story.publishedAt && formatDate(story.publishedAt.toString())}</p>
             </div>
               }

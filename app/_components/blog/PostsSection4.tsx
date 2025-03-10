@@ -1,6 +1,7 @@
 import { Post } from "@prisma/client";
 import { AbstractIntlMessages } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 
 
 interface Props {
@@ -43,7 +44,7 @@ const PostsSection4 = ({posts,locale,messages,title}:Props) => {
         {/* Sub news articles */}
         <div className="flex flex-col space-y-3">
         {posts && posts.length > 0 && posts.slice(1,4).map((article, index) => (
-            <div className="flex gap-2 bg-white mt-3 items-center border ">
+            <Link href={`/blog/${article.slug}`} className="flex gap-2 bg-white mt-3 items-center border ">
             {article.image && 
              <div className="p-1 flex-35">
               <Image
@@ -57,11 +58,10 @@ const PostsSection4 = ({posts,locale,messages,title}:Props) => {
             }
             <div className="flex-65  rtl:pl-2">
             <h3 className="text-bxs  text-gray-800 line-clamp-2 font-normal leading-6">
-                {article.titleAr}
+              {article.titleAr}
             </h3>
             </div>
-            
-            </div>
+            </Link >
             ))}
         </div>
         

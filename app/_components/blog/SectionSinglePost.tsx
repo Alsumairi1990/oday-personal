@@ -50,8 +50,8 @@ const SectionSinglePost =  ({category,locale,messages}:Props) => {
                   <div className="sm:px-3 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-[1rem] sm:mt-[-3rem]">
                   {category && category.pots.length > 0 && category.pots.slice(1,4).map((post) => (
       
-                      <div className=" shadow-lg max-sm:bg-white rounded-md ">
-                          <a href="" className="text-gray-600 max-sm:h-20  hover:text-primary-btn max-sm:flex">
+                      <Link href={`/blog/${post.title}`} className=" shadow-lg max-sm:bg-white rounded-md ">
+                          <div  className="text-gray-600 max-sm:h-20  hover:text-primary-btn max-sm:flex">
                             <div className="flex-25 sm:flex-30 h-32">
                               <img className=" h-full max-sm:w-full rounded-t-md max-sm:p-2 max-sm:rounded-xl max-sm:max-h-20" src={post.image || "/images/w01.png"}  />
                             </div>
@@ -59,10 +59,10 @@ const SectionSinglePost =  ({category,locale,messages}:Props) => {
                                           <span className='rtl:border-r-2 rtl:border-r-red-600 inline-flex rtl:pr-1.5 text-gray-900 font-bold'>{category.nameAr}</span>
                               </div>
                               <div className="max-sm:flex-75 max-sm:max-w-70 px-2 sm:pt-1.5 sm:mt-2 max-sm:pt-2 pb-2">
-                                  <h3 className=" text-sm line-clamp-3 font-semibold "><Link href={`/blog/${post.title}`}>{post.titleAr}</Link> </h3>
+                                  <h3 className=" text-sm line-clamp-3 font-semibold ">{post.titleAr} </h3>
                               </div>
-                          </a>  
-                      </div>
+                          </div>  
+                      </Link>
                       ))}
                   </div>
                 </div>

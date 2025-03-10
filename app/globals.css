@@ -218,7 +218,21 @@
   @apply scale-y-[1.18];
  
 }
-
+.ProseMirror:focus {
+  outline: none !important;
+}
+.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.twitter-tweet {
+  margin: 4rem auto !important;
+}
+.instagram-media {
+  margin: 4rem auto !important;
+}
 
 
   .inlineP-start-8{
