@@ -67,7 +67,7 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
     setActiveLink(link);
 };
   return (
-        <div className='flex max-sm:flex-col max-sm:mt-3  sm:justify-end rtl:pl-2 r w-full'>
+        <div className='flex max-sm:flex-col max-sm:mt-3  ltr:sm:justify-end rtl:pl-2 r w-full'>
             {Object.entries(menusData).map(([parentId, menus]) => {
             const parentMenu = menus.length > 0 ? menus[0].menuParent : null;
             return (
@@ -76,9 +76,9 @@ const [activeLink, setActiveLink] = useState<string | null>(null);
                   {locale === 'en' ?<span className="parent-menu-btn max-sm:text-gray-800 inline-flex w-full h-full items-center cursor-pointer">
                      {parentMenu?.title || ''}
                   </span> 
-                    :<span className="parent-menu-btn max-sm:text-gray-800 inline-flex w-full h-full items-center cursor-pointer">
+                    :<h3 className="parent-menu-btn  max-sm:text-gray-800 inline-flex w-full h-full items-center cursor-pointer">
                      {parentMenu?.titleAr || ''}
-                  </span> }
+                  </h3> }
                   <MdOutlineArrowDropDown className='text-2xl max-sm:rtl:ml-4 parent-arr text-gray-800 ' />
                   <span className="z-20  hidden down-nav absolute left-[40%] h-0 topdd-[30%] -bottom-6 border-l-[16px] border-r-[16px] border-b-[13px] border-l-transparent border-r-transparent border-b-white "></span>
 

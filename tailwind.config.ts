@@ -142,6 +142,7 @@ const config = {
         '60/40' : '60% 40%',
         '63/37' : '63% 37%',
         '75/25' : '75% 25%',
+        '70/30' : '70% 30%',
         '22/56/22' : 'minmax(auto, 22%) minmax(auto, 56%) minmax(auto, 22%)',
         '36/36/28' : 'minmax(auto, 36%) minmax(auto, 36%) minmax(auto, 28%)',
         '37/37/26' : 'minmax(auto, 37%) minmax(auto, 37%) minmax(auto, 25%)',
