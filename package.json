@@ -99,6 +99,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/decimal.js": "^7.4.0",
+    "@types/prismjs": "^1.26.5",
     "@types/react-svg": "^5.0.0",
     "prisma": "^6.2.1"
   }

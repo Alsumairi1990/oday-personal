@@ -29,3 +29,4 @@ declare module "@tiptap/core" {
   }
 }
 
+declare module "prismjs";
