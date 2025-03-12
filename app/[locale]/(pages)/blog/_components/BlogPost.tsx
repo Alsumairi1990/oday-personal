@@ -190,20 +190,135 @@
 
 
 // both x and inst work
+// import { useEffect, useRef } from "react";
+
+// declare global {
+//   interface Window {
+//     instgrm?: {
+//       Embeds: {
+//         process: () => void;
+//       };
+//     };
+//     twttr?: {
+//       widgets: {
+//         load: (element?: HTMLElement) => void;
+//       };
+//     };
+//   }
+// }
+
+// const decodeHtml = (html: string) => {
+//   const txt = document.createElement("textarea");
+//   txt.innerHTML = html;
+//   return txt.value;
+// };
+
+// const BlogPost = ({ content }: { content: string }) => {
+//   const blogRef = useRef<HTMLDivElement | null>(null);
+
+//   useEffect(() => {
+//     if (!blogRef.current) return;
+
+//     // Clear previous content
+//     blogRef.current.innerHTML = "";
+
+//     // Parse HTML content
+//     const parser = new DOMParser();
+//     const doc = parser.parseFromString(content, "text/html");
+
+//     let hasInstagramEmbed = false;
+//     let hasTwitterEmbed = false;
+
+//     doc.body.childNodes.forEach((node) => {
+//       if (node.nodeType === Node.ELEMENT_NODE) {
+//         const element = node as HTMLElement;
+
+//         // Handle Instagram Embed
+//         if (element.getAttribute("data-instagram") === "true") {
+//           hasInstagramEmbed = true;
+//           const embedCode = element.getAttribute("embedcode");
+//           if (embedCode) {
+//             const tempDiv = document.createElement("div");
+//             tempDiv.innerHTML = decodeHtml(embedCode);
+//             blogRef.current?.appendChild(tempDiv);
+//           }
+//         }
+
+//         // Handle Twitter Embed (Force Reprocessing)
+//         else if (element.getAttribute("data-tweet") === "true") {
+//           hasTwitterEmbed = true;
+//           const embedCode = element.getAttribute("embedcode");
+//           if (embedCode) {
+//             const tempDiv = document.createElement("div");
+//             tempDiv.innerHTML = decodeHtml(embedCode);
+//             tempDiv.classList.add("twitter-embed");
+//             blogRef.current?.appendChild(tempDiv);
+//           }
+//         } else {
+//           blogRef.current?.appendChild(element.cloneNode(true));
+//         }
+//       }
+//     });
+
+//     // Load Instagram Embed Script
+//     if (hasInstagramEmbed) {
+//       const loadInstagramScript = () => {
+//         if (window.instgrm?.Embeds) {
+//           window.instgrm.Embeds.process();
+//         } else {
+//           const script = document.createElement("script");
+//           script.src = "https://www.instagram.com/embed.js";
+//           script.async = true;
+//           script.onload = () => window.instgrm?.Embeds?.process();
+//           document.body.appendChild(script);
+//         }
+//       };
+//       loadInstagramScript();
+//     }
+
+//     // Load Twitter Embed Script (Force Reload)
+//     if (hasTwitterEmbed) {
+//       const loadTwitterScript = () => {
+//         // Remove old Twitter script
+//         document
+//           .querySelectorAll('script[src="https://platform.twitter.com/widgets.js"]')
+//           .forEach((s) => s.remove());
+
+//         // Add new Twitter script
+//         const script = document.createElement("script");
+//         script.src = "https://platform.twitter.com/widgets.js";
+//         script.async = true;
+//         script.onload = () => {
+//           setTimeout(() => {
+//             // if (window.twttr?.widgets) {
+//             //   window.twttr.widgets.load(blogRef.current);
+//             // }
+//             if (blogRef.current && window.twttr?.widgets) {
+//               window.twttr.widgets.load(blogRef.current);
+//             }
+//           }, 500);
+//         };
+//         document.body.appendChild(script);
+//       };
+
+//       loadTwitterScript();
+//     }
+//   }, [content]);
+
+//   return <div ref={blogRef} />;
+// };
+
+// export default BlogPost;
+
+
 import { useEffect, useRef } from "react";
+import Prism from "prismjs"; // Syntax highlighting
+import "prismjs/themes/prism.css"; // Prism theme
 
 declare global {
   interface Window {
-    instgrm?: {
-      Embeds: {
-        process: () => void;
-      };
-    };
-    twttr?: {
-      widgets: {
-        load: (element?: HTMLElement) => void;
-      };
-    };
+    instgrm?: { Embeds: { process: () => void } };
+    twttr?: { widgets: { load: (element?: HTMLElement) => void } };
   }
 }
 
@@ -244,7 +359,7 @@ const BlogPost = ({ content }: { content: string }) => {
           }
         }
 
-        // Handle Twitter Embed (Force Reprocessing)
+        // Handle Twitter Embed
         else if (element.getAttribute("data-tweet") === "true") {
           hasTwitterEmbed = true;
           const embedCode = element.getAttribute("embedcode");
@@ -254,58 +369,64 @@ const BlogPost = ({ content }: { content: string }) => {
             tempDiv.classList.add("twitter-embed");
             blogRef.current?.appendChild(tempDiv);
           }
-        } else {
+        }
+
+        // Handle Code Blocks
+        else if (element.tagName === "PRE" && element.querySelector("code")) {
+          const preElement = document.createElement("pre");
+          const codeElement = document.createElement("code");
+
+          codeElement.innerHTML = element.querySelector("code")!.innerHTML;
+          codeElement.className = element.querySelector("code")!.className || "language-javascript"; // Default language
+
+          preElement.appendChild(codeElement);
+          blogRef.current?.appendChild(preElement);
+
+          // Apply syntax highlighting
+          Prism.highlightElement(codeElement);
+        }
+
+        // Append other elements normally
+        else {
           blogRef.current?.appendChild(element.cloneNode(true));
         }
       }
     });
 
-    // Load Instagram Embed Script
+    // Load Instagram Embeds
     if (hasInstagramEmbed) {
-      const loadInstagramScript = () => {
-        if (window.instgrm?.Embeds) {
-          window.instgrm.Embeds.process();
-        } else {
-          const script = document.createElement("script");
-          script.src = "https://www.instagram.com/embed.js";
-          script.async = true;
-          script.onload = () => window.instgrm?.Embeds?.process();
-          document.body.appendChild(script);
-        }
-      };
-      loadInstagramScript();
+      if (window.instgrm?.Embeds) {
+        window.instgrm.Embeds.process();
+      } else {
+        const script = document.createElement("script");
+        script.src = "https://www.instagram.com/embed.js";
+        script.async = true;
+        script.onload = () => window.instgrm?.Embeds?.process();
+        document.body.appendChild(script);
+      }
     }
 
-    // Load Twitter Embed Script (Force Reload)
+    // Load Twitter Embeds
     if (hasTwitterEmbed) {
-      const loadTwitterScript = () => {
-        // Remove old Twitter script
-        document
-          .querySelectorAll('script[src="https://platform.twitter.com/widgets.js"]')
-          .forEach((s) => s.remove());
+      document
+        .querySelectorAll('script[src="https://platform.twitter.com/widgets.js"]')
+        .forEach((s) => s.remove());
 
-        // Add new Twitter script
-        const script = document.createElement("script");
-        script.src = "https://platform.twitter.com/widgets.js";
-        script.async = true;
-        script.onload = () => {
-          setTimeout(() => {
-            // if (window.twttr?.widgets) {
-            //   window.twttr.widgets.load(blogRef.current);
-            // }
-            if (blogRef.current && window.twttr?.widgets) {
-              window.twttr.widgets.load(blogRef.current);
-            }
-          }, 500);
-        };
-        document.body.appendChild(script);
+      const script = document.createElement("script");
+      script.src = "https://platform.twitter.com/widgets.js";
+      script.async = true;
+      script.onload = () => {
+        setTimeout(() => {
+          if (blogRef.current && window.twttr?.widgets) {
+            window.twttr.widgets.load(blogRef.current);
+          }
+        }, 500);
       };
-
-      loadTwitterScript();
+      document.body.appendChild(script);
     }
   }, [content]);
 
-  return <div ref={blogRef} />;
+  return <div ref={blogRef} className="blog-content" />;
 };
 
 export default BlogPost;

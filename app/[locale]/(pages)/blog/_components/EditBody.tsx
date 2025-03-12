@@ -26,6 +26,7 @@ import FontArea from "./editor-buttons/FontArea";
 import TwitterNode from "@/app/_components/admin/editor/TwitterNode";
 import InstagramNode from "@/app/_components/admin/editor/InstagramNode";
 import SocialBtn from "./editor-buttons/SocialBtn";
+import CodeBlock from "@tiptap/extension-code-block";
 
 interface Props {
   initialContent : string,
@@ -56,6 +57,7 @@ const EditBody = ({ initialContent, closeEdit,slug }: Props) => {
       LineHeight,
       TwitterNode,
       InstagramNode,
+      CodeBlock,
 
 
       Document,
