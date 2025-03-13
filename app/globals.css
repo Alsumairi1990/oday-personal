@@ -663,6 +663,9 @@ ol li p {
 .blog-content p {
   margin-bottom: 1rem !important;
 }
+.blog-content hr {
+  margin: 1rem;
+ }
 
 .blog-content pre {
  direction: ltr;
