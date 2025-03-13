@@ -23,7 +23,7 @@ export default function PostsArea3({posts,locale,messages}:Props) {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-7 ">
         {posts.slice(0,5).map((story) => (
-          <div key={story.id} className="max-sm:flex max-sm:flex-wrap max-sm:border border-gray-300 bg-white shadow-lg rounded-lg max-sm:p-1 overflow-hidden">
+          <Link href={`/blog/show/${story.slug}`} key={story.id} className="max-sm:flex max-sm:flex-wrap max-sm:border border-gray-300 bg-white shadow-lg rounded-lg max-sm:p-1 overflow-hidden">
             <div className="relative max-sm:flex-35 ">
               {story.image && <Image
                 src={story.image}
@@ -46,7 +46,7 @@ export default function PostsArea3({posts,locale,messages}:Props) {
               <p className="text-xs text-gray-500 font-semibold mt-3 sm:mt-5">{story.publishedAt && formatDate(story.publishedAt.toString())}</p>
             </div>
               }
-          </div>
+          </Link>
         ))}
       </div>
       <div className="mt-8 flex justify-center relative " >
