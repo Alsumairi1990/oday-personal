@@ -658,3 +658,7 @@ ol li p {
 .blog-content p {
   margin-bottom: 1rem !important;
 }
+
+.blog-content pre {
+ direction: ltr;
+}

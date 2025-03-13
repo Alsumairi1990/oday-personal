@@ -231,7 +231,11 @@
         "delayedServices": "الخدمات المتأخرة",
         "discountedServices": "الخدمات المخفضة",
         "supportRequestsForServices": "طلبات الدعم للخدمات",
-        "samBlogs" : "مدونات سام"
+        "samBlogs" : "مدونات سام",
+        "createdAt" : "تم الاضافة",
+        "updatedAt" : "اخر تعديل",
+        "readingTime" : "مدة القراءة"
+
         
         
         

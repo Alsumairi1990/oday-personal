@@ -16,6 +16,9 @@ const ShowBlogPage = async ({ params }: Props) => {
   const locale = await getLocale();
   const messages = await getMessages({ locale });
   const homePage = (messages as any).Common.homePage;
+  const createdAt = (messages as any).Common.createdAt;
+  const readingTime = (messages as any).Common.readingTime;
+
 
  
   const postData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/blogs/post/${params.slug}`, {
@@ -65,9 +68,25 @@ const ShowBlogPage = async ({ params }: Props) => {
         </div>
       {post ? (
         <>
-          <div className="mt-8 mb-10"><span className="text-xl scale-y-[1.19] sm:text-3xl sm:scale-y-[1.6] font-arabicBold font-semibold text-gray-800">
-              {post.titleAr}
-                </span></div>
+             <div className="mt-8 mb-10"><span className="text-xl sm:leading-[3rem] scale-y-[1.2] sm:text-3xl sm:scale-y-[1.9] font-arabicBold font-semibold text-gray-800">
+                {post.titleAr}
+                </span>
+              </div>
+              <div className="px-1.5 flex gap-x-3 items-center">
+                <div className="px-1 flex items-center">
+                  <span className="w-0.5 inline-flex h-4 bg-orange-600 rounded rtl:ml-2"></span>
+                  <span className="text-sm">{createdAt} : </span>
+                  <span className="text-sm text-gray-700">
+               {post.publishedAt && new Date(post.publishedAt).toLocaleDateString('en-GB')}
+                  </span>
+                </div>
+
+                <div className="px-1">
+                  <span className="text-sm">{readingTime} : </span>
+                  <span className="text-sm text-gray-700">{post.publishedAt && post.readingTime}</span>
+                </div>
+                
+              </div>
               <div className="rounded-md w-full mx-auto my-4">
                 {post.image && (
                   <Image
