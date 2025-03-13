@@ -216,7 +216,6 @@
 [dir="rtl"] h3 {
   @apply font-arabicBold;
   @apply scale-y-[1.18];
- 
 }
 .ProseMirror:focus {
   outline: none !important;
@@ -655,10 +654,19 @@ ol li p {
 .blog-content h3 {
   margin-bottom: 1rem !important;
 }
+
+[dir="rtl"] .blog-content  h2 {
+  margin-bottom: 1rem !important;
+  @apply font-arabicBold;
+  @apply scale-y-[1.18];
+}
 .blog-content p {
   margin-bottom: 1rem !important;
 }
 
 .blog-content pre {
  direction: ltr;
+}
+.ProseMirror p {
+  line-height: 2rem;
 }
