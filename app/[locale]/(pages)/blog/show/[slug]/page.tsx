@@ -5,6 +5,12 @@ import { PostForFront } from "@/app/[locale]/admin/blogs/_utils/PostForfront";
 import Image from 'next/image'
 import BlogPost from "../../_components/BlogPost";
 import { getLocale, getMessages } from "next-intl/server";
+import { Post } from "@prisma/client";
+import LatestPosts from "../../_components/LatestPosts";
+import ReleatedPosts from "../../_components/ReleatedPosts";
+import MostPopular from "../../_components/MostPopular";
+
+
 
 interface Props {
     params: {
@@ -25,8 +31,13 @@ const ShowBlogPage = async ({ params }: Props) => {
     method: 'GET',
     next: { revalidate: 1600 }, 
   });
-
+  const postLatestData = await fetch(`${process.env.NEXTAUTH_URL}/api/front/blogs/latest/8`, {
+    method: 'GET',
+    next: { revalidate: 1600 }, 
+  });
   const post:PostForFront = await postData.json();
+  const postLatest:Post[] = await postLatestData.json();
+
   
   // const [post, setPost] = useState<PostForFront | null>(null);
 
@@ -49,7 +60,8 @@ const ShowBlogPage = async ({ params }: Props) => {
   // }, [params.slug]); 
 
   return (
-    <div className="p-2 w-11.9/12 sm:w-11/12 grid grid-cols-1 sm:grid-cols-70/30 mx-auto">
+    <>
+    <div className="p-2 w-11.9/12 sm:w-11/12 grid grid-cols-1 sm:gap-x-4 sm:grid-cols-70/30 mx-auto">
       <div className="pl-4 ">
         <div className="flex items-center font-semibold my-4">
         <span className="text-gray-800 text-[13px] ">{homePage} </span>
@@ -107,9 +119,24 @@ const ShowBlogPage = async ({ params }: Props) => {
           ) : (
             <p className="p-2">No data</p>
           )}
+          <div>
+             <ReleatedPosts posts={postLatest} locale={locale} messages={messages}  />
+          </div>
+         
+          
       </div>
+      <div>
+        <LatestPosts posts={postLatest} locale={locale} messages={messages}  />
+      </div>
+
      
     </div>
+    <div className="w-11/12 mx-auto">
+       <MostPopular posts={postLatest} locale={locale} messages={messages} />
+    </div>
+
+
+    </>
   );
 };
 

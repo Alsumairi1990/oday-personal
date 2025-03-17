@@ -236,7 +236,8 @@
       "samBlogs" : "sam blogs",
       "createdAt" : "added",
       "updatedAt" : "updated",
-      "readingTime" : "reading time"
+      "readingTime" : "reading time",
+      "mostPopular" : "most popular"
 
       
 
