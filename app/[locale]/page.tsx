@@ -172,7 +172,7 @@ export default async function Home() {
  
   return (
     <main className="flex flex-col h-ful dark:bg-[#111] rtl:font-arabic" >
-       {/* <div className="rounded-md w-10/12 mx-auto my-4">
+       <div className="rounded-md w-10/12 mx-auto my-4">
                   
                     <Image
                       src="/images/under.avif"
@@ -182,9 +182,9 @@ export default async function Home() {
                       className="w-full max-w-full rounded"
                     />
                   
-                </div> */}
+                </div>
    
-      <div className="flex flex-col">
+      {/* <div className="flex flex-col">
           </div>   
           <Suspense fallback={<div></div>}>
         <NavBar menusData={menuElements} explores={explores} companyMenu={companyMenu} locale={locale} messages={messages} />
@@ -274,7 +274,7 @@ export default async function Home() {
       
       <ContactForm  locale={locale} messages={messages} />
        
-     <div className="clear"></div> 
+     <div className="clear"></div>  */}
      
  {/* <div className="dark:bg-[#111]">
           {posts && posts.length > 0 && blogsMeta && <BlogList meta={blogsMeta} posts={posts}  /> }

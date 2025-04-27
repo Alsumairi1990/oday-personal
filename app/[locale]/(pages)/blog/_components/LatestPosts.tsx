@@ -15,7 +15,7 @@ const LatestPosts = ({posts,locale,messages}:Props) => {
         <>
         
     <div className="mb-8 mt-8 sm:mt-20 pr-5 bg-gray-50 border border-gray-200 pl-3 py-3 rounded-md">
-      <h2 className="text-xl scale-y-[1.13] font-semibold mb-4 mb-7 rtl:font-arabicBold  border-b-2 border-red-500 pb-4">{mostPopular}</h2>
+      <h2 className="text-xl scale-y-[1.13] font-semibold mb-7 rtl:font-arabicBold  border-b-2 border-red-500 pb-4">{mostPopular}</h2>
       <div className="flex flex-col gap-y-3">
       {posts && posts.map((post,index) => (
         <div className="pb-4 flex items-center border-b border-b-gray-300">
